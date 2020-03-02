@@ -12,4 +12,4 @@ This project aims to create a social network in the university context where use
 * Vitor Ventuzelos, up201706403@fe.up.pt
 
 ***
-GROUP2034, 1t/02/2020
+GROUP2034, 02/03/2020
