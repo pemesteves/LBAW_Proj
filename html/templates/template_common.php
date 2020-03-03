@@ -25,7 +25,7 @@
 <?php } 
 function draw_navbar() { ?>
             <nav class="navbar navbar-dark" style="background-color: sandybrown;"> <!-- #ffa31a -->
-                <a class="navbar-brand" style="color : paleturquoise"><img src="images/uconnect.png" alt="UConnect"/></a> <!-- whitesmoke -->
+                <a class="navbar-brand"><img src="images/uconnect.png" alt="UConnect"/></a> <!-- whitesmoke -->
                 <form class="form-inline">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
