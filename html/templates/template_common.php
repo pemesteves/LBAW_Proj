@@ -9,6 +9,9 @@
 
             <!-- Bootstrap CSS -->
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+            
+            <!-- Font Awesome -->
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
             <style>
             body {
@@ -22,7 +25,7 @@
 <?php } 
 function draw_navbar() { ?>
             <nav class="navbar navbar-dark" style="background-color: sandybrown;"> <!-- #ffa31a -->
-                <a class="navbar-brand" style="color : paleturquoise">UConnect</a> <!-- whitesmoke -->
+                <a class="navbar-brand" style="color : paleturquoise"><img src="images/uconnect.png" alt="UConnect"/></a> <!-- whitesmoke -->
                 <form class="form-inline">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>

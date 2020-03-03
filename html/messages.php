@@ -5,48 +5,52 @@
     draw_header();
     draw_navbar();
 ?>
-<section id="chats">
-    <header id="search_chat">
-        <form class="form-inline" method="post">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search messages" aria-label="Search">
-            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
-        </form>
-    </header>
-    <ul>
-        <?php 
-        draw_chat_info("images/placeholder.png", "", "Joaquin", 1);
-        draw_chat_info("images/placeholder.png", "", "Joanna", 10);
-        draw_chat_info("images/placeholder.png", "", "Mary", 0);
-        ?>
-    </ul>
-    <footer id="create_chat">
-        <button type="button">
-            <p id="create_group_icon">&#10133;</p>
-            <p id="create_group_message">Create Group Chat</p>
-        </button>
-    </footer>
-</section>
-<section id="opened_message">
-    <header id="chat_info">
-        <img src="images/placeholder.png" alt="" />
-        <h2></h2>
-    </header>
+<section class="container">
+    <section class="row">
+        <section id="chats" class="col-md-3">
+            <header id="search_chat" class="row">
+                <form class="form-inline" method="post">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search messages" aria-label="Search"/>
+                    <button class="fa fa-search" type="submit"></button>
+                </form>
+            </header>
+            <?php 
+                draw_chat_info("images/placeholder.png", "", "Joaquin", 1);
+                draw_chat_info("images/placeholder.png", "", "Joanna", 10);
+                draw_chat_info("images/placeholder.png", "", "Mary", 0);
+            ?>
+            <footer id="create_chat" class="row">
+                <button type="button">
+                    <i class="fa fa-plus"></i>
+                    <p id="create_group_message">Create Group Chat</p>
+                </button>
+            </footer>
+        </section>
 
-    <ul>
-        <?php 
-        draw_message(false, "Quisque cursus risus augue, nec.");
-        draw_message(true, "Aenean volutpat euismod diam, et pharetra quam.");
-        draw_message(true, "Nunc non varius augue.");
-        ?>
-    </ul>
+        <section id="opened_message" class="col-md-9">
+            <header id="chat_info">
+                <img src="images/placeholder.png" alt="" style="width:2em" />
+                <h2>Mary</h2>
+            </header>
 
-    <footer id="send_message">
-        <img src="images/placeholder.png" alt="" />
-        <form class="form-inline" method="post">
-            <input class="form-control mr-sm-2" type="text" placeholder="Write a message..." aria-label="Search">
-            <!--aria-label????-->
-            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">&#8680;</button>
-        </form>
-    </footer>
+            <ul>
+                <?php 
+                    draw_message(false, "Quisque cursus risus augue, nec.");
+                    draw_message(true, "Aenean volutpat euismod diam, et pharetra quam.");
+                    draw_message(true, "Nunc non varius augue.");
+                ?>
+            </ul>
+
+            <footer id="send_message">
+                <img src="images/placeholder.png" alt="" style="width:2em" />
+                <form class="form-inline" method="post">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Write a message..."
+                        aria-label="Search">
+                    <!--aria-label????-->
+                    <button type="submit"><i class="fa fa-caret-right"></i></button>
+                </form>
+            </footer>
+        </section>
+    </section>
 </section>
 <?php draw_footer(); ?>
