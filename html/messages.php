@@ -1,5 +1,6 @@
 <?php
     include_once "templates/template_common.php";
+    include_once "templates/template_message.php";
 
     draw_header();
     draw_navbar();
@@ -12,26 +13,11 @@
         </form>
     </header>
     <ul>
-        <li>
-            <article>
-                <img src="#" alt="" />
-                <h2>Joaquin</h2>
-                <p>1</p>
-            </article>
-        </li>
-        <li>
-            <article>
-                <img src="#" alt="" />
-                <h2>Joanna</h2>
-                <p>+9</p>
-            </article>
-        </li>
-        <li>
-            <article>
-                <img src="#" alt="" />
-                <h2>Mary</h2>
-            </article>
-        </li>
+        <?php 
+        draw_chat_info("images/placeholder.png", "", "Joaquin", 1);
+        draw_chat_info("images/placeholder.png", "", "Joanna", 10);
+        draw_chat_info("images/placeholder.png", "", "Mary", 0);
+        ?>
     </ul>
     <footer id="create_chat">
         <button type="button">
@@ -42,24 +28,20 @@
 </section>
 <section id="opened_message">
     <header id="chat_info">
-        <img src="#" alt="" />
+        <img src="images/placeholder.png" alt="" />
         <h2></h2>
     </header>
 
     <ul>
-        <li class="other_message">
-            <p>Quisque cursus risus augue, nec.</p>
-        </li>
-        <li class="my_message">
-            <p>Aenean volutpat euismod diam, et pharetra quam.</p>
-        </li>
-        <li class="my_message">
-            <p>Nunc non varius augue.</p>
-        </li>
+        <?php 
+        draw_message(false, "Quisque cursus risus augue, nec.");
+        draw_message(true, "Aenean volutpat euismod diam, et pharetra quam.");
+        draw_message(true, "Nunc non varius augue.");
+        ?>
     </ul>
 
     <footer id="send_message">
-        <img src="#" alt="" />
+        <img src="images/placeholder.png" alt="" />
         <form class="form-inline" method="post">
             <input class="form-control mr-sm-2" type="text" placeholder="Write a message..." aria-label="Search">
             <!--aria-label????-->
