@@ -5,10 +5,10 @@
     draw_header();
     draw_navbar();
 ?>
-<section class="container">
+<section class="container" style="height: 100vh">
     <section class="row">
         <section id="chats" class="col-md-3">
-            <header id="search_chat" class="row">
+            <header id="search_chat" class="row" style="margin: 0; padding: 0; width: 100%">
                 <form class="form-inline" method="post">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search messages" aria-label="Search"/>
                     <button class="fa fa-search" type="submit"></button>
@@ -19,8 +19,8 @@
                 draw_chat_info("images/placeholder.png", "", "Joanna", 10);
                 draw_chat_info("images/placeholder.png", "", "Mary", 0);
             ?>
-            <footer id="create_chat" class="row">
-                <button type="button">
+            <footer id="create_chat" class="row" style="margin: 0; padding: 0; width: 100%;">
+                <button type="button" style="margin: 0; padding: 0; width: 100%;">
                     <i class="fa fa-plus"></i>
                     <p id="create_group_message">Create Group Chat</p>
                 </button>
