@@ -1,9 +1,9 @@
 <?php function draw_post_card(){ ?>
-    <div class="card mb-3" style="min-width: 540px;max-width:70%;margin:5% 15%">
+    <div class="card mb-3" style="max-width:70%;margin:5% 15%">
         <div class="row no-gutters">
-            <div class="col-md-4" style="max-width:200px">
+            <div class="col-sm" >
                 <div class="card text-center" style="border-bottom:none;border-top:none;border-radius:0;height:100%;">
-                    <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" class="card-img-top mx-auto d-block" alt="..." style="border-radius:50%; max-width:70%; padding-top:0.8rem">
+                    <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" class="card-img-top mx-auto d-block" alt="..." style="border-radius:50%; max-width:5rem; padding-top:0.8rem">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item" style="border:none;padding-top:0.2rem;padding-bottom:0.2rem">Joaquin</li>
                         <li class="list-group-item" style="border:none;padding-top:0.2rem;padding-bottom:0.2rem">FEUP</li>
@@ -19,7 +19,17 @@
                 <div class="card" style="height: 100%">
                     <div class="card-body">
                         <h3 class="card-title">Card title</h3>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        <p class="card-text">
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan facilisis euismod. Nullam pellentesque velit sit amet mauris mollis sollicitudin non vitae felis. Vestibulum elementum, augue vel maximus mollis, ipsum enim scelerisque sapien, interdum mollis nulla elit et neque. Pellentesque arcu ante, fermentum eu lectus at, hendrerit fermentum lacus. Vestibulum vel turpis non elit finibus dictum. Aliquam accumsan sit amet nunc quis condimentum. Donec et turpis sit amet lectus pharetra tincidunt. Praesent sagittis diam ac quam sagittis, non viverra mi consectetur. In volutpat ultrices urna sit amet dapibus. Suspendisse tincidunt justo vitae quam blandit pharetra. Pellentesque accumsan sit amet purus sed ornare. Cras risus enim, pellentesque et sem non, posuere lacinia turpis. Sed ante lorem, tincidunt sed erat id, mollis semper mi. Vestibulum cursus auctor consectetur. Ut pharetra dolor ligula, ac aliquet felis egestas sed.
+
+Quisque a suscipit purus. Sed in ultricies tellus. Fusce sit amet gravida libero, vitae tristique magna. Maecenas volutpat, ante eget aliquet imperdiet, libero mauris gravida risus, nec semper neque mi ac quam. Pellentesque ac metus accumsan, ornare turpis consequat, ullamcorper quam. Etiam convallis odio et purus congue, consectetur sagittis eros congue. Pellentesque ornare dui non magna dictum feugiat. Morbi lacus sapien, rhoncus sed ante nec, elementum laoreet velit. Sed vestibulum consequat erat et lobortis. Vestibulum ullamcorper elit id hendrerit feugiat. Nulla fermentum tristique justo. Nunc ac pharetra libero. Quisque felis diam, imperdiet id accumsan nec, eleifend eget quam.
+
+Nullam tempor a libero eu eleifend. Integer accumsan, sem et gravida iaculis, est nibh feugiat orci, non faucibus orci ipsum ac quam. Curabitur sit amet imperdiet ligula, quis sodales dui. Fusce venenatis arcu a suscipit gravida. In iaculis ante felis, eu dapibus odio maximus in. Donec facilisis consectetur mi, quis faucibus felis euismod id. Donec ultricies mauris sit amet placerat maximus. Sed nec ornare purus, sed facilisis nisl. Curabitur laoreet consequat nisi non dictum.
+
+Nulla porttitor augue sapien, vitae volutpat augue semper sit amet. In lorem nisi, volutpat eu egestas at, gravida non libero. Integer vitae turpis id quam luctus rutrum et eu lorem. Cras eu malesuada quam. Praesent sit amet neque non arcu porttitor dictum. Sed malesuada id orci ut rhoncus. Nulla lacinia odio ut ipsum suscipit elementum. Morbi elementum eu arcu sit amet mollis. Integer eget tristique mi. Curabitur placerat, nisi id pulvinar sagittis, dui lacus dictum lorem, at maximus risus risus ac nisl. Integer vel condimentum magna. Aenean at vestibulum leo.
+
+Maecenas suscipit quam quis diam hendrerit, id tincidunt nulla vulputate. Pellentesque semper diam et magna tincidunt, vel dictum metus iaculis. Phasellus varius odio ut orci vehicula, eget tempus urna ultricies. Etiam sed nunc magna. Pellentesque eu tortor vitae dui consequat accumsan nec non ante. Nam ut lorem quis mi luctus efficitur. Curabitur quis lobortis mauris, placerat porttitor nisi. Suspendisse potenti. Sed vitae dapibus lectus, scelerisque pellentesque orci. Morbi eget ipsum laoreet, elementum lorem quis, elementum diam. Aliquam eu rutrum nisi. Phasellus nisl nisl, ultricies nec dignissim non, porttitor quis odio. Mauris vel sodales nisi, eu tincidunt ex. Aenean quis dictum dolor. Duis gravida nunc et fermentum iaculis. Donec volutpat, ex id placerat tempus, sem orci malesuada nibh, vel viverra magna justo non nisl. </p>
                     </div>
                     <div class="card-footer" style="border-left:none;border-right:none;border-bottom:none">
                         <span class="comment"> 15 comments </span>
