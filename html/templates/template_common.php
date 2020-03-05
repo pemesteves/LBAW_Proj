@@ -25,19 +25,19 @@
 <?php } 
 function draw_navbar() { ?>
             <nav class="navbar navbar-dark" style="background-color: sandybrown;"> <!-- #ffa31a -->
-                <a class="navbar-brand"><img src="images/uconnect.png" alt="UConnect"/></a> <!-- whitesmoke -->
+                <a class="navbar-brand" href="index.php"><img src="images/uconnect.png" alt="UConnect"/></a> <!-- whitesmoke -->
                 <form class="form-inline">
                     <div class="input-group" style="border-width: 0.05em; border-color: white; border-radius: .5em; border-style:solid; background-color: white">
                         <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="search-button" style="border-width: 0; border-top-left-radius: .5em; border-bottom-left-radius: .5em;">
                         <div class="input-group-append">
-                            <button class="btn btn-outline-light fa fa-search" type="submit" id="search-button" style="background-color: sandybrown; border-top-right-radius: .5em; border-bottom-right-radius: .5em;"></button>
+                            <button class="btn btn-outline-light fa fa-search fa-flip-horizontal" type="submit" id="search-button" style="background-color: sandybrown; border-top-left-radius: .5em; border-bottom-left-radius: .5em;"></button>
                         </div>
                     </div>
                 </form>
-                <div class="btn-group">
-                    <button type="button" class="btn btn-outline-light">Notif</button>
-                    <button type="button" class="btn btn-outline-light">Msg</button>
-                    <button type="button" class="btn btn-outline-light">Current_User</button>
+                <div class="btn-group" >
+                    <button type="button" class="btn btn-outline-light fa fa-bell" style="border: 0; border-radius: .25em;"></button>
+                    <button type="button" class="btn btn-outline-light fa fa-envelope" style="border: 0; border-radius: .25em;" onclick="window.location.href='/messages.php'"></button>
+                    <button type="button" class="btn btn-outline-light" style="border-top-left-radius: .25em; border-bottom-left-radius: .25em"><img src="images/placeholder.png" alt="John" style="width: 25px; border-radius:1em;"/> John</button>
                     <button class="btn btn-outline-light dropdown-toggle dropdown-toggle-split" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     </button>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">            
