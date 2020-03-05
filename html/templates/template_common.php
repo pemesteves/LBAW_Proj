@@ -27,10 +27,16 @@ function draw_navbar() { ?>
             <nav class="navbar navbar-dark" style="background-color: sandybrown;"> <!-- #ffa31a -->
                 <a class="navbar-brand"><img src="images/uconnect.png" alt="UConnect"/></a> <!-- whitesmoke -->
                 <form class="form-inline">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+                    <div class="input-group" style="border-width: 0.05em; border-color: white; border-radius: .5em; border-style:solid; background-color: white">
+                        <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="search-button" style="border-width: 0; border-top-left-radius: .5em; border-bottom-left-radius: .5em;">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-light fa fa-search" type="submit" id="search-button" style="background-color: sandybrown; border-top-right-radius: .5em; border-bottom-right-radius: .5em;"></button>
+                        </div>
+                    </div>
                 </form>
                 <div class="btn-group">
+                    <button type="button" class="btn btn-outline-light">Notif</button>
+                    <button type="button" class="btn btn-outline-light">Msg</button>
                     <button type="button" class="btn btn-outline-light">Current_User</button>
                     <button class="btn btn-outline-light dropdown-toggle dropdown-toggle-split" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     </button>
