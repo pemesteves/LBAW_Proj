@@ -8,6 +8,7 @@ draw_header();
 draw_navbar();
 
 draw_group_card();
+draw_create_post();
 
 draw_post_card();
 draw_post_card();

@@ -5,8 +5,8 @@ function draw_event_card(){
     <img src="images/landscape.jpg" class="card-img-top mx-auto d-block" alt="..." style="border: 1px solid lightgrey; border-collapse: collapse; object-fit: cover; object-position: center; width: 100%; height: 25vh;">
     <div class="card" style="height: 100%; border: none">
         <div class="card-body" style="border: 1px solid lightgrey; border-collapse: collapse;" >
-            <h1 class="card-title">Walking</h1>
-            <p class="card-text" >Come and walk 10km with us.</p>
+            <h1 class="card-title uconnect-title" >Walking</h1>
+            <p class="card-text uconnect-paragraph" >Come and walk 10km with us.</p>
         </div>
         <div class="card-footer container no-gutters" style="border: 1px solid lightgrey; border-collapse: collapse; width: 100%; max-width: 100%;">            
             <div class="row">

@@ -40,4 +40,27 @@ Maecenas suscipit quam quis diam hendrerit, id tincidunt nulla vulputate. Pellen
         </div>
     </div>
 
-<?php } ?>
+<?php } 
+
+function draw_create_post(){ ?>
+    <form method="post">
+        <div class="container" style="max-width:70%;margin:5% 15%; border: 1px solid lightgrey; border-bottom-left-radius: .5em; border-bottom-right-radius: .5em;">
+            <div class="row" style="padding:0; background-color: white; border: 0; border-bottom: 1px solid lightgrey;">
+                <input type="text" placeholder="&ensp;&nbsp;Title" style="width: 100%; margin: 0 auto; border: 0; border-radius: inherit"></input>
+            </div>
+            <div class="row" style="border-radius: 0;">
+                <textarea class="form-control" placeholder="Write here..." rows="3" style="border: 0; "></textarea>
+            </div>
+            <div class="row" style="background-color: white; border-top: 1px solid lightgrey; border-bottom-left-radius: .5em; border-bottom-right-radius: .5em;">
+                <div class="col-11">
+
+                </div>
+                <div class="col-1" style="padding: 0">
+                    <button type="submit" style="width: 100%; margin: 0; background-color: white; border: 0; border-left: 1px solid lightgrey; border-bottom-right-radius: .5em;"><span class="fa fa-caret-right"></span></button>
+                </div>    
+            </div>
+        </div>
+    </form>
+<?php
+}
+?>

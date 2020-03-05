@@ -13,11 +13,20 @@
             <!-- Font Awesome -->
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+            <!-- Google Fonts -->
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Barlow|Cormorant+Garamond&display=swap">
+
             <style>
-            body {
-                background-color: rgba(244, 166, 98, 0.05);
-            } 
-        </style>
+                body {
+                    background-color: rgba(244, 166, 98, 0.05);
+                    font-family: 'Barlow', Arial, Helvetica, sans-serif
+                } 
+
+                h1, h2, h3, h4, h5, h6 {
+                    font-family: 'Cormorant Garamond', 'Times New Roman', Times, serif;
+                    font-weight: bold;
+                }
+            </style>
 
             <title>UConnect: We're getting there</title>
         </head>
@@ -27,10 +36,10 @@ function draw_navbar() { ?>
             <nav class="navbar navbar-dark" style="background-color: sandybrown;"> <!-- #ffa31a -->
                 <a class="navbar-brand" href="index.php"><img src="images/uconnect.png" alt="UConnect"/></a> <!-- whitesmoke -->
                 <form class="form-inline">
-                    <div class="input-group" style="border-width: 0.05em; border-color: white; border-radius: .5em; border-style:solid; background-color: white">
-                        <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="search-button" style="border-width: 0; border-top-left-radius: .5em; border-bottom-left-radius: .5em;">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-light fa fa-search fa-flip-horizontal" type="submit" id="search-button" style="background-color: sandybrown; border-top-left-radius: .5em; border-bottom-left-radius: .5em;"></button>
+                    <div class="input-group" style="border-width: 0.05em; border-color: white; border-radius: 2em; border-style:solid; background-color: white">
+                        <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="search-button" style="border-width: 0; border-top-left-radius: inherit; border-bottom-left-radius: inherit;">
+                        <div class="input-group-append" style="border-radius: inherit">
+                            <button class="btn btn-outline-light fa fa-search fa-flip-horizontal" type="submit" id="search-button" style="background-color: sandybrown; border-top-left-radius: inherit; border-bottom-left-radius: inherit;"></button>
                         </div>
                     </div>
                 </form>

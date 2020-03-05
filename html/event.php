@@ -9,6 +9,8 @@ draw_navbar();
 
 draw_event_card();
 
+draw_create_post();
+
 draw_post_card();
 draw_post_card();
 draw_post_card();
