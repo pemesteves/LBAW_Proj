@@ -1,7 +1,5 @@
 #dl-menu{
     width: 100%;
-    margin-top:2rem;
-    margin-left: 5%;
 }
 
 
@@ -18,18 +16,19 @@
 #dl-trigger {
     background: #ccc;
     border: none;
-    width: 48px;
+    width: 2.6rem;
     height: 45px;
     text-indent: -900em;
     overflow: hidden;
     position: relative;
     cursor: pointer;
     outline: none;
+    display: none;
 }
 
 #dl-trigger  {
-    background: orange;
-    border-radius:5px ;
+    background: sandybrown;
+    border-radius: 0px 0px 5px 0px;
 }
 
 
@@ -43,6 +42,7 @@
 
 
 #dl-menu2{
+    display: block;
     opacity: 1;
     transition: all 0.3s ease;
 }
@@ -54,11 +54,32 @@
 
 .menu_title{
     width: 100%;
-    border-bottom: 3px solid;
+    border-bottom: 2px solid;
     border-image: 
       linear-gradient(
         90deg,
-        orange, 
+        sandybrown, 
         rgba(0, 0, 0, 0)
       ) 1;
 }
+
+@media screen {
+    #dl-menu2{
+        display: block;
+        opacity: 1;
+    }
+    #dl-trigger {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    #dl-menu2{
+        display: none;
+        opacity: 0;
+    }
+    #dl-trigger {
+        display: inline;
+    }
+}
+  
