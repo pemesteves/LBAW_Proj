@@ -1,0 +1,64 @@
+#dl-menu{
+    width: 100%;
+    margin-top:2rem;
+    margin-left: 5%;
+}
+
+
+#dl-trigger::after {
+    content: '';
+    position: absolute;
+    width: 68%;
+    height: 5px;
+    background: #fff;
+    top: 10px;
+    left: 16%;
+    box-shadow: 0 10px 0#fff, 0 20px 0 #fff;
+}
+#dl-trigger {
+    background: #ccc;
+    border: none;
+    width: 48px;
+    height: 45px;
+    text-indent: -900em;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+}
+
+#dl-trigger  {
+    background: orange;
+    border-radius:5px ;
+}
+
+
+#dl-menu li{
+    list-style: none;
+    
+}
+#dl-menu li a{
+    color: #6c757d !important;
+}
+
+
+#dl-menu2{
+    opacity: 1;
+    transition: all 0.3s ease;
+}
+
+#dl-menu2 > li {
+    margin-top: 2rem;
+}
+
+
+.menu_title{
+    width: 100%;
+    border-bottom: 3px solid;
+    border-image: 
+      linear-gradient(
+        90deg,
+        orange, 
+        rgba(0, 0, 0, 0)
+      ) 1;
+}
