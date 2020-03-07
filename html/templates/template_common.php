@@ -16,6 +16,9 @@
             <!-- Google Fonts -->
             <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Barlow|Cormorant+Garamond&display=swap">
 
+            <!-- Costume Css -->
+            <link rel="stylesheet" href="./css/menu.css">
+
             <style>
                 body {
                     background-color: rgba(244, 166, 98, 0.05);
