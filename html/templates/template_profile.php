@@ -10,7 +10,7 @@
      */?>
     <body>
     <br>
-    <div class="container text-center flex">
+    <div class="container text-center d-flex justify-content-center" style="padding-top: 1em; padding-bottom: 1em">
     <div class="card flex-row flex-wrap border-0" style="height:25rem; width:60rem; border: none; padding:0 margin-right: 0">
         <div class="card-block " style="background: none; color: inherit; border: none; height:100%">
             <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" alt="" class="rounded-circle" style="border-radius:50%; max-width:20rem;">
