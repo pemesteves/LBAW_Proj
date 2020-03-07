@@ -135,12 +135,12 @@ function draw_post_popup(){ ?>
     <div class="modal-dialog" role="document" style="overflow: initial; max-width: 90%; width: 90%; max-height: 90%; height: 90%">
         <div class="modal-content" style="height: 100%;">
             <div class="modal-header">
-                <div class="container" style="border-bottom:none;border-top:none;border-radius:0;max-width: 90%;">
+                <div class="container" style="border-bottom:0;border-radius:0;max-width: 90%;">
                     <div class="row">
                         <div class="col-2">
                             <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" class="mx-auto d-block" alt="..." style="border-radius:50%; max-width:7rem; ">
                         </div>
-                        <div class="col-8" style="background-color: transparent;">
+                        <div class="col-7" style="background-color: transparent;">
                             <div class="row" style="background-color: transparent;">
                                 <h2 class="list-group-item" style="background-color: transparent; border:none;padding-top:0.2rem;padding-bottom:0.2rem">Joaquin</h2>
                             </div>
@@ -151,6 +151,10 @@ function draw_post_popup(){ ?>
                         <div class="col-2" style="padding-top:0.2rem;padding-bottom:0.2rem; text-align: right;">
                             <p class="card-text" style="margin-bottom:0rem">04-03-2020</p>
                             <p class="card-text">18:40</p>
+                        </div>
+                        <div class="col-1" style="margin-right: 0; padding-right: 0;">
+                            <button type="button" data-dismiss="modal" style="margin-right: 0; padding-right: 0; width: 100%; background-color: white; border: 0;"><span class="fa fa-times"></span></button>
+                            <button type="button" style="margin-right: 0; padding-right: 0; width: 100%; background-color: white; border: 0;"> <span class="fa fa-ellipsis-v" ></span></button>
                         </div>
                     </div>
                 </div>
@@ -189,10 +193,6 @@ function draw_post_popup(){ ?>
                     <?php draw_comment('0') ?>
                     <?php draw_comment('5em') ?>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
