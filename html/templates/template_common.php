@@ -37,7 +37,9 @@
 <?php } 
 function draw_navbar() { ?>
             <nav class="navbar navbar-dark" style="background-color: sandybrown;"> <!-- #ffa31a -->
-                <a class="navbar-brand" href="index.php"><img src="images/uconnect.png" alt="UConnect"/></a> <!-- whitesmoke -->
+                <a class="navbar-brand" href="index.php">
+                    <h1 style="color: whitesmoke;">UConnect <span class="fa fa-graduation-cap"></span></h1>
+                    </a> <!-- whitesmoke -->
                 <form class="form-inline">
                     <div class="input-group" style="border-width: 0.05em; border-color: white; border-radius: 2em; border-style:solid; background-color: white">
                         <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="search-button" style="border-width: 0; border-top-left-radius: inherit; border-bottom-left-radius: inherit;">
