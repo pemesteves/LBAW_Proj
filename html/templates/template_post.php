@@ -94,7 +94,7 @@ function draw_post_popup($author, $uni, $date, $hour, $title, $post_content){ ?>
                 <div class="container" style="border-bottom:0;border-radius:0;max-width: 90%;">
                     <div class="row">
                         <div class="col-2">
-                            <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" class="mx-auto d-block" alt="..." style="border-radius:50%; max-width:7rem; " onclick="window.location.href='/profile.php'"/>
+                            <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" class="mx-auto d-block" alt="..." style="border-radius:50%; max-width:7rem; " onclick="window.location.href='./profile.php'"/>
                         </div>
                         <div class="col-7" style="background-color: transparent;">
                             <div class="row" style="background-color: transparent;">
@@ -150,7 +150,7 @@ function draw_comment($padding_left, $author, $comment){ ?>
 <div class="row" style="padding-top: .5em; padding-bottom: .5em; border: 1px solid lightgrey; border-top: 0; padding-left: <?=$padding_left != 0 ? '5em' : 0 ?>;">
     <div class="col-2" >
         <div class="row">   
-            <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" class="mx-auto d-block" alt="..." style="border-radius:50%; max-width:2rem; "  onclick="window.location.href='/profile.php'">
+            <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" class="mx-auto d-block" alt="..." style="border-radius:50%; max-width:2rem; "  onclick="window.location.href='./profile.php'">
         </div>
         <div class="row">
             <h4 style="font-size: 1em; margin: 0 auto;"><?= $author ?></h4>
