@@ -7,25 +7,26 @@
     /**
      * Draws the login page
      */?>
-    <body>
-    <form>
-        <div class="form-group">
-            <input type="email" class="form-control" id="email" placeholder="Email">
-            <br>
-            <input type="password" class="form-control" id="password" placeholder="Password">
+    <section id="login" class="container d-flex justify-content-center flex-column align-items-center">
+        <form class="d-flex flex-column justify-content-center">
+            <div class="form-group">
+                <input type="email" required class="form-control" id="email" placeholder="Email" style="border-radius: 1em; margin:1em 0;">
+                <br>
+                <input type="password" required class="form-control" id="password" placeholder="Password" style="border-radius: 1em; margin:1em 0;">
 
 
-        </div>
-        <button type="submit" class="btn btn-primary" action="TO UPDATE" method="POST">Login</button>
+            </div>
+            <button type="submit" class="btn btn-primary" action="TO UPDATE" method="POST" style="color:whitesmoke">Login</button>
 
-        
-    </form>
+            
+        </form>
 
-    <footer>
-            <p>Don't have an account? Then <a href="TO UPDATE">REGISTER</a></p>
-            <p>Forgot your password? <a href="TO UPDATE">Recover password</a></p>
+        <footer>
+                <p>Don't have an account? Then <a href="TO UPDATE" style="color: #ffa31a">REGISTER</a></p>
+                <p>Forgot your password? <a href="TO UPDATE" style="color: #ffa31a">Recover password</a></p>
 
-    </footer>
+        </footer>
+    </section>
 
 <?php } ?>
 
@@ -35,24 +36,24 @@
     /**
      * Draws the sign up page
      */?>
-      <body>
-        <form>
+     <section id="register" class="container d-flex justify-content-center flex-column align-items-center">
+        <form class="d-flex flex-column justify-content-center">
             <div class="form-group">
-                <input type="text" class="form-control" id="name" required="required" placeholder="Name">
+                <input type="text" required class="form-control" id="name" required="required" placeholder="Name" style="border-radius: 1em; margin:1em 0;">
                 
-                <input type="email" class="form-control" id="email" placeholder="Email">
+                <input type="email" required class="form-control" id="email" placeholder="Email" style="border-radius: 1em; margin:1em 0;">
                 
-                <input type="password" class="form-control" id="password" placeholder="Password">
+                <input type="password" required class="form-control" id="password" placeholder="Password" style="border-radius: 1em; margin:1em 0;">
                 
-                <input type="password" class="form-control" id="confpassword" placeholder="Confirm Password">
+                <input type="password" required class="form-control" id="confpassword" placeholder="Confirm Password" style="border-radius: 1em; margin:1em 0;">
                 
-                <input type="text" class="form-control" id="university" placeholder="University">
+                <input type="text" required class="form-control" id="university" placeholder="University" style="border-radius: 1em; margin:1em 0;">
                 
 
 
             </div>
             <div class="form-group">
-                <select class="form-control" id="occupation">
+                <select class="form-control" required id="occupation" placeholder="Occupation" style="border-radius: 1em; margin:1em 0;">
                 <option>Choose an option:</option>
                 <option>Student</option>
                 <option>Teacher</option>
@@ -63,8 +64,9 @@
         </form>
         </body>
         <footer>
-            <p>Already have an account? Then <a href="TO UPDATE">LOGIN</a></p>
+            <p>Already have an account? Then <a href="TO UPDATE" style="color: #ffa31a">LOGIN</a></p>
         </footer>
+    </section>
         
     
 

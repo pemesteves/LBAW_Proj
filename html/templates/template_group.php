@@ -1,5 +1,5 @@
 <?php
-function draw_group_card(){
+function draw_group_card($name, $members){
 ?>
 <div class="card mb-3 border rounded" style="min-width: 540px;max-width:80%;margin:5% auto">
     <div class="row no-gutters">
@@ -8,8 +8,8 @@ function draw_group_card(){
         </div>
         <div class="card col-md-9" style="height: 100%; border: none">
             <div class="card-body">
-                <h1 class="card-title">Group Chats</h1>
-                <h2 class="card-subtitle" style="font-size:1.5em;">50 members</h2>
+                <h1 class="card-title"><?= $name ?></h1>
+                <h2 class="card-subtitle" style="font-size:1.5em;"><?= $members?> members</h2>
                 <p class="card-text" style="text-align: right;">Updated 2 days ago</p>
             </div>
         </div>

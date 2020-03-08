@@ -18,15 +18,15 @@ draw_navbar();
                         <li>
                             <h5 class="menu_title">Groups</h5>
                             <ul class="dl-submenu">
-                                <li><a href="group.php"><small>Let's Tennis</small></a></li>
-                                <li><a href="#"><small>Hicking</small></a></li>
+                                <li><a href="group.php"><small>NIAEFEUP</small></a></li>
+                                <li><a href="#"><small>AEFEUP</small></a></li>
                             </ul>
                         </li>
                         <li>
                             <h5 class="menu_title">Events</h5>
                             <ul class="dl-submenu">
-                                <li><a href="event.php"><small>NI Competition</small></a></li>
-                                <li><a href="#"><small>Running</small> </a></li>
+                                <li><a href="event.php"><small>FEUPCaffe 12/3</small></a></li>
+                                <li><a href="#"><small>Jantar NIAEFEUP</small> </a></li>
                             </ul>
                         </li>
                     </ul>
@@ -51,8 +51,25 @@ draw_navbar();
 
                 <?php
                 draw_create_post();
-                draw_post_card(1);
-                draw_post_card(2);
+                $author = "Peter";
+                $uni = "FEUP";
+                $date = "07-03-2020";
+                $hour = "14:30";
+                $title = "Impressão na FEUP";
+                $post_content = "Hoje de manhã estava na faculdade a tentar imprimir os conteúdos de PPIN e reparei que a impressora não reconhecia a minha pen. 
+                Depois tentei enviar pelo FEUP WebPrint e também não recebeu nenhum ficheiro.
+                Estamos sem sistema de impressão na faculdade?";
+
+                $author2 = "Carlota";
+                $uni2 ="FFUP";
+                $hour2 = "21:14";
+                $date2 = "07-03-2020";
+                $title2 = "Faculdade fechada";
+                $post_content2 = "Depois destas notícias de terem fechado a nossa faculdade e a do ICBAS, alguém sabe como se vai desenrolar o resto do semestre? Honestamente, estou muito confusa.";
+
+                draw_post_card(0, $author2, $uni2, $date2, $hour2, $title2, $post_content2);
+                draw_post_card(1, $author, $uni, $date, $hour, $title, $post_content);
+
                 ?>
 
             </div>

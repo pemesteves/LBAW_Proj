@@ -37,12 +37,12 @@
 <?php } 
 function draw_navbar() { ?>
             <nav class="navbar navbar-dark" style="background-color: sandybrown;"> <!-- #ffa31a -->
-                <a class="navbar-brand" href="feed.php">
+                <a class="navbar-brand" href="./feed.php">
                     <h1 style="color: whitesmoke;">UConnect <span class="fa fa-graduation-cap"></span></h1>
                     </a> <!-- whitesmoke -->
                 <form class="form-inline">
                     <div class="input-group" style="border-width: 0.05em; border-color: white; border-radius: 2em; border-style:solid; background-color: white">
-                        <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="search-button" style="border-width: 0; border-top-left-radius: inherit; border-bottom-left-radius: inherit;">
+                        <input type="text" required class="form-control" placeholder="Search" aria-label="Search" aria-describedby="search-button" style="border-width: 0; border-top-left-radius: inherit; border-bottom-left-radius: inherit;">
                         <div class="input-group-append" style="border-radius: inherit">
                             <button class="btn btn-outline-light fa fa-search fa-flip-horizontal" type="submit" id="search-button" style="background-color: sandybrown; border-top-left-radius: inherit; border-bottom-left-radius: inherit;"></button>
                         </div>
@@ -50,8 +50,8 @@ function draw_navbar() { ?>
                 </form>
                 <div class="btn-group" >
                     <button type="button" class="btn btn-outline-light fa fa-bell" style="border: 0; border-radius: .25em;"></button>
-                    <button type="button" class="btn btn-outline-light fa fa-envelope" style="border: 0; border-radius: .25em;" onclick="window.location.href='/messages.php'"></button>
-                    <button type="button" class="btn btn-outline-light" style="border-top-left-radius: .25em; border-bottom-left-radius: .25em" onclick="window.location.href='/profile.php'"><img src="images/placeholder.png" alt="John" style="width: 25px; border-radius:1em;"/> John</button>
+                    <button type="button" class="btn btn-outline-light fa fa-envelope" style="border: 0; border-radius: .25em;" onclick="window.location.href='./messages.php'"></button>
+                    <button type="button" class="btn btn-outline-light" style="border-top-left-radius: .25em; border-bottom-left-radius: .25em" onclick="window.location.href='./profile.php'"><img src="images/placeholder.png" alt="John" style="width: 25px; border-radius:1em;"/> John</button>
                     <button class="btn btn-outline-light dropdown-toggle dropdown-toggle-split" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"">
                     </button>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">            

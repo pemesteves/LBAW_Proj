@@ -62,7 +62,17 @@
     <br>
 
     <?php
-        draw_post_card();
+
+        $author = "Peter";
+        $uni = "FEUP";
+        $date = "07-03-2020";
+        $hour = "14:30";
+        $title = "Impressão na FEUP";
+        $post_content = "Hoje de manhã estava na faculdade a tentar imprimir os conteúdos de PPIN e reparei que a impressora não reconhecia a minha pen. 
+        Depois tentei enviar pelo FEUP WebPrint e também não recebeu nenhum ficheiro.
+        Estamos sem sistema de impressão na faculdade?";
+
+        draw_post_card($author, $uni, $date, $hour, $title, $post_content);
 
     ?>    
 
