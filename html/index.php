@@ -19,7 +19,7 @@ draw_header();
                 <a href="login.php" style="color:inherit"> LOGIN </a>
             </button>
             <button style="display:block;position:absolute;top:45%;right:15%;border:none;border-radius:10em;background-color:#f68e4d;width:150px;height:40px;text-align:center;color:white"> 
-                <a href="register.php" style="color:inherit"> LOGIN </a> 
+                <a href="register.php" style="color:inherit"> REGISTER </a> 
             </button>
         </div>
 
