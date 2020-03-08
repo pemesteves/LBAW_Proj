@@ -42,7 +42,7 @@ function draw_navbar() { ?>
                     </a> <!-- whitesmoke -->
                 <form class="form-inline">
                     <div class="input-group" style="border-width: 0.05em; border-color: white; border-radius: 2em; border-style:solid; background-color: white">
-                        <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="search-button" style="border-width: 0; border-top-left-radius: inherit; border-bottom-left-radius: inherit;">
+                        <input type="text" required class="form-control" placeholder="Search" aria-label="Search" aria-describedby="search-button" style="border-width: 0; border-top-left-radius: inherit; border-bottom-left-radius: inherit;">
                         <div class="input-group-append" style="border-radius: inherit">
                             <button class="btn btn-outline-light fa fa-search fa-flip-horizontal" type="submit" id="search-button" style="background-color: sandybrown; border-top-left-radius: inherit; border-bottom-left-radius: inherit;"></button>
                         </div>
