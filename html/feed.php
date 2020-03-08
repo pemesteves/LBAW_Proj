@@ -18,15 +18,15 @@ draw_navbar();
                         <li>
                             <h5 class="menu_title">Groups</h5>
                             <ul class="dl-submenu">
-                                <li><a href="group.php"><small>Let's Tennis</small></a></li>
-                                <li><a href="#"><small>Hicking</small></a></li>
+                                <li><a href="group.php"><small>NIAEFEUP</small></a></li>
+                                <li><a href="#"><small>AEFEUP</small></a></li>
                             </ul>
                         </li>
                         <li>
                             <h5 class="menu_title">Events</h5>
                             <ul class="dl-submenu">
                                 <li><a href="event.php"><small>FEUPCaffe 12/3</small></a></li>
-                                <li><a href="#"><small>Running</small> </a></li>
+                                <li><a href="#"><small>Jantar NIAEFEUP</small> </a></li>
                             </ul>
                         </li>
                     </ul>
