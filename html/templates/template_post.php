@@ -1,5 +1,5 @@
-<?php function draw_post_card($author, $uni, $date, $hour, $title, $post_content){ 
-    draw_post_popup($author, $uni, $date, $hour, $title, $post_content);    
+<?php function draw_post_card($id, $author, $uni, $date, $hour, $title, $post_content){ 
+    draw_post_popup($id, $author, $uni, $date, $hour, $title, $post_content);    
 ?>
 <div class="card mb-3" style="max-width:70%;margin:5% 15%">
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#postModal" style="text-align:ledt;background: none; color: inherit; border: none; padding: 0; font: inherit; cursor: pointer; outline: inherit;"> 
@@ -85,8 +85,8 @@ function draw_create_post_input_fields(){ ?>
 <?php
 }
 
-function draw_post_popup($author, $uni, $date, $hour, $title, $post_content){ ?>
-<div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+function draw_post_popup($id, $author, $uni, $date, $hour, $title, $post_content){ ?>
+<div class="modal fade" id="postModal-<?=$id?>" tabindex="-1" role="dialog" aria-labelledby="postModal-<?=$id?>"
     aria-hidden="true">
     <div class="modal-dialog" role="document" style="overflow: initial; max-width: 90%; width: 90%; max-height: 90%; height: 90%">
         <div class="modal-content" style="height: 100%;">

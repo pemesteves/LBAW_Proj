@@ -67,8 +67,8 @@ draw_navbar();
                 $title2 = "Faculdade fechada";
                 $post_content2 = "Depois destas notícias de terem fechado a nossa faculdade e a do ICBAS, alguém sabe como se vai desenrolar o resto do semestre? Honestamente, estou muito confusa.";
 
-                draw_post_card($author2, $uni2, $date2, $hour2, $title2, $post_content2);
-                draw_post_card($author, $uni, $date, $hour, $title, $post_content);
+                draw_post_card(0, $author2, $uni2, $date2, $hour2, $title2, $post_content2);
+                draw_post_card(1, $author, $uni, $date, $hour, $title, $post_content);
 
                 ?>
 
