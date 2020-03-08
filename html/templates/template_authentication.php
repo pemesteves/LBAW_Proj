@@ -10,9 +10,9 @@
     <section id="login" class="container d-flex justify-content-center flex-column align-items-center">
         <form class="d-flex flex-column justify-content-center">
             <div class="form-group">
-                <input type="email" class="form-control" id="email" placeholder="Email" style="border-radius: 1em; margin:1em 0;">
+                <input type="email" required class="form-control" id="email" placeholder="Email" style="border-radius: 1em; margin:1em 0;">
                 <br>
-                <input type="password" class="form-control" id="password" placeholder="Password" style="border-radius: 1em; margin:1em 0;">
+                <input type="password" required class="form-control" id="password" placeholder="Password" style="border-radius: 1em; margin:1em 0;">
 
 
             </div>
@@ -39,21 +39,21 @@
      <section id="register" class="container d-flex justify-content-center flex-column align-items-center">
         <form class="d-flex flex-column justify-content-center">
             <div class="form-group">
-                <input type="text" class="form-control" id="name" required="required" placeholder="Name" style="border-radius: 1em; margin:1em 0;">
+                <input type="text" required class="form-control" id="name" required="required" placeholder="Name" style="border-radius: 1em; margin:1em 0;">
                 
-                <input type="email" class="form-control" id="email" placeholder="Email" style="border-radius: 1em; margin:1em 0;">
+                <input type="email" required class="form-control" id="email" placeholder="Email" style="border-radius: 1em; margin:1em 0;">
                 
-                <input type="password" class="form-control" id="password" placeholder="Password" style="border-radius: 1em; margin:1em 0;">
+                <input type="password" required class="form-control" id="password" placeholder="Password" style="border-radius: 1em; margin:1em 0;">
                 
-                <input type="password" class="form-control" id="confpassword" placeholder="Confirm Password" style="border-radius: 1em; margin:1em 0;">
+                <input type="password" required class="form-control" id="confpassword" placeholder="Confirm Password" style="border-radius: 1em; margin:1em 0;">
                 
-                <input type="text" class="form-control" id="university" placeholder="University" style="border-radius: 1em; margin:1em 0;">
+                <input type="text" required class="form-control" id="university" placeholder="University" style="border-radius: 1em; margin:1em 0;">
                 
 
 
             </div>
             <div class="form-group">
-                <select class="form-control" id="occupation" placeholder="Occupation" style="border-radius: 1em; margin:1em 0;">
+                <select class="form-control" required id="occupation" placeholder="Occupation" style="border-radius: 1em; margin:1em 0;">
                 <option>Choose an option:</option>
                 <option>Student</option>
                 <option>Teacher</option>
