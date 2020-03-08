@@ -16,14 +16,14 @@
 
 
             </div>
-            <button type="submit" class="btn btn-primary" action="TO UPDATE" method="POST">Login</button>
+            <button type="submit" class="btn btn-primary" action="TO UPDATE" method="POST" style="color:whitesmoke">Login</button>
 
             
         </form>
 
         <footer>
-                <p>Don't have an account? Then <a href="TO UPDATE">REGISTER</a></p>
-                <p>Forgot your password? <a href="TO UPDATE">Recover password</a></p>
+                <p>Don't have an account? Then <a href="TO UPDATE" style="color: #ffa31a">REGISTER</a></p>
+                <p>Forgot your password? <a href="TO UPDATE" style="color: #ffa31a">Recover password</a></p>
 
         </footer>
     </section>
@@ -64,7 +64,7 @@
         </form>
         </body>
         <footer>
-            <p>Already have an account? Then <a href="TO UPDATE">LOGIN</a></p>
+            <p>Already have an account? Then <a href="TO UPDATE" style="color: #ffa31a">LOGIN</a></p>
         </footer>
     </section>
         
