@@ -76,7 +76,7 @@ draw_navbar();
         </div>
     </div>
 
-<?
+<?php
 
 draw_footer();
 ?>

@@ -2,7 +2,7 @@
     draw_post_popup($author, $uni, $date, $hour, $title, $post_content);    
 ?>
 <div class="card mb-3" style="max-width:70%;margin:5% 15%">
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#postModal" style="text-align:left;: none; color: inherit; border: none; padding: 0; font: inherit; cursor: pointer; outline: inherit;"> 
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#postModal" style="text-align:ledt;background: none; color: inherit; border: none; padding: 0; font: inherit; cursor: pointer; outline: inherit;"> 
         <div class="row no-gutters">
             <div class="col-sm">
                 <div class="card text-center" style="border-bottom:none;border-top:none;border-radius:0;height:100%;">
