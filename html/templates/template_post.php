@@ -1,8 +1,8 @@
 <?php function draw_post_card($author, $uni, $date, $hour, $title, $post_content){ 
     draw_post_popup($author, $uni, $date, $hour, $title, $post_content);    
 ?>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#postModal" style="background: none; color: inherit; border: none; padding: 0; font: inherit; cursor: pointer; outline: inherit;"> 
-    <div class="card mb-3" style="max-width:70%;margin:5% 15%">
+<div class="card mb-3" style="max-width:70%;margin:5% 15%">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#postModal" style="text-align:left;: none; color: inherit; border: none; padding: 0; font: inherit; cursor: pointer; outline: inherit;"> 
         <div class="row no-gutters">
             <div class="col-sm">
                 <div class="card text-center" style="border-bottom:none;border-top:none;border-radius:0;height:100%;">
@@ -35,8 +35,8 @@
                 </div>
             </div>
         </div>
-    </div>
-</button>
+    </button>
+</div>
 
 <?php } 
 
