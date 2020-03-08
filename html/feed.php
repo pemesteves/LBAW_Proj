@@ -18,14 +18,14 @@ draw_navbar();
                         <li>
                             <h5 class="menu_title">Groups</h5>
                             <ul class="dl-submenu">
-                                <li><a href="#"><small>Let's Tennis</small></a></li>
+                                <li><a href="group.php"><small>Let's Tennis</small></a></li>
                                 <li><a href="#"><small>Hicking</small></a></li>
                             </ul>
                         </li>
                         <li>
                             <h5 class="menu_title">Events</h5>
                             <ul class="dl-submenu">
-                                <li><a href="#"><small>NI Competition</small></a></li>
+                                <li><a href="event.php"><small>NI Competition</small></a></li>
                                 <li><a href="#"><small>Running</small> </a></li>
                             </ul>
                         </li>
