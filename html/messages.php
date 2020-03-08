@@ -16,7 +16,7 @@
                         <!--<input class="form-control mr-sm-2" type="search" placeholder="Search messages" aria-label="Search" style="margin: 0; padding: 0; height: 100%; width: 80%;"/>
                         <button class="fa fa-search" type="submit" style="height: 100%; width: 15%; margin: 0; padding: 0; "></button>-->
                         <div class="input-group" style="border-width: 0.05em; border-color: lightgrey; border-radius: 2em; border-style:solid; background-color: white">
-                            <input type="text" class="form-control" placeholder="Search" aria-label="Search messages" aria-describedby="search-messages-button" style="border-width: 0; border-top-left-radius: inherit; border-bottom-left-radius: inherit;">
+                            <input type="text" required class="form-control" placeholder="Search" aria-label="Search messages" aria-describedby="search-messages-button" style="border-width: 0; border-top-left-radius: inherit; border-bottom-left-radius: inherit;">
                             <div class="input-group-append" style="border-radius: inherit">
                                 <button class="btn btn-outline-light fa fa-search fa-flip-horizontal" type="submit" id="search-messages-button" style="background-color: sandybrown; border-top-left-radius: inherit; border-bottom-left-radius: inherit;"></button>
                             </div>
@@ -58,7 +58,7 @@
                             aria-label="Search" style="margin: 0; padding: 0; height: 100%; max-width: 90%; width: 90%; ">
                         <button type="submit" style="margin: 0; padding: 0; height: 100%; max-width: 8%; width: 8%;"><i class="fa fa-caret-right"></i></button>-->
                         <div class="input-group" style="border-width: 0.05em; border-color: lightgrey; border-radius: 2em; border-style:solid; background-color: white; width:98%">
-                            <input type="text" class="form-control" placeholder="Write a message..." aria-label="msg-write" aria-describedby="send-message-button" style="border-width: 0; border-top-left-radius: inherit; border-bottom-left-radius: inherit;">
+                            <input type="text" required class="form-control" placeholder="Write a message..." aria-label="msg-write" aria-describedby="send-message-button" style="border-width: 0; border-top-left-radius: inherit; border-bottom-left-radius: inherit;">
                             <div class="input-group-append" style="border-radius: inherit">
                                 <button class="btn btn-outline-light fa fa-caret-left fa-flip-horizontal" type="submit" id="send-message-button" style="background-color: sandybrown; border-top-left-radius: inherit; border-bottom-left-radius: inherit;"></button>
                             </div>

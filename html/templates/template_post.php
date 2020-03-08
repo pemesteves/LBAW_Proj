@@ -62,11 +62,11 @@ function draw_create_post(){ ?>
 
 function draw_create_post_input_fields(){ ?>
 <div class="row" style="padding:0; background-color: white; border: 0; border-bottom: 1px solid lightgrey;">
-    <input type="text" placeholder="&ensp;&nbsp;Title"
+    <input type="text" required placeholder="&ensp;&nbsp;Title"
         style="width: 100%; margin: 0 auto; border: 0; border-radius: inherit"></input>
 </div>
 <div class="row" style="border-radius: 0;">
-    <textarea class="form-control" placeholder="Write here..." rows="3" style="border: 0; "></textarea>
+    <textarea class="form-control" required placeholder="Write here..." rows="3" style="border: 0; "></textarea>
 </div>
 <div class="row" style="background-color: white; border-top: 1px solid lightgrey; border-bottom-left-radius: .5em; border-bottom-right-radius: .5em;">
     <div class="col-11 row">
@@ -129,7 +129,7 @@ function draw_post_popup($author, $uni, $date, $hour, $title, $post_content){ ?>
                                 <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" class="mx-auto d-block" alt="..." style="border-radius:50%; max-width:2rem; ">
                             </div>
                             <div class="col-9">
-                                <input type="text" name="comment" placeholder="Comment..." style="max-width: 100%; width: 100%; max-height: 100%; height: 100%; border: 1px solid lightgrey; border-collapse: collapse; padding-left: .5em;" />
+                                <input type="text" required name="comment" placeholder="Comment..." style="max-width: 100%; width: 100%; max-height: 100%; height: 100%; border: 1px solid lightgrey; border-collapse: collapse; padding-left: .5em;" />
                             </div>
                             <div class="col-1" style="padding: 0">
                                 <button type="submit" style="padding: 0; max-height: 100%; height: 100%; max-width: 100%; width: 100%; background-color: white; border: 0;"><span class="fa fa-caret-right" style="float: left; font-size: 1.5em;"></span></button>
