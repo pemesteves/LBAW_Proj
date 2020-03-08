@@ -20,7 +20,7 @@ $hour = "10:28";
 $title = "Jantar NIAEFEUP";
 $post_content = "Caros colegas, marcamos um jantar para os membros do NIAEFEUP no dia 20 de Março de 2020, pelas 20:30h no restaurante X. O preço será de 10$. Os interessados que se inscrevam!
 Cumprimentos, Matias.";
-draw_post_card($author, $uni, $date, $hour, $title, $post_content);
+draw_post_card(0, $author, $uni, $date, $hour, $title, $post_content);
 
 
 draw_footer();

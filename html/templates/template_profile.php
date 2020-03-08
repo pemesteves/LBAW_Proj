@@ -72,7 +72,7 @@
         Depois tentei enviar pelo FEUP WebPrint e também não recebeu nenhum ficheiro.
         Estamos sem sistema de impressão na faculdade?";
 
-        draw_post_card($author, $uni, $date, $hour, $title, $post_content);
+        draw_post_card(0, $author, $uni, $date, $hour, $title, $post_content);
 
     ?>    
 
