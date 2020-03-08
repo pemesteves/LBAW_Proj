@@ -1,7 +1,7 @@
-<?php function draw_post_card(){ 
-    draw_post_popup();    
+<?php function draw_post_card($id){ 
+    draw_post_popup($id);    
 ?>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#postModal" style="background: none; color: inherit; border: none; padding: 0; font: inherit; cursor: pointer; outline: inherit;"> 
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#postModal-<?=$id?>" style="background: none; color: inherit; border: none; padding: 0; font: inherit; cursor: pointer; outline: inherit;"> 
     <div class="card mb-3" style="max-width:70%;margin:5% 15%">
         <div class="row no-gutters">
             <div class="col-sm">
@@ -129,8 +129,8 @@ function draw_create_post_input_fields(){ ?>
 <?php
 }
 
-function draw_post_popup(){ ?>
-<div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+function draw_post_popup($id){ ?>
+<div class="modal fade" id="postModal-<?=$id?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document" style="overflow: initial; max-width: 90%; width: 90%; max-height: 90%; height: 90%">
         <div class="modal-content" style="height: 100%;">

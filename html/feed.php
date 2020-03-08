@@ -51,8 +51,8 @@ draw_navbar();
 
                 <?php
                 draw_create_post();
-                draw_post_card();
-                draw_post_card();
+                draw_post_card(1);
+                draw_post_card(2);
                 ?>
 
             </div>

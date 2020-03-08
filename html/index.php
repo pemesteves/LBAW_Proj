@@ -8,7 +8,7 @@ draw_navbar();
 
 draw_create_post();
 
-draw_post_card();
+draw_post_card(0);
 
 draw_footer();
 ?>
