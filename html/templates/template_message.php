@@ -26,7 +26,7 @@ function draw_chat_info($image_src, $image_alt, $name, $num_mess){
 
 function draw_message($owner, $message){
 ?>
-<p <?php if($owner) { ?> class="my_message" style="width:max-content; align-self:end; padding:0.5em; border-radius:1em; text-align:right; background-color:sandybrown; color: white; text-decoration:none"
+<p <?php if($owner) { ?> class="my_message" style="width:max-content; margin-left: auto; padding:0.5em; border-radius:1em; text-align:right; background-color:sandybrown; color: white; text-decoration:none"
     <?php } 
     else { ?> class="other_message" style="width:max-content; align-self:start; padding:0.5em; border-radius:1em; text-align:left; background-color:whitesmoke; color: black; text-decoration:none"
     <?php } ?> >

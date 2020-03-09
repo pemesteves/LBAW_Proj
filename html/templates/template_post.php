@@ -86,7 +86,7 @@ function draw_create_post_input_fields(){ ?>
 }
 
 function draw_post_popup($id, $author, $uni, $date, $hour, $title, $post_content){ ?>
-<div class="modal fade" id="postModal-<?=$id?>" tabindex="-1" role="dialog" aria-labelledby="postModal-<?=$id?>"
+<div class="modal fade" id="postModal-" tabindex="-1" role="dialog" aria-labelledby="postModal"
     aria-hidden="true">
     <div class="modal-dialog" role="document" style="overflow: initial; max-width: 90%; width: 90%; max-height: 90%; height: 90%">
         <div class="modal-content" style="height: 100%;">
