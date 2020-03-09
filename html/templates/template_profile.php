@@ -16,7 +16,7 @@
             <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" alt="" class="rounded-circle" style="border-radius:50%; max-width:20rem;">
         </div>
         <div class="card-block px-2" >
-            <h1 class="display-1" style="border:none;padding-top:0.2rem;padding-bottom:1rem;padding-left:5rem;padding-right:0rem">Peter</h1>
+            <h1 class="display-1" style="border:none;padding-top:0.2rem;padding-bottom:1rem;padding-left:5rem;padding-right:0rem">John</h1>
             <h2 class="card-text" style="border:none;padding-top:0.2rem;padding-bottom:1rem;padding-left:1.5rem;padding-right:0rem">University</h2>
             <h2 class="card-text" style="border:none;padding-top:0.2rem;padding-bottom:1rem;">Student</h2>
 
@@ -63,7 +63,7 @@
 
     <?php
 
-        $author = "Peter";
+        $author = "John";
         $uni = "FEUP";
         $date = "07-03-2020";
         $hour = "14:30";
@@ -72,7 +72,7 @@
         Depois tentei enviar pelo FEUP WebPrint e também não recebeu nenhum ficheiro.
         Estamos sem sistema de impressão na faculdade?";
 
-        draw_post_card($author, $uni, $date, $hour, $title, $post_content);
+        draw_post_card(0, $author, $uni, $date, $hour, $title, $post_content);
 
     ?>    
 
