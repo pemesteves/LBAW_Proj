@@ -8,59 +8,74 @@
     /**
      * Draws the profile page
      */?>
-    <body>
     <br>
-    <div class="container text-center d-flex justify-content-center" style="padding-top: 1em; padding-bottom: 1em">
-    <div class="card flex-row flex-wrap border-0" style="height:25rem; width:60rem; border: none; padding:0 margin-right: 0">
-        <div class="card-block " style="background: none; color: inherit; border: none; height:100%">
-            <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" alt="" class="rounded-circle" style="border-radius:50%; max-width:20rem;">
+    <div class="container" style="padding-top: 1em; margin-bottom: 0; background-color: white; border: 1px solid lightgrey;">
+        <div class="row">
+            <div class="col-4">
+                <div class="text-center" style="max-width: 75%; max-height: 80%;">
+                    <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" alt="" class="rounded-circle" style="max-width:100%; max-height: 50%;"/>
+                </div>
+            </div>
+            <div class="col-8" style="padding: 0.2rem 1rem 0 0.2rem;">
+                <div class="row">
+                    <h1 style="border: 0; font-size: 5rem;">John</h1>
+                </div>
+                <div class="row">
+                    <h2 style="border: 0; padding: 0">FEUP</h2>
+                </div>
+                <div class="row">
+                    <h2 style="border: 0; padding: 0;">Student</h2>
+                </div>
+            </div>
         </div>
-        <div class="card-block px-2" >
-            <h1 class="display-1" style="border:none;padding-top:0.2rem;padding-bottom:1rem;padding-left:5rem;padding-right:0rem">John</h1>
-            <h2 class="card-text" style="border:none;padding-top:0.2rem;padding-bottom:1rem;padding-left:1.5rem;padding-right:0rem">University</h2>
-            <h2 class="card-text" style="border:none;padding-top:0.2rem;padding-bottom:1rem;">Student</h2>
+    <div class="row">
+        <div id="accordion" style="width: 100%;">
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                <h5 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Personal Information
+                    </button>
+                </h5>
+                </div>
 
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingTwo">
+                <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Groups
+                    </button>
+                </h5>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                <div class="card-body">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingThree">
+                <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    Friends
+                    </button>
+                </h5>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                <div class="card-body">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                </div>
+                </div>
+            </div>
         </div>
     </div>
-    <br>
     </div>
-    <div class="container text-center">
-    <div class="btn-group" >
-        <button class="btn btn-secondary btn-lg dropdown-toggle dropdown-menu-center" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#000000; background-color:#FFFFFF; width:60rem; padding:1rem">
-        Personal Information
-        </button>
-        <div class="dropdown-menu">
-        </div>
-
-    </div>
-    <br>
-
-    <div class="container text-center">
-    <div class="btn-group" >
-        <button class="btn btn-secondary btn-lg dropdown-toggle dropdown-menu-center" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#000000; background-color:#FFFFFF;  width:60rem; padding:1rem">
-        Groups
-        </button>
-        <div class="dropdown-menu">
-        </div>
-
-    </div>
-
-    <br>
-
-    <div class="container text-center">
-    <div class="btn-group" >
-        <button class="btn btn-secondary btn-lg dropdown-toggle dropdown-menu-center" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#000000; background-color:#FFFFFF; width:60rem; padding:1rem">
-        Friends
-        </button>
-        <div class="dropdown-menu">
-        </div>
-
-    </div>
-
-    </div>
-
-    <br>
-
     <?php
 
         $author = "John";
@@ -74,7 +89,7 @@
 
         draw_post_card(0, $author, $uni, $date, $hour, $title, $post_content);
 
-    ?>    
+    ?>
 
 </body>
 
