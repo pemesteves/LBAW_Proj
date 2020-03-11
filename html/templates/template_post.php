@@ -1,5 +1,5 @@
-<?php function draw_post_card($id, $author, $uni, $date, $hour, $title, $post_content){ 
-    draw_post_popup($id, $author, $uni, $date, $hour, $title, $post_content);    
+<?php function draw_post_card($id, $author, $uni, $date, $hour, $title, $post_content, $likes, $dislikes){ 
+    draw_post_popup($id, $author, $uni, $date, $hour, $title, $post_content, $likes, $dislikes);    
 ?>
 <div class="card mb-3" style="max-width:70%;margin:5% 15%">
     <button type="button" id="postModal-<?=$id?>" class="btn btn-primary" data-toggle="modal" data-target="#popup-<?=$id?>" style="text-align:ledt;background: none; color: inherit; border: none; padding: 0; font: inherit; cursor: pointer; outline: inherit;"> 
@@ -14,23 +14,23 @@
                         <li class="list-group-item" style="border:none;padding-top:0.2rem;padding-bottom:0.2rem">4 friends
                         </li>
                     </ul>
-                    <div class="card-body" style="padding-top:0.2rem;padding-bottom:0.2rem">
-                        <p class="card-text" style="margin-bottom:0rem"><small class="text-muted" style="margin-bottom:0rem"><?= $date ?></small></p>
-                        <p class="card-text"><small class="text-muted" style="margin-bottom:0.2rem"><?= $hour ?></small></p>
-                    </div>
                 </div>
             </div>
-            <div class="col-md-8" style="flex-grow:1; max-width:100%">
-                <div class="card" style="height: 100%">
-                    <div class="card-body">
+            <div class="col-md-8" style="flex-grow:1; max-width:100%; text-align: left;">
+                <div class="card" style="height: 100%; margin-bottom: 0;">
+                    <div class="card-body" style="margin-bottom: 0;padding-bottom: 0;">
                         <h3 class="card-title"> <?= $title ?></h3>
                         <p class="card-text">
                         <?= $post_content ?>
                         </p>
+                        <p class="card-text" style="margin-bottom:0rem; float: right;"><small class="text-muted" style="margin-bottom:0rem"><?= $date ?></small>, <small class="text-muted" style="margin-bottom:0.2rem"><?= $hour ?></small></p>
                     </div>
                     <div class="card-footer" style="border-left:none;border-right:none;border-bottom:none">
                         <span class="comment"> 2 comments </span>
-                        <div></div>
+                        <div style="float: right;">
+                            <span class="fa fa-thumbs-up" style="color:darkgreen;">&nbsp;<?=$likes?>&nbsp;</span>
+                            <span class="fa fa-thumbs-down" style="color: darkred;">&nbsp;<?=$dislikes?>&nbsp;</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -85,7 +85,7 @@ function draw_create_post_input_fields(){ ?>
 <?php
 }
 
-function draw_post_popup($id, $author, $uni, $date, $hour, $title, $post_content){ ?>
+function draw_post_popup($id, $author, $uni, $date, $hour, $title, $post_content, $likes, $dislikes){ ?>
 <div class="modal fade" id="popup-<?=$id?>" tabindex="-1" role="dialog" aria-labelledby="postModal-<?=$id?>"
     aria-hidden="true">
     <div class="modal-dialog" role="document" style="overflow: initial; max-width: 90%; width: 90%; max-height: 90%; height: 90%">
@@ -93,26 +93,34 @@ function draw_post_popup($id, $author, $uni, $date, $hour, $title, $post_content
             <div class="modal-header">
                 <div class="container" style="border-bottom:0;border-radius:0;max-width: 90%;">
                     <div class="row">
-                        <div class="col-2">
+                        <div class="col-sm-2">
                             <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" class="mx-auto d-block" alt="..." style="border-radius:50%; max-width:7rem; " onclick="window.location.href='./profile.php'"/>
                         </div>
-                        <div class="col-7" style="background-color: transparent;">
-                            <div class="row" style="background-color: transparent;">
-                                <h2 class="list-group-item" style="background-color: transparent; border:none;padding-top:0.2rem;padding-bottom:0.2rem"><?= $author ?></h2>
+                        <div class="col-sm-10">
+                            <div class="row">
+                                <div class="col-sm-9" style="background-color: transparent;">
+                                    <div class="row" style="background-color: transparent;">
+                                        <h2 class="list-group-item" style="background-color: transparent; border:none;padding-top:0.2rem;padding-bottom:0.2rem"><?= $author ?></h2>
+                                    </div>
+                                    <div class="row" style="background-color: transparent;">
+                                        <h3 class="list-group-item" style="background-color: transparent; border:none;padding-top:0.2rem;padding-bottom:0.2rem"><?= $uni ?></h3>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" style="padding-top:0.2rem;padding-bottom:0.2rem; text-align: right; font-size: 1.25em;">
+                                    <p class="card-text" style="margin-bottom:0rem"><?= $date ?></p>
+                                    <p class="card-text"><?= $hour ?></p>
+                                </div>
                             </div>
-                            <div class="row" style="background-color: transparent;">
-                                <h3 class="list-group-item" style="background-color: transparent; border:none;padding-top:0.2rem;padding-bottom:0.2rem"><?= $uni ?></h3>
+                            <div class="row justify-content-end" style="font-size: 1.2em;">
+                                <span class="fa fa-thumbs-up" style="color:darkgreen;">&nbsp;<?=$likes?>&nbsp;</span>
+                                <span class="fa fa-thumbs-down" style="color: darkred;">&nbsp;<?=$dislikes?>&nbsp;</span>
                             </div>
-                        </div>
-                        <div class="col-2" style="padding-top:0.2rem;padding-bottom:0.2rem; text-align: right;">
-                            <p class="card-text" style="margin-bottom:0rem"><?= $date ?></p>
-                            <p class="card-text"><?= $hour ?></p>
-                        </div>
-                        <div class="col-1" style="margin-right: 0; padding-right: 0;">
-                            <button type="button" data-dismiss="modal" style="margin-right: 0; padding-right: 0; width: 100%; background-color: white; border: 0;"><span class="fa fa-times"></span></button>
-                            <button type="button" style="margin-right: 0; padding-right: 0; width: 100%; background-color: white; border: 0;"> <span class="fa fa-ellipsis-v" ></span></button>
                         </div>
                     </div>
+                </div>
+                <div>
+                    <button type="button" data-dismiss="modal" style="font-size: 150%; margin-right: 0; padding-right: 0; width: 100%; background-color: white; border: 0;"><span class="fa fa-times"></span></button>
+                    <button type="button" style="font-size: 150%; margin-right: 0; padding-right: 0; width: 100%; background-color: white; border: 0;"> <span class="fa fa-ellipsis-v" ></span></button>
                 </div>
             </div>
             <div class="modal-body" style="overflow-y: auto;">
@@ -124,7 +132,7 @@ function draw_post_popup($id, $author, $uni, $date, $hour, $title, $post_content
                         <p> <?= $post_content ?></p>
                     </div>
                     <form method="post">
-                        <div class="row" style="border: 1px solid lightgrey; border-collapse: collapse;">
+                        <div class="row" style="border: 1px solid lightgrey; margin: 0;">
                             <div class="col-2">
                                 <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" class="mx-auto d-block" alt="..." style="border-radius:50%; max-width:2rem; ">
                             </div>
@@ -136,8 +144,10 @@ function draw_post_popup($id, $author, $uni, $date, $hour, $title, $post_content
                             </div>
                         </div>
                     </form>
-                    <?php draw_comment('0', "Joaquin", "Talvez alguém nos vá informar através de email? Mas eu suponho que vamos ter aulas até mais tarde.") ?>
-                    <?php draw_comment('5em', "Tiago", "Sim, já contactei vários professores e todos disseram que vai sair um comunicado oficial da faculdade.") ?>
+                    <div style="border: 1px solid lightgrey;">
+                        <?php draw_comment('0', "Joaquin", "Talvez alguém nos vá informar através de email? Mas eu suponho que vamos ter aulas até mais tarde.") ?>
+                        <?php draw_comment('5em', "Tiago", "Sim, já contactei vários professores e todos disseram que vai sair um comunicado oficial da faculdade.") ?>
+                    </div>
                 </div>
             </div>
         </div>
@@ -147,20 +157,20 @@ function draw_post_popup($id, $author, $uni, $date, $hour, $title, $post_content
 }
 
 function draw_comment($padding_left, $author, $comment){ ?>
-<div class="row" style="padding-top: .5em; padding-bottom: .5em; border: 1px solid lightgrey; border-top: 0; padding-left: <?=$padding_left != 0 ? '5em' : 0 ?>;">
-    <div class="col-2" >
-        <div class="row">   
+<div class="row" style="padding-top: .5em; padding-bottom: .5em; padding-left: <?=$padding_left != 0 ? '5em' : 0 ?>; background-color: transparent;">
+    <div class="col-sm-2" >
+        <div class="row" >   
             <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" class="mx-auto d-block" alt="..." style="border-radius:50%; max-width:2rem; "  onclick="window.location.href='./profile.php'">
         </div>
         <div class="row">
             <h4 style="font-size: 1em; margin: 0 auto;"><?= $author ?></h4>
         </div>
     </div>
-    <div class="col-9">
+    <div class="col-sm-9">
         <p style="max-width: 100%; width: 100%; padding-left: .5em; border: 1px solid lightgrey;"><?= $comment?></p>
     </div>
-    <div class="col-1" style="padding: 0">
-        <button style="padding: 0; max-height: 100%; height: 100%; max-width: 100%; width: 100%; background-color: white; border: 0;"><span class="fa fa-ellipsis-v" style="float: left; margin-top: -1.5em;"></span></button>
+    <div class="col-sm-1" style="padding: 0">
+        <button style="padding: 0; max-height: 100%; height: 100%; max-width: 100%; width: 100%; background-color: white; border: 0; background-color: transparent;"><span class="fa fa-ellipsis-v" style="float: left; margin-top: -1.5em;"></span></button>
     </div>
 </div>
 <?php
