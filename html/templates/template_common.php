@@ -20,6 +20,7 @@
             <link rel="stylesheet" href="./css/menu.css">
             <link rel="stylesheet" href="./css/post_form.css">
             <link rel="stylesheet" href="./css/posts.css">
+            <link rel="stylesheet" href="./css/chat.css">
 
             <style>
                 body {
