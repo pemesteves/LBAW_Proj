@@ -12,8 +12,8 @@
                 <div style="display:flex;justify-content:space-between">
                     <h6 class="card-text">Issue : Improper content</h6>
                     <div>
-                        <button type="button" class="btn btn-warning">Accept</button>
-                        <button type="button" class="btn btn-info" style="margin-top:0.2rem">Ignore</button>
+                        <button type="button" class="btn btn-success">Accept</button>
+                        <button type="button" class="btn btn-danger" style="margin-top:0.2rem">Ignore</button>
                     </div>
                 </div>
 

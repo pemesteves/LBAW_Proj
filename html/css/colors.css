@@ -1,0 +1,16 @@
+.btn-primary {
+    background-color: sandybrown;
+}
+
+.btn-primary:hover{
+    background-color: rgb(255, 135, 30);
+}
+
+
+.btn-success, .text-success {
+    background-color: darkgreen;
+}
+
+.btn-danger, .text-danger {
+    background-color: darkred;
+}
