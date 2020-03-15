@@ -22,6 +22,7 @@
             <link rel="stylesheet" href="./css/posts.css">
             <link rel="stylesheet" href="./css/chat.css">
             <link rel="stylesheet" href="./css/colors.css">
+            <link rel="stylesheet" href="./css/authentication.css">
 
             <style>
                 body {

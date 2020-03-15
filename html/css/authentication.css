@@ -1,0 +1,48 @@
+#login, #register {
+    max-height: 90% !important; 
+    height: 90% !important;
+}
+
+#login h2 , #register h2 {
+    font-size: 3em;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 1em;
+}
+
+#login form input , #register form input, #register form select {
+    border-radius: 1em; 
+    margin: 1em 0; 
+    height: 3em; 
+    width: 100%;
+}
+
+#login form input:first-child, #register form input:first-child, 
+#register .form-group:first-child {
+    margin-bottom: 0;
+}
+
+#register .form-group select{
+    margin-top: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+#form_div {
+    margin: auto;
+}
+
+#login footer p, #register footer p {
+    padding-top: .5em;
+}
+
+#login footer p a, #register footer p a {
+    color: #ffa31a; 
+}
+
+#login form button[type="submit"], #login footer p, 
+#register form button[type="submit"], #register footer p {
+    max-width: 80%;
+    min-width: 80%;
+    margin: 0 auto;
+}

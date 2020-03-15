@@ -10,7 +10,7 @@ draw_header();
         <nav class="navbar navbar-dark" style="background-color: sandybrown;"> <!-- #ffa31a -->
             <a class="navbar-brand" href="#.php">
                 <h1 style="color: whitesmoke;">UConnect <span class="fa fa-graduation-cap"></span></h1>
-                </a> <!-- whitesmoke -->
+            </a> <!-- whitesmoke -->
         </nav>
         <div id="init_page_area" style="width:100%;height:100%;">
             <img src="./images/init.png" alt="init" style="position:absolute;bottom:0%;object-fit:fill;width: 100%; height: 50%";>
