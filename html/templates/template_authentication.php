@@ -19,7 +19,7 @@
             </form>
 
             <footer style="margin: 0; margin-top: 1em; padding: 0;">
-                <p class="row">Don't have an account? Then <a href="TO UPDATE" style="color: #ffa31a">&nbsp;REGISTER</a></p>
+                <p class="row">Don't have an account? Then <a href="/register.php" style="color: #ffa31a">&nbsp;REGISTER</a></p>
                 <p class="row">Forgot your password? <a href="TO UPDATE" style="color: #ffa31a">&nbsp;Recover password</a></p>
             </footer>
         </div>
@@ -61,7 +61,7 @@
         </form>
         </body>
         <footer>
-            <p>Already have an account? Then <a href="TO UPDATE" style="color: #ffa31a">LOGIN</a></p>
+            <p>Already have an account? Then <a href="/login.php" style="color: #ffa31a">LOGIN</a></p>
         </footer>
     </section>
         

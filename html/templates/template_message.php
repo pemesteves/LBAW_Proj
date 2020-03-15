@@ -1,24 +1,23 @@
 <?php
 function draw_chat_info($image_src, $image_alt, $name, $num_mess){
 ?>
-    <article class="card-mb-3" style="border-color: sandybrown; border-width: 0; border-bottom-width: 0.1em; border-style: solid; width: 100%; height: 3em; padding: 0.25em">
-        <div class="row">
-            <div class="col-md-4">
-                <img class="card-img" src="<?=$image_src?>" alt="<?=$image_alt?>" style="width:2.5em; border-radius:50%"/>
-            </div>
-            <div class="col-md-8">
-                <h2 class="card-title"><?=$name?>
+    <article class="card-mb-3 chat_user_info_article" >
+        <div class="row chat_user_info_article_div" style="margin-left:15px">
+            
+                <img class="card-img" src="<?=$image_src?>" alt="<?=$image_alt?>" style="width:2.5em;height:2.5em; border-radius:50%"/>
+            
+            
+                <h2 class="card-title" style="margin-left:10px"><?=$name?>
                 <?php        
                 if(isset($num_mess) && is_numeric($num_mess) && $num_mess > 0){
-                    if($num_mess > 9)
-                        $num_mess = "+9"; 
+                    if($num_mess > 9) $num_mess = "+9"; 
                 ?>
                 <span class="badge badge-primary badge-pill" style="font-size: 0.4em;"><?=$num_mess?></span>
                 <?php
                 }
                 ?>
                 </h2>
-            </div>
+            
         </div>
     </article>
 <?php

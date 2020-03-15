@@ -15,7 +15,7 @@
                     <form class="form-inline" method="post" style="width: 100%; justify-content:center;">
                         <!--<input class="form-control mr-sm-2" type="search" placeholder="Search messages" aria-label="Search" style="margin: 0; padding: 0; height: 100%; width: 80%;"/>
                         <button class="fa fa-search" type="submit" style="height: 100%; width: 15%; margin: 0; padding: 0; "></button>-->
-                        <div class="input-group" style="border-width: 0.05em; border-color: lightgrey; border-radius: 2em; border-style:solid; background-color: white">
+                        <div class="input-group" style="margin-left:5px;margin-right:5px;border-width: 0.05em; border-color: lightgrey; border-radius: 2em; border-style:solid; background-color: white">
                             <input type="text" required class="form-control" placeholder="Search" aria-label="Search messages" aria-describedby="search-messages-button" style="border-width: 0; border-top-left-radius: inherit; border-bottom-left-radius: inherit;">
                             <div class="input-group-append" style="border-radius: inherit">
                                 <button class="btn btn-outline-light fa fa-search fa-flip-horizontal" type="submit" id="search-messages-button" style="background-color: sandybrown; border-top-left-radius: inherit; border-bottom-left-radius: inherit;"></button>
@@ -38,7 +38,7 @@
             </section>
 
             <section id="opened_message" class="col-md-9 d-flex flex-column" style="height: 100%">
-                <header class="row" id="chat_info" style="padding-top:0.5em; border-width: 0; border-bottom-width: 0.1em; border-style:solid; border-color: sandybrown">
+                <header class="row" id="chat_info">
                     <img class="card-img" src="images/placeholder.png" alt="" style="width:2.5em; height:2.5em ; border-radius:50%" onclick="window.location.href='./profile.php'"/>
                     <h2>Mary</h2>
                 </header>
