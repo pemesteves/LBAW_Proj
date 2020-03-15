@@ -22,7 +22,7 @@
         </form>
 
         <footer>
-                <p>Don't have an account? Then <a href="TO UPDATE" style="color: #ffa31a">REGISTER</a></p>
+                <p>Don't have an account? Then <a href="/register.php" style="color: #ffa31a">REGISTER</a></p>
                 <p>Forgot your password? <a href="TO UPDATE" style="color: #ffa31a">Recover password</a></p>
 
         </footer>
@@ -64,7 +64,7 @@
         </form>
         </body>
         <footer>
-            <p>Already have an account? Then <a href="TO UPDATE" style="color: #ffa31a">LOGIN</a></p>
+            <p>Already have an account? Then <a href="/login.php" style="color: #ffa31a">LOGIN</a></p>
         </footer>
     </section>
         
