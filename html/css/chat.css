@@ -1,0 +1,44 @@
+.chat_user_image{
+    width:3.5rem;
+    height:3.5rem;
+    border-radius:50%;
+    height: 80%;
+    width: auto;
+    margin: 5px;
+}
+
+
+.chat_message_input{
+    border-width: 0.05em;
+    border-color: lightgrey; 
+    border-radius: 2em; 
+    border-style:solid; 
+    background-color: white; 
+    width:98%;
+}
+
+.chat_my_message{
+    width:max-content; 
+    margin-left: auto; 
+    padding:0.5em; 
+    border-radius:1em; 
+    text-align:right; 
+    background-color:sandybrown; 
+    color: white; 
+    text-decoration:none;
+}
+
+.chat_other_message{
+    width:max-content; 
+    align-self:start; 
+    padding:0.5em; 
+    border-radius:1em; 
+    text-align:left; 
+    background-color:whitesmoke; 
+    color: black; 
+    text-decoration:none
+}
+
+#messages_col{
+    margin: 0% 5%;
+}
