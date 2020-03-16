@@ -40,11 +40,13 @@
         </head>
         <body>
 <?php } 
-function draw_navbar() { ?>
+function draw_navbar($is_admin = false) { 
+    ?>
             <nav class="navbar navbar-dark navbar-bar" style="background-color: sandybrown;">
                 <a class="navbar-brand" href="./feed.php">
                     <h1 style="color: whitesmoke;">UConnect <span class="fa fa-graduation-cap"></span></h1>
                 </a> <!-- whitesmoke -->
+                <?php if(!$is_admin){?>
                 <form class="form-inline">
                     <div class="input-group" style="border-width: 0.05em; border-color: white; border-radius: 2em; border-style:solid; background-color: white">
                         <input type="text" required class="form-control" placeholder="Search" aria-label="Search" aria-describedby="search-button" style="border-width: 0; border-top-left-radius: inherit; border-bottom-left-radius: inherit;">
@@ -53,12 +55,16 @@ function draw_navbar() { ?>
                         </div>
                     </div>
                 </form>
+                <?php } ?>
                 <div class="btn-group" >
+                    <?php if(!$is_admin){ ?>
                     <button type="button" class="btn btn-outline-light fa fa-bell" style="border: 0; border-radius: .25em;"></button>
                     <button type="button" class="btn btn-outline-light fa fa-envelope" style="border: 0; border-radius: .25em;" onclick="window.location.href='./messages.php'"></button>
-                    <button type="button" class="btn btn-outline-light" style="border: 0; border-radius: .25em" onclick="window.location.href='./profile.php'"><img src="images/placeholder.png" alt="John" style="width: 25px; border-radius:1em;"/> John</button>
-                    <button class="btn btn-outline-light dropdown-toggle dropdown-toggle-split" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border: 0; border-radius: .25em;">
-                    </button>
+                    <?php } ?>
+                    <button type="button" class="btn btn-outline-light" style="border: 0; border-radius: .25em" onclick="window.location.href='<?php if($is_admin) echo './admin.php'; else echo './profile.php'; ?>'"><img src="images/placeholder.png" alt="John" style="width: 25px; border-radius:1em;"/> John</button>
+                    <?php if(!$is_admin){ ?>    
+                    <button class="btn btn-outline-light dropdown-toggle dropdown-toggle-split" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border: 0; border-radius: .25em;"></button>
+                    <?php } ?>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">            
                         <div class="navbar-nav">
                             <a class="dropdown-item" href="#"><span class="fa fa-adjust"></span>&nbsp;Dark Mode</a>
