@@ -14,7 +14,7 @@ draw_navbar();
 
                 <div id="dl-menu" class="dl-menuwrapper">
                     <button id="dl-trigger" onclick="toggle()">Open Menu</button>
-                    <ul id="dl-menu2" >
+                    <ul id="dl-menu2">
                         <li>
                             <h5 class="menu_title">Groups</h5>
                             <ul class="dl-submenu">

@@ -1,0 +1,43 @@
+#event_card {
+    max-width: 80%;
+    margin: 5% auto;
+}
+
+#event_card img {
+    border: 1px solid lightgrey; 
+    border-collapse: collapse; 
+    object-fit: cover; 
+    object-position: center; 
+    width: 100%; 
+    height: 25vh;
+}
+
+#event_card div.card {
+    height: 100%; 
+    border: none;
+}
+
+#event_card div.card-body {
+    border: 1px solid lightgrey; 
+    border-collapse: collapse;
+}
+
+#event_card .card-footer{
+    padding: 0 !important;
+    border: 1px solid lightgrey; 
+    border-collapse: collapse; 
+    width: 100%; 
+    max-width: 100%;
+}
+
+#event_card .card-footer .row{
+    margin: .25em 0 !important;
+}
+
+#event_card .card-footer .row * {
+    margin: 0 !important;
+}
+
+#event_card .card-footer .row .col-sm-6:last-child {
+    text-align: right;
+}

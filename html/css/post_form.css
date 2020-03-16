@@ -106,3 +106,7 @@
 #post_upload div p {
     margin-left:10px
 }
+
+#post_title{
+    padding-left: .5em;
+}

@@ -43,7 +43,7 @@
 function draw_create_post(){ ?>
     <form id="post_form" method="post">
         <div class="container" id="post_container">
-            <input id="post_title" type="text" required="required" placeholder="  Title"/>
+            <input id="post_title" type="text" required="required" placeholder="Title"/>
             <textarea id="post_text" class="form-control" required placeholder="Write here..." rows="3"></textarea>
             <div id="post_form_lower">
                 <div id="post_upload">
