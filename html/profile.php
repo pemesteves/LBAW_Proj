@@ -7,6 +7,5 @@
 
     draw_profile();
 
-
     draw_footer();
 ?>

@@ -26,6 +26,15 @@
     background-color: darkred;
 }
 
+.btn-link {
+    color: sandybrown;
+    font-size: 1em;
+}
+
+.btn-link:hover {
+    color: rgb(204, 103, 14);
+}
+
 .text-primary {
     color: sandybrown !important;
 }
