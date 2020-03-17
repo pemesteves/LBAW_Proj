@@ -1,0 +1,45 @@
+#about_container {
+    margin-top: 2em;
+    padding: 0;
+    max-width: 80%;
+    width: 80%;
+}
+
+#about_container div.row {
+    max-width: 100%;
+    width: 100%;
+    margin: 0;
+}
+
+#about_container > div.row {
+    margin-bottom: 1em;
+}
+
+#about_container div.row .col-sm-7, 
+#about_container div.row .col-sm-5{
+    padding: 0;
+}
+
+#about_container div.row .col-sm-7, #about_container div.row .col-sm-5 {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+#about_container div.row .col-sm-5 > img {
+    border: 1px solid lightgrey; 
+    border-collapse: collapse; 
+    object-fit: cover; 
+    object-position: center; 
+    width: 100%; 
+    height: 17.5vh;
+}
+
+#about_container div.row .card-title {
+    font-size: 1.5em;
+    text-align: center;
+    margin: 0;
+}
+
+#about_container div.row .card-body {
+    padding: 20px;
+}

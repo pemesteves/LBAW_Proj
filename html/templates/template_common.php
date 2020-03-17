@@ -26,6 +26,7 @@
             <link rel="stylesheet" href="./css/event.css">
             <link rel="stylesheet" href="./css/group.css">
             <link rel="stylesheet" href="./css/profile.css">
+            <link rel="stylesheet" href="./css/about.css">
 
             <style>
                 body {
