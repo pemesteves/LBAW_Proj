@@ -10,8 +10,6 @@ draw_navbar();
     <div class="container" style="margin:0; min-width:100%">
         <div class="row">
             <div class="col-sm-1" style="padding-left:0px">
-                
-
                 <div id="dl-menu" class="dl-menuwrapper">
                     <button id="dl-trigger" onclick="toggle()">Open Menu</button>
                     <ul id="dl-menu2">
