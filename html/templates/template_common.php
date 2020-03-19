@@ -62,14 +62,22 @@ function draw_navbar($is_admin = false) {
                         </div>
                     </div>
                 </form>
-                <?php } ?>
                 <button id="navbar_pers_info_mobile" onclick="show_pers_info()"><span class="fa fa-id-card"></span></button>
-                <div id="navbar_pers_info" class="btn-group" >
+                <?php } ?>
+                <div id="navbar_pers_info" class="btn-group" 
+                    <?php if($is_admin){ ?>    
+                    style="opacity: 1; display: block; width: auto;"    
+                    <?php }?>
+                >
                     <?php if(!$is_admin){ ?>
                     <button type="button" class="btn btn-outline-light fa fa-bell"></button>
                     <button type="button" class="btn btn-outline-light fa fa-envelope" onclick="window.location.href='./messages.php'"></button>
                     <?php } ?>
-                    <button type="button" class="btn btn-outline-light" onclick="window.location.href='<?php if($is_admin) echo './admin.php'; else echo './profile.php'; ?>'"><img src="images/placeholder.png" alt="John"/> John</button>
+                    <button type="button" class="btn btn-outline-light" onclick="window.location.href='<?php if($is_admin) echo './admin.php'; else echo './profile.php'; ?>'"
+                        <?php if($is_admin){ ?>    
+                        style="opacity: 1; display: block;"    
+                        <?php }?>
+                    ><img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" alt="John"/> John</button>
                     <?php if(!$is_admin){ ?>    
                     <button class="btn btn-outline-light dropdown-toggle dropdown-toggle-split" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                     <?php } ?>
