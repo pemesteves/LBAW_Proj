@@ -76,6 +76,7 @@ function draw_navbar($is_admin = false) {
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">            
                         <div class="navbar-nav">
                             <a class="dropdown-item" href="#"><span class="fa fa-adjust"></span>&nbsp;Dark Mode</a>
+                            <a class="dropdown-item" href="./about.php"><span class="fa fa-info-circle"></span>&nbsp;About Us</a>
                             <a class="dropdown-item" href="#"><span class="fa fa-cog"></span>&nbsp;Settings</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href=""><span class="fa fa-sign-out"></span>&nbsp;Logout</a>
