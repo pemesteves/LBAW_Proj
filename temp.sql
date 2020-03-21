@@ -121,8 +121,11 @@ CREATE TABLE public."image"
 	"regular_user_id" integer  DEFAULT NULL REFERENCES public."regular_user"("regular_user_id"),
 	"post_id" integer DEFAULT NULL REFERENCES public."post"("post_id"),
 	
-	CONSTRAINT "image_id_pkey" PRIMARY KEY ("image_id")
-	-- FAZER XOR ENTRE TODOS GOOD LUCK
+	CONSTRAINT "image_id_pkey" PRIMARY KEY ("image_id"),
+	CONSTRAINT "bellong_ck" CHECK ( (Case when ("group_id" iS NOT NULL) then 1 else 0 end)  + 
+								 	(Case when ("event_id" iS NOT NULL) then 1 else 0 end) + 
+								    (Case when ("regular_user_id" iS NOT NULL) then 1 else 0 end) + 
+								    (Case when ("post_id" iS NOT NULL) then 1 else 0 end) = 1)
 );
 
 CREATE TABLE public."comment"
@@ -165,7 +168,8 @@ CREATE TABLE public."message"
 CREATE TABLE public."user_in_chat"
 (
 	"user_id" serial NOT NULL REFERENCES public."regular_user"("regular_user_id"),
-	"chat_id" integer NOT NULL REFERENCES public."chat"("chat_id")
+	"chat_id" integer NOT NULL REFERENCES public."chat"("chat_id"),
+	CONSTRAINT "user_in_chat_pkey" PRIMARY KEY ("user_id", "chat_id")
 );
 
 CREATE TABLE public."notification"
@@ -184,6 +188,8 @@ CREATE TABLE public."notified_user"
 (
 	"notification_id" serial NOT NULL REFERENCES public."notification"("notification_id"),
 	"user_notified" integer NOT NULL REFERENCES public."regular_user"("regular_user_id"),
-	"seen" boolean DEFAULT FALSE NOT NULL
+	"seen" boolean DEFAULT FALSE NOT NULL,
+	CONSTRAINT "notified_user_pkey" PRIMARY KEY ("notification_id", "user_notified")
 );
+
 
