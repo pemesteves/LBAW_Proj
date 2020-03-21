@@ -1,189 +1,189 @@
-DROP TABLE IF EXISTS public."Notified_User";
-DROP TABLE IF EXISTS public."Notification";
-DROP TABLE IF EXISTS public."User_In_Chat";
-DROP TABLE IF EXISTS public."Message";
-DROP TABLE IF EXISTS public."Chat";
-DROP TABLE IF EXISTS public."Comment";
-DROP TABLE IF EXISTS public."Image";
-DROP TABLE IF EXISTS public."File";
-DROP TABLE IF EXISTS public."Post";
-DROP TABLE IF EXISTS public."Group";
-DROP TABLE IF EXISTS public."Event";
-DROP TABLE IF EXISTS public."Organization";
-DROP TABLE IF EXISTS public."Teacher";
-DROP TABLE IF EXISTS public."Student";
-DROP TABLE IF EXISTS public."Regular_User";
-DROP TABLE IF EXISTS public."Admin";
-DROP TABLE IF EXISTS public."User";
+DROP TABLE IF EXISTS public."notified_user";
+DROP TABLE IF EXISTS public."notification";
+DROP TABLE IF EXISTS public."user_in_chat";
+DROP TABLE IF EXISTS public."message";
+DROP TABLE IF EXISTS public."chat";
+DROP TABLE IF EXISTS public."comment";
+DROP TABLE IF EXISTS public."image";
+DROP TABLE IF EXISTS public."file";
+DROP TABLE IF EXISTS public."post";
+DROP TABLE IF EXISTS public."group";
+DROP TABLE IF EXISTS public."event";
+DROP TABLE IF EXISTS public."organization";
+DROP TABLE IF EXISTS public."teacher";
+DROP TABLE IF EXISTS public."student";
+DROP TABLE IF EXISTS public."regular_user";
+DROP TABLE IF EXISTS public."admin";
+DROP TABLE IF EXISTS public."user";
 
-CREATE TABLE public."User"
+CREATE TABLE public."user"
 (
-    "User_id" integer NOT NULL,
-    "Name" text NOT NULL,
-    "Email" text NOT NULL,
-    "Password" text NOT NULL,
-    CONSTRAINT "User_pkey" PRIMARY KEY ("User_id"),
-    CONSTRAINT "User_Email_key" UNIQUE ("Email")
+    "user_id" serial NOT NULL,
+    "name" text NOT NULL,
+    "email" text NOT NULL,
+    "password" text NOT NULL,
+    CONSTRAINT "user_pkey" PRIMARY KEY ("user_id"),
+    CONSTRAINT "user_email_key" UNIQUE ("email")
 );
 
-CREATE TABLE public."Admin"
+CREATE TABLE public."admin"
 (
-    "Admin_id" integer NOT NULL,
-	"User_id" integer NOT NULL REFERENCES public."User",
-    CONSTRAINT "Admin_pkey" PRIMARY KEY ("Admin_id")
+    "admin_id" serial NOT NULL,
+	"user_id" integer NOT NULL REFERENCES public."user"("user_id"),
+    CONSTRAINT "admin_pkey" PRIMARY KEY ("admin_id")
 );
 
-CREATE TABLE public."Regular_User"
+CREATE TABLE public."regular_user"
 (
-    "Regular_User_id" integer NOT NULL,
-	"User_id" integer NOT NULL REFERENCES public."User",
-	"Personal_Info" text,
-    CONSTRAINT "Regular_User_pkey" PRIMARY KEY ("Regular_User_id")
+    "regular_user_id" serial NOT NULL,
+	"user_id" integer NOT NULL REFERENCES public."user"("user_id"),
+	"personal_info" text,
+    CONSTRAINT "regular_user_pkey" PRIMARY KEY ("regular_user_id")
 );
 
-CREATE TABLE public."Student"
+CREATE TABLE public."student"
 (
-    "Student_id" integer NOT NULL,
-	"Regular_User_id" integer NOT NULL REFERENCES public."Regular_User",
-    CONSTRAINT "Student_pkey" PRIMARY KEY ("Student_id")
+    "student_id" serial NOT NULL,
+	"regular_user_id" integer NOT NULL REFERENCES public."regular_user"("regular_user_id"),
+    CONSTRAINT "student_pkey" PRIMARY KEY ("student_id")
 );
 
-CREATE TABLE public."Teacher"
+CREATE TABLE public."teacher"
 (
-    "Teacher_id" integer NOT NULL,
-	"Regular_User_id" integer NOT NULL REFERENCES public."Regular_User",
-    CONSTRAINT "Teacher_pkey" PRIMARY KEY ("Teacher_id")
+    "teacher_id" serial NOT NULL,
+	"regular_user_id" integer NOT NULL REFERENCES public."regular_user"("regular_user_id"),
+    CONSTRAINT "teacher_pkey" PRIMARY KEY ("teacher_id")
 );
 
-CREATE TABLE public."Organization"
+CREATE TABLE public."organization"
 (
-    "Organization_id" integer NOT NULL,
-	"Regular_User_id" integer NOT NULL REFERENCES public."Regular_User",
-	"Approval" boolean NOT NULL DEFAULT FALSE,
-    CONSTRAINT "Organization_pkey" PRIMARY KEY ("Organization_id")
+    "organization_id" serial NOT NULL,
+	"regular_user_id" integer NOT NULL REFERENCES public."regular_user"("regular_user_id"),
+	"approval" boolean NOT NULL DEFAULT FALSE,
+    CONSTRAINT "organization_pkey" PRIMARY KEY ("organization_id")
 );
 
-CREATE TABLE public."Event"
+CREATE TABLE public."event"
 (
-	"Event_id" integer NOT NULL,
-    "Organization_id" integer NOT NULL REFERENCES public."Organization",
-	"Name" text NOT NULL,
-	"Location" text NOT NULL,
-	"Date" timestamp with time zone NOT NULL,
-	"Information" text NOT NULL,
-    CONSTRAINT "Event_id_pkey" PRIMARY KEY ("Event_id")
+	"event_id" serial NOT NULL,
+    "organization_id" integer NOT NULL REFERENCES public."organization"("organization_id"),
+	"name" text NOT NULL,
+	"location" text NOT NULL,
+	"date" timestamp with time zone NOT NULL,
+	"information" text NOT NULL,
+    CONSTRAINT "event_id_pkey" PRIMARY KEY ("event_id")
 );
 
-CREATE TABLE public."Group"
+CREATE TABLE public."group"
 (
-	"Group_id" integer NOT NULL,
-	"Name" text NOT NULL,
-	"Information" text NOT NULL,
-    CONSTRAINT "Group_id_pkey" PRIMARY KEY ("Group_id")
+	"group_id" serial NOT NULL,
+	"name" text NOT NULL,
+	"information" text NOT NULL,
+    CONSTRAINT "group_id_pkey" PRIMARY KEY ("group_id")
 );
 
 
-CREATE TABLE public."Post"
+CREATE TABLE public."post"
 (
-	"Post_id" integer NOT NULL,
-	"Author_id" integer NOT NULL REFERENCES public."Regular_User",
-	"Title" text NOT NULL,
-	"Body" text NOT NULL,
-	"Date" timestamp with time zone NOT NULL DEFAULT now(),
-	"Upvotes" integer NOT NULL DEFAULT 0,
-	"Downvotes" integer NOT NULL DEFAULT 0,
+	"post_id" serial NOT NULL,
+	"author_id" integer NOT NULL REFERENCES public."regular_user"("regular_user_id"),
+	"title" text NOT NULL,
+	"body" text NOT NULL,
+	"date" timestamp with time zone NOT NULL DEFAULT now(),
+	"upvotes" integer NOT NULL DEFAULT 0,
+	"downvotes" integer NOT NULL DEFAULT 0,
 	
-	"Event_id" integer DEFAULT NULL References public."Event",
-	"Group_id" integer DEFAULT NULL References public."Group",
+	"event_id" integer DEFAULT NULL References public."event"("event_id"),
+	"group_id" integer DEFAULT NULL References public."group"("group_id"),
 	
-    CONSTRAINT "Post_id_pkey" PRIMARY KEY ("Post_id"),
-	CONSTRAINT "Date_ck" CHECK ( "Date" <= now() ),
-	CONSTRAINT "Upvotes_ck" CHECK ( "Upvotes" >= 0 ),
-	CONSTRAINT "Downvotes_ck" CHECK ( "Downvotes" >= 0 ),
-	CONSTRAINT "Bellong_ck" CHECK ( NOT ( ("Event_id" IS NOT NULL) AND ( "Group_id" IS NOT NULL ) )  )
+    CONSTRAINT "post_id_pkey" PRIMARY KEY ("post_id"),
+	CONSTRAINT "date_ck" CHECK ( "date" <= now() ),
+	CONSTRAINT "upvotes_ck" CHECK ( "upvotes" >= 0 ),
+	CONSTRAINT "downvotes_ck" CHECK ( "downvotes" >= 0 ),
+	CONSTRAINT "bellong_ck" CHECK ( NOT ( ("event_id" IS NOT NULL) AND ( "group_id" IS NOT NULL ) )  )
 );
 
-CREATE TABLE public."File"
+CREATE TABLE public."file"
 (
-	"File_id" integer NOT NULL,
-	"Post_id" integer REFERENCES public."Post",
-	"File" BYTEA NOT NULL, -- BYTEA == BLOB
+	"file_id" serial NOT NULL,
+	"post_id" integer REFERENCES public."post"("post_id"),
+	"file_path" text NOT NULL,
 	
-	CONSTRAINT "File_id_pkey" PRIMARY KEY ("File_id")
+	CONSTRAINT "file_id_pkey" PRIMARY KEY ("file_id")
 );
 
-CREATE TABLE public."Image"
+CREATE TABLE public."image"
 (
-	"Image_id" integer NOT NULL,
-	"File_id" integer NOT NULL REFERENCES public."File",
-	"Group_id" integer DEFAULT NULL REFERENCES public."Group",
-	"Event_id" integer DEFAULT NULL REFERENCES public."Event",
-	"Regular_user_id" integer  DEFAULT NULL REFERENCES public."Regular_User",
-	"Post_id" integer DEFAULT NULL REFERENCES public."Post",
+	"image_id" serial NOT NULL,
+	"file_id" integer NOT NULL REFERENCES public."file"("file_id"),
+	"group_id" integer DEFAULT NULL REFERENCES public."group"("group_id"),
+	"event_id" integer DEFAULT NULL REFERENCES public."event"("event_id"),
+	"regular_user_id" integer  DEFAULT NULL REFERENCES public."regular_user"("regular_user_id"),
+	"post_id" integer DEFAULT NULL REFERENCES public."post"("post_id"),
 	
-	CONSTRAINT "Image_id_pkey" PRIMARY KEY ("Image_id"),
+	CONSTRAINT "image_id_pkey" PRIMARY KEY ("image_id")
 	-- FAZER XOR ENTRE TODOS GOOD LUCK
 );
 
-CREATE TABLE public."Comment"
+CREATE TABLE public."comment"
 (
-	"Comment_id" integer NOT NULL,
-	"Post_id" integer DEFAULT NULL REFERENCES public."Post",
-	"Comment_to_id" integer DEFAULT NULL REFERENCES public."Comment",
-	"Body" text NOT NULL,
-	"Date" timestamp with time zone NOT NULL DEFAULT now(),
-	"Upvotes" integer NOT NULL DEFAULT 0,
-	"Downvotes" integer NOT NULL DEFAULT 0,
+	"comment_id" serial NOT NULL,
+	"post_id" integer DEFAULT NULL REFERENCES public."post"("post_id"),
+	"comment_to_id" integer DEFAULT NULL REFERENCES public."comment"("comment_id"),
+	"body" text NOT NULL,
+	"date" timestamp with time zone NOT NULL DEFAULT now(),
+	"upvotes" integer NOT NULL DEFAULT 0,
+	"downvotes" integer NOT NULL DEFAULT 0,
 	
 	
-	CONSTRAINT "Comment_id_pkey" PRIMARY KEY ("Comment_id"),
-	CONSTRAINT "Dif_cmmt" CHECK ( "Comment_id" != "Comment_to_id" ),
-	CONSTRAINT "Date_ck" CHECK ( "Date" <= now() ),
-	CONSTRAINT "Upvotes_ck" CHECK ( "Upvotes" >= 0 ),
-	CONSTRAINT "Downvotes_ck" CHECK ( "Downvotes" >= 0 ),
-	CONSTRAINT "Bellong_ck" CHECK ( (("Post_id" is NOT NULL) AND ("Comment_to_id" IS NULL)) or (("Post_id" is NULL) AND ("Comment_to_id" IS NOT NULL)))
+	CONSTRAINT "comment_id_pkey" PRIMARY KEY ("comment_id"),
+	CONSTRAINT "dif_cmmt" CHECK ( "comment_id" != "comment_to_id" ),
+	CONSTRAINT "date_ck" CHECK ( "date" <= now() ),
+	CONSTRAINT "upvotes_ck" CHECK ( "upvotes" >= 0 ),
+	CONSTRAINT "downvotes_ck" CHECK ( "downvotes" >= 0 ),
+	CONSTRAINT "bellong_ck" CHECK ( (("post_id" is NOT NULL) AND ("comment_to_id" IS NULL)) or (("post_id" is NULL) AND ("comment_to_id" IS NOT NULL)))
 );
 
-CREATE TABLE public."Chat"
+CREATE TABLE public."chat"
 (
-	"Chat_id" integer NOT NULL,
-	CONSTRAINT "Chat_id_pkey" PRIMARY KEY ("Chat_id")
+	"chat_id" integer NOT NULL,
+	CONSTRAINT "chat_id_pkey" PRIMARY KEY ("chat_id")
 );
 
-CREATE TABLE public."Message"
+CREATE TABLE public."message"
 (
-	"Message_id" integer NOT NULL,
-	"Sender_id" integer NOT NULL REFERENCES public."Regular_User",
-	"Chat_id" integer NOT NULL REFERENCES public."Chat",
-	"Body" text NOT NULL,
-	"Date" timestamp with time zone NOT NULL DEFAULT now(),
+	"message_id" serial NOT NULL,
+	"sender_id" integer NOT NULL REFERENCES public."regular_user"("regular_user_id"),
+	"chat_id" integer NOT NULL REFERENCES public."chat"("chat_id"),
+	"body" text NOT NULL,
+	"date" timestamp with time zone NOT NULL DEFAULT now(),
 	
-	CONSTRAINT "Message_id_pkey" PRIMARY KEY ("Message_id"),
-	CONSTRAINT "Date_ck" CHECK ( "Date" <= now() )
+	CONSTRAINT "message_id_pkey" PRIMARY KEY ("message_id"),
+	CONSTRAINT "date_ck" CHECK ( "date" <= now() )
 );
 
-CREATE TABLE public."User_In_Chat"
+CREATE TABLE public."user_in_chat"
 (
-	"User_id" integer NOT NULL REFERENCES public."Regular_User",
-	"Chat_id" integer NOT NULL REFERENCES public."Chat"
+	"user_id" serial NOT NULL REFERENCES public."regular_user"("regular_user_id"),
+	"chat_id" integer NOT NULL REFERENCES public."chat"("chat_id")
 );
 
-CREATE TABLE public."Notification"
+CREATE TABLE public."notification"
 (
-	"Notification_id" integer NOT NULL,
-	"Origin_user_id" integer NOT NULL REFERENCES public."Regular_User",
-	"Description" text NOT NULL,
-	"Link" text NOT NULL,
-	"Date" timestamp with time zone NOT NULL DEFAULT now(),
+	"notification_id" serial NOT NULL,
+	"origin_user_id" integer NOT NULL REFERENCES public."regular_user"("regular_user_id"),
+	"description" text NOT NULL,
+	"link" text NOT NULL,
+	"date" timestamp with time zone NOT NULL DEFAULT now(),
 	
-	CONSTRAINT "Notification_id_pkey" PRIMARY KEY ("Notification_id"),
-	CONSTRAINT "Date_ck" CHECK ( "Date" <= now() )
+	CONSTRAINT "notification_id_pkey" PRIMARY KEY ("notification_id"),
+	CONSTRAINT "date_ck" CHECK ( "date" <= now() )
 );
 
-CREATE TABLE public."Notified_User"
+CREATE TABLE public."notified_user"
 (
-	"Notification_id" integer NOT NULL REFERENCES public."Notification",
-	"User_notified" integer NOT NULL REFERENCES public."Regular_User",
-	"Seen" boolean DEFAULT FALSE NOT NULL
+	"notification_id" serial NOT NULL REFERENCES public."notification"("notification_id"),
+	"user_notified" integer NOT NULL REFERENCES public."regular_user"("regular_user_id"),
+	"seen" boolean DEFAULT FALSE NOT NULL
 );
 
