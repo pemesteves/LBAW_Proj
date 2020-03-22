@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS public."report";
 DROP TABLE IF EXISTS public."notified_user";
 DROP TABLE IF EXISTS public."notification";
 DROP TABLE IF EXISTS public."user_in_chat";
@@ -200,3 +201,26 @@ CREATE TABLE public."notified_user"
 );
 
 
+CREATE TABLE public."report"
+(
+	"report_id"  serial NOT NULL,
+	"reporter_id" integer NOT NULL REFERENCES public."regular_user"("regular_user_id"),
+	"approval" boolean DEFAULT NULL,
+	"reason" text NOT NULL,
+	
+	"reported_user_id" integer REFERENCES public."regular_user"("regular_user_id"),
+	"reported_event_id" integer REFERENCES public."event"("event_id"),
+	"reported_post_id" integer REFERENCES public."post"("post_id"),
+	"reported_comment_id" integer REFERENCES public."comment"("comment_id"),
+	"reported_group_id" integer REFERENCES public."group"("group_id"),
+	
+	CONSTRAINT "report_pkey" PRIMARY KEY ("report_id"),
+		CONSTRAINT "bellong_ck" CHECK ( (Case when ("reported_user_id" iS NOT NULL) then 1 else 0 end)  + 
+								 	(Case when ("reported_event_id" iS NOT NULL) then 1 else 0 end) + 
+									(Case when ("reported_post_id" iS NOT NULL) then 1 else 0 end) + 
+								    (Case when ("reported_comment_id" iS NOT NULL) then 1 else 0 end) + 
+								    (Case when ("reported_group_id" iS NOT NULL) then 1 else 0 end) = 1)
+);
+
+
+	
