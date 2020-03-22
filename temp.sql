@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS public."notified_user";
 DROP TABLE IF EXISTS public."notification";
 DROP TABLE IF EXISTS public."user_in_chat";
+DROP TABLE IF EXISTS public."user_in_group";
 DROP TABLE IF EXISTS public."message";
 DROP TABLE IF EXISTS public."chat";
 DROP TABLE IF EXISTS public."comment";
@@ -82,6 +83,12 @@ CREATE TABLE public."group"
     CONSTRAINT "group_id_pkey" PRIMARY KEY ("group_id")
 );
 
+CREATE TABLE public."user_in_group"
+(
+	"user_id" integer NOT NULL REFERENCES public."regular_user"("regular_user_id"),
+	"group_id" integer NOT NULL REFERENCES public."group"("group_id"),
+	CONSTRAINT "user_in_group_pkey" PRIMARY KEY ("user_id", "group_id")
+);
 
 CREATE TABLE public."post"
 (
@@ -149,7 +156,7 @@ CREATE TABLE public."comment"
 
 CREATE TABLE public."chat"
 (
-	"chat_id" integer NOT NULL,
+	"chat_id" serial NOT NULL,
 	CONSTRAINT "chat_id_pkey" PRIMARY KEY ("chat_id")
 );
 
@@ -167,7 +174,7 @@ CREATE TABLE public."message"
 
 CREATE TABLE public."user_in_chat"
 (
-	"user_id" serial NOT NULL REFERENCES public."regular_user"("regular_user_id"),
+	"user_id" integer NOT NULL REFERENCES public."regular_user"("regular_user_id"),
 	"chat_id" integer NOT NULL REFERENCES public."chat"("chat_id"),
 	CONSTRAINT "user_in_chat_pkey" PRIMARY KEY ("user_id", "chat_id")
 );
@@ -186,7 +193,7 @@ CREATE TABLE public."notification"
 
 CREATE TABLE public."notified_user"
 (
-	"notification_id" serial NOT NULL REFERENCES public."notification"("notification_id"),
+	"notification_id" integer NOT NULL REFERENCES public."notification"("notification_id"),
 	"user_notified" integer NOT NULL REFERENCES public."regular_user"("regular_user_id"),
 	"seen" boolean DEFAULT FALSE NOT NULL,
 	CONSTRAINT "notified_user_pkey" PRIMARY KEY ("notification_id", "user_notified")
