@@ -50,7 +50,7 @@
 function draw_navbar($is_admin = false) { 
     ?>
             <nav class="navbar navbar-dark navbar-bar">
-                <a class="navbar-brand" href="./feed.php">
+                <a class="navbar-brand" href="./<?php if($is_admin) echo 'admin.php'; else echo 'feed.php';?>">
                     <h1>UConnect <span class="fa fa-graduation-cap"></span></h1>
                 </a> <!-- whitesmoke -->
                 <?php if(!$is_admin){?>
