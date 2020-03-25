@@ -18,12 +18,16 @@ DROP TABLE IF EXISTS public."regular_user";
 DROP TABLE IF EXISTS public."admin";
 DROP TABLE IF EXISTS public."user";
 
+
+CREATE TYPE status AS ENUM ('normal', 'blocked', 'deleted');
+
 CREATE TABLE public."user"
 (
     "user_id" serial NOT NULL,
     "name" text NOT NULL,
     "email" text NOT NULL,
     "password" text NOT NULL,
+	TYPE status NOT NULL DEFAULT 'normal',
     CONSTRAINT "user_pkey" PRIMARY KEY ("user_id"),
     CONSTRAINT "user_email_key" UNIQUE ("email")
 );
@@ -81,6 +85,7 @@ CREATE TABLE public."group"
 	"group_id" serial NOT NULL,
 	"name" text NOT NULL,
 	"information" text NOT NULL,
+	TYPE status NOT NULL DEFAULT 'normal',
     CONSTRAINT "group_id_pkey" PRIMARY KEY ("group_id")
 );
 
@@ -100,6 +105,8 @@ CREATE TABLE public."post"
 	"date" timestamp with time zone NOT NULL DEFAULT now(),
 	"upvotes" integer NOT NULL DEFAULT 0,
 	"downvotes" integer NOT NULL DEFAULT 0,
+	TYPE status NOT NULL DEFAULT 'normal',
+
 	
 	"event_id" integer DEFAULT NULL References public."event"("event_id"),
 	"group_id" integer DEFAULT NULL References public."group"("group_id"),
@@ -139,6 +146,7 @@ CREATE TABLE public."image"
 CREATE TABLE public."comment"
 (
 	"comment_id" serial NOT NULL,
+	"user_id" NOT NULl, --NEW
 	"post_id" integer DEFAULT NULL REFERENCES public."post"("post_id"),
 	"comment_to_id" integer DEFAULT NULL REFERENCES public."comment"("comment_id"),
 	"body" text NOT NULL,
