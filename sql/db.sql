@@ -18,6 +18,7 @@ DROP TABLE IF EXISTS public."regular_user";
 DROP TABLE IF EXISTS public."admin";
 DROP TABLE IF EXISTS public."user";
 
+DROP TYPE IF EXISTS status;
 
 CREATE TYPE status AS ENUM ('normal', 'blocked', 'deleted');
 
@@ -146,7 +147,7 @@ CREATE TABLE public."image"
 CREATE TABLE public."comment"
 (
 	"comment_id" serial NOT NULL,
-	"user_id" NOT NULl, --NEW
+	"user_id" integer NOT NULl, --NEW
 	"post_id" integer DEFAULT NULL REFERENCES public."post"("post_id"),
 	"comment_to_id" integer DEFAULT NULL REFERENCES public."comment"("comment_id"),
 	"body" text NOT NULL,
