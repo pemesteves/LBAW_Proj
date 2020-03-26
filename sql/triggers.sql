@@ -14,6 +14,14 @@ END
 $BODY$
 LANGUAGE plppgsql;
 
+CREATE FUNCTION throw_exception_user_chat() RETURNS TRIGGER AS
+$BODY$
+    IF NOT EXISTS (SELECT * FROM public."user_in_chat" WHERE public."user_in_chat"."id_user" = NEW.public."message"."sender_id")
+    THEN RAISE EXCEPTION 'An user must be in the chat to send a message.';
+
+$BODY$
+LANGUAGE plppgsql;
+
 
 CREATE TRIGGER update_group_posts
     AFTER UPDATE OR INSERT ON public."group"
@@ -23,5 +31,11 @@ CREATE TRIGGER update_group_posts
 
 CREATE TRIGGER update_event_posts
     AFTER UPDATE OR INSERT ON public."event"
+    FOR EACH ROW
+    EXECUTE PROCEDURE update_event_posts();
+
+
+CREATE TRIGGER except_user_chat
+    BEFORE INSERT ON public."message"
     FOR EACH ROW
     EXECUTE PROCEDURE update_event_posts();
