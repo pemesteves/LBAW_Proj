@@ -30,6 +30,30 @@ Select "group_id" from "user_in_group" where "user_id" = 2;
 Select "name", "location", "date", "information" from "event" where "organization_id" = 1;
 
 
---My posts
+--Posts posted by me
 Select "title", "body", "date", "upvotes", "downvotes", TYPE, "event_id", "group_id" 
-	from "post" where "author_id" = 2;	
+	from "post" where "author_id" = 2 order by "date";
+
+--Post from event
+Select "author_id", "title", "body", "date", "upvotes", "downvotes", TYPE, "event_id", "group_id" 
+	from "post" where "event_id" = 1;
+
+--Post from group
+Select "author_id", "title", "body", "date", "upvotes", "downvotes", TYPE, "event_id", "group_id" 
+	from "post" where "group_id" = 1;
+
+--Posts from group I belong
+
+Select "author_id", "title", "body", "date", "upvotes", "downvotes", TYPE, "event_id", "post"."group_id" 
+	from "post" INNER JOIN "user_in_group" on "post"."group_id" = "user_in_group"."user_id" 
+	where "user_in_group"."user_id" = 2;
+
+	
+-- Select all regular users with starting name like...
+Select "name" , "user"."user_id" , "regular_user"."regular_user_id" from "user" 
+	INNER JOIN "regular_user" on "regular_user"."user_id" = "user"."user_id"  
+	where "user"."name" LIKE 'A%';
+
+
+Select "reporter_id", "approval", "reason", "reported_user_id", "reported_event_id", "reported_post_id", "reported_comment_id", "reported_group_id"
+	from "report" where "approval" IS NULL;
