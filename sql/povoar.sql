@@ -148,7 +148,7 @@ insert into public."report" ("reporter_id", "approval", "reason", "reported_user
 
 
 insert into public."file" ("post_id", "file_path") values ( 7,'../files/test.txt');
-insert into public."file" ("post_id", "file_path") values ( 7,'../files/image.png');
+insert into public."file" ("post_id", "file_path") values ( 8,'../files/image.png');
 
 
 insert into public."image" ("file_id", "post_id") values (2, 8);

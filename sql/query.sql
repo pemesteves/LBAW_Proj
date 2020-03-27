@@ -32,4 +32,29 @@ Select "name", "location", "date", "information" from "event" where "organizatio
 
 --My posts
 Select "title", "body", "date", "upvotes", "downvotes", TYPE, "event_id", "group_id" 
-	from "post" where "author_id" = 2;	
+	from "post" where "author_id" = 2;
+
+
+
+--Notification
+Select "origin_user_id", "description", "link", "date" from "notification"
+	INNER JOIN "notified_user" on "notification"."notification_id" ="notified_user"."notification_id" 
+	where "user_notified" = 5;
+
+
+--Message
+Select "sender_id", "body", "date",
+	from "message" where "chat_id" = 2
+	order by "date" DESC;
+
+
+--Comments
+ Select "comment_id", "user_id", "comment_to_id", "body", "date", "upvotes", "downvotes"
+	from "comment" where "post_id" = 5
+	order by "date" DESC;
+
+
+--File NAO PINTOU
+
+Select "file_path"
+	from "file" where "post_id" = 7;
