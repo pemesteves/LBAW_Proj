@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS public."user_interested_in_event";
+DROP TABLE IF EXISTS public."friend";
 DROP TABLE IF EXISTS public."report";
 DROP TABLE IF EXISTS public."notified_user";
 DROP TABLE IF EXISTS public."notification";
@@ -20,6 +22,7 @@ DROP TABLE IF EXISTS public."user";
 
 DROP TYPE IF EXISTS "friendship_status";
 DROP TYPE IF EXISTS status;
+
 
 CREATE TYPE status AS ENUM ('normal', 'blocked', 'deleted');
 CREATE TYPE "friendship_status" AS ENUM ('accepted', 'pending', 'refused');
@@ -239,7 +242,7 @@ CREATE TABLE public."friend"
 (
 	"friend_id1" integer NOT NULL REFERENCES public."user"("user_id") ON DELETE CASCADE,
 	"friend_id2" integer NOT NULL REFERENCES public."user"("user_id") ON DELETE CASCADE,
-	TYPE "friendship_status" NOT NULL DEFAULT "pending",
+	TYPE "friendship_status" NOT NULL DEFAULT 'pending',
 	CONSTRAINT "friend_pkey" PRIMARY KEY ("friend_id1", "friend_id2")
 );
 
