@@ -56,7 +56,6 @@ Select "sender_id", "body", "date",
 --File TODO:NAO PINTOU
 
 Select "file_path"
-	from "file" where "post_id" = 7;
 	from "post" where "author_id" = 2 order by "date" DESC;
 
 

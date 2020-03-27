@@ -240,8 +240,8 @@ CREATE TABLE public."report"
 
 CREATE TABLE public."friend"
 (
-	"friend_id1" integer NOT NULL REFERENCES public."user"("user_id") ON DELETE CASCADE,
-	"friend_id2" integer NOT NULL REFERENCES public."user"("user_id") ON DELETE CASCADE,
+	"friend_id1" integer NOT NULL REFERENCES public."regular_user"("regular_user_id") ON DELETE CASCADE,
+	"friend_id2" integer NOT NULL REFERENCES public."regular_user"("regular_user_id") ON DELETE CASCADE,
 	TYPE "friendship_status" NOT NULL DEFAULT 'pending',
 	CONSTRAINT "friend_pkey" PRIMARY KEY ("friend_id1", "friend_id2")
 );
