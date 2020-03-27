@@ -1,22 +1,41 @@
+--Trigger atualizar status dos posts de um grupo
+
 CREATE FUNCTION update_group_posts() RETURNS TRIGGER AS
 $BODY$
 BEGIN
-    UPDATE FROM public."post" SET public."post".TYPE = public."group".TYPE WHERE public."post"."group_id" = public."group"."group_id"
+    UPDATE public."post" SET public."post".TYPE = public."group".TYPE WHERE public."post"."group_id" = public."group"."group_id";
+    RETURN NEW;
 END
 $BODY$
 LANGUAGE plpgsql;
+
+
+CREATE TRIGGER update_group_posts
+    AFTER UPDATE OR INSERT ON public."group"
+    FOR EACH ROW
+    EXECUTE PROCEDURE update_group_posts();
+
+-- _____________________
+
+
+--Trigger atualizar status dos posts de um evento
 
 CREATE FUNCTION update_event_posts() RETURNS TRIGGER AS
 $BODY$
 BEGIN
-    UPDATE FROM public."post" SET public."post".TYPE = public."event".TYPE WHERE public."post"."event_id" = public."event"."event_id"
+    UPDATE public."post" SET public."post".TYPE = public."event".TYPE WHERE public."post"."event_id" = public."event"."event_id";
+    RETURN NEW;
 END
 $BODY$
 LANGUAGE plpgsql;
 
 
+CREATE TRIGGER update_event_posts
+    AFTER UPDATE OR INSERT ON public."group"
+    FOR EACH ROW
+    EXECUTE PROCEDURE update_event_posts();
 
-
+-- _____________________
 
 
 --Trigger user errado no chat
@@ -43,32 +62,21 @@ CREATE TRIGGER except_user_chat
 
 --Trigger adicionar amigo
 
-CREATE FUNCTION add_friend() RETURNS TRIGGER AS 
-$BODY$
+Create FUNCTION add_friend() returns trigger as $$
 BEGIN
-    INSERT INTO public."friend" values (public."friend"."friend_id2", public."friend_id1", 'accepted');
-    RETURN NEW;
-END
-$BODY$
+	IF new."friendship_status" = 'accepted' THEN
+		Insert into public."friend" ("friend_id1","friend_id2","friendship_status") values (old.public."friend_id2",old.public."friend_id1",'accepted');
+	END IF;
+END; $$
 LANGUAGE plpgsql;
 
 
-CREATE TRIGGER add_friend
-    AFTER UPDATE OR INSERT ON public."friend"
-    --WHEN (public."friend"."friendship_status" = 'accepted')
-    EXECUTE PROCEDURE add_friend();
+Create trigger add_friend
+	after update 
+	on public."friend"
+	EXECUTE PROCEDURE
+		add_friend();
 
---___________________________ TENHO QUE CORRIGIR, NAO PERCEBO :|
+--___________________________
 
-
-CREATE TRIGGER update_group_posts
-    AFTER UPDATE OR INSERT ON public."group"
-    FOR EACH ROW
-    EXECUTE PROCEDURE delete_group_posts();
-
-
-CREATE TRIGGER update_event_posts
-    AFTER UPDATE OR INSERT ON public."event"
-    FOR EACH ROW
-    EXECUTE PROCEDURE update_event_posts();
 

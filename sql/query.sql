@@ -53,11 +53,11 @@ Select "sender_id", "body", "date",
 	order by "date" DESC;
 
 
---File NAO PINTOU
+--File TODO:NAO PINTOU
 
 Select "file_path"
 	from "file" where "post_id" = 7;
-	from "post" where "author_id" = 2 order by "date";
+	from "post" where "author_id" = 2 order by "date" DESC;
 
 
 --Post from event
@@ -83,3 +83,13 @@ Select "name" , "user"."user_id" , "regular_user"."regular_user_id" from "user"
 
 Select "reporter_id", "approval", "reason", "reported_user_id", "reported_event_id", "reported_post_id", "reported_comment_id", "reported_group_id"
 	from "report" where "approval" IS NULL;
+
+
+--Select friends
+Select "friend_id2"
+	from "friend" where (TYPE = 'accepted' and "friend_id1" = 2);
+
+--Select pending requests (the user that hasn't answered)
+
+Select "friend_id2"
+	from "friend" where (TYPE = 'pending' and "friend_id1" = 2);

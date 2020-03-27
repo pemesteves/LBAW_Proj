@@ -159,3 +159,27 @@ insert into public."notification" ("origin_user_id", "description", "link", "dat
 insert into public."notified_user" ("notification_id", "user_notified") values (1, 5);
 insert into public."notified_user" ("notification_id", "user_notified") values (1, 7);
 insert into public."notified_user" ("notification_id", "user_notified") values (1, 10);
+
+
+insert into public."friend" ("friend_id1", "friend_id2", "friendship_status") values (1, 4, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", "friendship_status") values (1, 15, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", "friendship_status") values (1, 18, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", "friendship_status") values (2, 3, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", "friendship_status") values (2, 4, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", "friendship_status") values (2, 5, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", "friendship_status") values (2, 6, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", "friendship_status") values (2, 7, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", "friendship_status") values (2, 8, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", "friendship_status") values (2, 10, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", "friendship_status") values (4, 3, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", "friendship_status") values (4, 6, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", "friendship_status") values (5, 7, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", "friendship_status") values (5, 8, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", "friendship_status") values (6, 8, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", "friendship_status") values (6, 19, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", "friendship_status") values (7, 12, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", "friendship_status") values (7, 17, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", "friendship_status") values (8, 11, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", "friendship_status") values (8, 10, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", "friendship_status") values (10, 20, DEFAULT);
+
