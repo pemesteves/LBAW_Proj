@@ -18,9 +18,11 @@ DROP TABLE IF EXISTS public."regular_user";
 DROP TABLE IF EXISTS public."admin";
 DROP TABLE IF EXISTS public."user";
 
+DROP TYPE IF EXISTS "friendship_status";
 DROP TYPE IF EXISTS status;
 
 CREATE TYPE status AS ENUM ('normal', 'blocked', 'deleted');
+CREATE TYPE "friendship_status" AS ENUM ('accepted', 'pending', 'refused');
 
 CREATE TABLE public."user"
 (
@@ -94,6 +96,7 @@ CREATE TABLE public."user_in_group"
 (
 	"user_id" integer NOT NULL REFERENCES public."regular_user"("regular_user_id") ON DELETE CASCADE,
 	"group_id" integer NOT NULL REFERENCES public."group"("group_id") ON DELETE CASCADE,
+	"admin" boolean NOT NULL DEFAULT FALSE,
 	CONSTRAINT "user_in_group_pkey" PRIMARY KEY ("user_id", "group_id")
 );
 
@@ -232,4 +235,17 @@ CREATE TABLE public."report"
 );
 
 
-	
+CREATE TABLE public."friend"
+(
+	"friend_id1" integer NOT NULL REFERENCES public."user"("user_id") ON DELETE CASCADE,
+	"friend_id2" integer NOT NULL REFERENCES public."user"("user_id") ON DELETE CASCADE,
+	TYPE "friendship_status" NOT NULL DEFAULT "pending",
+	CONSTRAINT "friend_pkey" PRIMARY KEY ("friend_id1", "friend_id2")
+);
+
+CREATE TABLE public."user_interested_in_event"
+(
+	"user_id" integer NOT NULL REFERENCES public."user"("user_id") ON DELETE CASCADE,
+	"event_id" integer NOT NULL REFERENCES public."event"("event_id") ON DELETE CASCADE,
+	CONSTRAINT "user_interested_in_event_pkey" PRIMARY KEY ("user_id", "event_id")
+);
