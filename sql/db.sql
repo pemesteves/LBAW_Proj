@@ -36,14 +36,14 @@ CREATE TABLE public."user"
 CREATE TABLE public."admin"
 (
     "admin_id" serial NOT NULL,
-	"user_id" integer NOT NULL REFERENCES public."user"("user_id"),
+	"user_id" integer NOT NULL REFERENCES public."user"("user_id") ON DELETE CASCADE,
     CONSTRAINT "admin_pkey" PRIMARY KEY ("admin_id")
 );
 
 CREATE TABLE public."regular_user"
 (
     "regular_user_id" serial NOT NULL,
-	"user_id" integer NOT NULL REFERENCES public."user"("user_id"),
+	"user_id" integer NOT NULL REFERENCES public."user"("user_id") ON DELETE CASCADE,
 	"personal_info" text,
     CONSTRAINT "regular_user_pkey" PRIMARY KEY ("regular_user_id")
 );
@@ -51,21 +51,21 @@ CREATE TABLE public."regular_user"
 CREATE TABLE public."student"
 (
     "student_id" serial NOT NULL,
-	"regular_user_id" integer NOT NULL REFERENCES public."regular_user"("regular_user_id"),
+	"regular_user_id" integer NOT NULL REFERENCES public."regular_user"("regular_user_id") ON DELETE CASCADE,
     CONSTRAINT "student_pkey" PRIMARY KEY ("student_id")
 );
 
 CREATE TABLE public."teacher"
 (
     "teacher_id" serial NOT NULL,
-	"regular_user_id" integer NOT NULL REFERENCES public."regular_user"("regular_user_id"),
+	"regular_user_id" integer NOT NULL REFERENCES public."regular_user"("regular_user_id") ON DELETE CASCADE,
     CONSTRAINT "teacher_pkey" PRIMARY KEY ("teacher_id")
 );
 
 CREATE TABLE public."organization"
 (
     "organization_id" serial NOT NULL,
-	"regular_user_id" integer NOT NULL REFERENCES public."regular_user"("regular_user_id"),
+	"regular_user_id" integer NOT NULL REFERENCES public."regular_user"("regular_user_id") ON DELETE CASCADE,
 	"approval" boolean NOT NULL DEFAULT FALSE,
     CONSTRAINT "organization_pkey" PRIMARY KEY ("organization_id")
 );
@@ -73,7 +73,7 @@ CREATE TABLE public."organization"
 CREATE TABLE public."event"
 (
 	"event_id" serial NOT NULL,
-    "organization_id" integer NOT NULL REFERENCES public."organization"("organization_id"),
+    "organization_id" integer NOT NULL REFERENCES public."organization"("organization_id") ON DELETE CASCADE,
 	"name" text NOT NULL,
 	"location" text NOT NULL,
 	"date" timestamp with time zone NOT NULL,
@@ -92,15 +92,15 @@ CREATE TABLE public."group"
 
 CREATE TABLE public."user_in_group"
 (
-	"user_id" integer NOT NULL REFERENCES public."regular_user"("regular_user_id"),
-	"group_id" integer NOT NULL REFERENCES public."group"("group_id"),
+	"user_id" integer NOT NULL REFERENCES public."regular_user"("regular_user_id") ON DELETE CASCADE,
+	"group_id" integer NOT NULL REFERENCES public."group"("group_id") ON DELETE CASCADE,
 	CONSTRAINT "user_in_group_pkey" PRIMARY KEY ("user_id", "group_id")
 );
 
 CREATE TABLE public."post"
 (
 	"post_id" serial NOT NULL,
-	"author_id" integer NOT NULL REFERENCES public."regular_user"("regular_user_id"),
+	"author_id" integer NOT NULL REFERENCES public."regular_user"("regular_user_id") ON DELETE CASCADE,
 	"title" text NOT NULL,
 	"body" text NOT NULL,
 	"date" timestamp with time zone NOT NULL DEFAULT now(),
@@ -109,8 +109,8 @@ CREATE TABLE public."post"
 	TYPE status NOT NULL DEFAULT 'normal',
 
 	
-	"event_id" integer DEFAULT NULL References public."event"("event_id"),
-	"group_id" integer DEFAULT NULL References public."group"("group_id"),
+	"event_id" integer DEFAULT NULL References public."event"("event_id") ON DELETE CASCADE,
+	"group_id" integer DEFAULT NULL References public."group"("group_id") ON DELETE CASCADE,
 	
     CONSTRAINT "post_id_pkey" PRIMARY KEY ("post_id"),
 	CONSTRAINT "date_ck" CHECK ( "date" <= now() ),
@@ -131,11 +131,11 @@ CREATE TABLE public."file"
 CREATE TABLE public."image"
 (
 	"image_id" serial NOT NULL,
-	"file_id" integer NOT NULL REFERENCES public."file"("file_id"),
-	"group_id" integer DEFAULT NULL REFERENCES public."group"("group_id"),
-	"event_id" integer DEFAULT NULL REFERENCES public."event"("event_id"),
-	"regular_user_id" integer  DEFAULT NULL REFERENCES public."regular_user"("regular_user_id"),
-	"post_id" integer DEFAULT NULL REFERENCES public."post"("post_id"),
+	"file_id" integer NOT NULL REFERENCES public."file"("file_id") ON DELETE CASCADE,
+	"group_id" integer DEFAULT NULL REFERENCES public."group"("group_id") ON DELETE CASCADE,
+	"event_id" integer DEFAULT NULL REFERENCES public."event"("event_id") ON DELETE CASCADE,
+	"regular_user_id" integer  DEFAULT NULL REFERENCES public."regular_user"("regular_user_id") ON DELETE CASCADE,
+	"post_id" integer DEFAULT NULL REFERENCES public."post"("post_id") ON DELETE CASCADE,
 	
 	CONSTRAINT "image_id_pkey" PRIMARY KEY ("image_id"),
 	CONSTRAINT "bellong_ck" CHECK ( (Case when ("group_id" iS NOT NULL) then 1 else 0 end)  + 
@@ -148,8 +148,8 @@ CREATE TABLE public."comment"
 (
 	"comment_id" serial NOT NULL,
 	"user_id" integer NOT NULl, --NEW
-	"post_id" integer DEFAULT NULL REFERENCES public."post"("post_id"),
-	"comment_to_id" integer DEFAULT NULL REFERENCES public."comment"("comment_id"),
+	"post_id" integer DEFAULT NULL REFERENCES public."post"("post_id") ON DELETE CASCADE,
+	"comment_to_id" integer DEFAULT NULL REFERENCES public."comment"("comment_id") ON DELETE CASCADE,
 	"body" text NOT NULL,
 	"date" timestamp with time zone NOT NULL DEFAULT now(),
 	"upvotes" integer NOT NULL DEFAULT 0,
@@ -173,8 +173,8 @@ CREATE TABLE public."chat"
 CREATE TABLE public."message"
 (
 	"message_id" serial NOT NULL,
-	"sender_id" integer NOT NULL REFERENCES public."regular_user"("regular_user_id"),
-	"chat_id" integer NOT NULL REFERENCES public."chat"("chat_id"),
+	"sender_id" integer NOT NULL REFERENCES public."regular_user"("regular_user_id") ON DELETE CASCADE,
+	"chat_id" integer NOT NULL REFERENCES public."chat"("chat_id") ON DELETE CASCADE,
 	"body" text NOT NULL,
 	"date" timestamp with time zone NOT NULL DEFAULT now(),
 	
@@ -184,15 +184,15 @@ CREATE TABLE public."message"
 
 CREATE TABLE public."user_in_chat"
 (
-	"user_id" integer NOT NULL REFERENCES public."regular_user"("regular_user_id"),
-	"chat_id" integer NOT NULL REFERENCES public."chat"("chat_id"),
+	"user_id" integer NOT NULL REFERENCES public."regular_user"("regular_user_id") ON DELETE CASCADE,
+	"chat_id" integer NOT NULL REFERENCES public."chat"("chat_id") ON DELETE CASCADE,
 	CONSTRAINT "user_in_chat_pkey" PRIMARY KEY ("user_id", "chat_id")
 );
 
 CREATE TABLE public."notification"
 (
 	"notification_id" serial NOT NULL,
-	"origin_user_id" integer NOT NULL REFERENCES public."regular_user"("regular_user_id"),
+	"origin_user_id" integer NOT NULL REFERENCES public."regular_user"("regular_user_id") ON DELETE CASCADE,
 	"description" text NOT NULL,
 	"link" text NOT NULL,
 	"date" timestamp with time zone NOT NULL DEFAULT now(),
@@ -203,8 +203,8 @@ CREATE TABLE public."notification"
 
 CREATE TABLE public."notified_user"
 (
-	"notification_id" integer NOT NULL REFERENCES public."notification"("notification_id"),
-	"user_notified" integer NOT NULL REFERENCES public."regular_user"("regular_user_id"),
+	"notification_id" integer NOT NULL REFERENCES public."notification"("notification_id") ON DELETE CASCADE,
+	"user_notified" integer NOT NULL REFERENCES public."regular_user"("regular_user_id") ON DELETE CASCADE,
 	"seen" boolean DEFAULT FALSE NOT NULL,
 	CONSTRAINT "notified_user_pkey" PRIMARY KEY ("notification_id", "user_notified")
 );
@@ -213,15 +213,15 @@ CREATE TABLE public."notified_user"
 CREATE TABLE public."report"
 (
 	"report_id"  serial NOT NULL,
-	"reporter_id" integer NOT NULL REFERENCES public."regular_user"("regular_user_id"),
+	"reporter_id" integer NOT NULL REFERENCES public."regular_user"("regular_user_id") ON DELETE CASCADE,
 	"approval" boolean DEFAULT NULL,
 	"reason" text NOT NULL,
 	
-	"reported_user_id" integer REFERENCES public."regular_user"("regular_user_id"),
-	"reported_event_id" integer REFERENCES public."event"("event_id"),
-	"reported_post_id" integer REFERENCES public."post"("post_id"),
-	"reported_comment_id" integer REFERENCES public."comment"("comment_id"),
-	"reported_group_id" integer REFERENCES public."group"("group_id"),
+	"reported_user_id" integer REFERENCES public."regular_user"("regular_user_id") ON DELETE CASCADE,
+	"reported_event_id" integer REFERENCES public."event"("event_id") ON DELETE CASCADE,
+	"reported_post_id" integer REFERENCES public."post"("post_id") ON DELETE CASCADE,
+	"reported_comment_id" integer REFERENCES public."comment"("comment_id") ON DELETE CASCADE,
+	"reported_group_id" integer REFERENCES public."group"("group_id") ON DELETE CASCADE,
 	
 	CONSTRAINT "report_pkey" PRIMARY KEY ("report_id"),
 		CONSTRAINT "bellong_ck" CHECK ( (Case when ("reported_user_id" iS NOT NULL) then 1 else 0 end)  + 

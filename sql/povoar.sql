@@ -24,7 +24,6 @@ insert into public."user" ("name", "email", "password") values ('Rui Cardoso', '
 insert into public."user" ("name", "email", "password") values ('AEFEUP', 'aefeup@feup.pt', '6b82542b8c0a0afa1278f6c5a23d05aaf94eafec58a01cf70be8aa755cb26cce'); --gustavoboss
 insert into public."user" ("name", "email", "password") values ('Admin2', 'admin2@admins.pt', '25efc3e7a0aa2e33c3ffd37792156d9bb7e6eece07e268fe4bb558c70ce9cec2'); --adminGang
 
-Select *  from "user";
 
 insert into public."admin" ("user_id") values (1);
 insert into public."admin" ("user_id") values (24);
@@ -51,7 +50,6 @@ insert into public."regular_user" ("user_id", "personal_info") values (19, 'Spor
 insert into public."regular_user" ("user_id", "personal_info") values (20, 'Science student');
 insert into public."regular_user" ("user_id", "personal_info") values (21, 'FEP student');
 insert into public."regular_user" ("user_id", "personal_info") values (22, 'FEP teacher');
---insert into public."regular_user" ("user_id", "personal_info") values (23, 'AEFEUP');
 
 
 insert into public."student" ("regular_user_id") values (2);
@@ -69,22 +67,18 @@ insert into public."student" ("regular_user_id") values (18);
 insert into public."student" ("regular_user_id") values (19);
 insert into public."student" ("regular_user_id") values (20);
 insert into public."student" ("regular_user_id") values (21);
---insert into public."student" ("regular_user_id") values (22);
 
 
 insert into public."teacher" ("regular_user_id") values (3);
 insert into public."teacher" ("regular_user_id") values (9);
 insert into public."teacher" ("regular_user_id") values (11);
 insert into public."teacher" ("regular_user_id") values (16);
---insert into public."teacher" ("regular_user_id") values (22);
 
 
 insert into public."organization" ("regular_user_id", "approval") values (4, TRUE);
---insert into public."organization" ("regular_user_id", "approval") values (23, TRUE);
 
 
 insert into public."event" ("organization_id", "name", "location", "date", "information") values (1, 'Evento de LBAW', 'Porto', '2020-04-23 17:45:00', 'general info');
---insert into public."event" ("organization_id", "name", "location", "date", "information") values (2, 'AEFEUP Day', 'Porto', '2020-05-25 09:15:00' , 'general info');
 
 
 insert into public."group" ("name", "information", TYPE) values ('Grupo de LBAW', 'Grupo para os estudantes de LBAW', 'normal');
@@ -111,8 +105,6 @@ insert into public."user_in_group" ("user_id", "group_id") values (18, 2);
 insert into public."user_in_group" ("user_id", "group_id") values (19, 2);
 insert into public."user_in_group" ("user_id", "group_id") values (20, 2);
 insert into public."user_in_group" ("user_id", "group_id") values (21, 2);
---insert into public."user_in_group" ("user_id", "group_id") values (22, 2);
-
 
 
 insert into public."post" ("author_id", "title", "body", "date", "upvotes", "downvotes", TYPE, "event_id", "group_id") values (2, 'FEUP LIFE', 'Gosto de estudar na FEUP', '2020-02-20 17:45:00', 4, 3, DEFAULT, NULL, NULL);
@@ -121,7 +113,8 @@ insert into public."post" ("author_id", "title", "body", "date", "upvotes", "dow
 insert into public."post" ("author_id", "title", "body", "date", "upvotes", "downvotes", TYPE, "event_id", "group_id") values (1, 'Inquéritos FLUP', 'Conseguem todos preencher os inquéritos lançados pela faculdade?', '2020-03-10 08:31:06', 10, 0, DEFAULT, NULL, NULL);
 insert into public."post" ("author_id", "title", "body", "date", "upvotes", "downvotes", TYPE, "event_id", "group_id") values (3, 'Quarentena', 'Pedimos a todos os alunos da Academia, em especial os do ISEP para ficarem em casa durante este período de quarentena, seguindo as indicações da DGS.', '2020-03-13 16:54:51', 40, 1, DEFAULT, NULL, NULL);
 insert into public."post" ("author_id", "title", "body", "date", "upvotes", "downvotes", TYPE, "event_id", "group_id") values (6, 'Grupo para LBAW', 'Bom dia pessoal, criei este grupo para ser mais facil partilharmos os ficheiros para LBAW. Abraço', '2020-03-12 09:21:41', 3, 0, DEFAULT, NULL, 1);
---insert into public."post" ("author_id", "title", "body", "date", "upvotes", "downvotes", TYPE, "event_id", "group_id") values (23, 'AEFEUP Day', 'Bom dia estudantes! No próximo dia 25 de Maio realizar-se-á o AEFEUP Day, um evento recheado de brindes e empresas para construíres um futuro melhor', '2020-03-22 10:33:21', 10, 0, DEFAULT, 2, NULL);
+insert into public."post" ("author_id", "title", "body", "date", "upvotes", "downvotes", TYPE, "event_id", "group_id") values (10, 'Ficheiro de teste', 'Este post serve para testar o sistema de ficheiros.', '2020-03-20 21:23:44', 0, 0, DEFAULT, NULL, NULL);
+insert into public."post" ("author_id", "title", "body", "date", "upvotes", "downvotes", TYPE, "event_id", "group_id") values (12, 'Imagem de teste', 'Este post serve para testar o sistema de imagens.', '2020-03-20 22:31:22', 0, 0, DEFAULT, NULL, NULL);
 
 
 insert into public."comment" ("user_id","post_id", "comment_to_id", "body", "date", "upvotes", "downvotes") values (5, 2, NULL, 'Não, essa entrega tem uma data específica, verifica no Moodle', '2020-02-24 11:03:22', 1, 0);
@@ -141,7 +134,6 @@ insert into public."user_in_chat" ("user_id", "chat_id") values (3,1);
 insert into public."user_in_chat" ("user_id", "chat_id") values (9,1);
 insert into public."user_in_chat" ("user_id", "chat_id") values (11,1);
 insert into public."user_in_chat" ("user_id", "chat_id") values (16,1);
---insert into public."user_in_chat" ("user_id", "chat_id") values (22,1);
 
 
 insert into public."message" ("sender_id", "chat_id", "body", "date") values (2, 1, 'Boas pessoal, este vai ser o chat de LBAW', '2020-03-20 14:22:55');
@@ -155,7 +147,15 @@ insert into public."report" ("reporter_id", "approval", "reason", "reported_user
 insert into public."report" ("reporter_id", "approval", "reason", "reported_user_id", "reported_event_id", "reported_post_id", "reported_comment_id", "reported_group_id") values (2, NULL, 'pouco conteudo', NULL, NULL, NULL, 2, NULL);
 
 
---FALTA NOTIFICATION
---FALTA NOTIFIED_USER
---FALTA IMAGE
---FALTA FILE
+insert into public."file" ("post_id", "file_path") values ( 7,'../files/test.txt');
+insert into public."file" ("post_id", "file_path") values ( 7,'../files/image.png');
+
+
+insert into public."image" ("file_id", "post_id") values (2, 8);
+
+
+insert into public."notification" ("origin_user_id", "description", "link", "date") values (3, 'I just posted!', '---', '2020-03-21 12:00:00');
+
+insert into public."notified_user" ("notification_id", "user_notified") values (1, 5);
+insert into public."notified_user" ("notification_id", "user_notified") values (1, 7);
+insert into public."notified_user" ("notification_id", "user_notified") values (1, 10);
