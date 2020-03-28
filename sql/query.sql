@@ -9,22 +9,18 @@ Select "admin_id" from "admin" where "user_id" = 24;
 -- if is regular_user
 Select "regular_user_id", "personal_info" from "regular_user" where "user_id" = 4;
 
---if is student
+--if is a student
 Select "student_id" from "student" where "regular_user_id" = 5;
 
--- if is teacher
+-- if is a teacher
 Select "teacher_id" from "teacher" where "regular_user_id" = 3;
 
--- if is organization
+-- if is an organization
 Select "organization_id" from "organization" where "regular_user_id" = 4;
 
 
--- if user is group
+-- Select user from a group
 Select "user_id" from "user_in_group" where "group_id" = 1;
-
---if user in group
-Select "group_id" from "user_in_group" where "user_id" = 2;
-
 
 --events of organization
 Select "name", "location", "date", "information" from "event" where "organization_id" = 1;
@@ -41,8 +37,8 @@ Select "origin_user_id", "description", "link", "date" from "notification"
 	where "user_notified" = 5;
 
 
---Message
-Select "sender_id", "body", "date",
+--Message by chat
+Select "sender_id", "body", "date"
 	from "message" where "chat_id" = 2
 	order by "date" DESC;
 
@@ -53,25 +49,14 @@ Select "sender_id", "body", "date",
 	order by "date" DESC;
 
 
---File TODO:NAO PINTOU
-
-Select "file_path"
-	from "post" where "author_id" = 2 order by "date" DESC;
-
-
---Post from event
+--Posts from event
 Select "author_id", "title", "body", "date", "upvotes", "downvotes", TYPE, "event_id", "group_id" 
 	from "post" where "event_id" = 1;
 
---Post from group
+--Posts from group
 Select "author_id", "title", "body", "date", "upvotes", "downvotes", TYPE, "event_id", "group_id" 
 	from "post" where "group_id" = 1;
 
---Posts from group I belong
-
-Select "author_id", "title", "body", "date", "upvotes", "downvotes", TYPE, "event_id", "post"."group_id" 
-	from "post" INNER JOIN "user_in_group" on "post"."group_id" = "user_in_group"."user_id" 
-	where "user_in_group"."user_id" = 2;
 
 	
 -- Select all regular users with starting name like...
@@ -79,7 +64,7 @@ Select "name" , "user"."user_id" , "regular_user"."regular_user_id" from "user"
 	INNER JOIN "regular_user" on "regular_user"."user_id" = "user"."user_id"  
 	where "user"."name" LIKE 'A%';
 
-
+-- Select Reports that have no answer
 Select "reporter_id", "approval", "reason", "reported_user_id", "reported_event_id", "reported_post_id", "reported_comment_id", "reported_group_id"
 	from "report" where "approval" IS NULL;
 
@@ -88,7 +73,42 @@ Select "reporter_id", "approval", "reason", "reported_user_id", "reported_event_
 Select "friend_id2"
 	from "friend" where (TYPE = 'accepted' and "friend_id1" = 2);
 
---Select pending requests (the user that hasn't answered)
 
+--Select pending requests (the user that hasn't answered)
 Select "friend_id2"
 	from "friend" where (TYPE = 'pending' and "friend_id1" = 2);
+	
+
+--Files path from Posts
+
+Select "file_path"
+	from "file" INNER JOIN "post" on "post"."post_id" = "file"."post_id" where "post"."post_id" = 7 order by "date" DESC;
+
+
+--Posts from groups I belong, users I am friends with and events I am interested on (Feed)
+Select "author_id", "title", "body", "date", "upvotes", "downvotes", "post".TYPE, "event_id", "post"."group_id" 
+	from "post" INNER JOIN "user_in_group" on "post"."group_id" = "user_in_group"."group_id" 
+	where "user_in_group"."user_id" = 2
+UNION
+Select "author_id", "title", "body", "date", "upvotes", "downvotes", "post".TYPE, "event_id", "post"."group_id" 
+	from "post" INNER JOIN "friend" on "friend"."friend_id2" = "post"."author_id" 
+	WHERE "friend".TYPE = 'accepted' AND "friend"."friend_id1" = 2
+UNION
+Select "author_id", "title", "body", "date", "upvotes", "downvotes", "post".TYPE, "post"."event_id", "post"."group_id" 
+	from "post" INNER JOIN "user_interested_in_event" 
+	on "post"."event_id" = "user_interested_in_event"."event_id"
+	WHERE "user_interested_in_event"."user_id" = 2;
+	
+
+--Event informations of events I am interested on
+Select "event"."event_id", "organization_id", "name", "location", "date", "information"
+	FROM "event" INNER JOIN "user_interested_in_event" 
+	on "event"."event_id" = "user_interested_in_event"."event_id"
+	Where "user_interested_in_event"."user_id" = 2;
+	
+--Select group infomation of groups I belong
+Select "group"."group_id" , "name", "information", TYPE
+	from "user_in_group" INNER JOIN "group"
+	on "user_in_group"."group_id" = "group"."group_id"
+	where "user_id" = 2;
+	
