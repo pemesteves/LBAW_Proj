@@ -38,9 +38,10 @@ Select "origin_user_id", "description", "link", "date" from "notification"
 
 
 --Message by chat
-Select "sender_id", "body", "date"
-	from "message" where "chat_id" = 2
-	order by "date" DESC;
+SELECT "sender_id", "body", "date"
+	FROM "message" 
+	where "chat_id" = $chatId
+	ORDER BY "date" DESC;
 
 
 --Comments
@@ -81,8 +82,10 @@ Select "friend_id2"
 
 --Files path from Posts
 
-Select "file_path"
-	from "file" INNER JOIN "post" on "post"."post_id" = "file"."post_id" where "post"."post_id" = 7 order by "date" DESC;
+SELECT "file_path"
+	FROM "file" 
+	INNER JOIN "post" ON "post"."post_id" = "file"."post_id" 
+	WHERE "post"."post_id" = $postId;
 
 
 --Posts from groups I belong, users I am friends with and events I am interested on (Feed)
