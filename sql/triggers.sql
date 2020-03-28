@@ -1,3 +1,13 @@
+DROP TRIGGER IF EXISTS update_group_posts ON "group" CASCADE;
+DROP TRIGGER IF EXISTS update_event_posts ON "event" CASCADE;
+DROP TRIGGER IF EXISTS except_user_chat ON "message" CASCADE;
+DROP TRIGGER IF EXISTS add_friend ON "friend" CASCADE;
+
+DROP FUNCTION IF EXISTS update_group_posts() CASCADE;
+DROP FUNCTION IF EXISTS update_event_posts() CASCADE;
+DROP FUNCTION IF EXISTS throw_exception_user_chat() CASCADE;
+DROP FUNCTION IF EXISTS add_friend() CASCADE;
+
 --Trigger atualizar status dos posts de um grupo
 
 CREATE FUNCTION update_group_posts() RETURNS TRIGGER AS
@@ -31,7 +41,7 @@ LANGUAGE plpgsql;
 
 
 CREATE TRIGGER update_event_posts
-    AFTER UPDATE OR INSERT ON public."group"
+    AFTER UPDATE OR INSERT ON public."event"
     FOR EACH ROW
     EXECUTE PROCEDURE update_event_posts();
 
