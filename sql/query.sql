@@ -84,22 +84,6 @@ Select "friend_id2"
 Select "file_path"
 	from "file" INNER JOIN "post" on "post"."post_id" = "file"."post_id" where "post"."post_id" = 7 order by "date" DESC;
 
-
---Posts from groups I belong, users I am friends with and events I am interested on (Feed)
-Select "author_id", "title", "body", "date", "upvotes", "downvotes", "post".TYPE, "event_id", "post"."group_id" 
-	from "post" INNER JOIN "user_in_group" on "post"."group_id" = "user_in_group"."group_id" 
-	where "user_in_group"."user_id" = 2
-UNION
-Select "author_id", "title", "body", "date", "upvotes", "downvotes", "post".TYPE, "event_id", "post"."group_id" 
-	from "post" INNER JOIN "friend" on "friend"."friend_id2" = "post"."author_id" 
-	WHERE "friend".TYPE = 'accepted' AND "friend"."friend_id1" = 2
-UNION
-Select "author_id", "title", "body", "date", "upvotes", "downvotes", "post".TYPE, "post"."event_id", "post"."group_id" 
-	from "post" INNER JOIN "user_interested_in_event" 
-	on "post"."event_id" = "user_interested_in_event"."event_id"
-	WHERE "user_interested_in_event"."user_id" = 2;
-	
-
 --Event informations of events I am interested on
 Select "event"."event_id", "organization_id", "name", "location", "date", "information"
 	FROM "event" INNER JOIN "user_interested_in_event" 
@@ -111,4 +95,24 @@ Select "group"."group_id" , "name", "information", TYPE
 	from "user_in_group" INNER JOIN "group"
 	on "user_in_group"."group_id" = "group"."group_id"
 	where "user_id" = 2;
+
+--Posts from groups I belong, users I am friends with and events I am interested on (Feed)
+Select "posts"."post_id","author_id", "title", "body", "date", "upvotes", "downvotes", "posts".TYPE, "event_id", "posts"."group_id", COALESCE("count",0) as "comment_count" from (
+	Select "post_id","author_id", "title", "body", "date", "upvotes", "downvotes", "post".TYPE, "event_id", "post"."group_id" 
+		from "post" INNER JOIN "user_in_group" on "post"."group_id" = "user_in_group"."group_id" 
+		where "user_in_group"."user_id" = 2
+	UNION
+	Select "post_id","author_id", "title", "body", "date", "upvotes", "downvotes", "post".TYPE, "event_id", "post"."group_id" 
+		from "post" INNER JOIN "friend" on "friend"."friend_id2" = "post"."author_id" 
+		WHERE "friend".TYPE = 'accepted' AND "friend"."friend_id1" = 2
+	UNION
+	Select "post_id","author_id", "title", "body", "date", "upvotes", "downvotes", "post".TYPE, "post"."event_id", "post"."group_id" 
+		from "post" INNER JOIN "user_interested_in_event" 
+		on "post"."event_id" = "user_interested_in_event"."event_id"
+		WHERE "user_interested_in_event"."user_id" = 2
+	) as "posts"
+	LEFT JOIN
+	(Select "post_id",count("post_id") as "count" from "comment" GROUP BY "post_id") as "comments" 
+	on "posts"."post_id" = "comments"."post_id";
+	
 	
