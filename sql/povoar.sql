@@ -114,7 +114,7 @@ insert into public."post" ("author_id", "title", "body", "date", "upvotes", "dow
 insert into public."post" ("author_id", "title", "body", "date", "upvotes", "downvotes", TYPE, "event_id", "group_id") values (3, 'Quarentena', 'Pedimos a todos os alunos da Academia, em especial os do ISEP para ficarem em casa durante este período de quarentena, seguindo as indicações da DGS.', '2020-03-13 16:54:51', 40, 1, DEFAULT, NULL, NULL);
 insert into public."post" ("author_id", "title", "body", "date", "upvotes", "downvotes", TYPE, "event_id", "group_id") values (6, 'Grupo para LBAW', 'Bom dia pessoal, criei este grupo para ser mais facil partilharmos os ficheiros para LBAW. Abraço', '2020-03-12 09:21:41', 3, 0, DEFAULT, NULL, 1);
 insert into public."post" ("author_id", "title", "body", "date", "upvotes", "downvotes", TYPE, "event_id", "group_id") values (10, 'Ficheiro de teste', 'Este post serve para testar o sistema de ficheiros.', '2020-03-20 21:23:44', 0, 0, DEFAULT, NULL, NULL);
-insert into public."post" ("author_id", "title", "body", "date", "upvotes", "downvotes", TYPE, "event_id", "group_id") values (12, 'Imagem de teste', 'Este post serve para testar o sistema de imagens.', '2020-03-20 22:31:22', 0, 0, DEFAULT, NULL, NULL);
+insert into public."post" ("author_id", "title", "body", "date", "upvotes", "downvotes", TYPE, "event_id", "group_id") values (12, 'Imagem de teste', 'Este post serve para testar o sistema de imagens.', '2020-03-20 22:31:22', 0, 0, DEFAULT, 1, NULL);
 
 
 insert into public."comment" ("user_id","post_id", "comment_to_id", "body", "date", "upvotes", "downvotes") values (5, 2, NULL, 'Não, essa entrega tem uma data específica, verifica no Moodle', '2020-02-24 11:03:22', 1, 0);
@@ -161,25 +161,26 @@ insert into public."notified_user" ("notification_id", "user_notified") values (
 insert into public."notified_user" ("notification_id", "user_notified") values (1, 10);
 
 
-insert into public."friend" ("friend_id1", "friend_id2", "friendship_status") values (1, 4, DEFAULT);
-insert into public."friend" ("friend_id1", "friend_id2", "friendship_status") values (1, 15, DEFAULT);
-insert into public."friend" ("friend_id1", "friend_id2", "friendship_status") values (1, 18, DEFAULT);
-insert into public."friend" ("friend_id1", "friend_id2", "friendship_status") values (2, 3, DEFAULT);
-insert into public."friend" ("friend_id1", "friend_id2", "friendship_status") values (2, 4, DEFAULT);
-insert into public."friend" ("friend_id1", "friend_id2", "friendship_status") values (2, 5, DEFAULT);
-insert into public."friend" ("friend_id1", "friend_id2", "friendship_status") values (2, 6, DEFAULT);
-insert into public."friend" ("friend_id1", "friend_id2", "friendship_status") values (2, 7, DEFAULT);
-insert into public."friend" ("friend_id1", "friend_id2", "friendship_status") values (2, 8, DEFAULT);
-insert into public."friend" ("friend_id1", "friend_id2", "friendship_status") values (2, 10, DEFAULT);
-insert into public."friend" ("friend_id1", "friend_id2", "friendship_status") values (4, 3, DEFAULT);
-insert into public."friend" ("friend_id1", "friend_id2", "friendship_status") values (4, 6, DEFAULT);
-insert into public."friend" ("friend_id1", "friend_id2", "friendship_status") values (5, 7, DEFAULT);
-insert into public."friend" ("friend_id1", "friend_id2", "friendship_status") values (5, 8, DEFAULT);
-insert into public."friend" ("friend_id1", "friend_id2", "friendship_status") values (6, 8, DEFAULT);
-insert into public."friend" ("friend_id1", "friend_id2", "friendship_status") values (6, 19, DEFAULT);
-insert into public."friend" ("friend_id1", "friend_id2", "friendship_status") values (7, 12, DEFAULT);
-insert into public."friend" ("friend_id1", "friend_id2", "friendship_status") values (7, 17, DEFAULT);
-insert into public."friend" ("friend_id1", "friend_id2", "friendship_status") values (8, 11, DEFAULT);
-insert into public."friend" ("friend_id1", "friend_id2", "friendship_status") values (8, 10, DEFAULT);
-insert into public."friend" ("friend_id1", "friend_id2", "friendship_status") values (10, 20, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (1, 4, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (1, 15, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (1, 18, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (2, 3, 'accepted');
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (2, 4, 'accepted');
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (2, 5, 'accepted');
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (2, 6, 'accepted');
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (2, 7, 'accepted');
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (2, 8, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (2, 10, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (4, 3, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (4, 6, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (5, 7, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (5, 8, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (6, 8, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (6, 19, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (7, 12, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (7, 17, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (8, 11, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (8, 10, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (10, 20, DEFAULT);
 
+insert into public."user_interested_in_event" ("user_id","event_id") values(2,1);
