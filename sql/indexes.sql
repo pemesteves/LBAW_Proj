@@ -13,9 +13,9 @@ CREATE INDEX "user_notified" ON "notified_user"("user_notified");
 CREATE INDEX "user_email" ON "user" USING hash("email");
 
 -- REGULAR USER ID FOREIGN KEYS INDEXES
-CREATE INDEX "student_regular_id" ON "student"("regular_user_id");
-CREATE INDEX "teacher_regular_id" ON "teacher"("regular_user_id");
-CREATE INDEX "organization_regular_id" ON "organization"("regular_user_id");
+CREATE INDEX "student_regular_id" ON "student" USING hash("regular_user_id");
+CREATE INDEX "teacher_regular_id" ON "teacher" USING hash("regular_user_id");
+CREATE INDEX "organization_regular_id" ON "organization" USING hash("regular_user_id");
 
 -- GIST SEARCH INDEXES 
 CREATE INDEX "search_post_titles" ON "post" USING GIST(to_tsvector('english', "title"));
