@@ -47,7 +47,7 @@
 
     UPDATE "group"
     SET TYPE = 'deleted'
-    WHERE "group" = $groupId;
+    WHERE "group_id" = $groupId;
     
     UPDATE "group"
     SET TYPE = 'blocked'
