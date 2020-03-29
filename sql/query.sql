@@ -118,4 +118,7 @@ Select "posts"."post_id","author_id", "title", "body", "date", "upvotes", "downv
 	(Select "post_id",count("post_id") as "count" from "comment" GROUP BY "post_id") as "comments" 
 	on "posts"."post_id" = "comments"."post_id";
 	
-	
+SELECT "comment_id", "user_id", "body", "date", "upvotes", "downvotes"
+	FROM "comment"
+	WHERE ("post_id" = $postId AND 	"comment_to_id" = $commentId)
+	ORDER BY "date" ASC;
