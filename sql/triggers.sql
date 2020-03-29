@@ -1,12 +1,14 @@
 DROP TRIGGER IF EXISTS update_group_posts ON "group" CASCADE;
 DROP TRIGGER IF EXISTS update_event_posts ON "event" CASCADE;
 DROP TRIGGER IF EXISTS except_user_chat ON "message" CASCADE;
-DROP TRIGGER IF EXISTS add_friend ON "friend" CASCADE;
+DROP TRIGGER IF EXISTS friend_status ON "friend" CASCADE;
+DROP TRIGGER IF EXISTS delete_refused_report ON "report" CASCADE;
 
 DROP FUNCTION IF EXISTS update_group_posts() CASCADE;
 DROP FUNCTION IF EXISTS update_event_posts() CASCADE;
 DROP FUNCTION IF EXISTS throw_exception_user_chat() CASCADE;
-DROP FUNCTION IF EXISTS add_friend() CASCADE;
+DROP FUNCTION IF EXISTS friend_status() CASCADE;
+DROP FUNCTION IF EXISTS delete_refused_report() CASCADE;
 
 --Trigger atualizar status dos posts de um grupo
 
@@ -72,21 +74,43 @@ CREATE TRIGGER except_user_chat
 
 --Trigger adicionar amigo
 
-Create FUNCTION add_friend() returns trigger as $$
+CREATE FUNCTION friend_status() RETURNS trigger AS
+$$
 BEGIN
 	IF new."friendship_status" = 'accepted' THEN
 		Insert into public."friend" ("friend_id1","friend_id2","friendship_status") values (old.public."friend_id2",old.public."friend_id1",'accepted');
-	END IF;
-END; $$
+	ELSEIF new."friendship_status" = 'refused' THEN
+		DELETE FROM public."friend" 
+        WHERE ("friend_id1" = old.public."friend_id1" AND "friend_id2" = old.public."friend_id2");
+    END IF; 
+    RETURN NEW;
+END
+$$
 LANGUAGE plpgsql;
 
 
-Create trigger add_friend
-	after update 
-	on public."friend"
-	EXECUTE PROCEDURE
-		add_friend();
-
+Create TRIGGER friend_status
+	AFTER UPDATE ON public."friend"
+	EXECUTE PROCEDURE friend_status();
 --___________________________
 
 
+--Trigger apagar refused report
+
+CREATE FUNCTION delete_refused_report() RETURNS trigger AS
+$BODY$
+BEGIN
+    IF new."approval" = FALSE THEN
+        DELETE FROM public."report"
+        WHERE "report_id" = old.public."report_id";
+    END IF;
+    RETURN NEW;
+END
+$BODY$
+LANGUAGE plpgsql;
+
+CREATE TRIGGER delete_refused_report
+    AFTER UPDATE ON public."report"
+    EXECUTE PROCEDURE delete_refused_report();
+
+--____________________________

@@ -69,11 +69,6 @@
     --DELETE FROM "report"
     --WHERE "approval" = FALSE;
 
-    --DELETE FROM "friend"
-    --WHERE TYPE = 'refused'
-
-    -- ESTES DOIS PODEM SER TRIGGERS?
-
     DELETE FROM "comment"
     WHERE "comment_id" = $commentId;
     
