@@ -119,3 +119,14 @@ Select "posts"."post_id","author_id", "title", "body", "date", "upvotes", "downv
 	on "posts"."post_id" = "comments"."post_id";
 	
 	
+	-- Select all regular users and post with starting name ou title ou body is like something...
+Select * from 
+				(Select "name" , "user"."user_id" , "regular_user"."regular_user_id" from "user" 
+				INNER JOIN "regular_user" on "regular_user"."user_id" = "user"."user_id"  
+				where "user"."name" LIKE '%para%%')
+				 as "t1"
+				FULL OUTER JOIN
+				(Select "post_id","author_id", "title", "body", "date", "upvotes", "downvotes", "post".TYPE, "post"."event_id", "post"."group_id" from
+					"post" where "post"."body" LIKE '%para%' or "post"."title" LIKE '%para%'
+				) as "t2" on "t1"."name" = "body";
+	
