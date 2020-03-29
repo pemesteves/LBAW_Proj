@@ -1,12 +1,22 @@
 DROP TRIGGER IF EXISTS update_group_posts ON "group" CASCADE;
 DROP TRIGGER IF EXISTS update_event_posts ON "event" CASCADE;
-DROP TRIGGER IF EXISTS except_user_chat ON "message" CASCADE;
-DROP TRIGGER IF EXISTS add_friend ON "friend" CASCADE;
+DROP TRIGGER IF EXISTS update_user_posts ON "user" CASCADE;
+--DROP TRIGGER IF EXISTS except_user_chat ON "message" CASCADE;
+DROP TRIGGER IF EXISTS friend_status ON "friend" CASCADE;
+DROP TRIGGER IF EXISTS delete_refused_report ON "report" CASCADE;
+DROP TRIGGER IF EXISTS event_date ON "event" CASCADE;
+DROP TRIGGER IF EXISTS post_date ON "post" CASCADE;
+
 
 DROP FUNCTION IF EXISTS update_group_posts() CASCADE;
 DROP FUNCTION IF EXISTS update_event_posts() CASCADE;
-DROP FUNCTION IF EXISTS throw_exception_user_chat() CASCADE;
-DROP FUNCTION IF EXISTS add_friend() CASCADE;
+DROP FUNCTION IF EXISTS update_user_posts() CASCADE;
+--DROP FUNCTION IF EXISTS throw_exception_user_chat() CASCADE;
+DROP FUNCTION IF EXISTS friend_status() CASCADE;
+DROP FUNCTION IF EXISTS delete_refused_report() CASCADE;
+DROP FUNCTION IF EXISTS event_date() CASCADE;
+DROP FUNCTION IF EXISTS post_date() CASCADE;
+
 
 --Trigger atualizar status dos posts de um grupo
 
@@ -48,8 +58,28 @@ CREATE TRIGGER update_event_posts
 -- _____________________
 
 
---Trigger user errado no chat
+--Trigger atualizar status dos posts de um user
 
+CREATE FUNCTION update_user_posts() RETURNS TRIGGER AS
+$BODY$
+BEGIN
+    UPDATE public."post" SET public."post".TYPE = public."user".TYPE WHERE public."post"."author_id" = public."user"."user_id";
+    RETURN NEW;
+END
+$BODY$
+LANGUAGE plpgsql;
+
+
+CREATE TRIGGER update_user_posts
+    AFTER UPDATE ON public."user"
+    FOR EACH ROW
+    EXECUTE PROCEDURE update_user_posts();
+
+-- _____________________
+
+
+--Trigger user errado no chat
+/*
 CREATE FUNCTION throw_exception_user_chat() RETURNS TRIGGER AS
 $BODY$
 BEGIN
@@ -66,27 +96,108 @@ CREATE TRIGGER except_user_chat
     BEFORE INSERT ON public."message"
     FOR EACH ROW
     EXECUTE PROCEDURE throw_exception_user_chat();
-
+*/
 -- _____________________
 
 
 --Trigger adicionar amigo
 
-Create FUNCTION add_friend() returns trigger as $$
+CREATE FUNCTION friend_status() RETURNS trigger AS
+$$
 BEGIN
 	IF new."friendship_status" = 'accepted' THEN
 		Insert into public."friend" ("friend_id1","friend_id2","friendship_status") values (old.public."friend_id2",old.public."friend_id1",'accepted');
-	END IF;
-END; $$
+	ELSEIF new."friendship_status" = 'refused' THEN
+		DELETE FROM public."friend" 
+        WHERE ("friend_id1" = old.public."friend_id1" AND "friend_id2" = old.public."friend_id2");
+    END IF; 
+    RETURN NEW;
+END
+$$
 LANGUAGE plpgsql;
 
 
-Create trigger add_friend
-	after update 
-	on public."friend"
-	EXECUTE PROCEDURE
-		add_friend();
-
+Create TRIGGER friend_status
+	AFTER UPDATE ON public."friend"
+	EXECUTE PROCEDURE friend_status();
 --___________________________
 
 
+--Trigger apagar refused report
+
+CREATE FUNCTION delete_refused_report() RETURNS trigger AS
+$BODY$
+BEGIN
+    IF new."approval" = FALSE THEN
+        DELETE FROM public."report"
+        WHERE "report_id" = old.public."report_id";
+    END IF;
+    RETURN NEW;
+END
+$BODY$
+LANGUAGE plpgsql;
+
+CREATE TRIGGER delete_refused_report
+    AFTER UPDATE ON public."report"
+    EXECUTE PROCEDURE delete_refused_report();
+
+--____________________________
+
+--Trigger data evento
+
+CREATE FUNCTION event_date() RETURNS trigger AS
+$BODY$
+BEGIN
+    IF new."date" > now() THEN
+    RAISE EXCEPTION 'Invalid event date.';
+    END IF;
+    RETURN NEW;
+
+END
+$BODY$
+LANGUAGE plpgsql;
+
+CREATE TRIGGER event_date
+    AFTER INSERT ON public."event"
+    EXECUTE PROCEDURE event_date();
+
+--______________________
+
+--Trigger data post
+
+CREATE FUNCTION post_date() RETURNS trigger AS
+$BODY$
+BEGIN
+    IF new."date" > now() THEN
+    RAISE EXCEPTION 'Invalid post date.';
+    END IF;
+    RETURN NEW;
+
+END
+$BODY$
+LANGUAGE plpgsql;
+
+CREATE TRIGGER post_date
+    AFTER INSERT ON public."post"
+    EXECUTE PROCEDURE post_date();
+
+--______________________
+/*
+--Trigger unique organization
+$BODY$
+BEGIN
+    IF EXIST
+
+
+END
+$BODY$
+LANGUAGE plpgsql;
+
+CREATE TRIGGER unique_org
+    BEFORE UPDATE ON public."organization"
+    EXECUTE PROCEDURE unique_org()
+--_______________________
+*/
+
+
+--Falta Own content
