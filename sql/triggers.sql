@@ -7,7 +7,7 @@ DROP TRIGGER IF EXISTS delete_refused_report ON "report" CASCADE;
 DROP TRIGGER IF EXISTS event_date ON "event" CASCADE;
 DROP TRIGGER IF EXISTS post_date ON "post" CASCADE;
 
-
+DROP FUNCTION IF EXISTS unique_org() CASCADE;
 DROP FUNCTION IF EXISTS update_group_posts() CASCADE;
 DROP FUNCTION IF EXISTS update_event_posts() CASCADE;
 DROP FUNCTION IF EXISTS update_user_posts() CASCADE;
@@ -182,12 +182,23 @@ CREATE TRIGGER post_date
     EXECUTE PROCEDURE post_date();
 
 --______________________
-/*
---Trigger unique organization
+CREATE FUNCTION unique_org() RETURNS trigger AS
 $BODY$
 BEGIN
-    IF EXIST
-
+	IF new."approval" = TRUE THEN
+    	IF EXISTS (Select * from
+				  	(SELECT * FROM "organization" INNER JOIN "regular_user" on "organization"."regular_user_id" = "regular_user"."regular_user_id"
+						INNER JOIN "user" on "regular_user"."user_id" = "user"."user_id" where "organization"."approval" = TRUE) as "t1"
+				   	INNER JOIN
+				   	(SELECT * FROM "organization" INNER JOIN "regular_user" on "organization"."regular_user_id" = "regular_user"."regular_user_id"
+						INNER JOIN "user" on "regular_user"."user_id" = "user"."user_id" where "organization"."organization_id" = new."organization_id") as "t2"
+				   	on t1."name" = "t2"."name"
+				  	) 
+		THEN
+			RAISE EXCEPTION 'Two organizations approved with same name';
+		END IF;
+	END IF;
+	RETURN NEW;
 
 END
 $BODY$
@@ -196,8 +207,7 @@ LANGUAGE plpgsql;
 CREATE TRIGGER unique_org
     BEFORE UPDATE ON public."organization"
     EXECUTE PROCEDURE unique_org()
---_______________________
-*/
+
 
 
 --Falta Own content
