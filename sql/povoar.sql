@@ -154,7 +154,7 @@ insert into public."file" ("post_id", "file_path") values ( 8,'../files/image.pn
 insert into public."image" ("file_id", "post_id") values (2, 8);
 
 
-insert into public."notification" ("origin_user_id", "description", "link", "date") values (3, 'I just posted!', '---', '2020-03-21 12:00:00');
+insert into public."notification" ("origin_user_id", "description", "link", "date") values (3, 'I just posted!', 'link.link', '2020-03-21 12:00:00');
 
 insert into public."notified_user" ("notification_id", "user_notified") values (1, 5);
 insert into public."notified_user" ("notification_id", "user_notified") values (1, 7);
@@ -184,3 +184,6 @@ insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (8, 10, D
 insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (10, 20, DEFAULT);
 
 insert into public."user_interested_in_event" ("user_id","event_id") values(2,1);
+insert into public."user_interested_in_event" ("user_id","event_id") values(4,1);
+insert into public."user_interested_in_event" ("user_id","event_id") values(7,1);
+insert into public."user_interested_in_event" ("user_id","event_id") values(10,1);

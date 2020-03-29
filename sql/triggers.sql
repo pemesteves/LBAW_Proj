@@ -1,6 +1,7 @@
 DROP TRIGGER IF EXISTS update_group_posts ON "group" CASCADE;
 DROP TRIGGER IF EXISTS update_event_posts ON "event" CASCADE;
-DROP TRIGGER IF EXISTS except_user_chat ON "message" CASCADE;
+DROP TRIGGER IF EXISTS update_user_posts ON "user" CASCADE;
+--DROP TRIGGER IF EXISTS except_user_chat ON "message" CASCADE;
 DROP TRIGGER IF EXISTS friend_status ON "friend" CASCADE;
 DROP TRIGGER IF EXISTS delete_refused_report ON "report" CASCADE;
 DROP TRIGGER IF EXISTS event_date ON "event" CASCADE;
@@ -9,7 +10,8 @@ DROP TRIGGER IF EXISTS post_date ON "post" CASCADE;
 
 DROP FUNCTION IF EXISTS update_group_posts() CASCADE;
 DROP FUNCTION IF EXISTS update_event_posts() CASCADE;
-DROP FUNCTION IF EXISTS throw_exception_user_chat() CASCADE;
+DROP FUNCTION IF EXISTS update_user_posts() CASCADE;
+--DROP FUNCTION IF EXISTS throw_exception_user_chat() CASCADE;
 DROP FUNCTION IF EXISTS friend_status() CASCADE;
 DROP FUNCTION IF EXISTS delete_refused_report() CASCADE;
 DROP FUNCTION IF EXISTS event_date() CASCADE;
@@ -61,7 +63,7 @@ CREATE TRIGGER update_event_posts
 CREATE FUNCTION update_user_posts() RETURNS TRIGGER AS
 $BODY$
 BEGIN
-    UPDATE public."post" SET public."post".TYPE = public."user".TYPE WHERE public."post"."author_id" = public."event"."event_id";
+    UPDATE public."post" SET public."post".TYPE = public."user".TYPE WHERE public."post"."author_id" = public."user"."user_id";
     RETURN NEW;
 END
 $BODY$
@@ -69,7 +71,7 @@ LANGUAGE plpgsql;
 
 
 CREATE TRIGGER update_user_posts
-    AFTER UPDATE OR INSERT ON public."regula"
+    AFTER UPDATE ON public."user"
     FOR EACH ROW
     EXECUTE PROCEDURE update_user_posts();
 
@@ -77,7 +79,7 @@ CREATE TRIGGER update_user_posts
 
 
 --Trigger user errado no chat
-
+/*
 CREATE FUNCTION throw_exception_user_chat() RETURNS TRIGGER AS
 $BODY$
 BEGIN
@@ -94,7 +96,7 @@ CREATE TRIGGER except_user_chat
     BEFORE INSERT ON public."message"
     FOR EACH ROW
     EXECUTE PROCEDURE throw_exception_user_chat();
-
+*/
 -- _____________________
 
 
@@ -180,6 +182,22 @@ CREATE TRIGGER post_date
     EXECUTE PROCEDURE post_date();
 
 --______________________
+/*
+--Trigger unique organization
+$BODY$
+BEGIN
+    IF EXIST
 
 
---Falta Own content, Unique Organization, Ownership
+END
+$BODY$
+LANGUAGE plpgsql;
+
+CREATE TRIGGER unique_org
+    BEFORE UPDATE ON public."organization"
+    EXECUTE PROCEDURE unique_org()
+--_______________________
+*/
+
+
+--Falta Own content
