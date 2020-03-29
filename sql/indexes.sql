@@ -16,6 +16,7 @@ CREATE INDEX "user_email" ON "user" USING hash("email");
 CREATE INDEX "student_regular_id" ON "student" USING hash("regular_user_id");
 CREATE INDEX "teacher_regular_id" ON "teacher" USING hash("regular_user_id");
 CREATE INDEX "organization_regular_id" ON "organization" USING hash("regular_user_id");
+CREATE INDEX "post_author_id" ON "post" USING hash("author_id");
 
 -- GIST SEARCH INDEXES 
 CREATE INDEX "search_post_titles" ON "post" USING GIST(to_tsvector('english', "title"));
