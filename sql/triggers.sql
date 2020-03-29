@@ -3,12 +3,18 @@ DROP TRIGGER IF EXISTS update_event_posts ON "event" CASCADE;
 DROP TRIGGER IF EXISTS except_user_chat ON "message" CASCADE;
 DROP TRIGGER IF EXISTS friend_status ON "friend" CASCADE;
 DROP TRIGGER IF EXISTS delete_refused_report ON "report" CASCADE;
+DROP TRIGGER IF EXISTS event_date ON "event" CASCADE;
+DROP TRIGGER IF EXISTS post_date ON "post" CASCADE;
+
 
 DROP FUNCTION IF EXISTS update_group_posts() CASCADE;
 DROP FUNCTION IF EXISTS update_event_posts() CASCADE;
 DROP FUNCTION IF EXISTS throw_exception_user_chat() CASCADE;
 DROP FUNCTION IF EXISTS friend_status() CASCADE;
 DROP FUNCTION IF EXISTS delete_refused_report() CASCADE;
+DROP FUNCTION IF EXISTS event_date() CASCADE;
+DROP FUNCTION IF EXISTS post_date() CASCADE;
+
 
 --Trigger atualizar status dos posts de um grupo
 
@@ -46,6 +52,26 @@ CREATE TRIGGER update_event_posts
     AFTER UPDATE OR INSERT ON public."event"
     FOR EACH ROW
     EXECUTE PROCEDURE update_event_posts();
+
+-- _____________________
+
+
+--Trigger atualizar status dos posts de um user
+
+CREATE FUNCTION update_user_posts() RETURNS TRIGGER AS
+$BODY$
+BEGIN
+    UPDATE public."post" SET public."post".TYPE = public."user".TYPE WHERE public."post"."author_id" = public."event"."event_id";
+    RETURN NEW;
+END
+$BODY$
+LANGUAGE plpgsql;
+
+
+CREATE TRIGGER update_user_posts
+    AFTER UPDATE OR INSERT ON public."regula"
+    FOR EACH ROW
+    EXECUTE PROCEDURE update_user_posts();
 
 -- _____________________
 
@@ -114,3 +140,46 @@ CREATE TRIGGER delete_refused_report
     EXECUTE PROCEDURE delete_refused_report();
 
 --____________________________
+
+--Trigger data evento
+
+CREATE FUNCTION event_date() RETURNS trigger AS
+$BODY$
+BEGIN
+    IF new."date" > now() THEN
+    RAISE EXCEPTION 'Invalid event date.';
+    END IF;
+    RETURN NEW;
+
+END
+$BODY$
+LANGUAGE plpgsql;
+
+CREATE TRIGGER event_date
+    AFTER INSERT ON public."event"
+    EXECUTE PROCEDURE event_date();
+
+--______________________
+
+--Trigger data post
+
+CREATE FUNCTION post_date() RETURNS trigger AS
+$BODY$
+BEGIN
+    IF new."date" > now() THEN
+    RAISE EXCEPTION 'Invalid post date.';
+    END IF;
+    RETURN NEW;
+
+END
+$BODY$
+LANGUAGE plpgsql;
+
+CREATE TRIGGER post_date
+    AFTER INSERT ON public."post"
+    EXECUTE PROCEDURE post_date();
+
+--______________________
+
+
+--Falta Own content, Unique Organization, Ownership
