@@ -28,7 +28,6 @@ CREATE TYPE "friendship_status" AS ENUM ('accepted', 'pending', 'refused');
 
 DROP INDEX IF EXISTS "user_notified"; 
 DROP INDEX IF EXISTS "notified_user_notification_id";
-DROP INDEX IF EXISTS "user_email";
 DROP INDEX IF EXISTS "student_regular_id";
 DROP INDEX IF EXISTS "teacher_regular_id";
 DROP INDEX IF EXISTS "organization_regular_id";
@@ -42,6 +41,9 @@ DROP INDEX IF EXISTS "accepted_friendship";
 DROP INDEX IF EXISTS "pending_friendship";
 DROP INDEX IF EXISTS "message_chat";
 DROP INDEX IF EXISTS "file_post_id";
+DROP INDEX IF EXISTS "comment_date";
+DROP INDEX IF EXISTS "message_date";
+DROP INDEX IF EXISTS "post_date";
 DROP INDEX IF EXISTS "search_post_titles";
 DROP INDEX IF EXISTS "search_user_names";
 DROP INDEX IF EXISTS "search_group_names";
@@ -276,11 +278,8 @@ CREATE TABLE public."user_interested_in_event"
 
 
 -- USER NOTIFIED INDEX
-CREATE INDEX "user_notified" ON "notified_user"("user_notified");
+CREATE INDEX "user_notified" ON "notified_user" USING hash("user_notified");
 CREATE INDEX "notified_user_notification_id" ON "notified_user" USING hash("notification_id");
-
--- LOGIN EMAIL INDEX
-CREATE INDEX "user_email" ON "user" USING hash("email");
 
 -- REGULAR USER ID FOREIGN KEYS INDEXES
 CREATE INDEX "student_regular_id" ON "student" USING hash("regular_user_id");
@@ -309,12 +308,16 @@ CREATE INDEX "message_chat" ON "message" USING hash("chat_id");
 -- FILE INDEX
 CREATE INDEX "file_post_id" ON "file" USING hash("post_id");
 
+-- DATE INDEXES
+CREATE INDEX "message_date" ON "message" USING btree("date");
+CREATE INDEX "comment_date" ON "comment" USING btree("date");
+CREATE INDEX "post_date" ON "post" USING btree("date");
+
 -- GIST SEARCH INDEXES 
-CREATE INDEX "search_post_titles" ON "post" USING GIST(to_tsvector('english', "title"));
+CREATE INDEX "search_post_titles" ON "post" USING GIST(to_tsvector('english', "title" || ' ' || "body"));
 CREATE INDEX "search_user_names" ON "user" USING GIST(to_tsvector('english', "name"));
 CREATE INDEX "search_group_names" ON "group" USING GIST(to_tsvector('english', "name"));
 CREATE INDEX "search_event_names" ON "event" USING GIST(to_tsvector('english', "name"));
-
 
 
 DROP TRIGGER IF EXISTS update_group_posts ON "group" CASCADE;
