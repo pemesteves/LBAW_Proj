@@ -154,12 +154,30 @@ insert into public."file" ("post_id", "file_path") values ( 8,'../files/image.pn
 insert into public."image" ("file_id", "post_id") values (2, 8);
 
 
-insert into public."notification" ("origin_user_id", "description", "link", "date") values (3, 'I just posted!', 'link.link', '2020-03-21 12:00:00');
+insert into public."notification" ("origin_user_id", "description", "link", "date") values (3, 'I just posted!', '../feed.php#5', '2020-03-21 12:00:00');
+insert into public."notification" ("origin_user_id", "description", "link", "date") values (5, 'New message in chat!', '../chat/1', '2020-03-25 14:12:45');
+insert into public."notification" ("origin_user_id", "description", "link", "date") values (7, 'New message in chat!', '../chat/1', '2020-03-27 18:54:31');
+
 
 
 insert into public."notified_user" ("notification_id", "user_notified") values (1, 5);
 insert into public."notified_user" ("notification_id", "user_notified") values (1, 7);
 insert into public."notified_user" ("notification_id", "user_notified") values (1, 10);
+insert into public."notified_user" ("notification_id", "user_notified") values (2, 2);
+insert into public."notified_user" ("notification_id", "user_notified") values (2, 6);
+insert into public."notified_user" ("notification_id", "user_notified") values (2, 7);
+insert into public."notified_user" ("notification_id", "user_notified") values (2, 3);
+insert into public."notified_user" ("notification_id", "user_notified") values (2, 9);
+insert into public."notified_user" ("notification_id", "user_notified") values (2, 11);
+insert into public."notified_user" ("notification_id", "user_notified") values (2, 16);
+insert into public."notified_user" ("notification_id", "user_notified") values (3, 2);
+insert into public."notified_user" ("notification_id", "user_notified") values (3, 6);
+insert into public."notified_user" ("notification_id", "user_notified") values (3, 7);
+insert into public."notified_user" ("notification_id", "user_notified") values (3, 3);
+insert into public."notified_user" ("notification_id", "user_notified") values (3, 9);
+insert into public."notified_user" ("notification_id", "user_notified") values (3, 11);
+insert into public."notified_user" ("notification_id", "user_notified") values (3, 16);
+
 
 
 insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (1, 4, DEFAULT);
