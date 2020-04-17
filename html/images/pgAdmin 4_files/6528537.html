@@ -1,0 +1,4214 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"><!--<![endif]--><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>lbaw2034/lbaw2034@LBAW34</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- To set pgAdmin4 shortcut icon in browser -->
+    <link rel="shortcut icon" href="http://localhost:5050/favicon.ico?ver=41900">
+
+    <!-- Base template stylesheets -->
+    <link type="text/css" rel="stylesheet" href="style.css">
+    <link type="text/css" rel="stylesheet" href="pgadmin_002.css">
+    <link type="text/css" rel="stylesheet" href="pgadmin.css">
+
+     <!--View specified stylesheets-->
+    
+    <script>
+        /* This is used to change publicPath of webpack at runtime */
+        window.getChunkURL = function() {
+            return "/static/js/generated/";
+        };
+    </script>
+    <!-- Base template scripts -->
+    <script type="text/javascript" src="require.js"></script>
+    <script type="text/javascript">
+            require.config({
+                baseUrl: '',
+                urlArgs: 'ver=41900',
+                waitSeconds: 0,
+                shim: {},
+                paths: {
+                    sources: "/static/js",
+                    datagrid: "/static/js/generated/datagrid",
+                    sqleditor: "/static/js/generated/sqleditor",
+                    'pgadmin.browser.utils': "/browser/" + "js/utils",
+                    'pgadmin.browser.endpoints': "/browser/" + "js/endpoints",
+                    'pgadmin.browser.messages': "/browser/" + "js/messages",
+                    'pgadmin.server.supported_servers': "/browser/" + "server/supported_servers",
+                    'pgadmin.user_management.current_user': "/user_management/" + "current_user",
+                    'translations': "/tools/" + "translations"
+                }
+            });
+
+    </script>
+
+    <!-- View specified scripts -->
+    <script type="text/javascript" src="vendor_002.js"></script>
+    <script type="text/javascript" src="vendor.js"></script>
+    <script type="text/javascript" src="pgadmin_commons.js"></script>
+
+<script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="sources/generated/browser_nodes" src="browser_nodes.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="sources/generated/codemirror" src="codemirror.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="sources/generated/slickgrid" src="4161003_data/slickgrid.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="sources/generated/sqleditor" src="4161003_data/sqleditor.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="translations" src="translations.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="pgadmin.browser.endpoints" src="endpoints.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="pgadmin.browser.utils" src="utils.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="pgadmin.user_management.current_user" src="current_user.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="pgadmin.browser.messages" src="messages.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="pgadmin.server.supported_servers" src="supported_servers.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="sources/gettext" src="gettext.js"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="sources/pgadmin" src="pgadmin.js"></script><link id="wcTheme" rel="stylesheet" type="text/css" href="6528537_data/webcabin.css"><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="sources/generated/file_utils" src="4161003_data/file_utils.js"></script><style>body.tablesorter-disableSelection { -ms-user-select: none; -moz-user-select: -moz-none;-khtml-user-select: none; -webkit-user-select: none; user-select: none; }.tablesorter-resizable-container { position: relative; height: 1px; }.tablesorter-resizable-handle { position: absolute; display: inline-block; width: 8px;top: 1px; cursor: ew-resize; z-index: 3; user-select: none; -moz-user-select: none; }</style></head>
+<body tabindex="0" class="wcDesktop">
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<style>
+    body {padding: 0px;}
+    </style>
+<div id="main-editor_panel">
+    <div class="sql-editor">
+        <div id="btn-toolbar" class="editor-toolbar" role="toolbar" aria-label="">
+            <div class="btn-group mr-1" role="group" aria-label="">
+                <button id="btn-load-file" type="button" class="btn btn-sm btn-secondary btn-load-file" title="Open File (accesskey + O)" accesskey="O" tabindex="0" aria-label="Open File (accesskey + O)">
+                    <i class="fa fa-folder-open-o sql-icon-lg" aria-hidden="true" role="img"></i>
+                </button>
+                <button id="btn-save-file" type="button" class="btn btn-sm btn-secondary" title="Save File (accesskey + S)" accesskey="S" aria-label="Save File (accesskey + S)">
+                    <i class="fa fa-floppy-o sql-icon-lg" aria-hidden="true" tabindex="0" role="img"></i>
+                </button>
+                <button id="btn-file-menu-dropdown" type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" tabindex="0">
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a class="dropdown-item" id="btn-file-menu-save" href="#" tabindex="0" style="display: none;">
+                            <span>Save</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" id="btn-file-menu-save-as" href="#" tabindex="0">
+                            <span>Save As</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="btn-group mr-1" role="group" aria-label="">
+                <button id="btn-save-data" type="button" class="btn btn-sm btn-secondary" title="Save Data Changes (F6)" accesskey="" tabindex="0" disabled="disabled" aria-label="Save Data Changes (F6)">
+                    <i class="pg-font-icon icon-save-data-changes sql-icon-lg" aria-hidden="true" role="img"></i>
+                </button>
+            </div>
+            <div class="btn-group mr-1" role="group" aria-label="">
+                <button id="btn-find" type="button" class="btn btn-sm btn-secondary" aria-label="Find" title="Find (Ctrl/Cmd+F)">
+                    <i class="fa fa-search sql-icon-lg" aria-hidden="true" tabindex="0" role="img"></i>
+                </button>
+                <button id="btn-find-menu-dropdown" type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Find (accesskey + N)" accesskey="N" tabindex="0" aria-label="Find (accesskey + N)">
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a class="dropdown-item" id="btn-find-menu-find" href="#" tabindex="0">
+                            <span> Find                                  (Ctrl+F)</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" id="btn-find-menu-find-next" href="#" tabindex="0">
+                            <span> Find Next                                  (Ctrl+G)</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" id="btn-find-menu-find-previous" href="#" tabindex="0">
+                            <span> Find Previous                                  (Ctrl+Shift+G)</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" id="btn-find-menu-find-persistent" href="#" tabindex="0">
+                            <span>Persistent Find</span>
+                        </a>
+                    </li>
+                    <li class="dropdown-divider"></li>
+                    <li>
+                        <a class="dropdown-item" id="btn-find-menu-replace" href="#" tabindex="0">
+                            <span> Replace                                  (Ctrl+Shift+F)</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" id="btn-find-menu-replace-all" href="#" tabindex="0">
+                            <span>Replace All</span>
+                        </a>
+                    </li>
+                    <li class="dropdown-divider"></li>
+                    <li>
+                        <a class="dropdown-item" id="btn-find-menu-jump" href="#" tabindex="0">
+                            <span>Jump (Alt+G)</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="btn-group mr-1" role="group" aria-label="">
+                <button id="btn-copy-row" type="button" class="btn btn-sm btn-secondary" title="Copy (accesskey + C)" accesskey="C" tabindex="0" disabled="disabled" aria-label="Copy (accesskey + C)">
+                    <i class="fa fa-files-o sql-icon-lg" aria-hidden="true" role="img"></i>
+                </button>
+                <button id="btn-copy-row-dropdown" type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" tabindex="0">
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a class="dropdown-item" id="btn-copy-with-header" href="#" tabindex="0">
+                            <i class="copy-with-header fa fa-check visibility-hidden" aria-hidden="true" role="img"></i>
+                            <span> Copy with headers </span>
+                        </a>
+                    </li>
+                </ul>
+                <button id="btn-paste-row" type="button" class="btn btn-sm btn-secondary" title="Paste (accesskey + P)" accesskey="P" tabindex="0" disabled="disabled" aria-label="Paste (accesskey + P)">
+                    <i class="fa fa-clipboard sql-icon-lg" aria-hidden="true" role="img"></i>
+                </button>
+            </div>
+            <div class="btn-group mr-1" role="group" aria-label="">
+                <button id="btn-delete-row" type="button" class="btn btn-sm btn-secondary" title="Delete (accesskey + D)" accesskey="D" tabindex="0" disabled="disabled" aria-label="Delete (accesskey + D)">
+                    <i class="fa fa-trash sql-icon-lg" aria-hidden="true" role="img"></i>
+                </button>
+            </div>
+            <div class="btn-group mr-1" role="group" aria-label="">
+                <button id="btn-edit-dropdown" type="button" class="btn btn-sm btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Edit" title="Edit" tabindex="0">
+                    <i class="fa fa-pencil-square-o sql-icon-lg" aria-hidden="true" role="img"></i>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a class="dropdown-item" id="btn-indent-code" href="#" tabindex="0">
+                            <span> Indent Selection (Tab) </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" id="btn-unindent-code" href="#" tabindex="0">
+                            <span> Unindent Selection (Shift+Tab) </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" id="btn-comment-line" href="#" tabindex="0">
+                            <span> Inline Comment Selection                                  (Ctrl+/)</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" id="btn-uncomment-line" href="#" tabindex="0">
+                            <span> Inline Uncomment Selection                                  (Ctrl+.)</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" id="btn-toggle-comment-block" href="#" tabindex="0">
+                            <span> Block Comment/Uncomment Selection                                  (Shift+Ctrl+/)</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="btn-group mr-1" role="group" aria-label="">
+                <button id="btn-filter" type="button" class="btn btn-secondary" title="Filter (accesskey + F)" accesskey="F" tabindex="0" disabled="disabled" aria-label="Filter (accesskey + F)">
+                    <i class="fa fa-filter sql-icon-lg" aria-hidden="true" role="img"></i>
+                </button>
+                <button id="btn-filter-dropdown" type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Filter options (accesskey + I)" accesskey="I" disabled="disabled" tabindex="0" aria-label="Filter options (accesskey + I)">
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li>
+                        <a id="btn-filter-menu" class="dropdown-item" href="#" tabindex="0">Sort/Filter</a>
+                    </li>
+                    <li>
+                        <a id="btn-include-filter" class="dropdown-item" href="#" tabindex="0">Filter by Selection</a>
+                    </li>
+                    <li>
+                        <a id="btn-exclude-filter" class="dropdown-item" href="#" tabindex="0">Exclude by Selection</a>
+                    </li>
+                    <li>
+                        <a id="btn-remove-filter" class="dropdown-item" href="#" tabindex="0">Remove Sort/Filter</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="btn-group mr-1" role="group" aria-label="">
+                <select id="btn-rows-limit" class="limit form-control form-control-sm" disabled="disabled" title="Rows limit (accesskey + R)" accesskey="R" tabindex="0" aria-label="Rows limit (accesskey + R)">
+                    <option value="-1" selected="selected">No limit</option>
+                    <option value="1000">1000 rows</option>
+                    <option value="500">500 rows</option>
+                    <option value="100">100 rows</option>
+                </select>
+            </div>
+
+            <div class="btn-group mr-1" role="group" aria-label="">
+                <button id="btn-cancel-query" type="button" class="btn btn-sm btn-secondary" title="Cancel query (accesskey + Q)" accesskey="Q" tabindex="0" aria-label="Cancel query (accesskey + Q)" disabled="disabled">
+                    <i class="fa fa-stop sql-icon-lg" aria-hidden="true" role="img"></i>
+                </button>
+                <button id="btn-flash" data-test-selector="execute-refresh-button" type="button" class="btn btn-sm btn-secondary" style="width: 32px;" title="Execute/Refresh (F5)" tabindex="0" data-click-counter="1" aria-label="Execute/Refresh (F5)">
+                    <i class="fa fa-play sql-icon-lg" aria-hidden="true" role="img"></i>
+                </button>
+                <button id="btn-query-dropdown" type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" accesskey="X" title="Execute options (accesskey + X)" tabindex="0" aria-label="Execute options (accesskey + X)">
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li>
+                        <a class="dropdown-item" id="btn-auto-commit" href="#" tabindex="0">
+                            <i class="auto-commit fa fa-check" aria-hidden="true" role="img"></i>
+                            <span> Auto commit? </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" id="btn-auto-rollback" href="#" tabindex="0">
+                            <i class="auto-rollback fa fa-check visibility-hidden" aria-hidden="true" role="img"></i>
+                            <span> Auto rollback? </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="btn-group mr-1" role="group" aria-label="">
+                <button id="btn-explain" type="button" class="btn btn-sm btn-secondary" title="Explain (F7)" accesskey="" tabindex="0" aria-label="Explain (F7)">
+                    <i class="fa fa-hand-pointer-o sql-icon-lg" aria-hidden="true" role="img"></i>
+                </button>
+                <button id="btn-explain-analyze" type="button" class="btn btn-sm btn-secondary" title="Explain Analyze (Shift+F7)" accesskey="" aria-label="Explain Analyze (Shift+F7)">
+                    <i class="fa fa-list-alt sql-icon-lg" aria-hidden="true" role="img"></i>
+                </button>
+                <button id="btn-explain-options-dropdown" type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" tabindex="0">
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a class="dropdown-item" id="btn-explain-verbose" href="#" tabindex="0">
+                            <i class="explain-verbose fa fa-check visibility-hidden" aria-hidden="true" role="img"></i>
+                            <span> Verbose </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" id="btn-explain-costs" href="#" tabindex="0">
+                            <i class="explain-costs fa fa-check visibility-hidden" aria-hidden="true" role="img"></i>
+                            <span> Costs </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" id="btn-explain-buffers" href="#" tabindex="0">
+                            <i class="explain-buffers fa fa-check visibility-hidden" aria-hidden="true" role="img"></i>
+                            <span> Buffers </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" id="btn-explain-timing" href="#" tabindex="0">
+                            <i class="explain-timing fa fa-check visibility-hidden" aria-hidden="true" role="img"></i>
+                            <span> Timing </span>
+                        </a>
+                    </li>
+                    <li data-min-ver="100000" class="d-none">
+                        <a class="dropdown-item" id="btn-explain-summary" href="#" tabindex="0">
+                            <i class="explain-summary fa fa-check visibility-hidden" aria-hidden="true" role="img"></i>
+                            <span> Summary </span>
+                        </a>
+                    </li>
+                    <li data-min-ver="120000" class="d-none">
+                        <a class="dropdown-item" id="btn-explain-settings" href="#" tabindex="0">
+                            <i class="explain-settings fa fa-check visibility-hidden" aria-hidden="true" role="img"></i>
+                            <span> Settings </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="btn-group mr-1" role="group" aria-label="">
+                <button id="btn-commit" type="button" class="btn btn-sm btn-secondary" title="Commit (Shift+Ctrl+M)" accesskey="" tabindex="0" disabled="disabled" aria-label="Commit (Shift+Ctrl+M)">
+                    <i class="pg-font-icon icon-commit sql-icon-lg" aria-hidden="true" role="img"></i>
+                </button>
+                <button id="btn-rollback" type="button" class="btn btn-sm btn-secondary" title="Rollback (Shift+Ctrl+R)" tabindex="0" disabled="disabled" aria-label="Rollback (Shift+Ctrl+R)">
+                    <i class="pg-font-icon icon-rollback sql-icon-lg" aria-hidden="true" role="img"></i>
+                </button>
+            </div>
+            <div class="btn-group mr-1" role="group" aria-label="">
+                <button id="btn-clear-dropdown" type="button" class="btn btn-sm btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Clear (accesskey + L)" accesskey="L" tabindex="0" aria-label="Clear (accesskey + L)">
+                    <i class="fa fa-eraser sql-icon-lg" aria-hidden="true" role="img"></i>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a class="dropdown-item" id="btn-clear" href="#" tabindex="0">
+                            <span> Clear Query Window </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" id="btn-clear-history" href="#" tabindex="0">
+                            <span> Clear History </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="btn-group" role="group" aria-label="">
+                <button id="btn-download" type="button" class="btn btn-sm btn-secondary" title="Download as CSV (F8)" tabindex="0" aria-label="Download as CSV (F8)">
+                    <i class="fa fa-download sql-icon-lg" aria-hidden="true" role="img"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="connection_status_wrapper d-flex">
+            <div id="btn-conn-status" role="status" class="connection_status d-flex justify-content-center align-items-center" data-container="body" data-toggle="popover" data-placement="bottom" data-content="The session is idle and there is no current transaction." data-panel-visible="visible" accesskey="T" tabindex="0" data-original-title="" title="">
+                <i class="pg-font-icon icon-query-tool-connected" aria-hidden="true" title="Connection status (click for details) (accesskey + T)" role="img">
+                </i>
+            </div>
+            <div class="editor-title" style="background-color: ; color: ;">lbaw2034/lbaw2034@LBAW34</div>
+        </div>
+        <div id="editor-panel" tabindex="0">
+            <div id="fetching_data" class="pg-sp-container sql-editor-busy-fetching d-none">
+                <div class="pg-sp-content">
+                    <div class="row">
+                        <div class="col-12 pg-sp-icon sql-editor-busy-icon"></div>
+                    </div>
+                    <div class="row"><div class="col-12 pg-sp-text sql-editor-busy-text">Loading data from the database server and rendering...</div></div>
+                </div>
+            </div>
+        <div class="wcDocker"><div class="wcDockerTransition"></div><div class="wcLayoutPane" style="height: 430.25px; top: 0px; left: 0px; right: 0px;"><div class="wcFrame wcWide wcTall"><div class="wcFrameTitleBar wcTabTop" style="width: 1605px;"><div class="wcTabScroller" style="left: 0px;"><div class="wcPanelTab wcPanelTabActive" id="0"><div><a href="#" tabindex="-1" class="panel-link-heading">Query Editor</a></div></div><div class="wcPanelTab" id="1"><div><a href="#" tabindex="-1" class="panel-link-heading">Query History</a></div></div></div><div class="wcFrameButtonBar" style="min-width: 0px; width: 0px; right: 0px;"></div></div><div class="wcFrameButtonBar" style="min-width: 0px; width: 0px;"><div class="wcFrameButton" title="Close the currently active panel tab" aria-label="Close panel" tabindex="0" style="display: none;"><div class="fa fa-close"></div></div><div class="wcFrameButton" title="Collapse the active panel" style="display: none;"><div class="fa fa-download"></div>C</div></div><div class="wcFrameCenter wcPanelBackground wcScrollableX wcScrollableY" style="left: 0px; right: 0px; bottom: 0px;"><div class="wcPanelTabContent" id="0"><table class="wcLayout wcWide wcTall"><tbody><tr><td><div class="pg-panel-content"><div id="output-panel" tabindex="0"><textarea id="sql_query_tool" tabindex="-1" style="display: none;"></textarea><div class="CodeMirror cm-s-default CodeMirror-simplescroll CodeMirror-focused" style="font-size: 1em;"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 4px; left: 50px;"><textarea style="position: absolute; bottom: -1em; padding: 0px; width: 1px; height: 1em; outline: currentcolor none medium;" autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" wrap="off"></textarea></div><div class="CodeMirror-simplescroll-horizontal" cm-not-content="true" style="display: block; right: 16px; left: 46px;"><div style="width: 861.172px; left: 0px;"></div></div><div class="CodeMirror-simplescroll-vertical" cm-not-content="true" style="display: block; bottom: 16px;"><div style="height: 40.2513px; top: 0px;"></div></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true" style="height: 16px; width: 16px; display: block;"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1" draggable="true"><div class="CodeMirror-sizer" style="margin-left: 46px; margin-bottom: -12px; border-right-width: 18px; min-height: 3914px; min-width: 2828px; padding-right: 16px; padding-bottom: 16px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div style="position: relative; outline: currentcolor none medium;" role="presentation"><div class="CodeMirror-measure"><pre class="CodeMirror-line-like"><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"><pre class="CodeMirror-line" role="presentation"><span role="presentation"><span class="cm-keyword">insert</span> <span class="cm-keyword">into</span> <span class="cm-keyword">public</span>."post" <span class="cm-bracket">(</span>"author_id"<span class="cm-punctuation">,</span> "title"<span class="cm-punctuation">,</span> "body"<span class="cm-punctuation">,</span> "date"<span class="cm-punctuation">,</span> "upvotes"<span class="cm-punctuation">,</span> "downvotes"<span class="cm-punctuation">,</span> <span class="cm-keyword">TYPE</span><span class="cm-punctuation">,</span> "event_id"<span class="cm-punctuation">,</span> "group_id"<span class="cm-bracket">)</span> <span class="cm-keyword">values</span> <span class="cm-bracket">(</span><span class="cm-number">3</span><span class="cm-punctuation">,</span> <span class="cm-string">'Quarentena'</span><span class="cm-punctuation">,</span> <span class="cm-string">'Pedimos
+ a todos os alunos da Academia, em especial os do ISEP para ficarem em 
+casa durante este período de quarentena, seguindo as indicações da DGS.'</span><span class="cm-punctuation">,</span> <span class="cm-string">'2020-03-13 16:54:51'</span><span class="cm-punctuation">,</span> <span class="cm-number">40</span><span class="cm-punctuation">,</span> <span class="cm-number">1</span><span class="cm-punctuation">,</span> <span class="cm-keyword">DEFAULT</span><span class="cm-punctuation">,</span> <span class="cm-atom">NULL</span><span class="cm-punctuation">,</span> <span class="cm-atom">NULL</span><span class="cm-bracket">)</span><span class="cm-punctuation">;</span></span></pre></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-cursors" style="visibility: hidden;"><div class="CodeMirror-cursor" style="left: 4px; top: 0px; height: 21px;">&nbsp;</div></div><div class="CodeMirror-code" role="presentation" style=""><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 25px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation"><span cm-text="">​</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 25px;">2</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation"><span class="cm-keyword">insert</span> <span class="cm-keyword">into</span> <span class="cm-keyword">public</span>."user" <span class="cm-bracket">(</span>"name"<span class="cm-punctuation">,</span> "email"<span class="cm-punctuation">,</span> "password"<span class="cm-bracket">)</span> <span class="cm-keyword">values</span><span class="cm-bracket">(</span><span class="cm-string">'Admin1'</span><span class="cm-punctuation">,</span> <span class="cm-string">'admin1@gg.pt'</span><span class="cm-punctuation">,</span> <span class="cm-string">'8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918'</span><span class="cm-bracket">)</span><span class="cm-punctuation">;</span> <span class="cm-comment">--admin</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 25px;">3</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation"><span class="cm-keyword">insert</span> <span class="cm-keyword">into</span> <span class="cm-keyword">public</span>."user" <span class="cm-bracket">(</span>"name"<span class="cm-punctuation">,</span> "email"<span class="cm-punctuation">,</span> "password"<span class="cm-bracket">)</span> <span class="cm-keyword">values</span><span class="cm-bracket">(</span><span class="cm-string">'Joaquim Rodrigues'</span><span class="cm-punctuation">,</span> <span class="cm-string">'jokinho@feup.pt'</span><span class="cm-punctuation">,</span> <span class="cm-string">'61be55a8e2f6b4e172338bddf184d6dbee29c98853e0a0485ecee7f27b9af0b4'</span><span class="cm-bracket">)</span><span class="cm-punctuation">;</span> <span class="cm-comment">--aaaa</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 25px;">4</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation"><span class="cm-keyword">insert</span> <span class="cm-keyword">into</span> <span class="cm-keyword">public</span>."user" <span class="cm-bracket">(</span>"name"<span class="cm-punctuation">,</span> "email"<span class="cm-punctuation">,</span> "password"<span class="cm-bracket">)</span> <span class="cm-keyword">values</span><span class="cm-bracket">(</span><span class="cm-string">'Paulo Tavares'</span><span class="cm-punctuation">,</span> <span class="cm-string">'paulot@flup.pt'</span><span class="cm-punctuation">,</span> <span class="cm-string">'37d43d21680eea509d56b0b9aa90e986b068c6c3ebe5f6e31199d94d1d99920f'</span><span class="cm-bracket">)</span><span class="cm-punctuation">;</span> <span class="cm-comment">--1234pass</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 25px;">5</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation"><span class="cm-keyword">insert</span> <span class="cm-keyword">into</span> <span class="cm-keyword">public</span>."user" <span class="cm-bracket">(</span>"name"<span class="cm-punctuation">,</span> "email"<span class="cm-punctuation">,</span> "password"<span class="cm-bracket">)</span> <span class="cm-keyword">values</span><span class="cm-bracket">(</span><span class="cm-string">'AEISEP'</span><span class="cm-punctuation">,</span> <span class="cm-string">'aeisep@isep.pt'</span><span class="cm-punctuation">,</span> <span class="cm-string">'2371eed6bc20f1a21a1b02d963db2966c0f0b12b42153b0caf181416a2c09eae'</span><span class="cm-bracket">)</span><span class="cm-punctuation">;</span> <span class="cm-comment">--yoyo10</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 25px;">6</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation"><span class="cm-keyword">insert</span> <span class="cm-keyword">into</span> <span class="cm-keyword">public</span>."user" <span class="cm-bracket">(</span>"name"<span class="cm-punctuation">,</span> "email"<span class="cm-punctuation">,</span> "password"<span class="cm-bracket">)</span> <span class="cm-keyword">values</span><span class="cm-bracket">(</span><span class="cm-string">'Gustavo Torres'</span><span class="cm-punctuation">,</span> <span class="cm-string">'tgusta@feup.pt'</span><span class="cm-punctuation">,</span> <span class="cm-string">'1727619a97994f63beb35ab12c792972b4bfbebc6fbbaa0621a31afdbc725268'</span><span class="cm-bracket">)</span><span class="cm-punctuation">;</span> <span class="cm-comment">--tgustamucho</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 25px;">7</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation"><span class="cm-keyword">insert</span> <span class="cm-keyword">into</span> <span class="cm-keyword">public</span>."user" <span class="cm-bracket">(</span>"name"<span class="cm-punctuation">,</span> "email"<span class="cm-punctuation">,</span> "password"<span class="cm-bracket">)</span> <span class="cm-keyword">values</span><span class="cm-bracket">(</span><span class="cm-string">'Pedro Esteves'</span><span class="cm-punctuation">,</span> <span class="cm-string">'pmesteves@feup.pt'</span><span class="cm-punctuation">,</span> <span class="cm-string">'80cfa04f6ef471fef3a12581ca0ef857af748aa19463ea0292e4a9c310a4dae9'</span><span class="cm-bracket">)</span><span class="cm-punctuation">;</span> <span class="cm-comment">--estevesboss</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 25px;">8</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation"><span class="cm-keyword">insert</span> <span class="cm-keyword">into</span> <span class="cm-keyword">public</span>."user" <span class="cm-bracket">(</span>"name"<span class="cm-punctuation">,</span> "email"<span class="cm-punctuation">,</span> "password"<span class="cm-bracket">)</span> <span class="cm-keyword">values</span> <span class="cm-bracket">(</span><span class="cm-string">'Vitor Ventuzelos'</span><span class="cm-punctuation">,</span> <span class="cm-string">'berserking@feup.pt'</span><span class="cm-punctuation">,</span> <span class="cm-string">'979d2b82d1ed2c6f23406e898b9adb9060090501928654278eefff39a9fe15f4'</span><span class="cm-bracket">)</span><span class="cm-punctuation">;</span> <span class="cm-comment">--berserking_idiot</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 25px;">9</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation"><span class="cm-keyword">insert</span> <span class="cm-keyword">into</span> <span class="cm-keyword">public</span>."user" <span class="cm-bracket">(</span>"name"<span class="cm-punctuation">,</span> "email"<span class="cm-punctuation">,</span> "password"<span class="cm-bracket">)</span> <span class="cm-keyword">values</span> <span class="cm-bracket">(</span><span class="cm-string">'José Martins'</span><span class="cm-punctuation">,</span> <span class="cm-string">'martins@flup.pt'</span><span class="cm-punctuation">,</span> <span class="cm-string">'4447a0a857c5856a65be0b6d88e522930d60cc70cd87fc5a97ef5f9b29472e1f'</span><span class="cm-bracket">)</span><span class="cm-punctuation">;</span> <span class="cm-comment">--martins</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 25px;">10</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation"><span class="cm-keyword">insert</span> <span class="cm-keyword">into</span> <span class="cm-keyword">public</span>."user" <span class="cm-bracket">(</span>"name"<span class="cm-punctuation">,</span> "email"<span class="cm-punctuation">,</span> "password"<span class="cm-bracket">)</span> <span class="cm-keyword">values</span> <span class="cm-bracket">(</span><span class="cm-string">'Marta Camões'</span><span class="cm-punctuation">,</span> <span class="cm-string">'mcamoes@fcup.pt'</span><span class="cm-punctuation">,</span> <span class="cm-string">'919591ee58ee6ce7cec959d2a0d9130e7cf111d7ddafa15dc5283d74a2cb3a2a'</span><span class="cm-bracket">)</span><span class="cm-punctuation">;</span> <span class="cm-comment">--123p</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 25px;">11</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation"><span class="cm-keyword">insert</span> <span class="cm-keyword">into</span> <span class="cm-keyword">public</span>."user" <span class="cm-bracket">(</span>"name"<span class="cm-punctuation">,</span> "email"<span class="cm-punctuation">,</span> "password"<span class="cm-bracket">)</span> <span class="cm-keyword">values</span> <span class="cm-bracket">(</span><span class="cm-string">'Diana Magalhães'</span><span class="cm-punctuation">,</span> <span class="cm-string">'dmaga@flup.pt'</span><span class="cm-punctuation">,</span> <span class="cm-string">'b3d17ebbe4f2b75d27b6309cfaae1487b667301a73951e7d523a039cd2dfe110'</span><span class="cm-bracket">)</span><span class="cm-punctuation">;</span> <span class="cm-comment">--password12</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 25px;">12</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation"><span class="cm-keyword">insert</span> <span class="cm-keyword">into</span> <span class="cm-keyword">public</span>."user" <span class="cm-bracket">(</span>"name"<span class="cm-punctuation">,</span> "email"<span class="cm-punctuation">,</span> "password"<span class="cm-bracket">)</span> <span class="cm-keyword">values</span> <span class="cm-bracket">(</span><span class="cm-string">'Tiago Pessoa'</span><span class="cm-punctuation">,</span> <span class="cm-string">'tpessoa@isep.pt'</span><span class="cm-punctuation">,</span> <span class="cm-string">'2c8c79ee2d9b918b6839430f08cef4c811316c33d06560c7223975e3496fb20f'</span><span class="cm-bracket">)</span><span class="cm-punctuation">;</span> <span class="cm-comment">--hacked91</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 25px;">13</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation"><span class="cm-keyword">insert</span> <span class="cm-keyword">into</span> <span class="cm-keyword">public</span>."user" <span class="cm-bracket">(</span>"name"<span class="cm-punctuation">,</span> "email"<span class="cm-punctuation">,</span> "password"<span class="cm-bracket">)</span> <span class="cm-keyword">values</span> <span class="cm-bracket">(</span><span class="cm-string">'Ricardo Pinto'</span><span class="cm-punctuation">,</span> <span class="cm-string">'rpinto@fmup.pt'</span><span class="cm-punctuation">,</span> <span class="cm-string">'36fa35b7423a57975566cccb407a11667c166b92a7a6b8bf1a0e9d8accf8c417'</span><span class="cm-bracket">)</span><span class="cm-punctuation">;</span> <span class="cm-comment">--debugger99</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 25px;">14</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation"><span class="cm-keyword">insert</span> <span class="cm-keyword">into</span> <span class="cm-keyword">public</span>."user" <span class="cm-bracket">(</span>"name"<span class="cm-punctuation">,</span> "email"<span class="cm-punctuation">,</span> "password"<span class="cm-bracket">)</span> <span class="cm-keyword">values</span> <span class="cm-bracket">(</span><span class="cm-string">'Maria Soares'</span><span class="cm-punctuation">,</span> <span class="cm-string">'msoares@icbas.pt'</span><span class="cm-punctuation">,</span> <span class="cm-string">'a36d932abb39c80c3f573c08b7a2260e0555d053eeb9cacab9a3406b02d2330b'</span><span class="cm-bracket">)</span><span class="cm-punctuation">;</span> <span class="cm-comment">--12345p</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 25px;">15</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation"><span class="cm-keyword">insert</span> <span class="cm-keyword">into</span> <span class="cm-keyword">public</span>."user" <span class="cm-bracket">(</span>"name"<span class="cm-punctuation">,</span> "email"<span class="cm-punctuation">,</span> "password"<span class="cm-bracket">)</span> <span class="cm-keyword">values</span> <span class="cm-bracket">(</span><span class="cm-string">'Francisco Costa'</span><span class="cm-punctuation">,</span> <span class="cm-string">'fcosta@ffup.pt'</span><span class="cm-punctuation">,</span> <span class="cm-string">'1ba3d16e9881959f8c9a9762854f72c6e6321cdd44358a10a4e939033117eab9'</span><span class="cm-bracket">)</span><span class="cm-punctuation">;</span> <span class="cm-comment">--pass2</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 25px;">16</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation"><span class="cm-keyword">insert</span> <span class="cm-keyword">into</span> <span class="cm-keyword">public</span>."user" <span class="cm-bracket">(</span>"name"<span class="cm-punctuation">,</span> "email"<span class="cm-punctuation">,</span> "password"<span class="cm-bracket">)</span> <span class="cm-keyword">values</span> <span class="cm-bracket">(</span><span class="cm-string">'José Silva'</span><span class="cm-punctuation">,</span> <span class="cm-string">'runcolho@fadeup.pt'</span><span class="cm-punctuation">,</span> <span class="cm-string">'e6c3da5b206634d7f3f3586d747ffdb36b5c675757b380c6a5fe5c570c714349'</span><span class="cm-bracket">)</span><span class="cm-punctuation">;</span> <span class="cm-comment">--pass1</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 25px;">17</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation"><span class="cm-keyword">insert</span> <span class="cm-keyword">into</span> <span class="cm-keyword">public</span>."user" <span class="cm-bracket">(</span>"name"<span class="cm-punctuation">,</span> "email"<span class="cm-punctuation">,</span> "password"<span class="cm-bracket">)</span> <span class="cm-keyword">values</span> <span class="cm-bracket">(</span><span class="cm-string">'Miguel Alvim'</span><span class="cm-punctuation">,</span> <span class="cm-string">'malvim21@fadeup.pt'</span><span class="cm-punctuation">,</span> <span class="cm-string">'cb71cd3f59909532b783257f5f97d0502af258231f9d17cbe762799c0bb4a0f6'</span><span class="cm-bracket">)</span><span class="cm-punctuation">;</span> <span class="cm-comment">--pass0</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 25px;">18</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation"><span class="cm-keyword">insert</span> <span class="cm-keyword">into</span> <span class="cm-keyword">public</span>."user" <span class="cm-bracket">(</span>"name"<span class="cm-punctuation">,</span> "email"<span class="cm-punctuation">,</span> "password"<span class="cm-bracket">)</span> <span class="cm-keyword">values</span> <span class="cm-bracket">(</span><span class="cm-string">'Dinis Pereira'</span><span class="cm-punctuation">,</span> <span class="cm-string">'dinpereira@fmup.pt'</span><span class="cm-punctuation">,</span> <span class="cm-string">'1958e0a5696c86a9a147b27eb7b5c828fd8f99921fb7a1c068fb2d4860f85cd0'</span><span class="cm-bracket">)</span><span class="cm-punctuation">;</span> <span class="cm-comment">--lbaw2034</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 25px;">19</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation"><span class="cm-keyword">insert</span> <span class="cm-keyword">into</span> <span class="cm-keyword">public</span>."user" <span class="cm-bracket">(</span>"name"<span class="cm-punctuation">,</span> "email"<span class="cm-punctuation">,</span> "password"<span class="cm-bracket">)</span> <span class="cm-keyword">values</span> <span class="cm-bracket">(</span><span class="cm-string">'Soraia Tavares'</span><span class="cm-punctuation">,</span> <span class="cm-string">'stavares@ffup.pt'</span><span class="cm-punctuation">,</span> <span class="cm-string">'7d9187aec886a65a920d3b4a2e3eb66c771510255de4f02a1b0c67a1be856c33'</span><span class="cm-bracket">)</span><span class="cm-punctuation">;</span> <span class="cm-comment">--lbaw</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 25px;">20</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation"><span class="cm-keyword">insert</span> <span class="cm-keyword">into</span> <span class="cm-keyword">public</span>."user" <span class="cm-bracket">(</span>"name"<span class="cm-punctuation">,</span> "email"<span class="cm-punctuation">,</span> "password"<span class="cm-bracket">)</span> <span class="cm-keyword">values</span> <span class="cm-bracket">(</span><span class="cm-string">'Osvaldo Antunes'</span><span class="cm-punctuation">,</span> <span class="cm-string">'oantunes@fadeup.pt'</span><span class="cm-punctuation">,</span> <span class="cm-string">'adf1a868d88c0f53317e0dcbfb982c19438f5c46c14725dc24e837bd75afb0cb'</span><span class="cm-bracket">)</span><span class="cm-punctuation">;</span> <span class="cm-comment">--query10</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 25px;">21</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation"><span class="cm-keyword">insert</span> <span class="cm-keyword">into</span> <span class="cm-keyword">public</span>."user" <span class="cm-bracket">(</span>"name"<span class="cm-punctuation">,</span> "email"<span class="cm-punctuation">,</span> "password"<span class="cm-bracket">)</span> <span class="cm-keyword">values</span> <span class="cm-bracket">(</span><span class="cm-string">'Mariana Castro'</span><span class="cm-punctuation">,</span> <span class="cm-string">'mcastro@fcup.pt'</span><span class="cm-punctuation">,</span> <span class="cm-string">'a2979efbe3ef341d34ba03d1493da9d9282c2906710f33311e72dfe0b67b7373'</span><span class="cm-bracket">)</span><span class="cm-punctuation">;</span> <span class="cm-comment">--sql2</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 25px;">22</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation"><span class="cm-keyword">insert</span> <span class="cm-keyword">into</span> <span class="cm-keyword">public</span>."user" <span class="cm-bracket">(</span>"name"<span class="cm-punctuation">,</span> "email"<span class="cm-punctuation">,</span> "password"<span class="cm-bracket">)</span> <span class="cm-keyword">values</span> <span class="cm-bracket">(</span><span class="cm-string">'Ana Faria'</span><span class="cm-punctuation">,</span> <span class="cm-string">'afaria@fep.pt'</span><span class="cm-punctuation">,</span> <span class="cm-string">'0fa83a5d1a9db56f287856c263fb94c8d579fd8916750d67f7b78d1919dfa7e5'</span><span class="cm-bracket">)</span><span class="cm-punctuation">;</span> <span class="cm-comment">--turbulencia2725</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 25px;">23</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation"><span class="cm-keyword">insert</span> <span class="cm-keyword">into</span> <span class="cm-keyword">public</span>."user" <span class="cm-bracket">(</span>"name"<span class="cm-punctuation">,</span> "email"<span class="cm-punctuation">,</span> "password"<span class="cm-bracket">)</span> <span class="cm-keyword">values</span> <span class="cm-bracket">(</span><span class="cm-string">'Rui Cardoso'</span><span class="cm-punctuation">,</span> <span class="cm-string">'rcardoso@fep.pt'</span><span class="cm-punctuation">,</span> <span class="cm-string">'bbe41015c3f1053c527579a7a45b5531c93ac11c7d14664465b68903a6736e34'</span><span class="cm-bracket">)</span><span class="cm-punctuation">;</span> <span class="cm-comment">--bazofi10</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 25px;">24</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation"><span class="cm-keyword">insert</span> <span class="cm-keyword">into</span> <span class="cm-keyword">public</span>."user" <span class="cm-bracket">(</span>"name"<span class="cm-punctuation">,</span> "email"<span class="cm-punctuation">,</span> "password"<span class="cm-bracket">)</span> <span class="cm-keyword">values</span> <span class="cm-bracket">(</span><span class="cm-string">'AEFEUP'</span><span class="cm-punctuation">,</span> <span class="cm-string">'aefeup@feup.pt'</span><span class="cm-punctuation">,</span> <span class="cm-string">'6b82542b8c0a0afa1278f6c5a23d05aaf94eafec58a01cf70be8aa755cb26cce'</span><span class="cm-bracket">)</span><span class="cm-punctuation">;</span> <span class="cm-comment">--gustavoboss</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 25px;">25</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation"><span class="cm-keyword">insert</span> <span class="cm-keyword">into</span> <span class="cm-keyword">public</span>."user" <span class="cm-bracket">(</span>"name"<span class="cm-punctuation">,</span> "email"<span class="cm-punctuation">,</span> "password"<span class="cm-bracket">)</span> <span class="cm-keyword">values</span> <span class="cm-bracket">(</span><span class="cm-string">'Admin2'</span><span class="cm-punctuation">,</span> <span class="cm-string">'admin2@admins.pt'</span><span class="cm-punctuation">,</span> <span class="cm-string">'25efc3e7a0aa2e33c3ffd37792156d9bb7e6eece07e268fe4bb558c70ce9cec2'</span><span class="cm-bracket">)</span><span class="cm-punctuation">;</span> <span class="cm-comment">--adminGang</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 25px;">26</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation"><span cm-text="">​</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 25px;">27</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation"><span cm-text="">​</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -46px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 25px;">28</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation"><span class="cm-keyword">insert</span> <span class="cm-keyword">into</span> <span class="cm-keyword">public</span>."admin" <span class="cm-bracket">(</span>"user_id"<span class="cm-bracket">)</span> <span class="cm-keyword">values</span> <span class="cm-bracket">(</span><span class="cm-number">1</span><span class="cm-bracket">)</span><span class="cm-punctuation">;</span></span></pre></div></div></div></div></div></div><div style="position: absolute; height: 18px; width: 1px; border-bottom: 16px solid transparent; top: 3914px;"></div><div class="CodeMirror-gutters" style="height: 3948px; left: 0px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 33px;"></div><div class="CodeMirror-gutter CodeMirror-foldgutter"></div></div></div></div></div></div></td></tr></tbody></table></div><div class="wcPanelTabContent wcPanelTabContentHidden" id="1"><table class="wcLayout wcWide wcTall"><tbody><tr><td><div class="pg-panel-content"><div id="history_grid" class="sql-editor-history-container d-flex" tabindex="0"><div style="width: calc(50% - 0.5px);"><div class="toggle-and-history-container">
+            <div class="query-history-toggle">
+                <label class="control-label">
+                    Show queries generated internally by pgAdmin?
+                </label>
+                <div class="toggle btn btn-success btn-xs quick" data-toggle="toggle" style="width: 0px; height: 0px;"><input id="generated-queries-toggle" type="checkbox" class="pgadmin-controls" data-style="quick" data-size="mini" data-on="Yes" data-off="No" data-onstyle="success" data-offstyle="ternary" checked="checked"><div class="toggle-group"><label class="btn btn-success btn-xs toggle-on">Yes</label><label class="btn btn-ternary btn-xs toggle-off">No</label><span class="toggle-handle btn btn-light btn-xs"></span></div></div>
+            </div>
+            <div id="query_list" class="query-history" tabindex="0"><div class="query-group" data-key="2020 04 11">
+            <div class="date-label">Today - 4/11/2020</div>
+            <ul class="query-entries"><li class="list-item selected" tabindex="0" data-key="17:19:15">
+          <div class="entry ">
+              <div class="query">
+                  <span id="query_source_icon" class="query-history-icon sql-icon-lg fa fa-play" role="img"></span>
+                  
+insert into public."user" ("name", "email", "password") values('Admin1',
+ 'admin1@gg.pt', 
+'8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918'); 
+--admin
+insert into public."user" ("name", "email", "password") values('Joaquim 
+Rodrigues', 'jokinho@feup.pt', 
+'61be55a8e2f6b4e172338bddf184d6dbee29c98853e0a0485ecee7f27b9af0b4'); 
+--aaaa
+insert into public."user" ("name", "email", "password") values('Paulo 
+Tavares', 'paulot@flup.pt', 
+'37d43d21680eea509d56b0b9aa90e986b068c6c3ebe5f6e31199d94d1d99920f'); 
+--1234pass
+insert into public."user" ("name", "email", "password") values('AEISEP',
+ 'aeisep@isep.pt', 
+'2371eed6bc20f1a21a1b02d963db2966c0f0b12b42153b0caf181416a2c09eae'); 
+--yoyo10
+insert into public."user" ("name", "email", "password") values('Gustavo 
+Torres', 'tgusta@feup.pt', 
+'1727619a97994f63beb35ab12c792972b4bfbebc6fbbaa0621a31afdbc725268'); 
+--tgustamucho
+insert into public."user" ("name", "email", "password") values('Pedro 
+Esteves', 'pmesteves@feup.pt', 
+'80cfa04f6ef471fef3a12581ca0ef857af748aa19463ea0292e4a9c310a4dae9'); 
+--estevesboss
+insert into public."user" ("name", "email", "password") values ('Vitor 
+Ventuzelos', 'berserking@feup.pt', 
+'979d2b82d1ed2c6f23406e898b9adb9060090501928654278eefff39a9fe15f4'); 
+--berserking_idiot
+insert into public."user" ("name", "email", "password") values ('José 
+Martins', 'martins@flup.pt', 
+'4447a0a857c5856a65be0b6d88e522930d60cc70cd87fc5a97ef5f9b29472e1f'); 
+--martins
+insert into public."user" ("name", "email", "password") values ('Marta 
+Camões', 'mcamoes@fcup.pt', 
+'919591ee58ee6ce7cec959d2a0d9130e7cf111d7ddafa15dc5283d74a2cb3a2a'); 
+--123p
+insert into public."user" ("name", "email", "password") values ('Diana 
+Magalhães', 'dmaga@flup.pt', 
+'b3d17ebbe4f2b75d27b6309cfaae1487b667301a73951e7d523a039cd2dfe110'); 
+--password12
+insert into public."user" ("name", "email", "password") values ('Tiago 
+Pessoa', 'tpessoa@isep.pt', 
+'2c8c79ee2d9b918b6839430f08cef4c811316c33d06560c7223975e3496fb20f'); 
+--hacked91
+insert into public."user" ("name", "email", "password") values ('Ricardo
+ Pinto', 'rpinto@fmup.pt', 
+'36fa35b7423a57975566cccb407a11667c166b92a7a6b8bf1a0e9d8accf8c417'); 
+--debugger99
+insert into public."user" ("name", "email", "password") values ('Maria 
+Soares', 'msoares@icbas.pt', 
+'a36d932abb39c80c3f573c08b7a2260e0555d053eeb9cacab9a3406b02d2330b'); 
+--12345p
+insert into public."user" ("name", "email", "password") values 
+('Francisco Costa', 'fcosta@ffup.pt', 
+'1ba3d16e9881959f8c9a9762854f72c6e6321cdd44358a10a4e939033117eab9'); 
+--pass2
+insert into public."user" ("name", "email", "password") values ('José 
+Silva', 'runcolho@fadeup.pt', 
+'e6c3da5b206634d7f3f3586d747ffdb36b5c675757b380c6a5fe5c570c714349'); 
+--pass1
+insert into public."user" ("name", "email", "password") values ('Miguel 
+Alvim', 'malvim21@fadeup.pt', 
+'cb71cd3f59909532b783257f5f97d0502af258231f9d17cbe762799c0bb4a0f6'); 
+--pass0
+insert into public."user" ("name", "email", "password") values ('Dinis 
+Pereira', 'dinpereira@fmup.pt', 
+'1958e0a5696c86a9a147b27eb7b5c828fd8f99921fb7a1c068fb2d4860f85cd0'); 
+--lbaw2034
+insert into public."user" ("name", "email", "password") values ('Soraia 
+Tavares', 'stavares@ffup.pt', 
+'7d9187aec886a65a920d3b4a2e3eb66c771510255de4f02a1b0c67a1be856c33'); 
+--lbaw
+insert into public."user" ("name", "email", "password") values ('Osvaldo
+ Antunes', 'oantunes@fadeup.pt', 
+'adf1a868d88c0f53317e0dcbfb982c19438f5c46c14725dc24e837bd75afb0cb'); 
+--query10
+insert into public."user" ("name", "email", "password") values ('Mariana
+ Castro', 'mcastro@fcup.pt', 
+'a2979efbe3ef341d34ba03d1493da9d9282c2906710f33311e72dfe0b67b7373'); 
+--sql2
+insert into public."user" ("name", "email", "password") values ('Ana 
+Faria', 'afaria@fep.pt', 
+'0fa83a5d1a9db56f287856c263fb94c8d579fd8916750d67f7b78d1919dfa7e5'); 
+--turbulencia2725
+insert into public."user" ("name", "email", "password") values ('Rui 
+Cardoso', 'rcardoso@fep.pt', 
+'bbe41015c3f1053c527579a7a45b5531c93ac11c7d14664465b68903a6736e34'); 
+--bazofi10
+insert into public."user" ("name", "email", "password") values 
+('AEFEUP', 'aefeup@feup.pt', 
+'6b82542b8c0a0afa1278f6c5a23d05aaf94eafec58a01cf70be8aa755cb26cce'); 
+--gustavoboss
+insert into public."user" ("name", "email", "password") values 
+('Admin2', 'admin2@admins.pt', 
+'25efc3e7a0aa2e33c3ffd37792156d9bb7e6eece07e268fe4bb558c70ce9cec2'); 
+--adminGang
+
+
+insert into public."admin" ("user_id") values (1);
+insert into public."admin" ("user_id") values (24);
+
+
+insert into public."regular_user" ("user_id", "personal_info") values 
+(2, 'Just one regular user!');
+insert into public."regular_user" ("user_id", "personal_info") values 
+(3, 'Just another regular user!');
+insert into public."regular_user" ("user_id", "personal_info") values 
+(4, 'Another one!');
+insert into public."regular_user" ("user_id", "personal_info") values 
+(5, 'DB user');
+insert into public."regular_user" ("user_id", "personal_info") values 
+(6, 'GameJam user');
+insert into public."regular_user" ("user_id", "personal_info") values 
+(7, 'Another one!');
+insert into public."regular_user" ("user_id", "personal_info") values 
+(8, 'FLUP student');
+insert into public."regular_user" ("user_id", "personal_info") values 
+(9, 'FCUP teacher');
+insert into public."regular_user" ("user_id", "personal_info") values 
+(10, 'FLUP student');
+insert into public."regular_user" ("user_id", "personal_info") values 
+(11, 'I am an ISEP teacher');
+insert into public."regular_user" ("user_id", "personal_info") values 
+(12, 'FMUP student');
+insert into public."regular_user" ("user_id", "personal_info") values 
+(13, 'ICBAS student');
+insert into public."regular_user" ("user_id", "personal_info") values 
+(14, 'FFUP student');
+insert into public."regular_user" ("user_id", "personal_info") values 
+(15, 'Sports student');
+insert into public."regular_user" ("user_id", "personal_info") values 
+(16, 'FADEUP teacher');
+insert into public."regular_user" ("user_id", "personal_info") values 
+(17, 'FMUP student');
+insert into public."regular_user" ("user_id", "personal_info") values 
+(18, 'Pharmacy student');
+insert into public."regular_user" ("user_id", "personal_info") values 
+(19, 'Sports student');
+insert into public."regular_user" ("user_id", "personal_info") values 
+(20, 'Science student');
+insert into public."regular_user" ("user_id", "personal_info") values 
+(21, 'FEP student');
+insert into public."regular_user" ("user_id", "personal_info") values 
+(22, 'FEP teacher');
+
+
+insert into public."student" ("regular_user_id") values (2);
+insert into public."student" ("regular_user_id") values (5);
+insert into public."student" ("regular_user_id") values (6);
+insert into public."student" ("regular_user_id") values (7);
+insert into public."student" ("regular_user_id") values (8);
+insert into public."student" ("regular_user_id") values (10);
+insert into public."student" ("regular_user_id") values (12);
+insert into public."student" ("regular_user_id") values (13);
+insert into public."student" ("regular_user_id") values (14);
+insert into public."student" ("regular_user_id") values (15);
+insert into public."student" ("regular_user_id") values (17);
+insert into public."student" ("regular_user_id") values (18);
+insert into public."student" ("regular_user_id") values (19);
+insert into public."student" ("regular_user_id") values (20);
+insert into public."student" ("regular_user_id") values (21);
+
+
+insert into public."teacher" ("regular_user_id") values (3);
+insert into public."teacher" ("regular_user_id") values (9);
+insert into public."teacher" ("regular_user_id") values (11);
+insert into public."teacher" ("regular_user_id") values (16);
+
+
+insert into public."organization" ("regular_user_id", "approval") values
+ (4, TRUE);
+
+
+insert into public."event" ("organization_id", "name", "location", 
+"date", "information") values (1, 'Evento de LBAW', 'Porto', '2020-04-23
+ 17:45:00', 'general info');
+
+
+insert into public."group" ("name", "information", TYPE) values ('Grupo 
+de LBAW', 'Grupo para os estudantes de LBAW', 'normal');
+insert into public."group" ("name", "information", TYPE) values ('UP/IPP
+ Group', 'Estudantes do Porto', 'normal');
+
+
+insert into public."user_in_group" ("user_id", "group_id") values (2, 
+1);
+insert into public."user_in_group" ("user_id", "group_id") values (5, 
+1);
+insert into public."user_in_group" ("user_id", "group_id") values (6, 
+1);
+insert into public."user_in_group" ("user_id", "group_id") values (7, 
+1);
+insert into public."user_in_group" ("user_id", "group_id") values (2, 
+2);
+insert into public."user_in_group" ("user_id", "group_id") values (5, 
+2);
+insert into public."user_in_group" ("user_id", "group_id") values (6, 
+2);
+insert into public."user_in_group" ("user_id", "group_id") values (7, 
+2);
+insert into public."user_in_group" ("user_id", "group_id") values (8, 
+2);
+insert into public."user_in_group" ("user_id", "group_id") values (9, 
+2);
+insert into public."user_in_group" ("user_id", "group_id") values (10, 
+2);
+insert into public."user_in_group" ("user_id", "group_id") values (12, 
+2);
+insert into public."user_in_group" ("user_id", "group_id") values (13, 
+2);
+insert into public."user_in_group" ("user_id", "group_id") values (14, 
+2);
+insert into public."user_in_group" ("user_id", "group_id") values (15, 
+2);
+insert into public."user_in_group" ("user_id", "group_id") values (17, 
+2);
+insert into public."user_in_group" ("user_id", "group_id") values (18, 
+2);
+insert into public."user_in_group" ("user_id", "group_id") values (19, 
+2);
+insert into public."user_in_group" ("user_id", "group_id") values (20, 
+2);
+insert into public."user_in_group" ("user_id", "group_id") values (21, 
+2);
+
+
+insert into public."post" ("author_id", "title", "body", "date", 
+"upvotes", "downvotes", TYPE, "event_id", "group_id") values (2, 'FEUP 
+LIFE', 'Gosto de estudar na FEUP', '2020-02-20 17:45:00', 4, 3, DEFAULT,
+ NULL, NULL);
+insert into public."post" ("author_id", "title", "body", "date", 
+"upvotes", "downvotes", TYPE, "event_id", "group_id") values (2, 'Aula 
+de LBAW', 'Na próxima aula de LBAW temos que entregar todos os 
+artefactos desta componente?', '2020-02-24 10:38:43', 2, 0, DEFAULT, 
+NULL, NULL);
+insert into public."post" ("author_id", "title", "body", "date", 
+"upvotes", "downvotes", TYPE, "event_id", "group_id") values (2, 
+'Trabalho COMP', 'Alguém da turma 4 necessita de um elemento para a 
+realização do trabalho 1 de Compiladores?', '2020-03-05 15:50:11', 5, 1,
+ DEFAULT, NULL, NULL);
+insert into public."post" ("author_id", "title", "body", "date", 
+"upvotes", "downvotes", TYPE, "event_id", "group_id") values (1, 
+'Inquéritos FLUP', 'Conseguem todos preencher os inquéritos lançados 
+pela faculdade?', '2020-03-10 08:31:06', 10, 0, DEFAULT, NULL, NULL);
+insert into public."post" ("author_id", "title", "body", "date", 
+"upvotes", "downvotes", TYPE, "event_id", "group_id") values (3, 
+'Quarentena', 'Pedimos a todos os alunos da Academia, em especial os do 
+ISEP para ficarem em casa durante este período de quarentena, seguindo 
+as indicações da DGS.', '2020-03-13 16:54:51', 40, 1, DEFAULT, NULL, 
+NULL);
+insert into public."post" ("author_id", "title", "body", "date", 
+"upvotes", "downvotes", TYPE, "event_id", "group_id") values (6, 'Grupo 
+para LBAW', 'Bom dia pessoal, criei este grupo para ser mais facil 
+partilharmos os ficheiros para LBAW. Abraço', '2020-03-12 09:21:41', 3, 
+0, DEFAULT, NULL, 1);
+insert into public."post" ("author_id", "title", "body", "date", 
+"upvotes", "downvotes", TYPE, "event_id", "group_id") values (10, 
+'Ficheiro de teste', 'Este post serve para testar o sistema de 
+ficheiros.', '2020-03-20 21:23:44', 0, 0, DEFAULT, NULL, NULL);
+insert into public."post" ("author_id", "title", "body", "date", 
+"upvotes", "downvotes", TYPE, "event_id", "group_id") values (12, 
+'Imagem de teste', 'Este post serve para testar o sistema de imagens.', 
+'2020-03-20 22:31:22', 0, 0, DEFAULT, 1, NULL);
+
+
+insert into public."comment" ("user_id","post_id", "comment_to_id", 
+"body", "date", "upvotes", "downvotes") values (5, 2, NULL, 'Não, essa 
+entrega tem uma data específica, verifica no Moodle', '2020-02-24 
+11:03:22', 1, 0);
+insert into public."comment" ("user_id","post_id", "comment_to_id", 
+"body", "date", "upvotes", "downvotes") values (6, 5, NULL, 'Otima 
+iniciativa', '2020-03-14 16:31:19', 5, 0);
+insert into public."comment" ("user_id","post_id", "comment_to_id", 
+"body", "date", "upvotes", "downvotes") values (8, 4, NULL, 'Está 
+preenchido, professor', '2020-03-10 10:23:44', 1, 0);
+
+
+insert into public."chat" DEFAULT VALUES ;
+insert into public."chat" DEFAULT VALUES ;
+
+
+insert into public."user_in_chat" ("user_id", "chat_id") values (2,1);
+insert into public."user_in_chat" ("user_id", "chat_id") values (5,1);
+insert into public."user_in_chat" ("user_id", "chat_id") values (6,1);
+insert into public."user_in_chat" ("user_id", "chat_id") values (7,1);
+insert into public."user_in_chat" ("user_id", "chat_id") values (3,1);
+insert into public."user_in_chat" ("user_id", "chat_id") values (9,1);
+insert into public."user_in_chat" ("user_id", "chat_id") values (11,1);
+insert into public."user_in_chat" ("user_id", "chat_id") values (16,1);
+
+
+insert into public."message" ("sender_id", "chat_id", "body", "date") 
+values (2, 1, 'Boas pessoal, este vai ser o chat de LBAW', '2020-03-20 
+14:22:55');
+insert into public."message" ("sender_id", "chat_id", "body", "date") 
+values (5, 1, 'Boas!', '2020-03-20 14:30:00');
+insert into public."message" ("sender_id", "chat_id", "body", "date") 
+values (6, 1, 'Então, tudo bem?', '2020-03-20 15:02:21');
+insert into public."message" ("sender_id", "chat_id", "body", "date") 
+values (7, 1, 'Mãos à obra', '2020-03-20 15:03:41');
+insert into public."message" ("sender_id", "chat_id", "body", "date") 
+values (9, 2, 'Criei este chat para todos os professores se poderem 
+manter em contacto', '2020-03-22 21:16:47');
+
+
+insert into public."report" ("reporter_id", "approval", "reason", 
+"reported_user_id", "reported_event_id", "reported_post_id", 
+"reported_comment_id", "reported_group_id") values (3, NULL, 'so para 
+testar a ferramenta', NULL, NULL, 1, NULL, NULL);
+insert into public."report" ("reporter_id", "approval", "reason", 
+"reported_user_id", "reported_event_id", "reported_post_id", 
+"reported_comment_id", "reported_group_id") values (2, NULL, 'pouco 
+conteudo', NULL, NULL, NULL, 2, NULL);
+
+
+insert into public."file" ("post_id", "file_path") values ( 
+7,'../files/test.txt');
+insert into public."file" ("post_id", "file_path") values ( 
+8,'../files/image.png');
+
+
+insert into public."image" ("file_id", "post_id") values (2, 8);
+
+
+insert into public."notification" ("origin_user_id", "description", 
+"link", "date") values (3, 'I just posted!', '---', '2020-03-21 
+12:00:00');
+
+insert into public."notified_user" ("notification_id", "user_notified") 
+values (1, 5);
+insert into public."notified_user" ("notification_id", "user_notified") 
+values (1, 7);
+insert into public."notified_user" ("notification_id", "user_notified") 
+values (1, 10);
+
+
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values 
+(1, 4, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values 
+(1, 15, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values 
+(1, 18, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values 
+(2, 3, 'accepted');
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values 
+(2, 4, 'accepted');
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values 
+(2, 5, 'accepted');
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values 
+(2, 6, 'accepted');
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values 
+(2, 7, 'accepted');
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values 
+(2, 8, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values 
+(2, 10, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values 
+(4, 3, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values 
+(4, 6, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values 
+(5, 7, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values 
+(5, 8, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values 
+(6, 8, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values 
+(6, 19, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values 
+(7, 12, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values 
+(7, 17, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values 
+(8, 11, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values 
+(8, 10, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values 
+(10, 20, DEFAULT);
+
+insert into public."user_interested_in_event" ("user_id","event_id") 
+values(2,1);
+              </div>
+              <div class="other-info">
+              <div class="timestamp">17:19:15</div>
+              </div>
+          </div>
+      </li></ul>
+        </div><div class="query-group" data-key="2020 03 29">
+            <div class="date-label">3/29/2020</div>
+            <ul class="query-entries"><li class="list-item" tabindex="0" data-key="17:55:45">
+          <div class="entry error">
+              <div class="query">
+                  <span id="query_source_icon" class="query-history-icon sql-icon-lg fa fa-play" role="img"></span>
+                  
+-- my info
+Select "user_id", "name" from "user" where "email" = 'jokinho@feup.pt';
+
+
+-- if is admin
+Select "admin_id" from "admin" where "user_id" = 24;
+
+-- if is regular_user
+Select "regular_user_id", "personal_info" from "regular_user" where 
+"user_id" = 4;
+
+--if is a student
+Select "student_id" from "student" where "regular_user_id" = 5;
+
+-- if is a teacher
+Select "teacher_id" from "teacher" where "regular_user_id" = 3;
+
+-- if is an organization
+Select "organization_id" from "organization" where "regular_user_id" = 
+4;
+
+
+-- Select user from a group
+Select "user_id" from "user_in_group" where "group_id" = 1;
+
+--events of organization
+Select "name", "location", "date", "information" from "event" where 
+"organization_id" = 1;
+
+
+--Posts posted by me
+Select "title", "body", "date", "upvotes", "downvotes", TYPE, 
+"event_id", "group_id" 
+	from "post" where "author_id" = 2;
+
+
+--Notification
+Select "origin_user_id", "description", "link", "date" from 
+"notification"
+	INNER JOIN "notified_user" on "notification"."notification_id" 
+="notified_user"."notification_id" 
+	where "user_notified" = 5;
+
+
+--Message by chat
+Select "sender_id", "body", "date"
+	from "message" where "chat_id" = 2
+	order by "date" DESC;
+
+
+--Comments
+ Select "comment_id", "user_id", "comment_to_id", "body", "date", 
+"upvotes", "downvotes"
+	from "comment" where "post_id" = 5
+	order by "date" DESC;
+
+
+--Posts from event
+Select "author_id", "title", "body", "date", "upvotes", "downvotes", 
+TYPE, "event_id", "group_id" 
+	from "post" where "event_id" = 1;
+
+--Posts from group
+Select "author_id", "title", "body", "date", "upvotes", "downvotes", 
+TYPE, "event_id", "group_id" 
+	from "post" where "group_id" = 1;
+
+
+	
+-- Select all regular users with starting name like...
+Select "name" , "user"."user_id" , "regular_user"."regular_user_id" from
+ "user" 
+	INNER JOIN "regular_user" on "regular_user"."user_id" = 
+"user"."user_id"  
+	where "user"."name" LIKE 'A%';
+
+-- Select Reports that have no answer
+Select "reporter_id", "approval", "reason", "reported_user_id", 
+"reported_event_id", "reported_post_id", "reported_comment_id", 
+"reported_group_id"
+	from "report" where "approval" IS NULL;
+
+
+--Select friends
+Select "friend_id2"
+	from "friend" where (TYPE = 'accepted' and "friend_id1" = 2);
+
+
+--Select pending requests (the user that hasn't answered)
+Select "friend_id2"
+	from "friend" where (TYPE = 'pending' and "friend_id1" = 2);
+	
+
+--Files path from Posts
+
+Select "file_path"
+	from "file" INNER JOIN "post" on "post"."post_id" = "file"."post_id" 
+where "post"."post_id" = 7 order by "date" DESC;
+
+--Event informations of events I am interested on
+Select "event"."event_id", "organization_id", "name", "location", 
+"date", "information"
+	FROM "event" INNER JOIN "user_interested_in_event" 
+	on "event"."event_id" = "user_interested_in_event"."event_id"
+	Where "user_interested_in_event"."user_id" = 2;
+	
+--Select group infomation of groups I belong
+Select "group"."group_id" , "name", "information", TYPE
+	from "user_in_group" INNER JOIN "group"
+	on "user_in_group"."group_id" = "group"."group_id"
+	where "user_id" = 2;
+
+--Posts from groups I belong, users I am friends with and events I am 
+interested on (Feed)
+Select * from (
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "event_id", "post"."group_id" 
+		from "post" INNER JOIN "user_in_group" on "post"."group_id" = 
+"user_in_group"."group_id" 
+		where "user_in_group"."user_id" = 2
+	UNION
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "event_id", "post"."group_id" 
+		from "post" INNER JOIN "friend" on "friend"."friend_id2" = 
+"post"."author_id" 
+		WHERE "friend".TYPE = 'accepted' AND "friend"."friend_id1" = 2
+	UNION
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "post"."event_id", "post"."group_id" 
+		from "post" INNER JOIN "user_interested_in_event" 
+		on "post"."event_id" = "user_interested_in_event"."event_id"
+		WHERE "user_interested_in_event"."user_id" = 2
+) as posts
+	NATURAL JOIN
+
+(Select "post_id",count("post_id") from "comment" GROUP BY "post_id") as
+ "comments" ;
+	
+
+
+-- Select all regular users and post with starting name ou title ou body
+ is like something...
+Select * from (
+				(Select "name" , "user"."user_id" , "regular_user"."regular_user_id"
+ from "user" 
+				INNER JOIN "regular_user" on "regular_user"."user_id" = 
+"user"."user_id"  
+				where "user"."name" LIKE 'A%')
+				 
+				JOIN
+				(Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "post"."event_id", "post"."group_id" from
+					"post" where "post"."body" LIKE '%para%' or "post"."title" LIKE 
+'%para%'
+				)
+	);
+	
+	
+              </div>
+              <div class="other-info">
+              <div class="timestamp">17:55:45</div>
+              </div>
+          </div>
+      </li><li class="list-item" tabindex="0" data-key="17:55:34">
+          <div class="entry error">
+              <div class="query">
+                  <span id="query_source_icon" class="query-history-icon sql-icon-lg fa fa-play" role="img"></span>
+                  
+-- my info
+Select "user_id", "name" from "user" where "email" = 'jokinho@feup.pt';
+
+
+-- if is admin
+Select "admin_id" from "admin" where "user_id" = 24;
+
+-- if is regular_user
+Select "regular_user_id", "personal_info" from "regular_user" where 
+"user_id" = 4;
+
+--if is a student
+Select "student_id" from "student" where "regular_user_id" = 5;
+
+-- if is a teacher
+Select "teacher_id" from "teacher" where "regular_user_id" = 3;
+
+-- if is an organization
+Select "organization_id" from "organization" where "regular_user_id" = 
+4;
+
+
+-- Select user from a group
+Select "user_id" from "user_in_group" where "group_id" = 1;
+
+--events of organization
+Select "name", "location", "date", "information" from "event" where 
+"organization_id" = 1;
+
+
+--Posts posted by me
+Select "title", "body", "date", "upvotes", "downvotes", TYPE, 
+"event_id", "group_id" 
+	from "post" where "author_id" = 2;
+
+
+--Notification
+Select "origin_user_id", "description", "link", "date" from 
+"notification"
+	INNER JOIN "notified_user" on "notification"."notification_id" 
+="notified_user"."notification_id" 
+	where "user_notified" = 5;
+
+
+--Message by chat
+Select "sender_id", "body", "date"
+	from "message" where "chat_id" = 2
+	order by "date" DESC;
+
+
+--Comments
+ Select "comment_id", "user_id", "comment_to_id", "body", "date", 
+"upvotes", "downvotes"
+	from "comment" where "post_id" = 5
+	order by "date" DESC;
+
+
+--Posts from event
+Select "author_id", "title", "body", "date", "upvotes", "downvotes", 
+TYPE, "event_id", "group_id" 
+	from "post" where "event_id" = 1;
+
+--Posts from group
+Select "author_id", "title", "body", "date", "upvotes", "downvotes", 
+TYPE, "event_id", "group_id" 
+	from "post" where "group_id" = 1;
+
+
+	
+-- Select all regular users with starting name like...
+Select "name" , "user"."user_id" , "regular_user"."regular_user_id" from
+ "user" 
+	INNER JOIN "regular_user" on "regular_user"."user_id" = 
+"user"."user_id"  
+	where "user"."name" LIKE 'A%';
+
+-- Select Reports that have no answer
+Select "reporter_id", "approval", "reason", "reported_user_id", 
+"reported_event_id", "reported_post_id", "reported_comment_id", 
+"reported_group_id"
+	from "report" where "approval" IS NULL;
+
+
+--Select friends
+Select "friend_id2"
+	from "friend" where (TYPE = 'accepted' and "friend_id1" = 2);
+
+
+--Select pending requests (the user that hasn't answered)
+Select "friend_id2"
+	from "friend" where (TYPE = 'pending' and "friend_id1" = 2);
+	
+
+--Files path from Posts
+
+Select "file_path"
+	from "file" INNER JOIN "post" on "post"."post_id" = "file"."post_id" 
+where "post"."post_id" = 7 order by "date" DESC;
+
+--Event informations of events I am interested on
+Select "event"."event_id", "organization_id", "name", "location", 
+"date", "information"
+	FROM "event" INNER JOIN "user_interested_in_event" 
+	on "event"."event_id" = "user_interested_in_event"."event_id"
+	Where "user_interested_in_event"."user_id" = 2;
+	
+--Select group infomation of groups I belong
+Select "group"."group_id" , "name", "information", TYPE
+	from "user_in_group" INNER JOIN "group"
+	on "user_in_group"."group_id" = "group"."group_id"
+	where "user_id" = 2;
+
+--Posts from groups I belong, users I am friends with and events I am 
+interested on (Feed)
+Select * from (
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "event_id", "post"."group_id" 
+		from "post" INNER JOIN "user_in_group" on "post"."group_id" = 
+"user_in_group"."group_id" 
+		where "user_in_group"."user_id" = 2
+	UNION
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "event_id", "post"."group_id" 
+		from "post" INNER JOIN "friend" on "friend"."friend_id2" = 
+"post"."author_id" 
+		WHERE "friend".TYPE = 'accepted' AND "friend"."friend_id1" = 2
+	UNION
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "post"."event_id", "post"."group_id" 
+		from "post" INNER JOIN "user_interested_in_event" 
+		on "post"."event_id" = "user_interested_in_event"."event_id"
+		WHERE "user_interested_in_event"."user_id" = 2
+) as posts
+	NATURAL JOIN
+
+(Select "post_id",count("post_id") from "comment" GROUP BY "post_id") as
+ "comments" ;
+	
+
+
+-- Select all regular users and post with starting name ou title ou body
+ is like something...
+Select * from (
+				(Select "name" , "user"."user_id" , "regular_user"."regular_user_id"
+ from "user" 
+				INNER JOIN "regular_user" on "regular_user"."user_id" = 
+"user"."user_id"  
+				where "user"."name" LIKE 'A%')
+				 as "t1"
+				JOIN
+				(Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "post"."event_id", "post"."group_id" from
+					"post" where "post"."body" LIKE '%para%' or "post"."title" LIKE 
+'%para%'
+				) as "t2"
+	);
+	
+	
+              </div>
+              <div class="other-info">
+              <div class="timestamp">17:55:34</div>
+              </div>
+          </div>
+      </li><li class="list-item" tabindex="0" data-key="17:55:25">
+          <div class="entry ">
+              <div class="query">
+                  <span id="query_source_icon" class="query-history-icon sql-icon-lg fa fa-play" role="img"></span>
+                  
+-- my info
+Select "user_id", "name" from "user" where "email" = 'jokinho@feup.pt';
+
+
+-- if is admin
+Select "admin_id" from "admin" where "user_id" = 24;
+
+-- if is regular_user
+Select "regular_user_id", "personal_info" from "regular_user" where 
+"user_id" = 4;
+
+--if is a student
+Select "student_id" from "student" where "regular_user_id" = 5;
+
+-- if is a teacher
+Select "teacher_id" from "teacher" where "regular_user_id" = 3;
+
+-- if is an organization
+Select "organization_id" from "organization" where "regular_user_id" = 
+4;
+
+
+-- Select user from a group
+Select "user_id" from "user_in_group" where "group_id" = 1;
+
+--events of organization
+Select "name", "location", "date", "information" from "event" where 
+"organization_id" = 1;
+
+
+--Posts posted by me
+Select "title", "body", "date", "upvotes", "downvotes", TYPE, 
+"event_id", "group_id" 
+	from "post" where "author_id" = 2;
+
+
+--Notification
+Select "origin_user_id", "description", "link", "date" from 
+"notification"
+	INNER JOIN "notified_user" on "notification"."notification_id" 
+="notified_user"."notification_id" 
+	where "user_notified" = 5;
+
+
+--Message by chat
+Select "sender_id", "body", "date"
+	from "message" where "chat_id" = 2
+	order by "date" DESC;
+
+
+--Comments
+ Select "comment_id", "user_id", "comment_to_id", "body", "date", 
+"upvotes", "downvotes"
+	from "comment" where "post_id" = 5
+	order by "date" DESC;
+
+
+--Posts from event
+Select "author_id", "title", "body", "date", "upvotes", "downvotes", 
+TYPE, "event_id", "group_id" 
+	from "post" where "event_id" = 1;
+
+--Posts from group
+Select "author_id", "title", "body", "date", "upvotes", "downvotes", 
+TYPE, "event_id", "group_id" 
+	from "post" where "group_id" = 1;
+
+
+	
+-- Select all regular users with starting name like...
+Select "name" , "user"."user_id" , "regular_user"."regular_user_id" from
+ "user" 
+	INNER JOIN "regular_user" on "regular_user"."user_id" = 
+"user"."user_id"  
+	where "user"."name" LIKE 'A%';
+
+-- Select Reports that have no answer
+Select "reporter_id", "approval", "reason", "reported_user_id", 
+"reported_event_id", "reported_post_id", "reported_comment_id", 
+"reported_group_id"
+	from "report" where "approval" IS NULL;
+
+
+--Select friends
+Select "friend_id2"
+	from "friend" where (TYPE = 'accepted' and "friend_id1" = 2);
+
+
+--Select pending requests (the user that hasn't answered)
+Select "friend_id2"
+	from "friend" where (TYPE = 'pending' and "friend_id1" = 2);
+	
+
+--Files path from Posts
+
+Select "file_path"
+	from "file" INNER JOIN "post" on "post"."post_id" = "file"."post_id" 
+where "post"."post_id" = 7 order by "date" DESC;
+
+--Event informations of events I am interested on
+Select "event"."event_id", "organization_id", "name", "location", 
+"date", "information"
+	FROM "event" INNER JOIN "user_interested_in_event" 
+	on "event"."event_id" = "user_interested_in_event"."event_id"
+	Where "user_interested_in_event"."user_id" = 2;
+	
+--Select group infomation of groups I belong
+Select "group"."group_id" , "name", "information", TYPE
+	from "user_in_group" INNER JOIN "group"
+	on "user_in_group"."group_id" = "group"."group_id"
+	where "user_id" = 2;
+
+--Posts from groups I belong, users I am friends with and events I am 
+interested on (Feed)
+Select * from (
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "event_id", "post"."group_id" 
+		from "post" INNER JOIN "user_in_group" on "post"."group_id" = 
+"user_in_group"."group_id" 
+		where "user_in_group"."user_id" = 2
+	UNION
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "event_id", "post"."group_id" 
+		from "post" INNER JOIN "friend" on "friend"."friend_id2" = 
+"post"."author_id" 
+		WHERE "friend".TYPE = 'accepted' AND "friend"."friend_id1" = 2
+	UNION
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "post"."event_id", "post"."group_id" 
+		from "post" INNER JOIN "user_interested_in_event" 
+		on "post"."event_id" = "user_interested_in_event"."event_id"
+		WHERE "user_interested_in_event"."user_id" = 2
+) as posts
+	NATURAL JOIN
+
+(Select "post_id",count("post_id") from "comment" GROUP BY "post_id") as
+ "comments" ;
+	
+
+
+-- Select all regular users and post with starting name ou title ou body
+ is like something...
+Select * from (
+				(Select "name" , "user"."user_id" , "regular_user"."regular_user_id"
+ from "user" 
+				INNER JOIN "regular_user" on "regular_user"."user_id" = 
+"user"."user_id"  
+				where "user"."name" LIKE 'A%')
+				 as "t1"
+			NATURAL JOIN
+				(Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "post"."event_id", "post"."group_id" from
+					"post" where "post"."body" LIKE '%para%' or "post"."title" LIKE 
+'%para%'
+				) as "t2"
+	);
+	
+	
+              </div>
+              <div class="other-info">
+              <div class="timestamp">17:55:25</div>
+              </div>
+          </div>
+      </li><li class="list-item" tabindex="0" data-key="17:55:20">
+          <div class="entry ">
+              <div class="query">
+                  <span id="query_source_icon" class="query-history-icon sql-icon-lg fa fa-play" role="img"></span>
+                  
+-- my info
+Select "user_id", "name" from "user" where "email" = 'jokinho@feup.pt';
+
+
+-- if is admin
+Select "admin_id" from "admin" where "user_id" = 24;
+
+-- if is regular_user
+Select "regular_user_id", "personal_info" from "regular_user" where 
+"user_id" = 4;
+
+--if is a student
+Select "student_id" from "student" where "regular_user_id" = 5;
+
+-- if is a teacher
+Select "teacher_id" from "teacher" where "regular_user_id" = 3;
+
+-- if is an organization
+Select "organization_id" from "organization" where "regular_user_id" = 
+4;
+
+
+-- Select user from a group
+Select "user_id" from "user_in_group" where "group_id" = 1;
+
+--events of organization
+Select "name", "location", "date", "information" from "event" where 
+"organization_id" = 1;
+
+
+--Posts posted by me
+Select "title", "body", "date", "upvotes", "downvotes", TYPE, 
+"event_id", "group_id" 
+	from "post" where "author_id" = 2;
+
+
+--Notification
+Select "origin_user_id", "description", "link", "date" from 
+"notification"
+	INNER JOIN "notified_user" on "notification"."notification_id" 
+="notified_user"."notification_id" 
+	where "user_notified" = 5;
+
+
+--Message by chat
+Select "sender_id", "body", "date"
+	from "message" where "chat_id" = 2
+	order by "date" DESC;
+
+
+--Comments
+ Select "comment_id", "user_id", "comment_to_id", "body", "date", 
+"upvotes", "downvotes"
+	from "comment" where "post_id" = 5
+	order by "date" DESC;
+
+
+--Posts from event
+Select "author_id", "title", "body", "date", "upvotes", "downvotes", 
+TYPE, "event_id", "group_id" 
+	from "post" where "event_id" = 1;
+
+--Posts from group
+Select "author_id", "title", "body", "date", "upvotes", "downvotes", 
+TYPE, "event_id", "group_id" 
+	from "post" where "group_id" = 1;
+
+
+	
+-- Select all regular users with starting name like...
+Select "name" , "user"."user_id" , "regular_user"."regular_user_id" from
+ "user" 
+	INNER JOIN "regular_user" on "regular_user"."user_id" = 
+"user"."user_id"  
+	where "user"."name" LIKE 'A%';
+
+-- Select Reports that have no answer
+Select "reporter_id", "approval", "reason", "reported_user_id", 
+"reported_event_id", "reported_post_id", "reported_comment_id", 
+"reported_group_id"
+	from "report" where "approval" IS NULL;
+
+
+--Select friends
+Select "friend_id2"
+	from "friend" where (TYPE = 'accepted' and "friend_id1" = 2);
+
+
+--Select pending requests (the user that hasn't answered)
+Select "friend_id2"
+	from "friend" where (TYPE = 'pending' and "friend_id1" = 2);
+	
+
+--Files path from Posts
+
+Select "file_path"
+	from "file" INNER JOIN "post" on "post"."post_id" = "file"."post_id" 
+where "post"."post_id" = 7 order by "date" DESC;
+
+--Event informations of events I am interested on
+Select "event"."event_id", "organization_id", "name", "location", 
+"date", "information"
+	FROM "event" INNER JOIN "user_interested_in_event" 
+	on "event"."event_id" = "user_interested_in_event"."event_id"
+	Where "user_interested_in_event"."user_id" = 2;
+	
+--Select group infomation of groups I belong
+Select "group"."group_id" , "name", "information", TYPE
+	from "user_in_group" INNER JOIN "group"
+	on "user_in_group"."group_id" = "group"."group_id"
+	where "user_id" = 2;
+
+--Posts from groups I belong, users I am friends with and events I am 
+interested on (Feed)
+Select * from (
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "event_id", "post"."group_id" 
+		from "post" INNER JOIN "user_in_group" on "post"."group_id" = 
+"user_in_group"."group_id" 
+		where "user_in_group"."user_id" = 2
+	UNION
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "event_id", "post"."group_id" 
+		from "post" INNER JOIN "friend" on "friend"."friend_id2" = 
+"post"."author_id" 
+		WHERE "friend".TYPE = 'accepted' AND "friend"."friend_id1" = 2
+	UNION
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "post"."event_id", "post"."group_id" 
+		from "post" INNER JOIN "user_interested_in_event" 
+		on "post"."event_id" = "user_interested_in_event"."event_id"
+		WHERE "user_interested_in_event"."user_id" = 2
+) as posts
+	NATURAL JOIN
+
+(Select "post_id",count("post_id") from "comment" GROUP BY "post_id") as
+ "comments" ;
+	
+
+
+-- Select all regular users and post with starting name ou title ou body
+ is like something...
+Select * from (
+				(Select "name" , "user"."user_id" , "regular_user"."regular_user_id"
+ from "user" 
+				INNER JOIN "regular_user" on "regular_user"."user_id" = 
+"user"."user_id"  
+				where "user"."name" LIKE 'A%')
+				 as "t1"
+			NATURAL JOIN
+				(Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "post"."event_id", "post"."group_id" from
+					"post" where "post"."body" LIKE '%para%' or "post"."title" LIKE 
+'%para%'
+				) as "t2"
+	);
+	
+	Select "name" , "user"."user_id" , "regular_user"."regular_user_id" 
+from "user" 
+				INNER JOIN "regular_user" on "regular_user"."user_id" = 
+"user"."user_id"  
+				where "user"."name" LIKE 'A%'
+              </div>
+              <div class="other-info">
+              <div class="timestamp">17:55:20</div>
+              </div>
+          </div>
+      </li><li class="list-item" tabindex="0" data-key="17:54:07">
+          <div class="entry ">
+              <div class="query">
+                  <span id="query_source_icon" class="query-history-icon sql-icon-lg fa fa-play" role="img"></span>
+                  
+-- my info
+Select "user_id", "name" from "user" where "email" = 'jokinho@feup.pt';
+
+
+-- if is admin
+Select "admin_id" from "admin" where "user_id" = 24;
+
+-- if is regular_user
+Select "regular_user_id", "personal_info" from "regular_user" where 
+"user_id" = 4;
+
+--if is a student
+Select "student_id" from "student" where "regular_user_id" = 5;
+
+-- if is a teacher
+Select "teacher_id" from "teacher" where "regular_user_id" = 3;
+
+-- if is an organization
+Select "organization_id" from "organization" where "regular_user_id" = 
+4;
+
+
+-- Select user from a group
+Select "user_id" from "user_in_group" where "group_id" = 1;
+
+--events of organization
+Select "name", "location", "date", "information" from "event" where 
+"organization_id" = 1;
+
+
+--Posts posted by me
+Select "title", "body", "date", "upvotes", "downvotes", TYPE, 
+"event_id", "group_id" 
+	from "post" where "author_id" = 2;
+
+
+--Notification
+Select "origin_user_id", "description", "link", "date" from 
+"notification"
+	INNER JOIN "notified_user" on "notification"."notification_id" 
+="notified_user"."notification_id" 
+	where "user_notified" = 5;
+
+
+--Message by chat
+Select "sender_id", "body", "date"
+	from "message" where "chat_id" = 2
+	order by "date" DESC;
+
+
+--Comments
+ Select "comment_id", "user_id", "comment_to_id", "body", "date", 
+"upvotes", "downvotes"
+	from "comment" where "post_id" = 5
+	order by "date" DESC;
+
+
+--Posts from event
+Select "author_id", "title", "body", "date", "upvotes", "downvotes", 
+TYPE, "event_id", "group_id" 
+	from "post" where "event_id" = 1;
+
+--Posts from group
+Select "author_id", "title", "body", "date", "upvotes", "downvotes", 
+TYPE, "event_id", "group_id" 
+	from "post" where "group_id" = 1;
+
+
+	
+-- Select all regular users with starting name like...
+Select "name" , "user"."user_id" , "regular_user"."regular_user_id" from
+ "user" 
+	INNER JOIN "regular_user" on "regular_user"."user_id" = 
+"user"."user_id"  
+	where "user"."name" LIKE 'A%';
+
+-- Select Reports that have no answer
+Select "reporter_id", "approval", "reason", "reported_user_id", 
+"reported_event_id", "reported_post_id", "reported_comment_id", 
+"reported_group_id"
+	from "report" where "approval" IS NULL;
+
+
+--Select friends
+Select "friend_id2"
+	from "friend" where (TYPE = 'accepted' and "friend_id1" = 2);
+
+
+--Select pending requests (the user that hasn't answered)
+Select "friend_id2"
+	from "friend" where (TYPE = 'pending' and "friend_id1" = 2);
+	
+
+--Files path from Posts
+
+Select "file_path"
+	from "file" INNER JOIN "post" on "post"."post_id" = "file"."post_id" 
+where "post"."post_id" = 7 order by "date" DESC;
+
+--Event informations of events I am interested on
+Select "event"."event_id", "organization_id", "name", "location", 
+"date", "information"
+	FROM "event" INNER JOIN "user_interested_in_event" 
+	on "event"."event_id" = "user_interested_in_event"."event_id"
+	Where "user_interested_in_event"."user_id" = 2;
+	
+--Select group infomation of groups I belong
+Select "group"."group_id" , "name", "information", TYPE
+	from "user_in_group" INNER JOIN "group"
+	on "user_in_group"."group_id" = "group"."group_id"
+	where "user_id" = 2;
+
+--Posts from groups I belong, users I am friends with and events I am 
+interested on (Feed)
+Select * from (
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "event_id", "post"."group_id" 
+		from "post" INNER JOIN "user_in_group" on "post"."group_id" = 
+"user_in_group"."group_id" 
+		where "user_in_group"."user_id" = 2
+	UNION
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "event_id", "post"."group_id" 
+		from "post" INNER JOIN "friend" on "friend"."friend_id2" = 
+"post"."author_id" 
+		WHERE "friend".TYPE = 'accepted' AND "friend"."friend_id1" = 2
+	UNION
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "post"."event_id", "post"."group_id" 
+		from "post" INNER JOIN "user_interested_in_event" 
+		on "post"."event_id" = "user_interested_in_event"."event_id"
+		WHERE "user_interested_in_event"."user_id" = 2
+) as posts
+	NATURAL JOIN
+
+(Select "post_id",count("post_id") from "comment" GROUP BY "post_id") as
+ "comments" ;
+	
+
+
+-- Select all regular users and post with starting name ou title ou body
+ is like something...
+Select * from (
+				(Select "name" , "user"."user_id" , "regular_user"."regular_user_id"
+ from "user" 
+				INNER JOIN "regular_user" on "regular_user"."user_id" = 
+"user"."user_id"  
+				where "user"."name" LIKE 'A%')
+				 as "t1"
+			NATURAL JOIN
+				(Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "post"."event_id", "post"."group_id" from
+					"post" where "post"."body" LIKE '%para%' or "post"."title" LIKE 
+'%para%'
+				) as "t2"
+	);
+              </div>
+              <div class="other-info">
+              <div class="timestamp">17:54:07</div>
+              </div>
+          </div>
+      </li><li class="list-item" tabindex="0" data-key="17:53:30">
+          <div class="entry error">
+              <div class="query">
+                  <span id="query_source_icon" class="query-history-icon sql-icon-lg fa fa-play" role="img"></span>
+                  
+-- my info
+Select "user_id", "name" from "user" where "email" = 'jokinho@feup.pt';
+
+
+-- if is admin
+Select "admin_id" from "admin" where "user_id" = 24;
+
+-- if is regular_user
+Select "regular_user_id", "personal_info" from "regular_user" where 
+"user_id" = 4;
+
+--if is a student
+Select "student_id" from "student" where "regular_user_id" = 5;
+
+-- if is a teacher
+Select "teacher_id" from "teacher" where "regular_user_id" = 3;
+
+-- if is an organization
+Select "organization_id" from "organization" where "regular_user_id" = 
+4;
+
+
+-- Select user from a group
+Select "user_id" from "user_in_group" where "group_id" = 1;
+
+--events of organization
+Select "name", "location", "date", "information" from "event" where 
+"organization_id" = 1;
+
+
+--Posts posted by me
+Select "title", "body", "date", "upvotes", "downvotes", TYPE, 
+"event_id", "group_id" 
+	from "post" where "author_id" = 2;
+
+
+--Notification
+Select "origin_user_id", "description", "link", "date" from 
+"notification"
+	INNER JOIN "notified_user" on "notification"."notification_id" 
+="notified_user"."notification_id" 
+	where "user_notified" = 5;
+
+
+--Message by chat
+Select "sender_id", "body", "date"
+	from "message" where "chat_id" = 2
+	order by "date" DESC;
+
+
+--Comments
+ Select "comment_id", "user_id", "comment_to_id", "body", "date", 
+"upvotes", "downvotes"
+	from "comment" where "post_id" = 5
+	order by "date" DESC;
+
+
+--Posts from event
+Select "author_id", "title", "body", "date", "upvotes", "downvotes", 
+TYPE, "event_id", "group_id" 
+	from "post" where "event_id" = 1;
+
+--Posts from group
+Select "author_id", "title", "body", "date", "upvotes", "downvotes", 
+TYPE, "event_id", "group_id" 
+	from "post" where "group_id" = 1;
+
+
+	
+-- Select all regular users with starting name like...
+Select "name" , "user"."user_id" , "regular_user"."regular_user_id" from
+ "user" 
+	INNER JOIN "regular_user" on "regular_user"."user_id" = 
+"user"."user_id"  
+	where "user"."name" LIKE 'A%';
+
+-- Select Reports that have no answer
+Select "reporter_id", "approval", "reason", "reported_user_id", 
+"reported_event_id", "reported_post_id", "reported_comment_id", 
+"reported_group_id"
+	from "report" where "approval" IS NULL;
+
+
+--Select friends
+Select "friend_id2"
+	from "friend" where (TYPE = 'accepted' and "friend_id1" = 2);
+
+
+--Select pending requests (the user that hasn't answered)
+Select "friend_id2"
+	from "friend" where (TYPE = 'pending' and "friend_id1" = 2);
+	
+
+--Files path from Posts
+
+Select "file_path"
+	from "file" INNER JOIN "post" on "post"."post_id" = "file"."post_id" 
+where "post"."post_id" = 7 order by "date" DESC;
+
+--Event informations of events I am interested on
+Select "event"."event_id", "organization_id", "name", "location", 
+"date", "information"
+	FROM "event" INNER JOIN "user_interested_in_event" 
+	on "event"."event_id" = "user_interested_in_event"."event_id"
+	Where "user_interested_in_event"."user_id" = 2;
+	
+--Select group infomation of groups I belong
+Select "group"."group_id" , "name", "information", TYPE
+	from "user_in_group" INNER JOIN "group"
+	on "user_in_group"."group_id" = "group"."group_id"
+	where "user_id" = 2;
+
+--Posts from groups I belong, users I am friends with and events I am 
+interested on (Feed)
+Select * from (
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "event_id", "post"."group_id" 
+		from "post" INNER JOIN "user_in_group" on "post"."group_id" = 
+"user_in_group"."group_id" 
+		where "user_in_group"."user_id" = 2
+	UNION
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "event_id", "post"."group_id" 
+		from "post" INNER JOIN "friend" on "friend"."friend_id2" = 
+"post"."author_id" 
+		WHERE "friend".TYPE = 'accepted' AND "friend"."friend_id1" = 2
+	UNION
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "post"."event_id", "post"."group_id" 
+		from "post" INNER JOIN "user_interested_in_event" 
+		on "post"."event_id" = "user_interested_in_event"."event_id"
+		WHERE "user_interested_in_event"."user_id" = 2
+) as posts
+	NATURAL JOIN
+
+(Select "post_id",count("post_id") from "comment" GROUP BY "post_id") as
+ "comments" ;
+	
+
+
+-- Select all regular users and post with starting name ou title ou body
+ is like something...
+Select * from (
+				(Select "name" , "user"."user_id" , "regular_user"."regular_user_id"
+ from "user" 
+				INNER JOIN "regular_user" on "regular_user"."user_id" = 
+"user"."user_id"  
+				where "user"."name" LIKE 'A%')
+				 as "t1"
+			UNION
+				(Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "post"."event_id", "post"."group_id" from
+					"post" where "post"."body" LIKE '%para%' or "post"."title" LIKE 
+'%para%'
+				) as "t2");
+              </div>
+              <div class="other-info">
+              <div class="timestamp">17:53:30</div>
+              </div>
+          </div>
+      </li><li class="list-item" tabindex="0" data-key="17:53:16">
+          <div class="entry error">
+              <div class="query">
+                  <span id="query_source_icon" class="query-history-icon sql-icon-lg fa fa-play" role="img"></span>
+                  
+-- my info
+Select "user_id", "name" from "user" where "email" = 'jokinho@feup.pt';
+
+
+-- if is admin
+Select "admin_id" from "admin" where "user_id" = 24;
+
+-- if is regular_user
+Select "regular_user_id", "personal_info" from "regular_user" where 
+"user_id" = 4;
+
+--if is a student
+Select "student_id" from "student" where "regular_user_id" = 5;
+
+-- if is a teacher
+Select "teacher_id" from "teacher" where "regular_user_id" = 3;
+
+-- if is an organization
+Select "organization_id" from "organization" where "regular_user_id" = 
+4;
+
+
+-- Select user from a group
+Select "user_id" from "user_in_group" where "group_id" = 1;
+
+--events of organization
+Select "name", "location", "date", "information" from "event" where 
+"organization_id" = 1;
+
+
+--Posts posted by me
+Select "title", "body", "date", "upvotes", "downvotes", TYPE, 
+"event_id", "group_id" 
+	from "post" where "author_id" = 2;
+
+
+--Notification
+Select "origin_user_id", "description", "link", "date" from 
+"notification"
+	INNER JOIN "notified_user" on "notification"."notification_id" 
+="notified_user"."notification_id" 
+	where "user_notified" = 5;
+
+
+--Message by chat
+Select "sender_id", "body", "date"
+	from "message" where "chat_id" = 2
+	order by "date" DESC;
+
+
+--Comments
+ Select "comment_id", "user_id", "comment_to_id", "body", "date", 
+"upvotes", "downvotes"
+	from "comment" where "post_id" = 5
+	order by "date" DESC;
+
+
+--Posts from event
+Select "author_id", "title", "body", "date", "upvotes", "downvotes", 
+TYPE, "event_id", "group_id" 
+	from "post" where "event_id" = 1;
+
+--Posts from group
+Select "author_id", "title", "body", "date", "upvotes", "downvotes", 
+TYPE, "event_id", "group_id" 
+	from "post" where "group_id" = 1;
+
+
+	
+-- Select all regular users with starting name like...
+Select "name" , "user"."user_id" , "regular_user"."regular_user_id" from
+ "user" 
+	INNER JOIN "regular_user" on "regular_user"."user_id" = 
+"user"."user_id"  
+	where "user"."name" LIKE 'A%';
+
+-- Select Reports that have no answer
+Select "reporter_id", "approval", "reason", "reported_user_id", 
+"reported_event_id", "reported_post_id", "reported_comment_id", 
+"reported_group_id"
+	from "report" where "approval" IS NULL;
+
+
+--Select friends
+Select "friend_id2"
+	from "friend" where (TYPE = 'accepted' and "friend_id1" = 2);
+
+
+--Select pending requests (the user that hasn't answered)
+Select "friend_id2"
+	from "friend" where (TYPE = 'pending' and "friend_id1" = 2);
+	
+
+--Files path from Posts
+
+Select "file_path"
+	from "file" INNER JOIN "post" on "post"."post_id" = "file"."post_id" 
+where "post"."post_id" = 7 order by "date" DESC;
+
+--Event informations of events I am interested on
+Select "event"."event_id", "organization_id", "name", "location", 
+"date", "information"
+	FROM "event" INNER JOIN "user_interested_in_event" 
+	on "event"."event_id" = "user_interested_in_event"."event_id"
+	Where "user_interested_in_event"."user_id" = 2;
+	
+--Select group infomation of groups I belong
+Select "group"."group_id" , "name", "information", TYPE
+	from "user_in_group" INNER JOIN "group"
+	on "user_in_group"."group_id" = "group"."group_id"
+	where "user_id" = 2;
+
+--Posts from groups I belong, users I am friends with and events I am 
+interested on (Feed)
+Select * from (
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "event_id", "post"."group_id" 
+		from "post" INNER JOIN "user_in_group" on "post"."group_id" = 
+"user_in_group"."group_id" 
+		where "user_in_group"."user_id" = 2
+	UNION
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "event_id", "post"."group_id" 
+		from "post" INNER JOIN "friend" on "friend"."friend_id2" = 
+"post"."author_id" 
+		WHERE "friend".TYPE = 'accepted' AND "friend"."friend_id1" = 2
+	UNION
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "post"."event_id", "post"."group_id" 
+		from "post" INNER JOIN "user_interested_in_event" 
+		on "post"."event_id" = "user_interested_in_event"."event_id"
+		WHERE "user_interested_in_event"."user_id" = 2
+) as posts
+	NATURAL JOIN
+
+(Select "post_id",count("post_id") from "comment" GROUP BY "post_id") as
+ "comments" ;
+	
+
+
+-- Select all regular users and post with starting name ou title ou body
+ is like something...
+Select * from (
+				Select "name" , "user"."user_id" , "regular_user"."regular_user_id" 
+from "user" 
+				INNER JOIN "regular_user" on "regular_user"."user_id" = 
+"user"."user_id"  
+				where "user"."name" LIKE 'A%'
+				 as "t1"
+			UNION
+				Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "post"."event_id", "post"."group_id" from
+					"post" where "post"."body" LIKE '%para%' or "post"."title" LIKE 
+'%para%'
+				) as "t2";
+              </div>
+              <div class="other-info">
+              <div class="timestamp">17:53:16</div>
+              </div>
+          </div>
+      </li><li class="list-item" tabindex="0" data-key="17:52:59">
+          <div class="entry error">
+              <div class="query">
+                  <span id="query_source_icon" class="query-history-icon sql-icon-lg fa fa-play" role="img"></span>
+                  
+-- my info
+Select "user_id", "name" from "user" where "email" = 'jokinho@feup.pt';
+
+
+-- if is admin
+Select "admin_id" from "admin" where "user_id" = 24;
+
+-- if is regular_user
+Select "regular_user_id", "personal_info" from "regular_user" where 
+"user_id" = 4;
+
+--if is a student
+Select "student_id" from "student" where "regular_user_id" = 5;
+
+-- if is a teacher
+Select "teacher_id" from "teacher" where "regular_user_id" = 3;
+
+-- if is an organization
+Select "organization_id" from "organization" where "regular_user_id" = 
+4;
+
+
+-- Select user from a group
+Select "user_id" from "user_in_group" where "group_id" = 1;
+
+--events of organization
+Select "name", "location", "date", "information" from "event" where 
+"organization_id" = 1;
+
+
+--Posts posted by me
+Select "title", "body", "date", "upvotes", "downvotes", TYPE, 
+"event_id", "group_id" 
+	from "post" where "author_id" = 2;
+
+
+--Notification
+Select "origin_user_id", "description", "link", "date" from 
+"notification"
+	INNER JOIN "notified_user" on "notification"."notification_id" 
+="notified_user"."notification_id" 
+	where "user_notified" = 5;
+
+
+--Message by chat
+Select "sender_id", "body", "date"
+	from "message" where "chat_id" = 2
+	order by "date" DESC;
+
+
+--Comments
+ Select "comment_id", "user_id", "comment_to_id", "body", "date", 
+"upvotes", "downvotes"
+	from "comment" where "post_id" = 5
+	order by "date" DESC;
+
+
+--Posts from event
+Select "author_id", "title", "body", "date", "upvotes", "downvotes", 
+TYPE, "event_id", "group_id" 
+	from "post" where "event_id" = 1;
+
+--Posts from group
+Select "author_id", "title", "body", "date", "upvotes", "downvotes", 
+TYPE, "event_id", "group_id" 
+	from "post" where "group_id" = 1;
+
+
+	
+-- Select all regular users with starting name like...
+Select "name" , "user"."user_id" , "regular_user"."regular_user_id" from
+ "user" 
+	INNER JOIN "regular_user" on "regular_user"."user_id" = 
+"user"."user_id"  
+	where "user"."name" LIKE 'A%';
+
+-- Select Reports that have no answer
+Select "reporter_id", "approval", "reason", "reported_user_id", 
+"reported_event_id", "reported_post_id", "reported_comment_id", 
+"reported_group_id"
+	from "report" where "approval" IS NULL;
+
+
+--Select friends
+Select "friend_id2"
+	from "friend" where (TYPE = 'accepted' and "friend_id1" = 2);
+
+
+--Select pending requests (the user that hasn't answered)
+Select "friend_id2"
+	from "friend" where (TYPE = 'pending' and "friend_id1" = 2);
+	
+
+--Files path from Posts
+
+Select "file_path"
+	from "file" INNER JOIN "post" on "post"."post_id" = "file"."post_id" 
+where "post"."post_id" = 7 order by "date" DESC;
+
+--Event informations of events I am interested on
+Select "event"."event_id", "organization_id", "name", "location", 
+"date", "information"
+	FROM "event" INNER JOIN "user_interested_in_event" 
+	on "event"."event_id" = "user_interested_in_event"."event_id"
+	Where "user_interested_in_event"."user_id" = 2;
+	
+--Select group infomation of groups I belong
+Select "group"."group_id" , "name", "information", TYPE
+	from "user_in_group" INNER JOIN "group"
+	on "user_in_group"."group_id" = "group"."group_id"
+	where "user_id" = 2;
+
+--Posts from groups I belong, users I am friends with and events I am 
+interested on (Feed)
+Select * from (
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "event_id", "post"."group_id" 
+		from "post" INNER JOIN "user_in_group" on "post"."group_id" = 
+"user_in_group"."group_id" 
+		where "user_in_group"."user_id" = 2
+	UNION
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "event_id", "post"."group_id" 
+		from "post" INNER JOIN "friend" on "friend"."friend_id2" = 
+"post"."author_id" 
+		WHERE "friend".TYPE = 'accepted' AND "friend"."friend_id1" = 2
+	UNION
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "post"."event_id", "post"."group_id" 
+		from "post" INNER JOIN "user_interested_in_event" 
+		on "post"."event_id" = "user_interested_in_event"."event_id"
+		WHERE "user_interested_in_event"."user_id" = 2
+) as posts
+	NATURAL JOIN
+
+(Select "post_id",count("post_id") from "comment" GROUP BY "post_id") as
+ "comments" ;
+	
+
+
+-- Select all regular users and post with starting name ou title ou body
+ is like something...
+Select * from (
+				Select "name" , "user"."user_id" , "regular_user"."regular_user_id" 
+from "user" 
+				INNER JOIN "regular_user" on "regular_user"."user_id" = 
+"user"."user_id"  
+				where "user"."name" LIKE 'A%'
+				) as "t1"
+			UNION
+				(Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "post"."event_id", "post"."group_id" from
+					"post" where "post"."body" LIKE '%para%' or "post"."title" LIKE 
+'%para%'
+				) as "t2";
+              </div>
+              <div class="other-info">
+              <div class="timestamp">17:52:59</div>
+              </div>
+          </div>
+      </li><li class="list-item" tabindex="0" data-key="17:52:19">
+          <div class="entry error">
+              <div class="query">
+                  <span id="query_source_icon" class="query-history-icon sql-icon-lg fa fa-play" role="img"></span>
+                  
+-- my info
+Select "user_id", "name" from "user" where "email" = 'jokinho@feup.pt';
+
+
+-- if is admin
+Select "admin_id" from "admin" where "user_id" = 24;
+
+-- if is regular_user
+Select "regular_user_id", "personal_info" from "regular_user" where 
+"user_id" = 4;
+
+--if is a student
+Select "student_id" from "student" where "regular_user_id" = 5;
+
+-- if is a teacher
+Select "teacher_id" from "teacher" where "regular_user_id" = 3;
+
+-- if is an organization
+Select "organization_id" from "organization" where "regular_user_id" = 
+4;
+
+
+-- Select user from a group
+Select "user_id" from "user_in_group" where "group_id" = 1;
+
+--events of organization
+Select "name", "location", "date", "information" from "event" where 
+"organization_id" = 1;
+
+
+--Posts posted by me
+Select "title", "body", "date", "upvotes", "downvotes", TYPE, 
+"event_id", "group_id" 
+	from "post" where "author_id" = 2;
+
+
+--Notification
+Select "origin_user_id", "description", "link", "date" from 
+"notification"
+	INNER JOIN "notified_user" on "notification"."notification_id" 
+="notified_user"."notification_id" 
+	where "user_notified" = 5;
+
+
+--Message by chat
+Select "sender_id", "body", "date"
+	from "message" where "chat_id" = 2
+	order by "date" DESC;
+
+
+--Comments
+ Select "comment_id", "user_id", "comment_to_id", "body", "date", 
+"upvotes", "downvotes"
+	from "comment" where "post_id" = 5
+	order by "date" DESC;
+
+
+--Posts from event
+Select "author_id", "title", "body", "date", "upvotes", "downvotes", 
+TYPE, "event_id", "group_id" 
+	from "post" where "event_id" = 1;
+
+--Posts from group
+Select "author_id", "title", "body", "date", "upvotes", "downvotes", 
+TYPE, "event_id", "group_id" 
+	from "post" where "group_id" = 1;
+
+
+	
+-- Select all regular users with starting name like...
+Select "name" , "user"."user_id" , "regular_user"."regular_user_id" from
+ "user" 
+	INNER JOIN "regular_user" on "regular_user"."user_id" = 
+"user"."user_id"  
+	where "user"."name" LIKE 'A%';
+
+-- Select Reports that have no answer
+Select "reporter_id", "approval", "reason", "reported_user_id", 
+"reported_event_id", "reported_post_id", "reported_comment_id", 
+"reported_group_id"
+	from "report" where "approval" IS NULL;
+
+
+--Select friends
+Select "friend_id2"
+	from "friend" where (TYPE = 'accepted' and "friend_id1" = 2);
+
+
+--Select pending requests (the user that hasn't answered)
+Select "friend_id2"
+	from "friend" where (TYPE = 'pending' and "friend_id1" = 2);
+	
+
+--Files path from Posts
+
+Select "file_path"
+	from "file" INNER JOIN "post" on "post"."post_id" = "file"."post_id" 
+where "post"."post_id" = 7 order by "date" DESC;
+
+--Event informations of events I am interested on
+Select "event"."event_id", "organization_id", "name", "location", 
+"date", "information"
+	FROM "event" INNER JOIN "user_interested_in_event" 
+	on "event"."event_id" = "user_interested_in_event"."event_id"
+	Where "user_interested_in_event"."user_id" = 2;
+	
+--Select group infomation of groups I belong
+Select "group"."group_id" , "name", "information", TYPE
+	from "user_in_group" INNER JOIN "group"
+	on "user_in_group"."group_id" = "group"."group_id"
+	where "user_id" = 2;
+
+--Posts from groups I belong, users I am friends with and events I am 
+interested on (Feed)
+Select * from (
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "event_id", "post"."group_id" 
+		from "post" INNER JOIN "user_in_group" on "post"."group_id" = 
+"user_in_group"."group_id" 
+		where "user_in_group"."user_id" = 2
+	UNION
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "event_id", "post"."group_id" 
+		from "post" INNER JOIN "friend" on "friend"."friend_id2" = 
+"post"."author_id" 
+		WHERE "friend".TYPE = 'accepted' AND "friend"."friend_id1" = 2
+	UNION
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "post"."event_id", "post"."group_id" 
+		from "post" INNER JOIN "user_interested_in_event" 
+		on "post"."event_id" = "user_interested_in_event"."event_id"
+		WHERE "user_interested_in_event"."user_id" = 2
+) as posts
+	NATURAL JOIN
+
+(Select "post_id",count("post_id") from "comment" GROUP BY "post_id") as
+ "comments" ;
+	
+
+
+-- Select all regular users and post with starting name ou title ou body
+ is like something...
+Select * from (
+				Select "name" , "user"."user_id" , "regular_user"."regular_user_id" 
+from "user" 
+				INNER JOIN "regular_user" on "regular_user"."user_id" = 
+"user"."user_id"  
+				where "user"."name" LIKE 'A%'
+	) as "t1"
+
+JOIN
+(
+Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "post"."event_id", "post"."group_id" from
+	"post" where "post"."body" LIKE '%para%' or "post"."title" LIKE 
+'%para%'
+	) as "t2";
+              </div>
+              <div class="other-info">
+              <div class="timestamp">17:52:19</div>
+              </div>
+          </div>
+      </li><li class="list-item" tabindex="0" data-key="17:52:14">
+          <div class="entry error">
+              <div class="query">
+                  <span id="query_source_icon" class="query-history-icon sql-icon-lg fa fa-play" role="img"></span>
+                  
+-- my info
+Select "user_id", "name" from "user" where "email" = 'jokinho@feup.pt';
+
+
+-- if is admin
+Select "admin_id" from "admin" where "user_id" = 24;
+
+-- if is regular_user
+Select "regular_user_id", "personal_info" from "regular_user" where 
+"user_id" = 4;
+
+--if is a student
+Select "student_id" from "student" where "regular_user_id" = 5;
+
+-- if is a teacher
+Select "teacher_id" from "teacher" where "regular_user_id" = 3;
+
+-- if is an organization
+Select "organization_id" from "organization" where "regular_user_id" = 
+4;
+
+
+-- Select user from a group
+Select "user_id" from "user_in_group" where "group_id" = 1;
+
+--events of organization
+Select "name", "location", "date", "information" from "event" where 
+"organization_id" = 1;
+
+
+--Posts posted by me
+Select "title", "body", "date", "upvotes", "downvotes", TYPE, 
+"event_id", "group_id" 
+	from "post" where "author_id" = 2;
+
+
+--Notification
+Select "origin_user_id", "description", "link", "date" from 
+"notification"
+	INNER JOIN "notified_user" on "notification"."notification_id" 
+="notified_user"."notification_id" 
+	where "user_notified" = 5;
+
+
+--Message by chat
+Select "sender_id", "body", "date"
+	from "message" where "chat_id" = 2
+	order by "date" DESC;
+
+
+--Comments
+ Select "comment_id", "user_id", "comment_to_id", "body", "date", 
+"upvotes", "downvotes"
+	from "comment" where "post_id" = 5
+	order by "date" DESC;
+
+
+--Posts from event
+Select "author_id", "title", "body", "date", "upvotes", "downvotes", 
+TYPE, "event_id", "group_id" 
+	from "post" where "event_id" = 1;
+
+--Posts from group
+Select "author_id", "title", "body", "date", "upvotes", "downvotes", 
+TYPE, "event_id", "group_id" 
+	from "post" where "group_id" = 1;
+
+
+	
+-- Select all regular users with starting name like...
+Select "name" , "user"."user_id" , "regular_user"."regular_user_id" from
+ "user" 
+	INNER JOIN "regular_user" on "regular_user"."user_id" = 
+"user"."user_id"  
+	where "user"."name" LIKE 'A%';
+
+-- Select Reports that have no answer
+Select "reporter_id", "approval", "reason", "reported_user_id", 
+"reported_event_id", "reported_post_id", "reported_comment_id", 
+"reported_group_id"
+	from "report" where "approval" IS NULL;
+
+
+--Select friends
+Select "friend_id2"
+	from "friend" where (TYPE = 'accepted' and "friend_id1" = 2);
+
+
+--Select pending requests (the user that hasn't answered)
+Select "friend_id2"
+	from "friend" where (TYPE = 'pending' and "friend_id1" = 2);
+	
+
+--Files path from Posts
+
+Select "file_path"
+	from "file" INNER JOIN "post" on "post"."post_id" = "file"."post_id" 
+where "post"."post_id" = 7 order by "date" DESC;
+
+--Event informations of events I am interested on
+Select "event"."event_id", "organization_id", "name", "location", 
+"date", "information"
+	FROM "event" INNER JOIN "user_interested_in_event" 
+	on "event"."event_id" = "user_interested_in_event"."event_id"
+	Where "user_interested_in_event"."user_id" = 2;
+	
+--Select group infomation of groups I belong
+Select "group"."group_id" , "name", "information", TYPE
+	from "user_in_group" INNER JOIN "group"
+	on "user_in_group"."group_id" = "group"."group_id"
+	where "user_id" = 2;
+
+--Posts from groups I belong, users I am friends with and events I am 
+interested on (Feed)
+Select * from (
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "event_id", "post"."group_id" 
+		from "post" INNER JOIN "user_in_group" on "post"."group_id" = 
+"user_in_group"."group_id" 
+		where "user_in_group"."user_id" = 2
+	UNION
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "event_id", "post"."group_id" 
+		from "post" INNER JOIN "friend" on "friend"."friend_id2" = 
+"post"."author_id" 
+		WHERE "friend".TYPE = 'accepted' AND "friend"."friend_id1" = 2
+	UNION
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "post"."event_id", "post"."group_id" 
+		from "post" INNER JOIN "user_interested_in_event" 
+		on "post"."event_id" = "user_interested_in_event"."event_id"
+		WHERE "user_interested_in_event"."user_id" = 2
+) as posts
+	NATURAL JOIN
+
+(Select "post_id",count("post_id") from "comment" GROUP BY "post_id") as
+ "comments" ;
+	
+
+
+-- Select all regular users and post with starting name ou title ou body
+ is like something...
+Select * from (
+				Select "name" , "user"."user_id" , "regular_user"."regular_user_id" 
+from "user" 
+				INNER JOIN "regular_user" on "regular_user"."user_id" = 
+"user"."user_id"  
+				where "user"."name" LIKE 'A%'
+	) as "t1"
+
+JOIN
+(
+Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "post"."event_id", "post"."group_id" from
+	"post" where "post"."body" LIKE '%para%' or "post"."title" LIKE 
+'%para%';
+	) as "t2";
+              </div>
+              <div class="other-info">
+              <div class="timestamp">17:52:14</div>
+              </div>
+          </div>
+      </li><li class="list-item" tabindex="0" data-key="18:02:09">
+          <div class="entry ">
+              <div class="query">
+                  <span id="query_source_icon" class="query-history-icon sql-icon-lg fa fa-play" role="img"></span>
+                  
+-- my info
+Select "user_id", "name" from "user" where "email" = 'jokinho@feup.pt';
+
+
+-- if is admin
+Select "admin_id" from "admin" where "user_id" = 24;
+
+-- if is regular_user
+Select "regular_user_id", "personal_info" from "regular_user" where 
+"user_id" = 4;
+
+--if is a student
+Select "student_id" from "student" where "regular_user_id" = 5;
+
+-- if is a teacher
+Select "teacher_id" from "teacher" where "regular_user_id" = 3;
+
+-- if is an organization
+Select "organization_id" from "organization" where "regular_user_id" = 
+4;
+
+
+-- Select user from a group
+Select "user_id" from "user_in_group" where "group_id" = 1;
+
+--events of organization
+Select "name", "location", "date", "information" from "event" where 
+"organization_id" = 1;
+
+
+--Posts posted by me
+Select "title", "body", "date", "upvotes", "downvotes", TYPE, 
+"event_id", "group_id" 
+	from "post" where "author_id" = 2;
+
+
+--Notification
+Select "origin_user_id", "description", "link", "date" from 
+"notification"
+	INNER JOIN "notified_user" on "notification"."notification_id" 
+="notified_user"."notification_id" 
+	where "user_notified" = 5;
+
+
+--Message by chat
+Select "sender_id", "body", "date"
+	from "message" where "chat_id" = 2
+	order by "date" DESC;
+
+
+--Comments
+ Select "comment_id", "user_id", "comment_to_id", "body", "date", 
+"upvotes", "downvotes"
+	from "comment" where "post_id" = 5
+	order by "date" DESC;
+
+
+--Posts from event
+Select "author_id", "title", "body", "date", "upvotes", "downvotes", 
+TYPE, "event_id", "group_id" 
+	from "post" where "event_id" = 1;
+
+--Posts from group
+Select "author_id", "title", "body", "date", "upvotes", "downvotes", 
+TYPE, "event_id", "group_id" 
+	from "post" where "group_id" = 1;
+
+
+	
+-- Select all regular users with starting name like...
+Select "name" , "user"."user_id" , "regular_user"."regular_user_id" from
+ "user" 
+	INNER JOIN "regular_user" on "regular_user"."user_id" = 
+"user"."user_id"  
+	where "user"."name" LIKE 'A%';
+
+-- Select Reports that have no answer
+Select "reporter_id", "approval", "reason", "reported_user_id", 
+"reported_event_id", "reported_post_id", "reported_comment_id", 
+"reported_group_id"
+	from "report" where "approval" IS NULL;
+
+
+--Select friends
+Select "friend_id2"
+	from "friend" where (TYPE = 'accepted' and "friend_id1" = 2);
+
+
+--Select pending requests (the user that hasn't answered)
+Select "friend_id2"
+	from "friend" where (TYPE = 'pending' and "friend_id1" = 2);
+	
+
+--Files path from Posts
+
+Select "file_path"
+	from "file" INNER JOIN "post" on "post"."post_id" = "file"."post_id" 
+where "post"."post_id" = 7 order by "date" DESC;
+
+--Event informations of events I am interested on
+Select "event"."event_id", "organization_id", "name", "location", 
+"date", "information"
+	FROM "event" INNER JOIN "user_interested_in_event" 
+	on "event"."event_id" = "user_interested_in_event"."event_id"
+	Where "user_interested_in_event"."user_id" = 2;
+	
+--Select group infomation of groups I belong
+Select "group"."group_id" , "name", "information", TYPE
+	from "user_in_group" INNER JOIN "group"
+	on "user_in_group"."group_id" = "group"."group_id"
+	where "user_id" = 2;
+
+--Posts from groups I belong, users I am friends with and events I am 
+interested on (Feed)
+Select * from (
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "event_id", "post"."group_id" 
+		from "post" INNER JOIN "user_in_group" on "post"."group_id" = 
+"user_in_group"."group_id" 
+		where "user_in_group"."user_id" = 2
+	UNION
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "event_id", "post"."group_id" 
+		from "post" INNER JOIN "friend" on "friend"."friend_id2" = 
+"post"."author_id" 
+		WHERE "friend".TYPE = 'accepted' AND "friend"."friend_id1" = 2
+	UNION
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "post"."event_id", "post"."group_id" 
+		from "post" INNER JOIN "user_interested_in_event" 
+		on "post"."event_id" = "user_interested_in_event"."event_id"
+		WHERE "user_interested_in_event"."user_id" = 2
+) as posts
+	NATURAL JOIN
+
+(Select "post_id",count("post_id") from "comment" GROUP BY "post_id") as
+ "comments" ;
+	
+
+
+-- Select all regular users and post with starting name ou title ou body
+ is like something...
+Select * from 
+				(Select "name" , "user"."user_id" , "regular_user"."regular_user_id"
+ from "user" 
+				INNER JOIN "regular_user" on "regular_user"."user_id" = 
+"user"."user_id"  
+				where "user"."name" LIKE '%para%%')
+				 as "t1"
+				FULL OUTER JOIN
+				(Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "post"."event_id", "post"."group_id" from
+					"post" where "post"."body" LIKE '%para%' or "post"."title" LIKE 
+'%para%'
+				) as "t2" on "t1"."name" = "body";
+	
+	
+	
+              </div>
+              <div class="other-info">
+              <div class="timestamp">18:02:09</div>
+              </div>
+          </div>
+      </li><li class="list-item" tabindex="0" data-key="17:59:35">
+          <div class="entry ">
+              <div class="query">
+                  <span id="query_source_icon" class="query-history-icon sql-icon-lg fa fa-play" role="img"></span>
+                  
+-- my info
+Select "user_id", "name" from "user" where "email" = 'jokinho@feup.pt';
+
+
+-- if is admin
+Select "admin_id" from "admin" where "user_id" = 24;
+
+-- if is regular_user
+Select "regular_user_id", "personal_info" from "regular_user" where 
+"user_id" = 4;
+
+--if is a student
+Select "student_id" from "student" where "regular_user_id" = 5;
+
+-- if is a teacher
+Select "teacher_id" from "teacher" where "regular_user_id" = 3;
+
+-- if is an organization
+Select "organization_id" from "organization" where "regular_user_id" = 
+4;
+
+
+-- Select user from a group
+Select "user_id" from "user_in_group" where "group_id" = 1;
+
+--events of organization
+Select "name", "location", "date", "information" from "event" where 
+"organization_id" = 1;
+
+
+--Posts posted by me
+Select "title", "body", "date", "upvotes", "downvotes", TYPE, 
+"event_id", "group_id" 
+	from "post" where "author_id" = 2;
+
+
+--Notification
+Select "origin_user_id", "description", "link", "date" from 
+"notification"
+	INNER JOIN "notified_user" on "notification"."notification_id" 
+="notified_user"."notification_id" 
+	where "user_notified" = 5;
+
+
+--Message by chat
+Select "sender_id", "body", "date"
+	from "message" where "chat_id" = 2
+	order by "date" DESC;
+
+
+--Comments
+ Select "comment_id", "user_id", "comment_to_id", "body", "date", 
+"upvotes", "downvotes"
+	from "comment" where "post_id" = 5
+	order by "date" DESC;
+
+
+--Posts from event
+Select "author_id", "title", "body", "date", "upvotes", "downvotes", 
+TYPE, "event_id", "group_id" 
+	from "post" where "event_id" = 1;
+
+--Posts from group
+Select "author_id", "title", "body", "date", "upvotes", "downvotes", 
+TYPE, "event_id", "group_id" 
+	from "post" where "group_id" = 1;
+
+
+	
+-- Select all regular users with starting name like...
+Select "name" , "user"."user_id" , "regular_user"."regular_user_id" from
+ "user" 
+	INNER JOIN "regular_user" on "regular_user"."user_id" = 
+"user"."user_id"  
+	where "user"."name" LIKE 'A%';
+
+-- Select Reports that have no answer
+Select "reporter_id", "approval", "reason", "reported_user_id", 
+"reported_event_id", "reported_post_id", "reported_comment_id", 
+"reported_group_id"
+	from "report" where "approval" IS NULL;
+
+
+--Select friends
+Select "friend_id2"
+	from "friend" where (TYPE = 'accepted' and "friend_id1" = 2);
+
+
+--Select pending requests (the user that hasn't answered)
+Select "friend_id2"
+	from "friend" where (TYPE = 'pending' and "friend_id1" = 2);
+	
+
+--Files path from Posts
+
+Select "file_path"
+	from "file" INNER JOIN "post" on "post"."post_id" = "file"."post_id" 
+where "post"."post_id" = 7 order by "date" DESC;
+
+--Event informations of events I am interested on
+Select "event"."event_id", "organization_id", "name", "location", 
+"date", "information"
+	FROM "event" INNER JOIN "user_interested_in_event" 
+	on "event"."event_id" = "user_interested_in_event"."event_id"
+	Where "user_interested_in_event"."user_id" = 2;
+	
+--Select group infomation of groups I belong
+Select "group"."group_id" , "name", "information", TYPE
+	from "user_in_group" INNER JOIN "group"
+	on "user_in_group"."group_id" = "group"."group_id"
+	where "user_id" = 2;
+
+--Posts from groups I belong, users I am friends with and events I am 
+interested on (Feed)
+Select * from (
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "event_id", "post"."group_id" 
+		from "post" INNER JOIN "user_in_group" on "post"."group_id" = 
+"user_in_group"."group_id" 
+		where "user_in_group"."user_id" = 2
+	UNION
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "event_id", "post"."group_id" 
+		from "post" INNER JOIN "friend" on "friend"."friend_id2" = 
+"post"."author_id" 
+		WHERE "friend".TYPE = 'accepted' AND "friend"."friend_id1" = 2
+	UNION
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "post"."event_id", "post"."group_id" 
+		from "post" INNER JOIN "user_interested_in_event" 
+		on "post"."event_id" = "user_interested_in_event"."event_id"
+		WHERE "user_interested_in_event"."user_id" = 2
+) as posts
+	NATURAL JOIN
+
+(Select "post_id",count("post_id") from "comment" GROUP BY "post_id") as
+ "comments" ;
+	
+
+
+-- Select all regular users and post with starting name ou title ou body
+ is like something...
+Select * from 
+				(Select "name" , "user"."user_id" , "regular_user"."regular_user_id"
+ from "user" 
+				INNER JOIN "regular_user" on "regular_user"."user_id" = 
+"user"."user_id"  
+				where "user"."name" LIKE 'A%')
+				 as "t1"
+				FULL OUTER JOIN
+				(Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "post"."event_id", "post"."group_id" from
+					"post" where "post"."body" LIKE '%para%' or "post"."title" LIKE 
+'%para%'
+				) as "t2" on "t1"."name" = "body";
+	
+	
+	
+              </div>
+              <div class="other-info">
+              <div class="timestamp">17:59:35</div>
+              </div>
+          </div>
+      </li><li class="list-item" tabindex="0" data-key="17:59:22">
+          <div class="entry error">
+              <div class="query">
+                  <span id="query_source_icon" class="query-history-icon sql-icon-lg fa fa-play" role="img"></span>
+                  
+-- my info
+Select "user_id", "name" from "user" where "email" = 'jokinho@feup.pt';
+
+
+-- if is admin
+Select "admin_id" from "admin" where "user_id" = 24;
+
+-- if is regular_user
+Select "regular_user_id", "personal_info" from "regular_user" where 
+"user_id" = 4;
+
+--if is a student
+Select "student_id" from "student" where "regular_user_id" = 5;
+
+-- if is a teacher
+Select "teacher_id" from "teacher" where "regular_user_id" = 3;
+
+-- if is an organization
+Select "organization_id" from "organization" where "regular_user_id" = 
+4;
+
+
+-- Select user from a group
+Select "user_id" from "user_in_group" where "group_id" = 1;
+
+--events of organization
+Select "name", "location", "date", "information" from "event" where 
+"organization_id" = 1;
+
+
+--Posts posted by me
+Select "title", "body", "date", "upvotes", "downvotes", TYPE, 
+"event_id", "group_id" 
+	from "post" where "author_id" = 2;
+
+
+--Notification
+Select "origin_user_id", "description", "link", "date" from 
+"notification"
+	INNER JOIN "notified_user" on "notification"."notification_id" 
+="notified_user"."notification_id" 
+	where "user_notified" = 5;
+
+
+--Message by chat
+Select "sender_id", "body", "date"
+	from "message" where "chat_id" = 2
+	order by "date" DESC;
+
+
+--Comments
+ Select "comment_id", "user_id", "comment_to_id", "body", "date", 
+"upvotes", "downvotes"
+	from "comment" where "post_id" = 5
+	order by "date" DESC;
+
+
+--Posts from event
+Select "author_id", "title", "body", "date", "upvotes", "downvotes", 
+TYPE, "event_id", "group_id" 
+	from "post" where "event_id" = 1;
+
+--Posts from group
+Select "author_id", "title", "body", "date", "upvotes", "downvotes", 
+TYPE, "event_id", "group_id" 
+	from "post" where "group_id" = 1;
+
+
+	
+-- Select all regular users with starting name like...
+Select "name" , "user"."user_id" , "regular_user"."regular_user_id" from
+ "user" 
+	INNER JOIN "regular_user" on "regular_user"."user_id" = 
+"user"."user_id"  
+	where "user"."name" LIKE 'A%';
+
+-- Select Reports that have no answer
+Select "reporter_id", "approval", "reason", "reported_user_id", 
+"reported_event_id", "reported_post_id", "reported_comment_id", 
+"reported_group_id"
+	from "report" where "approval" IS NULL;
+
+
+--Select friends
+Select "friend_id2"
+	from "friend" where (TYPE = 'accepted' and "friend_id1" = 2);
+
+
+--Select pending requests (the user that hasn't answered)
+Select "friend_id2"
+	from "friend" where (TYPE = 'pending' and "friend_id1" = 2);
+	
+
+--Files path from Posts
+
+Select "file_path"
+	from "file" INNER JOIN "post" on "post"."post_id" = "file"."post_id" 
+where "post"."post_id" = 7 order by "date" DESC;
+
+--Event informations of events I am interested on
+Select "event"."event_id", "organization_id", "name", "location", 
+"date", "information"
+	FROM "event" INNER JOIN "user_interested_in_event" 
+	on "event"."event_id" = "user_interested_in_event"."event_id"
+	Where "user_interested_in_event"."user_id" = 2;
+	
+--Select group infomation of groups I belong
+Select "group"."group_id" , "name", "information", TYPE
+	from "user_in_group" INNER JOIN "group"
+	on "user_in_group"."group_id" = "group"."group_id"
+	where "user_id" = 2;
+
+--Posts from groups I belong, users I am friends with and events I am 
+interested on (Feed)
+Select * from (
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "event_id", "post"."group_id" 
+		from "post" INNER JOIN "user_in_group" on "post"."group_id" = 
+"user_in_group"."group_id" 
+		where "user_in_group"."user_id" = 2
+	UNION
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "event_id", "post"."group_id" 
+		from "post" INNER JOIN "friend" on "friend"."friend_id2" = 
+"post"."author_id" 
+		WHERE "friend".TYPE = 'accepted' AND "friend"."friend_id1" = 2
+	UNION
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "post"."event_id", "post"."group_id" 
+		from "post" INNER JOIN "user_interested_in_event" 
+		on "post"."event_id" = "user_interested_in_event"."event_id"
+		WHERE "user_interested_in_event"."user_id" = 2
+) as posts
+	NATURAL JOIN
+
+(Select "post_id",count("post_id") from "comment" GROUP BY "post_id") as
+ "comments" ;
+	
+
+
+-- Select all regular users and post with starting name ou title ou body
+ is like something...
+Select * from 
+				(Select "name" , "user"."user_id" , "regular_user"."regular_user_id"
+ from "user" 
+				INNER JOIN "regular_user" on "regular_user"."user_id" = 
+"user"."user_id"  
+				where "user"."name" LIKE 'A%')
+				 as "t1"
+				FULL OUTER JOIN
+				(Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "post"."event_id", "post"."group_id" from
+					"post" where "post"."body" LIKE '%para%' or "post"."title" LIKE 
+'%para%'
+				) as "t2" on "t1"."name" = "post_id";
+	
+	
+	
+              </div>
+              <div class="other-info">
+              <div class="timestamp">17:59:22</div>
+              </div>
+          </div>
+      </li><li class="list-item" tabindex="0" data-key="17:59:17">
+          <div class="entry error">
+              <div class="query">
+                  <span id="query_source_icon" class="query-history-icon sql-icon-lg fa fa-play" role="img"></span>
+                  
+-- my info
+Select "user_id", "name" from "user" where "email" = 'jokinho@feup.pt';
+
+
+-- if is admin
+Select "admin_id" from "admin" where "user_id" = 24;
+
+-- if is regular_user
+Select "regular_user_id", "personal_info" from "regular_user" where 
+"user_id" = 4;
+
+--if is a student
+Select "student_id" from "student" where "regular_user_id" = 5;
+
+-- if is a teacher
+Select "teacher_id" from "teacher" where "regular_user_id" = 3;
+
+-- if is an organization
+Select "organization_id" from "organization" where "regular_user_id" = 
+4;
+
+
+-- Select user from a group
+Select "user_id" from "user_in_group" where "group_id" = 1;
+
+--events of organization
+Select "name", "location", "date", "information" from "event" where 
+"organization_id" = 1;
+
+
+--Posts posted by me
+Select "title", "body", "date", "upvotes", "downvotes", TYPE, 
+"event_id", "group_id" 
+	from "post" where "author_id" = 2;
+
+
+--Notification
+Select "origin_user_id", "description", "link", "date" from 
+"notification"
+	INNER JOIN "notified_user" on "notification"."notification_id" 
+="notified_user"."notification_id" 
+	where "user_notified" = 5;
+
+
+--Message by chat
+Select "sender_id", "body", "date"
+	from "message" where "chat_id" = 2
+	order by "date" DESC;
+
+
+--Comments
+ Select "comment_id", "user_id", "comment_to_id", "body", "date", 
+"upvotes", "downvotes"
+	from "comment" where "post_id" = 5
+	order by "date" DESC;
+
+
+--Posts from event
+Select "author_id", "title", "body", "date", "upvotes", "downvotes", 
+TYPE, "event_id", "group_id" 
+	from "post" where "event_id" = 1;
+
+--Posts from group
+Select "author_id", "title", "body", "date", "upvotes", "downvotes", 
+TYPE, "event_id", "group_id" 
+	from "post" where "group_id" = 1;
+
+
+	
+-- Select all regular users with starting name like...
+Select "name" , "user"."user_id" , "regular_user"."regular_user_id" from
+ "user" 
+	INNER JOIN "regular_user" on "regular_user"."user_id" = 
+"user"."user_id"  
+	where "user"."name" LIKE 'A%';
+
+-- Select Reports that have no answer
+Select "reporter_id", "approval", "reason", "reported_user_id", 
+"reported_event_id", "reported_post_id", "reported_comment_id", 
+"reported_group_id"
+	from "report" where "approval" IS NULL;
+
+
+--Select friends
+Select "friend_id2"
+	from "friend" where (TYPE = 'accepted' and "friend_id1" = 2);
+
+
+--Select pending requests (the user that hasn't answered)
+Select "friend_id2"
+	from "friend" where (TYPE = 'pending' and "friend_id1" = 2);
+	
+
+--Files path from Posts
+
+Select "file_path"
+	from "file" INNER JOIN "post" on "post"."post_id" = "file"."post_id" 
+where "post"."post_id" = 7 order by "date" DESC;
+
+--Event informations of events I am interested on
+Select "event"."event_id", "organization_id", "name", "location", 
+"date", "information"
+	FROM "event" INNER JOIN "user_interested_in_event" 
+	on "event"."event_id" = "user_interested_in_event"."event_id"
+	Where "user_interested_in_event"."user_id" = 2;
+	
+--Select group infomation of groups I belong
+Select "group"."group_id" , "name", "information", TYPE
+	from "user_in_group" INNER JOIN "group"
+	on "user_in_group"."group_id" = "group"."group_id"
+	where "user_id" = 2;
+
+--Posts from groups I belong, users I am friends with and events I am 
+interested on (Feed)
+Select * from (
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "event_id", "post"."group_id" 
+		from "post" INNER JOIN "user_in_group" on "post"."group_id" = 
+"user_in_group"."group_id" 
+		where "user_in_group"."user_id" = 2
+	UNION
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "event_id", "post"."group_id" 
+		from "post" INNER JOIN "friend" on "friend"."friend_id2" = 
+"post"."author_id" 
+		WHERE "friend".TYPE = 'accepted' AND "friend"."friend_id1" = 2
+	UNION
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "post"."event_id", "post"."group_id" 
+		from "post" INNER JOIN "user_interested_in_event" 
+		on "post"."event_id" = "user_interested_in_event"."event_id"
+		WHERE "user_interested_in_event"."user_id" = 2
+) as posts
+	NATURAL JOIN
+
+(Select "post_id",count("post_id") from "comment" GROUP BY "post_id") as
+ "comments" ;
+	
+
+
+-- Select all regular users and post with starting name ou title ou body
+ is like something...
+Select * from 
+				(Select "name" , "user"."user_id" , "regular_user"."regular_user_id"
+ from "user" 
+				INNER JOIN "regular_user" on "regular_user"."user_id" = 
+"user"."user_id"  
+				where "user"."name" LIKE 'A%')
+				 as "t1"
+				FULL OUTER JOIN
+				(Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "post"."event_id", "post"."group_id" from
+					"post" where "post"."body" LIKE '%para%' or "post"."title" LIKE 
+'%para%'
+				) as "t2" on "t1"."name" = "post";
+	
+	
+	
+              </div>
+              <div class="other-info">
+              <div class="timestamp">17:59:17</div>
+              </div>
+          </div>
+      </li><li class="list-item" tabindex="0" data-key="17:58:27">
+          <div class="entry error">
+              <div class="query">
+                  <span id="query_source_icon" class="query-history-icon sql-icon-lg fa fa-play" role="img"></span>
+                  
+-- my info
+Select "user_id", "name" from "user" where "email" = 'jokinho@feup.pt';
+
+
+-- if is admin
+Select "admin_id" from "admin" where "user_id" = 24;
+
+-- if is regular_user
+Select "regular_user_id", "personal_info" from "regular_user" where 
+"user_id" = 4;
+
+--if is a student
+Select "student_id" from "student" where "regular_user_id" = 5;
+
+-- if is a teacher
+Select "teacher_id" from "teacher" where "regular_user_id" = 3;
+
+-- if is an organization
+Select "organization_id" from "organization" where "regular_user_id" = 
+4;
+
+
+-- Select user from a group
+Select "user_id" from "user_in_group" where "group_id" = 1;
+
+--events of organization
+Select "name", "location", "date", "information" from "event" where 
+"organization_id" = 1;
+
+
+--Posts posted by me
+Select "title", "body", "date", "upvotes", "downvotes", TYPE, 
+"event_id", "group_id" 
+	from "post" where "author_id" = 2;
+
+
+--Notification
+Select "origin_user_id", "description", "link", "date" from 
+"notification"
+	INNER JOIN "notified_user" on "notification"."notification_id" 
+="notified_user"."notification_id" 
+	where "user_notified" = 5;
+
+
+--Message by chat
+Select "sender_id", "body", "date"
+	from "message" where "chat_id" = 2
+	order by "date" DESC;
+
+
+--Comments
+ Select "comment_id", "user_id", "comment_to_id", "body", "date", 
+"upvotes", "downvotes"
+	from "comment" where "post_id" = 5
+	order by "date" DESC;
+
+
+--Posts from event
+Select "author_id", "title", "body", "date", "upvotes", "downvotes", 
+TYPE, "event_id", "group_id" 
+	from "post" where "event_id" = 1;
+
+--Posts from group
+Select "author_id", "title", "body", "date", "upvotes", "downvotes", 
+TYPE, "event_id", "group_id" 
+	from "post" where "group_id" = 1;
+
+
+	
+-- Select all regular users with starting name like...
+Select "name" , "user"."user_id" , "regular_user"."regular_user_id" from
+ "user" 
+	INNER JOIN "regular_user" on "regular_user"."user_id" = 
+"user"."user_id"  
+	where "user"."name" LIKE 'A%';
+
+-- Select Reports that have no answer
+Select "reporter_id", "approval", "reason", "reported_user_id", 
+"reported_event_id", "reported_post_id", "reported_comment_id", 
+"reported_group_id"
+	from "report" where "approval" IS NULL;
+
+
+--Select friends
+Select "friend_id2"
+	from "friend" where (TYPE = 'accepted' and "friend_id1" = 2);
+
+
+--Select pending requests (the user that hasn't answered)
+Select "friend_id2"
+	from "friend" where (TYPE = 'pending' and "friend_id1" = 2);
+	
+
+--Files path from Posts
+
+Select "file_path"
+	from "file" INNER JOIN "post" on "post"."post_id" = "file"."post_id" 
+where "post"."post_id" = 7 order by "date" DESC;
+
+--Event informations of events I am interested on
+Select "event"."event_id", "organization_id", "name", "location", 
+"date", "information"
+	FROM "event" INNER JOIN "user_interested_in_event" 
+	on "event"."event_id" = "user_interested_in_event"."event_id"
+	Where "user_interested_in_event"."user_id" = 2;
+	
+--Select group infomation of groups I belong
+Select "group"."group_id" , "name", "information", TYPE
+	from "user_in_group" INNER JOIN "group"
+	on "user_in_group"."group_id" = "group"."group_id"
+	where "user_id" = 2;
+
+--Posts from groups I belong, users I am friends with and events I am 
+interested on (Feed)
+Select * from (
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "event_id", "post"."group_id" 
+		from "post" INNER JOIN "user_in_group" on "post"."group_id" = 
+"user_in_group"."group_id" 
+		where "user_in_group"."user_id" = 2
+	UNION
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "event_id", "post"."group_id" 
+		from "post" INNER JOIN "friend" on "friend"."friend_id2" = 
+"post"."author_id" 
+		WHERE "friend".TYPE = 'accepted' AND "friend"."friend_id1" = 2
+	UNION
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "post"."event_id", "post"."group_id" 
+		from "post" INNER JOIN "user_interested_in_event" 
+		on "post"."event_id" = "user_interested_in_event"."event_id"
+		WHERE "user_interested_in_event"."user_id" = 2
+) as posts
+	NATURAL JOIN
+
+(Select "post_id",count("post_id") from "comment" GROUP BY "post_id") as
+ "comments" ;
+	
+
+
+-- Select all regular users and post with starting name ou title ou body
+ is like something...
+Select * from 
+				(Select "name" , "user"."user_id" , "regular_user"."regular_user_id"
+ from "user" 
+				INNER JOIN "regular_user" on "regular_user"."user_id" = 
+"user"."user_id"  
+				where "user"."name" LIKE 'A%')
+				 as "t1"
+				FULL OUTER JOIN
+				(Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "post"."event_id", "post"."group_id" from
+					"post" where "post"."body" LIKE '%para%' or "post"."title" LIKE 
+'%para%'
+				) as "t2" on "t1"."name" = "t2"."post";
+	
+	
+	
+              </div>
+              <div class="other-info">
+              <div class="timestamp">17:58:27</div>
+              </div>
+          </div>
+      </li><li class="list-item" tabindex="0" data-key="17:56:44">
+          <div class="entry error">
+              <div class="query">
+                  <span id="query_source_icon" class="query-history-icon sql-icon-lg fa fa-play" role="img"></span>
+                  
+-- my info
+Select "user_id", "name" from "user" where "email" = 'jokinho@feup.pt';
+
+
+-- if is admin
+Select "admin_id" from "admin" where "user_id" = 24;
+
+-- if is regular_user
+Select "regular_user_id", "personal_info" from "regular_user" where 
+"user_id" = 4;
+
+--if is a student
+Select "student_id" from "student" where "regular_user_id" = 5;
+
+-- if is a teacher
+Select "teacher_id" from "teacher" where "regular_user_id" = 3;
+
+-- if is an organization
+Select "organization_id" from "organization" where "regular_user_id" = 
+4;
+
+
+-- Select user from a group
+Select "user_id" from "user_in_group" where "group_id" = 1;
+
+--events of organization
+Select "name", "location", "date", "information" from "event" where 
+"organization_id" = 1;
+
+
+--Posts posted by me
+Select "title", "body", "date", "upvotes", "downvotes", TYPE, 
+"event_id", "group_id" 
+	from "post" where "author_id" = 2;
+
+
+--Notification
+Select "origin_user_id", "description", "link", "date" from 
+"notification"
+	INNER JOIN "notified_user" on "notification"."notification_id" 
+="notified_user"."notification_id" 
+	where "user_notified" = 5;
+
+
+--Message by chat
+Select "sender_id", "body", "date"
+	from "message" where "chat_id" = 2
+	order by "date" DESC;
+
+
+--Comments
+ Select "comment_id", "user_id", "comment_to_id", "body", "date", 
+"upvotes", "downvotes"
+	from "comment" where "post_id" = 5
+	order by "date" DESC;
+
+
+--Posts from event
+Select "author_id", "title", "body", "date", "upvotes", "downvotes", 
+TYPE, "event_id", "group_id" 
+	from "post" where "event_id" = 1;
+
+--Posts from group
+Select "author_id", "title", "body", "date", "upvotes", "downvotes", 
+TYPE, "event_id", "group_id" 
+	from "post" where "group_id" = 1;
+
+
+	
+-- Select all regular users with starting name like...
+Select "name" , "user"."user_id" , "regular_user"."regular_user_id" from
+ "user" 
+	INNER JOIN "regular_user" on "regular_user"."user_id" = 
+"user"."user_id"  
+	where "user"."name" LIKE 'A%';
+
+-- Select Reports that have no answer
+Select "reporter_id", "approval", "reason", "reported_user_id", 
+"reported_event_id", "reported_post_id", "reported_comment_id", 
+"reported_group_id"
+	from "report" where "approval" IS NULL;
+
+
+--Select friends
+Select "friend_id2"
+	from "friend" where (TYPE = 'accepted' and "friend_id1" = 2);
+
+
+--Select pending requests (the user that hasn't answered)
+Select "friend_id2"
+	from "friend" where (TYPE = 'pending' and "friend_id1" = 2);
+	
+
+--Files path from Posts
+
+Select "file_path"
+	from "file" INNER JOIN "post" on "post"."post_id" = "file"."post_id" 
+where "post"."post_id" = 7 order by "date" DESC;
+
+--Event informations of events I am interested on
+Select "event"."event_id", "organization_id", "name", "location", 
+"date", "information"
+	FROM "event" INNER JOIN "user_interested_in_event" 
+	on "event"."event_id" = "user_interested_in_event"."event_id"
+	Where "user_interested_in_event"."user_id" = 2;
+	
+--Select group infomation of groups I belong
+Select "group"."group_id" , "name", "information", TYPE
+	from "user_in_group" INNER JOIN "group"
+	on "user_in_group"."group_id" = "group"."group_id"
+	where "user_id" = 2;
+
+--Posts from groups I belong, users I am friends with and events I am 
+interested on (Feed)
+Select * from (
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "event_id", "post"."group_id" 
+		from "post" INNER JOIN "user_in_group" on "post"."group_id" = 
+"user_in_group"."group_id" 
+		where "user_in_group"."user_id" = 2
+	UNION
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "event_id", "post"."group_id" 
+		from "post" INNER JOIN "friend" on "friend"."friend_id2" = 
+"post"."author_id" 
+		WHERE "friend".TYPE = 'accepted' AND "friend"."friend_id1" = 2
+	UNION
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "post"."event_id", "post"."group_id" 
+		from "post" INNER JOIN "user_interested_in_event" 
+		on "post"."event_id" = "user_interested_in_event"."event_id"
+		WHERE "user_interested_in_event"."user_id" = 2
+) as posts
+	NATURAL JOIN
+
+(Select "post_id",count("post_id") from "comment" GROUP BY "post_id") as
+ "comments" ;
+	
+
+
+-- Select all regular users and post with starting name ou title ou body
+ is like something...
+Select * from 
+				(Select "name" , "user"."user_id" , "regular_user"."regular_user_id"
+ from "user" 
+				INNER JOIN "regular_user" on "regular_user"."user_id" = 
+"user"."user_id"  
+				where "user"."name" LIKE 'A%')
+				 as "t1"
+				FULL OUTER JOIN
+				(Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "post"."event_id", "post"."group_id" from
+					"post" where "post"."body" LIKE '%para%' or "post"."title" LIKE 
+'%para%'
+				) as "t2";
+	
+	
+	
+              </div>
+              <div class="other-info">
+              <div class="timestamp">17:56:44</div>
+              </div>
+          </div>
+      </li><li class="list-item" tabindex="0" data-key="17:56:39">
+          <div class="entry error">
+              <div class="query">
+                  <span id="query_source_icon" class="query-history-icon sql-icon-lg fa fa-play" role="img"></span>
+                  
+-- my info
+Select "user_id", "name" from "user" where "email" = 'jokinho@feup.pt';
+
+
+-- if is admin
+Select "admin_id" from "admin" where "user_id" = 24;
+
+-- if is regular_user
+Select "regular_user_id", "personal_info" from "regular_user" where 
+"user_id" = 4;
+
+--if is a student
+Select "student_id" from "student" where "regular_user_id" = 5;
+
+-- if is a teacher
+Select "teacher_id" from "teacher" where "regular_user_id" = 3;
+
+-- if is an organization
+Select "organization_id" from "organization" where "regular_user_id" = 
+4;
+
+
+-- Select user from a group
+Select "user_id" from "user_in_group" where "group_id" = 1;
+
+--events of organization
+Select "name", "location", "date", "information" from "event" where 
+"organization_id" = 1;
+
+
+--Posts posted by me
+Select "title", "body", "date", "upvotes", "downvotes", TYPE, 
+"event_id", "group_id" 
+	from "post" where "author_id" = 2;
+
+
+--Notification
+Select "origin_user_id", "description", "link", "date" from 
+"notification"
+	INNER JOIN "notified_user" on "notification"."notification_id" 
+="notified_user"."notification_id" 
+	where "user_notified" = 5;
+
+
+--Message by chat
+Select "sender_id", "body", "date"
+	from "message" where "chat_id" = 2
+	order by "date" DESC;
+
+
+--Comments
+ Select "comment_id", "user_id", "comment_to_id", "body", "date", 
+"upvotes", "downvotes"
+	from "comment" where "post_id" = 5
+	order by "date" DESC;
+
+
+--Posts from event
+Select "author_id", "title", "body", "date", "upvotes", "downvotes", 
+TYPE, "event_id", "group_id" 
+	from "post" where "event_id" = 1;
+
+--Posts from group
+Select "author_id", "title", "body", "date", "upvotes", "downvotes", 
+TYPE, "event_id", "group_id" 
+	from "post" where "group_id" = 1;
+
+
+	
+-- Select all regular users with starting name like...
+Select "name" , "user"."user_id" , "regular_user"."regular_user_id" from
+ "user" 
+	INNER JOIN "regular_user" on "regular_user"."user_id" = 
+"user"."user_id"  
+	where "user"."name" LIKE 'A%';
+
+-- Select Reports that have no answer
+Select "reporter_id", "approval", "reason", "reported_user_id", 
+"reported_event_id", "reported_post_id", "reported_comment_id", 
+"reported_group_id"
+	from "report" where "approval" IS NULL;
+
+
+--Select friends
+Select "friend_id2"
+	from "friend" where (TYPE = 'accepted' and "friend_id1" = 2);
+
+
+--Select pending requests (the user that hasn't answered)
+Select "friend_id2"
+	from "friend" where (TYPE = 'pending' and "friend_id1" = 2);
+	
+
+--Files path from Posts
+
+Select "file_path"
+	from "file" INNER JOIN "post" on "post"."post_id" = "file"."post_id" 
+where "post"."post_id" = 7 order by "date" DESC;
+
+--Event informations of events I am interested on
+Select "event"."event_id", "organization_id", "name", "location", 
+"date", "information"
+	FROM "event" INNER JOIN "user_interested_in_event" 
+	on "event"."event_id" = "user_interested_in_event"."event_id"
+	Where "user_interested_in_event"."user_id" = 2;
+	
+--Select group infomation of groups I belong
+Select "group"."group_id" , "name", "information", TYPE
+	from "user_in_group" INNER JOIN "group"
+	on "user_in_group"."group_id" = "group"."group_id"
+	where "user_id" = 2;
+
+--Posts from groups I belong, users I am friends with and events I am 
+interested on (Feed)
+Select * from (
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "event_id", "post"."group_id" 
+		from "post" INNER JOIN "user_in_group" on "post"."group_id" = 
+"user_in_group"."group_id" 
+		where "user_in_group"."user_id" = 2
+	UNION
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "event_id", "post"."group_id" 
+		from "post" INNER JOIN "friend" on "friend"."friend_id2" = 
+"post"."author_id" 
+		WHERE "friend".TYPE = 'accepted' AND "friend"."friend_id1" = 2
+	UNION
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "post"."event_id", "post"."group_id" 
+		from "post" INNER JOIN "user_interested_in_event" 
+		on "post"."event_id" = "user_interested_in_event"."event_id"
+		WHERE "user_interested_in_event"."user_id" = 2
+) as posts
+	NATURAL JOIN
+
+(Select "post_id",count("post_id") from "comment" GROUP BY "post_id") as
+ "comments" ;
+	
+
+
+-- Select all regular users and post with starting name ou title ou body
+ is like something...
+Select * from 
+				(Select "name" , "user"."user_id" , "regular_user"."regular_user_id"
+ from "user" 
+				INNER JOIN "regular_user" on "regular_user"."user_id" = 
+"user"."user_id"  
+				where "user"."name" LIKE 'A%')
+				 as "t1"
+				FULL OUTER JOIN
+				(Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "post"."event_id", "post"."group_id" from
+					"post" where "post"."body" LIKE '%para%' or "post"."title" LIKE 
+'%para%'
+				) as "t2"
+	
+	
+	
+              </div>
+              <div class="other-info">
+              <div class="timestamp">17:56:39</div>
+              </div>
+          </div>
+      </li><li class="list-item" tabindex="0" data-key="17:56:33">
+          <div class="entry error">
+              <div class="query">
+                  <span id="query_source_icon" class="query-history-icon sql-icon-lg fa fa-play" role="img"></span>
+                  
+-- my info
+Select "user_id", "name" from "user" where "email" = 'jokinho@feup.pt';
+
+
+-- if is admin
+Select "admin_id" from "admin" where "user_id" = 24;
+
+-- if is regular_user
+Select "regular_user_id", "personal_info" from "regular_user" where 
+"user_id" = 4;
+
+--if is a student
+Select "student_id" from "student" where "regular_user_id" = 5;
+
+-- if is a teacher
+Select "teacher_id" from "teacher" where "regular_user_id" = 3;
+
+-- if is an organization
+Select "organization_id" from "organization" where "regular_user_id" = 
+4;
+
+
+-- Select user from a group
+Select "user_id" from "user_in_group" where "group_id" = 1;
+
+--events of organization
+Select "name", "location", "date", "information" from "event" where 
+"organization_id" = 1;
+
+
+--Posts posted by me
+Select "title", "body", "date", "upvotes", "downvotes", TYPE, 
+"event_id", "group_id" 
+	from "post" where "author_id" = 2;
+
+
+--Notification
+Select "origin_user_id", "description", "link", "date" from 
+"notification"
+	INNER JOIN "notified_user" on "notification"."notification_id" 
+="notified_user"."notification_id" 
+	where "user_notified" = 5;
+
+
+--Message by chat
+Select "sender_id", "body", "date"
+	from "message" where "chat_id" = 2
+	order by "date" DESC;
+
+
+--Comments
+ Select "comment_id", "user_id", "comment_to_id", "body", "date", 
+"upvotes", "downvotes"
+	from "comment" where "post_id" = 5
+	order by "date" DESC;
+
+
+--Posts from event
+Select "author_id", "title", "body", "date", "upvotes", "downvotes", 
+TYPE, "event_id", "group_id" 
+	from "post" where "event_id" = 1;
+
+--Posts from group
+Select "author_id", "title", "body", "date", "upvotes", "downvotes", 
+TYPE, "event_id", "group_id" 
+	from "post" where "group_id" = 1;
+
+
+	
+-- Select all regular users with starting name like...
+Select "name" , "user"."user_id" , "regular_user"."regular_user_id" from
+ "user" 
+	INNER JOIN "regular_user" on "regular_user"."user_id" = 
+"user"."user_id"  
+	where "user"."name" LIKE 'A%';
+
+-- Select Reports that have no answer
+Select "reporter_id", "approval", "reason", "reported_user_id", 
+"reported_event_id", "reported_post_id", "reported_comment_id", 
+"reported_group_id"
+	from "report" where "approval" IS NULL;
+
+
+--Select friends
+Select "friend_id2"
+	from "friend" where (TYPE = 'accepted' and "friend_id1" = 2);
+
+
+--Select pending requests (the user that hasn't answered)
+Select "friend_id2"
+	from "friend" where (TYPE = 'pending' and "friend_id1" = 2);
+	
+
+--Files path from Posts
+
+Select "file_path"
+	from "file" INNER JOIN "post" on "post"."post_id" = "file"."post_id" 
+where "post"."post_id" = 7 order by "date" DESC;
+
+--Event informations of events I am interested on
+Select "event"."event_id", "organization_id", "name", "location", 
+"date", "information"
+	FROM "event" INNER JOIN "user_interested_in_event" 
+	on "event"."event_id" = "user_interested_in_event"."event_id"
+	Where "user_interested_in_event"."user_id" = 2;
+	
+--Select group infomation of groups I belong
+Select "group"."group_id" , "name", "information", TYPE
+	from "user_in_group" INNER JOIN "group"
+	on "user_in_group"."group_id" = "group"."group_id"
+	where "user_id" = 2;
+
+--Posts from groups I belong, users I am friends with and events I am 
+interested on (Feed)
+Select * from (
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "event_id", "post"."group_id" 
+		from "post" INNER JOIN "user_in_group" on "post"."group_id" = 
+"user_in_group"."group_id" 
+		where "user_in_group"."user_id" = 2
+	UNION
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "event_id", "post"."group_id" 
+		from "post" INNER JOIN "friend" on "friend"."friend_id2" = 
+"post"."author_id" 
+		WHERE "friend".TYPE = 'accepted' AND "friend"."friend_id1" = 2
+	UNION
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "post"."event_id", "post"."group_id" 
+		from "post" INNER JOIN "user_interested_in_event" 
+		on "post"."event_id" = "user_interested_in_event"."event_id"
+		WHERE "user_interested_in_event"."user_id" = 2
+) as posts
+	NATURAL JOIN
+
+(Select "post_id",count("post_id") from "comment" GROUP BY "post_id") as
+ "comments" ;
+	
+
+
+-- Select all regular users and post with starting name ou title ou body
+ is like something...
+Select * from (
+				(Select "name" , "user"."user_id" , "regular_user"."regular_user_id"
+ from "user" 
+				INNER JOIN "regular_user" on "regular_user"."user_id" = 
+"user"."user_id"  
+				where "user"."name" LIKE 'A%')
+				 as "t1"
+				FULL OUTER JOIN
+				(Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "post"."event_id", "post"."group_id" from
+					"post" where "post"."body" LIKE '%para%' or "post"."title" LIKE 
+'%para%'
+				) as "t2"
+	)
+	
+	
+              </div>
+              <div class="other-info">
+              <div class="timestamp">17:56:33</div>
+              </div>
+          </div>
+      </li><li class="list-item" tabindex="0" data-key="17:56:30">
+          <div class="entry error">
+              <div class="query">
+                  <span id="query_source_icon" class="query-history-icon sql-icon-lg fa fa-play" role="img"></span>
+                  
+-- my info
+Select "user_id", "name" from "user" where "email" = 'jokinho@feup.pt';
+
+
+-- if is admin
+Select "admin_id" from "admin" where "user_id" = 24;
+
+-- if is regular_user
+Select "regular_user_id", "personal_info" from "regular_user" where 
+"user_id" = 4;
+
+--if is a student
+Select "student_id" from "student" where "regular_user_id" = 5;
+
+-- if is a teacher
+Select "teacher_id" from "teacher" where "regular_user_id" = 3;
+
+-- if is an organization
+Select "organization_id" from "organization" where "regular_user_id" = 
+4;
+
+
+-- Select user from a group
+Select "user_id" from "user_in_group" where "group_id" = 1;
+
+--events of organization
+Select "name", "location", "date", "information" from "event" where 
+"organization_id" = 1;
+
+
+--Posts posted by me
+Select "title", "body", "date", "upvotes", "downvotes", TYPE, 
+"event_id", "group_id" 
+	from "post" where "author_id" = 2;
+
+
+--Notification
+Select "origin_user_id", "description", "link", "date" from 
+"notification"
+	INNER JOIN "notified_user" on "notification"."notification_id" 
+="notified_user"."notification_id" 
+	where "user_notified" = 5;
+
+
+--Message by chat
+Select "sender_id", "body", "date"
+	from "message" where "chat_id" = 2
+	order by "date" DESC;
+
+
+--Comments
+ Select "comment_id", "user_id", "comment_to_id", "body", "date", 
+"upvotes", "downvotes"
+	from "comment" where "post_id" = 5
+	order by "date" DESC;
+
+
+--Posts from event
+Select "author_id", "title", "body", "date", "upvotes", "downvotes", 
+TYPE, "event_id", "group_id" 
+	from "post" where "event_id" = 1;
+
+--Posts from group
+Select "author_id", "title", "body", "date", "upvotes", "downvotes", 
+TYPE, "event_id", "group_id" 
+	from "post" where "group_id" = 1;
+
+
+	
+-- Select all regular users with starting name like...
+Select "name" , "user"."user_id" , "regular_user"."regular_user_id" from
+ "user" 
+	INNER JOIN "regular_user" on "regular_user"."user_id" = 
+"user"."user_id"  
+	where "user"."name" LIKE 'A%';
+
+-- Select Reports that have no answer
+Select "reporter_id", "approval", "reason", "reported_user_id", 
+"reported_event_id", "reported_post_id", "reported_comment_id", 
+"reported_group_id"
+	from "report" where "approval" IS NULL;
+
+
+--Select friends
+Select "friend_id2"
+	from "friend" where (TYPE = 'accepted' and "friend_id1" = 2);
+
+
+--Select pending requests (the user that hasn't answered)
+Select "friend_id2"
+	from "friend" where (TYPE = 'pending' and "friend_id1" = 2);
+	
+
+--Files path from Posts
+
+Select "file_path"
+	from "file" INNER JOIN "post" on "post"."post_id" = "file"."post_id" 
+where "post"."post_id" = 7 order by "date" DESC;
+
+--Event informations of events I am interested on
+Select "event"."event_id", "organization_id", "name", "location", 
+"date", "information"
+	FROM "event" INNER JOIN "user_interested_in_event" 
+	on "event"."event_id" = "user_interested_in_event"."event_id"
+	Where "user_interested_in_event"."user_id" = 2;
+	
+--Select group infomation of groups I belong
+Select "group"."group_id" , "name", "information", TYPE
+	from "user_in_group" INNER JOIN "group"
+	on "user_in_group"."group_id" = "group"."group_id"
+	where "user_id" = 2;
+
+--Posts from groups I belong, users I am friends with and events I am 
+interested on (Feed)
+Select * from (
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "event_id", "post"."group_id" 
+		from "post" INNER JOIN "user_in_group" on "post"."group_id" = 
+"user_in_group"."group_id" 
+		where "user_in_group"."user_id" = 2
+	UNION
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "event_id", "post"."group_id" 
+		from "post" INNER JOIN "friend" on "friend"."friend_id2" = 
+"post"."author_id" 
+		WHERE "friend".TYPE = 'accepted' AND "friend"."friend_id1" = 2
+	UNION
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "post"."event_id", "post"."group_id" 
+		from "post" INNER JOIN "user_interested_in_event" 
+		on "post"."event_id" = "user_interested_in_event"."event_id"
+		WHERE "user_interested_in_event"."user_id" = 2
+) as posts
+	NATURAL JOIN
+
+(Select "post_id",count("post_id") from "comment" GROUP BY "post_id") as
+ "comments" ;
+	
+
+
+-- Select all regular users and post with starting name ou title ou body
+ is like something...
+Select * from (
+				(Select "name" , "user"."user_id" , "regular_user"."regular_user_id"
+ from "user" 
+				INNER JOIN "regular_user" on "regular_user"."user_id" = 
+"user"."user_id"  
+				where "user"."name" LIKE 'A%')
+				 as "t1"
+				FULL OUTER JOIN
+				(Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "post"."event_id", "post"."group_id" from
+					"post" where "post"."body" LIKE '%para%' or "post"."title" LIKE 
+'%para%'
+				) as "t2"
+	);
+	
+	
+              </div>
+              <div class="other-info">
+              <div class="timestamp">17:56:30</div>
+              </div>
+          </div>
+      </li><li class="list-item" tabindex="0" data-key="17:55:53">
+          <div class="entry error">
+              <div class="query">
+                  <span id="query_source_icon" class="query-history-icon sql-icon-lg fa fa-play" role="img"></span>
+                  
+-- my info
+Select "user_id", "name" from "user" where "email" = 'jokinho@feup.pt';
+
+
+-- if is admin
+Select "admin_id" from "admin" where "user_id" = 24;
+
+-- if is regular_user
+Select "regular_user_id", "personal_info" from "regular_user" where 
+"user_id" = 4;
+
+--if is a student
+Select "student_id" from "student" where "regular_user_id" = 5;
+
+-- if is a teacher
+Select "teacher_id" from "teacher" where "regular_user_id" = 3;
+
+-- if is an organization
+Select "organization_id" from "organization" where "regular_user_id" = 
+4;
+
+
+-- Select user from a group
+Select "user_id" from "user_in_group" where "group_id" = 1;
+
+--events of organization
+Select "name", "location", "date", "information" from "event" where 
+"organization_id" = 1;
+
+
+--Posts posted by me
+Select "title", "body", "date", "upvotes", "downvotes", TYPE, 
+"event_id", "group_id" 
+	from "post" where "author_id" = 2;
+
+
+--Notification
+Select "origin_user_id", "description", "link", "date" from 
+"notification"
+	INNER JOIN "notified_user" on "notification"."notification_id" 
+="notified_user"."notification_id" 
+	where "user_notified" = 5;
+
+
+--Message by chat
+Select "sender_id", "body", "date"
+	from "message" where "chat_id" = 2
+	order by "date" DESC;
+
+
+--Comments
+ Select "comment_id", "user_id", "comment_to_id", "body", "date", 
+"upvotes", "downvotes"
+	from "comment" where "post_id" = 5
+	order by "date" DESC;
+
+
+--Posts from event
+Select "author_id", "title", "body", "date", "upvotes", "downvotes", 
+TYPE, "event_id", "group_id" 
+	from "post" where "event_id" = 1;
+
+--Posts from group
+Select "author_id", "title", "body", "date", "upvotes", "downvotes", 
+TYPE, "event_id", "group_id" 
+	from "post" where "group_id" = 1;
+
+
+	
+-- Select all regular users with starting name like...
+Select "name" , "user"."user_id" , "regular_user"."regular_user_id" from
+ "user" 
+	INNER JOIN "regular_user" on "regular_user"."user_id" = 
+"user"."user_id"  
+	where "user"."name" LIKE 'A%';
+
+-- Select Reports that have no answer
+Select "reporter_id", "approval", "reason", "reported_user_id", 
+"reported_event_id", "reported_post_id", "reported_comment_id", 
+"reported_group_id"
+	from "report" where "approval" IS NULL;
+
+
+--Select friends
+Select "friend_id2"
+	from "friend" where (TYPE = 'accepted' and "friend_id1" = 2);
+
+
+--Select pending requests (the user that hasn't answered)
+Select "friend_id2"
+	from "friend" where (TYPE = 'pending' and "friend_id1" = 2);
+	
+
+--Files path from Posts
+
+Select "file_path"
+	from "file" INNER JOIN "post" on "post"."post_id" = "file"."post_id" 
+where "post"."post_id" = 7 order by "date" DESC;
+
+--Event informations of events I am interested on
+Select "event"."event_id", "organization_id", "name", "location", 
+"date", "information"
+	FROM "event" INNER JOIN "user_interested_in_event" 
+	on "event"."event_id" = "user_interested_in_event"."event_id"
+	Where "user_interested_in_event"."user_id" = 2;
+	
+--Select group infomation of groups I belong
+Select "group"."group_id" , "name", "information", TYPE
+	from "user_in_group" INNER JOIN "group"
+	on "user_in_group"."group_id" = "group"."group_id"
+	where "user_id" = 2;
+
+--Posts from groups I belong, users I am friends with and events I am 
+interested on (Feed)
+Select * from (
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "event_id", "post"."group_id" 
+		from "post" INNER JOIN "user_in_group" on "post"."group_id" = 
+"user_in_group"."group_id" 
+		where "user_in_group"."user_id" = 2
+	UNION
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "event_id", "post"."group_id" 
+		from "post" INNER JOIN "friend" on "friend"."friend_id2" = 
+"post"."author_id" 
+		WHERE "friend".TYPE = 'accepted' AND "friend"."friend_id1" = 2
+	UNION
+	Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "post"."event_id", "post"."group_id" 
+		from "post" INNER JOIN "user_interested_in_event" 
+		on "post"."event_id" = "user_interested_in_event"."event_id"
+		WHERE "user_interested_in_event"."user_id" = 2
+) as posts
+	NATURAL JOIN
+
+(Select "post_id",count("post_id") from "comment" GROUP BY "post_id") as
+ "comments" ;
+	
+
+
+-- Select all regular users and post with starting name ou title ou body
+ is like something...
+Select * from (
+				(Select "name" , "user"."user_id" , "regular_user"."regular_user_id"
+ from "user" 
+				INNER JOIN "regular_user" on "regular_user"."user_id" = 
+"user"."user_id"  
+				where "user"."name" LIKE 'A%')
+				 as "t1"
+				JOIN
+				(Select "post_id","author_id", "title", "body", "date", "upvotes", 
+"downvotes", "post".TYPE, "post"."event_id", "post"."group_id" from
+					"post" where "post"."body" LIKE '%para%' or "post"."title" LIKE 
+'%para%'
+				) as "t2"
+	);
+	
+	
+              </div>
+              <div class="other-info">
+              <div class="timestamp">17:55:53</div>
+              </div>
+          </div>
+      </li></ul>
+        </div></div>
+        </div></div><div class="gutter gutter-horizontal" style="width: 1px;"></div><div style="width: calc(50% - 0.5px);"><div id="query_detail" class="query-detail">
+            <div class="error-message-block d-none"></div>
+            <div class="info-message-block d-none"></div>
+            <div class="metadata-block"><div class="metadata">
+                <div class="item">
+                  <span class="value">4/11/2020 5:19:15 PM</span>
+                  <span class="description">Date</span>
+              </div>
+                <div class="item">
+                  <span class="value">1</span>
+                  <span class="description">Rows Affected</span>
+              </div>
+                <div class="item">
+                  <span class="value">261 msec</span>
+                  <span class="description">Duration</span>
+              </div>
+            </div></div>
+            <div class="query-statement-block">
+              <div id="history-detail-query">
+                <button class="btn-copy copy-all" tabindex="0" accesskey="y">Copy</button>
+                <button class="btn-copy-editor copy-to-editor" tabindex="0" accesskey="y">Copy to Query Editor</button>
+                <div><div class="CodeMirror cm-s-default" style="font-size: 1em;"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 0px;"><textarea style="position: absolute; bottom: -1em; padding: 0px; width: 1px; height: 1em; outline: currentcolor none medium;" autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="-1" wrap="off"></textarea></div><div class="CodeMirror-vscrollbar" tabindex="-1" cm-not-content="true" style="display: block; bottom: 0px;"><div style="min-width: 1px; height: 216px;"></div></div><div class="CodeMirror-hscrollbar" tabindex="-1" cm-not-content="true" style="display: block; right: 0px; left: 0px;"><div style="height: 100%; min-height: 1px; width: 33px;"></div></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1" draggable="true"><div class="CodeMirror-sizer" style="margin-left: 0px; min-width: 3px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative;"><div class="CodeMirror-lines" role="presentation"><div style="position: relative; outline: currentcolor none medium;" role="presentation"><div class="CodeMirror-measure"></div><div class="CodeMirror-measure"><pre class="CodeMirror-line" role="presentation"><span role="presentation"><span cm-text="">​</span></span></pre></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-cursors"></div><div class="CodeMirror-code" role="presentation"></div></div></div></div></div><div style="position: absolute; height: 30px; width: 1px; border-bottom: 0px solid transparent;"></div><div class="CodeMirror-gutters" style="display: none;"></div></div></div></div>
+              </div>
+            </div>
+            <div>
+              <hr class="block-divider">
+            </div>
+            <div class="message-block">
+              <div class="message">
+                <div class="message-header">Messages</div>
+                <div class="content"><pre class="content-value">INSERT 0 1
+
+Query returned successfully in 261 msec.</pre></div>
+              </div>
+            </div>
+        </div></div></div></div></td></tr></tbody></table></div></div></div></div><div class="wcLayoutPane" style="bottom: 0px; height: 424.25px; left: 0px; right: 0px;"><div class="wcFrame wcWide wcTall"><div class="wcFrameTitleBar wcTabTop" style="width: 1605px;"><div class="wcTabScroller" style="left: 0px;"><div class="wcPanelTab" id="0"><div><a href="#" tabindex="-1" class="panel-link-heading">Data Output</a></div></div><div class="wcPanelTab" id="1"><div><a href="#" tabindex="-1" class="panel-link-heading">Explain</a></div></div><div class="wcPanelTab wcPanelTabActive" id="2"><div><a href="#" tabindex="-1" class="panel-link-heading">Messages</a></div></div><div class="wcPanelTab" id="3"><div><a href="#" tabindex="-1" class="panel-link-heading">Notifications</a></div></div></div><div class="wcFrameButtonBar" style="min-width: 0px; width: 0px; right: 0px;"></div></div><div class="wcFrameButtonBar" style="min-width: 0px; width: 0px;"><div class="wcFrameButton" title="Close the currently active panel tab" aria-label="Close panel" tabindex="0" style="display: none;"><div class="fa fa-close"></div></div><div class="wcFrameButton" title="Collapse the active panel" style="display: none;"><div class="fa fa-download"></div>C</div></div><div class="wcFrameCenter wcPanelBackground wcScrollableX wcScrollableY" style="left: 0px; right: 0px; bottom: 0px;"><div class="wcPanelTabContent wcPanelTabContentHidden" id="0"><table class="wcLayout wcWide wcTall"><tbody><tr><td><div class="pg-panel-content hide-vertical-scrollbar"><div id="datagrid" class="sql-editor-grid-container text-12" tabindex="0"></div></div></td></tr></tbody></table></div><div class="wcPanelTabContent wcPanelTabContentHidden" id="1"><table class="wcLayout wcWide wcTall"><tbody><tr><td><div class="pg-panel-content"><div class="sql-editor-explain" tabindex="0"></div></div></td></tr></tbody></table></div><div class="wcPanelTabContent" id="2"><table class="wcLayout wcWide wcTall"><tbody><tr><td><div class="pg-panel-content"><div role="status" class="sql-editor-message" tabindex="0">INSERT 0 1
+
+Query returned successfully in 261 msec.</div></div></td></tr></tbody></table></div><div class="wcPanelTabContent wcPanelTabContentHidden" id="3"><table class="wcLayout wcWide wcTall"><tbody><tr><td><div class="pg-panel-content"><div id="notification_grid" class="sql-editor-notifications" tabindex="0"><table class="backgrid presentation table table-bordered table-hover table-noouter-border table-bottom-border" role="table"><thead><tr><th class="sortable renderable recorded_time" role="columnheader"><button>Recorded time<span class="sort-caret" aria-hidden="true"></span></button></th><th class="sortable renderable channel" role="columnheader"><button>Event<span class="sort-caret" aria-hidden="true"></span></button></th><th class="sortable renderable pid" role="columnheader"><button>Process ID<span class="sort-caret" aria-hidden="true"></span></button></th><th class="sortable renderable payload" role="columnheader"><button>Payload<span class="sort-caret" aria-hidden="true"></span></button></th></tr></thead><tbody><tr class="empty"><td colspan="4"><span>No data found</span></td></tr></tbody></table></div></div></td></tr></tbody></table></div></div></div></div><div class="wcSplitterBar wcWide wcSplitterBarH" style="top: 427.25px; left: 0px;"><div class="wcSplitterBarLine"></div></div></div></div>
+    </div>
+</div>
+<script>
+            require(['sources/generated/browser_nodes', 'sources/generated/codemirror', 'sources/generated/slickgrid'], function() {
+    require(['sources/generated/sqleditor'], function(ctx) {
+        var $ = pgAdmin.SqlEditor.jquery,
+            S = pgAdmin.SqlEditor.S,
+            editorPanel = $('.sql-editor'),
+            loadingDiv = $('#fetching_data'),
+            msgDiv = loadingDiv.find('.sql-editor-busy-text');
+
+        // Register unload event on window close.
+        /* If opened in new tab, close the connection only on tab/window close and
+         * not on refresh attempt because the user may cancel the reload
+         */
+        if(window.opener) {
+          $(window).on('unload', function(ev) {
+            $.ajax({
+              method: 'DELETE',
+              url: "/datagrid/" + "close/" + 6528537
+            });
+          });
+        } else {
+          $(window).on('beforeunload', function(ev) {
+            $.ajax({
+              method: 'DELETE',
+              url: "/datagrid/" + "close/" + 6528537
+            });
+          });
+        }
+
+        // Get the controller object from pgAdmin.SqlEditor
+        var sqlEditorController = pgAdmin.SqlEditor.create(editorPanel);
+
+        // Listen on events to show/hide loading-icon and change messages.
+        sqlEditorController.on('pgadmin-sqleditor:loading-icon:message', function(msg) {
+            msgDiv.text(msg);
+          }).on('pgadmin-sqleditor:loading-icon:show', function(msg) {
+            loadingDiv.removeClass('d-none');
+            msgDiv.text(msg);
+          }).on('pgadmin-sqleditor:loading-icon:hide', function() {
+            loadingDiv.addClass('d-none');
+          });
+                    var script_type_url = '';
+                // Start the query tool.
+        sqlEditorController.start(
+            6528537,
+            {"is_query_tool": "true", "sgid": "1", "sid": "2", "server_type": "pg", "did": "7880027", "title": "lbaw2034/lbaw2034@LBAW34"},
+            '{"floating":[],"root":{"type":"wcSplitter","horizontal":false,"isDrawer":false,"pane0":{"type":"wcFrame","floating":false,"isFocus":false,"tabOrientation":"top","pos":{"x":0.5,"y":0.5},"size":{"x":1212,"y":278.355},"tab":0,"panels":[{"type":"wcPanel","panelType":"sql_panel","size":{"x":1212,"y":278.355},"customData":{}},{"type":"wcPanel","panelType":"history","size":{"x":1616,"y":278.355},"customData":{}}]},"pane1":{"type":"wcFrame","floating":false,"isFocus":false,"tabOrientation":"top","pos":{"x":0.5,"y":0.5},"size":{"x":1616,"y":843.5},"tab":0,"panels":[{"type":"wcPanel","panelType":"data_output","size":{"x":1616,"y":843.5},"customData":{}},{"type":"wcPanel","panelType":"explain","size":{"x":1616,"y":843.5},"customData":{}},{"type":"wcPanel","panelType":"messages","size":{"x":1616,"y":843.5},"customData":{}},{"type":"wcPanel","panelType":"notifications","size":{"x":1616,"y":843.5},"customData":{}}]},"pos":0.5}}'
+        );
+
+        // If opening from schema diff, set the generated script to the SQL Editor
+
+        var schema_ddl_diff = (window.opener !== null) ? window.opener.pgAdmin.ddl_diff : (window.parent !== null) ? window.parent.pgAdmin.ddl_diff : window.top.pgAdmin.ddl_diff;
+        sqlEditorController.set_value_to_editor(schema_ddl_diff);
+        if (window.opener !== null) window.opener.pgAdmin.ddl_diff = '';
+        else if (window.parent !== null) window.parent.pgAdmin.ddl_diff = '';
+        else if (window.top !== null) window.top.pgAdmin.ddl_diff = '';
+
+    });
+});
+
+</script>
+
+
+<div class="alertify ajs-hidden  ajs-movable ajs-pinnable ajs-zoom"><div class="ajs-dimmer"></div><div class="ajs-modal" tabindex="0"><div class="ajs-dialog" tabindex="0"><button class="ajs-reset" aria-label="reset"></button><div class="ajs-commands"><button class="ajs-pin" aria-label="Pin"></button><button class="ajs-maximize" aria-label="Maximize" tabindex="0"></button><button class="ajs-close" aria-label="Close"></button></div><div class="ajs-header">AlertifyJS</div><div class="ajs-body"><div class="ajs-content"></div></div><div class="ajs-footer"><div class="ajs-auxiliary ajs-buttons"></div><div class="ajs-primary ajs-buttons"><button class="ajs-button btn btn-secondary fa fa-lg fa-times pg-alertify-button">Cancel</button><button class="ajs-button btn btn-primary fa fa-lg fa-check pg-alertify-button">OK</button></div></div><div class="ajs-handle"></div><button class="ajs-reset" aria-label="reset"></button></div></div></div><div class="alertify ajs-hidden  ajs-movable ajs-pinnable ajs-zoom"><div class="ajs-dimmer"></div><div class="ajs-modal" tabindex="0"><div class="ajs-dialog" tabindex="0"><button class="ajs-reset" aria-label="reset"></button><div class="ajs-commands"><button class="ajs-pin" aria-label="Pin"></button><button class="ajs-maximize" aria-label="Maximize" tabindex="0"></button><button class="ajs-close" aria-label="Close"></button></div><div class="ajs-header">AlertifyJS</div><div class="ajs-body"><div class="ajs-content"><p></p><label for="alertify-prompt-0" style="display: none;">HiddenLabel</label><input class="form-control" type="text" id="alertify-prompt-0"></div></div><div class="ajs-footer"><div class="ajs-auxiliary ajs-buttons"></div><div class="ajs-primary ajs-buttons"><button class="ajs-button btn btn-secondary fa fa-lg fa-times pg-alertify-button">Cancel</button><button class="ajs-button btn btn-primary fa fa-lg fa-check pg-alertify-button">OK</button></div></div><div class="ajs-handle"></div><button class="ajs-reset" aria-label="reset"></button></div></div></div><div class="alertify ajs-hidden  ajs-movable ajs-pinnable ajs-zoom"><div class="ajs-dimmer"></div><div class="ajs-modal" tabindex="0"><div class="ajs-dialog" tabindex="0"><button class="ajs-reset" aria-label="reset"></button><div class="ajs-commands"><button class="ajs-pin" aria-label="Pin"></button><button class="ajs-maximize" aria-label="Maximize" tabindex="0"></button><button class="ajs-close" aria-label="Close"></button></div><div class="ajs-header">AlertifyJS</div><div class="ajs-body"><div class="ajs-content"></div></div><div class="ajs-footer"><div class="ajs-auxiliary ajs-buttons"></div><div class="ajs-primary ajs-buttons"><button class="ajs-button btn btn-primary fa fa-lg fa-check pg-alertify-button">OK</button></div></div><div class="ajs-handle"></div><button class="ajs-reset" aria-label="reset"></button></div></div></div><div class="alertify ajs-hidden  ajs-movable ajs-pinnable ajs-zoom"><div class="ajs-dimmer"></div><div class="ajs-modal" tabindex="0"><div class="ajs-dialog" tabindex="0"><button class="ajs-reset" aria-label="reset"></button><div class="ajs-commands"><button class="ajs-pin" aria-label="Pin"></button><button class="ajs-maximize" aria-label="Maximize" tabindex="0"></button><button class="ajs-close" aria-label="Close"></button></div><div class="ajs-header">AlertifyJS</div><div class="ajs-body"><div class="ajs-content"></div></div><div class="ajs-footer"><div class="ajs-auxiliary ajs-buttons"></div><div class="ajs-primary ajs-buttons"><button class="ajs-button btn btn-secondary fa fa-lg fa-times pg-alertify-button">Cancel</button><button class="ajs-button btn btn-primary fa fa-lg fa-check pg-alertify-button">OK</button></div></div><div class="ajs-handle"></div><button class="ajs-reset" aria-label="reset"></button></div></div></div><div class="alertify ajs-hidden  ajs-movable ajs-pinnable ajs-zoom"><div class="ajs-dimmer"></div><div class="ajs-modal" tabindex="0"><div class="ajs-dialog" tabindex="0"><button class="ajs-reset" aria-label="reset"></button><div class="ajs-commands"><button class="ajs-pin" aria-label="Pin"></button><button class="ajs-maximize" aria-label="Maximize" tabindex="0"></button><button class="ajs-close" aria-label="Close"></button></div><div class="ajs-header">AlertifyJS</div><div class="ajs-body"><div class="ajs-content"><p></p><label for="alertify-prompt-0" style="display: none;">HiddenLabel</label><input class="form-control" type="text" id="alertify-prompt-0"></div></div><div class="ajs-footer"><div class="ajs-auxiliary ajs-buttons"></div><div class="ajs-primary ajs-buttons"><button class="ajs-button btn btn-secondary fa fa-lg fa-times pg-alertify-button">Cancel</button><button class="ajs-button btn btn-primary fa fa-lg fa-check pg-alertify-button">OK</button></div></div><div class="ajs-handle"></div><button class="ajs-reset" aria-label="reset"></button></div></div></div><div class="alertify ajs-hidden  ajs-movable ajs-pinnable ajs-zoom"><div class="ajs-dimmer"></div><div class="ajs-modal" tabindex="0"><div class="ajs-dialog" tabindex="0"><button class="ajs-reset" aria-label="reset"></button><div class="ajs-commands"><button class="ajs-pin" aria-label="Pin"></button><button class="ajs-maximize" aria-label="Maximize" tabindex="0"></button><button class="ajs-close" aria-label="Close"></button></div><div class="ajs-header">AlertifyJS</div><div class="ajs-body"><div class="ajs-content"></div></div><div class="ajs-footer"><div class="ajs-auxiliary ajs-buttons"></div><div class="ajs-primary ajs-buttons"><button class="ajs-button btn btn-primary fa fa-lg fa-check pg-alertify-button">OK</button></div></div><div class="ajs-handle"></div><button class="ajs-reset" aria-label="reset"></button></div></div></div><div class="alertify  ajs-modeless ajs-movable ajs-resizable ajs-zoom ajs-no-padding ajs-no-overflow ajs-out ajs-hidden"><div class="ajs-dimmer"></div><div class="ajs-modal" tabindex="0"><div class="ajs-dialog pg-el-container" tabindex="0" style="" el="sm"><button class="ajs-reset" aria-label="reset"></button><div class="ajs-commands"><button class="ajs-pin" aria-label="Pin"></button><button class="ajs-maximize" aria-label="Maximize" tabindex="0" title="Maximize"></button><button class="ajs-close" aria-label="Close" title="Close"></button></div><div class="ajs-header">Select file</div><div class="ajs-body"><div class="ajs-content alertify_tools_dialog_properties"><div class="storage_dialog file_selection_dlg"></div></div></div><div class="ajs-footer"><div class="ajs-auxiliary ajs-buttons"></div><div class="ajs-primary ajs-buttons"><button class="ajs-button btn btn-secondary fa fa-times pg-alertify-button">Cancel</button><button class="ajs-button btn btn-primary fa fa-file file_manager_ok pg-alertify-button">Select</button></div></div><div class="ajs-handle"></div><button class="ajs-reset" aria-label="reset"></button></div></div></div><div class="alertify-notifier ajs-bottom ajs-right"></div></body></html>

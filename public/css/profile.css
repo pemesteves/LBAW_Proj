@@ -1,0 +1,53 @@
+#profile_card #accordion .card-body {
+    font-size: 1.1em;
+}
+
+#profile_card #accordion .card-header {
+    border-bottom: 0;
+}
+
+#profile_card #accordion .card-header .btn{
+    padding-left: 0;
+    padding-right: 0;
+}
+
+#profile_card #accordion .card-header h5{
+    font-size: 1.4em;
+}
+
+#profile_card #accordion .card-body ul {
+    padding-left: 20px;
+    margin-bottom: 0;
+    list-style: none;
+}
+
+#profile_card #accordion .card-body ul li {
+    position: relative;
+	padding-bottom: 10px;
+}
+
+#profile_card #accordion .card-body ul li:before {
+    content: '';
+    position: absolute;
+    border-right:2px solid black;
+    border-bottom:2px solid black;
+    width:10px;
+    height:10px;
+    top: calc(50% - 4px);
+    left: -20px;
+    transform: translateY(-50%) rotate(-45deg);
+}
+
+#profile_card #accordion .card-body ul li.more::before {
+    border: 0;
+    width: 0;
+    height: 0;
+    top: 0;
+    left: 0;
+    transform: 0;
+}
+
+#profile_card #accordion .card-body ul li.more {
+    top: -10px;
+    padding-bottom: 0;
+}

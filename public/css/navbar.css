@@ -1,0 +1,93 @@
+.navbar {
+    background-color: sandybrown;
+}
+
+.navbar > a.navbar-brand h1 {
+    color: whitesmoke;
+}
+
+
+.navbar > .form-inline > .input-group {
+    border-width: 0.05em; 
+    border-color: white; 
+    border-radius: 2em; 
+    border-style:solid; 
+    background-color: white;
+}
+
+.navbar > .form-inline .input-group input {
+    border-width: 0; 
+    border-top-left-radius: inherit; 
+    border-bottom-left-radius: inherit;
+}
+
+.navbar > .form-inline .input-group .input-group-append {
+    border-radius: inherit;
+}
+
+.navbar > .form-inline .input-group .input-group-append button {
+    background-color: sandybrown; 
+    border-top-left-radius: inherit; 
+    border-bottom-left-radius: inherit;
+}
+
+.navbar > .btn-group button {
+    border: 0; 
+    border-radius: .25em;
+}
+
+.navbar > .btn-group button img{
+    width: 25px; 
+    border-radius: 1em;
+}
+
+/*******************/
+/** Mobile navbar **/
+/*******************/
+
+.navbar #navbar_pers_info_mobile {
+    background-color: transparent;
+    border: 0;
+    border-radius: .25em;
+    color: whitesmoke;
+    font-size: 1.75em;
+    padding: 6px 12px;
+}
+
+#navbar_pers_info_mobile:hover {
+    background-color: whitesmoke;
+    color: black;
+}
+
+
+@media screen {
+    #navbar_pers_info{
+        display: block;
+        opacity: 1;
+    }
+    #navbar_pers_info_mobile {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .navbar {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .navbar > .form-inline {
+        max-width: 60%;
+    }
+    #navbar_pers_info{
+        display: none;
+        opacity: 0;
+        width: 100%;
+        text-align: end;
+    }
+
+    #navbar_pers_info_mobile {
+        display: block;
+    }
+}
+  

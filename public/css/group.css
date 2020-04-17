@@ -1,0 +1,27 @@
+#group_card {
+    max-width: 80%;
+    margin: 5% auto;
+}
+
+#group_card .col-sm-3 {
+    border: 0;
+    border-radius: 0;
+    height: 100%;
+}
+
+#group_card .col-sm-9 {
+    height: 100%; 
+    border: 0;
+}
+
+#group_card h1 {
+    font-size: 3em;
+}
+
+#group_card h2 {
+    font-size: 1.75em;
+}
+
+#group_card p {
+    text-align: right;
+}

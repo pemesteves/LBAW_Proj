@@ -1,0 +1,40 @@
+.btn-primary {
+    background-color: sandybrown;
+    border-color: rgb(255, 135, 30);
+}
+
+.btn-primary:hover{
+    background-color: rgb(255, 135, 30);
+    border-color: rgb(255, 135, 30);
+}
+
+.btn-primary:active{
+    background-color: rgb(204, 103, 14)!important;
+    border-color: rgb(204, 103, 14)!important;
+}
+
+.btn-primary:focus{
+    background-color: rgb(204, 103, 14)!important;
+    border-color: rgb(204, 103, 14)!important;
+}
+
+.btn-success, .text-success {
+    background-color: darkgreen;
+}
+
+.btn-danger, .text-danger {
+    background-color: darkred;
+}
+
+.btn-link {
+    color: sandybrown;
+    font-size: 1em;
+}
+
+.btn-link:hover {
+    color: rgb(204, 103, 14);
+}
+
+.text-primary {
+    color: sandybrown !important;
+}
