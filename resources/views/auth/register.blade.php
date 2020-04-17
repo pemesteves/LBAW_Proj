@@ -1,7 +1,7 @@
 @extends('layouts.uconnect_auth')
 
 
-@section('content')
+@section('ocontent')
 
 <script src="./js/body_auth_prop.js" async></script>
     <section id="register" class="container d-flex flex-column align-items-center">
@@ -34,7 +34,7 @@
 @endsection
 
 
-@section('older_content')
+@section('content')
 <form method="POST" action="{{ route('register') }}">
     {{ csrf_field() }}
 

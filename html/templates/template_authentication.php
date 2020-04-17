@@ -7,7 +7,7 @@ include_once("template_common.php");
     /**
      * Draws the login page
      */ ?>
-    <script src="./js/body_auth_prop.js" async></script>
+    <script src={{ asset('js/body_auth_prop.js') }} async></script>
     <section id="login" class="container d-flex flex-column align-items-center">
         <div id="form_div" class="col-sm-7">
             <h2 class="text-primary">Login in UConnect</h2>

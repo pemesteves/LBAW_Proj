@@ -1,13 +1,14 @@
 @extends('layouts.uconnect_auth')
 
 
-@section('content')
+@section('o_basic_content')
 <script src="./js/body_auth_prop.js" async></script>
     <section id="login" class="container d-flex flex-column align-items-center">
         <div id="form_div" class="col-sm-7">
             <h2 class="text-primary">Login in UConnect</h2>
-            <form class="d-flex flex-column justify-content-center">
+            <form class="d-flex flex-column justify-content-center" method="POST" action="{{ route('login') }}">
                 <div class="form-group">
+                    {{ csrf_field() }}
                     <input type="email" required class="row form-control" id="email" placeholder="Email">
                     @if ($errors->has('email'))
                         <span class="error">
@@ -33,7 +34,7 @@
 @endsection
 
 
-@section('older_content')
+@section('content')
 <form method="POST" action="{{ route('login') }}">
     {{ csrf_field() }}
 
