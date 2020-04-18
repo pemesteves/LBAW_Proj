@@ -19,6 +19,7 @@
             <link href="{{ asset('css/menu.css') }}" rel="stylesheet">
             <link href="{{ asset('css/post_form.css') }}" rel="stylesheet">
             <link href="{{ asset('css/posts.css') }}" rel="stylesheet">
+            <link href="{{ asset('css/chat.css') }}" rel="stylesheet">
             <link href="{{ asset('css/colors.css') }}" rel="stylesheet">
             <link href="{{ asset('css/authentication.css') }}" rel="stylesheet">
             <link href="{{ asset('css/event.css') }}" rel="stylesheet">
@@ -27,7 +28,7 @@
             <link href="{{ asset('css/about.css') }}" rel="stylesheet">
             <link href="{{ asset('css/navbar.css') }}" rel="stylesheet">
 
-            <script src={{ asset('js/navbar_mobile.js') }} defer></script>
+            <script src="{{ asset('js/navbar_mobile.js') }}" defer></script>
 
             <style>
                 body {

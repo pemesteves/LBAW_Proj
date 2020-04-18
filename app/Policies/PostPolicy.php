@@ -8,7 +8,7 @@ use App\Post;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Support\Facades\Auth;
 
-class CardPolicy
+class PostPolicy
 {
     use HandlesAuthorization;
 

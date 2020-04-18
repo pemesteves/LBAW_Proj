@@ -3,7 +3,7 @@
 
 @section('nav_bar')
 <nav class="navbar navbar-dark navbar-bar">
-                <a class="navbar-brand" href="./<?php if($is_admin) echo 'admin.php'; else echo 'feed.php';?>">
+                <a class="navbar-brand" href="./<?php if($is_admin) echo 'admin'; else echo 'feed';?>">
                     <h1>UConnect <span class="fa fa-graduation-cap"></span></h1>
                 </a> <!-- whitesmoke -->
                 <?php if(!$is_admin){?>
@@ -44,7 +44,7 @@
                             <a class="dropdown-item" href="./about.php"><span class="fa fa-info-circle"></span>&nbsp;About Us</a>
                             <a class="dropdown-item" href="#"><span class="fa fa-cog"></span>&nbsp;Settings</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href=""><span class="fa fa-sign-out"></span>&nbsp;Logout</a>
+                            <a class="dropdown-item" href="/logout"><span class="fa fa-sign-out"></span>&nbsp;Logout</a>
                         </div>
                     </div>
                 </div>
