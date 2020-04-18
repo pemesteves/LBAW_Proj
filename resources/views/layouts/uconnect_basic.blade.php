@@ -30,7 +30,11 @@
                         <?php if($is_admin){ ?>    
                         style="opacity: 1; display: block;"    
                         <?php }?>
-                    ><img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" alt="John"/> John</button>
+                    ><img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" alt="John"/>
+                    @if (Auth::check()) 
+                        {{ Auth::user()->name }} 
+                    @endif
+                    </button>
                     <?php if(!$is_admin){ ?>    
                     <button class="btn btn-outline-light dropdown-toggle dropdown-toggle-split" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                     <?php } ?>

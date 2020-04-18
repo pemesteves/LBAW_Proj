@@ -34,3 +34,7 @@ Route::post('register', 'Auth\RegisterController@register');
 
 //Feed
 Route::get('/feed' , 'FeedController@show');
+
+
+//Event
+//Route::get('/event/{event_id}' , 'EventController@show');
