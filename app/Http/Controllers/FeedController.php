@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 class FeedController extends Controller{
 
     public function show(){
-        //if (!Auth::check()) return redirect('/login');
+        if (!Auth::check()) return redirect('/login');
 
         $posts = array( 
                 ['id' => '0', 'author' => 'Peter' , 'uni' => 'FEUP' , 'date' => "07-03-2020" , 'hour' => "14:30" , 'title' => "Impressão na FEUP" , 
