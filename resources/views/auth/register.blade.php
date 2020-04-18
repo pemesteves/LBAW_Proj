@@ -7,23 +7,29 @@
     <section id="register" class="container d-flex flex-column align-items-center">
         <div id="form_div" class="col-sm-7">
             <h2 class="text-primary">Register in UConnect</h2>
-            <form class="d-flex flex-column justify-content-center">
+            <form class="d-flex flex-column justify-content-center" method="POST" action="{{ route('register') }}">
                 <div class="form-group">
-                    <input type="text" required class="row form-control" id="name" required="required" placeholder="Name">
-                    <input type="email" required class="row form-control" id="email" placeholder="Email">
-                    <input type="password" required class="row form-control" id="password" placeholder="Password">
-                    <input type="password" required class="row form-control" id="confpassword" placeholder="Confirm Password">
-                    <input type="text" required class="row form-control" id="university" placeholder="University">
+                    {{ csrf_field() }}
+                    <input type="text" required class="row form-control" id="name" name="name" required="required" placeholder="Name">
+                    @if ($errors->has('name'))
+                        <span class="error">
+                            {{ $errors->first('name') }}
+                        </span>
+                    @endif
+                    <input type="email" required class="row form-control" id="email" name="email" placeholder="Email">
+                    <input type="password" required class="row form-control" id="password" name="password" placeholder="Password">
+                    <input type="password" required class="row form-control" id="password_confirmation" name="password_confirmation" placeholder="Confirm Password">
+                    <input type="text" required class="row form-control" id="university" name="university" placeholder="University">
                 </div>
                 <div class="form-group">
-                    <select class="form-control" required id="occupation" placeholder="Occupation">
+                    <select class="form-control" required id="occupation" name="occupation" placeholder="Occupation">
                         <option>Choose an option:</option>
                         <option>Student</option>
                         <option>Teacher</option>
                         <option>Organization</option>
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary" action="TO UPDATE" method="POST">Register</button>
+                <button type="submit" class="btn btn-primary">Register</button>
             </form>
             <footer>
                 <p>Already have an account? Then <a href="/login" style="color: #ffa31a">LOGIN</a></p>

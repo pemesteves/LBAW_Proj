@@ -9,20 +9,20 @@
             <form class="d-flex flex-column justify-content-center" method="POST" action="{{ route('login') }}">
                 <div class="form-group">
                     {{ csrf_field() }}
-                    <input type="email" required class="row form-control" id="email" placeholder="Email">
+                    <input type="email" required class="row form-control" id="email" name="email" placeholder="Email">
                     @if ($errors->has('email'))
                         <span class="error">
                         {{ $errors->first('email') }}
                         </span>
                     @endif
-                    <input type="password" required class="row form-control" id="password" placeholder="Password">
+                    <input type="password" required class="row form-control" id="password" name="password" placeholder="Password">
                     @if ($errors->has('password'))
                         <span class="error">
                             {{ $errors->first('password') }}
                         </span>
                     @endif
                 </div>
-                <button type="submit" class="row btn btn-primary" action="TO UPDATE" method="POST" style="color:whitesmoke">Login</button>
+                <button type="submit" class="row btn btn-primary" style="color:whitesmoke">Login</button>
             </form>
 
             <footer style="margin: 0; margin-top: 1em; padding: 0;">

@@ -32,7 +32,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $attributes = [
-        'status' => 'normal',
+        'type' => 'normal',
     ];
 
     /**
@@ -41,7 +41,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'status',
+        'name', 'email', 'password', 'type',
     ];
 
     /**

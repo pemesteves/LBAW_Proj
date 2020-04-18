@@ -44,7 +44,7 @@
                             <a class="dropdown-item" href="./about.php"><span class="fa fa-info-circle"></span>&nbsp;About Us</a>
                             <a class="dropdown-item" href="#"><span class="fa fa-cog"></span>&nbsp;Settings</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/logout"><span class="fa fa-sign-out"></span>&nbsp;Logout</a>
+                            <a class="dropdown-item" href="{{ url('/logout') }}"><span class="fa fa-sign-out"></span>&nbsp;Logout</a>
                         </div>
                     </div>
                 </div>
