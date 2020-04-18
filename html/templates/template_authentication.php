@@ -11,7 +11,7 @@ include_once("template_common.php");
     <section id="login" class="container d-flex flex-column align-items-center">
         <div id="form_div" class="col-sm-7">
             <h2 class="text-primary">Login in UConnect</h2>
-            <form class="d-flex flex-column justify-content-center">
+            <form class="d-flex flex-column justify-content-center" method="post">
                 <div class="form-group">
                     <input type="email" required class="row form-control" id="email" placeholder="Email">
                     <input type="password" required class="row form-control" id="password" placeholder="Password">
@@ -38,7 +38,7 @@ include_once("template_common.php");
     <section id="register" class="container d-flex flex-column align-items-center">
         <div id="form_div" class="col-sm-7">
             <h2 class="text-primary">Register in UConnect</h2>
-            <form class="d-flex flex-column justify-content-center">
+            <form class="d-flex flex-column justify-content-center" method="post">
                 <div class="form-group">
                     <input type="text" required class="row form-control" id="name" required="required" placeholder="Name">
                     <input type="email" required class="row form-control" id="email" placeholder="Email">
