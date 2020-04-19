@@ -24,6 +24,7 @@ Route::put('api/cards/{card_id}/', 'ItemController@create');
 Route::post('api/item/{id}', 'ItemController@update');
 Route::delete('api/item/{id}', 'ItemController@delete');
 Route::put('/api/posts' , 'PostController@create');
+Route::delete('api/posts/{id}', 'PostController@delete');
 
 // Authentication
 
@@ -41,6 +42,9 @@ Route::get('/feed' , 'FeedController@show');
 Route::get('/user/me', 'ProfileController@show_me');
 Route::get('/user/me/edit', 'ProfileController@show_me_edit');
 Route::post('/user/me', 'ProfileController@edit');
+Route::get('/user/{id}', 'ProfileController@show');
+
+
 
 
 //Event
