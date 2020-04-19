@@ -42,7 +42,7 @@
             </div>
             <div class="col-sm-8" style="flex-grow:1;max-width:100%">
 
-            <form id="post_form" class="new_post" method="post">
+            <form id="post_form" class="new_post">
                 <div class="container" id="post_container">
                     @csrf
                     <input id="post_title" name="title" type="text" required="required" placeholder="Title"/>
