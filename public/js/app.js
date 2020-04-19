@@ -31,6 +31,11 @@ function addEventListeners() {
   [].forEach.call(postDeleters, function(deleter) {
     deleter.addEventListener('click', sendDeletePostRequest);
   });
+
+  let commentCreators = document.querySelectorAll('div.post_container form');
+  [].forEach.call(commentCreators, function(creator){
+    creator.addEventListener('submit', sendCreateCommentRequest);
+  });
 }
 
 
@@ -104,6 +109,17 @@ function sendCreatePostRequest(event){
 
   if(title != '' && body != '')
     sendAjaxRequest('put', '/api/posts/', {title: title, body: body}, postAddedHandler);
+
+  event.preventDefault();
+}
+
+function sendCreateCommentRequest(event){
+  let body = this.querySelector('textarea').value;
+
+  let id = this.closest('article').getAttribute('data-id');
+
+  if(body != '')
+    sendAjaxRequest('put', '/api/posts/'+id+'/comment', {body: body}, commentAddedHandler);
 
   event.preventDefault();
 }
@@ -185,9 +201,27 @@ function postAddedHandler() {
   // Reset the new post input
   let form = document.querySelector('form#post_form');
   form.querySelector('[type=text]').value="";
+  form.querySelector('textarea').value="";
 
   // Insert the new post
   form.parentElement.insertBefore(new_post, form.nextSibling);
+}
+
+function commentAddedHandler(){
+  if (this.status != 200) window.location = '/';
+
+  console.log(this.responseText);
+  let comment = JSON.parse(this.responseText);
+
+  // Create the new comment
+  let new_comment = createComment(comment);
+
+  // Reset the new comment input
+  let form = document.querySelector('div.post_container form');
+  form.querySelector('textarea').value="";
+
+  // Insert the new comment
+  form.parentElement.insertBefore(new_comment, form.nextSibling);
 }
 
 function createCard(card) {
@@ -214,13 +248,14 @@ function createCard(card) {
   return new_card;
 }
 
+/* TODO Convert Dates */
 function createPost(post){
   let new_post = document.createElement('div');
   new_post.classList.add('modal', 'fade'); 
   new_post.setAttribute('id', 'popup-{{ $post->post_id }}');
   new_post.setAttribute('tabindex', '-1');
   new_post.setAttribute('role', 'dialog');
-  new_post.setAttribute('aria-labelledby', 'postModal-{{ $post->post_id }}');
+  new_post.setAttribute('aria-labelledby', `postModal-${post.post_id}`);
   new_post.setAttribute('aria-hidden', 'true');
   new_post.innerHTML = `
   <div class="modal-dialog" role="document" style="overflow: initial; max-width: 90%; width: 90%; max-height: 90%; height: 90%">
@@ -235,20 +270,20 @@ function createPost(post){
                           <div class="row">
                               <div class="col-sm-9" style="background-color: transparent;">
                                   <div class="row" style="background-color: transparent;">
-                                      <h2 class="list-group-item" style="background-color: transparent; border:none;padding-top:0.2rem;padding-bottom:0.2rem">{{ $post->name }}</h2>
+                                      <h2 class="list-group-item" style="background-color: transparent; border:none;padding-top:0.2rem;padding-bottom:0.2rem">${post.name}</h2>
                                   </div>
                                   <div class="row" style="background-color: transparent;">
-                                      <h3 class="list-group-item" style="background-color: transparent; border:none;padding-top:0.2rem;padding-bottom:0.2rem">{{ $post->uni }}</h3>
+                                      <h3 class="list-group-item" style="background-color: transparent; border:none;padding-top:0.2rem;padding-bottom:0.2rem">${post.uni}</h3>
                                   </div>
                               </div>
                               <div class="col-sm-3" style="padding-top:0.2rem;padding-bottom:0.2rem; text-align: right; font-size: 1.25em;">
-                                  <p class="card-text" style="margin-bottom:0rem">{{ $post->date }}</p>
-                                  <p class="card-text">{{ $post->hour }}</p>
+                                  <p class="card-text" style="margin-bottom:0rem">${post.date}</p>
+                                  <p class="card-text">${post.hour}</p>
                               </div>
                           </div>
                           <div class="row justify-content-end" style="font-size: 1.2em;">
-                              <span class="fa fa-thumbs-up post_like">&nbsp;{{ $post->upvotes }}&nbsp;</span>
-                              <span class="fa fa-thumbs-down post_dislike">&nbsp;{{ $post->downvotes }}&nbsp;</span>
+                              <span class="fa fa-thumbs-up post_like">&nbsp;${post.upvotes}&nbsp;</span>
+                              <span class="fa fa-thumbs-down post_dislike">&nbsp;${post.downvotes}&nbsp;</span>
                           </div>
                       </div>
                   </div>
@@ -261,10 +296,10 @@ function createPost(post){
           <div class="modal-body post_container" style="overflow-y: auto;">
               <div class="container" style="border-bottom:0;border-top:0;border-radius:0;height:100%;">
                   <div class="row">
-                      <h2>{{ $post['title'] }}</h2>  
+                      <h2>${post.title}</h2>  
                   </div>
                   <div class="row post_content">
-                      <p> {{ $post['body'] }}</p>
+                      <p> ${post.body}</p>
                   </div>
                   <form method="post">
                       <div class="row post_comment_form" >
@@ -288,6 +323,28 @@ function createPost(post){
   </div>`;
 
   return new_post;
+}
+
+/* TODO Get User Name */ 
+function createComment(comment){
+  let new_comment = document.createElement('div');
+  new_comment.classList.add('row', 'comment_container', 'comment_no_padding'); 
+  new_comment.innerHTML = `
+    <div class="col-2 comment_user_info" >
+        <div class="row">   
+            <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" class="mx-auto d-block" alt="..." style="border-radius:50%; max-width:2rem; "  onclick="window.location.href='./profile.php'">
+        </div>
+        <div class="row">
+            <h4 style="font-size: 1em; margin: 0 auto;">${comment.user_id}</h4>
+        </div>
+    </div>
+    <div class="col-9 comment_text">
+        <p>${comment.body}</p>
+    </div>
+    <div class="col-1 comment_opt">
+        <button><span class="fa fa-ellipsis-v"></span></button>
+    </div>`;
+  return new_comment;
 }
 
 function createItem(item) {

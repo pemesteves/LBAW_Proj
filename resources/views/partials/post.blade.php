@@ -28,8 +28,8 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-3" style="padding-top:0.2rem;padding-bottom:0.2rem; text-align: right; font-size: 1.25em;">
-                                        <p class="card-text" style="margin-bottom:0rem">{{ $post->date }}</p>
-                                        <p class="card-text">{{ $post->hour }}</p>
+                                        <p class="card-text" style="margin-bottom:0rem">{{date('d-m-Y', strtotime($post->date))}}</p>
+                                        <p class="card-text">{{date('H:i', strtotime($post->date))}}</p>
                                     </div>
                                 </div>
                                 <div class="row justify-content-end" style="font-size: 1.2em;">
@@ -70,13 +70,14 @@
                         <div class="row post_content">
                             <p> {{ $post['body'] }}</p>
                         </div>
-                        <form method="post">
+                        <form>
+                            @csrf
                             <div class="row post_comment_form" >
                                 <div class="col-2">
                                     <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" class="mx-auto d-block" alt="..." style="border-radius:50%; max-width:2rem; ">
                                 </div>
                                 <div class="col-9 post_comment_form_text">
-                                    <textarea class="form-control" required placeholder="Comment..." rows="1"></textarea>
+                                    <textarea name="body" class="form-control" required placeholder="Comment..." rows="1"></textarea>
                                 </div>
                                 <div class="col-1" style="padding: 0">
                                     <button type="submit" style="padding: 0; max-height: 100%; height: 100%; max-width: 100%; width: 100%; background-color: white; border: 0;"><span class="fa fa-caret-right" style="float: left; font-size: 1.5em;margin-left: 0.75em;"></span></button>
@@ -125,7 +126,7 @@
                             <p class="card-text">
                             {{ $post->body }}
                             </p>
-                            <p class="card-text" style="margin-bottom:0rem; float: right;"><small class="text-muted" style="margin-bottom:0rem">{{ $post['date'] }}</small>, <small class="text-muted" style="margin-bottom:0.2rem">{{ $post['hour'] }}</small></p>
+                            <p class="card-text" style="margin-bottom:0rem; float: right;"><small class="text-muted" style="margin-bottom:0rem">{{date('d-m-Y', strtotime($post->date))}}</small>, <small class="text-muted" style="margin-bottom:0.2rem">{{date('H:i', strtotime($post->date))}}</small></p>
                         </div>
                         <div class="card-footer" style="border-left:none;border-right:none;border-bottom:none">
                             <span class="comment"> {{$post->comments->count()}} comments </span>
