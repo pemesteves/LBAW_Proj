@@ -36,6 +36,9 @@ Route::post('register', 'Auth\RegisterController@register');
 Route::get('/feed' , 'FeedController@show');
 Route::post('/feed' , 'FeedController@create');
 
+//Profile
+Route::get('/profile/me', 'ProfileController@show_me');
+
 
 //Event
 //Route::get('/event/{event_id}' , 'EventController@show');
