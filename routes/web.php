@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'Auth\LoginController@home');
+
 // Cards
 Route::get('cards', 'CardController@list');
 Route::get('cards/{id}', 'CardController@show');
@@ -38,7 +39,9 @@ Route::post('register', 'Auth\RegisterController@register');
 Route::get('/feed' , 'FeedController@show');
 
 //Profile
-Route::get('/profile/me', 'ProfileController@show_me');
+Route::get('/user/me', 'ProfileController@show_me');
+Route::get('/user/me/edit', 'ProfileController@show_me_edit');
+Route::get('/user/{id}', 'ProfileController@show');
 
 
 
