@@ -22,6 +22,19 @@ class ProfileController extends Controller{
 
     }
 
+    public function show_me_edit(){
+      if (!Auth::check()) return redirect('/login');
+
+      $posts = Post::join('user','post.author_id','=', 'user_id')
+                     ->where('user_id', '=',  Auth::user()->user_id)
+                     ->orderBy('date','desc')
+                     ->get();
+
+      return view('pages.profile_edit' , ['is_admin' => false , 'posts' => $posts ]);
+
+  }
+
+
     /**
      * Creates a new post.
      *
