@@ -26,7 +26,13 @@ function addEventListeners() {
   let postCreator = document.querySelector('form#post_form');
   if(postCreator != null)
     postCreator.addEventListener('submit', sendCreatePostRequest);
+
+  let postDeleter = document.querySelector('div.modal button.delete');
+  [].forEach.call(postDeleter, function(deleter) {
+    deleter.addEventListener('click', sendDeletePostRequest);
+  });
 }
+
 
 function encodeForAjax(data) {
   if (data == null) return null;
@@ -54,9 +60,16 @@ function sendItemUpdateRequest() {
 }
 
 function sendDeleteItemRequest() {
-  let id = this.closest('li.item').getAttribute('data-id');
+  let id = this.closest('div.modal').getAttribute('data-id');
 
   sendAjaxRequest('delete', '/api/item/' + id, null, itemDeletedHandler);
+}
+
+function sendDeletePostRequest() {
+  let popup_id = this.closest('li.item').getAttribute('id');
+  let id = popup_id.split('-')[1];
+
+  sendAjaxRequest('delete', '/posts/' + id, null, postDeletedHandler);
 }
 
 function sendCreateItemRequest(event) {
@@ -123,6 +136,14 @@ function itemDeletedHandler() {
   let item = JSON.parse(this.responseText);
   let element = document.querySelector('li.item[data-id="' + item.id + '"]');
   element.remove();
+}
+
+function postDeletedHandler() {
+  if (this.status != 200) window.location = '/';
+  let post = JSON.parse(this.responseText);
+  let element = document.querySelector('div.modal button[id=postModal-"' + post.id + '"]');
+  let parentElement = element.parentElement;
+  parentElement.remove();
 }
 
 function cardDeletedHandler() {
