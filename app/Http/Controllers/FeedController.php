@@ -13,9 +13,9 @@ class FeedController extends Controller{
     public function show(){
         if (!Auth::check()) return redirect('/login');
 
-        $posts = Post::join('user','post.author_id','=','user_id')->orderBy('date','desc')->get();
+        $posts = Post::orderBy('date','desc')->get();
 
-        return view('pages.feed' , ['is_admin' => false , 'posts' => $posts ]);
+        return view('pages.feed' , ['is_admin' => false , 'posts' => $posts]);
 
     }
 }
