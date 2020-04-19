@@ -105,6 +105,7 @@ CREATE TABLE public."event"
 	"location" text NOT NULL,
 	"date" timestamp with time zone NOT NULL,
 	"information" text NOT NULL,
+	TYPE status NOT NULL DEFAULT 'normal',
     CONSTRAINT "event_id_pkey" PRIMARY KEY ("event_id")
 );
 
