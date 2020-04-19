@@ -18,25 +18,4 @@ class FeedController extends Controller{
         return view('pages.feed' , ['is_admin' => false , 'posts' => $posts ]);
 
     }
-
-    /**
-     * Creates a new post.
-     *
-     * @return Post The post created.
-     */
-    public function create(Request $request)
-    {
-      $post = new Post();
-
-      $this->authorize('create', $post);
-
-      $post->title = $request->input('title');
-      $post->body = $request->input('body');
-      $post->author_id = 3;
-      $post->save();
-
-      return $post;
-    }
-
-
 }

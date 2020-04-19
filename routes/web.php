@@ -22,6 +22,7 @@ Route::delete('api/cards/{card_id}', 'CardController@delete');
 Route::put('api/cards/{card_id}/', 'ItemController@create');
 Route::post('api/item/{id}', 'ItemController@update');
 Route::delete('api/item/{id}', 'ItemController@delete');
+Route::put('/api/posts' , 'PostController@create');
 
 // Authentication
 
@@ -34,7 +35,6 @@ Route::post('register', 'Auth\RegisterController@register');
 
 //Feed
 Route::get('/feed' , 'FeedController@show');
-Route::post('/feed' , 'FeedController@create');
 
 //Profile
 Route::get('/profile/me', 'ProfileController@show_me');
