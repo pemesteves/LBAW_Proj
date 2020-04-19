@@ -26,8 +26,8 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-3" style="padding-top:0.2rem;padding-bottom:0.2rem; text-align: right; font-size: 1.25em;">
-                                    <p class="card-text" style="margin-bottom:0rem">{{ $post->date }}</p>
-                                    <p class="card-text">{{ $post->hour }}</p>
+                                    <p class="card-text" style="margin-bottom:0rem">{{date('d-m-Y', strtotime($post->date))}}</p>
+                                    <p class="card-text">{{date('H:i', strtotime($post->date))}}</p>
                                 </div>
                             </div>
                             <div class="row justify-content-end" style="font-size: 1.2em;">
@@ -105,7 +105,7 @@
                         <p class="card-text">
                         {{ $post->body }}
                         </p>
-                        <p class="card-text" style="margin-bottom:0rem; float: right;"><small class="text-muted" style="margin-bottom:0rem">{{ $post['date'] }}</small>, <small class="text-muted" style="margin-bottom:0.2rem">{{ $post['hour'] }}</small></p>
+                        <p class="card-text" style="margin-bottom:0rem; float: right;"><small class="text-muted" style="margin-bottom:0rem">{{date('d-m-Y', strtotime($post->date))}}</small>, <small class="text-muted" style="margin-bottom:0.2rem">{{date('H:i', strtotime($post->date))}}</small></p>
                     </div>
                     <div class="card-footer" style="border-left:none;border-right:none;border-bottom:none">
                         <span class="comment"> 2 comments </span>
