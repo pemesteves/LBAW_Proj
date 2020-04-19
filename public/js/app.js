@@ -22,6 +22,10 @@ function addEventListeners() {
   let cardCreator = document.querySelector('article.card form.new_card');
   if (cardCreator != null)
     cardCreator.addEventListener('submit', sendCreateCardRequest);
+
+  let postCreator = document.querySelector('form#post_form');
+  if(postCreator != null)
+    postCreator.addEventListener('submit', sendCreatePostRequest);
 }
 
 function encodeForAjax(data) {
@@ -76,6 +80,17 @@ function sendCreateCardRequest(event) {
 
   if (name != '')
     sendAjaxRequest('put', '/api/cards/', {name: name}, cardAddedHandler);
+
+  event.preventDefault();
+}
+
+function sendCreatePostRequest(event){
+  //TODO Add files
+  let title = this.querySelector('input[name=title]').value;
+  let body = this.querySelector('textarea').value;
+
+  if(title != '' && body != '')
+    sendAjaxRequest('put', '/api/posts/', {title: title, body: body}, postAddedHandler);
 
   event.preventDefault();
 }
@@ -137,6 +152,22 @@ function cardAddedHandler() {
   new_card.querySelector('[type=text]').focus();
 }
 
+function postAddedHandler() {
+  if (this.status != 200) window.location = '/';
+
+  let post = JSON.parse(this.responseText);
+
+  // Create the new post
+  let new_post = createPost(post);
+
+  // Reset the new post input
+  let form = document.querySelector('form#post_form');
+  form.querySelector('[type=text]').value="";
+
+  // Insert the new post
+  form.parentElement.insertBefore(new_post, form.nextSibling);
+}
+
 function createCard(card) {
   let new_card = document.createElement('article');
   new_card.classList.add('card');
@@ -159,6 +190,82 @@ function createCard(card) {
   deleter.addEventListener('click', sendDeleteCardRequest);
 
   return new_card;
+}
+
+function createPost(post){
+  let new_post = document.createElement('div');
+  new_post.classList.add('modal', 'fade'); 
+  new_post.setAttribute('id', 'popup-{{ $post->post_id }}');
+  new_post.setAttribute('tabindex', '-1');
+  new_post.setAttribute('role', 'dialog');
+  new_post.setAttribute('aria-labelledby', 'postModal-{{ $post->post_id }}');
+  new_post.setAttribute('aria-hidden', 'true');
+  new_post.innerHTML = `
+  <div class="modal-dialog" role="document" style="overflow: initial; max-width: 90%; width: 90%; max-height: 90%; height: 90%">
+      <div class="modal-content" style="height: 100%;">
+          <div class="modal-header post_header" >
+              <div class="container" style="border-bottom:0;border-radius:0;max-width: 90%;">
+                  <div class="row">
+                      <div class="col-sm-2">
+                          <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" class="mx-auto d-block" alt="..." style="border-radius:50%; max-width:7rem; " onclick="window.location.href='./profile.php'"/>
+                      </div>
+                      <div class="col-sm-10">
+                          <div class="row">
+                              <div class="col-sm-9" style="background-color: transparent;">
+                                  <div class="row" style="background-color: transparent;">
+                                      <h2 class="list-group-item" style="background-color: transparent; border:none;padding-top:0.2rem;padding-bottom:0.2rem">{{ $post->name }}</h2>
+                                  </div>
+                                  <div class="row" style="background-color: transparent;">
+                                      <h3 class="list-group-item" style="background-color: transparent; border:none;padding-top:0.2rem;padding-bottom:0.2rem">{{ $post->uni }}</h3>
+                                  </div>
+                              </div>
+                              <div class="col-sm-3" style="padding-top:0.2rem;padding-bottom:0.2rem; text-align: right; font-size: 1.25em;">
+                                  <p class="card-text" style="margin-bottom:0rem">{{ $post->date }}</p>
+                                  <p class="card-text">{{ $post->hour }}</p>
+                              </div>
+                          </div>
+                          <div class="row justify-content-end" style="font-size: 1.2em;">
+                              <span class="fa fa-thumbs-up post_like">&nbsp;{{ $post->upvotes }}&nbsp;</span>
+                              <span class="fa fa-thumbs-down post_dislike">&nbsp;{{ $post->downvotes }}&nbsp;</span>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div>
+                  <button type="button" data-dismiss="modal" style="font-size: 150%; margin-right: 0; padding-right: 0; width: 100%; background-color: white; border: 0;"><span class="fa fa-times"></span></button>
+                  <button type="button" style="font-size: 150%; margin-right: 0; padding-right: 0; width: 100%; background-color: white; border: 0;"> <span class="fa fa-ellipsis-v" ></span></button>
+              </div>
+          </div>
+          <div class="modal-body post_container" style="overflow-y: auto;">
+              <div class="container" style="border-bottom:0;border-top:0;border-radius:0;height:100%;">
+                  <div class="row">
+                      <h2>{{ $post['title'] }}</h2>  
+                  </div>
+                  <div class="row post_content">
+                      <p> {{ $post['body'] }}</p>
+                  </div>
+                  <form method="post">
+                      <div class="row post_comment_form" >
+                          <div class="col-2">
+                              <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" class="mx-auto d-block" alt="..." style="border-radius:50%; max-width:2rem; ">
+                          </div>
+                          <div class="col-9 post_comment_form_text">
+                              <textarea class="form-control" required placeholder="Comment..." rows="1"></textarea>
+                          </div>
+                          <div class="col-1" style="padding: 0">
+                              <button type="submit" style="padding: 0; max-height: 100%; height: 100%; max-width: 100%; width: 100%; background-color: white; border: 0;"><span class="fa fa-caret-right" style="float: left; font-size: 1.5em;margin-left: 0.75em;"></span></button>
+                          </div>
+                      </div>
+                  </form>
+                  <div style="">
+                      
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>`;
+
+  return new_post;
 }
 
 function createItem(item) {

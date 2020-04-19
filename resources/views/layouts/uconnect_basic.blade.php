@@ -3,7 +3,7 @@
 
 @section('nav_bar')
 <nav class="navbar navbar-dark navbar-bar">
-                <a class="navbar-brand" href="./<?php if($is_admin) echo 'admin'; else echo 'feed';?>">
+                <a class="navbar-brand" href="/<?php if($is_admin) echo 'admin'; else echo 'feed';?>">
                     <h1>UConnect <span class="fa fa-graduation-cap"></span></h1>
                 </a> <!-- whitesmoke -->
                 <?php if(!$is_admin){?>
@@ -26,7 +26,7 @@
                     <button type="button" class="btn btn-outline-light fa fa-bell"></button>
                     <button type="button" class="btn btn-outline-light fa fa-envelope" onclick="window.location.href='./messages.php'"></button>
                     <?php } ?>
-                    <button type="button" class="btn btn-outline-light" onclick="window.location.href='<?php if($is_admin) echo './admin.php'; else echo './profile.php'; ?>'"
+                    <button type="button" class="btn btn-outline-light" onclick="window.location.href='<?php if($is_admin) echo '/admin'; else echo '/profile/me'; ?>'"
                         <?php if($is_admin){ ?>    
                         style="opacity: 1; display: block;"    
                         <?php }?>

@@ -8,18 +8,19 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Post;
 
-class PostController extends Controller{
+class ProfileController extends Controller{
 
-    public function delete(Request $request, $id)
-    {
-      $post = Post::find($id);
+    public function show_me(){
+        if (!Auth::check()) return redirect('/login');
 
-      $this->authorize('delete', $post);
-      $post->delete();
+        $posts = Post::join('user','post.author_id','=', 'user_id')
+                       ->where('user_id', '=',  Auth::user()->user_id)
+                       ->orderBy('date','desc')
+                       ->get();
 
-      return $post;
+        return view('pages.profile' , ['is_admin' => false , 'posts' => $posts ]);
+
     }
-
 
     /**
      * Creates a new post.
@@ -34,9 +35,11 @@ class PostController extends Controller{
 
       $post->title = $request->input('title');
       $post->body = $request->input('body');
-      $post->author_id = 3;//Auth::user()->user_id; //Change this to the id of the regular_user
+      $post->author_id = Auth::user()->user_id;
       $post->save();
 
       return $post;
     }
+
+
 }
