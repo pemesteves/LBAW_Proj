@@ -11,6 +11,8 @@
 |
 */
 
+use App\Http\Controllers\PostController;
+
 Route::get('/', 'Auth\LoginController@home');
 
 // Cards
