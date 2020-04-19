@@ -12,10 +12,11 @@
             </div>
             <div class="col-8" style="padding: 0.2rem 1rem 0 0.2rem;">
                 <div class="row">
-                    <form>
-                    <h2 style="border: 0; padding: 0">Name</h2>
-                    <input type="text" name="description" placeholder="{{ Auth::user()->name }}">
-                    <a href="#" class="update" style="text-decoration: none">Change</a>
+                    <form action="/user/me" method="post">
+                        @csrf
+                        <h2 style="border: 0; padding: 0">Name</h2>
+                        <input type="text" name="name" placeholder="{{ Auth::user()->name }}">
+                        <button type="submit" class="update" style="text-decoration: none">Change</a>
                     </form>
                 </div>
                 <div class="row">

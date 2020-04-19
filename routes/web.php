@@ -43,6 +43,7 @@ Route::get('/feed' , 'FeedController@show');
 //Profile
 Route::get('/user/me', 'ProfileController@show_me');
 Route::get('/user/me/edit', 'ProfileController@show_me_edit');
+Route::post('/user/me', 'ProfileController@edit');
 Route::get('/user/{id}', 'ProfileController@show');
 
 

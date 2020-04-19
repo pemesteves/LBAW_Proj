@@ -349,7 +349,7 @@ LANGUAGE plpgsql;
 
 
 CREATE TRIGGER update_group_posts
-    AFTER UPDATE ON public."group"
+    AFTER UPDATE OF TYPE ON public."group"
     FOR EACH ROW
     EXECUTE PROCEDURE update_group_posts();
 
@@ -366,7 +366,7 @@ LANGUAGE plpgsql;
 
 
 CREATE TRIGGER update_event_posts
-    AFTER UPDATE ON public."event"
+    AFTER UPDATE OF TYPE ON public."event"
     FOR EACH ROW
     EXECUTE PROCEDURE update_event_posts();
 
@@ -383,7 +383,7 @@ LANGUAGE plpgsql;
 
 
 CREATE TRIGGER update_user_posts
-    AFTER UPDATE ON public."user"
+    AFTER UPDATE OF TYPE ON public."user"
     FOR EACH ROW
     EXECUTE PROCEDURE update_user_posts();
 

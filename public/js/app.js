@@ -60,7 +60,7 @@ function sendItemUpdateRequest() {
 }
 
 function sendDeleteItemRequest() {
-  let id = this.closest('div.modal').getAttribute('data-id');
+  let id = this.closest('li.item').getAttribute('data-id');
 
   sendAjaxRequest('delete', '/api/item/' + id, null, itemDeletedHandler);
 }
