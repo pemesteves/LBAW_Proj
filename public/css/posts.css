@@ -98,3 +98,15 @@
     margin-top: -1.5em;
     margin-left: 1em;
 }
+
+
+
+.options_entry{
+    padding: 0;
+}
+
+.options_menu{
+    padding-top:0;
+    padding-bottom:0;
+    max-width: 2rem;
+}
