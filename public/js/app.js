@@ -60,16 +60,16 @@ function sendItemUpdateRequest() {
 }
 
 function sendDeleteItemRequest() {
-  let id = this.closest('div.modal').getAttribute('data-id');
+  let id = this.closest('li.item').getAttribute('data-id');
 
   sendAjaxRequest('delete', '/api/item/' + id, null, itemDeletedHandler);
 }
 
 function sendDeletePostRequest() {
-  let popup_id = this.closest('li.item').getAttribute('id');
+  let popup_id = this.closest('div.modal').getAttribute('id');
   let id = popup_id.split('-')[1];
 
-  sendAjaxRequest('delete', '/posts/' + id, null, postDeletedHandler);
+  sendAjaxRequest('delete', 'api/posts/' + id, null, postDeletedHandler);
 }
 
 function sendCreateItemRequest(event) {
