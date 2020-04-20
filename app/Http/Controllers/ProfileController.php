@@ -51,28 +51,6 @@ class ProfileController extends Controller{
 
     }
 
-
-
-    /**
-     * Creates a new post.
-     *
-     * @return Post The post created.
-     */
-    public function create(Request $request)
-    {
-      $post = new Post();
-
-      $this->authorize('create', $post);
-
-      $post->title = $request->input('title');
-      $post->body = $request->input('body');
-      $post->author_id = Auth::user()->user_id;
-      $post->save();
-
-      return $post;
-    }
-
-
     /**
      * Edits the user profile
      */

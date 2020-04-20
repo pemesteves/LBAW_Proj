@@ -8,7 +8,7 @@
 <article class="post" data-id="{{ $post->post_id }}">
 
     <div class="modal fade" id="popup-{{ $post->post_id }}" tabindex="-1" role="dialog" 
-        aria-labelledby="postModal-{{ $post->post_id }}"aria-hidden="true">
+        aria-labelledby="postModal-{{ $post->post_id }}" aria-hidden="true">
         <div class="modal-dialog" role="document" style="overflow: initi    al; max-width: 90%; width: 90%; max-height: 90%; height: 90%">
             <div class="modal-content" style="height: 100%;">
                 <div class="modal-header post_header" >

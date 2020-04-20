@@ -42,28 +42,28 @@
             </div>
             <div class="col-sm-8" style="flex-grow:1;max-width:100%">
 
-            <form id="post_form" class="new_post">
-                <div class="container" id="post_container">
-                    @csrf
-                    <input id="post_title" name="title" type="text" required="required" placeholder="Title"/>
-                    <textarea id="post_text" name="body" class="form-control" required placeholder="Write here..." rows="3"></textarea>
-                    <div id="post_form_lower">
-                        <div id="post_upload">
-                            <div>
-                                <p class="fa fa-plus">&ensp;image</p>
-                                <input type="file"/>
+                <form id="post_form" class="new_post">
+                    <div class="container" id="post_container">
+                        @csrf
+                        <input id="post_title" name="title" type="text" required="required" placeholder="Title"/>
+                        <textarea id="post_text" name="body" class="form-control" required placeholder="Write here..." rows="3"></textarea>
+                        <div id="post_form_lower">
+                            <div id="post_upload">
+                                <div>
+                                    <p class="fa fa-plus">&ensp;image</p>
+                                    <input type="file"/>
+                                </div>
+                                <div>
+                                        <p class="fa fa-plus">&ensp;file</p>
+                                        <input type="file"/>
+                                </div>  
                             </div>
                             <div>
-                                    <p class="fa fa-plus">&ensp;file</p>
-                                    <input type="file"/>
-                            </div>  
-                        </div>
-                        <div>
-                            <button id="post_form_post" type="submit">Post</button> 
+                                <button id="post_form_post" type="submit">Post</button> 
+                            </div>
                         </div>
                     </div>
-                </div>
-            </form>
+                </form>
 
                     
                 @each('partials.post', $posts, 'post')
