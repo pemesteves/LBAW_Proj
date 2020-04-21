@@ -54,4 +54,4 @@ Route::get('/about', 'AboutController@show');
 Route::get('/groups/{id}', 'GroupController@show');
 
 //Event
-//Route::get('/event/{event_id}' , 'EventController@show');
+Route::get('/events/{event_id}' , 'EventController@show');

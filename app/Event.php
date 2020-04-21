@@ -4,21 +4,21 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Group extends Model
+class Event extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'group';
+    protected $table = 'event';
 
     /**
      * The primary key associated with the table.
      *
      * @var string
      */
-    protected $primaryKey = 'group_id';
+    protected $primaryKey = 'event_id';
 
     /**
      * The model's default values for attributes.
@@ -35,22 +35,22 @@ class Group extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'information', 
+        'name', 'location', 'date', 'information', 
     ];
 
     /**
-     * The posts this group owns.
+     * The posta this event owns.
      */
     public function posts() {
       return $this->hasMany('App\Post');
     }
 
     /**
-     * Count the number of members of the group
+     * Count the number of users that go to the event
      */
-    public function members() {
-        $result = $this->join('user_in_group', 'group.group_id', '=', 'user_in_group.group_id')
-                       ->where('group.group_id', '=', $this->group_id)
+    public function going() {
+        $result = $this->join('user_interested_in_event', 'event.event_id', '=', 'user_interested_in_event.event_id')
+                       ->where('event.event_id', '=', $this->event_id)
                        ->select('*')
                        ->count();
 

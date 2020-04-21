@@ -16,7 +16,7 @@ class GroupController extends Controller{
 
       $group = Group::find($id);
 
-      $posts = Post::join('group','post.group_id','=', 'post.group_id')
+      $posts = Post::join('group','group.group_id','=', 'post.group_id')
                      ->where('group.group_id', '=',  $id)
                      ->orderBy('date','desc')
                      ->get();
