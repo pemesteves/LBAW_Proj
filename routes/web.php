@@ -47,6 +47,9 @@ Route::get('/users/me/edit', 'ProfileController@show_me_edit');
 Route::post('/users/me', 'ProfileController@edit');
 Route::get('/users/{id}', 'ProfileController@show');
 
+//About
+Route::get('/about', 'AboutController@show');
+
 
 
 
