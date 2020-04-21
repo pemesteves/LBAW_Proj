@@ -1,5 +1,4 @@
 
-
 <div class="row comment_container <?= $comment['padding_left'] != 0 ? 'comment_padding' : 'comment_no_padding' ?>">
     <div class="col-2 comment_user_info" >
         <div class="row">   

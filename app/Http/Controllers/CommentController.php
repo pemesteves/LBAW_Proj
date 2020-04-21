@@ -26,6 +26,9 @@ class CommentController extends Controller{
       $comment->user_id = Auth::user()->user_id;//Auth::user()->user_id; //Change this to the id of the regular_user
       $comment->save();
 
-      return $comment;
+      //Gets useful information about the comment
+      $new_comment = Comment::take(1)->where("comment_id", '=', $comment["comment_id"])->get(); 
+
+      return $new_comment[0];
     }
 }

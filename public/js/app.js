@@ -123,6 +123,7 @@ function sendCreateCommentRequest(event){
     sendAjaxRequest('put', '/api/posts/'+id+'/comment', {body: body}, commentAddedHandler);
 
   event.preventDefault();
+  return false;
 }
 
 function itemUpdatedHandler() {
@@ -215,9 +216,11 @@ function postAddedHandler() {
 }
 
 function commentAddedHandler(){
-  if (this.status != 200) window.location = '/';
+  if (this.status != 200 && this.status != 201){
+    window.location = '/';
+    return;
+  }
 
-  console.log(this.responseText);
   let comment = JSON.parse(this.responseText);
 
   // Create the new comment
@@ -421,10 +424,10 @@ function createComment(comment){
   new_comment.innerHTML = `
     <div class="col-2 comment_user_info" >
         <div class="row">   
-            <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" class="mx-auto d-block" alt="..." style="border-radius:50%; max-width:2rem; "  onclick="window.location.href='./profile.php'">
+            <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" class="mx-auto d-block" alt="..." style="border-radius:50%; max-width:2rem; "  onclick="window.location.href='./users/${comment.user.user_id}'">
         </div>
         <div class="row">
-            <h4 style="font-size: 1em; margin: 0 auto;">${comment.user_id}</h4>
+            <h4 style="font-size: 1em; margin: 0 auto;">${comment.user.name}</h4>
         </div>
     </div>
     <div class="col-9 comment_text">
