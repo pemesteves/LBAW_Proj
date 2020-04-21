@@ -8,14 +8,14 @@
 <article class="post" data-id="{{ $post->post_id }}">
 
     <div class="modal fade" id="popup-{{ $post->post_id }}" tabindex="-1" role="dialog" 
-        aria-labelledby="postModal-{{ $post->post_id }}"aria-hidden="true">
+        aria-labelledby="postModal-{{ $post->post_id }}" aria-hidden="true">
         <div class="modal-dialog" role="document" style="overflow: initi    al; max-width: 90%; width: 90%; max-height: 90%; height: 90%">
             <div class="modal-content" style="height: 100%;">
                 <div class="modal-header post_header" >
                     <div class="container" style="border-bottom:0;border-radius:0;max-width: 90%;">
                         <div class="row">
                             <div class="col-sm-2">
-                                <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" class="mx-auto d-block" alt="..." style="border-radius:50%; max-width:7rem; " onclick="window.location.href='./profile.php'"/>
+                                <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" class="mx-auto d-block" alt="..." style="border-radius:50%; max-width:7rem; " onclick="window.location.href='./users/{{ $post->user->user_id }}'"/>
                             </div>
                             <div class="col-sm-10">
                                 <div class="row">
