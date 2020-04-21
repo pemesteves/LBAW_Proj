@@ -23,7 +23,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-sm-6">
-                                <p class="card-text"><!--$members?>--> members</p>
+                                <p class="card-text"><!--$members?>-->{{ $members }} members</p>
                             </div>
                             <div class="col-sm-6">
                                 <p class="card-text" id="last_update"><span class="fa fa-history"></span>&nbsp;Updated <?= getUpdateDate($group->updated_at);?><!--2--> days ago</p>

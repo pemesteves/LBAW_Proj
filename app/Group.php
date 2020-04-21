@@ -45,7 +45,19 @@ class Group extends Model
     /**
      * The post this group owns.
      */
-     public function posts() {
+    public function posts() {
       return $this->hasMany('App\Post');
+    }
+
+    /**
+     * Count the number of members of the group
+     */
+    public function members() {
+        $result = $this->join('user_in_group', 'group.group_id', '=', 'user_in_group.group_id')
+                       ->where('group.group_id', '=', $this->group_id)
+                       ->select('*')
+                       ->count();
+
+        return $result;
     }
 }

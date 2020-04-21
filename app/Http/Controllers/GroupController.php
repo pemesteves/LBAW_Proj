@@ -12,7 +12,6 @@ use App\Group;
 class GroupController extends Controller{
 
     public function show($id){
-      error_log("ola");
       if (!Auth::check()) return redirect('/login');
 
       $group = Group::find($id);
@@ -22,7 +21,8 @@ class GroupController extends Controller{
                      ->orderBy('date','desc')
                      ->get();
 
-      return view('pages.group' , ['is_admin' => false , 'group' => $group, 'posts' => $posts ]);
+      $members = $group->members();
 
+      return view('pages.group' , ['is_admin' => false , 'group' => $group, 'posts' => $posts, 'members' => $members ]);
     }
 }
