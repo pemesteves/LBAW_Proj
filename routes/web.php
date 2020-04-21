@@ -50,8 +50,8 @@ Route::get('/users/{id}', 'ProfileController@show');
 //About
 Route::get('/about', 'AboutController@show');
 
-
-
+//Group
+Route::get('/groups/{id}', 'GroupController@show');
 
 //Event
 //Route::get('/event/{event_id}' , 'EventController@show');

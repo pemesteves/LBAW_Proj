@@ -45,7 +45,7 @@ class Post extends Model
   protected $with = ['user'];
 
   /**
-   * The user this card belongs to
+   * The user this post belongs to
    */
   public function user() {
     return $this->belongsTo('App\User' , 'author_id');
@@ -53,6 +53,13 @@ class Post extends Model
 
   public function comments(){
     return $this->hasMany('App\Comment' , 'post_id');
+  }
+
+  /**
+   * The group this post belongs to
+   */
+  public function group() {
+    return $this->belongsTo('App\Group', 'group_id');
   }
 
 
