@@ -23,7 +23,7 @@
     <div class="row">
         <div class="col-sm-3">
             <div class="card">
-                <img class="card-img-top" src="./images/lbaw2034_gt.jpg" alt="Joaquim Rodrigues"/>
+                <img class="card-img-top" src="./images/lbaw2034_gt.jpg" alt="Gustavo Torres"/>
                 <div class="card-body"> 
                     <h3 class="card-title">Gustavo Torres</h3>
                 </div>
@@ -39,7 +39,7 @@
         </div>
         <div class="col-sm-3">
             <div class="card">
-                <img class="card-img-top" src="./images/lbaw2034_pe.jpg" alt="Joaquim Rodrigues"/>
+                <img class="card-img-top" src="./images/lbaw2034_pe.jpg" alt="Pedro Esteves"/>
                 <div class="card-body"> 
                     <h3 class="card-title">Pedro Esteves</h3>
                 </div>
@@ -47,7 +47,7 @@
         </div>
         <div class="col-sm-3">
             <div class="card">
-                <img class="card-img-top" src="./images/lbaw2034_vv.jpg" alt="Joaquim Rodrigues"/>
+                <img class="card-img-top" src="./images/lbaw2034_vv.jpg" alt="Vitor Ventuzelos"/>
                 <div class="card-body"> 
                     <h3 class="card-title">Vitor Ventuzelos</h3>
                 </div>

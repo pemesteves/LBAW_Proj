@@ -227,7 +227,9 @@ function commentAddedHandler(){
   let new_comment = createComment(comment);
 
   // Reset the new comment input
-  let form = document.querySelector('div.post_container form');
+  console.log(comment.post_id);
+  let toSelect = document.querySelector('article.post[data-id="'+ comment.post_id + '"]');
+  let form = toSelect.querySelector('div.post_container form');
   form.querySelector('textarea').value="";
 
   // Insert the new comment
