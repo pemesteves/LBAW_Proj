@@ -25,9 +25,11 @@ Route::delete('api/cards/{card_id}', 'CardController@delete');
 Route::put('api/cards/{card_id}/', 'ItemController@create');
 Route::post('api/item/{id}', 'ItemController@update');
 Route::delete('api/item/{id}', 'ItemController@delete');
+
 Route::put('/api/posts' , 'PostController@create');
 Route::delete('api/posts/{id}', 'PostController@delete');
 Route::put('/api/posts/{id}/comment', 'CommentController@create');
+
 
 // Authentication
 

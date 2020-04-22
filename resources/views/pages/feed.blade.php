@@ -11,15 +11,26 @@
                         <li>
                             <h5 class="menu_title">Groups</h5>
                             <ul class="dl-submenu">
-                                <li><a href="group.php"><small>NIAEFEUP</small></a></li>
-                                <li><a href="#"><small>AEFEUP</small></a></li>
+                                @if (count($groups) === 0)
+                                    <small>No groups</small>
+                                @else
+                                    @foreach ($groups as $group)
+                                        <li><a href="groups/{{$group->group_id}}"><small>{{$group->name}}</small></a></li>
+                                    @endforeach
+                                @endif
+                                
                             </ul>
                         </li>
                         <li>
                             <h5 class="menu_title">Events</h5>
                             <ul class="dl-submenu">
-                                <li><a href="event.php"><small>FEUPCaffe 12/3</small></a></li>
-                                <li><a href="#"><small>Jantar NIAEFEUP</small> </a></li>
+                                @if (count($events) === 0)
+                                    <small>No events</small>
+                                @else
+                                    @foreach ($events as $event)
+                                        <li><a href="events/{{$event->event_id}}"><small>{{$event->name}}</small></a></li>
+                                    @endforeach
+                                @endif
                             </ul>
                         </li>
                     </ul>

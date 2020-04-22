@@ -25,4 +25,6 @@ class GroupController extends Controller{
 
       return view('pages.group' , ['is_admin' => false , 'group' => $group, 'posts' => $posts, 'members' => $members ]);
     }
+
+
 }
