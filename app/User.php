@@ -68,4 +68,8 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Event','user_interested_in_event','user_id','event_id');
     }
 
+    public function postsLiked(){
+        return $this->belongsToMany('App\Post' , 'user_reaction' , 'user_id' , 'post_id')->withPivot('like_or_dislike');
+      }
+
 }

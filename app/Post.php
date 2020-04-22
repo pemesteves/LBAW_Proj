@@ -63,4 +63,8 @@ class Post extends Model
   }
 
 
+  public function userLikes(){
+    return $this->belongsToMany('App\User' , 'user_reaction' , 'post_id' , 'user_id')->withPivot('like_or_dislike');
+  }
+
 }

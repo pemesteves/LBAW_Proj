@@ -79,10 +79,7 @@ class PostController extends Controller{
       //TODO: AUTHORIZE  
       $change = ['post_id' => $id ,'upvotes' => 0, 'downvotes' => 0];
 
-      $like = DB::table('user_reaction')
-                ->where('user_id', '=' , Auth::user()->user_id)
-                ->where('post_id', '=' , $id)
-                ->first();
+      $like = $post->userLikes()->wherePivot('user_id' , Auth::user()->user_id)->first();
       if(!$like){
         DB::table('user_reaction')
               ->insert(['user_id' => Auth::user()->user_id,
@@ -96,11 +93,8 @@ class PostController extends Controller{
           $change['upvotes'] = 1;
         }
       }else{ //se o like ja existir
-        if($like->like_or_dislike == $val){ //se o valor for igual então tirar o like
-          DB::table('user_reaction')
-                ->where('user_id', '=' , Auth::user()->user_id)
-                ->where('post_id', '=' , $id)
-                ->delete();
+        if($like->pivot->like_or_dislike == $val){ //se o valor for igual então tirar o like
+          $like->pivot->delete();
           if($val == 0){
             $post->decrement('downvotes');
             $change['downvotes'] = -1;
@@ -109,20 +103,13 @@ class PostController extends Controller{
             $change['upvotes'] = -1;
           }
         }else{ //mudar o like
-          DB::table('user_reaction')
-                ->where('user_id', '=' , Auth::user()->user_id)
-                ->where('post_id', '=' , $id)
-                ->update(['like_or_dislike' => $val]);
+          $like->pivot->update(['like_or_dislike' => $val]);
           if($val == 0){
-            $post->increment('downvotes');
-            $post->decrement('upvotes');
-            $change['upvotes'] = -1;
-            $change['downvotes'] = 1;
+            $post->increment('downvotes'); $post->decrement('upvotes');
+            $change = ['post_id' => $id ,'upvotes' => -1, 'downvotes' => 1];
           }else{
-            $post->increment('upvotes');
-            $post->decrement('downvotes');
-            $change['upvotes'] = 1;
-            $change['downvotes'] = -1;
+            $post->increment('upvotes'); $post->decrement('downvotes');
+            $change = ['post_id' => $id ,'upvotes' => 1, 'downvotes' => -1];
           }
         }
       }
