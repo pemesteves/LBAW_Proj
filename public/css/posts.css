@@ -110,3 +110,13 @@
     padding-bottom:0;
     max-width: 2rem;
 }
+
+.small_post_body{
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+}

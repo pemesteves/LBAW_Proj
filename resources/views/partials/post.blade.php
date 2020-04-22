@@ -68,7 +68,7 @@
                 </div>
                 <div class="modal-body post_container" style="overflow-y: auto;">
                     <div class="container" style="border-bottom:0;border-top:0;border-radius:0;height:100%;">
-                        <div class="row">
+                        <div class="row post_title">
                             <h2>{{ $post['title'] }}</h2>  
                         </div>
                         <div class="row post_content">
@@ -126,9 +126,9 @@
                 <div class="col-md-8" style="flex-grow:1; max-width:100%; text-align: left;">
                     <div class="card" style="height: 100%; margin-bottom: 0;">
                         <div class="card-body" style="margin-bottom: 0;padding-bottom: 0;">
-                            <h3 class="card-title"> {{ $post['title'] }}</h3>
-                            <p class="card-text">
-                            {{ $post->body }}
+                            <h3 class="card-title small_post_title"> {{ $post['title'] }}</h3>
+                            <p class="card-text small_post_body">
+                                {{ $post->body }}
                             </p>
                             <p class="card-text" style="margin-bottom:0rem; float: right;"><small class="text-muted" style="margin-bottom:0rem">{{date('d-m-Y', strtotime($post->date))}}</small>, <small class="text-muted" style="margin-bottom:0.2rem">{{date('H:i', strtotime($post->date))}}</small></p>
                         </div>
