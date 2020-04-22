@@ -32,9 +32,13 @@
                                         <p class="card-text">{{date('H:i', strtotime($post->date))}}</p>
                                     </div>
                                 </div>
-                                <div class="row justify-content-end" style="font-size: 1.2em;">
-                                    <span class="fa fa-thumbs-up post_like">&nbsp;{{ $post->upvotes }}&nbsp;</span>
-                                    <span class="fa fa-thumbs-down post_dislike">&nbsp;{{ $post->downvotes }}&nbsp;</span>
+                                <div class="row justify-content-end votes" style="font-size: 1.2em;">
+                                    <button class='upvote' style=" background-color: white; border: 0;" > 
+                                        <span class="fa fa-thumbs-up post_like">&nbsp;{{ $post->upvotes }}&nbsp;</span>
+                                    </button>    
+                                    <button class='downvote' style=" background-color: white; border: 0;" > 
+                                        <span class="fa fa-thumbs-down post_dislike">&nbsp;{{ $post->downvotes }}&nbsp;</span>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -130,7 +134,7 @@
                         </div>
                         <div class="card-footer" style="border-left:none;border-right:none;border-bottom:none">
                             <span class="comment"> {{$post->comments->count()}} comments </span>
-                            <div style="float: right;">
+                            <div class='post_votes' style="float: right;">
                                 <span class="fa fa-thumbs-up post_like">&nbsp;{{ $post['upvotes'] }}&nbsp;</span>
                                 <span class="fa fa-thumbs-down post_dislike">&nbsp;{{ $post['downvotes'] }}&nbsp;</span>
                             </div>

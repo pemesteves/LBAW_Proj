@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS public."user_reaction";
 DROP TABLE IF EXISTS public."user_interested_in_event";
 DROP TABLE IF EXISTS public."friend";
 DROP TABLE IF EXISTS public."report";
@@ -276,6 +277,13 @@ CREATE TABLE public."user_interested_in_event"
 	CONSTRAINT "user_interested_in_event_pkey" PRIMARY KEY ("user_id", "event_id")
 );
 
+CREATE TABLE public."user_reaction"
+(
+	"user_id" integer NOT NULL REFERENCES public."user"("user_id") ON DELETE CASCADE,
+	"post_id" integer NOT NULL REFERENCES public."post"("post_id") ON DELETE CASCADE,
+	"like_or_dislike" integer NOT NULL, -- 1 for like, 0 for dislike
+	CONSTRAINT "user_reaction_pkey" PRIMARY KEY ("user_id", "post_id")
+);
 
 
 -- USER NOTIFIED INDEX

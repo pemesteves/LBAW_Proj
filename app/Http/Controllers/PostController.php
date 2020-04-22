@@ -43,4 +43,62 @@ class PostController extends Controller{
     
       return $new_post[0];
     }
+
+    public function like(Request $request, $id , $val)
+    {
+      $post = Post::find($id);
+      //TODO: AUTHORIZE  
+      $change = ['post_id' => $id ,'upvotes' => 0, 'downvotes' => 0];
+
+      $like = DB::table('user_reaction')
+                ->where('user_id', '=' , Auth::user()->user_id)
+                ->where('post_id', '=' , $id)
+                ->first();
+      if(!$like){
+        DB::table('user_reaction')
+              ->insert(['user_id' => Auth::user()->user_id,
+                'post_id' => $id,
+                'like_or_dislike' => $val]);
+        if($val == 0){
+          $post->increment('downvotes');
+          $change['downvotes'] = 1;
+        }else{
+          $post->increment('upvotes');
+          $change['upvotes'] = 1;
+        }
+      }else{ //se o like ja existir
+        if($like->like_or_dislike == $val){ //se o valor for igual então tirar o like
+          DB::table('user_reaction')
+                ->where('user_id', '=' , Auth::user()->user_id)
+                ->where('post_id', '=' , $id)
+                ->delete();
+          if($val == 0){
+            $post->decrement('downvotes');
+            $change['downvotes'] = -1;
+          }else{
+            $post->decrement('upvotes');
+            $change['upvotes'] = -1;
+          }
+        }else{ //mudar o like
+          DB::table('user_reaction')
+                ->where('user_id', '=' , Auth::user()->user_id)
+                ->where('post_id', '=' , $id)
+                ->update(['like_or_dislike' => $val]);
+          if($val == 0){
+            $post->increment('downvotes');
+            $post->decrement('upvotes');
+            $change['upvotes'] = -1;
+            $change['downvotes'] = 1;
+          }else{
+            $post->increment('upvotes');
+            $post->decrement('downvotes');
+            $change['upvotes'] = 1;
+            $change['downvotes'] = -1;
+          }
+        }
+      }
+
+      return $change;
+    }
+
 }
