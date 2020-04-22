@@ -55,6 +55,8 @@ Route::get('/about', 'AboutController@show');
 
 //Group
 Route::get('/groups/{id}', 'GroupController@show');
+Route::put('/api/groups/{id}/posts', 'PostController@createInGroup');
 
 //Event
 Route::get('/events/{event_id}' , 'EventController@show');
+Route::put('/api/events/{id}/posts', 'PostController@createInEvent');

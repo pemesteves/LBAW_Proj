@@ -21,6 +21,26 @@ class PostController extends Controller{
       return $post;
     }
 
+    /**
+     * Generic create post function
+     */
+    public function createPost(Request $request,$group_id,$event_id)    {
+      $post = new Post();
+
+      $this->authorize('create', $post);
+
+      $post->title = $request->input('title');
+      $post->body = $request->input('body');
+      $post->author_id = Auth::user()->user_id; //TODO Change this to the id of the regular_user
+      if($group_id) $post->group_id = $group_id;
+      if($event_id) $post->event_id = $event_id;
+      $post->save();
+      
+      //Gets useful information about the post
+      $new_post = Post::take(1)->where("post_id", '=', $post["post_id"])->get(); 
+    
+      return $new_post[0];
+    }
 
     /**
      * Creates a new post.
@@ -29,20 +49,29 @@ class PostController extends Controller{
      */
     public function create(Request $request)
     {
-      $post = new Post();
-
-      $this->authorize('create', $post);
-
-      $post->title = $request->input('title');
-      $post->body = $request->input('body');
-      $post->author_id = Auth::user()->user_id; //TODO Change this to the id of the regular_user
-      $post->save();
-      
-      //Gets useful information about the post
-      $new_post = Post::take(1)->where("post_id", '=', $post["post_id"])->get(); 
-    
-      return $new_post[0];
+      return $this->createPost($request,null,null);
     }
+
+    /**
+     * Creates a new post in a group.
+     *
+     * @return Post The post created.
+     */
+    public function createInGroup(Request $request, $id)
+    {
+      return $this->createPost($request,$id,null);
+    }
+
+    /**
+     * Creates a new post in a event.
+     *
+     * @return Post The post created.
+     */
+    public function createInEvent(Request $request, $id)
+    {
+      return $this->createPost($request,null,$id);
+    }
+
 
     public function like(Request $request, $id , $val)
     {

@@ -107,8 +107,20 @@ function sendCreatePostRequest(event){
   let title = this.querySelector('input[name=title]').value;
   let body = this.querySelector('textarea').value;
 
+  let resource = "";
+
+  let pathParts = window.location.pathname.split('/');
+  if(pathParts[1] == "feed")
+    resource = '/api/posts/';
+  else if(pathParts[1] == "groups"){
+    resource = '/api/groups/' + pathParts[2] + '/posts/';
+  }else if(pathParts[1] == "events"){
+    resource = '/api/events/' + pathParts[2] + '/posts/';
+  }else
+    resource = '/api/posts/';
+
   if(title != '' && body != '')
-    sendAjaxRequest('put', '/api/posts/', {title: title, body: body}, postAddedHandler);
+    sendAjaxRequest('put', resource, {title: title, body: body}, postAddedHandler);
   
   event.preventDefault();
   return false;
