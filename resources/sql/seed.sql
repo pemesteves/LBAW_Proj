@@ -56,6 +56,10 @@ CREATE TABLE public."user"
     "name" text NOT NULL,
     "email" text NOT NULL,
     "password" text NOT NULL,
+
+	"userable_id" integer,
+	"userable_type" text,
+
 	TYPE status NOT NULL DEFAULT 'normal',
     CONSTRAINT "user_pkey" PRIMARY KEY ("user_id"),
     CONSTRAINT "user_email_key" UNIQUE ("email")
@@ -73,6 +77,10 @@ CREATE TABLE public."regular_user"
     "regular_user_id" serial NOT NULL,
 	"user_id" integer NOT NULL REFERENCES public."user"("user_id") ON DELETE CASCADE,
 	"personal_info" text,
+
+	"regular_userable_id" integer,
+	"regular_userable_type" text,
+
     CONSTRAINT "regular_user_pkey" PRIMARY KEY ("regular_user_id")
 );
 
@@ -582,7 +590,7 @@ insert into public."teacher" ("regular_user_id") values (16);
 insert into public."organization" ("regular_user_id", "approval") values (4, TRUE);
 
 
-insert into public."event" ("organization_id", "name", "location", "date", "information") values (1, 'Evento de LBAW', 'Porto', '2020-04-23 17:45:00', 'general info');
+insert into public."event" ("organization_id", "name", "location", "date", "information") values (1, 'Evento de LBAW', 'Porto', '2021-04-23 17:45:00', 'general info');
 
 
 insert into public."group" ("name", "information", TYPE) values ('Grupo de LBAW', 'Grupo para os estudantes de LBAW', 'normal');

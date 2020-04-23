@@ -70,6 +70,10 @@ class User extends Authenticatable
 
     public function postsLiked(){
         return $this->belongsToMany('App\Post' , 'user_reaction' , 'user_id' , 'post_id')->withPivot('like_or_dislike');
-      }
+    }
+
+    public function userable(){
+        return $this->morphTo();
+    }
 
 }

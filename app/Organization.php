@@ -2,7 +2,7 @@
 
 namespace App;
 
-class Organization extends RegularUser
+class Organization extends Model
 {
     // Don't add create and update timestamps in database.
     public $timestamps  = false;
@@ -31,8 +31,13 @@ class Organization extends RegularUser
         'approval' => 'FALSE',
     ];
 
-    public function regular_user(){
+    /*public function regular_user(){
         return $this->hasOne(RegularUser::class);
+    }*/
+
+    public function regular_user()
+    {
+        return $this->morphOne('App\User', 'regular_userable');
     }
 
 }
