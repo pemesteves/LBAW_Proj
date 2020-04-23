@@ -15,13 +15,13 @@
                     <div class="container" style="border-bottom:0;border-radius:0;max-width: 90%;">
                         <div class="row">
                             <div class="col-sm-2">
-                                <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" class="mx-auto d-block" alt="..." style="border-radius:50%; max-width:7rem; " onclick="window.location.href='/users/{{ $post->user->user_id }}'"/>
+                                <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" class="mx-auto d-block" alt="..." style="border-radius:50%; max-width:7rem; " onclick="window.location.href='/users/{{ $post->regularUser->regular_user_id }}'"/>
                             </div>
                             <div class="col-sm-10">
                                 <div class="row">
                                     <div class="col-sm-9" style="background-color: transparent;">
                                         <div class="row" style="background-color: transparent;">
-                                            <h2 class="list-group-item" style="background-color: transparent; border:none;padding-top:0.2rem;padding-bottom:0.2rem">{{ $post->user->name }}</h2>
+                                            <h2 class="list-group-item" style="background-color: transparent; border:none;padding-top:0.2rem;padding-bottom:0.2rem"> {{ object_get($post->regularUser->user,"name") }}</h2>
                                         </div>
                                         <div class="row" style="background-color: transparent;">
                                             <h3 class="list-group-item" style="background-color: transparent; border:none;padding-top:0.2rem;padding-bottom:0.2rem">{{ $post->uni }}</h3>
@@ -115,7 +115,7 @@
                     <div class="card text-center" style="border-bottom:none;border-top:none;border-radius:0;height:100%;">
                         <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" class="card-img-top mx-auto d-block" alt="..." style="border-radius:50%; max-width:5rem; padding-top:0.8rem">
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item" style="border:none;padding-top:0.2rem;padding-bottom:0.2rem"> {{ $post->user->name }}
+                            <li class="list-group-item" style="border:none;padding-top:0.2rem;padding-bottom:0.2rem"> {{ object_get($post->regularUser->user,"name") }}
                             </li>
                             <li class="list-group-item" style="border:none;padding-top:0.2rem;padding-bottom:0.2rem">{{ $post['uni'] }}</li>
                             <li class="list-group-item" style="border:none;padding-top:0.2rem;padding-bottom:0.2rem">4 friends

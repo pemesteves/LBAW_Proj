@@ -42,13 +42,13 @@ class Post extends Model
       
   ];
 
-  protected $with = ['user'];
+  protected $with = ['regularUser'];
 
   /**
    * The user this post belongs to
    */
-  public function user() {
-    return $this->belongsTo('App\User' , 'author_id');
+  public function regularUser() {
+    return $this->belongsTo('App\RegularUser' , 'author_id');
   }
 
   public function comments(){

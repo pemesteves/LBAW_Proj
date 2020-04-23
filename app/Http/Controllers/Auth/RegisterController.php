@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\User;
 use App\Http\Controllers\Controller;
 use App\RegularUser;
+use App\Student;
+use App\Teacher;
+use App\Organization;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -82,13 +85,30 @@ class RegisterController extends Controller
         $user->userable_type = RegularUser::class;
         $user->save();
 
+        $occupation = null;
+
+        if($data['occupation'] == 'Student')
+            $occupation = new Student;
+        else if($data['occupation'] == 'Teacher')
+            $occupation = new Teacher;
+        else if($data['occupation'] == 'Organization')
+            $occupation = new Organization;
+
+        $occupation->regular_user_id = $regular_user->regular_user_id;
+        $occupation->save();
+
+        if($data['occupation'] == 'Student'){
+            $regular_user->regular_userable_id = $occupation->student_id;
+            $regular_user->regular_userable_type = Student::class;
+        }else if($data['occupation'] == 'Teacher'){
+            $regular_user->regular_userable_id = $occupation->teacher_id;
+            $regular_user->regular_userable_type = Teacher::class;
+        }else if($data['occupation'] == 'Organization'){
+            $regular_user->regular_userable_id = $occupation->organization_id;
+            $regular_user->regular_userable_type = Organization::class;
+        }
+        $regular_user->save();
+
         return $user;
-
-        /*return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-
-        ]);*/
     }
 }

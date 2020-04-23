@@ -18,7 +18,19 @@
                     <h2 style="border: 0; padding: 0">FEUP</h2>
                 </div>
                 <div class="row">
-                    <h2 style="border: 0; padding: 0;">Student</h2>
+                    <h2 style="border: 0; padding: 0;">
+                    @switch(get_class(Auth::user()->userable->regular_userable))
+                        @case("App\Student")
+                            Student
+                        @break;
+                        @case("App\Teacher")
+                            Teacher
+                        @break;
+                        @case("App\Organization")
+                            Organization
+                        @break;
+                    @endswitch
+                    </h2>
                 </div>
             </div>
         </div>
@@ -35,7 +47,11 @@
 
                     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                         <div class="card-body">
-                            John, byname John Lackland, French Jean sans Terre, (born c. 1166—died October 18/19, 1216, Newark, Nottinghamshire, England), king of England from 1199 to 1216.
+                            @if( Auth::user()->userable->personal_info == "")
+                                No information yet.
+                            @else
+                                {{Auth::user()->userable->personal_info}}
+                            @endif
                         </div>
                     </div>
                 </div>

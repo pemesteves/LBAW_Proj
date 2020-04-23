@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 use App\Post;
+use App\RegularUser;
 use App\User;
 
 class ProfileController extends Controller{
@@ -15,7 +16,7 @@ class ProfileController extends Controller{
         if (!Auth::check()) return redirect('/login');
 
         $posts = Post::join('user','post.author_id','=', 'user_id')
-                       ->where('user_id', '=',  Auth::user()->user_id)
+                       ->where('user_id', '=',  Auth::user()->userable->regular_user_id)
                        ->orderBy('date','desc')
                        ->get();
 
@@ -27,7 +28,7 @@ class ProfileController extends Controller{
       if (!Auth::check()) return redirect('/login');
 
       $posts = Post::join('user','post.author_id','=', 'user_id')
-                     ->where('user_id', '=',  Auth::user()->user_id)
+                     ->where('user_id', '=',  Auth::user()->userable->regular_user_id)
                      ->orderBy('date','desc')
                      ->get();
 
@@ -38,7 +39,7 @@ class ProfileController extends Controller{
     public function show($id){
       if (!Auth::check()) return redirect('/login');
 
-      $user = User::find($id);
+      $user = RegularUser::find($id);
 
 
 

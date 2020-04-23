@@ -12,13 +12,25 @@
             </div>
             <div class="col-8" style="padding: 0.2rem 1rem 0 0.2rem;">
                 <div class="row">
-                    <h1 style="border: 0; font-size: 5rem;">{{ $user->name }}</h1>
+                    <h1 style="border: 0; font-size: 4.5rem;">{{ $user->user->name }}</h1>
                 </div>
                 <div class="row">
                     <h2 style="border: 0; padding: 0">FEUP</h2>
                 </div>
                 <div class="row">
-                    <h2 style="border: 0; padding: 0;">Student</h2>
+                    <h2 style="border: 0; padding: 0;">
+                    @switch(get_class($user->regular_userable))
+                        @case("App\Student")
+                            Student
+                        @break;
+                        @case("App\Teacher")
+                            Teacher
+                        @break;
+                        @case("App\Organization")
+                            Organization
+                        @break;
+                    @endswitch
+                    </h2>
                 </div>
             </div>
         </div>
@@ -28,14 +40,18 @@
                     <div class="card-header" id="headingOne">
                         <h5 class="mb-0">
                             <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            Personal Information
+                                Personal Information
                             </button>
                         </h5>
                     </div>
 
                     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                         <div class="card-body">
-                            John, byname John Lackland, French Jean sans Terre, (born c. 1166—died October 18/19, 1216, Newark, Nottinghamshire, England), king of England from 1199 to 1216.
+                            @if( Auth::user()->userable->personal_info == "")
+                                No information yet.
+                            @else
+                                {{$user->personal_info}}
+                            @endif    
                         </div>
                     </div>
                 </div>

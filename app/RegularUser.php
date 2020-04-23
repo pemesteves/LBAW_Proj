@@ -33,10 +33,15 @@ class RegularUser extends Model
         'personal_info', 
     ];
 
+    protected $with = ['user'];
 
-    /*public function user(){
-        return $this->hasOne(User::class);
-    }*/
+
+    /**
+     * The posts this user owns.
+     */
+    public function posts() {
+        return $this->hasMany('App\Post');
+      }
 
     public function user()
     {

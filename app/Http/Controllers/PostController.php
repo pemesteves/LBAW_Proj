@@ -31,7 +31,7 @@ class PostController extends Controller{
 
       $post->title = $request->input('title');
       $post->body = $request->input('body');
-      $post->author_id = Auth::user()->user_id; //TODO Change this to the id of the regular_user
+      $post->author_id = Auth::user()->userable->regular_user_id; //TODO Change this to the id of the regular_user
       if($group_id) $post->group_id = $group_id;
       if($event_id) $post->event_id = $event_id;
       $post->save();
@@ -79,10 +79,10 @@ class PostController extends Controller{
       //TODO: AUTHORIZE  
       $change = ['post_id' => $id ,'upvotes' => 0, 'downvotes' => 0];
 
-      $like = $post->userLikes()->wherePivot('user_id' , Auth::user()->user_id)->first();
+      $like = $post->userLikes()->wherePivot('user_id' , Auth::user()->userable->regular_user_id)->first();
       if(!$like){
         DB::table('user_reaction')
-              ->insert(['user_id' => Auth::user()->user_id,
+              ->insert(['user_id' => Auth::user()->userable->regular_user_id,
                 'post_id' => $id,
                 'like_or_dislike' => $val]);
         if($val == 0){
