@@ -40,7 +40,6 @@ class Chat extends Model
     protected $hidden = [
   ];
 
-
   public function messages(){
     return $this->hasMany('App\Message');
   }
