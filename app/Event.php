@@ -39,7 +39,7 @@ class Event extends Model
     ];
 
     /**
-     * The posta this event owns.
+     * The posts this event owns.
      */
     public function posts() {
       return $this->hasMany('App\Post');

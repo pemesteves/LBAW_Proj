@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class Chat extends Model
 {
   // Don't add create and update timestamps in database.
   public $timestamps  = false;

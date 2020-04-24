@@ -18,7 +18,7 @@ class ChatController extends Controller{
 
       $messages = Message::join('chat','chat.chat_id','=', 'message.chat_id')
                      ->where('chat.chat_id', '=',  $id)
-                     ->orderBy('date','desc')
+                     ->orderBy('date','asc')
                      ->get();
 
       $members = $chat->members();

@@ -17,6 +17,7 @@
                     </form>
                 </header>
                 <div class="col" style="height: 87%; justify-content:flex-start; padding: 0">
+                    @each('partials.chat', Auth::user()->chats, 'chat')
                 <!-- aqui -->
                 </div>
                 <footer id="create_chat" class="row" style="margin: 0; padding: 0; width: 100%; height: 6.5%">
@@ -29,7 +30,7 @@
             <section id="opened_message" class="col-md-9 d-flex flex-column" style="height: 100%">
                 <header class="row" id="chat_info">
                     <img class="card-img" src="images/placeholder.png" alt="" style="width:2.5em; height:2.5em ; border-radius:50%" onclick="window.location.href='./profile.php'"/>
-                    <h2>Mary</h2>
+                    <h2>{{$chat->chat_name}}</h2>
                 </header>
 
                 <section id="messages_col" class="d-flex flex-column" style="flex-grow:1">
