@@ -60,8 +60,6 @@ class ProfileController extends Controller{
 
       $input = $request->only('name');
 
-      error_log("Name: " . $input['name']);
-
       $user->update(['name' => $input['name']]);
 
       return ProfileController::show_me();

@@ -67,3 +67,5 @@ Route::get('/chats/{chat_id}', 'ChatController@show');
 
 //Post
 Route::get('/posts/{post_id}', 'PostController@show');
+Route::get('/posts/{post_id}/edit', 'PostController@show_edit');
+Route::post('/posts/{post_id}', 'PostController@edit');

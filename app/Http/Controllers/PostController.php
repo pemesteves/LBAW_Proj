@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 use App\Post;
-use App\Comment;
 
 class PostController extends Controller{
 
@@ -50,7 +49,48 @@ class PostController extends Controller{
 
       $post = Post::find($post_id);
 
+      if($post == null){
+        //TODO 404 error 
+      }
+
       return view('pages.post' , ['is_admin' => false , 'post' => $post]);
+    }
+
+    /**
+     * Shows the post edit page
+     */
+    public function show_edit($post_id){
+      if(!Auth::check()) return redirect('/login');
+      
+      $post = Post::find($post_id);
+
+      $this->authorize('edit', $post);
+
+      return view('pages.post_edit' , ['is_admin' => false , 'post' => $post]);
+    }
+
+     /**
+     * Edits the post
+     */
+    public function edit(Request $request, $post_id){
+      if(!Auth::check()) return redirect('/login');
+
+      $post = Post::find($post_id); 
+
+      error_log("Post: " . $post);
+
+      $this->authorize('edit', $post);
+
+      $title = $request->input('title');
+      error_log("Title: " . $title);
+      $body = $request->input('body');
+      error_log("Body: " . $body);
+
+      $post->update(['title' => $title, 'body' => $body]);
+
+      error_log("New Post: " . $post);
+
+      return PostController::show($post_id);
     }
 
     /**

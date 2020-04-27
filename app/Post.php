@@ -30,7 +30,7 @@ class Post extends Model
      * @var array
      */
     protected $fillable = [
-      'body',
+      'title', 'body',
   ];
 
   /**
