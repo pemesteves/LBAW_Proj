@@ -1,5 +1,7 @@
 
-<div class="row comment_container <?= $comment['padding_left'] != 0 ? 'comment_padding' : 'comment_no_padding' ?>">
+<div class="row comment_container 
+    <?= $comment['padding_left'] != 0 ? 'comment_padding' : 'comment_no_padding' ?>"
+    data-id="{{ $comment->comment_id }}" >
     <div class="col-2 comment_user_info" >
         <div class="row">   
             <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" class="mx-auto d-block" alt="..." style="border-radius:50%; max-width:2rem; "  onclick="window.location.href='./profile.php'">
@@ -18,7 +20,9 @@
             <div class="dropdown-menu options_menu" style="min-width:5rem">
                 <ul class="list-group">
                     <li class="list-group-item options_entry" style="text-align: left;">
-                        <button style=" margin-left:auto; margin-right:auto; background-color: white; border: 0;">Edit</button>
+                        <button class='comment_edit' style=" margin-left:auto; margin-right:auto; background-color: white; border: 0;">
+                            Edit
+                        </button>
                     </li>
                     <li class="list-group-item options_entry" style="text-align: left;">
                         <button class='comment_delete' style=" background-color: white; border: 0;" > 
@@ -26,7 +30,9 @@
                         </button>
                     </li>
                     <li class="list-group-item options_entry" style="text-align: left;">
-                        <button style="background-color: white; border: 0;">Report</button>
+                        <button style="background-color: white; border: 0;">
+                            Report
+                        </button>
                     </li>
                 </ul>
             </div>

@@ -88,7 +88,7 @@
                                 </div>
                             </div>
                         </form>
-                        <div>
+                        <div class="comments">
                             @each("partials.comment" , $post->comments, "comment")
                         </div>
                     </div>
