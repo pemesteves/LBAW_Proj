@@ -53,6 +53,9 @@
             <section>
                 @yield('nav_bar')
             </section>
+            
+            <section id='feedback'>
+            </section>           
 
             <section id="content">
                 @yield('content')

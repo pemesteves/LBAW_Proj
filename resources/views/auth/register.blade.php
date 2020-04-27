@@ -17,8 +17,23 @@
                         </span>
                     @endif
                     <input type="email" required class="row form-control" id="email" name="email" placeholder="Email">
+                    @if ($errors->has('email'))
+                        <span class="error">
+                            {{ $errors->first('email') }}
+                        </span>
+                    @endif
                     <input type="password" required class="row form-control" id="password" name="password" placeholder="Password">
+                    @if ($errors->has('password'))
+                        <span class="error">
+                            {{ $errors->first('password') }}
+                        </span>
+                    @endif
                     <input type="password" required class="row form-control" id="password_confirmation" name="password_confirmation" placeholder="Confirm Password">
+                    @if ($errors->has('password_confirmation'))
+                        <span class="error">
+                            {{ $errors->first('password_confirmation') }}
+                        </span>
+                    @endif
                     <input type="text" required class="row form-control" id="university" name="university" placeholder="University">
                 </div>
                 <div class="form-group">
