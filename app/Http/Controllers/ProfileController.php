@@ -20,8 +20,13 @@ class ProfileController extends Controller{
                        ->orderBy('date','desc')
                        ->get();
 
-        return view('pages.user_me' , ['is_admin' => false , 'posts' => $posts ]);
+        $groups = Auth::user()->groups;
 
+        $friends = User::join('friend', 'friend_id2', '=', 'userable_id')
+                       ->where('friend.friend_id1', '=', Auth::user()->userable_id)
+                       ->get();
+
+        return view('pages.user_me' , ['is_admin' => false , 'posts' => $posts , 'groups' => $groups, 'friends' => $friends]);
     }
 
     public function show_me_edit(){
@@ -48,7 +53,13 @@ class ProfileController extends Controller{
                      ->orderBy('date','desc')
                      ->get();
 
-      return view('pages.user' , ['is_admin' => false , 'user' => $user, 'posts' => $posts ]);
+      $groups = $user->user->groups;
+
+      $friends = User::join('friend', 'friend_id2', '=', 'userable_id')
+                      ->where('friend.friend_id1', '=', $user->regular_user_id)
+                      ->get();
+
+      return view('pages.user' , ['is_admin' => false , 'user' => $user, 'posts' => $posts, 'groups' => $groups, 'friends' => $friends ]);
 
     }
 
