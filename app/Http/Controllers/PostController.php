@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 use App\Post;
-use Exception;
+use App\Comment;
 
 class PostController extends Controller{
 
@@ -40,6 +40,17 @@ class PostController extends Controller{
       $new_post = Post::take(1)->where("post_id", '=', $post["post_id"])->get(); 
     
       return $new_post[0];
+    }
+
+    /**
+     * Shows the post page
+     */
+    public function show($post_id){
+      if (!Auth::check()) return redirect('/login');
+
+      $post = Post::find($post_id);
+
+      return view('pages.post' , ['is_admin' => false , 'post' => $post]);
     }
 
     /**

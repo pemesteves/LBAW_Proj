@@ -11,8 +11,6 @@
 |
 */
 
-use App\Http\Controllers\PostController;
-
 
 Route::get('/', 'Auth\LoginController@home');
 
@@ -66,3 +64,6 @@ Route::put('/api/events/{id}/posts', 'PostController@createInEvent');
 
 //Chat
 Route::get('/chats/{chat_id}', 'ChatController@show');
+
+//Post
+Route::get('/posts/{post_id}', 'PostController@show');
