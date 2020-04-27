@@ -36,6 +36,11 @@ function addEventListeners() {
   [].forEach.call(commentCreators, function(creator){
     creator.addEventListener('submit', sendCreateCommentRequest);
   });
+
+  let messageCreators = document.querySelectorAll('article.chat form#newmessage');
+  [].forEach.call(messageCreators, function(creator){
+   creator.addEventListener('submit', sendCreateMessageRequest);
+  });
 }
 
 
@@ -133,6 +138,22 @@ function sendCreateCommentRequest(event){
 
   if(body != '')
     sendAjaxRequest('put', '/api/posts/'+id+'/comment', {body: body}, commentAddedHandler);
+
+  event.preventDefault();
+  return false;
+}
+
+function sendCreateMessageRequest(event){
+  
+  let body = this.querySelector('textarea').value;
+
+  let id = this.closest('article.chat').getAttribute('data-id');
+
+  if(body != '') {
+    sendAjaxRequest('put', '/api/chats/'+id+'/message', {body: body}, messageAddedHandler);
+  }
+  else {
+  }
 
   event.preventDefault();
   return false;
@@ -246,6 +267,28 @@ function commentAddedHandler(){
   // Insert the new comment
   form.parentElement.insertBefore(new_comment, form.nextSibling);
 }
+
+function messageAddedHandler(){
+  if (this.status != 200 && this.status != 201){
+    window.location = '/';
+    return;
+  }
+
+  let message = JSON.parse(this.responseText);
+
+  // Create the new message
+  let new_message = createMessage(message);
+
+  // Reset the new message input
+  let toSelect = document.querySelector('article.chat[data-id="'+ message.chat_id + '"]');
+  let form = toSelect.querySelector('div.chat_message_input');
+  form.querySelector('textarea').value="";
+
+  // Insert the new message
+  let messageFeed = toSelect.querySelector('section#messages_col');
+  messageFeed.appendChild(new_message);
+}
+
 
 function createCard(card) {
   let new_card = document.createElement('article');
@@ -450,6 +493,16 @@ function createComment(comment){
         <button><span class="fa fa-ellipsis-v"></span></button>
     </div>`;
   return new_comment;
+}
+
+function createMessage(message) {
+  let new_message = document.createElement('p');
+  new_message.className = "chat_my_message";
+  new_message.innerHTML = `
+    ${message.body}
+  `;
+  return new_message;
+
 }
 
 function createItem(item) {

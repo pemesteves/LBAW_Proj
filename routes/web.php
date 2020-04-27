@@ -13,6 +13,7 @@
 
 use App\Http\Controllers\PostController;
 
+
 Route::get('/', 'Auth\LoginController@home');
 
 // Cards
@@ -31,6 +32,8 @@ Route::delete('api/posts/{id}', 'PostController@delete');
 Route::put('/api/posts/{id}/comment', 'CommentController@create');
 
 Route::put('/api/posts/{id}/like/{val}' , 'PostController@like');
+
+Route::put('/api/chats/{id}/message', 'MessageController@create');
 
 // Authentication
 
@@ -60,3 +63,6 @@ Route::put('/api/groups/{id}/posts', 'PostController@createInGroup');
 //Event
 Route::get('/events/{event_id}' , 'EventController@show');
 Route::put('/api/events/{id}/posts', 'PostController@createInEvent');
+
+//Chat
+Route::get('/chats/{chat_id}', 'ChatController@show');

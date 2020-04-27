@@ -205,6 +205,7 @@ CREATE TABLE public."comment"
 CREATE TABLE public."chat"
 (
 	"chat_id" serial NOT NULL,
+	"chat_name" text,
 	CONSTRAINT "chat_id_pkey" PRIMARY KEY ("chat_id")
 );
 
@@ -593,7 +594,7 @@ insert into public."teacher" ("regular_user_id") values (21);
 insert into public."organization" ("regular_user_id", "approval") values (22, TRUE);
 
 
-insert into public."event" ("organization_id", "name", "location", "date", "information") values (1, 'Evento de LBAW', 'Porto', '2021-04-23 17:45:00', 'general info');
+insert into public."event" ("organization_id", "name", "location", "date", "information") values (1, 'Evento de LBAW', 'Porto', '2020-04-29 17:45:00', 'general info');
 
 
 insert into public."group" ("name", "information", TYPE) values ('Grupo de LBAW', 'Grupo para os estudantes de LBAW', 'normal');
@@ -637,8 +638,8 @@ insert into public."comment" ("user_id","post_id", "comment_to_id", "body", "dat
 insert into public."comment" ("user_id","post_id", "comment_to_id", "body", "date", "upvotes", "downvotes") values (8, 4, NULL, 'Está preenchido, professor', '2020-03-10 10:23:44', 1, 0);
 
 
-insert into public."chat" DEFAULT VALUES ;
-insert into public."chat" DEFAULT VALUES ;
+insert into public."chat"("chat_name") VALUES('grupo de LBAW') ;
+insert into public."chat"("chat_name") VALUES('um chat qualquer') ;
 
 
 insert into public."user_in_chat" ("user_id", "chat_id") values (2,1);
