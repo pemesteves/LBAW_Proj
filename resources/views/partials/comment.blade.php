@@ -11,7 +11,25 @@
     <div class="col-9 comment_text">
         <p>{{ $comment->body }}</p>
     </div>
-    <div class="col-1 comment_opt">
-        <button><span class="fa fa-ellipsis-v"></span></button>
+    <div>
+        <div class="btn-group dropright" style="margin-right: 0; padding-right: 0; width: 100%">
+            <button type="button" data-toggle="dropdown" style="font-size: 150%; margin-right: 0; padding-right: 0; width: 100%; background-color: white; border: 0;"> 
+            <span class="fa fa-ellipsis-v" ></span></button>
+            <div class="dropdown-menu options_menu" style="min-width:5rem">
+                <ul class="list-group">
+                    <li class="list-group-item options_entry" style="text-align: left;">
+                        <button style=" margin-left:auto; margin-right:auto; background-color: white; border: 0;">Edit</button>
+                    </li>
+                    <li class="list-group-item options_entry" style="text-align: left;">
+                        <button class='comment_delete' style=" background-color: white; border: 0;" > 
+                            Delete
+                        </button>
+                    </li>
+                    <li class="list-group-item options_entry" style="text-align: left;">
+                        <button style="background-color: white; border: 0;">Report</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
