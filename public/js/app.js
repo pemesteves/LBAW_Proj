@@ -273,7 +273,7 @@ function messageAddedHandler(){
     window.location = '/';
     return;
   }
-
+  console.log(this.responseText);
   let message = JSON.parse(this.responseText);
 
   // Create the new message

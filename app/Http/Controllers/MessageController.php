@@ -30,7 +30,7 @@ class MessageController extends Controller{
       //Gets useful information about the message
       $new_message = Message::take(1)->where("message_id", '=', $message["message_id"])->get(); 
 
-      event(new NewMessage($new_message[0]));
+      broadcast(new NewMessage($message))->to_others();
 
       return $new_message[0];
     }
