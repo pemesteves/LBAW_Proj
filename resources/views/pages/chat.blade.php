@@ -33,6 +33,10 @@
                     </header>
 
                     <section id="messages_col" class="d-flex flex-column" style="flex-grow:1">
+                        Echo.channel('chat.' + {{$chat->chat_id}})
+                        .listen('NewMessage', (m) => {
+                            @each('partials.message', array('m'), 'message')
+                        })
                         @each('partials.message', $messages, 'message')
                     </section>
 

@@ -583,7 +583,7 @@ insert into public."teacher" ("regular_user_id") values (16);
 insert into public."organization" ("regular_user_id", "approval") values (4, TRUE);
 
 
-insert into public."event" ("organization_id", "name", "location", "date", "information") values (1, 'Evento de LBAW', 'Porto', '2020-04-29 17:45:00', 'general info');
+insert into public."event" ("organization_id", "name", "location", "date", "information") values (1, 'Evento de LBAW', 'Porto', '2020-06-29 17:45:00', 'general info');
 
 
 insert into public."group" ("name", "information", TYPE) values ('Grupo de LBAW', 'Grupo para os estudantes de LBAW', 'normal');
