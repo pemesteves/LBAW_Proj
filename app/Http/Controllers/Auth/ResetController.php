@@ -28,7 +28,7 @@ class ResetController extends Controller
         $email = $request->only('email');
         $user = User::where("email", "like",$email)->first();
         if(!$user)
-            return ['success' => 0 , 'error' => 'Email not found'];
+            return ['success' => 0 , 'error' => 'Email not found.'];
 
         $code = openssl_random_pseudo_bytes(3);
 
@@ -67,7 +67,13 @@ class ResetController extends Controller
 
         if(strcmp($hash,$_SESSION['code']) != 0){
             $_SESSION['max_tries'] = $_SESSION['max_tries'] -1;
-            return ['success' => 0, 'error' => 'Invalid code'];
+            if($_SESSION['max_tries'] == 0){
+                unset($_SESSION['code']);
+                unset($_SESSION['email']);
+                unset($_SESSION['max_tries']);
+                return ['success' => -1, 'error' => 'Exceded max tries.'];
+            }
+            return ['success' => 0, 'error' => 'Invalid code.'];
         }
 
         return ['success' => 1];
@@ -106,6 +112,6 @@ class ResetController extends Controller
         return redirect('/login');
 
     }
-
+    
 
 }

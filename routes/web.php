@@ -46,6 +46,7 @@ Route::post('api/resetPass/email', 'Auth\ResetController@addEmail');
 Route::post('api/resetPass/code', 'Auth\ResetController@checkCode');
 Route::post('/resetPass', 'Auth\ResetController@reset');
 
+
 //Feed
 Route::get('/feed' , 'FeedController@show');
 

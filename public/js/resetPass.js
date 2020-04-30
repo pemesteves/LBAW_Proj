@@ -9,7 +9,9 @@ function addEventListeners() {
 
 function sendResetEmailRequest(){
     let email = this.querySelector('input[name=email]').value;
-
+    let form = document.querySelector('form#reset_form');
+    let error = form.querySelector('#error_message');
+    error.innerHTML="Sending email";
     if(email != '')
         sendAjaxRequest('post', 'api/resetPass/email', {'email': email}, resetEmailHandler);
   
@@ -41,12 +43,13 @@ function resetEmailHandler(){
         error.innerHTML = resetinfo.error;
         return;
     }
-    error.innerHTML="";
+    error.innerHTML="Check your email for the code, check also spam!";
     let email = form.querySelector('input[name=email]');
     email.setAttribute("disabled",true);
     let code = form.querySelector('input[name=code]');
     code.style.display = 'block';
     code.setAttribute("required",true);
+    form.querySelector('button').innerHTML="Check code";
     form.removeEventListener('submit',sendResetEmailRequest);
     form.addEventListener('submit',sendCodeRequest);
 }
@@ -59,6 +62,19 @@ function checkCodeHandler(){
     let form = document.querySelector('form#reset_form');
     let resetinfo = JSON.parse(this.responseText);
     let error = form.querySelector('#error_message');
+    if(resetinfo.success == -1){
+        error.innerHTML = resetinfo.error;
+        let email = form.querySelector('input[name=email]');
+        email.removeAttribute("disabled");
+        let code = form.querySelector('input[name=code]');
+        code.value="";
+        code.style.display = 'none';
+        code.removeAttribute("required");
+        form.querySelector('button').innerHTML="Send email";
+        form.removeEventListener('submit',sendCodeRequest);
+        form.addEventListener('submit',sendResetEmailRequest);
+        return;
+    }
     if(resetinfo.success == 0){
         error.innerHTML = resetinfo.error;
         return;
@@ -72,6 +88,7 @@ function checkCodeHandler(){
     code.style.display = 'none';
     form.querySelector('input[name=pass]').style.display = 'block';
     form.querySelector('input[name=pass_confirmation]').style.display = 'block';
+    form.querySelector('button').innerHTML="Change password";
     form.removeEventListener('submit',sendCodeRequest);
     form.addEventListener('submit',function(event){
         let pass1 = form.querySelector('input[name=pass]').value;
