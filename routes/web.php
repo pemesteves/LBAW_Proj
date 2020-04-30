@@ -11,8 +11,6 @@
 |
 */
 
-use App\Http\Controllers\PostController;
-
 
 Route::get('/', 'Auth\LoginController@home');
 
@@ -29,16 +27,11 @@ Route::delete('api/item/{id}', 'ItemController@delete');
 
 Route::put('/api/posts' , 'PostController@create');
 Route::delete('api/posts/{id}', 'PostController@delete');
-
 Route::put('/api/posts/{id}/comment', 'CommentController@create');
-Route::delete('api/comments/{id}', 'CommentController@delete');
-Route::put('api/comments/{id}/edit' , 'CommentController@update');
 
 Route::put('/api/posts/{id}/like/{val}' , 'PostController@like');
 
 Route::put('/api/chats/{id}/message', 'MessageController@create');
-
-
 
 // Authentication
 
@@ -77,3 +70,8 @@ Route::put('/api/events/{id}/posts', 'PostController@createInEvent');
 
 //Chat
 Route::get('/chats/{chat_id}', 'ChatController@show');
+
+//Post
+Route::get('/posts/{post_id}', 'PostController@show');
+Route::get('/posts/{post_id}/edit', 'PostController@show_edit');
+Route::post('/posts/{post_id}', 'PostController@edit');

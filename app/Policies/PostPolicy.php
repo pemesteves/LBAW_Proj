@@ -21,6 +21,11 @@ class PostPolicy
     public function delete(User $user, Post $post)
     {
       // Only a post owner can delete it
-      return $user->userable->regular_user_id == $post->author_id;
+      return $user->userable_id == $post->author_id;
+    }
+
+    public function edit(User $user, Post $post){
+      // Only a post owner can edit it
+      return $user->userable_id == $post->author_id;
     }
 }

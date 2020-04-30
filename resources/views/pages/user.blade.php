@@ -66,8 +66,7 @@
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                         <div class="card-body">
                             <ul>
-                                <li>AEFEUP</li>
-                                <li>NIAEFEUP</li>
+                                @each('partials.user_group', $groups, 'group')
                             </ul>
                         </div>
                     </div>
@@ -83,10 +82,7 @@
                     <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
                         <div class="card-body">
                             <ul>
-                                <li>Joanna</li>
-                                <li>Joaquin</li>
-                                <li>Mary</li>
-                                <li class="more">...</li>
+                                @each('partials.user_friend', $friends, 'friend')
                             </ul>
                         </div>
                     </div>

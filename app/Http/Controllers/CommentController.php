@@ -31,28 +31,4 @@ class CommentController extends Controller{
 
       return $new_comment[0];
     }
-
-    public function delete(Request $request, $id)
-    {
-      $comment = Comment::find($id);
-
-      //$this->authorize('delete', $comment);
-      $comment->delete();
-
-      return $comment;
-    }
-
-    public function update(Request $request, $id)
-    {
-      $comment = Comment::find($id);
-
-
-      //TODO::CHECKPOLICE
-      $comment->body = $request->input('body');
-
-      $comment->save();
-
-      return $comment;
-    }
-
 }
