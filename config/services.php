@@ -15,8 +15,9 @@ return [
     */
 
     'mailgun' => [
-        'domain' => env('MAILGUN_DOMAIN'),
-        'secret' => env('MAILGUN_SECRET'),
+        'domain' => /*env('MAILGUN_DOMAIN'),*/ 'smtp-relay.sendinblue.com',
+        'secret' => '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',
+        'endpoint' => 'api.eu.mailgun.net',
     ],
 
     'ses' => [

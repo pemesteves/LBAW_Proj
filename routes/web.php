@@ -47,7 +47,11 @@ Route::post('login', 'Auth\LoginController@login');
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 Route::post('register', 'Auth\RegisterController@register');
+Route::get('resetPass', 'Auth\ResetController@showReset');
 
+Route::post('api/resetPass/email', 'Auth\ResetController@addEmail');
+Route::post('api/resetPass/code', 'Auth\ResetController@checkCode');
+Route::post('/resetPass', 'Auth\ResetController@reset');
 
 //Feed
 Route::get('/feed' , 'FeedController@show');
@@ -57,6 +61,7 @@ Route::get('/users/me', 'ProfileController@show_me');
 Route::get('/users/me/edit', 'ProfileController@show_me_edit');
 Route::post('/users/me', 'ProfileController@edit');
 Route::get('/users/{id}', 'ProfileController@show');
+Route::get('/users/me/email', 'ProfileController@email');
 
 //About
 Route::get('/about', 'AboutController@show');
@@ -68,6 +73,7 @@ Route::put('/api/groups/{id}/posts', 'PostController@createInGroup');
 //Event
 Route::get('/events/{event_id}' , 'EventController@show');
 Route::put('/api/events/{id}/posts', 'PostController@createInEvent');
+
 
 //Chat
 Route::get('/chats/{chat_id}', 'ChatController@show');

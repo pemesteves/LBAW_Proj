@@ -6,9 +6,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
+use App\Mail\OrderShipped;
+use Illuminate\Support\Facades\Mail;
+
+
+
 use App\Post;
 use App\RegularUser;
 use App\User;
+
+
+
 
 class ProfileController extends Controller{
 
@@ -65,6 +73,32 @@ class ProfileController extends Controller{
       $user->update(['name' => $input['name']]);
 
       return ProfileController::show_me();
+    }
+
+
+
+    public function email(){
+      if (!Auth::check()) return redirect('/login');
+
+      //Generate a random string.
+      $token = openssl_random_pseudo_bytes(16);
+      
+      //Convert the binary data into hexadecimal representation.
+      $token = bin2hex($token);
+
+      $data = array(
+            'url'=> $_SERVER['HTTP_HOST'] . "/resetPass/" . strval($token),
+      );
+
+      Mail::send('emails.simple',$data, function($message){
+        $message->from("uconnectlbaw@gmail.com","Hello test");
+        $message->to('uconnectlbaw@gmail.com')
+                ->subject('This is a test email');
+        
+      });
+
+      return "Your email has been sended sucessfully";
+
     }
 
 }

@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS public."reset_pass";
 DROP TABLE IF EXISTS public."user_reaction";
 DROP TABLE IF EXISTS public."user_interested_in_event";
 DROP TABLE IF EXISTS public."friend";
@@ -292,6 +293,14 @@ CREATE TABLE public."user_reaction"
 	"post_id" integer NOT NULL REFERENCES public."post"("post_id") ON DELETE CASCADE,
 	"like_or_dislike" integer NOT NULL, -- 1 for like, 0 for dislike
 	CONSTRAINT "user_reaction_pkey" PRIMARY KEY ("user_id", "post_id")
+);
+
+CREATE TABLE public."reset_pass"
+(
+	"reset_pass_id" serial,
+	"email" text NOT NULL,
+	"token" text NOT NULL,
+	CONSTRAINT "reset_pass_pkey" PRIMARY KEY ("reset_pass_id")
 );
 
 
@@ -594,7 +603,7 @@ insert into public."teacher" ("regular_user_id") values (21);
 insert into public."organization" ("regular_user_id", "approval") values (22, TRUE);
 
 
-insert into public."event" ("organization_id", "name", "location", "date", "information") values (1, 'Evento de LBAW', 'Porto', '2020-04-29 17:45:00', 'general info');
+insert into public."event" ("organization_id", "name", "location", "date", "information") values (1, 'Evento de LBAW', 'Porto', '2021-04-29 17:45:00', 'general info');
 
 
 insert into public."group" ("name", "information", TYPE) values ('Grupo de LBAW', 'Grupo para os estudantes de LBAW', 'normal');

@@ -34,6 +34,7 @@
             <script src="{{ asset('js/navbar_mobile.js') }}" defer></script>        
             <script src="{{ asset('js/app.js') }}" defer> </script>
             <script src="{{ asset('js/post.js') }}" defer> </script>
+            <script src="{{ asset('js/resetPass.js') }}" defer> </script>
 
             <style>
                 body {
