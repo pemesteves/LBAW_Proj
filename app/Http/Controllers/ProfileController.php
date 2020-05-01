@@ -14,9 +14,8 @@ use Illuminate\Support\Facades\Mail;
 use App\Post;
 use App\RegularUser;
 use App\User;
-
-
-
+use Exception;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class ProfileController extends Controller{
 
@@ -54,6 +53,8 @@ class ProfileController extends Controller{
 
       $user = RegularUser::find($id);
 
+      if(!isset($user))
+        throw new HttpException(404, "user");
 
 
       $posts = Post::join('user','post.author_id','=', 'user_id')

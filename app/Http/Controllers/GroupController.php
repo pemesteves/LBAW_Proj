@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Post;
 use App\Group;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class GroupController extends Controller{
 
@@ -15,6 +16,8 @@ class GroupController extends Controller{
       if (!Auth::check()) return redirect('/login');
 
       $group = Group::find($id);
+      if(!isset($group))
+        throw new HttpException(404, "group");
 
       $posts = Post::join('group','group.group_id','=', 'post.group_id')
                      ->where('group.group_id', '=',  $id)

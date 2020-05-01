@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Post;
 use App\Event;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class EventController extends Controller{
 
@@ -15,6 +16,8 @@ class EventController extends Controller{
       if (!Auth::check()) return redirect('/login');
 
       $event = Event::find($id);
+      if(!isset($event))
+        throw new HttpException(404, "event");
 
       $posts = Post::join('event','post.event_id','=', 'event.event_id')
                      ->where('event.event_id', '=',  $id)

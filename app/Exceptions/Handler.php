@@ -48,6 +48,10 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($this->isHttpException($exception)) {
+            return response()->view('errors.' . 'error', ['is_admin' => false, 'erro_code' => $exception->getStatusCode(), 'property_not_found' => $exception->getMessage()], $exception->getStatusCode());
+        }
+
         return parent::render($request, $exception);
     }
 }

@@ -7,12 +7,15 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 use App\Post;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class PostController extends Controller{
 
     public function delete(Request $request, $id)
     {
       $post = Post::find($id);
+      if(!isset($post))
+        throw new HttpException(404, "post");
 
       $this->authorize('delete', $post);
       $post->delete();
@@ -48,10 +51,8 @@ class PostController extends Controller{
       if (!Auth::check()) return redirect('/login');
 
       $post = Post::find($post_id);
-
-      if($post == null){
-        //TODO 404 error 
-      }
+      if(!isset($post))
+        throw new HttpException(404, "post");
 
       return view('pages.post' , ['is_admin' => false , 'post' => $post]);
     }
@@ -63,6 +64,8 @@ class PostController extends Controller{
       if(!Auth::check()) return redirect('/login');
       
       $post = Post::find($post_id);
+      if(!isset($post))
+        throw new HttpException(404, "post");
 
       $this->authorize('edit', $post);
 
@@ -76,19 +79,15 @@ class PostController extends Controller{
       if(!Auth::check()) return redirect('/login');
 
       $post = Post::find($post_id); 
-
-      error_log("Post: " . $post);
+      if(!isset($post))
+        throw new HttpException(404, "post");
 
       $this->authorize('edit', $post);
 
       $title = $request->input('title');
-      error_log("Title: " . $title);
       $body = $request->input('body');
-      error_log("Body: " . $body);
 
       $post->update(['title' => $title, 'body' => $body]);
-
-      error_log("New Post: " . $post);
 
       return PostController::show($post_id);
     }
@@ -127,6 +126,8 @@ class PostController extends Controller{
     public function like(Request $request, $id , $val)
     {
       $post = Post::find($id);
+      if(!isset($post))
+        throw new HttpException(404, "post");
       //TODO: AUTHORIZE  
       $change = ['post_id' => $id ,'upvotes' => 0, 'downvotes' => 0];
 

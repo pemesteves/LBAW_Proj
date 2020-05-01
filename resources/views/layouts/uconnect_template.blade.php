@@ -30,6 +30,7 @@
             <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
             <link href="{{ asset('css/about.css') }}" rel="stylesheet">
             <link href="{{ asset('css/navbar.css') }}" rel="stylesheet">
+            <link href="{{ asset('css/error.css') }}" rel="stylesheet">
 
             <script src="{{ asset('js/navbar_mobile.js') }}" defer></script>        
             <script src="{{ asset('js/app.js') }}" defer> </script>
