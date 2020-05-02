@@ -24,20 +24,20 @@ class GroupPolicy
         return $user->userable_id == $post->author_id;
     }
     */
-    public function edit(User $user, Event $event)
+    public function edit(User $user, Group $group)
     {
         if(!$user->userable_type == 'App\RegularUser')
             return false;
 
-        $regular_user = $user->userable;
+        $user_in_group = DB::table('user_in_group')
+            ->where('user_id', '=', $user->userable_id)
+            ->where('group_id', '=', $group->group_id)
+            ->get();
 
-        if($regular_user->regular_userable_type != 'App\Organization')
+        if(!isset($user_in_group))
             return false;
         
-        $organization = $regular_user->regular_userable;
-
-        
-        return $organization->organization_id == $event->organization_id;
+        return $user_in_group[0]->admin;
     }
 
     public function show(User $user, Group $group){

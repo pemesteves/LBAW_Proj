@@ -56,10 +56,41 @@ class GroupController extends Controller{
               'group_id' => $group->group_id,
               'admin' => true
             ]);
+            
         return $group;
       });
     
       return redirect()->route('groups.show', $group);
     }
 
+    public function show_edit($id){
+      if(!Auth::check()) return redirect('/login');
+
+      $group = Group::find($id);
+      if(!isset($group))
+        throw new HttpException(404, "group");
+
+      $this->authorize('edit', $group);
+      
+      return view('pages.edit_group' , ['is_admin' => false , 'group' => $group ]);
+    }
+
+    /**
+     * Edits the group
+     */
+    public function edit(Request $request, $id){
+      $group = Group::find($id);
+
+      if(!isset($group))
+        throw new HttpException(404, "group");
+
+      $this->authorize('edit', $group);
+
+      $name = $request->input('name');
+      $information = $request->input('information');
+
+      $group->update(['name' => $name, 'information' => $information]);
+
+      return GroupController::show($group->group_id);
+    }
 }

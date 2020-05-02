@@ -67,6 +67,9 @@ Route::post('/groups/create', 'GroupController@create');
 Route::get('/groups/{id}', 'GroupController@show')->name('groups.show');
 Route::put('/api/groups/{id}/posts', 'PostController@createInGroup');
 
+Route::get('/groups/{group_id}/edit', 'GroupController@show_edit');
+Route::post('/groups/{group_id}', 'GroupController@edit');
+
 //Event
 Route::get('/events/create', 'EventController@showCreateForm');
 Route::post('/events/create', 'EventController@create');

@@ -359,6 +359,8 @@ DROP TRIGGER IF EXISTS delete_refused_report ON "report" CASCADE;
 DROP TRIGGER IF EXISTS event_date ON "event" CASCADE;
 DROP TRIGGER IF EXISTS post_date ON "post" CASCADE;
 DROP TRIGGER IF EXISTS unique_org ON "organization" CASCADE;
+DROP TRIGGER IF EXISTS event_update_at ON "event" CASCADE;
+DROP TRIGGER IF EXISTS group_update_at ON "group" CASCADE;
 
 DROP FUNCTION IF EXISTS update_group_posts() CASCADE;
 DROP FUNCTION IF EXISTS update_event_posts() CASCADE;
@@ -368,6 +370,7 @@ DROP FUNCTION IF EXISTS delete_refused_report() CASCADE;
 DROP FUNCTION IF EXISTS event_date() CASCADE;
 DROP FUNCTION IF EXISTS post_date() CASCADE;
 DROP FUNCTION IF EXISTS unique_org() CASCADE;
+DROP FUNCTION IF EXISTS update_at() CASCADE;
 
 CREATE FUNCTION update_group_posts() RETURNS TRIGGER AS
 $BODY$
@@ -476,7 +479,6 @@ CREATE TRIGGER event_date
     AFTER INSERT ON public."event"
 	FOR EACH ROW
     EXECUTE PROCEDURE event_date();
-
 
 
 CREATE FUNCTION update_at() RETURNS trigger AS

@@ -71,9 +71,6 @@ class EventController extends Controller{
 
       $this->authorize('edit', $event);
 
-      if(!isset($event))
-        throw new HttpException(404, "event");
-
       return view('pages.edit_event' , ['is_admin' => false , 'event' => $event ]);
     }
 
