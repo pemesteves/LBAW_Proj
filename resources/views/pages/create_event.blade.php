@@ -6,7 +6,7 @@
         <h2>Create Event</h2>
     </div>
     <div class="card">
-        <form method="POST" action="/events/create">
+        <form method="post" action="/events/create">
             <div class="card-body container">
                     @csrf      
                     <legend class="card-title uconnect-title" >Name: </legend>
@@ -17,11 +17,11 @@
                     
                     <div class="row">
                         <div class="col-sm-6">
-                            <legend>Date:</legend>
+                            <legend><span class="fa fa-calendar"></span>&nbsp;Date:</legend>
                             <input type="date" name="date" required/> <!--Change calendar-->
                         </div>
                         <div class="col-sm-6">
-                            <legend>Location:</legend>
+                            <legend><span class="fa fa-map-pin"></span>&nbsp;Location:</legend>
                             <input type="text" name="location" required/> <!--Add Google Maps API-->
                         </div>
                     </div>

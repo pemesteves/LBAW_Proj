@@ -477,6 +477,22 @@ CREATE TRIGGER event_date
 
 
 
+CREATE FUNCTION event_update_at() RETURNS trigger AS
+$BODY$
+BEGIN
+    New."updated_at" = now();
+	RETURN NEW;
+END
+$BODY$
+LANGUAGE plpgsql;
+
+CREATE TRIGGER event_update_at
+    AFTER INSERT ON public."event"
+	FOR EACH ROW
+    EXECUTE PROCEDURE event_update_at();
+
+
+
 CREATE FUNCTION post_date() RETURNS trigger AS
 $BODY$
 BEGIN

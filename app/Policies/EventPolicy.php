@@ -3,7 +3,7 @@
 namespace App\Policies;
 
 use App\User;
-use App\RegularUser;
+use App\Event;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +17,7 @@ class EventPolicy
         if (!Auth::check())
             return false;
 
-        if(!$user->userable_type == 'App\RegularUser')
+        if($user->userable_type != 'App\RegularUser')
             return false;
 
         $regular_user = $user->userable;
@@ -30,10 +30,20 @@ class EventPolicy
         // Only a post owner can delete it
         return $user->userable_id == $post->author_id;
     }
-
-    public function edit(User $user, Post $post)
+    */
+    public function edit(User $user, Event $event)
     {
-        // Only a post owner can edit it
-        return $user->userable_id == $post->author_id;
-    }*/
+        if(!$user->userable_type == 'App\RegularUser')
+            return false;
+
+        $regular_user = $user->userable;
+
+        if($regular_user->regular_userable_type != 'App\Organization')
+            return false;
+        
+        $organization = $regular_user->regular_userable;
+
+        
+        return $organization->organization_id == $event->organization_id;
+    }
 }

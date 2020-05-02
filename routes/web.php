@@ -71,6 +71,8 @@ Route::post('/events/create', 'EventController@create');
 Route::get('/events/{event_id}' , 'EventController@show')->name('events.show');
 Route::put('/api/events/{id}/posts', 'PostController@createInEvent');
 
+Route::get('/events/{event_id}/edit', 'EventController@show_edit');
+Route::post('/events/{event_id}', 'EventController@edit');
 
 //Chat
 Route::get('/chats/{chat_id}', 'ChatController@show');

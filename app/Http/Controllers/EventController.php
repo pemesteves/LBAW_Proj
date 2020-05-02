@@ -52,16 +52,39 @@ class EventController extends Controller{
       return redirect()->route('events.show', $event);
     }
 
+    public function show_edit($id){
+      if(!Auth::check()) return redirect('/login');
+
+      $event = Event::find($id);
+      if(!isset($event))
+        throw new HttpException(404, "event");
+
+      $this->authorize('edit', $event);
+
+      if(!isset($event))
+        throw new HttpException(404, "event");
+
+      return view('pages.edit_event' , ['is_admin' => false , 'event' => $event ]);
+    }
+
     /**
      * Edits the event
      */
-    /*public function edit(Request $request){
-      $user = Auth::user();
+    public function edit(Request $request, $id){
+      $event = Event::find($id);
 
-      /*$input = $request->only('name');
+      if(!isset($event))
+        throw new HttpException(404, "event");
 
-      $user->update(['name' => $input['name']]);*/
+      $this->authorize('edit', $event);
 
-      /*return ProfileController::show_me();
-    }*/
+      $name = $request->input('name');
+      $information = $request->input('information');
+      $date = $request->input('date');
+      $location = $request->input('location');
+
+      $event->update(['name' => $name, 'information' => $information, 'date' => $date, 'location' => $location]);
+
+      return EventController::show($event->event_id);
+    }
 }
