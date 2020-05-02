@@ -27,7 +27,7 @@ class ProfileController extends Controller{
                        ->orderBy('date','desc')
                        ->get();
 
-        $groups = Auth::user()->groups;
+        $groups = Auth::user()->userable->groups;
 
         $friends = User::join('friend', 'friend_id2', '=', 'userable_id')
                        ->where('friend.friend_id1', '=', Auth::user()->userable_id)
@@ -62,7 +62,7 @@ class ProfileController extends Controller{
                      ->orderBy('date','desc')
                      ->get();
 
-      $groups = $user->user->groups;
+      $groups = $user->user->userable->groups;
 
       $friends = User::join('friend', 'friend_id2', '=', 'userable_id')
                       ->where('friend.friend_id1', '=', $user->regular_user_id)

@@ -126,6 +126,8 @@ CREATE TABLE public."group"
 	"group_id" serial NOT NULL,
 	"name" text NOT NULL,
 	"information" text NOT NULL,
+	"updated_at" timestamp with time zone NOT NULL DEFAULT now(),
+	"created_at" timestamp with time zone NOT NULL DEFAULT now(),
 	TYPE status NOT NULL DEFAULT 'normal',
     CONSTRAINT "group_id_pkey" PRIMARY KEY ("group_id")
 );
@@ -477,7 +479,7 @@ CREATE TRIGGER event_date
 
 
 
-CREATE FUNCTION event_update_at() RETURNS trigger AS
+CREATE FUNCTION update_at() RETURNS trigger AS
 $BODY$
 BEGIN
     New."updated_at" = now();
@@ -487,9 +489,14 @@ $BODY$
 LANGUAGE plpgsql;
 
 CREATE TRIGGER event_update_at
-    AFTER INSERT ON public."event"
+    AFTER UPDATE ON public."event"
 	FOR EACH ROW
-    EXECUTE PROCEDURE event_update_at();
+    EXECUTE PROCEDURE update_at();
+
+CREATE TRIGGER group_update_at
+    AFTER UPDATE ON public."group"
+	FOR EACH ROW
+    EXECUTE PROCEDURE update_at();
 
 
 

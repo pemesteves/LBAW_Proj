@@ -1,19 +1,19 @@
-#create_event_card {
+#create_card {
     max-width: 80%;
     margin: 5% auto;
 }
 
-#create_event_card div.card {
+#create_card div.card {
     height: 100%; 
     border: none;
 }
 
-#create_event_card div.card-body {
-    border: 1px solid lightgrey; 
+
+#create_card div.card-body { 
     border-collapse: collapse;
 }
 
-#create_event_card .card-footer{
+#create_card .card-footer{
     padding: 0 !important;
     border: 1px solid lightgrey; 
     border-collapse: collapse; 
@@ -21,37 +21,37 @@
     max-width: 100%;
 }
 
-#create_event_card .card-footer .row{
+#create_card .card-footer .row{
     margin: .25em 0 !important;
 }
 
-#create_event_card .card-footer .row * {
+#create_card .card-footer .row * {
     margin: 0 !important;
 }
 
-#create_event_card .card-footer .row .col-sm-6:last-child {
+#create_card .card-footer .row .col-sm-6:last-child {
     text-align: right;
 }
 
-#create_event_card textarea {
+#create_card textarea {
     width: 100%; 
     margin: 0;
 }
 
-#create_event_card input[type="text"] {
+#create_card input[type="text"] {
     width: 100%;
 }
 
-#create_event_card legend.card-title {
+#create_card legend.card-title {
     margin-top: 0;
 }
 
-#create_event_card legend {
+#create_card legend {
     margin-top: .5em;
     margin-bottom: 0;
 }
 
-#create_event_card button[type="submit"]{
+#create_card button[type="submit"]{
     width: 100%;
     border: 0;
 }

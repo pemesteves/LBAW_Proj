@@ -61,7 +61,10 @@ Route::get('/users/me/email', 'ProfileController@email');
 Route::get('/about', 'AboutController@show');
 
 //Group
-Route::get('/groups/{id}', 'GroupController@show');
+Route::get('/groups/create', 'GroupController@showCreateForm');
+Route::post('/groups/create', 'GroupController@create');
+
+Route::get('/groups/{id}', 'GroupController@show')->name('groups.show');
 Route::put('/api/groups/{id}/posts', 'PostController@createInGroup');
 
 //Event
