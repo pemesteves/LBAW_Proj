@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Post;
 use App\Event;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class EventController extends Controller{
@@ -41,13 +42,22 @@ class EventController extends Controller{
       if (!Auth::check()) return redirect('/login');
 
       $this->authorize('create', 'App\Event');
-      $event = new Event();
-      $event->organization_id = Auth::user()->userable->regular_userable->organization_id;
-      $event->name = $request->input('name');
-      $event->location = $request->input('location');
-      $event->information = $request->input('information');
-      $event->date = $request->input('date');
-      $event->save();
+      $event = DB::transaction(function(){
+        $event = new Event();
+        $event->organization_id = Auth::user()->userable->regular_userable->organization_id;
+        $event->name = Input::get('name');
+        $event->location = Input::get('location');
+        $event->information = Input::get('information');
+        $event->date = Input::get('date');
+        $event->save();
+
+        DB::table('user_interested_in_event')->insert([
+          'user_id' => Auth::user()->user_id,
+          'event_id' => $event->event_id
+        ]);
+
+        return $event;
+      });
     
       return redirect()->route('events.show', $event);
     }
