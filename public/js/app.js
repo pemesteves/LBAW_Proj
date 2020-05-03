@@ -196,6 +196,14 @@ function postDeletedHandler() {
   //let parentElement = element.parentElement;
   $('#popup-'+post.post_id).modal('hide');
   element.remove();
+
+  let feedback = document.getElementById('feedback');
+  feedback.innerHTML = `<div class="alert alert-success alert-dismissible fade show" role="alert">
+                              Post deleted successfully.
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                              </button>
+                          </div>`; 
 }
 
 function cardDeletedHandler() {
@@ -246,6 +254,14 @@ function postAddedHandler() {
 
   let postDeleter = new_post.querySelector('button.delete');
   postDeleter.addEventListener('click', sendDeletePostRequest);
+
+  let feedback = document.getElementById('feedback');
+  feedback.innerHTML = `<div class="alert alert-success alert-dismissible fade show" role="alert">
+                              Post added successfully.
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                              </button>
+                          </div>`;
 }
 
 function commentAddedHandler(){
@@ -266,6 +282,14 @@ function commentAddedHandler(){
 
   // Insert the new comment
   form.parentElement.insertBefore(new_comment, form.nextSibling);
+
+  let feedback = document.getElementById('feedback');
+  feedback.innerHTML = `<div class="alert alert-success alert-dismissible fade show" role="alert">
+                              Comment added successfully.
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                              </button>
+                          </div>`;
 }
 
 function messageAddedHandler(){
