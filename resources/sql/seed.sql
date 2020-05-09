@@ -197,6 +197,7 @@ CREATE TABLE public."comment"
 	"date" timestamp with time zone NOT NULL DEFAULT now(),
 	"upvotes" integer NOT NULL DEFAULT 0,
 	"downvotes" integer NOT NULL DEFAULT 0,
+	TYPE status NOT NULL DEFAULT 'normal',
 	
 	
 	CONSTRAINT "comment_id_pkey" PRIMARY KEY ("comment_id"),
@@ -259,7 +260,9 @@ CREATE TABLE public."report"
 	"report_id"  serial NOT NULL,
 	"reporter_id" integer NOT NULL REFERENCES public."regular_user"("regular_user_id") ON DELETE CASCADE,
 	"approval" boolean DEFAULT NULL,
+	"title" text NOT NULL,
 	"reason" text NOT NULL,
+	"date" timestamp with time zone NOT NULL DEFAULT now(),
 	
 	"reported_user_id" integer REFERENCES public."regular_user"("regular_user_id") ON DELETE CASCADE,
 	"reported_event_id" integer REFERENCES public."event"("event_id") ON DELETE CASCADE,
@@ -447,9 +450,9 @@ Create TRIGGER friend_status
 CREATE FUNCTION delete_refused_report() RETURNS trigger AS
 $BODY$
 BEGIN
-    IF new."approval" = FALSE THEN
+    IF New."approval" = FALSE THEN
         DELETE FROM public."report"
-        WHERE "report_id" = old.public."report_id";
+        WHERE "report_id" = Old."report_id";
     END IF;
     RETURN NEW;
 END
@@ -458,6 +461,7 @@ LANGUAGE plpgsql;
 
 CREATE TRIGGER delete_refused_report
     AFTER UPDATE ON public."report"
+	FOR EACH ROW
     EXECUTE PROCEDURE delete_refused_report();
 
 
@@ -695,8 +699,8 @@ insert into public."message" ("sender_id", "chat_id", "body", "date") values (7,
 insert into public."message" ("sender_id", "chat_id", "body", "date") values (9, 2, 'Criei este chat para todos os professores se poderem manter em contacto', '2020-03-22 21:16:47');
 
 
-insert into public."report" ("reporter_id", "approval", "reason", "reported_user_id", "reported_event_id", "reported_post_id", "reported_comment_id", "reported_group_id") values (3, NULL, 'so para testar a ferramenta', NULL, NULL, 1, NULL, NULL);
-insert into public."report" ("reporter_id", "approval", "reason", "reported_user_id", "reported_event_id", "reported_post_id", "reported_comment_id", "reported_group_id") values (2, NULL, 'pouco conteudo', NULL, NULL, NULL, 2, NULL);
+insert into public."report" ("reporter_id", "approval", "title", "reason", "reported_user_id", "reported_event_id", "reported_post_id", "reported_comment_id", "reported_group_id") values (3, NULL, 'Reportando a ferramenta', 'so para testar a ferramenta', NULL, NULL, 1, NULL, NULL);
+insert into public."report" ("reporter_id", "approval", "title", "reason", "reported_user_id", "reported_event_id", "reported_post_id", "reported_comment_id", "reported_group_id") values (2, NULL, 'Não gosto da diversidade', 'pouco conteudo', NULL, NULL, NULL, 2, NULL);
 
 
 insert into public."file" ("post_id", "file_path") values ( 7,'../files/test.txt');
