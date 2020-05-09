@@ -33,6 +33,9 @@ Route::put('/api/posts/{id}/like/{val}' , 'PostController@like');
 
 Route::put('/api/chats/{id}/message', 'MessageController@create');
 
+Route::put('/api/reports/{id}/accept' , 'ReportController@accept');
+Route::put('/api/reports/{id}/decline' , 'ReportController@decline');
+
 // Authentication
 
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');

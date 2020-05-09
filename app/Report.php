@@ -4,7 +4,6 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-use App\Post;
 use App\Comment;
 
 class Report extends Model
@@ -32,7 +31,7 @@ class Report extends Model
      * @var array
      */
     protected $fillable = [
-      
+      'approval',
   ];
 
   /**

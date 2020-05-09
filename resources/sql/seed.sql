@@ -197,6 +197,7 @@ CREATE TABLE public."comment"
 	"date" timestamp with time zone NOT NULL DEFAULT now(),
 	"upvotes" integer NOT NULL DEFAULT 0,
 	"downvotes" integer NOT NULL DEFAULT 0,
+	TYPE status NOT NULL DEFAULT 'normal',
 	
 	
 	CONSTRAINT "comment_id_pkey" PRIMARY KEY ("comment_id"),
@@ -449,9 +450,9 @@ Create TRIGGER friend_status
 CREATE FUNCTION delete_refused_report() RETURNS trigger AS
 $BODY$
 BEGIN
-    IF new."approval" = FALSE THEN
+    IF New."approval" = FALSE THEN
         DELETE FROM public."report"
-        WHERE "report_id" = old.public."report_id";
+        WHERE "report_id" = Old."report_id";
     END IF;
     RETURN NEW;
 END
@@ -460,6 +461,7 @@ LANGUAGE plpgsql;
 
 CREATE TRIGGER delete_refused_report
     AFTER UPDATE ON public."report"
+	FOR EACH ROW
     EXECUTE PROCEDURE delete_refused_report();
 
 
