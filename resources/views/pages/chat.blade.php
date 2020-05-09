@@ -16,6 +16,8 @@ window.Echo = new Echo({
 });
 </script>
 
+<meta name="csrf-token" content="{{ csrf_token() }}" />
+
 <article class="chat" data-id="{{ $chat->chat_id }}">
     <div id="full_page" class="d-flex flex-column no-gutters vh-100" style="padding: 0">
         <section class="container-fluid no-gutters" style="flex: 1 1 auto">
@@ -53,7 +55,17 @@ window.Echo = new Echo({
                         <script>
                             window.Echo.channel('chat.{{$chat->chat_id}}')
                             .listen('NewMessage', (e) => {
-                                console.log(e)
+                                let new_message = document.createElement("P");
+                                if (1 == e.message.sender_id) {
+                                    new_message.className = "chat_my_message";
+                                }                        
+                                else {
+                                    new_message.className = "chat_other_message";
+                                }
+
+                                new_message.innerHTML = `${e.message.body}`;
+
+                                document.getElementById("messages_col").appendChild(new_message);
                             });
                         </script>
                     </section>
