@@ -43,7 +43,7 @@
                     </section>
 
                     <footer class="row" id="send_message" style="border-width: 0; border-top-width: 0.1em; border-style:solid; border-color: sandybrown; height: 6.5%;">
-                        <img class="chat_user_image" src="images/placeholder.png" alt=""  onclick="window.location.href='./profile.php'"/>
+                        <img class="chat_user_image" src="images/placeholder.png" alt=""  onclick="window.location.href='/users/me'"/>
                         <form id="newmessage" class="form-inline" style="max-width: 90%; width: 90%; justify-content:center;">
                             <div class="input-group chat_message_input" style="width:98%">
                                 <textarea type="text" required class="form-control" placeholder="Write a message..." aria-label="msg-write" aria-describedby="send-message-button" style="border-width: 0; border-top-left-radius: inherit; border-bottom-left-radius: inherit;"></textarea>

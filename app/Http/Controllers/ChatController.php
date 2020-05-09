@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Message;
 use App\Chat;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class ChatController extends Controller{
 
@@ -15,6 +16,9 @@ class ChatController extends Controller{
       if (!Auth::check()) return redirect('/login');
 
       $chat = Chat::find($id);
+
+      if(!isset($chat))
+        throw new HttpException(404, "chat");
 
       $messages = Message::join('chat','chat.chat_id','=', 'message.chat_id')
                      ->where('chat.chat_id', '=',  $id)

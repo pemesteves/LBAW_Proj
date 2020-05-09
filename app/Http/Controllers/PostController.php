@@ -7,13 +7,15 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 use App\Post;
-use Exception;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class PostController extends Controller{
 
     public function delete(Request $request, $id)
     {
       $post = Post::find($id);
+      if(!isset($post))
+        throw new HttpException(404, "post");
 
       $this->authorize('delete', $post);
       $post->delete();
@@ -31,7 +33,7 @@ class PostController extends Controller{
 
       $post->title = $request->input('title');
       $post->body = $request->input('body');
-      $post->author_id = Auth::user()->user_id; //TODO Change this to the id of the regular_user
+      $post->author_id = Auth::user()->userable->regular_user_id; //TODO Change this to the id of the regular_user
       if($group_id) $post->group_id = $group_id;
       if($event_id) $post->event_id = $event_id;
       $post->save();
@@ -40,6 +42,54 @@ class PostController extends Controller{
       $new_post = Post::take(1)->where("post_id", '=', $post["post_id"])->get(); 
     
       return $new_post[0];
+    }
+
+    /**
+     * Shows the post page
+     */
+    public function show($post_id){
+      if (!Auth::check()) return redirect('/login');
+
+      $post = Post::find($post_id);
+      if(!isset($post))
+        throw new HttpException(404, "post");
+
+      return view('pages.post' , ['is_admin' => false , 'post' => $post]);
+    }
+
+    /**
+     * Shows the post edit page
+     */
+    public function show_edit($post_id){
+      if(!Auth::check()) return redirect('/login');
+      
+      $post = Post::find($post_id);
+      if(!isset($post))
+        throw new HttpException(404, "post");
+
+      $this->authorize('edit', $post);
+
+      return view('pages.post_edit' , ['is_admin' => false , 'post' => $post]);
+    }
+
+     /**
+     * Edits the post
+     */
+    public function edit(Request $request, $post_id){
+      if(!Auth::check()) return redirect('/login');
+
+      $post = Post::find($post_id); 
+      if(!isset($post))
+        throw new HttpException(404, "post");
+
+      $this->authorize('edit', $post);
+
+      $title = $request->input('title');
+      $body = $request->input('body');
+
+      $post->update(['title' => $title, 'body' => $body]);
+
+      return PostController::show($post_id);
     }
 
     /**
@@ -76,13 +126,15 @@ class PostController extends Controller{
     public function like(Request $request, $id , $val)
     {
       $post = Post::find($id);
+      if(!isset($post))
+        throw new HttpException(404, "post");
       //TODO: AUTHORIZE  
       $change = ['post_id' => $id ,'upvotes' => 0, 'downvotes' => 0];
 
-      $like = $post->userLikes()->wherePivot('user_id' , Auth::user()->user_id)->first();
+      $like = $post->userLikes()->wherePivot('user_id' , Auth::user()->userable->regular_user_id)->first();
       if(!$like){
         DB::table('user_reaction')
-              ->insert(['user_id' => Auth::user()->user_id,
+              ->insert(['user_id' => Auth::user()->userable->regular_user_id,
                 'post_id' => $id,
                 'like_or_dislike' => $val]);
         if($val == 0){

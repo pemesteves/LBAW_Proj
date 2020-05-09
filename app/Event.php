@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
 {
+    // Don't add create and update timestamps in database.
+    public $timestamps  = false;
+
     /**
      * The table associated with the model.
      *
@@ -35,7 +38,7 @@ class Event extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'location', 'date', 'information', 
+        'name', 'location', 'date', 'information', 'updated_at', 'created_at',
     ];
 
     /**

@@ -2,7 +2,9 @@
 
 namespace App;
 
-class RegularUser extends User
+use Illuminate\Database\Eloquent\Model;
+
+class RegularUser extends Model
 {
     // Don't add create and update timestamps in database.
     public $timestamps  = false;
@@ -31,9 +33,28 @@ class RegularUser extends User
         'personal_info', 
     ];
 
+    protected $with = ['user'];
 
-    public function user(){
-        return $this->hasOne(User::class);
+
+    /**
+     * The posts this user owns.
+     */
+    public function posts() {
+        return $this->hasMany('App\Post');
+      }
+
+    public function user()
+    {
+        return $this->morphOne('App\User', 'userable');
+    }
+
+    public function regular_userable()
+    {
+        return $this->morphTo();
+    }
+
+    public function groups(){
+        return $this->belongsToMany('App\Group','user_in_group','user_id','group_id');
     }
 
 }

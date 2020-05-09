@@ -2,6 +2,7 @@
 
 
 @section('nav_bar')
+
 <nav class="navbar navbar-dark navbar-bar">
                 <a class="navbar-brand" href="/<?php if($is_admin) echo 'admin'; else echo 'feed';?>">
                     <h1>UConnect <span class="fa fa-graduation-cap"></span></h1>

@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -53,15 +54,9 @@ class User extends Authenticatable
         'password',
     ];
 
-    /**
-     * The cards this user owns.
-     */
-     public function posts() {
-      return $this->hasMany('App\Post');
-    }
 
     public function groups(){
-        return $this->belongsToMany('App\Group','user_in_group','user_id','group_id');
+        return $this->userable->groups;
     }
 
     public function events(){
@@ -74,6 +69,10 @@ class User extends Authenticatable
 
     public function postsLiked(){
         return $this->belongsToMany('App\Post' , 'user_reaction' , 'user_id' , 'post_id')->withPivot('like_or_dislike');
-      }
+    }
+
+    public function userable(){
+        return $this->morphTo();
+    }
 
 }

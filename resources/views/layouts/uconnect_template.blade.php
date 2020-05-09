@@ -30,10 +30,13 @@
             <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
             <link href="{{ asset('css/about.css') }}" rel="stylesheet">
             <link href="{{ asset('css/navbar.css') }}" rel="stylesheet">
+            <link href="{{ asset('css/error.css') }}" rel="stylesheet">
+            <link href="{{ asset('css/create.css') }}" rel="stylesheet">
 
             <script src="{{ asset('js/navbar_mobile.js') }}" defer></script>        
             <script src="{{ asset('js/app.js') }}" defer> </script>
             <script src="{{ asset('js/post.js') }}" defer> </script>
+            <script src="{{ asset('js/resetPass.js') }}" defer> </script>
 
             <style>
                 body {
@@ -53,6 +56,9 @@
             <section>
                 @yield('nav_bar')
             </section>
+            
+            <section id='feedback'>
+            </section>           
 
             <section id="content">
                 @yield('content')

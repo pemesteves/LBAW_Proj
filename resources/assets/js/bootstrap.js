@@ -43,18 +43,15 @@ if (token) {
  * allows your team to easily build robust real-time web applications.
  */
 
-import Echo from 'laravel-echo'
+ import Echo from 'laravel-echo'
 
-window.Pusher = require('pusher-js');
+ window.Pusher = require('pusher-js');
 
-window.Echo = new Echo({
-    broadcaster: 'pusher',
-    key: 'your-pusher-key',
-    wsHost: window.location.hostname,
-    wsPort: 6001,
-    cluster: 'mt1',
-    disableStats: true,
-    encrypted: true
-});  
-
-window.Echo.channel(`chat.{{$chat->chat_id}}`);
+ window.Echo = new Echo({
+     broadcaster: 'pusher',
+     key: '05ddfe6c26eaafb78b1b',
+     cluster: 'mt1',
+     encrypted: true,
+     wsPort: 6001,
+     disableStats: true,
+ });

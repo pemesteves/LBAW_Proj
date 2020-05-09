@@ -2,7 +2,10 @@
 
 namespace App;
 
-class Teacher extends RegularUser
+use Illuminate\Database\Eloquent\Model;
+
+
+class Teacher extends Model
 {
     // Don't add create and update timestamps in database.
     public $timestamps  = false;
@@ -21,8 +24,13 @@ class Teacher extends RegularUser
      */
     protected $primaryKey = 'teacher_id';
 
-    public function regular_user(){
+    /*public function regular_user(){
         return $this->hasOne(RegularUser::class);
+    }*/
+
+    public function regular_user()
+    {
+        return $this->morphOne('App\User', 'regular_userable');
     }
 
 }

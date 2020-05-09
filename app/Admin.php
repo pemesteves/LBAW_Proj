@@ -21,8 +21,13 @@ class Admin extends User
      */
     protected $primaryKey = 'admin_id';
 
-    public function user(){
+    /*public function user(){
         return $this->hasOne(User::class);
+    }*/
+
+    public function user()
+    {
+        return $this->morphOne('App\User', 'userable');
     }
 
 }

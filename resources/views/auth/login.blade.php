@@ -27,7 +27,7 @@
 
             <footer style="margin: 0; margin-top: 1em; padding: 0;">
                 <p class="row">Don't have an account? Then <a href="/register">&nbsp;REGISTER</a></p>
-                <p class="row">Forgot your password? <a href="TO UPDATE">&nbsp;Recover password</a></p>
+                <p class="row">Forgot your password? Then <a href="/resetPass">&nbsp;Recover password</a></p>
             </footer>
         </div>
     </section>

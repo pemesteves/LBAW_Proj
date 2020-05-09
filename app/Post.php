@@ -30,7 +30,7 @@ class Post extends Model
      * @var array
      */
     protected $fillable = [
-      'body',
+      'title', 'body',
   ];
 
   /**
@@ -42,17 +42,18 @@ class Post extends Model
       
   ];
 
-  protected $with = ['user'];
+  protected $with = ['regularUser'];
 
   /**
    * The user this post belongs to
    */
-  public function user() {
-    return $this->belongsTo('App\User' , 'author_id');
+  public function regularUser() {
+    return $this->belongsTo('App\RegularUser' , 'author_id');
   }
 
   public function comments(){
-    return $this->hasMany('App\Comment' , 'post_id');
+    return $this->hasMany('App\Comment' , 'post_id')
+                ->orderBy('comment.date', 'desc');
   }
 
   /**

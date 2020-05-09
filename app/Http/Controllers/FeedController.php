@@ -15,7 +15,7 @@ class FeedController extends Controller{
 
         $posts = Post::orderBy('date','desc')->get();
 
-        return view('pages.feed' , ['is_admin' => false , 'posts' => $posts , 'groups' => Auth::user()->groups , 'events' => Auth::user()->events]);
+        return view('pages.feed' , ['is_admin' => false , 'posts' => $posts , 'groups' => Auth::user()->userable->groups , 'events' => Auth::user()->events]);
 
     }
 }

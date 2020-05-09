@@ -13,12 +13,10 @@
         "axios": "^0.17",
         "cross-env": "^5.2.1",
         "laravel-mix": "^1.0",
-        "lodash": "^4.17.4",
-        "webpack-cli": "^3.3.11"
+        "lodash": "^4.17.4"
     },
     "dependencies": {
         "laravel-echo": "^1.7.0",
-        "pusher-js": "^6.0.2",
-        "webpack": "^4.43.0"
+        "pusher-js": "^6.0.0"
     }
 }

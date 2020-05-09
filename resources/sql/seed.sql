@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS public."reset_pass";
 DROP TABLE IF EXISTS public."user_reaction";
 DROP TABLE IF EXISTS public."user_interested_in_event";
 DROP TABLE IF EXISTS public."friend";
@@ -56,6 +57,10 @@ CREATE TABLE public."user"
     "name" text NOT NULL,
     "email" text NOT NULL,
     "password" text NOT NULL,
+
+	"userable_id" integer,
+	"userable_type" text,
+
 	TYPE status NOT NULL DEFAULT 'normal',
     CONSTRAINT "user_pkey" PRIMARY KEY ("user_id"),
     CONSTRAINT "user_email_key" UNIQUE ("email")
@@ -73,6 +78,10 @@ CREATE TABLE public."regular_user"
     "regular_user_id" serial NOT NULL,
 	"user_id" integer NOT NULL REFERENCES public."user"("user_id") ON DELETE CASCADE,
 	"personal_info" text,
+
+	"regular_userable_id" integer,
+	"regular_userable_type" text,
+
     CONSTRAINT "regular_user_pkey" PRIMARY KEY ("regular_user_id")
 );
 
@@ -106,6 +115,8 @@ CREATE TABLE public."event"
 	"location" text NOT NULL,
 	"date" timestamp with time zone NOT NULL,
 	"information" text NOT NULL,
+	"updated_at" timestamp with time zone NOT NULL DEFAULT now(),
+	"created_at" timestamp with time zone NOT NULL DEFAULT now(),
 	TYPE status NOT NULL DEFAULT 'normal',
     CONSTRAINT "event_id_pkey" PRIMARY KEY ("event_id")
 );
@@ -115,6 +126,8 @@ CREATE TABLE public."group"
 	"group_id" serial NOT NULL,
 	"name" text NOT NULL,
 	"information" text NOT NULL,
+	"updated_at" timestamp with time zone NOT NULL DEFAULT now(),
+	"created_at" timestamp with time zone NOT NULL DEFAULT now(),
 	TYPE status NOT NULL DEFAULT 'normal',
     CONSTRAINT "group_id_pkey" PRIMARY KEY ("group_id")
 );
@@ -286,6 +299,14 @@ CREATE TABLE public."user_reaction"
 	CONSTRAINT "user_reaction_pkey" PRIMARY KEY ("user_id", "post_id")
 );
 
+CREATE TABLE public."reset_pass"
+(
+	"reset_pass_id" serial,
+	"email" text NOT NULL,
+	"token" text NOT NULL,
+	CONSTRAINT "reset_pass_pkey" PRIMARY KEY ("reset_pass_id")
+);
+
 
 -- USER NOTIFIED INDEX
 CREATE INDEX "user_notified" ON "notified_user" USING hash("user_notified");
@@ -338,6 +359,8 @@ DROP TRIGGER IF EXISTS delete_refused_report ON "report" CASCADE;
 DROP TRIGGER IF EXISTS event_date ON "event" CASCADE;
 DROP TRIGGER IF EXISTS post_date ON "post" CASCADE;
 DROP TRIGGER IF EXISTS unique_org ON "organization" CASCADE;
+DROP TRIGGER IF EXISTS event_update_at ON "event" CASCADE;
+DROP TRIGGER IF EXISTS group_update_at ON "group" CASCADE;
 
 DROP FUNCTION IF EXISTS update_group_posts() CASCADE;
 DROP FUNCTION IF EXISTS update_event_posts() CASCADE;
@@ -347,6 +370,7 @@ DROP FUNCTION IF EXISTS delete_refused_report() CASCADE;
 DROP FUNCTION IF EXISTS event_date() CASCADE;
 DROP FUNCTION IF EXISTS post_date() CASCADE;
 DROP FUNCTION IF EXISTS unique_org() CASCADE;
+DROP FUNCTION IF EXISTS update_at() CASCADE;
 
 CREATE FUNCTION update_group_posts() RETURNS TRIGGER AS
 $BODY$
@@ -457,6 +481,26 @@ CREATE TRIGGER event_date
     EXECUTE PROCEDURE event_date();
 
 
+CREATE FUNCTION update_at() RETURNS trigger AS
+$BODY$
+BEGIN
+    New."updated_at" = now();
+	RETURN NEW;
+END
+$BODY$
+LANGUAGE plpgsql;
+
+CREATE TRIGGER event_update_at
+    AFTER UPDATE ON public."event"
+	FOR EACH ROW
+    EXECUTE PROCEDURE update_at();
+
+CREATE TRIGGER group_update_at
+    AFTER UPDATE ON public."group"
+	FOR EACH ROW
+    EXECUTE PROCEDURE update_at();
+
+
 
 CREATE FUNCTION post_date() RETURNS trigger AS
 $BODY$
@@ -504,83 +548,86 @@ CREATE TRIGGER unique_org
     EXECUTE PROCEDURE unique_org();
 
 
-insert into public."user" ("name", "email", "password") values('Admin1', 'admin1@gg.pt', '$2y$12$4c4ki2eoJHMW75uuaFffLe6yEiUsbtomUOQErBwgp7hmeV5DfVzPa'); --admin
-insert into public."user" ("name", "email", "password") values('Joaquim Rodrigues', 'jokinho@feup.pt', '$2y$12$YD2mkOUiJDXykPGe2bHw6ugb14EBPlTK6.Nf7QTnDEz2Su19tW7EW'); --aaaa
-insert into public."user" ("name", "email", "password") values('Paulo Tavares', 'paulot@flup.pt', '$2y$12$v4q.gyOIG6xdFbhoq8dcsuhoIvyWvHYD8DJtLMi0vX5B1r..3M7N2'); --1234pass
-insert into public."user" ("name", "email", "password") values('AEISEP', 'aeisep@isep.pt', '$2y$12$zXXPUS2k6hPJ4u/Ue9lLuesoKfJMKIBspDTejMvQGyoKvZ1kNbV8u'); --yoyo10
-insert into public."user" ("name", "email", "password") values('Gustavo Torres', 'tgusta@feup.pt', '$2y$12$ydeNcQ4mOr1HLYnooq2Xuu5ZLYMla7ZIEBaQiN08UekSJ0WvAqdve'); --tgustamucho
-insert into public."user" ("name", "email", "password") values('Pedro Esteves', 'pmesteves@feup.pt', '$2y$12$braCBZULabp3zeMXJHAmDeClfXk9myM/4LovIm/UES5Kgk8HR8Isy'); --estevesboss
-insert into public."user" ("name", "email", "password") values ('Vitor Ventuzelos', 'berserking@feup.pt', '$2y$12$mAQnlXAoBWvwe..Oym7pmuRBsbw2Xtqcbt75hjxuYPH9ll3n/XhlC'); --berserking_idiot
-insert into public."user" ("name", "email", "password") values ('José Martins', 'martins@flup.pt', '$2y$12$csw8WDrgXzAay3jiFdxYIOmpECmceiXvyOK1AECLSFyXuZnQsusuO'); --martins
-insert into public."user" ("name", "email", "password") values ('Marta Camões', 'mcamoes@fcup.pt', '$2y$12$0l0WKBud6d/WPJUH/7ceye1JaEGaOWMsAaihzl/EnRQ2rSsOhmrMa'); --123p
-insert into public."user" ("name", "email", "password") values ('Diana Magalhães', 'dmaga@flup.pt', '$2y$12$U8cNTlV7AwpXvn5uJOk9euWg8TPizGb4tE.n1EQUobcb1A/ySy3nW'); --password12
-insert into public."user" ("name", "email", "password") values ('Tiago Pessoa', 'tpessoa@isep.pt', '$2y$12$vufeANKaqUnvw0qhTY8m0uqnvcJ8oz22xX0GYX6pZWGk8nJK9dFAy'); --hacked91
-insert into public."user" ("name", "email", "password") values ('Ricardo Pinto', 'rpinto@fmup.pt', '$2y$12$EvueAIWOHfCnNBRs5kzF8uaN3breD8yb1AmcQxl47gl0TPsRMWb/2'); --debugger99
-insert into public."user" ("name", "email", "password") values ('Maria Soares', 'msoares@icbas.pt', '$2y$12$birxlOQC5ZjVdgM01lqrfOrbh/xKcvJTDsJ.g0kZz6g6VImGoKAgK'); --12345p
-insert into public."user" ("name", "email", "password") values ('Francisco Costa', 'fcosta@ffup.pt', '$2y$12$gZefsrh9Vw2HV6xhtIbSsuinFsRZAhJUuTyNfY9oWCUHgscv2V94K'); --pass2
-insert into public."user" ("name", "email", "password") values ('José Silva', 'runcolho@fadeup.pt', '$2y$12$nghMwiWQGwiq5PnD1APOZer8ARVAWUgVMV0eOR.wtYnl04yEt9TQm'); --pass1
-insert into public."user" ("name", "email", "password") values ('Miguel Alvim', 'malvim21@fadeup.pt', '$2y$12$3LK/1hPOKHizdFXR0DPUcemsDtKVaIblJPlZqjMDmbJ6YTydMDD8S'); --pass0
-insert into public."user" ("name", "email", "password") values ('Dinis Pereira', 'dinpereira@fmup.pt', '$2y$12$FlACpgGQRMEZ8eKaPXuesu48Sck0ddmXiGx.IeN5Zsa92YgH6BYTC'); --lbaw2034
-insert into public."user" ("name", "email", "password") values ('Soraia Tavares', 'stavares@ffup.pt', '$2y$12$LS1C2bq2avu4KQrRftIC.u9NFiRFNyr4CFCmWYMPB0ujhm743w6ki'); --lbaw
-insert into public."user" ("name", "email", "password") values ('Osvaldo Antunes', 'oantunes@fadeup.pt', '$2y$12$A/LUWLcMsPHJJYgfsmruMeYFmVyGnJXsg1IP3OFDS5fhrFr4Kubde'); --query10
-insert into public."user" ("name", "email", "password") values ('Mariana Castro', 'mcastro@fcup.pt', '$2y$12$HSHLu.dkd9b73IWz4LQAgOS9C4l3V2tJfQKAcK1Cz.aHyi8krJFpW'); --sql2
-insert into public."user" ("name", "email", "password") values ('Ana Faria', 'afaria@fep.pt', '$2y$12$fE4X/GTixS845Xx4YwjAo.a.e9LC7Ay7vba./gQHbeT/ONecrbkXm'); --turbulencia2725
-insert into public."user" ("name", "email", "password") values ('Rui Cardoso', 'rcardoso@fep.pt', '$2y$12$U8sMy44W0FPraRQ5bAdjtOd91ouvK9tnrAvn62MOPUl1E.OWFfsHy'); --bazofi10
-insert into public."user" ("name", "email", "password") values ('AEFEUP', 'aefeup@feup.pt', '$2y$12$Oo8YqVMNXx5M2a47bWjeHOl11KzF94DYs0AsJLf8hC8un3p2RK2HG'); --gustavoboss
-insert into public."user" ("name", "email", "password") values ('Admin2', 'admin2@admins.pt', '$2y$12$BUZvInYL8iZR.N.qu59NIOGr8asY3vlML2KaRIVAJBkQ6IS4odm6m'); --adminGang
+insert into public."user" ("name", "email", "password","userable_id","userable_type") values('Admin1', 'admin1@gg.pt', '$2y$12$4c4ki2eoJHMW75uuaFffLe6yEiUsbtomUOQErBwgp7hmeV5DfVzPa',1,'App\Admin'); --admin
+insert into public."user" ("name", "email", "password","userable_id","userable_type") values('Joaquim Rodrigues', 'jokinho@feup.pt', '$2y$12$YD2mkOUiJDXykPGe2bHw6ugb14EBPlTK6.Nf7QTnDEz2Su19tW7EW',1,'App\RegularUser'); --aaaa
+insert into public."user" ("name", "email", "password","userable_id","userable_type") values('Paulo Tavares', 'paulot@flup.pt', '$2y$12$v4q.gyOIG6xdFbhoq8dcsuhoIvyWvHYD8DJtLMi0vX5B1r..3M7N2',2,'App\RegularUser'); --1234pass
+insert into public."user" ("name", "email", "password","userable_id","userable_type") values('AEISEP', 'aeisep@isep.pt', '$2y$12$zXXPUS2k6hPJ4u/Ue9lLuesoKfJMKIBspDTejMvQGyoKvZ1kNbV8u',3,'App\RegularUser'); --yoyo10
+insert into public."user" ("name", "email", "password","userable_id","userable_type") values('Gustavo Torres', 'tgusta@feup.pt', '$2y$12$ydeNcQ4mOr1HLYnooq2Xuu5ZLYMla7ZIEBaQiN08UekSJ0WvAqdve',4,'App\RegularUser'); --tgustamucho
+insert into public."user" ("name", "email", "password","userable_id","userable_type") values('Pedro Esteves', 'pmesteves@feup.pt', '$2y$12$braCBZULabp3zeMXJHAmDeClfXk9myM/4LovIm/UES5Kgk8HR8Isy',5,'App\RegularUser'); --estevesboss
+insert into public."user" ("name", "email", "password","userable_id","userable_type") values ('Vitor Ventuzelos', 'berserking@feup.pt', '$2y$12$mAQnlXAoBWvwe..Oym7pmuRBsbw2Xtqcbt75hjxuYPH9ll3n/XhlC',6,'App\RegularUser'); --berserking_idiot
+insert into public."user" ("name", "email", "password","userable_id","userable_type") values ('José Martins', 'martins@flup.pt', '$2y$12$csw8WDrgXzAay3jiFdxYIOmpECmceiXvyOK1AECLSFyXuZnQsusuO',7,'App\RegularUser'); --martins
+insert into public."user" ("name", "email", "password","userable_id","userable_type") values ('Marta Camões', 'mcamoes@fcup.pt', '$2y$12$0l0WKBud6d/WPJUH/7ceye1JaEGaOWMsAaihzl/EnRQ2rSsOhmrMa',8,'App\RegularUser'); --123p
+insert into public."user" ("name", "email", "password","userable_id","userable_type") values ('Diana Magalhães', 'dmaga@flup.pt', '$2y$12$U8cNTlV7AwpXvn5uJOk9euWg8TPizGb4tE.n1EQUobcb1A/ySy3nW',9,'App\RegularUser'); --password12
+insert into public."user" ("name", "email", "password","userable_id","userable_type") values ('Tiago Pessoa', 'tpessoa@isep.pt', '$2y$12$vufeANKaqUnvw0qhTY8m0uqnvcJ8oz22xX0GYX6pZWGk8nJK9dFAy',10,'App\RegularUser'); --hacked91
+insert into public."user" ("name", "email", "password","userable_id","userable_type") values ('Ricardo Pinto', 'rpinto@fmup.pt', '$2y$12$EvueAIWOHfCnNBRs5kzF8uaN3breD8yb1AmcQxl47gl0TPsRMWb/2',11,'App\RegularUser'); --debugger99
+insert into public."user" ("name", "email", "password","userable_id","userable_type") values ('Maria Soares', 'msoares@icbas.pt', '$2y$12$birxlOQC5ZjVdgM01lqrfOrbh/xKcvJTDsJ.g0kZz6g6VImGoKAgK',12,'App\RegularUser'); --12345p
+insert into public."user" ("name", "email", "password","userable_id","userable_type") values ('Francisco Costa', 'fcosta@ffup.pt', '$2y$12$gZefsrh9Vw2HV6xhtIbSsuinFsRZAhJUuTyNfY9oWCUHgscv2V94K',13,'App\RegularUser'); --pass2
+insert into public."user" ("name", "email", "password","userable_id","userable_type") values ('José Silva', 'runcolho@fadeup.pt', '$2y$12$nghMwiWQGwiq5PnD1APOZer8ARVAWUgVMV0eOR.wtYnl04yEt9TQm',14,'App\RegularUser'); --pass1
+insert into public."user" ("name", "email", "password","userable_id","userable_type") values ('Miguel Alvim', 'malvim21@fadeup.pt', '$2y$12$3LK/1hPOKHizdFXR0DPUcemsDtKVaIblJPlZqjMDmbJ6YTydMDD8S',15,'App\RegularUser'); --pass0
+insert into public."user" ("name", "email", "password","userable_id","userable_type") values ('Dinis Pereira', 'dinpereira@fmup.pt', '$2y$12$FlACpgGQRMEZ8eKaPXuesu48Sck0ddmXiGx.IeN5Zsa92YgH6BYTC',16,'App\RegularUser'); --lbaw2034
+insert into public."user" ("name", "email", "password","userable_id","userable_type") values ('Soraia Tavares', 'stavares@ffup.pt', '$2y$12$LS1C2bq2avu4KQrRftIC.u9NFiRFNyr4CFCmWYMPB0ujhm743w6ki',17,'App\RegularUser'); --lbaw
+insert into public."user" ("name", "email", "password","userable_id","userable_type") values ('Osvaldo Antunes', 'oantunes@fadeup.pt', '$2y$12$A/LUWLcMsPHJJYgfsmruMeYFmVyGnJXsg1IP3OFDS5fhrFr4Kubde',18,'App\RegularUser'); --query10
+insert into public."user" ("name", "email", "password","userable_id","userable_type") values ('Mariana Castro', 'mcastro@fcup.pt', '$2y$12$HSHLu.dkd9b73IWz4LQAgOS9C4l3V2tJfQKAcK1Cz.aHyi8krJFpW',19,'App\RegularUser'); --sql2
+insert into public."user" ("name", "email", "password","userable_id","userable_type") values ('Ana Faria', 'afaria@fep.pt', '$2y$12$fE4X/GTixS845Xx4YwjAo.a.e9LC7Ay7vba./gQHbeT/ONecrbkXm',20,'App\RegularUser'); --turbulencia2725
+insert into public."user" ("name", "email", "password","userable_id","userable_type") values ('Rui Cardoso', 'rcardoso@fep.pt', '$2y$12$U8sMy44W0FPraRQ5bAdjtOd91ouvK9tnrAvn62MOPUl1E.OWFfsHy',21,'App\RegularUser'); --bazofi10
+insert into public."user" ("name", "email", "password","userable_id","userable_type") values ('AEFEUP', 'aefeup@feup.pt', '$2y$12$Oo8YqVMNXx5M2a47bWjeHOl11KzF94DYs0AsJLf8hC8un3p2RK2HG',22,'App\RegularUser'); --gustavoboss
+insert into public."user" ("name", "email", "password","userable_id","userable_type") values ('Admin2', 'admin2@admins.pt', '$2y$12$BUZvInYL8iZR.N.qu59NIOGr8asY3vlML2KaRIVAJBkQ6IS4odm6m',2,'App\Admin'); --adminGang
 
 
 insert into public."admin" ("user_id") values (1);
 insert into public."admin" ("user_id") values (24);
 
 
-insert into public."regular_user" ("user_id", "personal_info") values (2, 'Just one regular user!');
-insert into public."regular_user" ("user_id", "personal_info") values (3, 'Just another regular user!');
-insert into public."regular_user" ("user_id", "personal_info") values (4, 'Another one!');
-insert into public."regular_user" ("user_id", "personal_info") values (5, 'DB user');
-insert into public."regular_user" ("user_id", "personal_info") values (6, 'GameJam user');
-insert into public."regular_user" ("user_id", "personal_info") values (7, 'Another one!');
-insert into public."regular_user" ("user_id", "personal_info") values (8, 'FLUP student');
-insert into public."regular_user" ("user_id", "personal_info") values (9, 'FCUP teacher');
-insert into public."regular_user" ("user_id", "personal_info") values (10, 'FLUP student');
-insert into public."regular_user" ("user_id", "personal_info") values (11, 'I am an ISEP teacher');
-insert into public."regular_user" ("user_id", "personal_info") values (12, 'FMUP student');
-insert into public."regular_user" ("user_id", "personal_info") values (13, 'ICBAS student');
-insert into public."regular_user" ("user_id", "personal_info") values (14, 'FFUP student');
-insert into public."regular_user" ("user_id", "personal_info") values (15, 'Sports student');
-insert into public."regular_user" ("user_id", "personal_info") values (16, 'FADEUP teacher');
-insert into public."regular_user" ("user_id", "personal_info") values (17, 'FMUP student');
-insert into public."regular_user" ("user_id", "personal_info") values (18, 'Pharmacy student');
-insert into public."regular_user" ("user_id", "personal_info") values (19, 'Sports student');
-insert into public."regular_user" ("user_id", "personal_info") values (20, 'Science student');
-insert into public."regular_user" ("user_id", "personal_info") values (21, 'FEP student');
-insert into public."regular_user" ("user_id", "personal_info") values (22, 'FEP teacher');
+insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type") values (2, 'Just one regular user!',1,'App\Student');
+insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type") values (3, 'Just another regular user!',2,'App\Student');
+insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type") values (4, 'Another one!',3,'App\Student');
+insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type") values (5, 'DB user',4,'App\Student');
+insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type") values (6, 'GameJam user',5,'App\Student');
+insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type") values (7, 'Another one!',6,'App\Student');
+insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type") values (8, 'FLUP student',7,'App\Student');
+insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type") values (9, 'FCUP teacher',1,'App\Teacher');
+insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type") values (10, 'FLUP student',8,'App\Student');
+insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type") values (11, 'I am an ISEP teacher',2,'App\Teacher');
+insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type") values (12, 'FMUP student',9,'App\Student');
+insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type") values (13, 'ICBAS student',10,'App\Student');
+insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type") values (14, 'FFUP student',11,'App\Student');
+insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type") values (15, 'Sports student',12,'App\Student');
+insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type") values (16, 'FADEUP teacher',3,'App\Teacher');
+insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type") values (17, 'FMUP student',13,'App\Student');
+insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type") values (18, 'Pharmacy student',14,'App\Student');
+insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type") values (19, 'Sports student',15,'App\Student');
+insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type") values (20, 'Science student',16,'App\Student');
+insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type") values (21, 'FEP student',17,'App\Student');
+insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type") values (22, 'FEP teacher',4,'App\Teacher');
+insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type") values (23, 'Aefeup',1,'App\Organization');
 
 
+insert into public."student" ("regular_user_id") values (1);
 insert into public."student" ("regular_user_id") values (2);
+insert into public."student" ("regular_user_id") values (3);
+insert into public."student" ("regular_user_id") values (4);
 insert into public."student" ("regular_user_id") values (5);
 insert into public."student" ("regular_user_id") values (6);
 insert into public."student" ("regular_user_id") values (7);
-insert into public."student" ("regular_user_id") values (8);
-insert into public."student" ("regular_user_id") values (10);
+insert into public."student" ("regular_user_id") values (9);
+insert into public."student" ("regular_user_id") values (11);
 insert into public."student" ("regular_user_id") values (12);
 insert into public."student" ("regular_user_id") values (13);
 insert into public."student" ("regular_user_id") values (14);
-insert into public."student" ("regular_user_id") values (15);
+insert into public."student" ("regular_user_id") values (16);
 insert into public."student" ("regular_user_id") values (17);
 insert into public."student" ("regular_user_id") values (18);
 insert into public."student" ("regular_user_id") values (19);
 insert into public."student" ("regular_user_id") values (20);
-insert into public."student" ("regular_user_id") values (21);
 
 
-insert into public."teacher" ("regular_user_id") values (3);
-insert into public."teacher" ("regular_user_id") values (9);
-insert into public."teacher" ("regular_user_id") values (11);
-insert into public."teacher" ("regular_user_id") values (16);
+insert into public."teacher" ("regular_user_id") values (8);
+insert into public."teacher" ("regular_user_id") values (10);
+insert into public."teacher" ("regular_user_id") values (15);
+insert into public."teacher" ("regular_user_id") values (21);
 
 
-insert into public."organization" ("regular_user_id", "approval") values (4, TRUE);
+insert into public."organization" ("regular_user_id", "approval") values (22, TRUE);
 
 
 insert into public."event" ("organization_id", "name", "location", "date", "information") values (1, 'Evento de LBAW', 'Porto', '2020-06-29 17:45:00', 'general info');
