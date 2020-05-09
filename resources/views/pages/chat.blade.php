@@ -3,21 +3,17 @@
 @section('content')
 
 
+<script src="https://js.pusher.com/5.0/pusher.min.js"></script>
+<script src="{{ asset('js/echo.iife.js') }}"></script>
+<script src="{{ asset('js/echo.js') }}"></script>
 <script>
-    window.Laravel = <?php echo json_encode([
-        'csrfToken' => csrf_token(),
-    ]); ?>;
-    var module = { }; /*   <-----THIS LINE */
-</script>
-
-<script>
-    window.Echo = new Echo({
-        broadcaster: 'pusher',
-        key: '05ddfe6c26eaafb78b1b',
-        cluster: 'mt1',
-        encrypted: true,
-        authEndpoint: 'http://localhost:8000/broadcasting/auth'
-    });
+Pusher.logToConsole = true;
+window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: '05ddfe6c26eaafb78b1b',
+    cluster: 'mt1',
+    forceTLS: true
+});
 </script>
 
 <article class="chat" data-id="{{ $chat->chat_id }}">
@@ -57,10 +53,9 @@
                         <script>
                             window.Echo.channel('chat.{{$chat->chat_id}}')
                             .listen('NewMessage', (e) => {
-                                console.log(e);
+                                console.log(e)
                             });
                         </script>
-                        <script src="../js/app.js"></script>
                     </section>
 
                     <footer class="row" id="send_message" style="border-width: 0; border-top-width: 0.1em; border-style:solid; border-color: sandybrown; height: 6.5%;">
