@@ -34,10 +34,12 @@
 
                     <section id="messages_col" class="d-flex flex-column" style="flex-grow:1">
                         @each('partials.message', $messages, 'message')
-                        Echo.channel('chat' +  $chat->chat_id)
-                            .listen('NewMessage', (mess) => {
-                            var_dump(mess)<!-- @each('partials.message', array(mess), 'message') -->
+                        <script>
+                            window.Echo.channel(`chat.{{$chat->chat_id}}`)
+                            .listen('NewMessage', (e) => {
+                            console.log(e);
                             });
+                        </script>
                     </section>
 
                     <footer class="row" id="send_message" style="border-width: 0; border-top-width: 0.1em; border-style:solid; border-color: sandybrown; height: 6.5%;">

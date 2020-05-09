@@ -56,3 +56,5 @@ window.Echo = new Echo({
     disableStats: true,
     encrypted: true
 });  
+
+window.Echo.channel(`chat.{{$chat->chat_id}}`);
