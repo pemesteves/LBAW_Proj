@@ -37,7 +37,8 @@
                         </div>
                     </div>
                 </div>
-                <div> <div class="btn-group dropleft" style="margin-right: 0; padding-right: 0; width: 100%">
+                <div> 
+                    <div class="btn-group dropleft" style="margin-right: 0; padding-right: 0; width: 100%">
                         <button type="button" data-toggle="dropdown" style="font-size: 150%; margin-right: 0; padding-right: 0; width: 100%; background-color: white; border: 0;"> 
                         <span class="fa fa-ellipsis-v" ></span></button>
                         <div class="dropdown-menu options_menu" style="min-width:5rem">

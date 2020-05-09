@@ -4,7 +4,7 @@
 
 <div class="container" style="margin:0; min-width:100%">
         <div class="row">
-            <div class="col-sm-1" style="padding-left:0px">
+            <div class="col-sm-2" style="padding-left:0px">
                 <div id="dl-menu" class="dl-menuwrapper">
                     <button id="dl-trigger" onclick="toggle()">Open Menu</button>
                     <ul id="dl-menu2">
@@ -18,7 +18,7 @@
                                         <li><a href="groups/{{$group->group_id}}"><small>{{$group->name}}</small></a></li>
                                     @endforeach
                                 @endif
-                                
+                                <li><button class="btn btn-primary" onclick="window.location.href='/groups/create'"><span class="fa fa-plus"></span>&nbsp;Create Group</button>
                             </ul>
                         </li>
                         <li>
@@ -30,6 +30,10 @@
                                     @foreach ($events as $event)
                                         <li><a href="events/{{$event->event_id}}"><small>{{$event->name}}</small></a></li>
                                     @endforeach
+                                @endif
+
+                                @if ($can_create_events)
+                                    <li><button class="btn btn-primary" onclick="window.location.href='/events/create'"><span class="fa fa-plus"></span>&nbsp;Create Event</button>
                                 @endif
                             </ul>
                         </li>
@@ -80,9 +84,9 @@
                 @each('partials.post', $posts, 'post')
 
             </div>
+            <div class="col-sm-2">
 
-
-
+            </div>
         </div>
     </div>
 

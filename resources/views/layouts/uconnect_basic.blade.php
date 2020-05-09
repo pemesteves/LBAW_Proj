@@ -41,9 +41,13 @@
                     <?php } ?>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">            
                         <div class="navbar-nav">
-                            <a class="dropdown-item" href="#"><span class="fa fa-adjust"></span>&nbsp;Dark Mode</a>
-                            <a class="dropdown-item" href="/about"><span class="fa fa-info-circle"></span>&nbsp;About Us</a>
-                            <a class="dropdown-item" href="#"><span class="fa fa-cog"></span>&nbsp;Settings</a>
+                            <a class="dropdown-item" href="#"><span class="fa fa-adjust"></span>&nbsp;&nbsp;Dark Mode</a>
+                            <a class="dropdown-item" href="/groups/create"><span class="fa fa-users"></span>&nbsp;Create Group</a>
+                            @if (isset($can_create_events) && $can_create_events)
+                                <a class="dropdown-item" href="/events/create"><span class="fa fa-calendar"></span>&nbsp;&nbsp;Create Event</a>
+                            @endif
+                            <a class="dropdown-item" href="/about"><span class="fa fa-info-circle"></span>&nbsp;&nbsp;About Us</a>
+                            <a class="dropdown-item" href="#"><span class="fa fa-cog"></span>&nbsp;&nbsp;Settings</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ url('/logout') }}"><span class="fa fa-sign-out"></span>&nbsp;Logout</a>
                         </div>

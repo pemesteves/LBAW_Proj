@@ -27,7 +27,7 @@ class EventController extends Controller{
 
       $going = $event->going();
 
-      return view('pages.event' , ['is_admin' => false , 'event' => $event, 'posts' => $posts, 'going' => $going ]);
+      return view('pages.event' , ['is_admin' => false , 'event' => $event, 'posts' => $posts, 'going' => $going, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization' ]);
     }
 
     public function showCreateForm(){
@@ -35,7 +35,7 @@ class EventController extends Controller{
 
       $this->authorize('create', 'App\Event');
 
-      return view('pages.create_event', ['is_admin' => false]);
+      return view('pages.create_event', ['is_admin' => false, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
     }
 
     public function create(Request $request){
@@ -71,7 +71,7 @@ class EventController extends Controller{
 
       $this->authorize('edit', $event);
 
-      return view('pages.edit_event' , ['is_admin' => false , 'event' => $event ]);
+      return view('pages.edit_event' , ['is_admin' => false , 'event' => $event, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization' ]);
     }
 
     /**

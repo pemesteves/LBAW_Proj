@@ -10,7 +10,7 @@
 ?>
 
 @section('content')
-<div id="create_event_card" class="card mb-3 border rounded">
+<div id="event_card" class="card mb-3 border rounded">
     <form method="post" action="/events/{{$event->event_id}}">
         @csrf
         <img src="images/aefeup.jpg" class="card-img-top mx-auto d-block" alt="..."> <!--Add image upload -->

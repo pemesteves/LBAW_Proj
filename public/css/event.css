@@ -17,12 +17,15 @@
     border: none;
 }
 
-#event_card div.card-body {
+#event_card div.card .container {
+    margin: 0; 
     border: 1px solid lightgrey; 
     border-collapse: collapse;
+    max-width: 100%; 
+    padding: 0;
 }
 
-#event_card .card-footer{
+#event_card .card-footer {
     padding: 0 !important;
     border: 1px solid lightgrey; 
     border-collapse: collapse; 
@@ -41,3 +44,19 @@
 #event_card .card-footer .row .col-sm-6:last-child {
     text-align: right;
 }
+
+#event_card button {
+    width: 100%; 
+    max-width: 100%;
+    border: 0;
+}
+
+#event_card .card-body h1 input {
+    width: 100%;
+    max-width: 100%;
+} 
+
+#event_card .card-body p textarea {
+    width: 100%;
+    max-width: 100%;
+} 

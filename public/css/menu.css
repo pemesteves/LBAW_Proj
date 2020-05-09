@@ -51,6 +51,12 @@
     margin-top: 2rem;
 }
 
+#dl-menu2 .dl-submenu li button {
+    font-size: 0.8em;
+    padding: 0.25em;
+    color: black;
+}
+
 
 .menu_title{
     width: 100%;

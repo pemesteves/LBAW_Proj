@@ -10,12 +10,41 @@
 ?>
 
 @section('content')
-    <div id="event_card" class="card mb-3 border rounded">
-        <img src="images/aefeup.jpg" class="card-img-top mx-auto d-block" alt="...">
+    <div id="event_card" class="card mb-3 border rounded">      
+        <img src="" class="card-img-top mx-auto d-block" alt="...">
         <div class="card">
-            <div class="card-body">
-                <h1 class="card-title uconnect-title" >{{ $event->name }}</h1>
-                <p class="card-text uconnect-paragraph" >{{ $event->information }}</p>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-11">
+                        <div class="card-body">
+                            <h1 class="card-title uconnect-title" >{{ $event->name }}</h1>
+                            <p class="card-text uconnect-paragraph" >{{ $event->information }}</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-1">
+                        <div class="btn-group dropleft" style="margin-right: 0; padding-right: 0; width: 100%">
+                            <button type="button" data-toggle="dropdown" style="font-size: 150%; margin-right: 0; padding-right: 0; width: 100%; background-color: white; border: 0;"> 
+                            <span class="fa fa-ellipsis-v" ></span></button>
+                            <div class="dropdown-menu options_menu" style="min-width:5rem">
+                                <ul class="list-group">
+                                    <li class="list-group-item options_entry" style="text-align: left;">
+                                        <button onclick="location.href='/events/{{$event->event_id}}/edit'" style=" margin-left:auto; margin-right:auto; background-color: white; border: 0;">
+                                            Edit
+                                        </button>
+                                    </li>
+                                    <li class="list-group-item options_entry" style="text-align: left;">
+                                        <button class='delete' style=" background-color: white; border: 0;" > 
+                                            Delete
+                                        </button>
+                                    </li>
+                                    <li class="list-group-item options_entry" style="text-align: left;">
+                                        <button style="background-color: white; border: 0;">Report</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>  
+                </div>
             </div>
             <div class="card-footer container no-gutters">            
                 <div class="row">

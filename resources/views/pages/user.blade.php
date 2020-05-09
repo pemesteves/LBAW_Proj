@@ -65,9 +65,13 @@
                     </div>
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                         <div class="card-body">
-                            <ul>
-                                @each('partials.user_group', $groups, 'group')
-                            </ul>
+                            @if (count($groups) === 0)
+                                <p>No groups</p>
+                            @else
+                                <ul>
+                                    @each('partials.user_group', $groups, 'group')
+                                </ul>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -81,9 +85,13 @@
                     </div>
                     <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
                         <div class="card-body">
-                            <ul>
-                                @each('partials.user_friend', $friends, 'friend')
-                            </ul>
+                            @if (count($friends) === 0)
+                                <p>User has no friends yet</p>
+                            @else
+                                <ul>
+                                    @each('partials.user_friend', $friends, 'friend')
+                                </ul>
+                            @endif
                         </div>
                     </div>
                 </div>

@@ -54,7 +54,7 @@ class PostController extends Controller{
       if(!isset($post))
         throw new HttpException(404, "post");
 
-      return view('pages.post' , ['is_admin' => false , 'post' => $post]);
+      return view('pages.post' , ['is_admin' => false , 'post' => $post, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
     }
 
     /**
@@ -69,7 +69,7 @@ class PostController extends Controller{
 
       $this->authorize('edit', $post);
 
-      return view('pages.post_edit' , ['is_admin' => false , 'post' => $post]);
+      return view('pages.post_edit' , ['is_admin' => false , 'post' => $post, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
     }
 
      /**

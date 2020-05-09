@@ -35,6 +35,13 @@
 
 #group_card .container {
     padding: 0;
-    margin-top: 0.5em;
+}
+
+#group_card .container:first-child {
+    padding-right: .5em;
+}
+
+#group_card .container:not(:first-child) {
     border-top: 1px solid sandybrown;
+    margin-top: 0.5em;
 }

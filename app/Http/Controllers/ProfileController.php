@@ -33,7 +33,7 @@ class ProfileController extends Controller{
                        ->where('friend.friend_id1', '=', Auth::user()->userable_id)
                        ->get();
 
-        return view('pages.user_me' , ['is_admin' => false , 'posts' => $posts , 'groups' => $groups, 'friends' => $friends]);
+        return view('pages.user_me' , ['is_admin' => false , 'posts' => $posts , 'groups' => $groups, 'friends' => $friends, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
     }
 
     public function show_me_edit(){
@@ -44,7 +44,7 @@ class ProfileController extends Controller{
                      ->orderBy('date','desc')
                      ->get();
 
-      return view('pages.user_me_edit' , ['is_admin' => false , 'posts' => $posts ]);
+      return view('pages.user_me_edit' , ['is_admin' => false , 'posts' => $posts, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization' ]);
 
     }
 
@@ -68,7 +68,7 @@ class ProfileController extends Controller{
                       ->where('friend.friend_id1', '=', $user->regular_user_id)
                       ->get();
 
-      return view('pages.user' , ['is_admin' => false , 'user' => $user, 'posts' => $posts, 'groups' => $groups, 'friends' => $friends ]);
+      return view('pages.user' , ['is_admin' => false , 'user' => $user, 'posts' => $posts, 'groups' => $groups, 'friends' => $friends, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization' ]);
 
     }
 
