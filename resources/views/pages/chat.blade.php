@@ -1,6 +1,25 @@
 @extends('layouts.uconnect_basic')
 
 @section('content')
+
+
+<script>
+    window.Laravel = <?php echo json_encode([
+        'csrfToken' => csrf_token(),
+    ]); ?>;
+    var module = { }; /*   <-----THIS LINE */
+</script>
+
+<script>
+    window.Echo = new Echo({
+        broadcaster: 'pusher',
+        key: '05ddfe6c26eaafb78b1b',
+        cluster: 'mt1',
+        encrypted: true,
+        authEndpoint: 'http://localhost:8000/broadcasting/auth'
+    });
+</script>
+
 <article class="chat" data-id="{{ $chat->chat_id }}">
     <div id="full_page" class="d-flex flex-column no-gutters vh-100" style="padding: 0">
         <section class="container-fluid no-gutters" style="flex: 1 1 auto">
@@ -34,12 +53,14 @@
 
                     <section id="messages_col" class="d-flex flex-column" style="flex-grow:1">
                         @each('partials.message', $messages, 'message')
+
                         <script>
-                            window.Echo.channel(`chat.{{$chat->chat_id}}`)
+                            window.Echo.channel('chat.{{$chat->chat_id}}')
                             .listen('NewMessage', (e) => {
-                            console.log(e);
+                                console.log(e);
                             });
                         </script>
+                        <script src="../js/app.js"></script>
                     </section>
 
                     <footer class="row" id="send_message" style="border-width: 0; border-top-width: 0.1em; border-style:solid; border-color: sandybrown; height: 6.5%;">

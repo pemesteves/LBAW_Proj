@@ -51,7 +51,7 @@ if (token) {
      broadcaster: 'pusher',
      key: '05ddfe6c26eaafb78b1b',
      cluster: 'mt1',
+     forceTLS: true,
      encrypted: true,
      wsPort: 6001,
-     disableStats: true,
  });
