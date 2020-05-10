@@ -430,11 +430,11 @@ CREATE TRIGGER update_user_posts
 CREATE FUNCTION friend_status() RETURNS trigger AS
 $$
 BEGIN
-	IF new."friendship_status" = 'accepted' THEN
-		Insert into public."friend" ("friend_id1","friend_id2","friendship_status") values (old.public."friend_id2",old.public."friend_id1",'accepted');
-	ELSEIF new."friendship_status" = 'refused' THEN
+	IF NEW."type" = 'accepted'::friendship_status THEN
+		Insert INTO public."friend" ("friend_id1","friend_id2","type") values (OLD."friend_id2",OLD."friend_id1",'accepted');
+	ELSEIF NEW."type" = 'refused'::friendship_status THEN
 		DELETE FROM public."friend" 
-        WHERE ("friend_id1" = old.public."friend_id1" AND "friend_id2" = old.public."friend_id2");
+        WHERE ("friend_id1" = OLD."friend_id1" AND "friend_id2" = OLD."friend_id2");
     END IF; 
     RETURN NEW;
 END
@@ -444,7 +444,9 @@ LANGUAGE plpgsql;
 
 Create TRIGGER friend_status
 	AFTER UPDATE ON public."friend"
+	FOR EACH ROW
 	EXECUTE PROCEDURE friend_status();
+
 
 
 
@@ -741,10 +743,15 @@ insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (1, 4, DE
 insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (1, 15, DEFAULT);
 insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (1, 18, DEFAULT);
 insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (2, 3, 'accepted');
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (3, 2, 'accepted');
 insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (2, 4, 'accepted');
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (4, 2, 'accepted');
 insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (2, 5, 'accepted');
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (5, 2, 'accepted');
 insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (2, 6, 'accepted');
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (6, 2, 'accepted');
 insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (2, 7, 'accepted');
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (7, 2, 'accepted');
 insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (2, 8, DEFAULT);
 insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (2, 10, DEFAULT);
 insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (4, 3, DEFAULT);
@@ -758,6 +765,7 @@ insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (7, 17, D
 insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (8, 11, DEFAULT);
 insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (8, 10, DEFAULT);
 insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (10, 20, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (14, 2, DEFAULT);
 
 
 insert into public."user_interested_in_event" ("user_id","event_id") values(2,1);

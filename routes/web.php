@@ -39,6 +39,14 @@ Route::put('/api/chats/{id}/message', 'MessageController@create');
 Route::put('/api/reports/{id}/accept' , 'ReportController@accept');
 Route::put('/api/reports/{id}/decline' , 'ReportController@decline');
 
+Route::put('/api/sendFriendRequest/{id}' , 'RegularUserController@sendRequest');
+Route::put('/api/cancelFriendRequest/{id}' , 'RegularUserController@cancelRequest');
+Route::put('/api/acceptFriendRequest/{id}' , 'RegularUserController@acceptRequest');
+Route::put('/api/declineFriendRequest/{id}' , 'RegularUserController@declineRequest');
+Route::put('/api/removeFriendRequest/{id}' , 'RegularUserController@removeFriend');
+
+
+
 // Authentication
 
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');

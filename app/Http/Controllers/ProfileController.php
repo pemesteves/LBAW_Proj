@@ -33,7 +33,7 @@ class ProfileController extends Controller{
 
       $groups = Auth::user()->userable->groups;
 
-      $friends = User::join('friend', 'friend_id2', '=', 'userable_id')
+      $friends = RegularUser::join('friend', 'friend_id2', '=', 'regular_user_id')
                       ->where([
                         ['friend.friend_id1', '=', Auth::user()->userable_id],
                         ['friend.type','accepted']
@@ -74,7 +74,7 @@ class ProfileController extends Controller{
 
     $groups = $user->user->userable->groups;
 
-    $friends = User::join('friend', 'friend_id2', '=', 'userable_id')
+    $friends = RegularUser::join('friend', 'friend_id2', '=', 'regular_user_id')
                     ->where([
                       ['friend.friend_id1', '=', $user->regular_user_id],
                       ['friend.type','accepted']
@@ -82,9 +82,16 @@ class ProfileController extends Controller{
                     ->get();
     $friendship_status = DB::table("friend")
                         ->where([
+                          ['friend.friend_id1', '=', $user->regular_user_id],
+                          ['friend.friend_id2', '=',Auth::user()->userable_id],
+                        ])->get();
+    if(count($friendship_status) == 0){
+      $friendship_status = DB::table("friend")
+                        ->where([
                           ['friend.friend_id2', '=', $user->regular_user_id],
                           ['friend.friend_id1', '=',Auth::user()->userable_id],
                         ])->get();
+    }
 
     return view('pages.user' , ['is_admin' => false , 'user' => $user, 'friendship_status' => $friendship_status, 'posts' => $posts, 'groups' => $groups, 'friends' => $friends, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization' ]);
 

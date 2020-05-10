@@ -38,6 +38,7 @@
             <script src="{{ asset('js/post.js') }}" defer> </script>
             <script src="{{ asset('js/resetPass.js') }}" defer> </script>
             <script src="{{ asset('js/reports.js') }}" defer> </script>
+            <script src="{{ asset('js/friendship.js') }}" defer> </script>
 
             <style>
                 body {
