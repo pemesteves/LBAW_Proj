@@ -7,7 +7,6 @@
 <script src="{{ asset('js/echo.iife.js') }}"></script>
 <script src="{{ asset('js/echo.js') }}"></script>
 <script>
-Pusher.logToConsole = true;
 window.Echo = new Echo({
     broadcaster: 'pusher',
     key: '05ddfe6c26eaafb78b1b',
