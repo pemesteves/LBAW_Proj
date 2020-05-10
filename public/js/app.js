@@ -297,7 +297,6 @@ function messageAddedHandler(){
     window.location = '/';
     return;
   }
-  console.log(this.responseText);
   let message = JSON.parse(this.responseText);
 
   // Create the new message
@@ -307,10 +306,6 @@ function messageAddedHandler(){
   let toSelect = document.querySelector('article.chat[data-id="'+ message.chat_id + '"]');
   let form = toSelect.querySelector('div.chat_message_input');
   form.querySelector('textarea').value="";
-
-  // Insert the new message
-  //let messageFeed = toSelect.querySelector('section#messages_col');
-  //messageFeed.appendChild(new_message);
 }
 
 
