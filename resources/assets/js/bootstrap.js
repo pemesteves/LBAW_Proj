@@ -49,9 +49,9 @@ if (token) {
 
  window.Echo = new Echo({
      broadcaster: 'pusher',
-     key: 'lbawKey',
+     key: '05ddfe6c26eaafb78b1b',
      cluster: 'mt1',
-     encrypted: true
+     forceTLS: true,
+     encrypted: true,
      wsPort: 6001,
-     disableStats: true,
  });

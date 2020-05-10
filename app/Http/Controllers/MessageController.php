@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 use App\Message;
+use App\Events\NewMessage;
 
 class MessageController extends Controller{
 
@@ -28,6 +29,8 @@ class MessageController extends Controller{
 
       //Gets useful information about the message
       $new_message = Message::take(1)->where("message_id", '=', $message["message_id"])->get(); 
+
+      broadcast(new NewMessage($message))->toOthers();
 
       return $new_message[0];
     }
