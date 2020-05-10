@@ -491,6 +491,7 @@ function createPost(post){
 function createComment(comment){
   let new_comment = document.createElement('div');
   new_comment.classList.add('row', 'comment_container', 'comment_no_padding'); 
+  new_comment.setAttribute('data-id',comment.comment_id);
   new_comment.innerHTML = `
     <div class="col-2 comment_user_info" >
         <div class="row">   
@@ -503,9 +504,38 @@ function createComment(comment){
     <div class="col-9 comment_text">
         <p>${comment.body}</p>
     </div>
-    <div class="col-1 comment_opt">
-        <button><span class="fa fa-ellipsis-v"></span></button>
+    <div>
+        <div class="btn-group dropright" style="margin-right: 0; padding-right: 0; width: 100%">
+            <button type="button" data-toggle="dropdown" style="font-size: 150%; margin-right: 0; padding-right: 0; width: 100%; background-color: white; border: 0;"> 
+            <span class="fa fa-ellipsis-v" ></span></button>
+            <div class="dropdown-menu options_menu" style="min-width:5rem">
+                <ul class="list-group">
+                    <li class="list-group-item options_entry" style="text-align: left;">
+                        <button class='comment_edit' style=" margin-left:auto; margin-right:auto; background-color: white; border: 0;">
+                            Edit
+                        </button>
+                    </li>
+                    <li class="list-group-item options_entry" style="text-align: left;">
+                        <button class='comment_delete' style=" background-color: white; border: 0;" > 
+                            Delete
+                        </button>
+                    </li>
+                    <li class="list-group-item options_entry" style="text-align: left;">
+                        <button style="background-color: white; border: 0;">
+                            Report
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>`;
+
+    let commentDelleters = new_comment.querySelector('.comment_container div.options_menu .comment_delete');
+    commentDelleters.addEventListener('click', sendDeleteCommentRequest);
+
+
+    let commentEditTransformers = new_comment.querySelector('.comment_container div.options_menu .comment_edit');
+    commentEditTransformers.addEventListener('click', setCommentEditBox);
   return new_comment;
 }
 

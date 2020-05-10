@@ -28,6 +28,9 @@ Route::delete('api/item/{id}', 'ItemController@delete');
 Route::put('/api/posts' , 'PostController@create');
 Route::delete('api/posts/{id}', 'PostController@delete');
 Route::put('/api/posts/{id}/comment', 'CommentController@create');
+Route::delete('api/comments/{id}', 'CommentController@delete');
+Route::put('api/comments/{id}/edit' , 'CommentController@update');
+
 
 Route::put('/api/posts/{id}/like/{val}' , 'PostController@like');
 
