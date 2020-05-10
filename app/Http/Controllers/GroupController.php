@@ -22,14 +22,17 @@ class GroupController extends Controller{
 
       $this->authorize('show', $group);
 
-      $posts = Post::join('group','group.group_id','=', 'post.group_id')
-                     ->where('group.group_id', '=',  $id)
-                     ->orderBy('date','desc')
-                     ->get();
+      $posts = $group->posts;
 
       $members = $group->members();
 
-      return view('pages.group' , ['is_admin' => false , 'group' => $group, 'posts' => $posts, 'members' => $members, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization' ]);
+      $owner = DB::table('user_in_group')
+            ->where('group_id', '=', $id)
+            ->where('user_id', '=', Auth::user()->userable->regular_user_id)
+            ->select('admin')
+            ->limit(1);
+
+      return view('pages.group' , ['is_admin' => false , 'group' => $group, 'posts' => $posts, 'members' => $members, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'is_owner' => $owner ]);
     }
 
     public function showCreateForm(){

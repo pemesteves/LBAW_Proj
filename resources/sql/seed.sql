@@ -78,6 +78,7 @@ CREATE TABLE public."regular_user"
     "regular_user_id" serial NOT NULL,
 	"user_id" integer NOT NULL REFERENCES public."user"("user_id") ON DELETE CASCADE,
 	"personal_info" text,
+	"university" text NOT NULL,
 
 	"regular_userable_id" integer,
 	"regular_userable_type" text,
@@ -582,28 +583,28 @@ insert into public."admin" ("user_id") values (1);
 insert into public."admin" ("user_id") values (24);
 
 
-insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type") values (2, 'Just one regular user!',1,'App\Student');
-insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type") values (3, 'Just another regular user!',2,'App\Student');
-insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type") values (4, 'Another one!',3,'App\Student');
-insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type") values (5, 'DB user',4,'App\Student');
-insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type") values (6, 'GameJam user',5,'App\Student');
-insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type") values (7, 'Another one!',6,'App\Student');
-insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type") values (8, 'FLUP student',7,'App\Student');
-insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type") values (9, 'FCUP teacher',1,'App\Teacher');
-insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type") values (10, 'FLUP student',8,'App\Student');
-insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type") values (11, 'I am an ISEP teacher',2,'App\Teacher');
-insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type") values (12, 'FMUP student',9,'App\Student');
-insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type") values (13, 'ICBAS student',10,'App\Student');
-insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type") values (14, 'FFUP student',11,'App\Student');
-insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type") values (15, 'Sports student',12,'App\Student');
-insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type") values (16, 'FADEUP teacher',3,'App\Teacher');
-insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type") values (17, 'FMUP student',13,'App\Student');
-insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type") values (18, 'Pharmacy student',14,'App\Student');
-insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type") values (19, 'Sports student',15,'App\Student');
-insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type") values (20, 'Science student',16,'App\Student');
-insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type") values (21, 'FEP student',17,'App\Student');
-insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type") values (22, 'FEP teacher',4,'App\Teacher');
-insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type") values (23, 'Aefeup',1,'App\Organization');
+insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type", "university") values (2, 'Just one regular user!',1,'App\Student', 'FEUP');
+insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type", "university") values (3, 'Just another regular user!',2,'App\Student', 'FEUP');
+insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type", "university") values (4, 'Another one!',3,'App\Student', 'FEUP');
+insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type", "university") values (5, 'DB user',4,'App\Student', 'FEUP');
+insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type", "university") values (6, 'GameJam user',5,'App\Student', 'FEUP');
+insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type", "university") values (7, 'Another one!',6,'App\Student', 'FEUP');
+insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type", "university") values (8, 'FLUP student',7,'App\Student', 'FEUP');
+insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type", "university") values (9, 'FCUP teacher',1,'App\Teacher', 'FEUP');
+insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type", "university") values (10, 'FLUP student',8,'App\Student', 'FEUP');
+insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type", "university") values (11, 'I am an ISEP teacher',2,'App\Teacher', 'FEUP');
+insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type", "university") values (12, 'FMUP student',9,'App\Student', 'FEUP');
+insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type", "university") values (13, 'ICBAS student',10,'App\Student', 'FEUP');
+insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type", "university") values (14, 'FFUP student',11,'App\Student', 'FEUP');
+insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type", "university") values (15, 'Sports student',12,'App\Student', 'FEUP');
+insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type", "university") values (16, 'FADEUP teacher',3,'App\Teacher', 'FEUP');
+insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type", "university") values (17, 'FMUP student',13,'App\Student', 'FEUP');
+insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type", "university") values (18, 'Pharmacy student',14,'App\Student', 'FEUP');
+insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type", "university") values (19, 'Sports student',15,'App\Student', 'FEUP');
+insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type", "university") values (20, 'Science student',16,'App\Student', 'FEUP');
+insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type", "university") values (21, 'FEP student',17,'App\Student', 'FEUP');
+insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type", "university") values (22, 'FEP teacher',4,'App\Teacher', 'FEUP');
+insert into public."regular_user" ("user_id", "personal_info","regular_userable_id","regular_userable_type", "university") values (23, 'Aefeup',1,'App\Organization', 'FEUP');
 
 
 insert into public."student" ("regular_user_id") values (1);
@@ -634,7 +635,7 @@ insert into public."teacher" ("regular_user_id") values (21);
 insert into public."organization" ("regular_user_id", "approval") values (22, TRUE);
 
 
-insert into public."event" ("organization_id", "name", "location", "date", "information") values (1, 'Evento de LBAW', 'Porto', '2021-04-29 17:45:00', 'general info');
+insert into public."event" ("organization_id", "name", "location", "date", "information") values (1, 'Evento de LBAW', 'Porto', '2020-06-29 17:45:00', 'general info');
 
 
 insert into public."group" ("name", "information", TYPE) values ('Grupo de LBAW', 'Grupo para os estudantes de LBAW', 'normal');

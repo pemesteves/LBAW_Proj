@@ -22,7 +22,7 @@
                             </ul>
                         </li>
                         <li>
-                            <h5 class="menu_title">Events</h5>
+                            <h5 class="menu_title">EnewMessagevents</h5>
                             <ul class="dl-submenu">
                                 @if (count($events) === 0)
                                     <small>No events</small>

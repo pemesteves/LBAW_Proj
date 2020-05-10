@@ -297,7 +297,7 @@ function messageAddedHandler(){
     window.location = '/';
     return;
   }
-
+  console.log(this.responseText);
   let message = JSON.parse(this.responseText);
 
   // Create the new message
@@ -309,8 +309,8 @@ function messageAddedHandler(){
   form.querySelector('textarea').value="";
 
   // Insert the new message
-  let messageFeed = toSelect.querySelector('section#messages_col');
-  messageFeed.appendChild(new_message);
+  //let messageFeed = toSelect.querySelector('section#messages_col');
+  //messageFeed.appendChild(new_message);
 }
 
 
@@ -338,7 +338,6 @@ function createCard(card) {
   return new_card;
 }
 
-/* TODO Convert Dates */
 function createPost(post){
   const date = new Date(post.date);
   let day;
@@ -390,7 +389,7 @@ function createPost(post){
                                         <h2 class="list-group-item" style="background-color: transparent; border:none;padding-top:0.2rem;padding-bottom:0.2rem">${post.regular_user.user.name}</h2>
                                     </div>
                                     <div class="row" style="background-color: transparent;">
-                                        <h3 class="list-group-item" style="background-color: transparent; border:none;padding-top:0.2rem;padding-bottom:0.2rem">`/*${author.uni}*/+`</h3>
+                                        <h3 class="list-group-item" style="background-color: transparent; border:none;padding-top:0.2rem;padding-bottom:0.2rem">${post.regular_user.university}</h3>
                                     </div>
                                 </div>
                                 <div class="col-sm-3" style="padding-top:0.2rem;padding-bottom:0.2rem; text-align: right; font-size: 1.25em;">
@@ -419,9 +418,6 @@ function createPost(post){
                                   <button class='delete' style=" background-color: white; border: 0;" > 
                                       Delete
                                   </button>
-                              </li>
-                              <li class="list-group-item options_entry" style="text-align: left;">
-                                  <button style="background-color: white; border: 0;">Report</button>
                               </li>
                           </ul>
                       </div>
@@ -466,7 +462,7 @@ function createPost(post){
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item" style="border:none;padding-top:0.2rem;padding-bottom:0.2rem">${post.regular_user.user.name}
                             </li>
-                            <li class="list-group-item" style="border:none;padding-top:0.2rem;padding-bottom:0.2rem">`/*{{ $post['uni'] }}*/+`</li>
+                            <li class="list-group-item" style="border:none;padding-top:0.2rem;padding-bottom:0.2rem">${post.regular_user.university}</li>
                             <li class="list-group-item" style="border:none;padding-top:0.2rem;padding-bottom:0.2rem">4 friends
                             </li>
                         </ul>
@@ -497,7 +493,6 @@ function createPost(post){
   return new_post;
 }
 
-/* TODO Get User Name */ 
 function createComment(comment){
   let new_comment = document.createElement('div');
   new_comment.classList.add('row', 'comment_container', 'comment_no_padding'); 
