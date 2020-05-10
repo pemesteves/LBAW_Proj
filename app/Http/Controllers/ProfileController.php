@@ -96,9 +96,13 @@ class ProfileController extends Controller{
   public function edit(Request $request){
     $user = Auth::user();
 
-    $input = $request->only('name');
+    //$input = $request->only('name');
+    $name = $request->input('name');
+    $university = $request->input('university');
+    $personal_info = $request->input('personal_info');
 
-    $user->update(['name' => $input['name']]);
+    $user->update(['name' => $name]);
+    $user->userable->update(['personal_info' => $personal_info, 'university' => $university]);
 
     return ProfileController::show_me();
   }

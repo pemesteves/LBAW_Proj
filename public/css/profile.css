@@ -55,3 +55,17 @@
     top: -10px;
     padding-bottom: 0;
 }
+
+#profile_card #personal_info_card, #profile_card textarea,
+#profile_card div.input_div input, #profile_card form button[type="submit"] {
+    max-width:100%; 
+    width: 100%;
+}
+
+#profile_card div.input_div > div {
+    padding-left: 0;
+}
+
+#profile_card form button[type="submit"] {
+    border-radius: 0;
+}
