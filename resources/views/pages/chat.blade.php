@@ -4,7 +4,6 @@
 
 
 <script src="https://js.pusher.com/5.0/pusher.min.js"></script>
-<script src="{{ asset('js/echo.iife.js') }}"></script>
 <script src="{{ asset('js/echo.js') }}"></script>
 <script>
 window.Echo = new Echo({
