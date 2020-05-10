@@ -24,7 +24,7 @@
                                             <h2 class="list-group-item" style="background-color: transparent; border:none;padding-top:0.2rem;padding-bottom:0.2rem"> {{ object_get($post->regularUser->user,"name") }}</h2>
                                         </div>
                                         <div class="row" style="background-color: transparent;">
-                                            <h3 class="list-group-item" style="background-color: transparent; border:none;padding-top:0.2rem;padding-bottom:0.2rem">{{ $post->uni }}</h3>
+                                            <h3 class="list-group-item" style="background-color: transparent; border:none;padding-top:0.2rem;padding-bottom:0.2rem">{{ object_get($post->regularUser,"university") }}</h3>
                                         </div>
                                     </div>
                                     <div class="col-sm-3" style="padding-top:0.2rem;padding-bottom:0.2rem; text-align: right; font-size: 1.25em;">
@@ -50,19 +50,22 @@
                             <span class="fa fa-ellipsis-v" ></span></button>
                             <div class="dropdown-menu options_menu" style="min-width:5rem">
                                 <ul class="list-group">
-                                    <li class="list-group-item options_entry" style="text-align: left;">
-                                        <button onclick="location.href='/posts/{{$post->post_id}}/edit'" style=" margin-left:auto; margin-right:auto; background-color: white; border: 0;">
-                                            Edit
-                                        </button>
-                                    </li>
-                                    <li class="list-group-item options_entry" style="text-align: left;">
-                                        <button class='delete' style=" background-color: white; border: 0;" > 
-                                            Delete
-                                        </button>
-                                    </li>
-                                    <li class="list-group-item options_entry" style="text-align: left;">
-                                        <button style="background-color: white; border: 0;">Report</button>
-                                    </li>
+                                    @if ( object_get($post->regularUser->user, "user_id") == Auth::user()->user_id)
+                                        <li class="list-group-item options_entry" style="text-align: left;">
+                                            <button onclick="location.href='/posts/{{$post->post_id}}/edit'" style=" margin-left:auto; margin-right:auto; background-color: white; border: 0;">
+                                                Edit
+                                            </button>
+                                        </li>
+                                        <li class="list-group-item options_entry" style="text-align: left;">
+                                            <button class='delete' style=" background-color: white; border: 0;" > 
+                                                Delete
+                                            </button>
+                                        </li>
+                                    @else
+                                        <li class="list-group-item options_entry" style="text-align: left;">
+                                            <button style="background-color: white; border: 0;">Report</button>
+                                        </li>
+                                    @endif
                                 </ul>
                             </div>
                         </div>
@@ -119,7 +122,7 @@
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item" style="border:none;padding-top:0.2rem;padding-bottom:0.2rem"> {{ object_get($post->regularUser->user,"name") }}
                             </li>
-                            <li class="list-group-item" style="border:none;padding-top:0.2rem;padding-bottom:0.2rem">{{ $post['uni'] }}</li>
+                            <li class="list-group-item" style="border:none;padding-top:0.2rem;padding-bottom:0.2rem">{{ object_get($post->regularUser, "university") }}</li>
                             <li class="list-group-item" style="border:none;padding-top:0.2rem;padding-bottom:0.2rem">4 friends
                             </li>
                         </ul>

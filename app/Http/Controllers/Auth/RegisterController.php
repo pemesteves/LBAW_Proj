@@ -78,6 +78,7 @@ class RegisterController extends Controller
         
         $regular_user = new RegularUser;
         $regular_user->user_id = $user->user_id;
+        $regular_user->university = $data['university'];
         $regular_user->save();
 
         

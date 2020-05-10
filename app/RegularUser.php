@@ -30,7 +30,7 @@ class RegularUser extends Model
      * @var array
      */
     protected $fillable = [
-        'personal_info', 
+        'personal_info', 'university',
     ];
 
     protected $with = ['user'];

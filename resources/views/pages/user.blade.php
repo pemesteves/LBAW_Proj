@@ -15,7 +15,7 @@
                     <h1 style="border: 0; font-size: 4.5rem;">{{ $user->user->name }}</h1>
                 </div>
                 <div class="row">
-                    <h2 style="border: 0; padding: 0">FEUP</h2>
+                    <h2 style="border: 0; padding: 0">{{$user->university}}</h2>
                 </div>
                 <div class="row">
                     <h2 style="border: 0; padding: 0;">
