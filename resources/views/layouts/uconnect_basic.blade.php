@@ -25,7 +25,7 @@
                 >
                     <?php if(!$is_admin){ ?>
                     <button type="button" class="btn btn-outline-light fa fa-bell"></button>
-                    <button type="button" class="btn btn-outline-light fa fa-envelope" onclick="window.location.href='./messages.php'"></button>
+                    <button type="button" class="btn btn-outline-light fa fa-envelope" onclick="window.location.href='/chats'"></button>
                     <?php } ?>
                     <button type="button" class="btn btn-outline-light" onclick="window.location.href='<?php if($is_admin) echo '/admin'; else echo '/users/me'; ?>'"
                         <?php if($is_admin){ ?>    

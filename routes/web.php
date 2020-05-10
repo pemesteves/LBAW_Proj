@@ -54,7 +54,7 @@ Route::post('/resetPass', 'Auth\ResetController@reset');
 
 
 //Feed
-Route::get('/feed' , 'FeedController@show');
+Route::get('/feed' , 'FeedController@show')->name('feed');
 
 //Profile
 Route::get('/users/me', 'ProfileController@show_me');
@@ -87,7 +87,8 @@ Route::get('/events/{event_id}/edit', 'EventController@show_edit');
 Route::post('/events/{event_id}', 'EventController@edit');
 
 //Chat
-Route::get('/chats/{chat_id}', 'ChatController@show');
+Route::get('/chats/{chat_id}', 'ChatController@show')->name('chats.show');
+Route::get('/chats', 'ChatController@get_chat');
 
 //Post
 Route::get('/posts/{post_id}', 'PostController@show');
