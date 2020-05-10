@@ -5,7 +5,7 @@
 <br>
     <div id="profile_card" class="container" style="padding-top: 1em; margin-bottom: 0; background-color: white; border: 1px solid lightgrey;">
         <div class="row">
-            <div class="col-4">
+            <div class="col-3">
                 <div class="text-center" style="max-width: 75%; max-height: 80%;">
                     <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" alt="" class="rounded-circle" style="max-width:100%; max-height: 50%;"/>
                 </div>
@@ -48,6 +48,32 @@
                             </button>
                         @endif
                     @endif
+                </div>
+            </div>
+            <div class="col-sm-1">
+                <div class="btn-group dropleft" style="margin-right: 0; padding-right: 0; width: 100%">
+                    <button type="button" data-toggle="dropdown" style="font-size: 150%; margin-right: 0; padding-right: 0; width: 100%; background-color: white; border: 0;"> 
+                    <span class="fa fa-ellipsis-v" ></span></button>
+                    <div class="dropdown-menu options_menu" style="min-width:5rem">
+                        <ul class="list-group">
+                            @if (Auth::user()->user_id == $user->user_id)
+                                <li class="list-group-item options_entry" style="text-align: left;">
+                                    <button onclick="location.href='/users/me/edit'" style=" margin-left:auto; margin-right:auto; background-color: white; border: 0;">
+                                        Edit
+                                    </button>
+                                </li>
+                                <li class="list-group-item options_entry" style="text-align: left;">
+                                    <button class='delete' style=" background-color: white; border: 0;" > 
+                                        Delete
+                                    </button>
+                                </li>
+                            @else
+                                <li class="list-group-item options_entry" style="text-align: left;">
+                                    <button style="background-color: white; border: 0;">Report</button>
+                                </li>
+                            @endif
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

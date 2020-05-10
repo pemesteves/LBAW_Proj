@@ -40,7 +40,7 @@ class ProfileController extends Controller{
                       ])
                       ->get();
 
-      return view('pages.user_me' , ['is_admin' => false , 'posts' => $posts , 'groups' => $groups, 'friends' => $friends, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
+      return view('pages.user' , ['is_admin' => false , 'user' => Auth::user()->userable, 'posts' => $posts , 'groups' => $groups, 'friends' => $friends, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
   }
 
   public function show_me_edit(){
