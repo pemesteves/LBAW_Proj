@@ -57,4 +57,8 @@ class RegularUser extends Model
         return $this->belongsToMany('App\Group','user_in_group','user_id','group_id');
     }
 
+    public function chats(){
+        return $this->belongsToMany('App\Chat', 'user_in_chat', 'user_id', 'chat_id');
+    }
+
 }
