@@ -6,7 +6,7 @@
  */
 
 require('./bootstrap');
-
+/*
 import EchoLibrary from "laravel-echo"
 
 window.Echo = new EchoLibrary({
@@ -17,7 +17,7 @@ window.Echo = new EchoLibrary({
     encrypted: true,
     wsPort: 6001
 });
-
+*/
 // Echo.channel('chat.1')
 //     .listen('NewMessage', (e) => {
 //         console.log(e);

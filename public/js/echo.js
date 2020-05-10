@@ -835,5 +835,3 @@ class Echo {
         }
     }
 }
-
-module.exports = Echo;
