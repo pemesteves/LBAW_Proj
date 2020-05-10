@@ -32,6 +32,23 @@
                     @endswitch
                     </h2>
                 </div>
+                <div class="row">
+                    @if(Auth::user()->user_id != $user->user_id)
+                        @if(count($friendship_status) == 0)
+                        <button type="button" class="btn btn-light add_friend" style="margin-left: auto; margin-right:5%;background-color: rgba(0,0,150,.03); ">
+                            Add Friend
+                        </button>
+                        @elseif($friendship_status[0]->type == 'accepted')
+                            <button type="button" class="btn btn-light remove_friend" style="margin-left: auto; margin-right:5%;background-color: rgba(0,0,150,.03); ">
+                                Remove Friend
+                            </button>
+                        @elseif($friendship_status[0]->type == 'pending')
+                            <button type="button" class="btn btn-light cancel_friend" style="margin-left: auto; margin-right:5%;background-color: rgba(0,0,150,.03); ">
+                                Cancel Request
+                            </button>
+                        @endif
+                    @endif
+                </div>
             </div>
         </div>
         <div class="row">
@@ -99,30 +116,30 @@
         </div>
     </div>
     <div class="col-sm-8" style="flex-grow:1;max-width:100%">
-
-        <form id="post_form" class="new_post">
-            <div class="container" id="post_container">
-                @csrf
-                <input id="post_title" name="title" type="text" required="required" placeholder="Title"/>
-                <textarea id="post_text" name="body" class="form-control" required placeholder="Write here..." rows="3"></textarea>
-                <div id="post_form_lower">
-                    <div id="post_upload">
-                        <div>
-                            <p class="fa fa-plus">&ensp;image</p>
-                            <input type="file"/>
+        @if(Auth::user()->user_id == $user->user_id)
+            <form id="post_form" class="new_post">
+                <div class="container" id="post_container">
+                    @csrf
+                    <input id="post_title" name="title" type="text" required="required" placeholder="Title"/>
+                    <textarea id="post_text" name="body" class="form-control" required placeholder="Write here..." rows="3"></textarea>
+                    <div id="post_form_lower">
+                        <div id="post_upload">
+                            <div>
+                                <p class="fa fa-plus">&ensp;image</p>
+                                <input type="file"/>
+                            </div>
+                            <div>
+                                    <p class="fa fa-plus">&ensp;file</p>
+                                    <input type="file"/>
+                            </div>  
                         </div>
                         <div>
-                                <p class="fa fa-plus">&ensp;file</p>
-                                <input type="file"/>
-                        </div>  
-                    </div>
-                    <div>
-                        <button id="post_form_post" type="submit">Post</button> 
+                            <button id="post_form_post" type="submit">Post</button> 
+                        </div>
                     </div>
                 </div>
-            </div>
-        </form>
-
+            </form>
+        @endif
             
         @each('partials.post', $posts, 'post')
 
