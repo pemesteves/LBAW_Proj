@@ -2,6 +2,17 @@
 
 @section('content')
 
+<script src="https://js.pusher.com/5.0/pusher.min.js"></script>
+<script src="{{ asset('js/echo.js') }}"></script>
+<script>
+window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: '05ddfe6c26eaafb78b1b',
+    cluster: 'mt1',
+    forceTLS: true
+});
+</script>
+
 <article class="post" data-id="{{ $post->post_id }}">
     <div class="modal-dialog" role="document" style="overflow: initial; max-width: 90%; width: 90%; max-height: 90%; height: 90%">
         <div class="modal-content" style="height: 100%;">
