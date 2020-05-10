@@ -419,9 +419,6 @@ function createPost(post){
                                       Delete
                                   </button>
                               </li>
-                              <li class="list-group-item options_entry" style="text-align: left;">
-                                  <button style="background-color: white; border: 0;">Report</button>
-                              </li>
                           </ul>
                       </div>
                   </div>

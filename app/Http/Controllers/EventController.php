@@ -27,7 +27,14 @@ class EventController extends Controller{
 
       $going = $event->going();
 
-      return view('pages.event' , ['is_admin' => false , 'event' => $event, 'posts' => $posts, 'going' => $going, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization' ]);
+      $can_create_events  = Auth::user()->userable->regular_userable_type === 'App\Organization';
+
+      $owner = false;
+      if($can_create_events && Auth::user()->userable->regular_userable->organization_id === $event->organization_id){
+          $owner = true;
+      }
+
+      return view('pages.event' , ['is_admin' => false , 'event' => $event, 'posts' => $posts, 'going' => $going, 'can_create_events' => $can_create_events, 'is_owner' => $owner ]);
     }
 
     public function showCreateForm(){
