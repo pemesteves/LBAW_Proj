@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 use App\Comment;
+use App\Events\NewComment;
 
 class CommentController extends Controller{
 
@@ -27,7 +28,9 @@ class CommentController extends Controller{
       $comment->save();
 
       //Gets useful information about the comment
-      $new_comment = Comment::take(1)->where("comment_id", '=', $comment["comment_id"])->get(); 
+      $new_comment = Comment::take(1)->where("comment_id", '=', $comment["comment_id"])->get();
+      
+      broadcast(new NewComment($comment))->toOthers();
 
       return $new_comment[0];
     }

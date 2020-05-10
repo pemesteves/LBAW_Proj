@@ -281,7 +281,7 @@ function commentAddedHandler(){
   form.querySelector('textarea').value="";
 
   // Insert the new comment
-  form.parentElement.insertBefore(new_comment, form.nextSibling);
+  //form.parentElement.insertBefore(new_comment, form.nextSibling);
 
   let feedback = document.getElementById('feedback');
   feedback.innerHTML = `<div class="alert alert-success alert-dismissible fade show" role="alert">

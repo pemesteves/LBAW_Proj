@@ -2,8 +2,8 @@
 
 namespace App\Events;
 
-use App\Chat;
-use App\Message;
+use App\Post;
+use App\Comment;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
