@@ -22,10 +22,7 @@ class GroupController extends Controller{
 
       $this->authorize('show', $group);
 
-      $posts = Post::join('group','group.group_id','=', 'post.group_id')
-                     ->where('group.group_id', '=',  $id)
-                     ->orderBy('date','desc')
-                     ->get();
+      $posts = $group->posts;
 
       $members = $group->members();
 

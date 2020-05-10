@@ -20,10 +20,7 @@ class EventController extends Controller{
       if(!isset($event))
         throw new HttpException(404, "event");
 
-      $posts = Post::join('event','post.event_id','=', 'event.event_id')
-                     ->where('event.event_id', '=',  $id)
-                     ->orderBy('event.date','desc')
-                     ->get();
+      $posts = $event->posts;
 
       $going = $event->going();
 

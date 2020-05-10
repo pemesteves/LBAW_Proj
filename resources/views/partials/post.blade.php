@@ -29,7 +29,6 @@
                                     </div>
                                     <div class="col-sm-3" style="padding-top:0.2rem;padding-bottom:0.2rem; text-align: right; font-size: 1.25em;">
                                         <p class="card-text" style="margin-bottom:0rem">{{date('d-m-Y', strtotime($post->date))}}</p>
-                                        <?php error_log($post) ?>
                                         <p class="card-text">{{date('H:i', strtotime($post->date))}}</p>
                                     </div>
                                 </div>
