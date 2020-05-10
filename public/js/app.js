@@ -309,8 +309,8 @@ function messageAddedHandler(){
   form.querySelector('textarea').value="";
 
   // Insert the new message
-  let messageFeed = toSelect.querySelector('section#messages_col');
-  messageFeed.appendChild(new_message);
+  //let messageFeed = toSelect.querySelector('section#messages_col');
+  //messageFeed.appendChild(new_message);
 }
 
 

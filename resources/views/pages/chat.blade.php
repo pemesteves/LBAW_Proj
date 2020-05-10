@@ -55,8 +55,9 @@ window.Echo = new Echo({
                         <script>
                             window.Echo.channel('chat.{{$chat->chat_id}}')
                             .listen('NewMessage', (e) => {
+                                var idUser = {{Auth::id()}}
                                 let new_message = document.createElement("P");
-                                if (1 == e.message.sender_id) {
+                                if (idUser == e.message.sender_id) {
                                     new_message.className = "chat_my_message";
                                 }                        
                                 else {
