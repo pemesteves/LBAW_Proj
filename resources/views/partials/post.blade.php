@@ -95,6 +95,55 @@
                         </form>
                         <div class="comments">
                             @each("partials.comment" , $post->comments, "comment")
+
+                            <script>
+                            window.Echo.channel('post.{{$post->post_id}}')
+                            .listen('NewComment', (e) => {
+
+                                let new_comment = document.createElement('div');
+                                new_comment.classList.add('row', 'comment_container', 'comment_no_padding'); 
+                                new_comment.setAttribute('data-id',e.comment.comment_id);
+
+                                new_comment.innerHTML = `<div class="col-2 comment_user_info" >
+                                    <div class="row">   
+                                        <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" class="mx-auto d-block" alt="..." style="border-radius:50%; max-width:2rem; "  onclick="window.location.href='./users/${e.comment.user.user_id}'">
+                                    </div>
+                                    <div class="row">
+                                        <h4 style="font-size: 1em; margin: 0 auto;">${e.comment.user.name}</h4>
+                                    </div>
+                                </div>
+                                <div class="col-9 comment_text">
+                                    <p>${e.comment.body}</p>
+                                </div>
+                                <div>
+                                    <div class="btn-group dropright" style="margin-right: 0; padding-right: 0; width: 100%">
+                                        <button type="button" data-toggle="dropdown" style="font-size: 150%; margin-right: 0; padding-right: 0; width: 100%; background-color: white; border: 0;"> 
+                                        <span class="fa fa-ellipsis-v" ></span></button>
+                                        <div class="dropdown-menu options_menu" style="min-width:5rem">
+                                            <ul class="list-group">
+                                                <li class="list-group-item options_entry" style="text-align: left;">
+                                                    <button class='comment_edit' style=" margin-left:auto; margin-right:auto; background-color: white; border: 0;">
+                                                        Edit
+                                                    </button>
+                                                </li>
+                                                <li class="list-group-item options_entry" style="text-align: left;">
+                                                    <button class='comment_delete' style=" background-color: white; border: 0;" > 
+                                                        Delete
+                                                    </button>
+                                                </li>
+                                                <li class="list-group-item options_entry" style="text-align: left;">
+                                                    <button style="background-color: white; border: 0;">
+                                                        Report
+                                                    </button>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>`;
+
+                                document.getElementsByClassName("comments")[0].insertBefore(new_comment, document.getElementsByClassName("comments")[0].firstChild);
+                            });
+                        </script>
                         </div>
                     </div>
                 </div>
