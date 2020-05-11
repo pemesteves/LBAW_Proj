@@ -15,6 +15,7 @@ use App\Post;
 use App\RegularUser;
 use App\User;
 use Exception;
+use Illuminate\Support\Facades\Input;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class ProfileController extends Controller{
@@ -101,16 +102,19 @@ class ProfileController extends Controller{
    * Edits the user profile
    */
   public function edit(Request $request){
-    $user = Auth::user();
+    if(!Auth::check()) return redirect('/login');
 
-    //$input = $request->only('name');
-    $name = $request->input('name');
-    $university = $request->input('university');
-    $personal_info = $request->input('personal_info');
+    DB::transaction(function(){
+      $user = Auth::user();
 
-    $user->update(['name' => $name]);
-    $user->userable->update(['personal_info' => $personal_info, 'university' => $university]);
+      $name = Input::get('name');
+      $university = Input::get('university');
+      $personal_info = Input::get('personal_info');
 
+      $user->update(['name' => $name]);
+      $user->userable->update(['personal_info' => $personal_info, 'university' => $university]);
+    });
+    
     return ProfileController::show_me();
   }
 
