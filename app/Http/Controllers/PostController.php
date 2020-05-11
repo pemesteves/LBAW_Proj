@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 use App\Post;
+use App\Report;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class PostController extends Controller{
@@ -120,6 +121,27 @@ class PostController extends Controller{
     public function createInEvent(Request $request, $id)
     {
       return $this->createPost($request,null,$id);
+    }
+
+    /**
+     * Report a post.
+     *
+     * @return Post The post created.
+     */
+    public function report(Request $request, $id)
+    { 
+      $title = $request->input('title');
+      $description = $request->input('description');
+      $reporter_id = Auth::user()->userable->regular_user_id;
+
+      $report = new Report();
+      $report->title = $title;
+      $report->reason = $description;
+      $report->reporter_id = $reporter_id;
+      $report->reported_post_id = $id;
+
+      $report->save();
+      return $report;
     }
 
 

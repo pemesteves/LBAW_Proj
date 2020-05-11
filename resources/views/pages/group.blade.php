@@ -38,7 +38,7 @@
                         <div class="btn-group dropleft" style="margin-right: 0; padding-right: 0; width: 100%">
                             <button type="button" data-toggle="dropdown" style="font-size: 150%; margin-right: 0; padding-right: 0; width: 100%; background-color: white; border: 0;"> 
                             <span class="fa fa-ellipsis-v" ></span></button>
-                            <div class="dropdown-menu options_menu" style="min-width:5rem">
+                            <div class="dropdown-menu options_menu" id="group_menu_options" style="min-width:5rem">
                                 <ul class="list-group">
                                     @if ($is_owner)
                                         <li class="list-group-item options_entry" style="text-align: left;">
@@ -51,9 +51,11 @@
                                                 Delete
                                             </button>
                                         </li>
-                                    @else
+                                    
                                         <li class="list-group-item options_entry" style="text-align: left;">
-                                            <button style="background-color: white; border: 0;">Report</button>
+                                            <button class='report' style=" background-color: white; border: 0;" data-id='{{$group->group_id}}' > 
+                                                Report
+                                            </button>
                                         </li>
                                     @endif
                                 </ul>
