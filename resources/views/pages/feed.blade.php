@@ -2,6 +2,19 @@
 
 @section('content')
 
+<script src="https://js.pusher.com/5.0/pusher.min.js"></script>
+<script src="{{ asset('js/echo.js') }}"></script>
+<script>
+window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: '05ddfe6c26eaafb78b1b',
+    cluster: 'mt1',
+    forceTLS: true
+});
+</script>
+
+<meta name="csrf-token" content="{{ csrf_token() }}" />
+
 <div class="container" style="margin:0; min-width:100%">
         <div class="row">
             <div class="col-sm-2" style="padding-left:0px">
@@ -22,7 +35,7 @@
                             </ul>
                         </li>
                         <li>
-                            <h5 class="menu_title">EnewMessagevents</h5>
+                            <h5 class="menu_title">Events</h5>
                             <ul class="dl-submenu">
                                 @if (count($events) === 0)
                                     <small>No events</small>
@@ -80,7 +93,7 @@
                     </div>
                 </form>
 
-                    
+
                 @each('partials.post', $posts, 'post')
 
             </div>
