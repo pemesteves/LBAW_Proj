@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Post;
 use App\Report;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Illuminate\Support\Facades\Session;
+
 
 class PostController extends Controller{
 
@@ -89,6 +91,8 @@ class PostController extends Controller{
       $body = $request->input('body');
 
       $post->update(['title' => $title, 'body' => $body]);
+
+      Session::flash("success_message", "Post updated successfully.");
 
       return PostController::show($post_id);
     }

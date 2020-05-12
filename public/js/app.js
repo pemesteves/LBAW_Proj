@@ -57,13 +57,14 @@ function encodeForAjax(data) {
   }).join('&');
 }
 
-function sendAjaxRequest(method, url, data, handler) {
+function sendAjaxRequest(method, url, data, successHandler, errorHandler) {
   let request = new XMLHttpRequest();
 
   request.open(method, url, true);
   request.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="csrf-token"]').content);
   request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-  request.addEventListener('load', handler);
+  request.addEventListener('load', successHandler);
+  request.addEventListener('error', errorHandler);
   request.send(encodeForAjax(data));
 }
 
@@ -101,7 +102,7 @@ function sendDeleteCardRequest(event) {
 function sendDeletePostRequest(event) {
   let id = this.closest('article').getAttribute('data-id');
 
-  sendAjaxRequest('delete', '/api/posts/' + id, null, postDeletedHandler);
+  sendAjaxRequest('delete', '/api/posts/' + id, null, postDeletedHandler, postDeleteErrorHandler);
 }
 
 
@@ -124,7 +125,7 @@ function sendReportPostRequest(event) {
   let description = modal.querySelector("#report_description").value;
   modal.querySelector("#report_description").value = "";
   $('#reportModal').modal('hide')
-  sendAjaxRequest('put', '/api/posts/' + id + '/report', {'title' : title, 'description' : description}, postReportedHandler);
+  sendAjaxRequest('put', '/api/posts/' + id + '/report', {'title' : title, 'description' : description}, postReportedHandler, postReportErrorHandler);
 }
 
 function sendCreateCardRequest(event) {
@@ -154,7 +155,7 @@ function sendCreatePostRequest(event){
     resource = '/api/posts/';
 
   if(title != '' && body != '')
-    sendAjaxRequest('put', resource, {title: title, body: body}, postAddedHandler);
+    sendAjaxRequest('put', resource, {title: title, body: body}, postAddedHandler, postAddErrorHandler);
   
   event.preventDefault();
   return false;
@@ -166,7 +167,7 @@ function sendCreateCommentRequest(event){
   let id = this.closest('article').getAttribute('data-id');
 
   if(body != '')
-    sendAjaxRequest('put', '/api/posts/'+id+'/comment', {body: body}, commentAddedHandler);
+    sendAjaxRequest('put', '/api/posts/'+id+'/comment', {body: body}, commentAddedHandler, commentAddErrorHandler);
 
   event.preventDefault();
   return false;
@@ -219,7 +220,10 @@ function itemDeletedHandler() {
 }
 
 function postDeletedHandler() {
-  if (this.status != 200) window.location = '/';
+  if (this.status != 200) {
+    addErrorFeedback("Failed to delete post.");
+    return;
+  }
   let post = JSON.parse(this.responseText);
   let element = document.querySelector('article.post[data-id="'+ post.post_id + '"]');
   //let parentElement = element.parentElement;
@@ -230,16 +234,24 @@ function postDeletedHandler() {
 
 }
 
+function postDeleteErrorHandler() {
+  addErrorFeedback("Failed to delete post.");
+}
+
 function postReportedHandler() {
   if (this.status !== 201 && this.status !== 200) {
-    window.location = '/';
+    addErrorFeedback("Failed to report post.");
     return;
   }
   let post = JSON.parse(this.responseText);
   //$('#popup-'+post.post_id).modal('hide');
 
-  addFeedback("Post reported sucessfully");
+  addFeedback("Post reported sucessfully.");
 
+}
+
+function postReportErrorHandler() {
+  addErrorFeedback("Failed to report post.");
 }
 
 function cardDeletedHandler() {
@@ -271,7 +283,7 @@ function cardAddedHandler() {
 
 function postAddedHandler() {
   if (this.status !== 201 && this.status !== 200) {
-    window.location = '/';
+    addErrorFeedback("Failed to add post.");
     return;
   }
   
@@ -294,9 +306,13 @@ function postAddedHandler() {
   addFeedback("Post added successfully.")
 }
 
+function postAddErrorHandler() {
+  addErrorFeedback("Failed to add post.");
+}
+
 function commentAddedHandler(){
   if (this.status != 200 && this.status != 201){
-    window.location = '/';
+    addErrorFeedback("Failed to add comment.");
     return;
   }
 
@@ -314,6 +330,10 @@ function commentAddedHandler(){
   //form.parentElement.insertBefore(new_comment, form.nextSibling);
 
   addFeedback("Comment added successfully.")
+}
+
+function commentAddErrorHandler() {
+  addErrorFeedback("Failed to add comment.");
 }
 
 function messageAddedHandler(){
@@ -593,6 +613,16 @@ function createItem(item) {
 function addFeedback(message){
   let feedback = document.getElementById('feedback');
   feedback.innerHTML = `<div class="alert alert-success alert-dismissible fade show" role="alert">
+                              ${message}
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                              </button>
+                          </div>`; 
+}
+
+function addErrorFeedback(message){
+  let feedback = document.getElementById('feedback');
+  feedback.innerHTML = `<div class="alert alert-danger alert-dismissible fade show" role="alert">
                               ${message}
                               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                   <span aria-hidden="true">&times;</span>
