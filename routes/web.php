@@ -27,6 +27,7 @@ Route::delete('api/item/{id}', 'ItemController@delete');
 
 Route::put('/api/posts' , 'PostController@create');
 Route::delete('api/posts/{id}', 'PostController@delete');
+Route::put('api/posts/{id}/report', 'PostController@report');
 Route::put('/api/posts/{id}/comment', 'CommentController@create');
 Route::delete('api/comments/{id}', 'CommentController@delete');
 Route::put('api/comments/{id}/edit' , 'CommentController@update');
@@ -83,6 +84,7 @@ Route::put('/api/groups/{id}/posts', 'PostController@createInGroup');
 
 Route::get('/groups/{group_id}/edit', 'GroupController@show_edit');
 Route::post('/groups/{group_id}', 'GroupController@edit');
+Route::put('api/groups/{id}/report', 'GroupController@report');
 
 //Event
 Route::get('/events/create', 'EventController@showCreateForm');
@@ -93,6 +95,7 @@ Route::put('/api/events/{id}/posts', 'PostController@createInEvent');
 
 Route::get('/events/{event_id}/edit', 'EventController@show_edit');
 Route::post('/events/{event_id}', 'EventController@edit');
+Route::put('api/events/{id}/report', 'EventController@report');
 
 //Chat
 Route::get('/chats/{chat_id}', 'ChatController@show')->name('chats.show');

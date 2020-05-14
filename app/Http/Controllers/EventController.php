@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 use App\Post;
+use App\Report;
 use App\Event;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
@@ -98,4 +99,27 @@ class EventController extends Controller{
 
       return EventController::show($event->event_id);
     }
+
+    /**
+     * Report a event.
+     *
+     * @return Post The event reported.
+     */
+    public function report(Request $request, $id)
+    { 
+      $title = $request->input('title');
+      $description = $request->input('description');
+      $reporter_id = Auth::user()->userable->regular_user_id;
+
+      $report = new Report();
+      $report->title = $title;
+      $report->reason = $description;
+      $report->reporter_id = $reporter_id;
+      $report->reported_event_id = $id;
+
+      $report->save();
+      return $report;
+    }
+
+
 }

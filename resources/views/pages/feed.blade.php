@@ -93,8 +93,11 @@ window.Echo = new Echo({
                     </div>
                 </form>
 
-
-                @each('partials.post', $posts, 'post')
+                @if (count($posts) === 0)
+                    <h4 style="text-align:center">No posts to see, let's make friends!</h4>
+                @else
+                    @each('partials.post', $posts, 'post')
+                @endif
 
             </div>
             <div class="col-sm-2">

@@ -41,6 +41,12 @@ function addEventListeners() {
   [].forEach.call(messageCreators, function(creator){
    creator.addEventListener('submit', sendCreateMessageRequest);
   });
+
+  let postReporters = document.querySelectorAll('article.post button.report');
+  [].forEach.call(postReporters, function(reporter) {
+    reporter.addEventListener('click', openReportPostModal);
+  });
+
 }
 
 
@@ -96,6 +102,29 @@ function sendDeletePostRequest(event) {
   let id = this.closest('article').getAttribute('data-id');
 
   sendAjaxRequest('delete', '/api/posts/' + id, null, postDeletedHandler);
+}
+
+
+function openReportPostModal(event){
+  let id = this.closest('article').getAttribute('data-id');
+  $('#reportModal').modal('show')
+  let modal = document.querySelector('#reportModal');
+  modal.querySelector('#reportModalLabel').innerHTML = "Report post"
+  modal.querySelector("#report_id").value = id;
+  modal.querySelector(".sendReport").addEventListener('click' , sendReportPostRequest);
+}
+
+
+function sendReportPostRequest(event) {
+  let modal = this.closest('#reportModal');
+  let id = modal.querySelector("#report_id").value;
+  modal.querySelector("#report_id").value = ""
+  let title = modal.querySelector("#report_title").value;
+  modal.querySelector("#report_title").value = "";
+  let description = modal.querySelector("#report_description").value;
+  modal.querySelector("#report_description").value = "";
+  $('#reportModal').modal('hide')
+  sendAjaxRequest('put', '/api/posts/' + id + '/report', {'title' : title, 'description' : description}, postReportedHandler);
 }
 
 function sendCreateCardRequest(event) {
@@ -197,13 +226,20 @@ function postDeletedHandler() {
   $('#popup-'+post.post_id).modal('hide');
   element.remove();
 
-  let feedback = document.getElementById('feedback');
-  feedback.innerHTML = `<div class="alert alert-success alert-dismissible fade show" role="alert">
-                              Post deleted successfully.
-                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                              </button>
-                          </div>`; 
+  addFeedback("Post deleted sucessfully");
+
+}
+
+function postReportedHandler() {
+  if (this.status !== 201 && this.status !== 200) {
+    window.location = '/';
+    return;
+  }
+  let post = JSON.parse(this.responseText);
+  //$('#popup-'+post.post_id).modal('hide');
+
+  addFeedback("Post reported sucessfully");
+
 }
 
 function cardDeletedHandler() {
@@ -255,13 +291,7 @@ function postAddedHandler() {
   let postDeleter = new_post.querySelector('button.delete');
   postDeleter.addEventListener('click', sendDeletePostRequest);
 
-  let feedback = document.getElementById('feedback');
-  feedback.innerHTML = `<div class="alert alert-success alert-dismissible fade show" role="alert">
-                              Post added successfully.
-                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                              </button>
-                          </div>`;
+  addFeedback("Post added successfully.")
 }
 
 function commentAddedHandler(){
@@ -283,13 +313,7 @@ function commentAddedHandler(){
   // Insert the new comment
   //form.parentElement.insertBefore(new_comment, form.nextSibling);
 
-  let feedback = document.getElementById('feedback');
-  feedback.innerHTML = `<div class="alert alert-success alert-dismissible fade show" role="alert">
-                              Comment added successfully.
-                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                              </button>
-                          </div>`;
+  addFeedback("Comment added successfully.")
 }
 
 function messageAddedHandler(){
@@ -564,5 +588,17 @@ function createItem(item) {
 
   return new_item;
 }
+
+
+function addFeedback(message){
+  let feedback = document.getElementById('feedback');
+  feedback.innerHTML = `<div class="alert alert-success alert-dismissible fade show" role="alert">
+                              ${message}
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                              </button>
+                          </div>`; 
+}
+
 
 addEventListeners();

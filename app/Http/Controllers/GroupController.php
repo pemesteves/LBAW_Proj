@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Post;
 use App\Group;
+use App\Report;
 use Illuminate\Support\Facades\Input;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
@@ -95,5 +96,26 @@ class GroupController extends Controller{
       $group->update(['name' => $name, 'information' => $information]);
 
       return GroupController::show($group->group_id);
+    }
+
+    /**
+     * Report a group.
+     *
+     * @return Group The group reported.
+     */
+    public function report(Request $request, $id)
+    { 
+      $title = $request->input('title');
+      $description = $request->input('description');
+      $reporter_id = Auth::user()->userable->regular_user_id;
+
+      $report = new Report();
+      $report->title = $title;
+      $report->reason = $description;
+      $report->reporter_id = $reporter_id;
+      $report->reported_group_id = $id;
+
+      $report->save();
+      return $report;
     }
 }

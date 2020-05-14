@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 use App\Post;
+use App\Report;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class PostController extends Controller{
@@ -53,7 +54,10 @@ class PostController extends Controller{
       $post = Post::find($post_id);
       if(!isset($post))
         throw new HttpException(404, "post");
-
+      $report = Report::where("reported_post_id",$post_id)->where("approval","true")->get();
+      if(count($report) > 0)
+        throw new HttpException(404, "post");
+        
       return view('pages.post' , ['is_admin' => false , 'post' => $post, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
     }
 
@@ -120,6 +124,27 @@ class PostController extends Controller{
     public function createInEvent(Request $request, $id)
     {
       return $this->createPost($request,null,$id);
+    }
+
+    /**
+     * Report a post.
+     *
+     * @return Post The post created.
+     */
+    public function report(Request $request, $id)
+    { 
+      $title = $request->input('title');
+      $description = $request->input('description');
+      $reporter_id = Auth::user()->userable->regular_user_id;
+
+      $report = new Report();
+      $report->title = $title;
+      $report->reason = $description;
+      $report->reporter_id = $reporter_id;
+      $report->reported_post_id = $id;
+
+      $report->save();
+      return $report;
     }
 
 
