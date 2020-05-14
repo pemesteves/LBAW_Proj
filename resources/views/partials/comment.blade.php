@@ -1,7 +1,7 @@
 
 <div class="row comment_container 
     <?= $comment['padding_left'] != 0 ? 'comment_padding' : 'comment_no_padding' ?>"
-    data-id="{{ $comment->comment_id }}" >
+    data-id="{{ $comment->comment_id }}" id="comment_{{ $comment->comment_id }}">
     <div class="col-2 comment_user_info" >
         <div class="row">   
             <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" class="mx-auto d-block" alt="..." style="border-radius:50%; max-width:2rem; "  onclick="window.location.href='./profile.php'">

@@ -27,9 +27,12 @@ class ProfileController extends Controller{
   public function show_me(){
       if (!Auth::check()) return redirect('/login');
 
-      $posts = Post::join('user','post.author_id','=', 'user_id')
+      $posts = Post::join('regular_user','post.author_id','=', 'user_id')
                       ->where('user_id', '=',  Auth::user()->userable->regular_user_id)
-                      ->orderBy('date','desc')
+                      ->leftJoin("report" , "post.post_id","report.reported_post_id")
+                      ->whereNull('report.approval')
+                      ->orderBy('post.date','desc')
+                      ->select("post.*")
                       ->get();
 
       $groups = Auth::user()->userable->groups;
@@ -47,9 +50,12 @@ class ProfileController extends Controller{
   public function show_me_edit(){
     if (!Auth::check()) return redirect('/login');
 
-    $posts = Post::join('user','post.author_id','=', 'user_id')
+    $posts = Post::join('regular_user','post.author_id','=', 'user_id')
                     ->where('user_id', '=',  Auth::user()->userable->regular_user_id)
-                    ->orderBy('date','desc')
+                    ->leftJoin("report" , "post.post_id","report.reported_post_id")
+                    ->whereNull('report.approval')
+                    ->orderBy('post.date','desc')
+                    ->select("post.*")
                     ->get();
 
     return view('pages.user_me_edit' , ['is_admin' => false , 'posts' => $posts, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization' ]);
@@ -68,9 +74,12 @@ class ProfileController extends Controller{
       throw new HttpException(404, "user");
 
 
-    $posts = Post::join('user','post.author_id','=', 'user_id')
+    $posts = Post::join('regular_user','post.author_id','=', 'user_id')
                     ->where('user_id', '=',  $id)
-                    ->orderBy('date','desc')
+                    ->leftJoin("report" , "post.post_id","report.reported_post_id")
+                    ->whereNull('report.approval')
+                    ->orderBy('post.date','desc')
+                    ->select("post.*")
                     ->get();
 
     $groups = $user->user->userable->groups;

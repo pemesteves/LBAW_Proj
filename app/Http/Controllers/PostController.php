@@ -54,7 +54,10 @@ class PostController extends Controller{
       $post = Post::find($post_id);
       if(!isset($post))
         throw new HttpException(404, "post");
-
+      $report = Report::where("reported_post_id",$post_id)->where("approval","true")->get();
+      if(count($report) > 0)
+        throw new HttpException(404, "post");
+        
       return view('pages.post' , ['is_admin' => false , 'post' => $post, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
     }
 

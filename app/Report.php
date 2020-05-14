@@ -68,7 +68,7 @@ class Report extends Model
         return "posts/" . $this->reported_post_id;
     if($this->reported_comment_id){
       $comment = Comment::where('comment_id',$this->reported_comment_id)->first();
-      return "posts/" . $comment->post_id;
+      return "posts/" . $comment->post_id . "#comment_" . $this->reported_comment_id;
     }
     if($this->reported_group_id)
       return "groups/" . $this->reported_group_id;
