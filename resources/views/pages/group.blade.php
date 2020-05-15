@@ -11,7 +11,7 @@
 
 @section('content')
 
-    <div id="group_card" class="card mb-3 border rounded">
+    <div id="group_card" class="container card mb-3 border rounded">
         <div class="row no-gutters">
             <div class="card text-center col-sm-3">
                 <img src="http://www.pluspixel.com.br/wp-content/uploads/services-socialmediamarketing-optimized.png" class="card-img-top mx-auto d-block" alt="..." style="border-radius:50%; max-width:8rem">
@@ -22,19 +22,17 @@
                         <div class="card-body">
                             <h1 class="card-title">{{ $group->name }}</h1>
                             <h2 class="card-subtitle">{{ $group->information }} </h2>
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <p class="card-text"><!--$members?>-->{{ $members }} members</p>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <p class="card-text" id="last_update"><span class="fa fa-history"></span>&nbsp;Updated <?= getUpdateDate($group->updated_at);?><!--2--> days ago</p>
-                                    </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <p class="card-text"><!--$members?>-->{{ $members }} members</p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p class="card-text" id="last_update"><span class="fa fa-history"></span>&nbsp;Updated <?= getUpdateDate($group->updated_at);?><!--2--> days ago</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-1">
+                    <div class="col-sm-1 d-print-none">
                         <div class="btn-group dropleft" style="margin-right: 0; padding-right: 0; width: 100%">
                             <button type="button" data-toggle="dropdown" style="font-size: 150%; margin-right: 0; padding-right: 0; width: 100%; background-color: white; border: 0;"> 
                             <span class="fa fa-ellipsis-v" ></span></button>
@@ -69,7 +67,7 @@
     
     <div class="col-sm-8" style="flex-grow:1;max-width:100%">
 
-        <form id="post_form" class="new_post">
+        <form id="post_form" class="new_post d-print-none">
             <div class="container" id="post_container">
                 @csrf
                 <input id="post_title" name="title" type="text" required="required" placeholder="Title"/>

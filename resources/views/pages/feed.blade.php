@@ -17,7 +17,7 @@ window.Echo = new Echo({
 
 <div id="feed_container" class="container" >
         <div class="row">
-            <div id="sidebar" class="col-sm-2">
+            <div id="sidebar" class="col-sm-2 d-print-none">
                 <div id="dl-menu" class="dl-menuwrapper">
                     <button id="dl-trigger" onclick="toggle()">Open Menu</button>
                     <ul id="dl-menu2">
@@ -72,7 +72,7 @@ window.Echo = new Echo({
             </div>
             <div id="posts_container" class="col-sm-8">
 
-                <form id="post_form" class="new_post">
+                <form id="post_form" class="new_post d-print-none">
                     <div class="container" id="post_container">
                         @csrf
                         <input id="post_title" name="title" type="text" required="required" placeholder="Title"/>
@@ -102,7 +102,7 @@ window.Echo = new Echo({
                 @endif
 
             </div>
-            <div class="col-sm-2">
+            <div class="col-sm-2 d-print-none">
 
             </div>
         </div>

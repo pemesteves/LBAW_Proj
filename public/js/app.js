@@ -592,7 +592,7 @@ function createItem(item) {
 
 function addFeedback(message){
   let feedback = document.getElementById('feedback');
-  feedback.innerHTML = `<div class="alert alert-success alert-dismissible fade show" role="alert">
+  feedback.innerHTML = `<div class="alert alert-success alert-dismissible fade show d-print-none" role="alert">
                               ${message}
                               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                   <span aria-hidden="true">&times;</span>

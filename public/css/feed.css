@@ -40,25 +40,3 @@ div#feed_container .post div.modal-dialog div.modal-content div.modal-header > d
     border-radius: 50%;     
     max-width: 7rem; 
 }
-
-/****************/
-/** Feed Print **/
-/****************/
-
-@media print {
-    div#feed_container div#sidebar {
-        display: none;
-    }
-
-    div#feed_container div#posts_container + div {
-        display: none;
-    } 
-
-    div#feed_container div#posts_container form#post_form {
-        display: none;
-    }
-
-    #feedback {
-        display: none;
-    }
-}
