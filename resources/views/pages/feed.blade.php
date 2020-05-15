@@ -35,6 +35,8 @@ window.Echo = new Echo({
                             </ul>
                         </li>
                         <li>
+
+
                             <h5 class="menu_title">Events</h5>
                             <ul class="dl-submenu">
                                 @if (count($events) === 0)
