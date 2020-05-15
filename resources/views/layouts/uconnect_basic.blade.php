@@ -42,18 +42,11 @@ window.Echo = new Echo({
                         <button class="btn btn-outline-light dropdown-toggle dropdown-toggle-split fa fa-bell" 
                             type="button" id="notificationDrop" data-toggle="dropdown" 
                             aria-haspopup="true" aria-expanded="false"></button>
-                        <div class="dropdown-menu dropdown-menu-lg-right" style=" min-width:350px;padding:0px" aria-labelledby="notificationDrop">
+                        <div class="dropdown-menu dropdown-menu-lg-right" style=" min-width:350px;padding:0px" aria-labelledby="notificationDrop" id="notif">
                             <p style='margin-left:10%;margin-top:auto;margin-bottom:auto' >Notifications</p>
                             <div class="dropdown-divider" style="margin-bottom:0px"></div>
                             <div style="max-height:200px;overflow-x: hidden;">
 
-                            <script>
-                                window.Echo.channel('notifiedUser.{{Auth::user()->userable->regular_user_id}}')
-                                .listen('NewNotification', (e) => {
-                                    console.log(e);
-                                });
-
-                            </script>
                             @if (count($notifications) == 0) 
                                 <p style='margin-left:10%;margin-top:auto;margin-bottom:auto' >No notifications yet</p>
                             @else
@@ -61,6 +54,36 @@ window.Echo = new Echo({
                             @endif
 
                             </div>
+
+                            <script>
+                                window.Echo.channel('notifiedUser.{{Auth::user()->userable->regular_user_id}}')
+                                .listen('NewNotification', (e) => {
+                                    let new_notification = document.createElement('div');
+                                    new_notification.classList.add('card', 'mb');
+                                    new_notification.setAttribute('style',"margin-bottom:0px;border-radius:0px;");
+
+                                    new_notification.innerHTML = ` 
+                                        <a href="${e.notification.link}" style="text-decoration: none; color:black">
+                                        <div class="row no-gutters">
+                                            <div class="col-sm">
+                                                <div class="card text-center" style="border-bottom:none;border-top:none;border-radius:0;height:100%;">
+                                                    <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" class="card-img-top mx-auto d-block" alt="..." style="border-radius:50%; max-width:3rem; padding:0.1rem">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8" style="flex-grow:1; max-width:100%; text-align: left;">
+                                                <div class="" style="margin-bottom: 0;padding-bottom: 0;">
+                                                    
+                                                    <p class="card-text small_post_body" style="margin-bottom:0;margin-left:0.2rem;">
+                                                        ${e.notification.description}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a> `
+                                    document.getElementById("notif").insertBefore(new_notification, document.getElementById("notif").childNodes[0].nextSibling);
+                                });
+
+                            </script>
                             
                         </div>
                     </div>
