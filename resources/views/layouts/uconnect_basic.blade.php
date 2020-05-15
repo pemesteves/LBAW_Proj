@@ -24,7 +24,26 @@
                     <?php }?>
                 >
                     <?php if(!$is_admin){ ?>
-                    <button type="button" class="btn btn-outline-light fa fa-bell"></button>
+                    
+                    <div class="btn-group">
+                        <button class="btn btn-outline-light dropdown-toggle dropdown-toggle-split fa fa-bell" 
+                            type="button" id="notificationDrop" data-toggle="dropdown" 
+                            aria-haspopup="true" aria-expanded="false"></button>
+                        <div class="dropdown-menu dropdown-menu-lg-right" style=" min-width:350px;padding:0px" aria-labelledby="notificationDrop">
+                            <p style='margin-left:10%;margin-top:auto;margin-bottom:auto' >Notifications</p>
+                            <div class="dropdown-divider" style="margin-bottom:0px"></div>
+                            <div style="max-height:200px;overflow-x: hidden;">
+
+                            @if (count($notifications) == 0) 
+                                <p style='margin-left:10%;margin-top:auto;margin-bottom:auto' >No notifications yet</p>
+                            @else
+                                @each("partials.notification",$notifications,"notification")
+                            @endif
+
+                            </div>
+                            
+                        </div>
+                    </div>
                     <button type="button" class="btn btn-outline-light fa fa-envelope" onclick="window.location.href='/chats'"></button>
                     <?php } ?>
                     <button type="button" class="btn btn-outline-light" onclick="window.location.href='<?php if($is_admin) echo '/admin'; else echo '/users/me'; ?>'"
@@ -36,22 +55,24 @@
                         {{ Auth::user()->name }} 
                     @endif
                     </button>
-                    <?php if(!$is_admin){ ?>    
-                    <button class="btn btn-outline-light dropdown-toggle dropdown-toggle-split" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                    <?php } ?>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">            
-                        <div class="navbar-nav">
-                            <a class="dropdown-item" href="#"><span class="fa fa-adjust"></span>&nbsp;&nbsp;Dark Mode</a>
-                            <a class="dropdown-item" href="/groups/create"><span class="fa fa-users"></span>&nbsp;Create Group</a>
-                            @if (isset($can_create_events) && $can_create_events)
-                                <a class="dropdown-item" href="/events/create"><span class="fa fa-calendar"></span>&nbsp;&nbsp;Create Event</a>
-                            @endif
-                            <a class="dropdown-item" href="/about"><span class="fa fa-info-circle"></span>&nbsp;&nbsp;About Us</a>
-                            <a class="dropdown-item" href="#"><span class="fa fa-cog"></span>&nbsp;&nbsp;Settings</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{{ url('/logout') }}"><span class="fa fa-sign-out"></span>&nbsp;Logout</a>
+                    <?php /*if(!$is_admin){*/ ?>    
+                        <div class="btn-group">
+                        <button class="btn btn-outline-light dropdown-toggle dropdown-toggle-split" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">            
+                                <div class="navbar-nav">
+                                    <a class="dropdown-item" href="#"><span class="fa fa-adjust"></span>&nbsp;&nbsp;Dark Mode</a>
+                                    <a class="dropdown-item" href="/groups/create"><span class="fa fa-users"></span>&nbsp;Create Group</a>
+                                    @if (isset($can_create_events) && $can_create_events)
+                                        <a class="dropdown-item" href="/events/create"><span class="fa fa-calendar"></span>&nbsp;&nbsp;Create Event</a>
+                                    @endif
+                                    <a class="dropdown-item" href="/about"><span class="fa fa-info-circle"></span>&nbsp;&nbsp;About Us</a>
+                                    <a class="dropdown-item" href="#"><span class="fa fa-cog"></span>&nbsp;&nbsp;Settings</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{{ url('/logout') }}"><span class="fa fa-sign-out"></span>&nbsp;Logout</a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    <?php /*}*/ ?>
                 </div>
             </nav>
 @endsection

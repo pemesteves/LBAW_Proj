@@ -49,12 +49,19 @@ class Notification extends Model
 
   ];
 
+  /**
+ * The user this notification belongs to
+ */
+  public function triggerUser() {
+    return $this->belongsTo('App\RegularUser' , 'origin_user_id');
+  }
+
 
   /**
    * The user this notification belongs to
    */
   public function users() {
-    return $this->belongsToMany('App\User' , 'notified_user', 'notification_id', 'user_notified')->withPivot('seen');
+    return $this->belongsToMany('App\RegularUser' , 'notified_user', 'notification_id', 'user_notified')->withPivot('seen');
   }
 
 

@@ -67,9 +67,6 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Chat', 'user_in_chat', 'user_id', 'chat_id');
     }
 
-    public function notifications() {
-        return $this->belongsToMany('App\Notification', 'notified_user', 'user_notified', 'notification_id' )->withPivot('seen');
-    }
 
     public function postsLiked(){
         return $this->belongsToMany('App\Post' , 'user_reaction' , 'user_id' , 'post_id')->withPivot('like_or_dislike');
