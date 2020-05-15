@@ -4,6 +4,8 @@ namespace App\Http\Traits;
 use Illuminate\Support\Facades\DB;
 
 use App\Notification;
+use App\Events\NewNotification;
+
 
 trait NotificationTrait {
 
@@ -18,6 +20,8 @@ trait NotificationTrait {
             ["notification_id" => $notification->notification_id , "user_notified" => $regular_user_id]
         );
 
+        broadcast(new NewNotification($notification))->toOthers();
+
         return;
     }
 
@@ -27,6 +31,7 @@ trait NotificationTrait {
 
         foreach($regular_user_ids as $id){
             array_push($arr,["notification_id" => $notification->notification_id , "user_notified" => $id]);
+            broadcast(new NewNotification($notification))->toOthers();
         }
 
         DB::table("notified_user")->insert(

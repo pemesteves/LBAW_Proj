@@ -3,6 +3,19 @@
 
 @section('nav_bar')
 
+<script src="https://js.pusher.com/5.0/pusher.min.js"></script>
+<script src="{{ asset('js/echo.js') }}"></script>
+<script>
+window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: '05ddfe6c26eaafb78b1b',
+    cluster: 'mt1',
+    forceTLS: true
+});
+</script>
+
+<meta name="csrf-token" content="{{ csrf_token() }}" />
+
 <nav class="navbar navbar-dark navbar-bar">
                 <a class="navbar-brand" href="/<?php if($is_admin) echo 'admin'; else echo 'feed';?>">
                     <h1>UConnect <span class="fa fa-graduation-cap"></span></h1>
@@ -34,6 +47,13 @@
                             <div class="dropdown-divider" style="margin-bottom:0px"></div>
                             <div style="max-height:200px;overflow-x: hidden;">
 
+                            <script>
+                                window.Echo.channel('notifiedUser.{{Auth::user()->userable->regular_user_id}}')
+                                .listen('NewNotification', (e) => {
+                                    console.log(e);
+                                });
+
+                            </script>
                             @if (count($notifications) == 0) 
                                 <p style='margin-left:10%;margin-top:auto;margin-bottom:auto' >No notifications yet</p>
                             @else
