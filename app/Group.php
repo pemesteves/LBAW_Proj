@@ -45,7 +45,7 @@ class Group extends Model
      * The posts this group owns.
      */
     public function posts() {
-      return $this->hasMany('App\Post', 'group_id', 'group_id');
+      return $this->hasMany('App\Post', 'group_id', 'group_id')->orderBy('date', 'desc');
     }
 
     /**
