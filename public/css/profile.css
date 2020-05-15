@@ -69,3 +69,17 @@
 #profile_card form button[type="submit"] {
     border-radius: 0;
 }
+
+@media print {
+    #profile_card div.btn-group.dropleft {
+        display: none;
+    }
+
+    #profile_card + div form {
+        display: none;
+    }
+    
+    #feedback {
+        display: none;
+    }
+}

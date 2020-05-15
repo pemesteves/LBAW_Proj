@@ -15,9 +15,9 @@ window.Echo = new Echo({
 
 <meta name="csrf-token" content="{{ csrf_token() }}" />
 
-<div class="container" style="margin:0; min-width:100%">
+<div id="feed_container" class="container" >
         <div class="row">
-            <div class="col-sm-2" style="padding-left:0px">
+            <div id="sidebar" class="col-sm-2">
                 <div id="dl-menu" class="dl-menuwrapper">
                     <button id="dl-trigger" onclick="toggle()">Open Menu</button>
                     <ul id="dl-menu2">
@@ -70,7 +70,7 @@ window.Echo = new Echo({
             
 
             </div>
-            <div class="col-sm-8" style="flex-grow:1;max-width:100%">
+            <div id="posts_container" class="col-sm-8">
 
                 <form id="post_form" class="new_post">
                     <div class="container" id="post_container">
