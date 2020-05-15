@@ -43,3 +43,9 @@
 #about_container div.row .card-body {
     padding: 20px;
 }
+
+@media print {
+    #about_container div.row .card-body {
+        height: 6em;
+    }
+}
