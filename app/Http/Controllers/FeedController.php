@@ -52,7 +52,7 @@ class FeedController extends Controller{
                     ->orderBy('date','desc')
                     ->get();
 
-            return view('pages.feed' , ['is_admin' => false , 'posts' => $posts , 'groups' => Auth::user()->userable->groups , 'notifications' => Auth::user()->notifications ,'events' => Auth::user()->events, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
+            return view('pages.feed' , ['is_admin' => false , 'posts' => $posts , 'groups' => Auth::user()->userable->groups , 'notifications' => Auth::user()->userable->notifications ,'events' => Auth::user()->events, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
         }
         else if(get_class($user->userable) == "App\Admin"){
 
