@@ -53,16 +53,16 @@ class RegularUser extends Model
         return $this->morphTo();
     }
 
-    public function notifications() {
-        return $this->belongsToMany('App\Notification', 'notified_user', 'user_notified', 'notification_id' )->withPivot('seen');
-    }
-
     public function groups(){
         return $this->belongsToMany('App\Group','user_in_group','user_id','group_id');
     }
 
     public function chats(){
         return $this->belongsToMany('App\Chat', 'user_in_chat', 'user_id', 'chat_id');
+    }
+
+    public function notifications() {
+        return $this->belongsToMany('App\Notification', 'notified_user', 'user_notified', 'notification_id' )->withPivot('seen');
     }
 
 }

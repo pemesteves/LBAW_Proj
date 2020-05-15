@@ -242,7 +242,13 @@ CREATE TABLE public."notification"
 	"description" text NOT NULL,
 	"link" text NOT NULL,
 	"date" timestamp with time zone NOT NULL DEFAULT now(),
-	
+
+	"notification_user_id" integer REFERENCES public."regular_user"("regular_user_id") ON DELETE CASCADE,
+	"notification_event_id" integer REFERENCES public."event"("event_id") ON DELETE CASCADE,
+	"notification_post_id" integer REFERENCES public."post"("post_id") ON DELETE CASCADE,
+	"notification_comment_id" integer REFERENCES public."comment"("comment_id") ON DELETE CASCADE,
+	"notification_group_id" integer REFERENCES public."group"("group_id") ON DELETE CASCADE,
+
 	CONSTRAINT "notification_id_pkey" PRIMARY KEY ("notification_id"),
 	CONSTRAINT "date_ck" CHECK ( "date" <= now() )
 );

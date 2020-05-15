@@ -3,19 +3,6 @@
 @section('content')
 
 
-<script src="https://js.pusher.com/5.0/pusher.min.js"></script>
-<script src="{{ asset('js/echo.js') }}"></script>
-<script>
-window.Echo = new Echo({
-    broadcaster: 'pusher',
-    key: '05ddfe6c26eaafb78b1b',
-    cluster: 'mt1',
-    forceTLS: true
-});
-</script>
-
-<meta name="csrf-token" content="{{ csrf_token() }}" />
-
 <article class="chat" data-id="{{ $chat->chat_id }}">
     <div id="full_page" class="d-flex flex-column no-gutters vh-100" style="padding: 0">
         <section class="container-fluid no-gutters" style="flex: 1 1 auto">

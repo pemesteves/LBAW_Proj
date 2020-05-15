@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Traits\NotificationTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -14,18 +15,32 @@ use Illuminate\Support\Facades\Mail;
 use App\Post;
 use App\RegularUser;
 use App\User;
+use App\Notification;
 use Exception;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class RegularUserController extends Controller{
 
+    use NotificationTrait;
+
     function sendRequest($id){
         DB::table('friend')->insert(['friend_id1' => Auth::user()->userable->regular_user_id, 'friend_id2' => $id]);
+
+        $notification =  new Notification;
+        $notification->origin_user_id = Auth::user()->userable->regular_user_id;
+        $notification->notification_user_id = $id;
+        $notification->description = "sent you a friend request.";
+        $notification->link = "#";
+        $notification->save();
+
+        $this->sendNotification($notification,$id);
+
         return ['result' => true , 'user_id' => $id];
     }
 
     function cancelRequest($id){
         DB::table('friend')->where(['friend_id1' => Auth::user()->userable->regular_user_id, 'friend_id2' => $id])->delete();
+        Notification::where(['origin_user_id' => Auth::user()->userable->regular_user_id, 'notification_user_id' => $id])->delete();
         return ['result' => true , 'user_id' => $id];
     }
 
@@ -38,6 +53,16 @@ class RegularUserController extends Controller{
             ->where(['friend_id2' => Auth::user()->userable->regular_user_id, 'friend_id1' => $id])
             ->update(['type' => 'accepted']);
         }
+        //Notification::where(['origin_user_id' => $id, 'notification_user_id' => Auth::user()->userable->regular_user_id])->delete();
+        $notification =  new Notification;
+        $notification->origin_user_id = Auth::user()->userable->regular_user_id;
+        $notification->notification_user_id = Auth::user()->userable->regular_user_id;
+        $notification->description = " accepted your friend request.";
+        $notification->link = "#";
+        $notification->save();
+
+        $this->sendNotification($notification,$id);
+
         return ['result' => true , 'user_id' => $id];
     }
 
@@ -50,6 +75,7 @@ class RegularUserController extends Controller{
             ->where(['friend_id2' => Auth::user()->userable->regular_user_id, 'friend_id1' => $id])
             ->update(['type' => 'refused']);
         }
+        //Notification::where(['origin_user_id' => $id, 'notification_user_id' => Auth::user()->userable->regular_user_id])->delete();
         return ['result' => true , 'user_id' => $id];
     }
 

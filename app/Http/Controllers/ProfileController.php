@@ -44,7 +44,7 @@ class ProfileController extends Controller{
                       ])
                       ->get();
 
-      return view('pages.user' , ['is_admin' => false , 'user' => Auth::user()->userable, 'posts' => $posts , 'groups' => $groups, 'friends' => $friends, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
+      return view('pages.user' , ['is_admin' => false , 'user' => Auth::user()->userable, 'posts' => $posts ,'notifications' => Auth::user()->userable->notifications, 'groups' => $groups, 'friends' => $friends, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
   }
 
   public function show_me_edit(){
@@ -103,7 +103,7 @@ class ProfileController extends Controller{
                         ])->get();
     }
 
-    return view('pages.user' , ['is_admin' => false , 'user' => $user, 'friendship_status' => $friendship_status, 'posts' => $posts, 'groups' => $groups, 'friends' => $friends, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization' ]);
+    return view('pages.user' , ['is_admin' => false , 'user' => $user,'notifications' => Auth::user()->userable->notifications, 'friendship_status' => $friendship_status, 'posts' => $posts, 'groups' => $groups, 'friends' => $friends, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization' ]);
 
   }
 
