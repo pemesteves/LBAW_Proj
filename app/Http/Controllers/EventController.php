@@ -32,7 +32,9 @@ class EventController extends Controller{
           $owner = true;
       }
 
-      return view('pages.event' , ['is_admin' => false , 'event' => $event, 'posts' => $posts, 'going' => $going, 'can_create_events' => $can_create_events, 'is_owner' => $owner ]);
+      $notifications = Auth::user()->userable->notifications;
+
+      return view('pages.event' , ['is_admin' => false , 'event' => $event, 'posts' => $posts, 'going' => $going, 'can_create_events' => $can_create_events, 'is_owner' => $owner, 'notifications' => $notifications]);
     }
 
     public function showCreateForm(){
