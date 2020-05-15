@@ -68,7 +68,7 @@ class Notification extends Model
 
   function link(){
     if($this->notification_user_id)
-        return "users/" . $this->notificationuser_id;
+        return "users/" . $this->origin_user_id;
     if($this->notification_event_id)
         return "events/" . $this->notification_event_id;
     if($this->notification_post_id)
@@ -89,7 +89,7 @@ class Notification extends Model
     //return $this->triggerUser->user->name . ": " . $this->description;
 
     if($this->notification_user_id)
-      $description = $this->triggerUser->user->name . " sent you a friend request";
+      $description = $this->triggerUser->user->name . $this->description;
     if($this->notification_event_id)
       $description = $this->triggerUser->user->name . " has posted in " . Event::find($this->notification_event_id)->name;
     if($this->notification_post_id)
