@@ -64,6 +64,7 @@ Route::post('/resetPass', 'Auth\ResetController@reset');
 
 //Feed
 Route::get('/feed' , 'FeedController@show')->name('feed');
+Route::get('/admin' , 'FeedController@show_admin_feed')->name('admin');
 
 //Profile
 Route::get('/users/me', 'ProfileController@show_me');

@@ -55,11 +55,15 @@ class FeedController extends Controller{
             return view('pages.feed' , ['is_admin' => false , 'posts' => $posts , 'groups' => Auth::user()->userable->groups , 'notifications' => Auth::user()->userable->notifications ,'events' => Auth::user()->events, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
         }
         else if(get_class($user->userable) == "App\Admin"){
-
-            $reports = Report::whereNull('approval')->orderBy('report_id','desc')->get();
-
-            return view('pages.report_feed' , ['reports' => $reports, 'is_admin' => true, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
+            return redirect('/admin');
         }
 
+    }
+
+    public function show_admin_feed(){
+        $reports = Report::whereNull('approval')->orderBy('report_id','desc')->get();
+
+        return view('pages.report_feed' , ['reports' => $reports, 'is_admin' => true, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
+    
     }
 }
