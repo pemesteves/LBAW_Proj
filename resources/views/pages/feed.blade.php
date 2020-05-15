@@ -2,6 +2,7 @@
 
 @section('content')
 
+
 <div class="container" style="margin:0; min-width:100%">
         <div class="row">
             <div class="col-sm-2" style="padding-left:0px">

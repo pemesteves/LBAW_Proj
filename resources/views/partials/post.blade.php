@@ -95,13 +95,13 @@
                                 </div>
                             </div>
                         </form>
-                        <div class="comments">
+                        <div class="comments" comments-id= "{{$post->post_id}}">
                             @each("partials.comment" , $post->comments, "comment")
 
                             <script>
+                            
                             window.Echo.channel('post.{{$post->post_id}}')
                             .listen('NewComment', (e) => {
-
                                 let new_comment = document.createElement('div');
                                 new_comment.classList.add('row', 'comment_container', 'comment_no_padding'); 
                                 new_comment.setAttribute('data-id',e.comment.comment_id);
@@ -142,8 +142,7 @@
                                         </div>
                                     </div>
                                 </div>`;
-
-                                document.getElementsByClassName("comments")[0].insertBefore(new_comment, document.getElementsByClassName("comments")[0].firstChild);
+                                document.querySelector("[comments-id=" + CSS.escape(e.comment.post_id) + "]").insertBefore(new_comment,document.querySelector("[comments-id=" + CSS.escape(e.comment.post_id) + "] > div"));
                             });
                         </script>
                         </div>
