@@ -29,8 +29,8 @@ class RegularUserController extends Controller{
         $notification =  new Notification;
         $notification->origin_user_id = Auth::user()->userable->regular_user_id;
         $notification->notification_user_id = $id;
-        $notification->description = "sent you a friend request.";
-        $notification->link = "#";
+        $notification->description = $notification->getDescription(" Sent you a friend request");
+        $notification->link = $notification->link();
         $notification->save();
 
         $this->sendNotification($notification,$id);
@@ -57,8 +57,8 @@ class RegularUserController extends Controller{
         $notification =  new Notification;
         $notification->origin_user_id = Auth::user()->userable->regular_user_id;
         $notification->notification_user_id = Auth::user()->userable->regular_user_id;
-        $notification->description = " accepted your friend request.";
-        $notification->link = "#";
+        $notification->description = $notification->getDescription(" Accepted the friend request");
+        $notification->link = $notification->link();
         $notification->save();
 
         $this->sendNotification($notification,$id);

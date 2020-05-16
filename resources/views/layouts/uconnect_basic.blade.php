@@ -48,7 +48,7 @@ window.Echo = new Echo({
                             <div style="max-height:200px;overflow-x: hidden;">
 
                             @if (count($notifications) == 0) 
-                                <p style='margin-left:10%;margin-top:auto;margin-bottom:auto' >No notifications yet</p>
+                                <p id="no_notif" style='margin-left:10%;margin-top:auto;margin-bottom:auto' >No notifications yet</p>
                             @else
                                 @each("partials.notification",$notifications,"notification")
                             @endif
@@ -80,6 +80,7 @@ window.Echo = new Echo({
                                             </div>
                                         </div>
                                     </a> `
+                                    document.getElementById("no_notif").style.display = 'none';
                                     document.getElementById("notif").insertBefore(new_notification, document.getElementById("notif").childNodes[0].nextSibling);
                                 });
 
