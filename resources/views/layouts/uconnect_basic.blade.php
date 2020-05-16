@@ -39,9 +39,9 @@ window.Echo = new Echo({
                             type="button" id="notificationDrop" data-toggle="dropdown" 
                             aria-haspopup="true" aria-expanded="false"></button>
                         <div class="dropdown-menu dropdown-menu-lg-right" style=" min-width:350px;padding:0px" aria-labelledby="notificationDrop" id="notif">
-                            <p style='margin-left:10%;margin-top:auto;margin-bottom:auto' >Notifications</p>
+                            <p id="notifBar" style='margin-left:10%;margin-top:auto;margin-bottom:auto' >Notifications</p>
                             <div class="dropdown-divider" style="margin-bottom:0px"></div>
-                            <div style="max-height:200px;overflow-x: hidden;">
+                            <div id="notificationDiv" style="max-height:200px;overflow-x: hidden;">
 
                             @if (count(Auth::user()->userable->notifications) == 0) 
                                 <p id="no_notif" style='margin-left:10%;margin-top:auto;margin-bottom:auto' >No notifications yet</p>
@@ -77,7 +77,7 @@ window.Echo = new Echo({
                                         </div>
                                     </a> `
                                     document.getElementById("no_notif").style.display = 'none';
-                                    document.getElementById("notif").insertBefore(new_notification, document.getElementById("notif").childNodes[0].nextSibling);
+                                    document.getElementById("notificationDiv").insertBefore(new_notification, document.getElementById("notificationDiv").childNodes[0]);
                                 });
 
                             </script>
