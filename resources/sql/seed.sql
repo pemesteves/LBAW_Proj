@@ -748,6 +748,20 @@ insert into public."notified_user" ("notification_id", "user_notified") values (
 insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (1, 4, DEFAULT);
 insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (1, 15, DEFAULT);
 insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (1, 18, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (2, 8, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (2, 10, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (4, 3, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (4, 6, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (5, 8, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (6, 19, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (7, 12, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (7, 17, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (8, 11, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (8, 10, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (10, 20, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (14, 2, DEFAULT);
+
+
 insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (2, 3, 'accepted');
 insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (3, 2, 'accepted');
 insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (2, 4, 'accepted');
@@ -758,20 +772,28 @@ insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (2, 6, 'a
 insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (6, 2, 'accepted');
 insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (2, 7, 'accepted');
 insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (7, 2, 'accepted');
-insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (2, 8, DEFAULT);
-insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (2, 10, DEFAULT);
-insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (4, 3, DEFAULT);
-insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (4, 6, DEFAULT);
-insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (5, 7, DEFAULT);
-insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (5, 8, DEFAULT);
-insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (6, 8, DEFAULT);
-insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (6, 19, DEFAULT);
-insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (7, 12, DEFAULT);
-insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (7, 17, DEFAULT);
-insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (8, 11, DEFAULT);
-insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (8, 10, DEFAULT);
-insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (10, 20, DEFAULT);
-insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (14, 2, DEFAULT);
+
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (5, 6, 'accepted');
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (6, 5, 'accepted');
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (5, 4, 'accepted');
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (4, 5, 'accepted');
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (5, 3, 'accepted');
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (3, 5, 'accepted');
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (5, 14, 'accepted');
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (14, 5, 'accepted');
+
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (7, 19, 'accepted');
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (19, 7, 'accepted');
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (7, 5, 'accepted');
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (5, 7, 'accepted');
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (7, 4, 'accepted');
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (4, 7, 'accepted');
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (7, 15, 'accepted');
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (15, 7, 'accepted');
+
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (15, 4, 'accepted');
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (4, 15, 'accepted');
+
 
 
 insert into public."user_interested_in_event" ("user_id","event_id") values(2,1);

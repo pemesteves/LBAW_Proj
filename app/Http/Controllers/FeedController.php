@@ -51,8 +51,57 @@ class FeedController extends Controller{
                     ->union($myEventsPosts)
                     ->orderBy('date','desc')
                     ->get();
+            //->join('friend as friend_gen2',"friend_id2",)
 
-            return view('pages.feed' , ['is_admin' => false , 'posts' => $posts , 'groups' => Auth::user()->userable->groups  ,'events' => Auth::user()->events, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
+            $closest = DB::table("regular_user")->join("friend as gen1", "regular_user_id" , '=', "gen1.friend_id2")
+                            ->join("friend as gen2" , "gen1.friend_id2", '=' , "gen2.friend_id1")
+                            ->where([
+                                ["gen1.friend_id1",Auth::user()->userable_id],
+                                ['gen1.type','accepted'],
+                                ['gen2.friend_id2', '<>' ,Auth::user()->userable_id],
+                                ['gen2.type','accepted']])
+                            ->groupBy('gen1.friend_id2')
+                            ->orderByRaw('N_common DESC')
+                            ->select('gen1.friend_id2 as axis' , DB::raw('count(gen2.friend_id2) as N_common' ) )
+                            ->limit(5);
+
+            $recommendations_user = DB::table("regular_user")->joinSub($closest,'best',function ($join) {
+                                    $join->on('regular_user_id', '=', 'best.axis');
+                                })
+                                ->join('friend as friendsOfFriends','best.axis','friendsOfFriends.friend_id1') 
+                                ->where([
+                                    ['friendsOfFriends.type','accepted'],
+                                    ['friendsOfFriends.friend_id2', '<>' ,Auth::user()->userable_id],
+                                ])
+                                ->whereNOTIn('friendsOfFriends.friend_id2',function($query){
+
+                                    $query->select('friend_id2')->from('friend')
+                                    ->where([['friend_id1',Auth::user()->userable_id]]);
+                     
+                                 })
+                                //->groupBy('friendsOfFriends.friend_id2')
+                                ->select('friendsOfFriends.friend_id2')
+                                
+                                ;
+            $recommendations_pre =  DB::table("regular_user")->joinSub($recommendations_user , 'rec' , function ($join) {
+                                    $join->on('regular_user_id', '=', 'rec.friend_id2');
+                                })
+                                ->select('rec.friend_id2',DB::raw('count(rec.friend_id2) as N_common' ))
+                                ->groupBy('rec.friend_id2')
+                                ->orderByRaw('N_common DESC')
+                                ->limit(10)
+                                 ; 
+            $recommendations = RegularUser::joinSub($recommendations_pre , 'rec' , function ($join) {
+                $join->on('regular_user_id', '=', 'rec.friend_id2');
+            })->get();    
+            //return $recommendations->toSql();
+
+            return view('pages.feed' , ['is_admin' => false , 
+            'posts' => $posts , 
+            'groups' => Auth::user()->userable->groups  ,
+            'events' => Auth::user()->userable->events, 
+            'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization',
+            'recommendations' => $recommendations]);
         }
         else if(get_class($user->userable) == "App\Admin"){
             return redirect('/admin');

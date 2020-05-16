@@ -55,13 +55,14 @@ class User extends Authenticatable
     ];
 
 
-    public function groups(){
+    /*public function groups(){
         return $this->userable->groups;
     }
 
     public function events(){
-        return $this->belongsToMany('App\Event','user_interested_in_event','user_id','event_id');
-    }
+        return $this->userable->events;
+        //return $this->belongsToMany('App\Event','user_interested_in_event','user_id','event_id');
+    }*/
 
     public function chats(){
         return $this->belongsToMany('App\Chat', 'user_in_chat', 'user_id', 'chat_id');

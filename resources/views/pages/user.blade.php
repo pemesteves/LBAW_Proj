@@ -132,17 +132,20 @@
                     <div class="card-header" id="headingThree">
                         <h5 class="mb-0">
                             <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            Friends
+                            Friends 
+                                @if(Auth::user()->user_id != $user->user_id) 
+                                    ( {{count(Auth::user()->userable->friendsInCommun($user))}} in commun )
+                                @endif
                             </button>
                         </h5>
                     </div>
                     <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
                         <div class="card-body">
-                            @if (count($friends) === 0)
+                            @if (count($user->friends) === 0)
                                 <p>User has no friends yet</p>
                             @else
                                 <ul>
-                                    @each('partials.user_friend', $friends, 'friend')
+                                    @each('partials.user_friend', $user->friends, 'friend')
                                 </ul>
                             @endif
                         </div>

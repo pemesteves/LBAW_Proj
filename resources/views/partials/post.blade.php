@@ -173,7 +173,10 @@
                             <li class="list-group-item" style="border:none;padding-top:0.2rem;padding-bottom:0.2rem"> {{ object_get($post->regularUser->user,"name") }}
                             </li>
                             <li class="list-group-item" style="border:none;padding-top:0.2rem;padding-bottom:0.2rem">{{ object_get($post->regularUser, "university") }}</li>
-                            <li class="list-group-item" style="border:none;padding-top:0.2rem;padding-bottom:0.2rem">4 friends
+                            <li class="list-group-item" style="border:none;padding-top:0.2rem;padding-bottom:0.2rem">
+                                @if(Auth::user()->userable_id != $post->regularUser->regular_user_id)
+                                    {{count($post->regularUser->friendsInCommun(Auth::user()->userable))}} friends in commun
+                                @endif
                             </li>
                         </ul>
                     </div>

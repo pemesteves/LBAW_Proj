@@ -31,14 +31,8 @@ class ProfileController extends Controller{
 
       $groups = Auth::user()->userable->groups;
 
-      $friends = RegularUser::join('friend', 'friend_id2', '=', 'regular_user_id')
-                      ->where([
-                        ['friend.friend_id1', '=', Auth::user()->userable_id],
-                        ['friend.type','accepted']
-                      ])
-                      ->get();
 
-      return view('pages.user' , ['is_admin' => false , 'user' => Auth::user()->userable, 'posts' => $posts , 'groups' => $groups, 'friends' => $friends, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
+      return view('pages.user' , ['is_admin' => false , 'user' => Auth::user()->userable, 'posts' => $posts , 'groups' => $groups, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
   }
 
   public function show_me_edit(){
@@ -66,12 +60,6 @@ class ProfileController extends Controller{
 
     $groups = $user->groups;
 
-    $friends = RegularUser::join('friend', 'friend_id2', '=', 'regular_user_id')
-                    ->where([
-                      ['friend.friend_id1', '=', $user->regular_user_id],
-                      ['friend.type','accepted']
-                    ])
-                    ->get();
     $friendship_status = DB::table("friend")
                         ->where([
                           ['friend.friend_id1', '=', $user->regular_user_id],
@@ -85,7 +73,7 @@ class ProfileController extends Controller{
                         ])->get();
     }
 
-    return view('pages.user' , ['is_admin' => false , 'user' => $user, 'friendship_status' => $friendship_status, 'posts' => $posts, 'groups' => $groups, 'friends' => $friends, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization' ]);
+    return view('pages.user' , ['is_admin' => false , 'user' => $user, 'friendship_status' => $friendship_status, 'posts' => $posts, 'groups' => $groups,  'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization' ]);
 
   }
 
