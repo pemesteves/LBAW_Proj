@@ -1,5 +1,5 @@
 <div class="card mb" style="margin-bottom:0px;border-radius:0px;">
-    <a href="{{$notification->link()}}" style="text-decoration: none; color:black">
+    <a href="{{$notification->link}}" style="text-decoration: none; color:black">
         <div class="row no-gutters">
             <div class="col-sm">
                 <div class="card text-center" style="border-bottom:none;border-top:none;border-radius:0;height:100%;">
@@ -10,11 +10,11 @@
                 <div class="" style="margin-bottom: 0;padding-bottom: 0;">
                     
                     <p class="card-text small_post_body" style="margin-bottom:0;margin-left:0.2rem;">
-                        {{$notification->getDescription()}}
+                        {{$notification->description}}
                     </p>
                     <p class="card-text" style="margin-bottom:0rem; float: right;margin-right:0.1rem;"><small class="text-muted" style="margin-bottom:0rem">{{date('d-m-Y', strtotime($notification->date))}}</small>, <small class="text-muted" style="margin-bottom:0.2rem">{{date('H:i', strtotime($notification->date))}}</small></p>
                 </div>
-            </div>
+            </div>, document.getElementById("notifBar").childNodes[0]
         </div>
     </a> 
 </div>
