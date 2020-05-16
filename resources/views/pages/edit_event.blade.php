@@ -11,11 +11,19 @@
 
 @section('content')
 <div id="event_card" class="card mb-3 border rounded">
-    <form method="post" action="/events/{{$event->event_id}}">
+    <!--<form id="event_image_upload" method="post" action="/api/events/{{$event->event_id}}/upload_image" enctype="multipart/form-data">
+-->
+    <form method="post" id="event_image_upload" action="/events/{{$event->event_id}}" enctype="multipart/form-data">
         @csrf
         <img src="images/aefeup.jpg" class="card-img-top mx-auto d-block" alt="..."> <!--Add image upload -->
+        <div style="display: none">
+            <input required name="image" type="file"/>
+        </div>
+    <!--</form>
+        @csrf
+-->
         <div class="card">
-            <div class="card-body">
+            <div class="card-body" style="padding: 1em;">
                 <legend class="card-title uconnect-title" >Name: </legend>
                 <h1 class="card-title uconnect-title" >
                     <input type="text" name="name" placeholder="Event Name" value="{{ $event->name }}" required/>

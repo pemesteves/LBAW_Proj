@@ -778,3 +778,4 @@ insert into public."user_interested_in_event" ("user_id","event_id") values(2,1)
 insert into public."user_interested_in_event" ("user_id","event_id") values(4,1);
 insert into public."user_interested_in_event" ("user_id","event_id") values(7,1);
 insert into public."user_interested_in_event" ("user_id","event_id") values(10,1);
+insert into public."user_interested_in_event" ("user_id","event_id") values(23,1);

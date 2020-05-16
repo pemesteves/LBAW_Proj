@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Post;
 use App\Report;
 use App\Event;
+use App\File;
+use App\Image;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -34,7 +36,9 @@ class EventController extends Controller{
 
       $notifications = Auth::user()->userable->notifications;
 
-      return view('pages.event' , ['is_admin' => false , 'event' => $event, 'posts' => $posts, 'going' => $going, 'can_create_events' => $can_create_events, 'is_owner' => $owner, 'notifications' => $notifications]);
+      $image = $event->image();
+
+      return view('pages.event' , ['is_admin' => false , 'event' => $event, 'posts' => $posts, 'going' => $going, 'can_create_events' => $can_create_events, 'is_owner' => $owner, 'notifications' => $notifications, 'image' => $image]);
     }
 
     public function showCreateForm(){
@@ -42,7 +46,7 @@ class EventController extends Controller{
 
       $this->authorize('create', 'App\Event');
 
-      return view('pages.create_event', ['is_admin' => false, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
+      return view('pages.create_event', ['is_admin' => false, 'notifications' => Auth::user()->userable->notifications, 'notifications' => Auth::user()->userable->notifications, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
     }
 
     public function create(Request $request){
@@ -78,7 +82,7 @@ class EventController extends Controller{
 
       $this->authorize('edit', $event);
 
-      return view('pages.edit_event' , ['is_admin' => false , 'event' => $event, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization' ]);
+      return view('pages.edit_event' , ['is_admin' => false ,'notifications' => Auth::user()->userable->notifications, 'event' => $event, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization' ]);
     }
 
     /**
@@ -97,6 +101,8 @@ class EventController extends Controller{
       $date = $request->input('date');
       $location = $request->input('location');
 
+      $this->upload_image($request, $id);
+      
       $event->update(['name' => $name, 'information' => $information, 'date' => $date, 'location' => $location]);
 
       return EventController::show($event->event_id);
@@ -123,5 +129,36 @@ class EventController extends Controller{
       return $report;
     }
 
+
+    public function upload_image(Request $request, $event_id){
+      $request->validate([
+        'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+      ]);
+
+      $imageName = time().'.'.request()->image->getClientOriginalExtension();
+
+      request()->image->move(public_path('images/events'), $imageName);
+
+      $image = Image::where('event_id', '=', $event_id)->get()[0];
+
+      if(isset($image) && $image !== null){ // Delete image and file
+        $file_id = $image->file_id;
+        $image->delete();
+        
+        $file = File::find($file_id);
+        $file->delete();
+      }
+      
+      $file = new File();
+      $file->file_path = '/images/events/' . $imageName;
+      $file->save();
+
+      $image = new Image();
+      $image->file_id = $file->file_id;
+      $image->event_id = $event_id;
+      $image->save();
+
+      return $image;
+    }
 
 }

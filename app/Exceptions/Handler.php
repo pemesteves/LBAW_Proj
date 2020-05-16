@@ -50,7 +50,7 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
         if ($this->isHttpException($exception)) {
-            return response()->view('errors.' . 'error', ['is_admin' => false, 'erro_code' => $exception->getStatusCode(), 'property_not_found' => $exception->getMessage(), 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization'], $exception->getStatusCode());
+            //return response()->view('errors.' . 'error', ['is_admin' => false, 'erro_code' => $exception->getStatusCode(), 'property_not_found' => $exception->getMessage(), 'can_create_events' => false], $exception->getStatusCode());
         }else{
             //return response()->view('errors.' . 'error', ['is_admin' => false, 'erro_code' => 404, 'property_not_found' => null, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization'], 404);
         }

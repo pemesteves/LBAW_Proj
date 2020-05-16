@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Event extends Model
 {
@@ -58,5 +59,14 @@ class Event extends Model
                        ->count();
 
         return $result;
+    }
+
+    /**
+     * Get event image
+     */
+    public function image() {
+        return DB::table('image')
+                   ->where('image.event_id', '=', $this->event_id)
+                   ->join('file', 'file.file_id', '=', 'image.image_id')->get()[0];
     }
 }

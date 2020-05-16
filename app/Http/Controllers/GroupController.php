@@ -33,7 +33,7 @@ class GroupController extends Controller{
             ->select('admin')
             ->limit(1);
 
-      return view('pages.group' , ['is_admin' => false , 'group' => $group, 'posts' => $posts, 'members' => $members, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'is_owner' => $owner ]);
+      return view('pages.group' , ['is_admin' => false, 'notifications' => Auth::user()->userable->notifications, 'group' => $group, 'posts' => $posts, 'members' => $members, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'is_owner' => $owner ]);
     }
 
     public function showCreateForm(){
@@ -41,7 +41,7 @@ class GroupController extends Controller{
 
       $this->authorize('create', 'App\Group');
 
-      return view('pages.create_group', ['is_admin' => false, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
+      return view('pages.create_group', ['is_admin' => false, 'notifications' => Auth::user()->userable->notifications, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
     }
 
     public function create(Request $request){
@@ -76,7 +76,7 @@ class GroupController extends Controller{
 
       $this->authorize('edit', $group);
       
-      return view('pages.edit_group' , ['is_admin' => false , 'group' => $group, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization' ]);
+      return view('pages.edit_group' , ['is_admin' => false, 'notifications' => Auth::user()->userable->notifications, 'group' => $group, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization' ]);
     }
 
     /**

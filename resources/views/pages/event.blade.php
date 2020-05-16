@@ -12,7 +12,13 @@
 @section('content')
     <div id="event_card" class="container card mb-3 border rounded">
         <div class="row">      
-            <img src="" class="card-img-top mx-auto d-block" alt="...">
+            <img 
+            @if (isset($image))
+                src="{{$image->file_path}}"
+            @else
+                src=""
+            @endif
+            class="card-img-top mx-auto d-block" alt="..."/>
         </div>
         <div class="card row">
             <div class="row">

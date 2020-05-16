@@ -46,7 +46,7 @@ class ProfileController extends Controller{
 
     $posts = Auth::user()->userable->posts;
 
-    return view('pages.user_me_edit' , ['is_admin' => false , 'posts' => $posts, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization' ]);
+    return view('pages.user_me_edit' , ['is_admin' => false , 'notifications' => Auth::user()->userable->notifications, 'posts' => $posts, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization' ]);
 
   }
 

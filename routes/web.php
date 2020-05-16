@@ -95,6 +95,7 @@ Route::get('/events/{event_id}' , 'EventController@show')->name('events.show');
 Route::put('/api/events/{id}/posts', 'PostController@createInEvent');
 
 Route::get('/events/{event_id}/edit', 'EventController@show_edit');
+Route::post('/api/events/{event_id}/upload_image', 'EventController@upload_image');
 Route::post('/events/{event_id}', 'EventController@edit');
 Route::put('api/events/{id}/report', 'EventController@report');
 
