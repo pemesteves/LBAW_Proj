@@ -40,38 +40,47 @@
                                         <span class="fa fa-thumbs-down post_dislike">&nbsp;{{ $post->downvotes }}&nbsp;</span>
                                     </button>
                                 </div>
+                                @if($post->hasContext())
+                                    <a href="../{{$post->getLink()}}" style="text-decoration:none;">
+                                        <small class="text-muted" style="margin-left:1%">{{$post->getContext()}}</small>
+                                    </a>
+                                @endif
                             </div>
                         </div>
+                        
                     </div>
-                    <div>
-                        <button type="button" data-dismiss="modal" style="font-size: 150%; margin-right: 0; padding-right: 0; width: 100%; background-color: white; border: 0;"><span class="fa fa-times"></span></button>
-                        <div class="btn-group dropleft" style="margin-right: 0; padding-right: 0; width: 100%">
-                            <button type="button" data-toggle="dropdown" style="font-size: 150%; margin-right: 0; padding-right: 0; width: 100%; background-color: white; border: 0;"> 
-                            <span class="fa fa-ellipsis-v" ></span></button>
-                            <div class="dropdown-menu options_menu" style="min-width:5rem">
-                                <ul class="list-group">
-                                    @if ( object_get($post->regularUser->user, "user_id") == Auth::user()->user_id)
-                                        <li class="list-group-item options_entry" style="text-align: left;">
-                                            <button onclick="location.href='/posts/{{$post->post_id}}/edit'" style=" margin-left:auto; margin-right:auto; background-color: white; border: 0;">
-                                                Edit
-                                            </button>
-                                        </li>
-                                        <li class="list-group-item options_entry" style="text-align: left;">
-                                            <button class='delete' style=" background-color: white; border: 0;" > 
-                                                Delete
-                                            </button>
-                                        </li>
-                                    @else
-                                        <li class="list-group-item options_entry" style="text-align: left;">
-                                            <button class='report' style=" background-color: white; border: 0;" > 
-                                                Report
-                                            </button>
-                                        </li>
-                                    @endif
-                                </ul>
+                    @if(!Auth::user()->isAdmin())
+                        <div>
+                            <button type="button" data-dismiss="modal" style="font-size: 150%; margin-right: 0; padding-right: 0; width: 100%; background-color: white; border: 0;"><span class="fa fa-times"></span></button>
+                            <div class="btn-group dropleft" style="margin-right: 0; padding-right: 0; width: 100%">
+                                <button type="button" data-toggle="dropdown" style="font-size: 150%; margin-right: 0; padding-right: 0; width: 100%; background-color: white; border: 0;"> 
+                                <span class="fa fa-ellipsis-v" ></span></button>
+                                <div class="dropdown-menu options_menu" style="min-width:5rem">
+                                    <ul class="list-group">
+                                        @if ( object_get($post->regularUser->user, "user_id") == Auth::user()->user_id)
+                                            <li class="list-group-item options_entry" style="text-align: left;">
+                                                <button onclick="location.href='/posts/{{$post->post_id}}/edit'" style=" margin-left:auto; margin-right:auto; background-color: white; border: 0;">
+                                                    Edit
+                                                </button>
+                                            </li>
+                                            <li class="list-group-item options_entry" style="text-align: left;">
+                                                <button class='delete' style=" background-color: white; border: 0;" > 
+                                                    Delete
+                                                </button>
+                                            </li>
+                                        @else
+                                            <li class="list-group-item options_entry" style="text-align: left;">
+                                                <button class='report' style=" background-color: white; border: 0;" > 
+                                                    Report
+                                                </button>
+                                            </li>
+                                        @endif
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
+                    
                 </div>
                 <div class="modal-body post_container" style="overflow-y: auto;">
                     <div class="container" style="border-bottom:0;border-top:0;border-radius:0;height:100%;">
@@ -184,11 +193,15 @@
                 <div class="col-md-8" style="flex-grow:1; max-width:100%; text-align: left;">
                     <div class="card" style="height: 100%; margin-bottom: 0;">
                         <div class="card-body" style="margin-bottom: 0;padding-bottom: 0;">
+                            <small class="text-muted" style="margin-bottom:0rem;float: right;">{{$post->getContext()}}</small>
                             <h3 class="card-title small_post_title"> {{ $post['title'] }}</h3>
                             <p class="card-text small_post_body">
                                 {{ $post->body }}
                             </p>
-                            <p class="card-text" style="margin-bottom:0rem; float: right;"><small class="text-muted" style="margin-bottom:0rem">{{date('d-m-Y', strtotime($post->date))}}</small>, <small class="text-muted" style="margin-bottom:0.2rem">{{date('H:i', strtotime($post->date))}}</small></p>
+                            <p class="card-text" style="margin-bottom:0rem; float: right;">
+                                <small class="text-muted" style="margin-bottom:0rem">{{date('d-m-Y', strtotime($post->date))}}</small>, 
+                                <small class="text-muted" style="margin-bottom:0.2rem">{{date('H:i', strtotime($post->date))}}</small>
+                            </p>
                         </div>
                         <div class="card-footer" style="border-left:none;border-right:none;border-bottom:none">
                             <span class="comment"> {{$post->comments->count()}} comments </span>

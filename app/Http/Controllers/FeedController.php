@@ -74,10 +74,12 @@ class FeedController extends Controller{
                                     ['friendsOfFriends.friend_id2', '<>' ,Auth::user()->userable_id],
                                 ])
                                 ->whereNOTIn('friendsOfFriends.friend_id2',function($query){
-
                                     $query->select('friend_id2')->from('friend')
                                     ->where([['friend_id1',Auth::user()->userable_id]]);
-                     
+                                 })
+                                 ->whereNOTIn('friendsOfFriends.friend_id2',function($query){
+                                    $query->select('friend_id1')->from('friend')
+                                    ->where([['friend_id2',Auth::user()->userable_id]]);
                                  })
                                 //->groupBy('friendsOfFriends.friend_id2')
                                 ->select('friendsOfFriends.friend_id2')
@@ -91,9 +93,12 @@ class FeedController extends Controller{
                                 ->orderByRaw('N_common DESC')
                                 ->limit(10)
                                  ; 
-            $recommendations = RegularUser::joinSub($recommendations_pre , 'rec' , function ($join) {
+            $recommendations_t = RegularUser::joinSub($recommendations_pre , 'rec' , function ($join) {
                 $join->on('regular_user_id', '=', 'rec.friend_id2');
             })->get();    
+
+            $recommendations = $recommendations_t->shuffle()->random(min(count($recommendations_t),3));
+
             //return $recommendations->toSql();
 
             return view('pages.feed' , ['is_admin' => false , 

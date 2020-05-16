@@ -14,7 +14,7 @@
                     </p>
                     <p class="card-text" style="margin-bottom:0rem; float: right;margin-right:0.1rem;"><small class="text-muted" style="margin-bottom:0rem">{{date('d-m-Y', strtotime($notification->date))}}</small>, <small class="text-muted" style="margin-bottom:0.2rem">{{date('H:i', strtotime($notification->date))}}</small></p>
                 </div>
-            </div>, document.getElementById("notifBar").childNodes[0]
+            </div>
         </div>
     </a> 
 </div>

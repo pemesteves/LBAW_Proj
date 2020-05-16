@@ -91,8 +91,9 @@
 
             </div>
             <div class="col-sm-2 d-print-none">
-                <br>
-                @each('partials.recommendFriend', $recommendations, 'user')
+                <div style="position: absolute;top: 20%;transform: translateY(-50%);">
+                    @each('partials.recommendFriend', $recommendations, 'user')
+                </div>
             </div>
         </div>
     </div>
