@@ -1,4 +1,4 @@
-<div class="card mb" style="margin-bottom:0px;border-radius:0px;">
+<div class="card mb" style="margin-bottom:0px;border-radius:0px;margin-right:0.5rem">
     <a href="./users/{{$user->regular_user_id}}" style="text-decoration: none; color:black">
         <div class="row no-gutters">
             <div class="col-sm">
@@ -9,12 +9,11 @@
             </div>
             <div class="col-md-8" style="flex-grow:1; max-width:100%; text-align: left;">
                 <div class="" style="margin-bottom: 0;padding-bottom: 0;">
-                    
-                    <p class="card-text small_post_body" style="margin-bottom:0;margin-left:0.2rem;">
+                    <p class="card-text small_post_body" style="margin-bottom:0;margin-left:0.2rem;display:inline-block;">
                         {{$user->user->name}}
                     </p>
                     <button type="button" class="btn btn-light add_friend" data-id='{{$user->regular_user_id}}' 
-                        style="float:right;background-color: rgba(0,0,150,.03); ">
+                        style="background-color: rgba(0,0,150,.03);float:right; margin-right:0.5rem;margin-top:0.2rem;font-size:0.9rem ">
                         Add Friend
                     </button>
                     <p class="card-text" style="margin-bottom:0rem; float: left;margin-left:0.2rem;">

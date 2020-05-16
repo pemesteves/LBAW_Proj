@@ -32,7 +32,12 @@
                                         <p class="card-text">{{date('H:i', strtotime($post->date))}}</p>
                                     </div>
                                 </div>
-                                <div class="row justify-content-end votes" style="font-size: 1.2em;">
+                                @if($post->hasContext())
+                                    <a href="../{{$post->getLink()}}" style="text-decoration:none;">
+                                        <small class="text-muted" style="margin-left:0.4rem">{{$post->getContext()}}</small>
+                                    </a>
+                                @endif
+                                <div class="row justify-content-end votes" style="font-size: 1.2em;float:right">
                                     <button class='upvote' style=" background-color: white; border: 0;" > 
                                         <span class="fa fa-thumbs-up post_like">&nbsp;{{ $post->upvotes }}&nbsp;</span>
                                     </button>    
@@ -40,11 +45,6 @@
                                         <span class="fa fa-thumbs-down post_dislike">&nbsp;{{ $post->downvotes }}&nbsp;</span>
                                     </button>
                                 </div>
-                                @if($post->hasContext())
-                                    <a href="../{{$post->getLink()}}" style="text-decoration:none;">
-                                        <small class="text-muted" style="margin-left:1%">{{$post->getContext()}}</small>
-                                    </a>
-                                @endif
                             </div>
                         </div>
                         
