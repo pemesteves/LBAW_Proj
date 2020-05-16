@@ -45,7 +45,7 @@ class Event extends Model
      * The posts this event owns.
      */
     public function posts() {
-      return $this->hasMany('App\Post', 'event_id', 'event_id');
+      return $this->hasMany('App\Post', 'event_id', 'event_id')->orderBy('date', 'desc');
     }
 
     /**

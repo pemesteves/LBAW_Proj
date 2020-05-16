@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 use App\Comment;
+use App\Report;
 use App\Events\NewComment;
 
 class CommentController extends Controller{
@@ -56,6 +57,27 @@ class CommentController extends Controller{
       $comment->save();
 
       return $comment;
+    }
+
+        /**
+     * Report a comment.
+     *
+     * @return Report The comment created.
+     */
+    public function report(Request $request, $id)
+    { 
+      $title = $request->input('title');
+      $description = $request->input('description');
+      $reporter_id = Auth::user()->userable->regular_user_id;
+
+      $report = new Report();
+      $report->title = $title;
+      $report->reason = $description;
+      $report->reporter_id = $reporter_id;
+      $report->reported_comment_id = $id;
+
+      $report->save();
+      return $report;
     }
 
 }

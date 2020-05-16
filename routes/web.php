@@ -31,6 +31,7 @@ Route::put('api/posts/{id}/report', 'PostController@report');
 Route::put('/api/posts/{id}/comment', 'CommentController@create');
 Route::delete('api/comments/{id}', 'CommentController@delete');
 Route::put('api/comments/{id}/edit' , 'CommentController@update');
+Route::put('api/comments/{id}/report' , 'CommentController@report');
 
 
 Route::put('/api/posts/{id}/like/{val}' , 'PostController@like');
@@ -64,6 +65,7 @@ Route::post('/resetPass', 'Auth\ResetController@reset');
 
 //Feed
 Route::get('/feed' , 'FeedController@show')->name('feed');
+Route::get('/admin' , 'FeedController@show_admin_feed')->name('admin');
 
 //Profile
 Route::get('/users/me', 'ProfileController@show_me');

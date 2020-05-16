@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Post;
 use App\Report;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Illuminate\Support\Facades\Session;
+
 
 class PostController extends Controller{
 
@@ -58,7 +60,7 @@ class PostController extends Controller{
       if(count($report) > 0)
         throw new HttpException(404, "post");
         
-      return view('pages.post' , ['is_admin' => false , 'post' => $post, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'notifications' => Auth::user()->userable->notifications]);
+      return view('pages.post' , ['is_admin' => false , 'post' => $post, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
     }
 
     /**
@@ -92,6 +94,8 @@ class PostController extends Controller{
       $body = $request->input('body');
 
       $post->update(['title' => $title, 'body' => $body]);
+
+      Session::flash("success_message", "Post updated successfully.");
 
       return PostController::show($post_id);
     }

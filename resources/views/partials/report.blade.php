@@ -3,7 +3,7 @@
         <div class="card-body">
             <div style="display:flex;justify-content:space-between">
                 <h5 class="card-title">{{$report->title}}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">{{$report->referenceTo()}} | {{$report->date}}</h6>
+                <h6 class="card-subtitle mb-2 text-muted">{{$report->referenceTo()}} | {{date('d-m-Y H:m', strtotime($report->date))}}</h6>
             </div>
             <div style="display:flex;justify-content:space-between">
                 <h6 class="card-text">Issue : {{$report->reason}}</h6>

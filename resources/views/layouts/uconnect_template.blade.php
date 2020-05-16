@@ -32,6 +32,7 @@
             <link href="{{ asset('css/navbar.css') }}" rel="stylesheet">
             <link href="{{ asset('css/error.css') }}" rel="stylesheet">
             <link href="{{ asset('css/create.css') }}" rel="stylesheet">
+            <link href="{{ asset('css/feed.css') }}" rel="stylesheet">
 
             <script src="{{ asset('js/navbar_mobile.js') }}" defer></script>        
             <script src="{{ asset('js/app.js') }}" defer> </script>
@@ -65,6 +66,16 @@
             </section>           
 
             <section id="content">
+                
+            @if(Session::has("success_message"))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <?= Session::get("success_message") ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
+
                 @yield('content')
                 
                 <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -91,7 +102,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary sendReport">Send message</button>
+                        <button type="button" class="btn btn-primary sendReport">Send report</button>
                     </div>
                     </div>
                 </div>

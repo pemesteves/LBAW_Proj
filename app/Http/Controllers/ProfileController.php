@@ -17,6 +17,7 @@ use App\User;
 use Exception;
 use Illuminate\Support\Facades\Input;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Illuminate\Support\Facades\Session;
 
 class ProfileController extends Controller{
 
@@ -27,13 +28,7 @@ class ProfileController extends Controller{
   public function show_me(){
       if (!Auth::check()) return redirect('/login');
 
-      $posts = Post::join('regular_user','post.author_id','=', 'user_id')
-                      ->where('user_id', '=',  Auth::user()->userable->regular_user_id)
-                      ->leftJoin("report" , "post.post_id","report.reported_post_id")
-                      ->whereNull('report.approval')
-                      ->orderBy('post.date','desc')
-                      ->select("post.*")
-                      ->get();
+      $posts = Auth::user()->userable->posts;
 
       $groups = Auth::user()->userable->groups;
 
@@ -44,19 +39,13 @@ class ProfileController extends Controller{
                       ])
                       ->get();
 
-      return view('pages.user' , ['is_admin' => false , 'user' => Auth::user()->userable, 'posts' => $posts ,'notifications' => Auth::user()->userable->notifications, 'groups' => $groups, 'friends' => $friends, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
+      return view('pages.user' , ['is_admin' => false , 'user' => Auth::user()->userable, 'posts' => $posts , 'groups' => $groups, 'friends' => $friends, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
   }
 
   public function show_me_edit(){
     if (!Auth::check()) return redirect('/login');
 
-    $posts = Post::join('regular_user','post.author_id','=', 'user_id')
-                    ->where('user_id', '=',  Auth::user()->userable->regular_user_id)
-                    ->leftJoin("report" , "post.post_id","report.reported_post_id")
-                    ->whereNull('report.approval')
-                    ->orderBy('post.date','desc')
-                    ->select("post.*")
-                    ->get();
+    $posts = Auth::user()->userable->posts;
 
     return view('pages.user_me_edit' , ['is_admin' => false , 'posts' => $posts, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization' ]);
 
@@ -74,15 +63,9 @@ class ProfileController extends Controller{
       throw new HttpException(404, "user");
 
 
-    $posts = Post::join('regular_user','post.author_id','=', 'user_id')
-                    ->where('user_id', '=',  $id)
-                    ->leftJoin("report" , "post.post_id","report.reported_post_id")
-                    ->whereNull('report.approval')
-                    ->orderBy('post.date','desc')
-                    ->select("post.*")
-                    ->get();
+    $posts = $user->posts;
 
-    $groups = $user->user->userable->groups;
+    $groups = $user->groups;
 
     $friends = RegularUser::join('friend', 'friend_id2', '=', 'regular_user_id')
                     ->where([
@@ -103,7 +86,7 @@ class ProfileController extends Controller{
                         ])->get();
     }
 
-    return view('pages.user' , ['is_admin' => false , 'user' => $user,'notifications' => Auth::user()->userable->notifications, 'friendship_status' => $friendship_status, 'posts' => $posts, 'groups' => $groups, 'friends' => $friends, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization' ]);
+    return view('pages.user' , ['is_admin' => false , 'user' => $user, 'friendship_status' => $friendship_status, 'posts' => $posts, 'groups' => $groups, 'friends' => $friends, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization' ]);
 
   }
 
@@ -123,6 +106,8 @@ class ProfileController extends Controller{
       $user->update(['name' => $name]);
       $user->userable->update(['personal_info' => $personal_info, 'university' => $university]);
     });
+
+    Session::flash("success_message", "Profile updated successfully.");
     
     return ProfileController::show_me();
   }

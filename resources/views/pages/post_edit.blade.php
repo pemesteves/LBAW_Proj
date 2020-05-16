@@ -22,17 +22,20 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-3" style="padding-top:0.2rem;padding-bottom:0.2rem; text-align: right; font-size: 1.25em;">
-                                    <p class="card-text" style="margin-bottom:0rem">{{date('d-m-Y', strtotime($post->date))}}</p>
-                                    <p class="card-text">{{date('H:i', strtotime($post->date))}}</p>
+                                    <p class="card-text row" style="margin-bottom:0rem">{{date('d-m-Y', strtotime($post->date))}}</p>
+                                    <p class="card-text row">{{date('H:i', strtotime($post->date))}}</p>
                                 </div>
                             </div>
                             <div class="row justify-content-end votes" style="font-size: 1.2em;">
-                                <button class='upvote' style=" background-color: white; border: 0;" > 
-                                    <span class="fa fa-thumbs-up post_like">&nbsp;{{ $post->upvotes }}&nbsp;</span>
-                                </button>    
-                                <button class='downvote' style=" background-color: white; border: 0;" > 
-                                    <span class="fa fa-thumbs-down post_dislike">&nbsp;{{ $post->downvotes }}&nbsp;</span>
-                                </button>
+                                <div class="col-sm-9" style="padding: 0;"></div>
+                                <div class="col-sm-3" style="padding: 0; float:right">
+                                    <button class='upvote' style=" background-color: white; border: 0;" > 
+                                        <span class="fa fa-thumbs-up post_like">&nbsp;{{ $post->upvotes }}&nbsp;</span>
+                                    </button>    
+                                    <button class='downvote' style=" background-color: white; border: 0;" > 
+                                        <span class="fa fa-thumbs-down post_dislike">&nbsp;{{ $post->downvotes }}&nbsp;</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -51,8 +54,10 @@
                             <h2 style="font-weight: normal">Body:</h2>
                             <textarea style="width: 100%; margin: 0;" name="body" type="text" >{{$post['body']}}</textarea>
                         </div>
-                        <button id="post_form_post" type="submit" style="border-radius: .7em; width: 15%; height: 15%; margin: 0; color: black">EDIT</button>
                     </div>
+                </div>
+                <div id="post_edit_button" class="modal-footer">
+                    <button class="btn btn-primary" type="submit">EDIT POST</button>
                 </div>
             </form>
         </div>

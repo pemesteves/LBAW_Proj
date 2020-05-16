@@ -41,7 +41,7 @@
     padding-right: .5em;
 }
 
-#group_card .container:not(:first-child) {
+#group_card .row:not(:first-child) {
     border-top: 1px solid sandybrown;
     margin-top: 0.5em;
 }

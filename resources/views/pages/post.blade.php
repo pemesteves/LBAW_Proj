@@ -22,23 +22,26 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-3" style="padding-top:0.2rem;padding-bottom:0.2rem; text-align: right; font-size: 1.25em;">
-                                    <p class="card-text" style="margin-bottom:0rem">{{date('d-m-Y', strtotime($post->date))}}</p>
-                                    <p class="card-text">{{date('H:i', strtotime($post->date))}}</p>
+                                    <p class="card-text row" style="margin-bottom:0rem">{{date('d-m-Y', strtotime($post->date))}}</p>
+                                    <p class="card-text row">{{date('H:i', strtotime($post->date))}}</p>
                                 </div>
                             </div>
                             <div class="row justify-content-end votes" style="font-size: 1.2em;">
-                                <button class='upvote' style=" background-color: white; border: 0;" > 
-                                    <span class="fa fa-thumbs-up post_like">&nbsp;{{ $post->upvotes }}&nbsp;</span>
-                                </button>    
-                                <button class='downvote' style=" background-color: white; border: 0;" > 
-                                    <span class="fa fa-thumbs-down post_dislike">&nbsp;{{ $post->downvotes }}&nbsp;</span>
-                                </button>
+                                <div class="col-sm-9" style="padding: 0;"></div>
+                                <div class="col-sm-3" style="padding: 0; float:right">
+                                    <button class='upvote' style=" background-color: white; border: 0;" > 
+                                        <span class="fa fa-thumbs-up post_like">&nbsp;{{ $post->upvotes }}&nbsp;</span>
+                                    </button>    
+                                    <button class='downvote' style=" background-color: white; border: 0;" > 
+                                        <span class="fa fa-thumbs-down post_dislike">&nbsp;{{ $post->downvotes }}&nbsp;</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div> 
-                    <div class="btn-group dropleft" style="margin-right: 0; padding-right: 0; width: 100%">
+                    <div class="btn-group dropleft d-print-none" style="margin-right: 0; padding-right: 0; width: 100%">
                         <button type="button" data-toggle="dropdown" style="font-size: 150%; margin-right: 0; padding-right: 0; width: 100%; background-color: white; border: 0;"> 
                         <span class="fa fa-ellipsis-v" ></span></button>
                         <div class="dropdown-menu options_menu" style="min-width:5rem">
@@ -69,7 +72,7 @@
                     <div class="row post_content">
                         <p> {{ $post['body'] }}</p>
                     </div>
-                    <form>
+                    <form class="d-print-none">
                         @csrf
                         <div class="row post_comment_form" >
                             <div class="col-2">
@@ -95,7 +98,7 @@
                                 new_comment.setAttribute('data-id',e.comment.comment_id);
 
                                 new_comment.innerHTML = `
-                                    <div class="col-2 comment_user_info" >
+                                    <div class="col-sm-2 comment_user_info" >
                                         <div class="row">   
                                             <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" class="mx-auto d-block" alt="..." style="border-radius:50%; max-width:2rem; "  onclick="window.location.href='./users/${e.comment.user.user_id}'">
                                         </div>
@@ -103,11 +106,11 @@
                                             <h4 style="font-size: 1em; margin: 0 auto;">${e.comment.user.name}</h4>
                                         </div>
                                     </div>
-                                    <div class="col-9 comment_text">
+                                    <div class="col-sm-9 comment_text">
                                         <p>${e.comment.body}</p>
                                     </div>
-                                    <div>
-                                        <div class="btn-group dropright" style="margin-right: 0; padding-right: 0; width: 100%">
+                                    <div class="col-sm-1">
+                                        <div class="btn-group dropright d-print-none" style="margin-right: 0; padding-right: 0; width: 100%">
                                             <button type="button" data-toggle="dropdown" style="font-size: 150%; margin-right: 0; padding-right: 0; width: 100%; background-color: white; border: 0;"> 
                                             <span class="fa fa-ellipsis-v" ></span></button>
                                             <div class="dropdown-menu options_menu" style="min-width:5rem">

@@ -91,3 +91,26 @@
     }
 }
   
+
+/******************/
+/** Print Navbar **/
+/******************/
+
+@media print {
+    .navbar {
+        display: block;
+        border-bottom: 1px solid sandybrown;
+    }
+
+    .navbar > * {
+        display: none;
+    }
+
+    .navbar > a.navbar-brand {
+        display: block;
+    }
+
+    .navbar > a.navbar-brand h1{
+        color: sandybrown;
+    }
+}

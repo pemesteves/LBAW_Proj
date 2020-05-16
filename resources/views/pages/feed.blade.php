@@ -3,9 +3,9 @@
 @section('content')
 
 
-<div class="container" style="margin:0; min-width:100%">
+<div id="feed_container" class="container" >
         <div class="row">
-            <div class="col-sm-2" style="padding-left:0px">
+            <div id="sidebar" class="col-sm-2 d-print-none">
                 <div id="dl-menu" class="dl-menuwrapper">
                     <button id="dl-trigger" onclick="toggle()">Open Menu</button>
                     <ul id="dl-menu2">
@@ -58,15 +58,15 @@
             
 
             </div>
-            <div class="col-sm-8" style="flex-grow:1;max-width:100%">
+            <div id="posts_container" class="col-sm-8">
 
-                <form id="post_form" class="new_post">
-                    <div class="container" id="post_container">
+                <form id="post_form" class="new_post d-print-none">
+                    <div id="post_container">
                         @csrf
                         <input id="post_title" name="title" type="text" required="required" placeholder="Title"/>
                         <textarea id="post_text" name="body" class="form-control" required placeholder="Write here..." rows="3"></textarea>
-                        <div id="post_form_lower">
-                            <div id="post_upload">
+                        <div id="post_form_lower" class="container">
+                            <div id="post_upload" class="col-sm-11" style="padding: 0;">
                                 <div>
                                     <p class="fa fa-plus">&ensp;image</p>
                                     <input type="file"/>
@@ -76,7 +76,7 @@
                                         <input type="file"/>
                                 </div>  
                             </div>
-                            <div>
+                            <div class="col-sm-1" style="padding: 0;">
                                 <button id="post_form_post" type="submit">Post</button> 
                             </div>
                         </div>
@@ -90,7 +90,7 @@
                 @endif
 
             </div>
-            <div class="col-sm-2">
+            <div class="col-sm-2 d-print-none">
 
             </div>
         </div>

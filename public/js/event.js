@@ -28,20 +28,24 @@ function openReportEventModal(event){
     let description = modal.querySelector("#report_description").value;
     modal.querySelector("#report_description").value = "";
     $('#reportModal').modal('hide')
-    sendAjaxRequest('put', '/api/events/' + id + '/report', {'title' : title, 'description' : description}, eventReportedHandler);
+    sendAjaxRequest('put', '/api/events/' + id + '/report', {'title' : title, 'description' : description}, eventReportedHandler, eventReportErrorHandler);
   }
 
 
 
   function eventReportedHandler() {
     if (this.status !== 201 && this.status !== 200) {
-      window.location = '/';
+      addErrorFeedback("Failed to report event.");
       return;
     }
     let post = JSON.parse(this.responseText);
     //$('#popup-'+post.post_id).modal('hide');
   
-    addFeedback("Event reported sucessfully");
+    addFeedback("Event reported sucessfully.");
+  }
+
+  function eventReportErrorHandler() {
+    addErrorFeedback("Failed to report event.");
   }
 
 
