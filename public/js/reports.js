@@ -26,10 +26,20 @@ function sendDeclineReportRequest(event) {
 
 
 function reportStatusHandler(){
-    if (this.status != 200) window.location = '/';
+    if (this.status != 200) {
+      //window.location = '/';
+      addErrorFeedback("Report processing failed.");
+      return;
+      }
     let response = JSON.parse(this.responseText);
     let element = document.querySelector('div.report[data-id="'+ response.id + '"]');
     element.parentElement.remove();
+
+    addFeedback("Report processed successfully.");
+}
+
+function reportFailedHandler(){
+  addErrorFeedback("Report processing failed.");
 }
 
 

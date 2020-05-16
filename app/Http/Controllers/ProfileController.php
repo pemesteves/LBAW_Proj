@@ -17,6 +17,7 @@ use App\User;
 use Exception;
 use Illuminate\Support\Facades\Input;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Illuminate\Support\Facades\Session;
 
 class ProfileController extends Controller{
 
@@ -105,6 +106,8 @@ class ProfileController extends Controller{
       $user->update(['name' => $name]);
       $user->userable->update(['personal_info' => $personal_info, 'university' => $university]);
     });
+
+    Session::flash("success_message", "Profile updated successfully.");
     
     return ProfileController::show_me();
   }

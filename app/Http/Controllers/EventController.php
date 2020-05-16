@@ -11,6 +11,7 @@ use App\Event;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Illuminate\Support\Facades\Session;
 
 class EventController extends Controller{
 
@@ -98,6 +99,8 @@ class EventController extends Controller{
       $location = $request->input('location');
 
       $event->update(['name' => $name, 'information' => $information, 'date' => $date, 'location' => $location]);
+
+      Session::flash("success_message", "Event updated successfully.");
 
       return EventController::show($event->event_id);
     }

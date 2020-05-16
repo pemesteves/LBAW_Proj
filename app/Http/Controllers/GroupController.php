@@ -11,6 +11,7 @@ use App\Group;
 use App\Report;
 use Illuminate\Support\Facades\Input;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Illuminate\Support\Facades\Session;
 
 class GroupController extends Controller{
 
@@ -94,6 +95,8 @@ class GroupController extends Controller{
       $information = $request->input('information');
 
       $group->update(['name' => $name, 'information' => $information]);
+
+      Session::flash("success_message", "Group updated successfully.");
 
       return GroupController::show($group->group_id);
     }
