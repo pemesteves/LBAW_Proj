@@ -21,6 +21,11 @@ function addEventListeners() {
       editers.addEventListener('click', setCommentEditBox);
     });
 
+    let commentReporters = document.querySelectorAll('article.post button.comment_report');
+    [].forEach.call(commentReporters, function(reporter) {
+      reporter.addEventListener('click', openReportCommentModal);
+    });
+
 
 }
 
@@ -66,8 +71,38 @@ function commentDeletedHandler() {
   element.remove();
 }
 
+function openReportCommentModal(event){
+  let id = this.closest('.comment_container').getAttribute('data-id');
+  $('#reportModal').modal('show')
+  let modal = document.querySelector('#reportModal');
+  modal.querySelector('#reportModalLabel').innerHTML = "Report comment"
+  modal.querySelector("#report_id").value = id;
+  modal.querySelector(".sendReport").removeEventListener('click' , sendReportPostRequest);
+  modal.querySelector(".sendReport").addEventListener('click' , sendReportCommentRequest);
+}
 
+function sendReportCommentRequest(event) {
+  let modal = this.closest('#reportModal');
+  let id = modal.querySelector("#report_id").value;
+  modal.querySelector("#report_id").value = ""
+  let title = modal.querySelector("#report_title").value;
+  modal.querySelector("#report_title").value = "";
+  let description = modal.querySelector("#report_description").value;
+  modal.querySelector("#report_description").value = "";
+  $('#reportModal').modal('hide')
+  sendAjaxRequest('put', '/api/comments/' + id + '/report', {'title' : title, 'description' : description}, commentReportedHandler);
+}
 
+function commentReportedHandler() {
+  if (this.status !== 201 && this.status !== 200) {
+    window.location = '/';
+    return;
+  }
+  let post = JSON.parse(this.responseText);
+
+  addFeedback("Comment reported sucessfully");
+
+}
 
 
 function setCommentEditBox(event){

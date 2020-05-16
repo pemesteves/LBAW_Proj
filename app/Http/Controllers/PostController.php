@@ -58,7 +58,7 @@ class PostController extends Controller{
       if(count($report) > 0)
         throw new HttpException(404, "post");
         
-      return view('pages.post' , ['is_admin' => false , 'post' => $post, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'notifications' => Auth::user()->userable->notifications]);
+      return view('pages.post' , ['is_admin' => false , 'post' => $post, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
     }
 
     /**

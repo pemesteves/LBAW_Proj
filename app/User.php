@@ -76,4 +76,8 @@ class User extends Authenticatable
         return $this->morphTo();
     }
 
+    public function isAdmin(){
+        return strcmp(get_class($this->userable) , "App\Admin") == 0;
+    }
+
 }

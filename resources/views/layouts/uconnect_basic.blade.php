@@ -32,10 +32,10 @@ window.Echo = new Echo({
                 <button id="navbar_pers_info_mobile" onclick="show_pers_info()"><span class="fa fa-id-card"></span></button>
                 @endif
                 <div id="navbar_pers_info" class="btn-group">
-                @if (!$is_admin)
+                @if (!Auth::user()->isAdmin())
                     
                     <div class="btn-group">
-                        <button class="btn btn-outline-light dropdown-toggle dropdown-toggle-split fa fa-bell" 
+                        <button class="btn btn-outline-light  dropdown-toggle-split fa fa-bell" 
                             type="button" id="notificationDrop" data-toggle="dropdown" 
                             aria-haspopup="true" aria-expanded="false"></button>
                         <div class="dropdown-menu dropdown-menu-lg-right" style=" min-width:350px;padding:0px" aria-labelledby="notificationDrop" id="notif">
@@ -43,10 +43,10 @@ window.Echo = new Echo({
                             <div class="dropdown-divider" style="margin-bottom:0px"></div>
                             <div style="max-height:200px;overflow-x: hidden;">
 
-                            @if (count($notifications) == 0) 
+                            @if (count(Auth::user()->userable->notifications) == 0) 
                                 <p style='margin-left:10%;margin-top:auto;margin-bottom:auto' >No notifications yet</p>
                             @else
-                                @each("partials.notification",$notifications,"notification")
+                                @each("partials.notification",Auth::user()->userable->notifications,"notification")
                             @endif
 
                             </div>
@@ -96,7 +96,7 @@ window.Echo = new Echo({
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">            
                             <div class="navbar-nav">
                                     <a class="dropdown-item" href="#"><span class="fa fa-adjust"></span>&nbsp;&nbsp;Dark Mode</a>
-                                @if(!$is_admin)   
+                                @if(!Auth::user()->isAdmin())   
                                     <a class="dropdown-item" href="/groups/create"><span class="fa fa-users"></span>&nbsp;Create Group</a>
                                     @if (isset($can_create_events) && $can_create_events)
                                         <a class="dropdown-item" href="/events/create"><span class="fa fa-calendar"></span>&nbsp;&nbsp;Create Event</a>

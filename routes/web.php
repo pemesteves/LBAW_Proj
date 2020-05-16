@@ -31,6 +31,7 @@ Route::put('api/posts/{id}/report', 'PostController@report');
 Route::put('/api/posts/{id}/comment', 'CommentController@create');
 Route::delete('api/comments/{id}', 'CommentController@delete');
 Route::put('api/comments/{id}/edit' , 'CommentController@update');
+Route::put('api/comments/{id}/report' , 'CommentController@report');
 
 
 Route::put('/api/posts/{id}/like/{val}' , 'PostController@like');
