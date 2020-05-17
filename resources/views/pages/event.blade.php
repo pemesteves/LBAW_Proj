@@ -13,7 +13,7 @@
     <div id="event_card" class="container card mb-3 border rounded">
         <div class="row">      
             <img 
-            @if (isset($image))
+            @if (isset($image) && $image !== null)
                 src="{{$image->file_path}}"
             @else
                 src=""

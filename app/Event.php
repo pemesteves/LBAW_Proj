@@ -65,8 +65,13 @@ class Event extends Model
      * Get event image
      */
     public function image() {
-        return DB::table('image')
+        $image = DB::table('image')
                    ->where('image.event_id', '=', $this->event_id)
-                   ->join('file', 'file.file_id', '=', 'image.image_id')->get()[0];
+                   ->join('file', 'file.file_id', '=', 'image.image_id')->get();
+        
+        if($image->count() === 0)
+            return null;
+            
+        return $image[0];
     }
 }

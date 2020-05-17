@@ -6,9 +6,15 @@
         <h2>Create Event</h2>
     </div>
     <div class="card">
-        <form method="post" action="/events/create">
+        <form id="event_image_upload" method="post" action="/events/create" enctype="multipart/form-data">
             <div class="card-body container">
                 @csrf      
+
+                <img src="" class="card-img-top mx-auto d-block" alt=""> 
+                <div>
+                    <input required name="image" type="file"/>
+                </div>
+
                 <legend class="card-title uconnect-title" >Name: </legend>
                 <input type="text" name="name" placeholder="Event Name" required/>
 
@@ -27,7 +33,7 @@
                 </div>
             </div>
             <div class="card-footer no-gutters">      
-                <button type="submit" class="btn-primary">Create Event</button>      
+                <button type="submit" class="btn-primary">CREATE EVENT</button>      
             </div>
         </form>    
     </div>

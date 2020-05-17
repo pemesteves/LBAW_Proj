@@ -10,6 +10,7 @@ use App\Report;
 use App\Event;
 use App\File;
 use App\Image;
+use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -53,7 +54,8 @@ class EventController extends Controller{
       if (!Auth::check()) return redirect('/login');
 
       $this->authorize('create', 'App\Event');
-      $event = DB::transaction(function(){
+
+      $event = DB::transaction(function() use ($request) {
         $event = new Event();
         $event->organization_id = Auth::user()->userable->regular_userable->organization_id;
         $event->name = Input::get('name');
@@ -61,11 +63,28 @@ class EventController extends Controller{
         $event->information = Input::get('information');
         $event->date = Input::get('date');
         $event->save();
-
+        
         DB::table('user_interested_in_event')->insert([
           'user_id' => Auth::user()->user_id,
           'event_id' => $event->event_id
         ]);
+        
+        $request->validate([
+          'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $imageName = time().'.'.request()->image->getClientOriginalExtension();
+
+        request()->image->move(public_path('images/events'), $imageName);
+
+        $file = new File();
+        $file->file_path = '/images/events/' . $imageName;
+        $file->save();
+
+        $image = new Image();
+        $image->file_id = $file->file_id;
+        $image->event_id = $event->event_id;
+        $image->save();
 
         return $event;
       });
@@ -101,7 +120,8 @@ class EventController extends Controller{
       $date = $request->input('date');
       $location = $request->input('location');
 
-      $this->upload_image($request, $id);
+      if($request->input('image') !== null)
+        $this->upload_image($request, $id);
       
       $event->update(['name' => $name, 'information' => $information, 'date' => $date, 'location' => $location]);
 
@@ -139,7 +159,11 @@ class EventController extends Controller{
 
       request()->image->move(public_path('images/events'), $imageName);
 
-      $image = Image::where('event_id', '=', $event_id)->get()[0];
+      try{
+        $image = Image::where('event_id', '=', $event_id)->get()[0];
+      }catch(Exception $e){
+        $image = null;
+      }
 
       if(isset($image) && $image !== null){ // Delete image and file
         $file_id = $image->file_id;
