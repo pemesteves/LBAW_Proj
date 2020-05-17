@@ -10,10 +10,10 @@
             <div class="card-body container">
                 @csrf      
                 <legend class="card-title uconnect-title" >Name: </legend>
-                <input type="text" name="name" placeholder="Group Name" required/>
+                <input id="name" type="text" name="name" placeholder="Group Name" required/>
 
                 <legend>Information:</legend>
-                <textarea  name="information" type="text" required></textarea>
+                <textarea id="information" name="information" type="text" required></textarea>
             </div>
             <div class="card-footer no-gutters">      
                 <button type="submit" class="btn-primary">Create Group</button>      

@@ -48,11 +48,11 @@
                     <div class="container" style="border-bottom:0;border-top:0;border-radius:0;height:100%; margin: 0 auto">
                         <div class="row post_title" style="width:100%; margin: 0;">
                             <h2 style="font-weight: normal">Title:</h2>
-                            <h2 style="width: 100%"><input style="width: 100%" name="title" type="text" value="{{$post['title']}}"></input></h2>  
+                            <h2 style="width: 100%"><input id="post_title" style="width: 100%" name="title" type="text" value="{{$post['title']}}"></input></h2>  
                         </div>
                         <div class="row post_content" style="border-bottom: 0; width: 100%; margin: 0; margin-bottom: 1em">
                             <h2 style="font-weight: normal">Body:</h2>
-                            <textarea style="width: 100%; margin: 0;" name="body" type="text" >{{$post['body']}}</textarea>
+                            <textarea id="post_text" style="width: 100%; margin: 0;" name="body" type="text" >{{$post['body']}}</textarea>
                         </div>
                     </div>
                 </div>
