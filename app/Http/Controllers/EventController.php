@@ -120,7 +120,7 @@ class EventController extends Controller{
       $date = $request->input('date');
       $location = $request->input('location');
 
-      if($request->input('image') !== null)
+      if(request()->image !== null)
         $this->upload_image($request, $id);
       
       $event->update(['name' => $name, 'information' => $information, 'date' => $date, 'location' => $location]);
@@ -154,7 +154,6 @@ class EventController extends Controller{
       $request->validate([
         'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
       ]);
-
       $imageName = time().'.'.request()->image->getClientOriginalExtension();
 
       request()->image->move(public_path('images/events'), $imageName);
@@ -181,7 +180,7 @@ class EventController extends Controller{
       $image->file_id = $file->file_id;
       $image->event_id = $event_id;
       $image->save();
-
+      error_log($image);
       return $image;
     }
 

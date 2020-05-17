@@ -6,9 +6,15 @@
         <h2>Create Group</h2>
     </div>
     <div class="card">
-        <form method="post" action="/groups/create">
+        <form id="group_image_upload" method="post" action="/groups/create" enctype="multipart/form-data">
+            @csrf
+            <div class="card-title">
+                <img src="http://www.pluspixel.com.br/wp-content/uploads/services-socialmediamarketing-optimized.png" class="mx-auto d-block" alt=""> 
+                <div style="display: none;">
+                    <input name="image" type="file"/>
+                </div>      
+            </div>
             <div class="card-body container">
-                @csrf      
                 <legend class="card-title uconnect-title" >Name: </legend>
                 <input type="text" name="name" placeholder="Group Name" required/>
 

@@ -14,7 +14,13 @@
     <div id="group_card" class="container card mb-3 border rounded">
         <div class="row no-gutters">
             <div class="card text-center col-sm-3">
-                <img src="http://www.pluspixel.com.br/wp-content/uploads/services-socialmediamarketing-optimized.png" class="card-img-top mx-auto d-block" alt="..." style="border-radius:50%; max-width:8rem">
+                <img 
+                    @if (isset($image) && $image !== null)
+                        src="{{$image->file_path}}"
+                    @else
+                        src="http://www.pluspixel.com.br/wp-content/uploads/services-socialmediamarketing-optimized.png" 
+                    @endif
+                class="card-img-top mx-auto d-block" alt="..." style="border-radius:50%; max-width:8rem">
             </div>
             <div class="card col-sm-9" >
                 <div class="row">

@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 use App\Post;
 use App\Group;
+use App\Image;
 use App\Report;
+use Exception;
 use Illuminate\Support\Facades\Input;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
@@ -32,8 +35,10 @@ class GroupController extends Controller{
             ->where('user_id', '=', Auth::user()->userable->regular_user_id)
             ->select('admin')
             ->limit(1);
+      
+      $image = $group->image();
 
-      return view('pages.group' , ['is_admin' => false, 'notifications' => Auth::user()->userable->notifications, 'group' => $group, 'posts' => $posts, 'members' => $members, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'is_owner' => $owner ]);
+      return view('pages.group' , ['is_admin' => false, 'notifications' => Auth::user()->userable->notifications, 'group' => $group, 'posts' => $posts, 'members' => $members, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'is_owner' => $owner , 'image' => $image]);
     }
 
     public function showCreateForm(){
@@ -49,7 +54,7 @@ class GroupController extends Controller{
 
       $this->authorize('create', 'App\Group');
       
-      $group = DB::transaction(function(){
+      $group = DB::transaction(function() use($request){
         $group = new Group();
         $group->name = Input::get('name');
         $group->information = Input::get('information');
@@ -60,6 +65,24 @@ class GroupController extends Controller{
               'group_id' => $group->group_id,
               'admin' => true
             ]);
+
+        if(request()->image !== null){
+          $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:20048',
+          ]);
+          $imageName = time().'.'.request()->image->getClientOriginalExtension();
+
+          request()->image->move(public_path('images/groups'), $imageName);
+
+          $file = new File();
+          $file->file_path = '/images/groups/' . $imageName;
+          $file->save();
+
+          $image = new Image();
+          $image->file_id = $file->file_id;
+          $image->group_id = $group->group_id;
+          $image->save();
+        }
             
         return $group;
       });
@@ -93,6 +116,9 @@ class GroupController extends Controller{
       $name = $request->input('name');
       $information = $request->input('information');
 
+      if($request->input('image') !== null)
+        $this->upload_image($request, $id);
+
       $group->update(['name' => $name, 'information' => $information]);
 
       return GroupController::show($group->group_id);
@@ -117,5 +143,40 @@ class GroupController extends Controller{
 
       $report->save();
       return $report;
+    }
+
+    public function upload_image(Request $request, $group_id){
+      $request->validate([
+        'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+      ]);
+
+      $imageName = time().'.'.request()->image->getClientOriginalExtension();
+
+      request()->image->move(public_path('images/groups'), $imageName);
+
+      try{
+        $image = Image::where('group_id', '=', $group_id)->get()[0];
+      }catch(Exception $e){
+        $image = null;
+      }
+
+      if(isset($image) && $image !== null){ // Delete image and file
+        $file_id = $image->file_id;
+        $image->delete();
+        
+        $file = File::find($file_id);
+        $file->delete();
+      }
+      
+      $file = new File();
+      $file->file_path = '/images/groups/' . $imageName;
+      $file->save();
+
+      $image = new Image();
+      $image->file_id = $file->file_id;
+      $image->group_id = $group_id;
+      $image->save();
+
+      return $image;
     }
 }

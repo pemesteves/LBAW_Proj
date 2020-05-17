@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Group extends Model
 {
@@ -58,5 +59,19 @@ class Group extends Model
                        ->count();
 
         return $result;
+    }
+
+    /**
+     * Get group image
+     */
+    public function image() {
+        $image = DB::table('image')
+                   ->where('image.group_id', '=', $this->group_id)
+                   ->join('file', 'file.file_id', '=', 'image.image_id')->get();
+        
+        if($image->count() === 0)
+            return null;
+            
+        return $image[0];
     }
 }
