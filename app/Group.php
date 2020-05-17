@@ -67,7 +67,7 @@ class Group extends Model
     public function image() {
         $image = DB::table('image')
                    ->where('image.group_id', '=', $this->group_id)
-                   ->join('file', 'file.file_id', '=', 'image.image_id')->get();
+                   ->join('file', 'file.file_id', '=', 'image.file_id')->get();
         
         if($image->count() === 0)
             return null;
