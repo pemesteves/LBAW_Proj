@@ -42,6 +42,7 @@
             <script src="{{ asset('js/friendship.js') }}" defer> </script>
             <script src="{{ asset('js/event.js') }}" defer> </script>
             <script src="{{ asset('js/group.js') }}" defer> </script>
+            <script src="{{ asset('js/input_validation.js') }}" defer> </script>
 
             <style>
                 body {
