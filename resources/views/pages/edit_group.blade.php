@@ -2,10 +2,25 @@
 
 @section('content')
 <div id="create_card" class="card mb-3 border rounded">
-    <form id="group_image_upload" method="post" action="/groups/{{$group->group_id}}">
+    <form id="group_image_upload" method="post" action="/groups/{{$group->group_id}}" enctype="multipart/form-data">
         @csrf
-        <img src="images/aefeup.jpg" class="card-img-top mx-auto d-block" alt="..."> <!--Add image upload -->
         <div class="card">
+            <div class="card-title">
+                <img 
+                @if (isset($image) && $image !== null)
+                    src="{{$image->file_path}}"
+                @else
+                    src="http://www.pluspixel.com.br/wp-content/uploads/services-socialmediamarketing-optimized.png" 
+                @endif
+                class="mx-auto d-block" alt=""> 
+                <div style="display: none;">
+                    <input name="image" type="file" 
+                        @if (isset($image) && $image !== null)
+                            value="{{$image->file_path}}"
+                        @endif
+                    />
+                </div>      
+            </div>
             <div class="card-body">
                 <legend class="card-title uconnect-title" >Name: </legend>
                 <h1 class="card-title uconnect-title" >

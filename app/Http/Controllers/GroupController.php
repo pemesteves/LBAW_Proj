@@ -99,7 +99,9 @@ class GroupController extends Controller{
 
       $this->authorize('edit', $group);
       
-      return view('pages.edit_group' , ['is_admin' => false, 'notifications' => Auth::user()->userable->notifications, 'group' => $group, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization' ]);
+      $image = $group->image();
+
+      return view('pages.edit_group' , ['is_admin' => false, 'notifications' => Auth::user()->userable->notifications, 'group' => $group, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'image' => $image ]);
     }
 
     /**
@@ -116,7 +118,7 @@ class GroupController extends Controller{
       $name = $request->input('name');
       $information = $request->input('information');
 
-      if($request->input('image') !== null)
+      if(request()->image !== null)
         $this->upload_image($request, $id);
 
       $group->update(['name' => $name, 'information' => $information]);
@@ -149,7 +151,6 @@ class GroupController extends Controller{
       $request->validate([
         'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
       ]);
-
       $imageName = time().'.'.request()->image->getClientOriginalExtension();
 
       request()->image->move(public_path('images/groups'), $imageName);
