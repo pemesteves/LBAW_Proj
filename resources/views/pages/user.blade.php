@@ -31,7 +31,7 @@
                         @break;
                     @endswitch
                     </h2>
-                        @if(Auth::user()->user_id != $user->user_id)
+                        @if(Auth::user()->user_id != $user->user_id && !Auth::user()->isAdmin())
                             @if(count($friendship_status) == 0)
                             <button type="button" class="btn btn-light add_friend" data-id='{{$user->regular_user_id}}' style="margin-left: auto; margin-right:4%;background-color: rgba(0,0,150,.03); ">
                                 Add Friend
@@ -133,7 +133,7 @@
                         <h5 class="mb-0">
                             <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                             Friends 
-                                @if(Auth::user()->user_id != $user->user_id) 
+                                @if(Auth::user()->user_id != $user->user_id && !Auth::user()->isAdmin()) 
                                     ( {{count(Auth::user()->userable->friendsInCommun($user))}} in commun )
                                 @endif
                             </button>
