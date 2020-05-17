@@ -95,7 +95,7 @@ class RegularUserController extends Controller{
     public function orgVerify(Request $request, $id) {
         $approval_request = new OrgApproval();
         $approval_request->organization_id = Auth::user()->userable->regular_userable->organization_id;
-        $approval_request->reason = Auth::name() . " wants to be verified";
+        $approval_request->reason = Auth::user()->name . " wants to be verified";
 
         $approval_request->save();
         return $approval_request;

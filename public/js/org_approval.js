@@ -42,22 +42,4 @@ function requestFailedHandler(){
   addErrorFeedback("Request processing failed.");
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 addEventListeners();

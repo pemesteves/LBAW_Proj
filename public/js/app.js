@@ -250,6 +250,8 @@ function postDeletedHandler() {
 
 function orgRequestHandler() {
     if (this.status != 200 && this.status != 201) {
+      console.log(this.responseText);
+      let x = JSON.parse(this.responseText);
       addErrorFeedback("Request processing failed.");
       return;
     }
