@@ -54,6 +54,10 @@
                                         </button>
                                 @endif
                             @endif
+                        @elseif (Auth::user()->user_id == $user->user_id && get_class($user->regular_userable) == "App\Organization")  
+                            <button type="button" class="btn btn-light verify_org" data-id='{{$user->regular_user_id}}' style="margin-left: auto; margin-right:4%;background-color: rgba(0,0,150,.03); ">
+                                Verify Organization
+                            </button>
                         @endif
                 </div>
                 <div class="row">
