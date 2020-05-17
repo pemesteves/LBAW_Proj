@@ -41,6 +41,9 @@ Route::put('/api/chats/{id}/message', 'MessageController@create');
 Route::put('/api/reports/{id}/accept' , 'ReportController@accept');
 Route::put('/api/reports/{id}/decline' , 'ReportController@decline');
 
+Route::put('api/orgApproval/{id}/accept', 'OrgApprovalController@accept');
+Route::put('api/orgApproval/{id}/decline', 'OrgApprovalController@decline');
+
 Route::put('/api/sendFriendRequest/{id}' , 'RegularUserController@sendRequest');
 Route::put('/api/cancelFriendRequest/{id}' , 'RegularUserController@cancelRequest');
 Route::put('/api/acceptFriendRequest/{id}' , 'RegularUserController@acceptRequest');

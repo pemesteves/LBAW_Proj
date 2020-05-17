@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Post;
 use App\Report;
 use App\RegularUser;
+use App\OrgApproval;
 
 class FeedController extends Controller{
 
@@ -116,8 +117,9 @@ class FeedController extends Controller{
 
     public function show_admin_feed(){
         $reports = Report::whereNull('approval')->orderBy('report_id','desc')->get();
+        $requests = OrgApproval::whereNull('approval')->orderBy('request_id','desc')->get();
 
-        return view('pages.report_feed' , ['reports' => $reports, 'is_admin' => true, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
+        return view('pages.admin_feed' , ['reports' => $reports, 'is_admin' => true, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'requests' => $requests]);
     
     }
 }

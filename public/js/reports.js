@@ -1,13 +1,13 @@
 function addEventListeners() {
 
     let reportAccepters = document.querySelectorAll('div.report button.accept');
-    [].forEach.call(reportAccepters, function(liker) {
-      liker.addEventListener('click', sendAcceptReportRequest);
+    [].forEach.call(reportAccepters, function(accepter) {
+      accepter.addEventListener('click', sendAcceptReportRequest);
     });
 
     let reportDecliners = document.querySelectorAll('div.report button.decline');
-    [].forEach.call(reportDecliners, function(liker) {
-      liker.addEventListener('click', sendDeclineReportRequest);
+    [].forEach.call(reportDecliners, function(decliner) {
+      decliner.addEventListener('click', sendDeclineReportRequest);
     });
 
 
