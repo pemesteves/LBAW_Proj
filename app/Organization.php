@@ -30,6 +30,7 @@ class Organization extends Model
      * @var array
      */
     protected $attributes = [
+        
     ];
 
     /*public function regular_user(){
