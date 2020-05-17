@@ -49,7 +49,7 @@ class OrgApproval extends Model
 
 
   function link(){
-    return "users/" . Organization::find($this->organization_id)->regular_user_id;;
+    return "users/" . Organization::find($this->organization_id)->regular_user_id;
   }
 
    /**

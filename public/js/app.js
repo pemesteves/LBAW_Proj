@@ -47,6 +47,10 @@ function addEventListeners() {
     reporter.addEventListener('click', openReportPostModal);
   });
 
+  let orgRequesters = document.querySelectorAll('button.verify_org');
+  [].forEach.call(orgRequesters, function(requester) {
+    requester.addEventListener('click', sendOrgRequest);
+  });
 }
 
 
@@ -105,6 +109,15 @@ function sendDeletePostRequest(event) {
   sendAjaxRequest('delete', '/api/posts/' + id, null, postDeletedHandler, postDeleteErrorHandler);
 }
 
+
+function sendOrgRequest(event) {
+  let id = this.closest('button').getAttribute('data-id');
+
+  sendAjaxRequest('put', '/api/users/' + id + '/orgVerify', null, orgRequestHandler, orgRequestErrorHandler);
+
+  event.preventDefault();
+  return false;
+}
 
 function openReportPostModal(event){
   let id = this.closest('article').getAttribute('data-id');
@@ -231,8 +244,23 @@ function postDeletedHandler() {
   $('#popup-'+post.post_id).modal('hide');
   element.remove();
 
-  addFeedback("Post deleted sucessfully");
+  addFeedback("Post deleted successfully");
 
+}
+
+function orgRequestHandler() {
+    if (this.status != 200 && this.status != 201) {
+      addErrorFeedback("Request processing failed.");
+      return;
+    }
+    let x = JSON.parse(this.responseText);
+
+    addFeedback("Request sent successfully");
+
+}
+
+function orgRequestErrorHandler() {
+  addErrorFeedback("Request processing failed.");
 }
 
 function postDeleteErrorHandler() {

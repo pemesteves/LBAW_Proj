@@ -51,6 +51,7 @@ Route::put('/api/declineFriendRequest/{id}' , 'RegularUserController@declineRequ
 Route::put('/api/removeFriendRequest/{id}' , 'RegularUserController@removeFriend');
 
 
+Route::put('/api/users/{id}/orgVerify', 'RegularUserController@orgVerify');
 
 // Authentication
 
