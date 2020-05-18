@@ -31,6 +31,7 @@ Route::put('api/posts/{id}/report', 'PostController@report');
 Route::put('/api/posts/{id}/comment', 'CommentController@create');
 Route::delete('api/comments/{id}', 'CommentController@delete');
 Route::put('api/comments/{id}/edit' , 'CommentController@update');
+Route::put('api/comments/{id}/report' , 'CommentController@report');
 
 
 Route::put('/api/posts/{id}/like/{val}' , 'PostController@like');
@@ -40,6 +41,9 @@ Route::put('/api/chats/{id}/message', 'MessageController@create');
 Route::put('/api/reports/{id}/accept' , 'ReportController@accept');
 Route::put('/api/reports/{id}/decline' , 'ReportController@decline');
 
+Route::put('/api/orgApproval/{id}/accept', 'OrgApprovalController@accept');
+Route::put('/api/orgApproval/{id}/decline', 'OrgApprovalController@decline');
+
 Route::put('/api/sendFriendRequest/{id}' , 'RegularUserController@sendRequest');
 Route::put('/api/cancelFriendRequest/{id}' , 'RegularUserController@cancelRequest');
 Route::put('/api/acceptFriendRequest/{id}' , 'RegularUserController@acceptRequest');
@@ -47,6 +51,7 @@ Route::put('/api/declineFriendRequest/{id}' , 'RegularUserController@declineRequ
 Route::put('/api/removeFriendRequest/{id}' , 'RegularUserController@removeFriend');
 
 
+Route::put('/api/users/{id}/orgVerify', 'RegularUserController@orgVerify');
 
 // Authentication
 

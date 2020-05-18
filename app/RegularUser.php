@@ -58,6 +58,10 @@ class RegularUser extends Model
         return $this->belongsToMany('App\Group','user_in_group','user_id','group_id');
     }
 
+    public function events(){
+        return $this->belongsToMany('App\Event','user_interested_in_event','user_id','event_id');
+    }
+
     public function chats(){
         return $this->belongsToMany('App\Chat', 'user_in_chat', 'user_id', 'chat_id');
     }
@@ -79,4 +83,17 @@ class RegularUser extends Model
             
         return $image[0];
     }
+    
+    public function friends(){
+        return $this->belongsToMany('App\RegularUser', 'friend', 'friend_id1', 'friend_id2')->wherePivot('type', 'accepted');
+    }
+
+    /**
+     * $user : App\RegularUser object
+     */
+    public function friendsInCommun($user){
+        return $this->friends->intersect($user->friends);
+    }
+    
+
 }

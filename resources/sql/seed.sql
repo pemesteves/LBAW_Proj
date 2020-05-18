@@ -15,6 +15,7 @@ DROP TABLE IF EXISTS public."file";
 DROP TABLE IF EXISTS public."post";
 DROP TABLE IF EXISTS public."group";
 DROP TABLE IF EXISTS public."event";
+DROP TABLE IF EXISTS public."organization_approval_request";
 DROP TABLE IF EXISTS public."organization";
 DROP TABLE IF EXISTS public."teacher";
 DROP TABLE IF EXISTS public."student";
@@ -104,7 +105,6 @@ CREATE TABLE public."organization"
 (
     "organization_id" serial NOT NULL,
 	"regular_user_id" integer NOT NULL REFERENCES public."regular_user"("regular_user_id") ON DELETE CASCADE,
-	"approval" boolean NOT NULL DEFAULT FALSE,
     CONSTRAINT "organization_pkey" PRIMARY KEY ("organization_id")
 );
 
@@ -301,6 +301,16 @@ CREATE TABLE public."user_interested_in_event"
 	CONSTRAINT "user_interested_in_event_pkey" PRIMARY KEY ("user_id", "event_id")
 );
 
+
+CREATE TABLE public."organization_approval_request" (
+	"request_id" serial NOT NULL,
+	"organization_id" integer NOT NULL REFERENCES public."organization"("organization_id") ON DELETE CASCADE,
+	"approval" boolean DEFAULT NULL,
+	"reason" text NOT NULL,
+	"date" timestamp with time zone NOT NULL DEFAULT now(),
+	CONSTRAINT "organization_approval_request_pkey" PRIMARY KEY ("request_id")
+);
+
 CREATE TABLE public."user_reaction"
 (
 	"user_id" integer NOT NULL REFERENCES public."user"("user_id") ON DELETE CASCADE,
@@ -368,7 +378,7 @@ DROP TRIGGER IF EXISTS friend_status ON "friend" CASCADE;
 DROP TRIGGER IF EXISTS delete_refused_report ON "report" CASCADE;
 DROP TRIGGER IF EXISTS event_date ON "event" CASCADE;
 DROP TRIGGER IF EXISTS post_date ON "post" CASCADE;
-DROP TRIGGER IF EXISTS unique_org ON "organization" CASCADE;
+-- DROP TRIGGER IF EXISTS unique_org ON "organization" CASCADE;
 DROP TRIGGER IF EXISTS event_update_at ON "event" CASCADE;
 DROP TRIGGER IF EXISTS group_update_at ON "group" CASCADE;
 
@@ -379,7 +389,7 @@ DROP FUNCTION IF EXISTS friend_status() CASCADE;
 DROP FUNCTION IF EXISTS delete_refused_report() CASCADE;
 DROP FUNCTION IF EXISTS event_date() CASCADE;
 DROP FUNCTION IF EXISTS post_date() CASCADE;
-DROP FUNCTION IF EXISTS unique_org() CASCADE;
+-- DROP FUNCTION IF EXISTS unique_org() CASCADE;
 DROP FUNCTION IF EXISTS update_at() CASCADE;
 
 CREATE FUNCTION update_group_posts() RETURNS TRIGGER AS
@@ -534,31 +544,31 @@ CREATE TRIGGER post_date
 
 
 
-CREATE FUNCTION unique_org() RETURNS trigger AS
-$BODY$
-BEGIN
-	IF new."approval" = TRUE THEN
-    	IF EXISTS (Select * from
-				  	(SELECT * FROM "organization" INNER JOIN "regular_user" on "organization"."regular_user_id" = "regular_user"."regular_user_id"
-						INNER JOIN "user" on "regular_user"."user_id" = "user"."user_id" where "organization"."approval" = TRUE) as "t1"
-				   	INNER JOIN
-				   	(SELECT * FROM "organization" INNER JOIN "regular_user" on "organization"."regular_user_id" = "regular_user"."regular_user_id"
-						INNER JOIN "user" on "regular_user"."user_id" = "user"."user_id" where "organization"."organization_id" = new."organization_id") as "t2"
-				   	on t1."name" = "t2"."name"
-				  	) 
-		THEN
-			RAISE EXCEPTION 'Two organizations approved with same name';
-		END IF;
-	END IF;
-	RETURN NEW;
+-- CREATE FUNCTION unique_org() RETURNS trigger AS
+-- $BODY$
+-- BEGIN
+-- 	IF new."approval" = TRUE THEN
+--     	IF EXISTS (Select * from
+-- 				  	(SELECT * FROM "organization" INNER JOIN "regular_user" on "organization"."regular_user_id" = "regular_user"."regular_user_id"
+-- 						INNER JOIN "user" on "regular_user"."user_id" = "user"."user_id" where "organization"."approval" = TRUE) as "t1"
+-- 				   	INNER JOIN
+-- 				   	(SELECT * FROM "organization" INNER JOIN "regular_user" on "organization"."regular_user_id" = "regular_user"."regular_user_id"
+-- 						INNER JOIN "user" on "regular_user"."user_id" = "user"."user_id" where "organization"."organization_id" = new."organization_id") as "t2"
+-- 				   	on t1."name" = "t2"."name"
+-- 				  	) 
+-- 		THEN
+-- 			RAISE EXCEPTION 'Two organizations approved with same name';
+-- 		END IF;
+-- 	END IF;
+-- 	RETURN NEW;
 
-END
-$BODY$
-LANGUAGE plpgsql;
+-- END
+-- $BODY$
+-- LANGUAGE plpgsql;
 
-CREATE TRIGGER unique_org
-    BEFORE UPDATE ON public."organization"
-    EXECUTE PROCEDURE unique_org();
+-- CREATE TRIGGER unique_org
+--     BEFORE UPDATE ON public."organization"
+--     EXECUTE PROCEDURE unique_org();
 
 
 insert into public."user" ("name", "email", "password","userable_id","userable_type") values('Admin1', 'admin1@gg.pt', '$2y$12$4c4ki2eoJHMW75uuaFffLe6yEiUsbtomUOQErBwgp7hmeV5DfVzPa',1,'App\Admin'); --admin
@@ -640,7 +650,9 @@ insert into public."teacher" ("regular_user_id") values (15);
 insert into public."teacher" ("regular_user_id") values (21);
 
 
-insert into public."organization" ("regular_user_id", "approval") values (22, TRUE);
+insert into public."organization" ("regular_user_id") values (22);
+
+insert into public."organization_approval_request" ("organization_id", "reason") values (1, 'We need this to comprove the veracity of our organization');
 
 
 insert into public."event" ("organization_id", "name", "location", "date", "information") values (1, 'Evento de LBAW', 'Porto', '2020-06-29 17:45:00', 'general info');
@@ -748,6 +760,20 @@ insert into public."notified_user" ("notification_id", "user_notified") values (
 insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (1, 4, DEFAULT);
 insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (1, 15, DEFAULT);
 insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (1, 18, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (2, 8, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (2, 10, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (4, 3, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (4, 6, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (5, 8, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (6, 19, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (7, 12, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (7, 17, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (8, 11, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (8, 10, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (10, 20, DEFAULT);
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (14, 2, DEFAULT);
+
+
 insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (2, 3, 'accepted');
 insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (3, 2, 'accepted');
 insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (2, 4, 'accepted');
@@ -758,20 +784,28 @@ insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (2, 6, 'a
 insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (6, 2, 'accepted');
 insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (2, 7, 'accepted');
 insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (7, 2, 'accepted');
-insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (2, 8, DEFAULT);
-insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (2, 10, DEFAULT);
-insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (4, 3, DEFAULT);
-insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (4, 6, DEFAULT);
-insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (5, 7, DEFAULT);
-insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (5, 8, DEFAULT);
-insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (6, 8, DEFAULT);
-insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (6, 19, DEFAULT);
-insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (7, 12, DEFAULT);
-insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (7, 17, DEFAULT);
-insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (8, 11, DEFAULT);
-insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (8, 10, DEFAULT);
-insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (10, 20, DEFAULT);
-insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (14, 2, DEFAULT);
+
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (5, 6, 'accepted');
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (6, 5, 'accepted');
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (5, 4, 'accepted');
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (4, 5, 'accepted');
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (5, 3, 'accepted');
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (3, 5, 'accepted');
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (5, 14, 'accepted');
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (14, 5, 'accepted');
+
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (7, 19, 'accepted');
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (19, 7, 'accepted');
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (7, 5, 'accepted');
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (5, 7, 'accepted');
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (7, 4, 'accepted');
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (4, 7, 'accepted');
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (7, 15, 'accepted');
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (15, 7, 'accepted');
+
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (15, 4, 'accepted');
+insert into public."friend" ("friend_id1", "friend_id2", TYPE ) values (4, 15, 'accepted');
+
 
 
 insert into public."user_interested_in_event" ("user_id","event_id") values(2,1);

@@ -19,6 +19,7 @@ use App\User;
 use Exception;
 use Illuminate\Support\Facades\Input;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Illuminate\Support\Facades\Session;
 
 class ProfileController extends Controller{
 
@@ -33,16 +34,9 @@ class ProfileController extends Controller{
 
       $groups = Auth::user()->userable->groups;
 
-      $friends = RegularUser::join('friend', 'friend_id2', '=', 'regular_user_id')
-                      ->where([
-                        ['friend.friend_id1', '=', Auth::user()->userable_id],
-                        ['friend.type','accepted']
-                      ])
-                      ->get();
-
       $image = Auth::user()->userable->image();
-
-      return view('pages.user' , ['is_admin' => false , 'user' => Auth::user()->userable, 'posts' => $posts ,'notifications' => Auth::user()->userable->notifications, 'groups' => $groups, 'friends' => $friends, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'image' => $image]);
+      
+      return view('pages.user' , ['is_admin' => false , 'user' => Auth::user()->userable, 'posts' => $posts , 'groups' => $groups, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'image' => $image]);
   }
 
   public function show_me_edit(){
@@ -69,12 +63,6 @@ class ProfileController extends Controller{
 
     $groups = $user->groups;
 
-    $friends = RegularUser::join('friend', 'friend_id2', '=', 'regular_user_id')
-                    ->where([
-                      ['friend.friend_id1', '=', $user->regular_user_id],
-                      ['friend.type','accepted']
-                    ])
-                    ->get();
     $friendship_status = DB::table("friend")
                         ->where([
                           ['friend.friend_id1', '=', $user->regular_user_id],
@@ -89,9 +77,7 @@ class ProfileController extends Controller{
     }
 
     $image = $user->image();
-
-    return view('pages.user' , ['is_admin' => false , 'user' => $user,'notifications' => Auth::user()->userable->notifications, 'friendship_status' => $friendship_status, 'posts' => $posts, 'groups' => $groups, 'friends' => $friends, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'image' => $image ]);
-
+    return view('pages.user' , ['is_admin' => false , 'user' => $user, 'friendship_status' => $friendship_status, 'posts' => $posts, 'groups' => $groups,  'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'image' => $image ]);
   }
 
   /**
@@ -142,6 +128,8 @@ class ProfileController extends Controller{
         $image->save();
       }
     });
+
+    Session::flash("success_message", "Profile updated successfully.");
     
     return ProfileController::show_me();
   }

@@ -30,7 +30,7 @@ class Organization extends Model
      * @var array
      */
     protected $attributes = [
-        'approval' => 'FALSE',
+        
     ];
 
     /*public function regular_user(){

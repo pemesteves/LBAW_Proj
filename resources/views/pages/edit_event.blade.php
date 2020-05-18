@@ -21,11 +21,11 @@
             <div class="card-body" style="padding: 1em;">
                 <legend class="card-title uconnect-title" >Name: </legend>
                 <h1 class="card-title uconnect-title" >
-                    <input type="text" name="name" placeholder="Event Name" value="{{ $event->name }}" required/>
+                    <input id="name" type="text" name="name" placeholder="Event Name" value="{{ $event->name }}" required/>
                 </h1>
                 <legend>Information:</legend>
                 <p class="card-text uconnect-paragraph" >
-                    <textarea name="information" type="text" required>{{ $event->information }}</textarea>
+                    <textarea id="information" name="information" type="text" required>{{ $event->information }}</textarea>
                 </p>
                 <div class="row">
                     <div class="col-sm-6">

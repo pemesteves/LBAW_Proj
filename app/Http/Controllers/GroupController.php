@@ -14,6 +14,7 @@ use App\Report;
 use Exception;
 use Illuminate\Support\Facades\Input;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Illuminate\Support\Facades\Session;
 
 class GroupController extends Controller{
 
@@ -122,6 +123,8 @@ class GroupController extends Controller{
         $this->upload_image($request, $id);
 
       $group->update(['name' => $name, 'information' => $information]);
+
+      Session::flash("success_message", "Group updated successfully.");
 
       return GroupController::show($group->group_id);
     }

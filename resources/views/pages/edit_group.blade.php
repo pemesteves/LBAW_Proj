@@ -24,11 +24,11 @@
             <div class="card-body">
                 <legend class="card-title uconnect-title" >Name: </legend>
                 <h1 class="card-title uconnect-title" >
-                    <input type="text" name="name" placeholder="Group Name" value="{{ $group->name }}" required/>
+                    <input id="name" type="text" name="name" placeholder="Group Name" value="{{ $group->name }}" required/>
                 </h1>
                 <legend>Information:</legend>
                 <p class="card-text uconnect-paragraph" >
-                    <textarea name="information" type="text" required>{{$group->information}}</textarea>
+                    <textarea id="information" name="information" type="text" required>{{$group->information}}</textarea>
                 </p>
             </div>       
             <div class="card-footer container no-gutters">  

@@ -85,11 +85,15 @@ function requestFriendHandler(){
         return false;
 
     let adder = document.querySelector('button.add_friend[data-id="'+ status.user_id + '"]');
-    adder.outerHTML=
+    adder.classList.remove("add_friend");
+    adder.classList.add("cancel_friend");
+    /*adder.outerHTML=
     `<button type="button" class="btn btn-light cancel_friend" data-id='${status.user_id}' style="margin-left: auto; margin-right:4%;background-color: rgba(0,0,150,.03); ">
         Cancel Request
-    </button>`;
-    document.querySelector('button.cancel_friend[data-id="'+ status.user_id + '"]').addEventListener('click',calcelFriendRequest);
+    </button>`;*/
+    adder.innerHTML = "Cancel Request";
+    adder.removeEventListener('click',requestFriendRequest);
+    adder.addEventListener('click',calcelFriendRequest);
     return true;
 }
 
@@ -104,11 +108,15 @@ function cancelFriendHandler(){
         return false;
 
     let adder = document.querySelector('button.cancel_friend[data-id="'+ status.user_id + '"]');
+    adder.classList.remove("cancel_friend");
+    adder.classList.add("add_friend");/*
     adder.outerHTML=
     `<button type="button" class="btn btn-light add_friend" data-id='${status.user_id}' style="margin-left: auto; margin-right:4%;background-color: rgba(0,0,150,.03); ">
         Add Friend
-    </button>`
-    document.querySelector('button.add_friend[data-id="'+ status.user_id + '"]').addEventListener('click',requestFriendRequest);
+    </button>`*/
+    adder.innerHTML = "Add Friend";
+    adder.removeEventListener('click',calcelFriendRequest);
+    adder.addEventListener('click',requestFriendRequest);
     return true;
 }
 

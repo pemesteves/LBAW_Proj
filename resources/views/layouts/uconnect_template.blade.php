@@ -43,6 +43,7 @@
             <script src="{{ asset('js/event.js') }}" defer> </script>
             <script src="{{ asset('js/group.js') }}" defer> </script>
             <script src="{{ asset('js/uploadImages.js') }}" defer> </script>
+            <script src="{{ asset('js/input_validation.js') }}" defer> </script>
 
             <style>
                 body {
@@ -67,6 +68,18 @@
             </section>           
 
             <section id="content">
+                
+            @if(Session::has("success_message"))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <?php 
+                Session::get("success_message") 
+                ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
+
                 @yield('content')
                 
                 <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -93,7 +106,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary sendReport">Send message</button>
+                        <button type="button" class="btn btn-primary sendReport">Send report</button>
                     </div>
                     </div>
                 </div>

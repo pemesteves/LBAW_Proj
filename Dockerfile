@@ -16,7 +16,5 @@ COPY .env_production /var/www/.env
 COPY docker_run.sh /docker_run.sh
 RUN mkdir /var/run/php
 
-RUN php artisan websockets:serve
-
 # Start command
 CMD sh /docker_run.sh

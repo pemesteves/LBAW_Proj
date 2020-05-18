@@ -37,32 +37,42 @@
                                     </button>
                                 </div>
                             </div>
+                            @if($post->hasContext())
+                                <a href="../{{$post->getLink()}}" style="text-decoration:none;"><small class="text-muted" style="margin-left:1%">{{$post->getContext()}}</small></a>
+                            @endif
                         </div>
                     </div>
                 </div>
+                @if(!Auth::user()->isAdmin())
                 <div> 
                     <div class="btn-group dropleft d-print-none" style="margin-right: 0; padding-right: 0; width: 100%">
                         <button type="button" data-toggle="dropdown" style="font-size: 150%; margin-right: 0; padding-right: 0; width: 100%; background-color: white; border: 0;"> 
                         <span class="fa fa-ellipsis-v" ></span></button>
                         <div class="dropdown-menu options_menu" style="min-width:5rem">
                             <ul class="list-group">
-                                <li class="list-group-item options_entry" style="text-align: left;">
-                                    <button onclick="location.href='/posts/{{$post->post_id}}/edit'" style=" margin-left:auto; margin-right:auto; background-color: white; border: 0;">
-                                        Edit
-                                    </button>
-                                </li>
-                                <li class="list-group-item options_entry" style="text-align: left;">
-                                    <button class='delete' style=" background-color: white; border: 0;" > 
-                                        Delete
-                                    </button>
-                                </li>
-                                <li class="list-group-item options_entry" style="text-align: left;">
-                                    <button style="background-color: white; border: 0;">Report</button>
-                                </li>
+                                @if ( object_get($post->regularUser->user, "user_id") == Auth::user()->user_id)
+                                    <li class="list-group-item options_entry" style="text-align: left;">
+                                        <button onclick="location.href='/posts/{{$post->post_id}}/edit'" style=" margin-left:auto; margin-right:auto; background-color: white; border: 0;">
+                                            Edit
+                                        </button>
+                                    </li>
+                                    <li class="list-group-item options_entry" style="text-align: left;">
+                                        <button class='delete' style=" background-color: white; border: 0;" > 
+                                            Delete
+                                        </button>
+                                    </li>
+                                @else
+                                    <li class="list-group-item options_entry" style="text-align: left;">
+                                        <button class='report' style=" background-color: white; border: 0;" > 
+                                            Report
+                                        </button>
+                                    </li>
+                                @endif
                             </ul>
                         </div>
                     </div>
                 </div>
+                @endif
             </div>
             <div class="modal-body post_container" style="overflow-y: auto;">
                 <div class="container" style="border-bottom:0;border-top:0;border-radius:0;height:100%;">

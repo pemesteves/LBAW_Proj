@@ -83,13 +83,13 @@ class Notification extends Model
     return "#";
   }
 
-  function getDescription(){
+  function getDescription($descriptionText){
     $description = "";
 
     //return $this->triggerUser->user->name . ": " . $this->description;
 
     if($this->notification_user_id)
-      $description = $this->triggerUser->user->name . $this->description;
+      $description = $this->triggerUser->user->name . $descriptionText;
     if($this->notification_event_id)
       $description = $this->triggerUser->user->name . " has posted in " . Event::find($this->notification_event_id)->name;
     if($this->notification_post_id)
@@ -99,7 +99,7 @@ class Notification extends Model
     if($this->notification_group_id)
       $description = $this->triggerUser->user->name . " has posted in " . Group::find($this->notification_event_id)->name;
     else
-      $description = $this->triggerUser->user->name . ": " . $this->description;
+      $description = $this->triggerUser->user->name . ": " . $descriptionText;
     return $description;
   }
 

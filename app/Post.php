@@ -68,4 +68,30 @@ class Post extends Model
     return $this->belongsToMany('App\User' , 'user_reaction' , 'post_id' , 'user_id')->withPivot('like_or_dislike');
   }
 
+  public function hasContext(){
+    if($this->event_id || $this->group_id)
+      return true;
+    return false;
+  }
+
+  public function getLink(){
+    if($this->event_id){
+      return "./events/" . $this->event_id;
+    }
+    if($this->group_id){
+      return "./groups/" . $this->group_id;
+    }
+    return "#";
+  }
+
+  public function getContext(){
+    if($this->event_id){
+      return Event::find($this->event_id)->name;
+    }
+    if($this->group_id){
+      return Group::find($this->group_id)->name;
+    }
+    return "";
+  }
+
 }

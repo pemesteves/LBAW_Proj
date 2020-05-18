@@ -28,20 +28,24 @@ function openReportGroupModal(event){
     let description = modal.querySelector("#report_description").value;
     modal.querySelector("#report_description").value = "";
     $('#reportModal').modal('hide')
-    sendAjaxRequest('put', '/api/groups/' + id + '/report', {'title' : title, 'description' : description}, groupReportedHandler);
+    sendAjaxRequest('put', '/api/groups/' + id + '/report', {'title' : title, 'description' : description}, groupReportedHandler, groupReportErrorHandler);
   }
 
 
 
   function groupReportedHandler() {
     if (this.status !== 201 && this.status !== 200) {
-      window.location = '/';
+      addErrorFeedback("Failed to report group.");
       return;
     }
     let post = JSON.parse(this.responseText);
     //$('#popup-'+post.post_id).modal('hide');
   
     addFeedback("Group reported sucessfully");
+  }
+
+  function groupReportErrorHandler() {
+    addErrorFeedback("Failed to report group.");
   }
 
 

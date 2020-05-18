@@ -31,7 +31,7 @@
                             <h2 style="border: 0; padding: 0">Name:</h2>
                         </div>
                         <div class="col-sm-8">
-                            <input type="text" name="name" value="{{ Auth::user()->name }}">
+                            <input id="name" type="text" name="name" value="{{ Auth::user()->name }}">
                         </div>
                     </div>
                     <div class="row input_div">
@@ -39,7 +39,7 @@
                             <h2 style="border: 0; padding: 0">University:</h2>
                         </div>
                         <div class="col-sm-8">
-                            <input type="text" name="university" value="{{ Auth::user()->userable->university }}">
+                            <input id="university" type="text" name="university" value="{{ Auth::user()->userable->university }}">
                         </div>
                     </div>
                 </div>
@@ -53,7 +53,7 @@
                     </div>
                     <div id="collapseOne">
                         <div class="card-body">
-                            <textarea name="personal_info"
+                            <textarea id="personal_info" name="personal_info"
                                 <?php if(Auth::user()->userable->personal_info == "") echo 'placeholder="No information yet."';?> 
                             >{{Auth::user()->userable->personal_info}}</textarea>
                         </div>

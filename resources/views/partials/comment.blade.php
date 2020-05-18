@@ -30,7 +30,7 @@
                         </button>
                     </li>
                     <li class="list-group-item options_entry" style="text-align: left;">
-                        <button style="background-color: white; border: 0;">
+                        <button class='comment_report' style=" background-color: white; border: 0;" > 
                             Report
                         </button>
                     </li>
