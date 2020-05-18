@@ -38,3 +38,8 @@
 .text-primary {
     color: sandybrown !important;
 }
+
+.text-link {
+    color: sandybrown;
+    font-size: 1em;
+}

@@ -168,7 +168,13 @@
             <div class="row no-gutters">
                 <div class="col-sm">
                     <div class="card text-center" style="border-bottom:none;border-top:none;border-radius:0;height:100%;">
-                        <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" class="card-img-top mx-auto d-block" alt="..." style="border-radius:50%; max-width:5rem; padding-top:0.8rem">
+                        <img 
+                        @if (object_get($post->regularUser->image(), "image_id"))
+                            src="{{object_get($post->regularUser->image(), "file_path")}}"
+                        @else
+                            src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" 
+                        @endif
+                        class="card-img-top mx-auto d-block" alt="..." style="border-radius:50%; max-width:5rem; padding-top:0.8rem">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item" style="border:none;padding-top:0.2rem;padding-bottom:0.2rem"> {{ object_get($post->regularUser->user,"name") }}
                             </li>

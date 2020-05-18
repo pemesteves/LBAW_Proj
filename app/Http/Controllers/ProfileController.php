@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\File;
+use App\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -38,16 +40,17 @@ class ProfileController extends Controller{
                       ])
                       ->get();
 
-      return view('pages.user' , ['is_admin' => false , 'user' => Auth::user()->userable, 'posts' => $posts ,'notifications' => Auth::user()->userable->notifications, 'groups' => $groups, 'friends' => $friends, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
+      $image = Auth::user()->userable->image();
+
+      return view('pages.user' , ['is_admin' => false , 'user' => Auth::user()->userable, 'posts' => $posts ,'notifications' => Auth::user()->userable->notifications, 'groups' => $groups, 'friends' => $friends, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'image' => $image]);
   }
 
   public function show_me_edit(){
     if (!Auth::check()) return redirect('/login');
 
-    $posts = Auth::user()->userable->posts;
+    $image = Auth::user()->userable->image();
 
-    return view('pages.user_me_edit' , ['is_admin' => false , 'notifications' => Auth::user()->userable->notifications, 'posts' => $posts, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization' ]);
-
+    return view('pages.user_me_edit' , ['is_admin' => false , 'notifications' => Auth::user()->userable->notifications, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'image' => $image ]);
   }
 
   /**
@@ -85,7 +88,9 @@ class ProfileController extends Controller{
                         ])->get();
     }
 
-    return view('pages.user' , ['is_admin' => false , 'user' => $user,'notifications' => Auth::user()->userable->notifications, 'friendship_status' => $friendship_status, 'posts' => $posts, 'groups' => $groups, 'friends' => $friends, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization' ]);
+    $image = $user->image();
+
+    return view('pages.user' , ['is_admin' => false , 'user' => $user,'notifications' => Auth::user()->userable->notifications, 'friendship_status' => $friendship_status, 'posts' => $posts, 'groups' => $groups, 'friends' => $friends, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'image' => $image ]);
 
   }
 
@@ -95,7 +100,7 @@ class ProfileController extends Controller{
   public function edit(Request $request){
     if(!Auth::check()) return redirect('/login');
 
-    DB::transaction(function(){
+    DB::transaction(function() use ($request){
       $user = Auth::user();
 
       $name = Input::get('name');
@@ -104,6 +109,38 @@ class ProfileController extends Controller{
 
       $user->update(['name' => $name]);
       $user->userable->update(['personal_info' => $personal_info, 'university' => $university]);
+
+      if(request()->image !== null){
+        $request->validate([
+          'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:20048',
+        ]);
+        $imageName = time().'.'.request()->image->getClientOriginalExtension();
+
+        request()->image->move(public_path('images/users'), $imageName);
+
+        try{
+          $image = Image::where('regular_user_id', '=', $user->userable->regular_user_id)->get()[0];
+        }catch(Exception $e){
+          $image = null;
+        }
+  
+        if(isset($image) && $image !== null){ // Delete image and file
+          $file_id = $image->file_id;
+          $image->delete();
+          
+          $file = File::find($file_id);
+          $file->delete();
+        }
+
+        $file = new File();
+        $file->file_path = '/images/users/' . $imageName;
+        $file->save();
+
+        $image = new Image();
+        $image->file_id = $file->file_id;
+        $image->regular_user_id = $user->userable->regular_user_id;
+        $image->save();
+      }
     });
     
     return ProfileController::show_me();

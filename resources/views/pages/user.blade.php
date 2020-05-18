@@ -7,7 +7,13 @@
         <div class="row">
             <div class="col-3">
                 <div class="text-center" style="max-width: 75%; max-height: 80%;">
-                    <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" alt="" class="rounded-circle" style="max-width:100%; max-height: 50%;"/>
+                    <img 
+                    @if (isset($image) && $image !== null)
+                        src="{{$image->file_path}}"
+                    @else
+                        src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" 
+                    @endif
+                    alt="" class="rounded-circle" style="max-width:100%; max-height: 50%;"/>
                 </div>
             </div>
             <div class="col-8" style="padding: 0.2rem 1rem 0 0.2rem;">

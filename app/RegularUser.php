@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class RegularUser extends Model
 {
@@ -65,4 +66,17 @@ class RegularUser extends Model
         return $this->belongsToMany('App\Notification', 'notified_user', 'user_notified', 'notification_id' )->withPivot('seen');
     }
 
+    /**
+     * Get user image
+     */
+    public function image() {
+        $image = DB::table('image')
+                   ->where('image.regular_user_id', '=', $this->regular_user_id)
+                   ->join('file', 'file.file_id', '=', 'image.file_id')->get();
+        
+        if($image->count() === 0)
+            return null;
+            
+        return $image[0];
+    }
 }

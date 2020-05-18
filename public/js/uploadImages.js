@@ -23,6 +23,16 @@ function addEventListeners() {
                     img.src = URL.createObjectURL(this.files[0]);
                 }
             });
+
+        /** EDIT USER PROFILE **/
+        let userInputFile = document.querySelector('form#user_image_upload input[type="file"]');
+        if(userInputFile !== null)
+            userInputFile.addEventListener('change', function(){
+                if(this.files && this.files[0]){
+                    let img = document.querySelector('form#user_image_upload img');
+                    img.src = URL.createObjectURL(this.files[0]);
+                }
+            });
     });
     
     let eventImage = document.querySelector('form#event_image_upload img');
@@ -32,6 +42,10 @@ function addEventListeners() {
     let groupImage = document.querySelector('form#group_image_upload img');
     if(groupImage != null)
         groupImage.addEventListener('click', uploadGroupImage);
+
+    let userImage = document.querySelector('form#user_image_upload img');
+    if(userImage != null)
+        userImage.addEventListener('click', uploadUserImage);
 }
 
 function uploadEventImage(event){
@@ -40,6 +54,10 @@ function uploadEventImage(event){
 
 function uploadGroupImage(event){
     return uploadImage(event, document.querySelector('form#group_image_upload input[type="file"]'));
+}
+
+function uploadUserImage(event){
+    return uploadImage(event, document.querySelector('form#user_image_upload input[type="file"]'));
 }
 
 function uploadImage(event, inputFile){

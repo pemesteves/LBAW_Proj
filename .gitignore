@@ -3,6 +3,7 @@
 /public/storage
 /public/images/events
 /public/images/groups
+/public/images/users
 /storage/*.key
 /vendor
 /.idea

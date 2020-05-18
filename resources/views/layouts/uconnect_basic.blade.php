@@ -86,7 +86,16 @@ window.Echo = new Echo({
                     <button type="button" class="btn btn-outline-light fa fa-envelope" onclick="window.location.href='/chats'"></button>
                 @endif
                     <button type="button" class="btn btn-outline-light" onclick="window.location.href='<?php if($is_admin) echo '/admin'; else echo '/users/me'; ?>'">
-                        <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" alt="John"/>
+                        @if(!$is_admin)
+                            <img 
+                            @if (Auth::user()->userable->image() !== null)
+                                src="{{Auth::user()->userable->image()->file_path}}"
+                            @else
+                                src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" 
+                            @endif    
+
+                            alt="User profile image"/>
+                        @endif
                         @if (Auth::check()) 
                             {{ Auth::user()->name }} 
                         @endif
