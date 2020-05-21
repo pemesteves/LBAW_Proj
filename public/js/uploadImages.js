@@ -39,9 +39,14 @@ function addEventListeners() {
     if(eventImage != null)
         eventImage.addEventListener('click', uploadEventImage);
 
-    let groupImage = document.querySelector('form#group_image_upload img');
-    if(groupImage != null)
-        groupImage.addEventListener('click', uploadGroupImage);
+    let groupForm = document.querySelector('form#group_image_upload');
+    if(groupForm != null){
+        groupForm.addEventListener('submit', checkGroupImageUpload);
+
+        let groupImage = groupForm.querySelector('img');
+        if(groupImage != null)
+            groupImage.addEventListener('click', uploadGroupImage);
+    }
 
     let userImage = document.querySelector('form#user_image_upload img');
     if(userImage != null)
@@ -65,6 +70,38 @@ function uploadImage(event, inputFile){
 
     event.preventDefault();
     return false;
+}
+
+function checkGroupImageUpload(event){
+    const img = this.querySelector('img');
+    let message = "";
+    if(img.src === "http://www.pluspixel.com.br/wp-content/uploads/services-socialmediamarketing-optimized.png"){
+       message = "You can also add an image to your group!"
+    }
+    
+    let popUp = document.createElement("dialog");
+    popUp.classList.add('d-print-none');
+    popUp.setAttribute('open', 'open');
+    popUp.setAttribute('style', 'margin-top: 3.5em;');
+    popUp.innerHTML = `
+        <p style="text-align: center;">Are you sure you want to create the group? ${message}</p>
+        <div style="text-align: center;">
+            <button class="btn btn-success" onclick="submitForm()">Yes</button>
+            <button class="btn btn-danger" onclick="deletePopUp()">No</button>
+        </div>
+        `;
+    img.parentNode.insertBefore(popUp, img);
+
+    event.preventDefault();
+    return false;
+}
+
+function submitForm(){
+    document.querySelector('form#group_image_upload').submit();
+}
+
+function deletePopUp(){
+    document.querySelector('dialog').remove();
 }
 
 addEventListeners();

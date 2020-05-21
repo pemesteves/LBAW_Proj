@@ -9,10 +9,16 @@
         <form id="group_image_upload" method="post" action="/groups/create" enctype="multipart/form-data">
             @csrf
             <div class="card-title">
-                <img src="http://www.pluspixel.com.br/wp-content/uploads/services-socialmediamarketing-optimized.png" class="mx-auto d-block" alt=""> 
+                <img src="http://www.pluspixel.com.br/wp-content/uploads/services-socialmediamarketing-optimized.png" class="mx-auto d-block" alt=""
+                    title="Click here to upload the group image"
+                    style="border-radius: 50%; max-width: 8rem;"> 
                 <div style="display: none;">
                     <input name="image" type="file"/>
                 </div>      
+                <div id="upload_help" style="text-align: center; margin-top: -0.5em; margin-right: -7.5em;">
+                    <span class="fa fa-question-circle text-info"
+                    title="A group can have an image. If you want to change it you can click on this image and upload a new one. If you don't upload an image now, your group will have this image until you edit it."></span>
+                </div>
             </div>
             <div class="card-body container">
                 <legend class="card-title uconnect-title" >Name: </legend>
