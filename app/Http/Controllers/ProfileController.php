@@ -86,6 +86,13 @@ class ProfileController extends Controller{
   public function edit(Request $request){
     if(!Auth::check()) return redirect('/login');
 
+    $request->validate([
+      'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+      'name' => 'required|string|regex:/^[a-z0-9áàãâéêíóõôú]+[a-z0-9áàãâéêíóõôú ]*[a-z0-9áàãâéêíóõôú]$/i|max:255',
+      'university' => 'required|string|regex:/^[a-z0-9áàãâéêíóõôú]+[a-z0-9áàãâéêíóõôú ]*[a-z0-9áàãâéêíóõôú]$/i|max:255',
+      'personal_info' => "required|string|regex:/^[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]+[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@ ]*[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]$/i|max:255",
+    ]);
+
     DB::transaction(function() use ($request){
       $user = Auth::user();
 

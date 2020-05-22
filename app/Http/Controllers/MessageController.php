@@ -22,6 +22,10 @@ class MessageController extends Controller{
 
       $this->authorize('create', $message);
 
+      $request->validate([
+          'body' => "required|string|regex:/^[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]+[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@ ]*[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]$/i|max:255",
+      ]);
+
       $message->body = $request->input('body');
       $message->chat_id = $chat_id;
       $message->sender_id = Auth::user()->user_id;//Auth::user()->user_id; //Change this to the id of the regular_user
