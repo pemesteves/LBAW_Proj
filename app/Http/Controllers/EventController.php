@@ -56,38 +56,42 @@ class EventController extends Controller{
 
       $this->authorize('create', 'App\Event');
 
+      $request->validate([
+        'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'name' => 'required|string|regex:/^[a-z0-9áàãâéêíóõôú]+[a-z0-9áàãâéêíóõôú ]*[a-z0-9áàãâéêíóõôú]$/i|max:255',
+        'information' => "required|string|regex:/^[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]+[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@ ]*[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]$/i|max:255",
+        'location' => 'required|string|regex:/^[a-z0-9áàãâéêíóõôú]+[a-z0-9áàãâéêíóõôú ]*[a-z0-9áàãâéêíóõôú]$/i|max:255',
+        'date' => 'required|date',
+      ]);
+
       $event = DB::transaction(function() use ($request) {
-        $event = new Event();
-        $event->organization_id = Auth::user()->userable->regular_userable->organization_id;
-        $event->name = Input::get('name');
-        $event->location = Input::get('location');
-        $event->information = Input::get('information');
-        $event->date = Input::get('date');
-        $event->save();
-        
-        DB::table('user_interested_in_event')->insert([
-          'user_id' => Auth::user()->user_id,
-          'event_id' => $event->event_id
-        ]);
-        
-        $request->validate([
-          'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
+      $event = new Event();
+      $event->organization_id = Auth::user()->userable->regular_userable->organization_id;
+      $event->name = Input::get('name');
+      $event->location = Input::get('location');
+      $event->information = Input::get('information');
+      $event->date = Input::get('date');
+      $event->save();
+      
+      DB::table('user_interested_in_event')->insert([
+        'user_id' => Auth::user()->user_id,
+        'event_id' => $event->event_id
+      ]);
+      
+      $imageName = time().'.'.request()->image->getClientOriginalExtension();
 
-        $imageName = time().'.'.request()->image->getClientOriginalExtension();
+      request()->image->move(public_path('images/events'), $imageName);
 
-        request()->image->move(public_path('images/events'), $imageName);
+      $file = new File();
+      $file->file_path = '/images/events/' . $imageName;
+      $file->save();
 
-        $file = new File();
-        $file->file_path = '/images/events/' . $imageName;
-        $file->save();
+      $image = new Image();
+      $image->file_id = $file->file_id;
+      $image->event_id = $event->event_id;
+      $image->save();
 
-        $image = new Image();
-        $image->file_id = $file->file_id;
-        $image->event_id = $event->event_id;
-        $image->save();
-
-        return $event;
+      return $event;
       });
     
       return redirect()->route('events.show', $event);
@@ -116,6 +120,14 @@ class EventController extends Controller{
 
       $this->authorize('edit', $event);
 
+      $request->validate([
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'name' => 'required|string|regex:/^[a-z0-9áàãâéêíóõôú]+[a-z0-9áàãâéêíóõôú ]*[a-z0-9áàãâéêíóõôú]$/i|max:255',
+        'information' => "required|string|regex:/^[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]+[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@ ]*[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]$/i|max:255",
+        'location' => 'required|string|regex:/^[a-z0-9áàãâéêíóõôú]+[a-z0-9áàãâéêíóõôú ]*[a-z0-9áàãâéêíóõôú]$/i|max:255',
+        'date' => 'required|date',
+      ]);
+
       $name = $request->input('name');
       $information = $request->input('information');
       $date = $request->input('date');
@@ -138,6 +150,12 @@ class EventController extends Controller{
      */
     public function report(Request $request, $id)
     { 
+
+      $request->validate([
+        'title' => 'required|string|regex:/^[a-z0-9áàãâéêíóõôú]+[a-z0-9áàãâéêíóõôú ]*[a-z0-9áàãâéêíóõôú]$/i|max:255',
+        'description' => "required|string|regex:/^[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]+[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@ ]*[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]$/i|max:255",
+      ]);
+
       $title = $request->input('title');
       $description = $request->input('description');
       $reporter_id = Auth::user()->userable->regular_user_id;

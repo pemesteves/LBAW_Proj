@@ -39,7 +39,7 @@ function addEventListeners(){
 
 function nameCheck(){
     let field = document.getElementById('name');
-    let regex = /^[a-z0-9]+[a-z0-9 ]*[a-z0-9]$/i;
+    let regex = /^[a-z0-9áàãâéêíóõôú]+[a-z0-9áàãâéêíóõôú ]*[a-z0-9áàãâéêíóõôú]$/i;
     if(regex.test(field.value)){
         field.setCustomValidity("");
     }
@@ -50,7 +50,7 @@ function nameCheck(){
 
 function universityCheck(){
     let field = document.getElementById('university');
-    let regex = /^[a-z0-9]+[a-z0-9 ]*[a-z0-9]$/i;
+    let regex = /^[a-z0-9áàãâéêíóõôú]+[a-z0-9áàãâéêíóõôú ]*[a-z0-9áàãâéêíóõôú]$/i;
     if(regex.test(field.value)){
         field.setCustomValidity("");
     }
@@ -61,7 +61,7 @@ function universityCheck(){
 
 function postTitleCheck(){
     let field = document.getElementById('post_title');
-    let regex = /^[a-z0-9\[\]\(\)<>\-_!?\.&',;:@]+[a-z0-9\[\]\(\)<>\-_!?\.&',;:@ ]*[a-z0-9\[\]\(\)<>\-_!?\.&',;:@]$/i;
+    let regex = /^[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]+[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@ ]*[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]$/i;
     if(regex.test(field.value)){
         field.setCustomValidity("");
     }
@@ -72,7 +72,7 @@ function postTitleCheck(){
 
 function postTextCheck(){
     let field = document.getElementById('post_text');
-    let regex = /^[a-z0-9\[\]\(\)<>\-_!?\.&',;:@]+[a-z0-9\[\]\(\)<>\-_!?\.&',;:@ ]*[a-z0-9\[\]\(\)<>\-_!?\.&',;:@]$/i;
+    let regex = /^[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]+[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@ ]*[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]$/i;
     if(regex.test(field.value)){
         field.setCustomValidity("");
     }
@@ -83,7 +83,7 @@ function postTextCheck(){
 
 function commentCheck(){
     let field = document.querySelector('article.post div[style="display: block;"] div.post_comment_form textarea');
-    let regex = /^[a-z0-9\[\]\(\)<>\-_!?\.&',;:@]+[a-z0-9\[\]\(\)<>\-_!?\.&',;:@ ]*[a-z0-9\[\]\(\)<>\-_!?\.&',;:@]$/i;
+    let regex = /^[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]+[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@ ]*[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]$/i;
     if(regex.test(field.value)){
         field.setCustomValidity("");
     }
@@ -94,7 +94,7 @@ function commentCheck(){
 
 function informationCheck(){
     let field = document.getElementById('information');
-    let regex = /^[a-z0-9\[\]\(\)<>\-_!?\.&',;:@]+[a-z0-9\[\]\(\)<>\-_!?\.&',;:@ ]*[a-z0-9\[\]\(\)<>\-_!?\.&',;:@]$/i;
+    let regex = /^[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]+[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@ ]*[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]$/i;
     if(regex.test(field.value)){
         field.setCustomValidity("");
     }
@@ -105,7 +105,7 @@ function informationCheck(){
 
 function personalInfoCheck(){
     let field = document.getElementById('personal_info');
-    let regex = /^[a-z0-9\[\]\(\)<>\-_!?\.&',;:@]+[a-z0-9\[\]\(\)<>\-_!?\.&',;:@ ]*[a-z0-9\[\]\(\)<>\-_!?\.&',;:@]$/i;
+    let regex = /^[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]+[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@ ]*[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]$/i;
     if(regex.test(field.value)){
         field.setCustomValidity("");
     }
@@ -116,7 +116,7 @@ function personalInfoCheck(){
 
 function reportTitleCheck(){
     let field = document.getElementById('report_title');
-    let regex = /^[a-z0-9]+[a-z0-9 ]*[a-z0-9]$/i;
+    let regex = /^[a-z0-9áàãâéêíóõôú]+[a-z0-9áàãâéêíóõôú ]*[a-z0-9áàãâéêíóõôú]$/i;
     if(regex.test(field.value)){
         field.setCustomValidity("");
     }
@@ -127,7 +127,7 @@ function reportTitleCheck(){
 
 function reportDescriptionCheck(){
     let field = document.getElementById('report_description');
-    let regex = /^[a-z0-9\[\]\(\)<>\-_!?\.&',;:@]+[a-z0-9\[\]\(\)<>\-_!?\.&',;:@ ]*[a-z0-9\[\]\(\)<>\-_!?\.&',;:@]$/i;
+    let regex = /^[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]+[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@ ]*[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]$/i;
     if(regex.test(field.value)){
         field.setCustomValidity("");
     }

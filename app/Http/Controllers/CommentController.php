@@ -23,6 +23,10 @@ class CommentController extends Controller{
 
       $this->authorize('create', $comment);
 
+      $request->validate([
+        'body' => "required|string|regex:/^[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]+[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@ ]*[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]$/i|max:255",
+      ]);
+
       $comment->body = $request->input('body');
       $comment->post_id = $post_id;
       $comment->user_id = Auth::user()->user_id;//Auth::user()->user_id; //Change this to the id of the regular_user
@@ -48,6 +52,11 @@ class CommentController extends Controller{
 
     public function update(Request $request, $id)
     {
+
+      $request->validate([
+        'body' => "required|string|regex:/^[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]+[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@ ]*[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]$/i|max:255",
+      ]);
+
       $comment = Comment::find($id);
 
 
@@ -66,6 +75,12 @@ class CommentController extends Controller{
      */
     public function report(Request $request, $id)
     { 
+
+      $request->validate([
+        'title' => 'required|string|regex:/^[a-z0-9áàãâéêíóõôú]+[a-z0-9áàãâéêíóõôú ]*[a-z0-9áàãâéêíóõôú]$/i|max:255',
+        'description' => "required|string|regex:/^[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]+[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@ ]*[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]$/i|max:255",
+      ]);
+
       $title = $request->input('title');
       $description = $request->input('description');
       $reporter_id = Auth::user()->userable->regular_user_id;
