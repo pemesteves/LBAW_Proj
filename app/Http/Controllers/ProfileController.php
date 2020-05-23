@@ -57,6 +57,8 @@ class ProfileController extends Controller{
 
     if(!isset($user))
       throw new HttpException(404, "user");
+    if($user->type == 'blocked' && !Auth::user()->isAdmin())
+      throw new HttpException(404, "user");
 
 
     $posts = $user->posts;

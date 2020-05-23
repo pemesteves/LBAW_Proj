@@ -62,7 +62,6 @@ CREATE TABLE public."user"
 	"userable_id" integer,
 	"userable_type" text,
 
-	TYPE status NOT NULL DEFAULT 'normal',
     CONSTRAINT "user_pkey" PRIMARY KEY ("user_id"),
     CONSTRAINT "user_email_key" UNIQUE ("email")
 );
@@ -80,6 +79,8 @@ CREATE TABLE public."regular_user"
 	"user_id" integer NOT NULL REFERENCES public."user"("user_id") ON DELETE CASCADE,
 	"personal_info" text,
 	"university" text NOT NULL,
+
+	TYPE status NOT NULL DEFAULT 'normal',
 
 	"regular_userable_id" integer,
 	"regular_userable_type" text,
@@ -392,10 +393,12 @@ DROP FUNCTION IF EXISTS post_date() CASCADE;
 -- DROP FUNCTION IF EXISTS unique_org() CASCADE;
 DROP FUNCTION IF EXISTS update_at() CASCADE;
 
+
+
 CREATE FUNCTION update_group_posts() RETURNS TRIGGER AS
 $BODY$
 BEGIN
-    UPDATE public."post" SET public."post".TYPE = public."group".TYPE WHERE public."post"."group_id" = public."group"."group_id";
+    UPDATE "post" SET TYPE = NEW.TYPE WHERE "group_id" = NEW."group_id" and "post_id" not in (SELECT "post_id" from "post" INNER JOIN "report" on "post_id" = "reported_post_id" where 'approval' = '1');
     RETURN NEW;
 END
 $BODY$
@@ -412,7 +415,7 @@ CREATE TRIGGER update_group_posts
 CREATE FUNCTION update_event_posts() RETURNS TRIGGER AS
 $BODY$
 BEGIN
-    UPDATE public."post" SET public."post".TYPE = public."event".TYPE WHERE public."post"."event_id" = public."event"."event_id";
+    UPDATE "post" SET TYPE = NEW.TYPE WHERE "event_id" = NEW."event_id" and "post_id" not in (SELECT "post_id" from "post" INNER JOIN "report" on "post_id" = "reported_post_id" where 'approval' = '1');
     RETURN NEW;
 END
 $BODY$
@@ -429,7 +432,9 @@ CREATE TRIGGER update_event_posts
 CREATE FUNCTION update_user_posts() RETURNS TRIGGER AS
 $BODY$
 BEGIN
-    UPDATE public."post" SET public."post".TYPE = public."user".TYPE WHERE public."post"."author_id" = public."user"."user_id";
+    --UPDATE "post" SET TYPE = NEW.TYPE WHERE "author_id" = NEW."regular_user_id";
+    UPDATE "post" SET TYPE = NEW.TYPE WHERE "author_id" = NEW."regular_user_id" and "post_id" not in (SELECT "post_id" from "post" INNER JOIN "report" on "post_id" = "reported_post_id" where 'approval' = '1');
+    UPDATE "comment" SET TYPE = NEW.TYPE WHERE "user" = NEW."regular_user_id" and "comment_id" not in (SELECT "comment_id" from "comment" INNER JOIN "report" on "comment_id" = "reported_comment_id" where 'approval' = '1');
     RETURN NEW;
 END
 $BODY$
@@ -437,7 +442,7 @@ LANGUAGE plpgsql;
 
 
 CREATE TRIGGER update_user_posts
-    AFTER UPDATE OF TYPE ON public."user"
+    AFTER UPDATE OF TYPE ON public."regular_user"
     FOR EACH ROW
     EXECUTE PROCEDURE update_user_posts();
 

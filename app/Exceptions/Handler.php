@@ -48,7 +48,8 @@ class Handler extends ExceptionHandler
      * @return \Illuminate\Http\Response
      */
     public function render($request, Exception $exception)
-    {
+    {   
+        //error_log($exception, 3, "./log/tmp/my-errors.log");
         if ($this->isHttpException($exception)) {
             //return response()->view('errors.' . 'error', ['is_admin' => false, 'erro_code' => $exception->getStatusCode(), 'property_not_found' => $exception->getMessage(), 'can_create_events' => false], $exception->getStatusCode());
         }else{

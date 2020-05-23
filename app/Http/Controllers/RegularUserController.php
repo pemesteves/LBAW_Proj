@@ -17,6 +17,7 @@ use App\RegularUser;
 use App\User;
 use App\Notification;
 use App\OrgApproval;
+use App\Report;
 use App\Organization;
 use Exception;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -100,5 +101,28 @@ class RegularUserController extends Controller{
         $approval_request->save();
         return $approval_request;
     }
+
+    public function report(Request $request, $id)
+    { 
+
+      $request->validate([
+        'title' => 'required|string|regex:/^[a-z0-9áàãâéêíóõôú]+[a-z0-9áàãâéêíóõôú ]*[a-z0-9áàãâéêíóõôú]$/i|max:255',
+        'description' => "required|string|regex:/^[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]+[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@ ]*[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]$/i|max:255",
+      ]);
+
+      $title = $request->input('title');
+      $description = $request->input('description');
+      $reporter_id = Auth::user()->userable->regular_user_id;
+
+      $report = new Report();
+      $report->title = $title;
+      $report->reason = $description;
+      $report->reporter_id = $reporter_id;
+      $report->reported_user_id = $id;
+
+      $report->save();
+      return $report;
+    }
+
 
 }

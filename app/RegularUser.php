@@ -31,7 +31,7 @@ class RegularUser extends Model
      * @var array
      */
     protected $fillable = [
-        'personal_info', 'university',
+        'personal_info', 'university','type'
     ];
 
     protected $with = ['user'];
@@ -55,11 +55,11 @@ class RegularUser extends Model
     }
 
     public function groups(){
-        return $this->belongsToMany('App\Group','user_in_group','user_id','group_id');
+        return $this->belongsToMany('App\Group','user_in_group','user_id','group_id')->where("type",'<>','blocked');
     }
 
     public function events(){
-        return $this->belongsToMany('App\Event','user_interested_in_event','user_id','event_id');
+        return $this->belongsToMany('App\Event','user_interested_in_event','user_id','event_id')->where("type",'<>','blocked');;
     }
 
     public function chats(){

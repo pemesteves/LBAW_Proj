@@ -25,6 +25,9 @@ class GroupController extends Controller{
       if(!isset($group))
         throw new HttpException(404, "group");
 
+      if($group->type == 'blocked' && !Auth::user()->isAdmin())
+        throw new HttpException(404, "group");
+
       $this->authorize('show', $group);
 
       $posts = $group->posts;
@@ -39,7 +42,7 @@ class GroupController extends Controller{
       
       $image = $group->image();
 
-      return view('pages.group' , ['is_admin' => false, 'notifications' => Auth::user()->userable->notifications, 'group' => $group, 'posts' => $posts, 'members' => $members, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'is_owner' => $owner , 'image' => $image]);
+      return view('pages.group' , ['is_admin' => false, 'group' => $group, 'posts' => $posts, 'members' => $members, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'is_owner' => $owner , 'image' => $image]);
     }
 
     public function showCreateForm(){
@@ -47,7 +50,7 @@ class GroupController extends Controller{
 
       $this->authorize('create', 'App\Group');
 
-      return view('pages.create_group', ['is_admin' => false, 'notifications' => Auth::user()->userable->notifications, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
+      return view('pages.create_group', ['is_admin' => false, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
     }
 
     public function create(Request $request){
@@ -108,7 +111,7 @@ class GroupController extends Controller{
       
       $image = $group->image();
 
-      return view('pages.edit_group' , ['is_admin' => false, 'notifications' => Auth::user()->userable->notifications, 'group' => $group, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'image' => $image ]);
+      return view('pages.edit_group' , ['is_admin' => false, 'group' => $group, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'image' => $image ]);
     }
 
     /**
@@ -118,6 +121,9 @@ class GroupController extends Controller{
       $group = Group::find($id);
 
       if(!isset($group))
+        throw new HttpException(404, "group");
+
+      if($group->type == 'blocked' && !Auth::user()->isAdmin())
         throw new HttpException(404, "group");
 
       $this->authorize('edit', $group);

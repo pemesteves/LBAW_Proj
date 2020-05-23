@@ -33,6 +33,7 @@ Route::delete('api/comments/{id}', 'CommentController@delete');
 Route::put('api/comments/{id}/edit' , 'CommentController@update');
 Route::put('api/comments/{id}/report' , 'CommentController@report');
 
+Route::put('/api/users/{id}/report', 'RegularUserController@report');
 
 Route::put('/api/posts/{id}/like/{val}' , 'PostController@like');
 

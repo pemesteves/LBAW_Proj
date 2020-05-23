@@ -22,30 +22,30 @@ class FeedController extends Controller{
                     
         if(get_class($user->userable) == "App\RegularUser"){
             //$posts = Post::orderBy('date','desc')->get();
-            $myPosts = Post::where('author_id', Auth::user()->userable->regular_user_id)
+            $myPosts = Post::where([['author_id', Auth::user()->userable->regular_user_id],['type','<>','blocked']])
                             ->whereNull('post.event_id')
                             ->whereNull('post.group_id')
-                            ->leftJoin("report" , "post.post_id","report.reported_post_id")
-                            ->whereNull('report.approval')
+                            /*->leftJoin("report" , "post.post_id","report.reported_post_id")
+                            ->whereNull('report.approval')*/
                             ->select("post.*");
             $myGroupsPosts = Post::join('user_in_group' , "post.group_id" , "user_in_group.group_id")
-                                ->where('user_in_group.user_id', Auth::user()->userable->regular_user_id)
-                                ->leftJoin("report" , "post.post_id","report.reported_post_id")
-                                ->whereNull('report.approval')
+                                ->where([['user_in_group.user_id', Auth::user()->userable->regular_user_id],['post.type','<>','blocked']])
+                                /*->leftJoin("report" , "post.post_id","report.reported_post_id")
+                                ->whereNull('report.approval')*/
                                 ->select("post.*");
             $myEventsPosts = Post::join('user_interested_in_event' , "post.event_id" , "user_interested_in_event.event_id")
-                                ->where('user_interested_in_event.user_id', Auth::user()->userable->regular_user_id)
-                                ->leftJoin("report" , "post.post_id","report.reported_post_id")
-                                ->whereNull('report.approval')
+                                ->where([['user_interested_in_event.user_id', Auth::user()->userable->regular_user_id],['post.type','<>','blocked']])
+                                /*->leftJoin("report" , "post.post_id","report.reported_post_id")
+                                ->whereNull('report.approval')*/
                                 ->select("post.*");
 
             $posts = Post::join('friend' , "author_id" , "friend_id2")
                     ->where( [["friend_id1" , "=" , Auth::user()->userable->regular_user_id] ,
-                            ['friend.type','accepted']])
+                            ['friend.type','accepted'],['post.type','<>','blocked']])
                             ->whereNull('post.event_id')
                             ->whereNull('post.group_id')
-                    ->leftJoin("report" , "post.post_id","report.reported_post_id")
-                    ->whereNull('report.approval')
+                    /*->leftJoin("report" , "post.post_id","report.reported_post_id")
+                    ->whereNull('report.approval')*/
                     ->select("post.*")
                     ->union($myPosts)
                     ->union($myGroupsPosts)

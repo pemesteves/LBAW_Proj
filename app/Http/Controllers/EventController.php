@@ -25,6 +25,9 @@ class EventController extends Controller{
       if(!isset($event))
         throw new HttpException(404, "event");
 
+      if($event->type == "blocked" && !Auth::user()->isAdmin())
+        throw new HttpException(404, "event");
+
       $posts = $event->posts;
 
       $going = $event->going();
@@ -36,11 +39,9 @@ class EventController extends Controller{
           $owner = true;
       }
 
-      $notifications = Auth::user()->userable->notifications;
-
       $image = $event->image();
 
-      return view('pages.event' , ['is_admin' => false , 'event' => $event, 'posts' => $posts, 'going' => $going, 'can_create_events' => $can_create_events, 'is_owner' => $owner, 'notifications' => $notifications, 'image' => $image]);
+      return view('pages.event' , ['is_admin' => false , 'event' => $event, 'posts' => $posts, 'going' => $going, 'can_create_events' => $can_create_events, 'is_owner' => $owner, 'image' => $image]);
     }
 
     public function showCreateForm(){
@@ -48,7 +49,7 @@ class EventController extends Controller{
 
       $this->authorize('create', 'App\Event');
 
-      return view('pages.create_event', ['is_admin' => false, 'notifications' => Auth::user()->userable->notifications, 'notifications' => Auth::user()->userable->notifications, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
+      return view('pages.create_event', ['is_admin' => false, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
     }
 
     public function create(Request $request){
@@ -104,9 +105,12 @@ class EventController extends Controller{
       if(!isset($event))
         throw new HttpException(404, "event");
 
+      if($event->type == "blocked" && !Auth::user()->isAdmin())
+        throw new HttpException(404, "event");
+
       $this->authorize('edit', $event);
 
-      return view('pages.edit_event' , ['is_admin' => false ,'notifications' => Auth::user()->userable->notifications, 'event' => $event, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization' ]);
+      return view('pages.edit_event' , ['is_admin' => false , 'event' => $event, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization' ]);
     }
 
     /**

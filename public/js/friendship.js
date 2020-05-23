@@ -25,8 +25,41 @@ function addEventListeners() {
         remover.addEventListener('click', removeFriendRequest);
     });
 
+    let userReporter = document.querySelector('#profile_card button.report');
+    userReporter.addEventListener('click', openReportUserModal);
+
 }
 
+function openReportUserModal(event){
+    let id = this.getAttribute('data-id');
+    $('#reportModal').modal('show')
+    let modal = document.querySelector('#reportModal');
+    modal.querySelector('#reportModalLabel').innerHTML = "Report user"
+    modal.querySelector("#report_id").value = id;
+    modal.querySelector(".sendReport").addEventListener('click' , sendReportUserRequest);
+}
+function sendReportUserRequest(event) {
+    let modal = this.closest('#reportModal');
+    let id = modal.querySelector("#report_id").value;
+    modal.querySelector("#report_id").value = ""
+    let title = modal.querySelector("#report_title").value;
+    modal.querySelector("#report_title").value = "";
+    let description = modal.querySelector("#report_description").value;
+    modal.querySelector("#report_description").value = "";
+    $('#reportModal').modal('hide')
+    sendAjaxRequest('put', '/api/users/' + id + '/report', {'title' : title, 'description' : description}, userReportedHandler);
+}
+
+function userReportedHandler() {
+    if (this.status !== 201 && this.status !== 200) {
+      window.location = '/';
+      return;
+    }
+    let post = JSON.parse(this.responseText);
+  
+    addFeedback("User reported sucessfully");
+  
+  }
 
 function requestFriendRequest(event){
     let id = this.closest('button').getAttribute('data-id');

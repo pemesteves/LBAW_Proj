@@ -86,8 +86,12 @@ window.Echo = new Echo({
                     </div>
                     <button type="button" class="btn btn-outline-light fa fa-envelope" onclick="window.location.href='/chats'"></button>
                 @endif
-                    <button type="button" class="btn btn-outline-light" onclick="window.location.href='<?php if($is_admin) echo '/admin'; else echo '/users/me'; ?>'">
-                        @if(!$is_admin)
+                    @if(Auth::user()->isAdmin())
+                        <button type="button" class="btn btn-outline-light" onclick="window.location.href='/admin'">
+                    @else
+                        <button type="button" class="btn btn-outline-light" onclick="window.location.href='/users/me'">
+                    @endif
+                        @if(!Auth::user()->isAdmin())
                             <img 
                             @if (Auth::user()->userable->image() !== null)
                                 src="{{Auth::user()->userable->image()->file_path}}"

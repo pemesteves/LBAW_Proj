@@ -41,6 +41,8 @@ class GroupPolicy
     }
 
     public function show(User $user, Group $group){
+        if(Auth::user()->isAdmin())
+            return true;
         return Auth::user()->userable->groups->find($group) != null;
     }
 }

@@ -51,7 +51,7 @@ function sendDeclineReportRequest(event) {
 function reportStatusHandler(){
     if (this.status != 200) {
       //window.location = '/';
-      addErrorFeedback("Report processing failed.");
+      addErrorFeedback("Report processing failed." + this.responseText);
       return;
       }
     let response = JSON.parse(this.responseText);
