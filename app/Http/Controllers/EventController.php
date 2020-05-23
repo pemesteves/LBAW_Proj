@@ -32,6 +32,9 @@ class EventController extends Controller{
 
       $going = $event->going();
 
+      $interested = DB::table("user_interested_in_event")
+                    ->where([['user_id',Auth::user()->userable->regular_user_id],['event_id',$id]])->get();
+
       $can_create_events  = Auth::user()->userable->regular_userable_type === 'App\Organization';
 
       $owner = false;
@@ -41,7 +44,7 @@ class EventController extends Controller{
 
       $image = $event->image();
 
-      return view('pages.event' , ['is_admin' => false , 'event' => $event, 'posts' => $posts, 'going' => $going, 'can_create_events' => $can_create_events, 'is_owner' => $owner, 'image' => $image]);
+      return view('pages.event' , ['interested'=>$interested,'is_admin' => false , 'event' => $event, 'posts' => $posts, 'going' => $going, 'can_create_events' => $can_create_events, 'is_owner' => $owner, 'image' => $image]);
     }
 
     public function showCreateForm(){
@@ -207,6 +210,15 @@ class EventController extends Controller{
       $image->save();
       error_log($image);
       return $image;
+    }
+
+    function desinterest($id){
+      DB::table('user_interested_in_event')->where([['user_id',Auth::user()->userable->regular_user_id],['event_id',$id]])->delete();
+      return ;
+    }
+    function interest($id){
+      DB::table('user_interested_in_event')->insert(['user_id' => Auth::user()->userable->regular_user_id,'event_id' => $id]);
+      return ;
     }
 
 }

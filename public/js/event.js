@@ -4,8 +4,49 @@ function addEventListeners() {
     [].forEach.call(eventReporters, function(reporter) {
       reporter.addEventListener('click', openReportEventModal);
     });
+
+    let eventInterest = document.querySelector('.show_interest');
+    if(eventInterest) eventInterest.addEventListener('click', eventInsterestRequest);
+
+    let eventDesinterest = document.querySelector('.remove_interest');
+    if(eventDesinterest) eventDesinterest.addEventListener('click', eventDesinsterestRequest);
+
   
 }
+
+
+function eventDesinsterestRequest(event) {
+  let id = this.getAttribute('data-id');
+  sendAjaxRequest('put', '/api/events/' + id +"/desinterest", null, desinterestHandler);
+  event.preventDefault();
+}
+
+function eventInsterestRequest(event) {
+  let id = this.getAttribute('data-id');
+  sendAjaxRequest('put', '/api/events/' + id +"/interest", null, interestHandler);
+  event.preventDefault();
+}
+
+function desinterestHandler() {
+  if (this.status != 200){window.location = '/';return}
+  let button = document.querySelector('.remove_interest')
+  button.classList.remove('remove_interest');
+  button.classList.add('show_interest');
+  button.innerHTML = "Show interest";
+  button.removeEventListener('click',eventDesinsterestRequest);
+  button.addEventListener('click',eventInsterestRequest);
+}
+
+function interestHandler() {
+  if (this.status != 200){window.location = '/';return}
+  let button = document.querySelector('.show_interest')
+  button.classList.remove('show_interest');
+  button.classList.add('remove_interest');
+  button.innerHTML = "Remove interest";
+  button.removeEventListener('click',eventInsterestRequest);
+  button.addEventListener('click',eventDesinsterestRequest);
+}
+
 
 function openReportEventModal(event){
     let id = this.getAttribute('data-id');

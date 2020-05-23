@@ -109,6 +109,8 @@ Route::get('/events/{event_id}/edit', 'EventController@show_edit');
 Route::post('/api/events/{event_id}/upload_image', 'EventController@upload_image');
 Route::post('/events/{event_id}', 'EventController@edit');
 Route::put('api/events/{id}/report', 'EventController@report');
+Route::put('api/events/{id}/interest', 'EventController@interest');
+Route::put('api/events/{id}/desinterest', 'EventController@desinterest');
 
 //Chat
 Route::get('/chats/{chat_id}', 'ChatController@show')->name('chats.show');
