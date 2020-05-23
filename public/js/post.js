@@ -52,8 +52,8 @@ function postLikeHandler() {
     element = document.querySelector('article.post[data-id="'+ like.post_id + '"] .post_votes');
     likes = element.querySelector('.post_like');
     dislikes = element.querySelector('.post_dislike');
-    likes.textContent=parseInt(likes.textContent)+like.upvotes;
-    dislikes.textContent=parseInt(dislikes.textContent)+like.downvotes;
+    likes.textContent= String.fromCharCode(160)+ (parseInt(likes.textContent)+like.upvotes) + String.fromCharCode(160);
+    dislikes.textContent= String.fromCharCode(160)+ (parseInt(dislikes.textContent)+like.downvotes) + String.fromCharCode(160);
   }
 
 

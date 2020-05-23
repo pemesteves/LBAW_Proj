@@ -5,7 +5,7 @@
 
 <!-- Popup -->
 
-<article class="post" data-id="{{ $post->post_id }}">
+<article class="post" id='post_{{ $post->post_id }}' data-id="{{ $post->post_id }}">
 
     <div class="modal fade" id="popup-{{ $post->post_id }}" tabindex="-1" role="dialog" 
         aria-labelledby="postModal-{{ $post->post_id }}" aria-hidden="true">
@@ -158,6 +158,8 @@
                                     </div>
                                 </div>`;
                                 document.querySelector("[comments-id=" + CSS.escape(e.comment.post_id) + "]").insertBefore(new_comment,document.querySelector("[comments-id=" + CSS.escape(e.comment.post_id) + "] > div"));
+                                let count = document.querySelector("#post_" + CSS.escape(e.comment.post_id) + " .comments_count");
+                                count.innerHTML = (parseInt(count.textContent)+1) + " comments";
                             });
                         </script>
                         </div>
@@ -179,53 +181,65 @@
 
 
     <div class="card mb-3" style="max-width:70%;margin:5% 15%">
-        <button type="button" id="postModal-{{ $post['post_id'] }}" class="btn btn-primary" data-toggle="modal" data-target="#popup-{{ $post['post_id'] }}" style="text-align:left;background: none; color: inherit; border: none; padding: 0; font: inherit; cursor: pointer; outline: inherit;"> 
-            <div class="row no-gutters">
+        <div class="row no-gutters">
                 <div class="col-sm">
-                    <div class="card text-center" style="border-bottom:none;border-top:none;border-radius:0;height:100%;">
-                        <img 
-                        @if (object_get($post->regularUser->image(), "image_id"))
-                            src="{{object_get($post->regularUser->image(), "file_path")}}"
-                        @else
-                            src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" 
-                        @endif
-                        class="card-img-top mx-auto d-block" alt="..." style="border-radius:50%; max-width:5rem; padding-top:0.8rem">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item" style="border:none;padding-top:0.2rem;padding-bottom:0.2rem"> {{ object_get($post->regularUser->user,"name") }}
-                            </li>
-                            <li class="list-group-item" style="border:none;padding-top:0.2rem;padding-bottom:0.2rem">{{ object_get($post->regularUser, "university") }}</li>
-                            <li class="list-group-item" style="border:none;padding-top:0.2rem;padding-bottom:0.2rem">
-                                @if(Auth::user()->userable_id != $post->regularUser->regular_user_id)
-                                    {{count($post->regularUser->friendsInCommun(Auth::user()->userable))}} friends in commun
-                                @endif
-                            </li>
-                        </ul>
-                    </div>
+                    <a href='/users/{{$post->regularUser->regular_user_id}}' style='text-decoration:none;color:black'>
+                        <div class="card text-center" style="border-bottom:none;border-top:none;border-radius:0;height:100%;">
+                            <img 
+                            @if (object_get($post->regularUser->image(), "image_id"))
+                                src="{{object_get($post->regularUser->image(), "file_path")}}"
+                            @else
+                                src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" 
+                            @endif
+                            class="card-img-top mx-auto d-block" alt="..." style="border-radius:50%; max-width:5rem; padding-top:0.8rem">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item" style="border:none;padding-top:0.2rem;padding-bottom:0.2rem"> {{ object_get($post->regularUser->user,"name") }}
+                                </li>
+                                <li class="list-group-item" style="border:none;padding-top:0.2rem;padding-bottom:0.2rem">{{ object_get($post->regularUser, "university") }}</li>
+                                <li class="list-group-item" style="border:none;padding-top:0.2rem;padding-bottom:0.2rem">
+                                    @if(Auth::user()->userable_id != $post->regularUser->regular_user_id)
+                                        {{count($post->regularUser->friendsInCommun(Auth::user()->userable))}} friends in commun
+                                    @endif
+                                </li>
+                            </ul>
+                        </div>
+                    </a>
                 </div>
                 <div class="col-md-8" style="flex-grow:1; max-width:100%; text-align: left;">
                     <div class="card" style="height: 100%; margin-bottom: 0;">
-                        <div class="card-body" style="margin-bottom: 0;padding-bottom: 0;">
-                            <small class="text-muted" style="margin-bottom:0rem;float: right;">{{$post->getContext()}}</small>
-                            <h3 class="card-title small_post_title"> {{ $post['title'] }}</h3>
-                            <p class="card-text small_post_body">
-                                {{ $post->body }}
-                            </p>
-                            <p class="card-text" style="margin-bottom:0rem; float: right;">
-                                <small class="text-muted" style="margin-bottom:0rem">{{date('d-m-Y', strtotime($post->date))}}</small>, 
-                                <small class="text-muted" style="margin-bottom:0.2rem">{{date('H:i', strtotime($post->date))}}</small>
-                            </p>
-                        </div>
+            
+                
+                            <div class="card-body" style="margin-bottom: 0;padding: 0;">
+                                <button type="button" id="postModal-{{ $post['post_id'] }}" class="btn post_open_modal" data-toggle="modal" 
+                                data-target="#popup-{{ $post['post_id'] }}" 
+                                style="color: inherit;background: none; width:100%;height:100%;padding-top: 20px;padding-left: 20px;"> 
+                                    <h3 class="card-title small_post_title" style="display:inline-block;"> {{ $post['title'] }}</h3>
+                                    <small class="text-muted" style="margin-bottom:0rem;float:right;margin-right:1rem;">{{$post->getContext()}}</small>
+                                    <p class="card-text small_post_body">
+                                        {{ $post->body }}
+                                    </p>
+                                    <p class="card-text" style="margin-bottom:0rem; float: right;margin-right:1rem;">
+                                        <small class="text-muted" style="margin-bottom:0rem;">{{date('d-m-Y', strtotime($post->date))}}</small>, 
+                                        <small class="text-muted" style="margin-bottom:0.2rem">{{date('H:i', strtotime($post->date))}}</small>
+                                    </p>
+                                </button>
+                            </div>
+
+                        
                         <div class="card-footer" style="border-left:none;border-right:none;border-bottom:none">
-                            <span class="comment"> {{$post->comments->count()}} comments </span>
+                            <span class="comments_count"> {{$post->comments->count()}} comments </span>
                             <div class='post_votes' style="float: right;">
-                                <span class="fa fa-thumbs-up post_like">&nbsp;{{ $post['upvotes'] }}&nbsp;</span>
-                                <span class="fa fa-thumbs-down post_dislike">&nbsp;{{ $post['downvotes'] }}&nbsp;</span>
+                                <button class='upvote' style=" background-color: none; border: 0;" > 
+                                    <span class="fa fa-thumbs-up post_like">&nbsp;{{$post->upvotes}}&nbsp;</span>
+                                </button>    
+                                <button class='downvote' style=" background-color: none; border: 0;" > 
+                                    <span class="fa fa-thumbs-down post_dislike">&nbsp;{{$post->downvotes}}&nbsp;</span>
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </button>
     </div>
 
 </article>
