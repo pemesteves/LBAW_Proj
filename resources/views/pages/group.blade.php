@@ -10,7 +10,7 @@
 ?>
 
 @section('content')
-
+<div id="feed_container" class="container" >
     <div id="group_card" class="container card mb-3 border rounded">
         <div class="row no-gutters">
             <div class="card text-center col-sm-3">
@@ -100,5 +100,5 @@
         @each('partials.post', $posts, 'post')
 
     </div>
-    
+</div>  
 @endsection

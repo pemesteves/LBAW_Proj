@@ -3,6 +3,7 @@
 @section('content')
 
 <br>
+<div id="feed_container" class="container" >
     <div id="profile_card" class="container" style="padding-top: 1em; margin-bottom: 0; background-color: white; border: 1px solid lightgrey;">
         <div class="row">
             <div class="col-3">
@@ -164,7 +165,7 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-8" style="flex-grow:1;max-width:100%">
+    <div id="posts_container" class="col-sm-8" style="flex-grow:1;max-width:100%">
         @if(Auth::user()->user_id == $user->user_id)
             <form id="post_form" class="new_post d-print-none">
                 <div class="container" id="post_container">
@@ -189,9 +190,12 @@
                 </div>
             </form>
         @endif
-            
-        @each('partials.post', $posts, 'post')
+
+        <div id="posts_container">
+            @each('partials.post', $posts, 'post')
+        </div>
+        
 
     </div>
-    
+</div>
 @endsection
