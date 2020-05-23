@@ -34,6 +34,7 @@
             <link href="{{ asset('css/create.css') }}" rel="stylesheet">
             <link href="{{ asset('css/feed.css') }}" rel="stylesheet">
             <link href="{{ asset('css/help.css') }}" rel="stylesheet">
+            <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
 
             <script src="{{ asset('js/navbar_mobile.js') }}" defer></script>        
             <script src="{{ asset('js/app.js') }}" defer> </script>

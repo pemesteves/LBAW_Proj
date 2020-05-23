@@ -17,19 +17,24 @@ window.Echo = new Echo({
 <meta name="csrf-token" content="{{ csrf_token() }}" />
 
 <nav class="navbar navbar-dark navbar-bar">
-                <a class="navbar-brand" href="/<?php if($is_admin) echo 'admin'; else echo 'feed';?>">
+
+                @if(!Auth::user()->isAdmin())
+                    <a class="navbar-brand" href="/feed">
+                @else
+                    <a class="navbar-brand" href="/admin">
+                @endif
                     <h1>UConnect <span class="fa fa-graduation-cap"></span></h1>
                 </a> <!-- whitesmoke -->
-                @if(!$is_admin)
-                <form class="form-inline">
-                    <div class="input-group">
-                        <input type="text" required class="form-control" placeholder="Search" aria-label="Search" aria-describedby="search-button">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-light fa fa-search fa-flip-horizontal" type="submit" id="search-button"></button>
+                @if(!Auth::user()->isAdmin())
+                    <form class="form-inline" method="get" action="/search">
+                        <div class="input-group">
+                            <input type="text" name='search' required class="form-control" placeholder="Search" aria-label="Search" aria-describedby="search-button">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-light fa fa-search fa-flip-horizontal" type="submit" id="search-button"></button>
+                            </div>
                         </div>
-                    </div>
-                </form>
-                <button id="navbar_pers_info_mobile" onclick="show_pers_info()"><span class="fa fa-id-card"></span></button>
+                    </form>
+                    <button id="navbar_pers_info_mobile" onclick="show_pers_info()"><span class="fa fa-id-card"></span></button>
                 @endif
                 <div id="navbar_pers_info" class="btn-group">
                 @if (!Auth::user()->isAdmin())

@@ -1,0 +1,21 @@
+
+
+
+.tab_selector{
+    display:inline-block;
+    border: solid 2px transparent;
+    border-radius: 5px;
+    background-color:transparent;
+}
+
+.tab_selector:hover{
+    border-bottom: solid 2px sandybrown;
+}
+
+.tab_selected{
+    background-color: rgb(243, 210, 181);
+}
+
+.not_selected{
+    display: none;
+}

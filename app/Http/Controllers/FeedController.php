@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Post;
 use App\Report;
 use App\RegularUser;
+use App\Event;
+use App\Group;
 use App\OrgApproval;
 
 class FeedController extends Controller{
@@ -117,9 +119,42 @@ class FeedController extends Controller{
 
     public function show_admin_feed(){
         $reports = Report::whereNull('approval')->orderBy('report_id','desc')->get();
+        $reported = Report::where('approval','True')->orderBy('report_id','desc')->get();
         $requests = OrgApproval::whereNull('approval')->orderBy('request_id','desc')->get();
+        $requested = OrgApproval::where('approval','True')->orderBy('request_id','desc')->get();
 
-        return view('pages.admin_feed' , ['reports' => $reports, 'is_admin' => true, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'requests' => $requests]);
+        return view('pages.admin_feed' , ['reports' => $reports, 'reported' => $reported, 'is_admin' => true, 'requests' => $requests, 'requested' => $requested]);
     
     }
+
+    public function searchUsers(Request $request ){
+        $str = strtolower($request->input('search'));
+        $users = RegularUser::join('user','user.user_id','regular_user.user_id')->whereRaw('lower(name) LIKE \'%'.$str.'%\'')->get();
+        return view('pages.search',[ 'str' => $str  ,'users' => $users,'events' => null, 'groups' => null]);
+    }
+
+    public function searchEvents(Request $request ){
+        $str = strtolower($request->input('search'));
+        $events = Event::whereRaw('lower(name) LIKE \'%'.$str.'%\'')->get();
+
+        return view('pages.search',[ 'str' => $str  ,'users' => null,'events' => $events, 'groups' => null]);
+    }
+
+    public function searchGroups(Request $request ){
+        $str = strtolower($request->input('search'));
+        $groups = Group::whereRaw('lower(name) LIKE \'%'.$str.'%\'')->get();
+
+        return view('pages.search',[ 'str' => $str  ,'users' => null,'events' => null, 'groups' => $groups]);
+    }
+
+    public function search(Request $request ){
+        $str = strtolower($request->input('search'));
+        $users = RegularUser::join('user','user.user_id','regular_user.user_id')->whereRaw('lower(name) LIKE \'%'.$str.'%\'')->limit(5)->get();
+        $events = Event::whereRaw('lower(name) LIKE \'%'.$str.'%\'')->limit(5)->get();
+        $groups = Group::whereRaw('lower(name) LIKE \'%'.$str.'%\'')->limit(5)->get();
+
+        return view('pages.search',[ 'str' => $str  ,'users' => $users,'events' => $events, 'groups' => $groups]);
+    }
+
+
 }

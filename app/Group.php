@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class Group extends Model
 {
@@ -46,7 +47,11 @@ class Group extends Model
      * The posts this group owns.
      */
     public function posts() {
-      return $this->hasMany('App\Post', 'group_id', 'group_id')->orderBy('date', 'desc');
+        if(Auth::user()->isAdmin())
+            return $this->hasMany('App\Post', 'group_id', 'group_id')
+                        ->orderBy('date', 'desc');
+        return $this->hasMany('App\Post', 'group_id', 'group_id')->where("type",'<>','blocked')
+                    ->orderBy('date', 'desc');
     }
 
     /**

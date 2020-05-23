@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class Event extends Model
 {
@@ -46,7 +47,10 @@ class Event extends Model
      * The posts this event owns.
      */
     public function posts() {
-      return $this->hasMany('App\Post', 'event_id', 'event_id')->orderBy('date', 'desc');
+        if(Auth::user()->isAdmin())
+            return $this->hasMany('App\Post', 'event_id', 'event_id')
+                        ->orderBy('date', 'desc');
+        return $this->hasMany('App\Post', 'event_id', 'event_id')->where("type",'<>','blocked')->orderBy('date', 'desc');
     }
 
     /**

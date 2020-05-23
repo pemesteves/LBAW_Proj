@@ -20,6 +20,10 @@ function addEventListeners() {
       decliner.addEventListener('click', sendDeclineRequest);
     });
 
+    let tabSelectors = document.querySelectorAll('.tab_selector');
+    [].forEach.call(tabSelectors, function(selector) {
+      selector.addEventListener('click', changeTab);
+    });
 
 }
 
@@ -84,7 +88,18 @@ addErrorFeedback("Request processing failed.");
 
 
 
-
+function changeTab(){
+  newTabInfo = this.getAttribute('data-id');
+  document.querySelector('.tab_selected').classList.remove('tab_selected')
+  this.classList.add('tab_selected')
+  newTab = document.querySelector('#' + newTabInfo);
+  oldTab = document.querySelector('div.selected');
+  oldTab.classList.remove('selected');
+  oldTab.classList.add('not_selected');
+  newTab.classList.add('selected');
+  newTab.classList.remove('not_selected');
+  this.preventDefault();
+}
 
 
 

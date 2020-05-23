@@ -72,6 +72,11 @@ Route::post('/resetPass', 'Auth\ResetController@reset');
 Route::get('/feed' , 'FeedController@show')->name('feed');
 Route::get('/admin' , 'FeedController@show_admin_feed')->name('admin');
 
+Route::get('/search' , 'FeedController@search');
+Route::get('/users/search' , 'FeedController@searchUsers');
+Route::get('/groups/search' , 'FeedController@searchGroups');
+Route::get('/events/search' , 'FeedController@searchEvents');
+
 //Profile
 Route::get('/users/me', 'ProfileController@show_me');
 Route::get('/users/me/edit', 'ProfileController@show_me_edit');
