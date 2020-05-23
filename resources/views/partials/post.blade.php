@@ -126,7 +126,7 @@
                                         <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" class="mx-auto d-block" alt="..." style="border-radius:50%; max-width:2rem; "  onclick="window.location.href='./users/${e.comment.user.user_id}'">
                                     </div>
                                     <div class="row">
-                                        <h4 style="font-size: 1em; margin: 0 auto;">${e.comment.user.name}</h4>
+                                        <h4 style="font-size: 1em; margin: 0 auto;">${e.comment.user.user.name}</h4>
                                     </div>
                                 </div>
                                 <div class="col-9 comment_text">
@@ -148,11 +148,6 @@
                                                         Delete
                                                     </button>
                                                 </li>
-                                                <li class="list-group-item options_entry" style="text-align: left;">
-                                                    <button style="background-color: white; border: 0;">
-                                                        Report
-                                                    </button>
-                                                </li>
                                             </ul>
                                         </div>
                                     </div>
@@ -160,6 +155,10 @@
                                 document.querySelector("[comments-id=" + CSS.escape(e.comment.post_id) + "]").insertBefore(new_comment,document.querySelector("[comments-id=" + CSS.escape(e.comment.post_id) + "] > div"));
                                 let count = document.querySelector("#post_" + CSS.escape(e.comment.post_id) + " .comments_count");
                                 count.innerHTML = (parseInt(count.textContent)+1) + " comments";
+                                let commentDelleters = new_comment.querySelector('.comment_container div.options_menu .comment_delete');
+                                commentDelleters.addEventListener('click', sendDeleteCommentRequest);
+                                let commentEditTransformers = new_comment.querySelector('.comment_container div.options_menu .comment_edit');
+                                commentEditTransformers.addEventListener('click', setCommentEditBox);
                             });
                         </script>
                         </div>

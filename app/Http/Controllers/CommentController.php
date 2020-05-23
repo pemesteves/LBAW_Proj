@@ -29,7 +29,7 @@ class CommentController extends Controller{
 
       $comment->body = $request->input('body');
       $comment->post_id = $post_id;
-      $comment->user_id = Auth::user()->user_id;//Auth::user()->user_id; //Change this to the id of the regular_user
+      $comment->user_id = Auth::user()->userable->regular_user_id;
       $comment->save();
 
       //Gets useful information about the comment

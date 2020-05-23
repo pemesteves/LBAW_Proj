@@ -59,7 +59,7 @@ class Comment extends Model
    * The user this comment belongs to
    */
   public function user() {
-    return $this->belongsTo('App\User' , 'user_id');
+    return $this->belongsTo('App\RegularUser' , 'user_id');
   }
 
 

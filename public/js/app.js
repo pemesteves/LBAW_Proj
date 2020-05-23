@@ -573,7 +573,7 @@ function createComment(comment){
             <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" class="mx-auto d-block" alt="..." style="border-radius:50%; max-width:2rem; "  onclick="window.location.href='./users/${comment.user.user_id}'">
         </div>
         <div class="row">
-            <h4 style="font-size: 1em; margin: 0 auto;">${comment.user.name}</h4>
+            <h4 style="font-size: 1em; margin: 0 auto;">${comment.user.user.name}</h4>
         </div>
     </div>
     <div class="col-9 comment_text">
@@ -593,11 +593,6 @@ function createComment(comment){
                     <li class="list-group-item options_entry" style="text-align: left;">
                         <button class='comment_delete' style=" background-color: white; border: 0;" > 
                             Delete
-                        </button>
-                    </li>
-                    <li class="list-group-item options_entry" style="text-align: left;">
-                        <button style="background-color: white; border: 0;">
-                            Report
                         </button>
                     </li>
                 </ul>

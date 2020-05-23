@@ -67,6 +67,8 @@ function commentDeletedHandler() {
   if (this.status != 200) window.location = '/';
   let comment = JSON.parse(this.responseText);
   let element = document.querySelector('div.comment_container[data-id="'+ comment.comment_id + '"]');
+  let count = document.querySelector("#post_" + comment.post_id + " .comments_count");
+  count.innerHTML = (parseInt(count.textContent)-1) + " comments";
 
   element.remove();
 }
