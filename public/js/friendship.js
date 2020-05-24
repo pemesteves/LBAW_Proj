@@ -26,7 +26,7 @@ function addEventListeners() {
     });
 
     let userReporter = document.querySelector('#profile_card button.report');
-    userReporter.addEventListener('click', openReportUserModal);
+    if(userReporter) userReporter.addEventListener('click', openReportUserModal);
 
 }
 
@@ -55,7 +55,6 @@ function userReportedHandler() {
       window.location = '/';
       return;
     }
-    let post = JSON.parse(this.responseText);
   
     addFeedback("User reported sucessfully");
   
