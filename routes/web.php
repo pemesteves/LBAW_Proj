@@ -113,4 +113,4 @@ Route::get('/posts/{post_id}', 'PostController@show');
 Route::get('/posts/{post_id}/edit', 'PostController@show_edit');
 Route::post('/posts/{post_id}', 'PostController@edit');
 
-
+Route::get('/api/posts/{last_id}', 'FeedController@getPosts');

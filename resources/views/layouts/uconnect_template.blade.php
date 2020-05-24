@@ -47,6 +47,12 @@
             <script src="{{ asset('js/uploadImages.js') }}" defer> </script>
             <script src="{{ asset('js/input_validation.js') }}" defer> </script>
 
+            @if(isset($js))
+                @foreach($js as $j)
+                    <script src='{{ asset("js/$j") }}' defer> </script>
+                @endforeach
+            @endif
+
             <style>
                 body {
                     background-color: rgba(244, 166, 98, 0.05);
