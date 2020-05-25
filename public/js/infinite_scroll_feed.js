@@ -5,7 +5,7 @@ window.onscroll = function(ev) {
         //this.console.log('a chegar a baixo');
         if(!sent_request){
             sent_request = true;
-            let last_id = document.querySelector('#posts_container article:last-of-type').getAttribute('data-id')
+            let last_id = document.querySelector('#postFeed_container article:last-of-type').getAttribute('data-id')
             sendAjaxRequest('get', '/api/posts/'+last_id, null , addPosts);
         }
     }
@@ -21,6 +21,6 @@ function addPosts(){
 
     if(this.responseText.length < 5) // no important content available
         return;
-    document.querySelector('#posts_container').insertAdjacentHTML('beforeend',this.responseText);
+    document.querySelector('#postFeed_container').insertAdjacentHTML('beforeend',this.responseText);
     sent_request = false;
 }

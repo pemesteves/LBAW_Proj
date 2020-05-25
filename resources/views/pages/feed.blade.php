@@ -58,7 +58,7 @@
             
 
             </div>
-            <div id="posts_container" class="col-sm-8">
+            <div id='postFeed_container' class="col-sm-8">
 
                 <form id="post_form" class="new_post d-print-none">
                     <div id="post_container">

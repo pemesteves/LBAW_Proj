@@ -11,7 +11,7 @@
         </div>
     </div>
     <div class="col-sm-9 comment_text">
-        <p>{{ $comment->body }}</p>
+        <h6>{{ $comment->body }}</h6>
     </div>
     <div class="col-sm-1">
         <div class="btn-group dropright d-print-none" style="margin-right: 0; padding-right: 0; width: 100%">

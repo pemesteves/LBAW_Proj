@@ -23,7 +23,7 @@ window.Echo = new Echo({
                 @else
                     <a class="navbar-brand" href="/admin">
                 @endif
-                    <h1>UConnect <span class="fa fa-graduation-cap"></span></h1>
+                    <h2>UConnect <span class="fa fa-graduation-cap"></span></h2>
                 </a> <!-- whitesmoke -->
                 @if(!Auth::user()->isAdmin())
                     <form class="form-inline" method="get" action="/search">

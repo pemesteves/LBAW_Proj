@@ -40,25 +40,25 @@
                     </h2>
                         @if(Auth::user()->user_id != $user->user_id && !Auth::user()->isAdmin())
                             @if(count($friendship_status) == 0)
-                            <button type="button" class="btn btn-light add_friend" data-id='{{$user->regular_user_id}}' style="margin-left: auto; margin-right:4%;background-color: rgba(0,0,150,.03); ">
+                            <span class="btn btn-light add_friend" data-id='{{$user->regular_user_id}}' style="margin-left: auto; margin-right:4%;background-color: rgba(0,0,150,.03); ">
                                 Add Friend
-                            </button>
+                            </span>
                             @elseif($friendship_status[0]->type == 'accepted')
-                                <button type="button" class="btn btn-light remove_friend" data-id='{{$user->regular_user_id}}' style="margin-left: auto; margin-right:4%;background-color: rgba(0,0,150,.03); ">
+                                <span  class="btn btn-light remove_friend" data-id='{{$user->regular_user_id}}' style="margin-left: auto; margin-right:4%;background-color: rgba(0,0,150,.03); ">
                                     Remove Friend
-                                </button>
+                                </span>
                             @elseif($friendship_status[0]->type == 'pending')
                                 @if($friendship_status[0]->friend_id1 == Auth::user()->userable_id)
-                                    <button type="button" class="btn btn-light cancel_friend" data-id='{{$user->regular_user_id}}' style="margin-left: auto; margin-right:4%;background-color: rgba(0,0,150,.03); ">
+                                    <span  class="btn btn-light cancel_friend" data-id='{{$user->regular_user_id}}' style="margin-left: auto; margin-right:4%;background-color: rgba(0,0,150,.03); ">
                                         Cancel Request
-                                    </button>
+                                    </span>
                                 @else
-                                        <button type="button" class="btn btn-light accept_friend" data-id='{{$user->regular_user_id}}' style="margin-left: auto; margin-right:4%;background-color: rgba(0,0,150,.03); ">
+                                        <span  class="btn btn-light accept_friend" data-id='{{$user->regular_user_id}}' style="margin-left: auto; margin-right:4%;background-color: rgba(0,0,150,.03); ">
                                             Accept
-                                        </button>
-                                        <button type="button" class="btn btn-light decline_friend" data-id='{{$user->regular_user_id}}' style="margin-right:4%;background-color: rgba(0,0,150,.03); ">
+                                        </span>
+                                        <span class="btn btn-light decline_friend" data-id='{{$user->regular_user_id}}' style="margin-right:4%;background-color: rgba(0,0,150,.03); ">
                                             Decline
-                                        </button>
+                                        </span>
                                 @endif
                             @endif
                         @elseif (Auth::user()->user_id == $user->user_id && get_class($user->regular_userable) == "App\Organization")  

@@ -68,14 +68,14 @@
             <title>UConnect: We're getting there</title>
         </head>
         <body>
-            <section>
+            <div>
                 @yield('nav_bar')
-            </section>
+            </div>
             
-            <section id='feedback'>
-            </section>           
+            <div id='feedback'>
+            </div>           
 
-            <section id="content">
+            <div id="content">
                 
             @if(Session::has("success_message"))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -99,7 +99,7 @@
 
                 @yield('content')
                 
-                <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                     <div class="modal-header">
@@ -112,11 +112,11 @@
                     <div class="modal-body">
                         <form>
                         <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Title:</label>
+                            <label class="col-form-label">Title:</label>
                             <input type="text" class="form-control" id="report_title">
                         </div>
                         <div class="form-group">
-                            <label for="message-text" class="col-form-label">Description:</label>
+                            <label class="col-form-label">Description:</label>
                             <textarea class="form-control" id="report_description"></textarea>
                         </div>
                         </form>
@@ -129,7 +129,7 @@
                 </div>
             </div>
 
-            </section>
+            </div>
 
 
             <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

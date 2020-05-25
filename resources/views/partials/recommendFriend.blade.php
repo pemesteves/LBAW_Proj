@@ -12,10 +12,10 @@
                     <p class="card-text small_post_body" style="margin-bottom:0;margin-left:0.2rem;display:inline-block;">
                         {{$user->user->name}}
                     </p>
-                    <button type="button" class="btn btn-light add_friend" data-id='{{$user->regular_user_id}}' 
+                    <span class="btn btn-light add_friend" data-id='{{$user->regular_user_id}}' 
                         style="background-color: rgba(0,0,150,.03);float:right; margin-right:0.5rem;margin-top:0.2rem;font-size:0.9rem ">
                         Add Friend
-                    </button>
+                    </span>
                     <p class="card-text" style="margin-bottom:0rem; float: left;margin-left:0.2rem;">
                         <small class="text-muted" style="margin-bottom:0rem"> {{count($user->friendsInCommun(Auth::user()->userable))}} friends in commun </small>
                     </p>

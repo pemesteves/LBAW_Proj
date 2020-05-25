@@ -110,7 +110,7 @@
                                 </div>
                             </div>
                         </form>
-                        <div class="comments" comments-id= "{{$post->post_id}}">
+                        <div class="comments" data-id= "{{$post->post_id}}">
                             @each("partials.comment" , $post->comments, "comment")
 
                             <script>
@@ -152,7 +152,7 @@
                                         </div>
                                     </div>
                                 </div>`;
-                                document.querySelector("[comments-id=" + CSS.escape(e.comment.post_id) + "]").insertBefore(new_comment,document.querySelector("[comments-id=" + CSS.escape(e.comment.post_id) + "] > div"));
+                                document.querySelector(".comments[data-id=" + CSS.escape(e.comment.post_id) + "]").insertBefore(new_comment,document.querySelector(".comments[data-id=" + CSS.escape(e.comment.post_id) + "] > div"));
                                 let count = document.querySelector("#post_" + CSS.escape(e.comment.post_id) + " .comments_count");
                                 count.innerHTML = (parseInt(count.textContent)+1) + " comments";
                                 let commentDelleters = new_comment.querySelector('.comment_container div.options_menu .comment_delete');
@@ -212,15 +212,15 @@
                                 <button type="button" id="postModal-{{ $post['post_id'] }}" class="btn post_open_modal" data-toggle="modal" 
                                 data-target="#popup-{{ $post['post_id'] }}" 
                                 style="color: inherit;background: none; width:100%;height:100%;padding-top: 20px;padding-left: 20px;"> 
-                                    <h3 class="card-title small_post_title" style="display:inline-block;"> {{ $post['title'] }}</h3>
+                                    <span class="card-title small_post_title" style="display:inline-block;"> {{ $post['title'] }}</span>
                                     <small class="text-muted" style="margin-bottom:0rem;float:right;margin-right:1rem;">{{$post->getContext()}}</small>
-                                    <p class="card-text small_post_body">
+                                    <span class="card-text small_post_body">
                                         {{ $post->body }}
-                                    </p>
-                                    <p class="card-text" style="margin-bottom:0rem; float: right;margin-right:1rem;">
+                                    </span>
+                                    <span class="card-text" style="margin-bottom:0rem; float: right;margin-right:1rem;">
                                         <small class="text-muted" style="margin-bottom:0rem;">{{date('d-m-Y', strtotime($post->date))}}</small>, 
                                         <small class="text-muted" style="margin-bottom:0.2rem">{{date('H:i', strtotime($post->date))}}</small>
-                                    </p>
+                                    </spany>
                                 </button>
                             </div>
 
@@ -228,10 +228,10 @@
                         <div class="card-footer" style="border-left:none;border-right:none;border-bottom:none">
                             <span class="comments_count"> {{$post->comments->count()}} comments </span>
                             <div class='post_votes' style="float: right;">
-                                <button class='upvote' style=" background-color: none; border: 0;" > 
+                                <button class='upvote' style=" background-color: transparent; border: 0;" > 
                                     <span class="fa fa-thumbs-up post_like">&nbsp;{{$post->upvotes}}&nbsp;</span>
                                 </button>    
-                                <button class='downvote' style=" background-color: none; border: 0;" > 
+                                <button class='downvote' style=" background-color: transparent; border: 0;" > 
                                     <span class="fa fa-thumbs-down post_dislike">&nbsp;{{$post->downvotes}}&nbsp;</span>
                                 </button>
                             </div>
