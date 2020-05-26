@@ -71,7 +71,7 @@
                                     Request Pending
                                 </button>
                             @elseif($org_status[0]->type == 'accepted')
-                                <button type="button" class="btn btn-light org" data-id='{{$user->regular_user_id}}' style="margin-left: auto; margin-right:4%;background-color: rgba(0,0,150,.03); ">
+                                <button type="button" class="btn btn-light org" data-id='{{$user->regular_user_id}}' style="margin-left: auto; margin-right:4%;background-color: rgba(0,0,150,.03); " disabled>
                                     Verified
                                 </button>
                             @else

@@ -8,10 +8,10 @@
             <div style="display:flex;justify-content:space-between">
                 <h6 class="card-text">Issue : {{$request->reason}}</h6>
                 <div>
-                    @if($request->type == 'pending')
+                    @if(strcmp($request->type,'pending') == 0)
                         <button type="button" class="btn btn-success accept">Accept</button>
                         <button type="button" class="btn btn-danger decline" style="margin-top:0.2rem">Ignore</button>
-                    @else
+                    @elseif(strcmp($request->type,'accepted') == 0)
                         <button type="button" class="btn btn-danger decline" style="margin-top:0.2rem">Cancel</button>
                     @endif
                 </div>

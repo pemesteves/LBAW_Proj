@@ -50,10 +50,10 @@ function addEventListeners() {
       reporter.addEventListener('click', openReportPostModal);
     });
 
-
-
     let notification = document.querySelector('#notificationDrop');
-    notification.addEventListener('click',sendSeenNotificationsRequest);
+    if(notification !== null) {
+      notification.addEventListener('click',sendSeenNotificationsRequest);
+    }
 
 }
 
