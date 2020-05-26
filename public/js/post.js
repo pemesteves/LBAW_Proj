@@ -352,6 +352,9 @@ function postAddedHandler() {
 
   new_post.querySelector('div.post_container form').addEventListener('submit', sendCreateCommentRequest);
 
+  let script = new_post.getElementsByTagName('script')[0];
+  eval(script.innerHTML);
+
   addFeedback("Post added successfully.")
 }
 
