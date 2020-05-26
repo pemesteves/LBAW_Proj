@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\RegularUser;
 
 class Event extends Model
 {
@@ -63,6 +64,10 @@ class Event extends Model
                        ->count();
 
         return $result;
+    }
+
+    public function interested(){
+        return $this->belongsToMany('App\RegularUser','user_interested_in_event','event_id','user_id');
     }
 
     /**

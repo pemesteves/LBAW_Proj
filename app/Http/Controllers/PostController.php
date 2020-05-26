@@ -2,17 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
+use App\Http\Traits\NotificationTrait;
+
 use App\Post;
 use App\Report;
+use App\Notification;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Support\Facades\Session;
 
 
 class PostController extends Controller{
+
+    use NotificationTrait;
 
     public function delete(Request $request, $id)
     {
@@ -42,13 +48,40 @@ class PostController extends Controller{
       $post->title = $request->input('title');
       $post->body = $request->input('body');
       $post->author_id = Auth::user()->userable->regular_user_id; //TODO Change this to the id of the regular_user
-      if($group_id) $post->group_id = $group_id;
-      if($event_id) $post->event_id = $event_id;
+      if($group_id){
+        $post->group_id = $group_id;
+        $interested = DB::table('user_in_group')
+                      ->where([['group_id', '=', $group_id],['user_id','<>',Auth::user()->userable->regular_user_id]])
+                      ->select('user_id')->get();
+        
+        $notification =  new Notification;
+        $notification->origin_user_id = Auth::user()->userable->regular_user_id;
+        $notification->notification_user_id = Auth::user()->userable->regular_user_id ;
+        $notification->notification_group_id = $group_id;
+        $notification->description = $notification->getDescription(" has a new post");
+        $notification->link = $notification->link();
+        $notification->save();
+        $this->sendNotifications($notification,$interested);
+      }
+      else if($event_id){
+        $post->event_id = $event_id;
+        $interested = DB::table('user_interested_in_event')
+                      ->where([['event_id', '=', $event_id],['user_id','<>',Auth::user()->userable->regular_user_id]])
+                      ->select('user_id')->get();
+        $notification =  new Notification;
+        $notification->origin_user_id = Auth::user()->userable->regular_user_id;
+        $notification->notification_user_id = Auth::user()->userable->regular_user_id ;
+        $notification->notification_event_id = $event_id;
+        $notification->description = $notification->getDescription(" has a new post");
+        $notification->link = $notification->link();
+        $notification->save();
+        $this->sendNotifications($notification,$interested);
+      }
       $post->save();
       
       //Gets useful information about the post
       $new_post = Post::take(1)->where("post_id", '=', $post["post_id"])->get(); 
-    
+        
       return view('partials.post',['post' => $new_post[0]]); 
     }
 

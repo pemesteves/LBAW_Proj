@@ -67,7 +67,12 @@ class RegularUser extends Model
     }
 
     public function notifications() {
-        return $this->belongsToMany('App\Notification', 'notified_user', 'user_notified', 'notification_id' )->withPivot('seen');
+        return $this->belongsToMany('App\Notification', 'notified_user', 'user_notified', 'notification_id' )->orderBy('date','DESC')->withPivot('seen');
+    }
+
+    public function numberOfNotifications() {
+        return $this->belongsToMany('App\Notification', 'notified_user', 'user_notified', 'notification_id' )
+                ->withPivot('seen')->where('seen',false)->count();
     }
 
     /**
