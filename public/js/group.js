@@ -13,6 +13,9 @@ function openReportGroupModal(event){
     let modal = document.querySelector('#reportModal');
     modal.querySelector('#reportModalLabel').innerHTML = "Report group"
     modal.querySelector("#report_id").value = id;
+    modal.querySelector(".sendReport").removeEventListener('click' , sendReportCommentRequest);
+    modal.querySelector(".sendReport").removeEventListener('click' , sendReportEventRequest);
+    modal.querySelector(".sendReport").removeEventListener('click' , sendReportPostRequest);
     modal.querySelector(".sendReport").addEventListener('click' , sendReportGroupRequest);
   }
 

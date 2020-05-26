@@ -398,7 +398,8 @@ DROP FUNCTION IF EXISTS update_at() CASCADE;
 CREATE FUNCTION update_group_posts() RETURNS TRIGGER AS
 $BODY$
 BEGIN
-    UPDATE "post" SET TYPE = NEW.TYPE WHERE "group_id" = NEW."group_id" and "post_id" not in (SELECT "reported_post_id" from "report" where 'approval' = '1');
+    UPDATE "post" SET TYPE = NEW.TYPE WHERE "group_id" = NEW."group_id" and "post_id" not in 
+		(SELECT "reported_post_id" from "report" where 'approval' is NOT NULL);
     RETURN NEW;
 END
 $BODY$
@@ -415,7 +416,8 @@ CREATE TRIGGER update_group_posts
 CREATE FUNCTION update_event_posts() RETURNS TRIGGER AS
 $BODY$
 BEGIN
-    UPDATE "post" SET TYPE = NEW.TYPE WHERE "event_id" = NEW."event_id" and "post_id" not in (SELECT "reported_post_id" from "report" where 'approval' = '1');
+    UPDATE "post" SET TYPE = NEW.TYPE WHERE "event_id" = NEW."event_id" and "post_id" not in 
+								(SELECT "reported_post_id" from "report" where 'approval' is NOT NULL);
     RETURN NEW;
 END
 $BODY$
@@ -433,8 +435,8 @@ CREATE FUNCTION update_user_posts() RETURNS TRIGGER AS
 $BODY$
 BEGIN
     --UPDATE "post" SET TYPE = NEW.TYPE WHERE "author_id" = NEW."regular_user_id";
-    UPDATE "post" SET TYPE = NEW.TYPE WHERE "author_id" = NEW."regular_user_id" and "post_id" not in (SELECT "reported_post_id" from "report" where 'approval' = '1');
-    UPDATE "comment" SET TYPE = NEW.TYPE WHERE "user" = NEW."regular_user_id" and "comment_id" not in (SELECT "comment_id" from "comment" INNER JOIN "report" on "comment_id" = "reported_comment_id" where 'approval' = '1');
+    UPDATE "post" SET TYPE = NEW.TYPE WHERE "author_id" = NEW."regular_user_id" and "post_id" not in (SELECT "reported_post_id" from "report" where 'approval' is NOT NULL);
+    UPDATE "comment" SET TYPE = NEW.TYPE WHERE "user" = NEW."regular_user_id" and "comment_id" not in (SELECT "comment_id" from "comment" INNER JOIN "report" on "comment_id" = "reported_comment_id" where 'approval' is NOT NULL);
     RETURN NEW;
 END
 $BODY$

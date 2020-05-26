@@ -50,7 +50,6 @@ function sendAcceptReportRequest(event) {
     event.preventDefault();
 }
 function sendDeclineReportRequest(event) {
-    console.log("we le le");
     let id = this.closest('div.report').getAttribute('data-id');
     sendAjaxRequest('put', '/api/reports/' + id + '/decline', null, reportStatusHandler);
     event.preventDefault();
@@ -74,9 +73,18 @@ function reportStatusHandler(){
       }
     let response = JSON.parse(this.responseText);
     let element = document.querySelector('div.report[data-id="'+ response.id + '"]');
-    element.parentElement.remove();
-
-    addFeedback("Report processed successfully.");
+    let button = element.querySelector('button.accept')
+    let parent = element.parentElement;
+    parent.remove();
+    if(button){
+      button.remove();
+      let reported = document.querySelector('#reported');
+      reported.insertBefore(parent,reported.firstChild);
+      element.querySelector('button.decline').innerHTML="Cancel";
+      addFeedback("Report processed successfully.");
+    }else{
+      addFeedback("Report cancelled successfully.");
+    }
 }
 
 function reportFailedHandler(){
@@ -112,7 +120,7 @@ function changeTab(){
   oldTab.classList.add('not_selected');
   newTab.classList.add('selected');
   newTab.classList.remove('not_selected');
-  this.preventDefault();
+ 
 }
 
 

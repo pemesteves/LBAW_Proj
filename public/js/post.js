@@ -209,6 +209,8 @@ function openReportPostModal(event){
   modal.querySelector('#reportModalLabel').innerHTML = "Report post"
   modal.querySelector("#report_id").value = id;
   modal.querySelector(".sendReport").removeEventListener('click' , sendReportCommentRequest);
+  modal.querySelector(".sendReport").removeEventListener('click' , sendReportEventRequest);
+  modal.querySelector(".sendReport").removeEventListener('click' , sendReportGroupRequest);
   modal.querySelector(".sendReport").addEventListener('click' , sendReportPostRequest);
 }
 
@@ -347,6 +349,8 @@ function postAddedHandler() {
   [].forEach.call(postDislikers, function(disliker) {
     disliker.addEventListener('click', sendDislikePostRequest);
   });
+
+  new_post.querySelector('div.post_container form').addEventListener('submit', sendCreateCommentRequest);
 
   addFeedback("Post added successfully.")
 }
