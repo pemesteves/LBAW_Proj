@@ -36,6 +36,15 @@ class ProfileController extends Controller{
 
       $image = Auth::user()->userable->image();
       
+
+      if(get_class(Auth::user()->userable->regular_userable) == "App\Organization") {
+        $org_status = DB::table("organization_approval_request")
+        ->where([['organization_approval_request.organization_id', '=', Auth::user()->userable->regular_userable->organization_id]]
+        )->get();
+        return view('pages.user' , ['is_admin' => false , 'user' => Auth::user()->userable, 'posts' => $posts , 'groups' => $groups, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'image' => $image, 'org_status' => $org_status]);
+  
+      }
+      
       return view('pages.user' , ['is_admin' => false , 'user' => Auth::user()->userable, 'posts' => $posts , 'groups' => $groups, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'image' => $image]);
   }
 
@@ -43,8 +52,10 @@ class ProfileController extends Controller{
     if (!Auth::check()) return redirect('/login');
 
     $image = Auth::user()->userable->image();
+ 
+    return view('pages.user_me_edit' , ['is_admin' => false , 'notifications' => Auth::user()->userable->notifications, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'image' => $image]);
 
-    return view('pages.user_me_edit' , ['is_admin' => false , 'notifications' => Auth::user()->userable->notifications, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'image' => $image ]);
+
   }
 
   /**

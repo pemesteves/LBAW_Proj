@@ -24,10 +24,12 @@ DROP TABLE IF EXISTS public."admin";
 DROP TABLE IF EXISTS public."user";
 
 DROP TYPE IF EXISTS "friendship_status";
+DROP TYPE IF EXISTS "org_approval";
 DROP TYPE IF EXISTS status;
 
 CREATE TYPE status AS ENUM ('normal', 'blocked', 'deleted');
 CREATE TYPE "friendship_status" AS ENUM ('accepted', 'pending', 'refused');
+CREATE TYPE "org_approval" AS ENUM ('pending', 'accepted', 'refused');
 
 DROP INDEX IF EXISTS "user_notified"; 
 DROP INDEX IF EXISTS "notified_user_notification_id";
@@ -306,7 +308,7 @@ CREATE TABLE public."user_interested_in_event"
 CREATE TABLE public."organization_approval_request" (
 	"request_id" serial NOT NULL,
 	"organization_id" integer NOT NULL REFERENCES public."organization"("organization_id") ON DELETE CASCADE,
-	"approval" boolean DEFAULT NULL,
+	TYPE "org_approval" NOT NULL DEFAULT 'pending',
 	"reason" text NOT NULL,
 	"date" timestamp with time zone NOT NULL DEFAULT now(),
 	CONSTRAINT "organization_approval_request_pkey" PRIMARY KEY ("request_id")
