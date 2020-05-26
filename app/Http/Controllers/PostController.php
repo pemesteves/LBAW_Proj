@@ -251,3 +251,17 @@ class PostController extends Controller{
     }
 
 }
+/*
+class SendMultipleNotifications extends Thread {
+
+  use NotificationTrait;
+
+  public function __construct($notification, $dest) {
+      $this->notification = $notification;
+      $this->dest = $dest;
+  }
+
+  public function run() {
+    $this->sendNotifications($this->notification,$this->dest);
+  }
+}*/

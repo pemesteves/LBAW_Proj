@@ -21,7 +21,7 @@
     </div>
 
     <div id="requested" class='tab not_selected'>
-        @each('partials.report', $requested, 'report')
+        @each('partials.org_approval', $requested, 'request')
     </div>
 
 @endsection
