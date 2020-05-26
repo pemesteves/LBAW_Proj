@@ -20,7 +20,7 @@ trait NotificationTrait {
             ["notification_id" => $notification->notification_id , "user_notified" => $regular_user_id]
         );
 
-        broadcast(new NewNotification($notification))->toOthers();
+        broadcast(new NewNotification($notification,$regular_user_id))->toOthers();
 
         return;
     }
@@ -29,9 +29,10 @@ trait NotificationTrait {
 
         $arr = [];
 
-        foreach($regular_user_ids as $id){
+        foreach($regular_user_ids as $user){
+            $id = $user->user_id;
             array_push($arr,["notification_id" => $notification->notification_id , "user_notified" => $id]);
-            broadcast(new NewNotification($notification))->toOthers();
+            broadcast(new NewNotification($notification,$id))->toOthers();
         }
 
         DB::table("notified_user")->insert(

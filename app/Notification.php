@@ -92,12 +92,12 @@ class Notification extends Model
       $description = $this->triggerUser->user->name . $descriptionText;
     if($this->notification_event_id)
       $description = $this->triggerUser->user->name . " has posted in " . Event::find($this->notification_event_id)->name;
-    if($this->notification_post_id)
+    else if($this->notification_post_id)
       $description = $this->description;
-    if($this->notificationcomment_id)
+    else if($this->notification_comment_id)
         $description = $this->triggerUser->user->name . " has commented in your post";
-    if($this->notification_group_id)
-      $description = $this->triggerUser->user->name . " has posted in " . Group::find($this->notification_event_id)->name;
+    else if($this->notification_group_id)
+      $description = $this->triggerUser->user->name . " has posted in " . Group::find($this->notification_group_id)->name;
     else
       $description = $this->triggerUser->user->name . ": " . $descriptionText;
     return $description;

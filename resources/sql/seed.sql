@@ -299,7 +299,7 @@ CREATE TABLE public."friend"
 
 CREATE TABLE public."user_interested_in_event"
 (
-	"user_id" integer NOT NULL REFERENCES public."user"("user_id") ON DELETE CASCADE,
+	"user_id" integer NOT NULL REFERENCES public."regular_user"("regular_user_id") ON DELETE CASCADE,
 	"event_id" integer NOT NULL REFERENCES public."event"("event_id") ON DELETE CASCADE,
 	CONSTRAINT "user_interested_in_event_pkey" PRIMARY KEY ("user_id", "event_id")
 );
@@ -671,6 +671,7 @@ insert into public."group" ("name", "information", TYPE) values ('Grupo de LBAW'
 insert into public."group" ("name", "information", TYPE) values ('UP/IPP Group', 'Estudantes do Porto', 'normal');
 
 
+insert into public."user_in_group" ("user_id", "group_id") values (1, 1);
 insert into public."user_in_group" ("user_id", "group_id") values (2, 1);
 insert into public."user_in_group" ("user_id", "group_id") values (5, 1);
 insert into public."user_in_group" ("user_id", "group_id") values (6, 1);
@@ -821,4 +822,4 @@ insert into public."user_interested_in_event" ("user_id","event_id") values(2,1)
 insert into public."user_interested_in_event" ("user_id","event_id") values(4,1);
 insert into public."user_interested_in_event" ("user_id","event_id") values(7,1);
 insert into public."user_interested_in_event" ("user_id","event_id") values(10,1);
-insert into public."user_interested_in_event" ("user_id","event_id") values(23,1);
+insert into public."user_interested_in_event" ("user_id","event_id") values(21,1);

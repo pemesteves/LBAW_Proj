@@ -124,5 +124,9 @@ class RegularUserController extends Controller{
       return $report;
     }
 
+    public function seeNotifactions(){
+        DB::table('notified_user')->where([['user_notified',Auth::user()->userable->regular_user_id],['seen', false]])->update(['seen' => true]);
+        return;
+    }
 
 }

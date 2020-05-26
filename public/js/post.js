@@ -51,6 +51,24 @@ function addEventListeners() {
     });
 
 
+
+    let notification = document.querySelector('#notificationDrop');
+    notification.addEventListener('click',sendSeenNotificationsRequest);
+
+}
+
+function sendSeenNotificationsRequest(event) {
+  sendAjaxRequest('put', '/api/users/notifications', null, seenNotificationsHandler);
+  event.preventDefault();
+}
+
+function seenNotificationsHandler(){
+  if (this.status != 200){
+    return;
+  }
+  let count = document.querySelector('#notifications_count');
+  count.style.display='none';
+  count.textContent = "0";
 }
 
 
@@ -351,6 +369,9 @@ function postAddedHandler() {
   });
 
   new_post.querySelector('div.post_container form').addEventListener('submit', sendCreateCommentRequest);
+
+  let script = new_post.getElementsByTagName('script')[0];
+  eval(script.innerHTML);
 
   addFeedback("Post added successfully.")
 }

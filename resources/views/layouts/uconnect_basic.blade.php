@@ -42,7 +42,17 @@ window.Echo = new Echo({
                     <div class="btn-group">
                         <button class="btn btn-outline-light  dropdown-toggle-split fa fa-bell" 
                             type="button" id="notificationDrop" data-toggle="dropdown" 
-                            aria-haspopup="true" aria-expanded="false"></button>
+                            aria-haspopup="true" aria-expanded="false">
+                        </button>
+                        @if(Auth::user()->userable->numberOfNotifications() > 0)
+                        <h5 id='notifications_count' style='display:inline-block;position:absolute;left:22px;top:13px;background-color:lavender;
+                            border-radius:50%;width: 15px;height: 15px;text-align: center;line-height: 13px;'>
+                        @else
+                        <h5 id='notifications_count' style='display:none;position:absolute;left:22px;top:13px;background-color:lavender;
+                            border-radius:50%;width: 15px;height: 15px;text-align: center;line-height: 13px;'>
+                        @endif
+                            {{Auth::user()->userable->numberOfNotifications()}}
+                        </h5>
                         <div class="dropdown-menu dropdown-menu-lg-right" style=" min-width:350px;padding:0px" aria-labelledby="notificationDrop" id="notif">
                             <p id="notifBar" style='margin-left:10%;margin-top:auto;margin-bottom:auto' >Notifications</p>
                             <div class="dropdown-divider" style="margin-bottom:0px"></div>
@@ -81,8 +91,12 @@ window.Echo = new Echo({
                                             </div>
                                         </div>
                                     </a> `
-                                    document.getElementById("no_notif").style.display = 'none';
+                                    let no_notif = document.getElementById("no_notif");
+                                    if(no_notif) no_notif.style.display = 'none';
                                     document.getElementById("notificationDiv").insertBefore(new_notification, document.getElementById("notificationDiv").childNodes[0]);
+                                    let count = document.querySelector('#notifications_count');
+                                    count.style.display = 'inline-block';
+                                    count.textContent = parseInt(count.textContent) + 1;
                                 });
 
                             </script>
