@@ -114,8 +114,8 @@ class FeedController extends Controller{
     public function show_admin_feed(){
         $reports = Report::whereNull('approval')->orderBy('report_id','desc')->get();
         $reported = Report::where('approval','True')->orderBy('report_id','desc')->get();
-        $requests = OrgApproval::whereNull('approval')->orderBy('request_id','desc')->get();
-        $requested = OrgApproval::where('approval','True')->orderBy('request_id','desc')->get();
+        $requests = OrgApproval::where('type', 'pending')->orderBy('request_id','desc')->get();
+        $requested = OrgApproval::where('type','accepted')->orderBy('request_id','desc')->get();
 
         return view('pages.admin_feed' , ['reports' => $reports, 'reported' => $reported, 'is_admin' => true, 'requests' => $requests, 'requested' => $requested]);
     

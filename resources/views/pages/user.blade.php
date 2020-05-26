@@ -67,7 +67,7 @@
                                     Verify Organization
                                 </button>
                             @elseif($org_status[0]->type == 'pending')
-                                <button type="button" class="btn btn-light verify_pending" data-id='{{$user->regular_user_id}}' style="margin-left: auto; margin-right:4%;background-color: rgba(0,0,150,.03); ">
+                                <button type="button" class="btn btn-light verify_pending" data-id='{{$user->regular_user_id}}' style="margin-left: auto; margin-right:4%;background-color: rgba(0,0,150,.03); " disabled>
                                     Request Pending
                                 </button>
                             @elseif($org_status[0]->type == 'accepted')
@@ -75,8 +75,8 @@
                                     Verified
                                 </button>
                             @else
-                                <button type="button" class="btn btn-light org" data-id='{{$user->regular_user_id}}' style="margin-left: auto; margin-right:4%;background-color: rgba(0,0,150,.03); ">
-                                    Rejected
+                                <button type="button" class="btn btn-light verify_org" data-id='{{$user->regular_user_id}}' style="margin-left: auto; margin-right:4%;background-color: rgba(0,0,150,.03); ">
+                                    Verify Organization
                                 </button>
                             @endif
                         @endif
