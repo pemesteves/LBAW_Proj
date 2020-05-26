@@ -321,10 +321,11 @@ function postAddedHandler() {
     return;
   }
   
-  let post = JSON.parse(this.responseText);
+  //let post = JSON.parse(this.responseText);
 
   // Create the new post
-  let new_post = createPost(post);
+  //let new_post = createPost(post);
+  let new_post = this.responseText;
 
   // Reset the new post input
   let form = document.querySelector('form#post_form');
@@ -332,10 +333,20 @@ function postAddedHandler() {
   form.querySelector('textarea').value="";
 
   // Insert the new post
-  form.parentElement.insertBefore(new_post, form.nextSibling);
-
+  //form.parentElement.insertBefore(new_post, form.nextSibling);
+  form.insertAdjacentHTML('afterend',new_post);
+  new_post = document.querySelectorAll('.post')[0];
   let postDeleter = new_post.querySelector('button.delete');
   postDeleter.addEventListener('click', sendDeletePostRequest);
+  let postLikers = new_post.querySelectorAll('article.post button.upvote');
+  [].forEach.call(postLikers, function(liker) {
+    liker.addEventListener('click', sendLikePostRequest);
+  });
+
+  let postDislikers = new_post.querySelectorAll('article.post button.downvote');
+  [].forEach.call(postDislikers, function(disliker) {
+    disliker.addEventListener('click', sendDislikePostRequest);
+  });
 
   addFeedback("Post added successfully.")
 }
@@ -537,6 +548,10 @@ function createPost(post){
             </div>
         </button>
     </div>`;
+
+
+
+    
 
   return new_post;
 }

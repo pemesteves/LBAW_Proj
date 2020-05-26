@@ -49,7 +49,7 @@ class PostController extends Controller{
       //Gets useful information about the post
       $new_post = Post::take(1)->where("post_id", '=', $post["post_id"])->get(); 
     
-      return $new_post[0];
+      return view('partials.post',['post' => $new_post[0]]); 
     }
 
     /**
