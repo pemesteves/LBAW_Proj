@@ -20,7 +20,7 @@ class OrgApprovalController extends Controller{
     function decline(Request $request, $id){
         $orgRequest = DB::table('organization_approval_request')
         ->where(['organization_approval_request.request_id' => $id])
-        ->update(['type' => 'refused']);
+        ->delete();
     return ['id' => $id];
     }
 
