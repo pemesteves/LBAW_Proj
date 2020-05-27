@@ -95,4 +95,50 @@ class CommentController extends Controller{
       return $report;
     }
 
+    public function like(Request $request, $id , $val)
+    {
+      $comment = Comment::find($id);
+      if(!isset($comment))
+        throw new HttpException(404, "comment");
+      //TODO: AUTHORIZE  
+      $change = ['comment_id' => $id ,'upvotes' => 0, 'downvotes' => 0];
+
+      $like = $comment->userLikes()->wherePivot('user_id' , Auth::user()->userable->regular_user_id)->first();
+      if(!$like){
+        DB::table('user_comment_reaction')
+              ->insert(['user_id' => Auth::user()->userable->regular_user_id,
+                'comment_id' => $id,
+                'like_or_dislike' => $val]);
+        if($val == 0){
+          $comment->increment('downvotes');
+          $change['downvotes'] = 1;
+        }else{
+          $comment->increment('upvotes');
+          $change['upvotes'] = 1;
+        }
+      }else{ //se o like ja existir
+        if($like->pivot->like_or_dislike == $val){ //se o valor for igual então tirar o like
+          $like->pivot->delete();
+          if($val == 0){
+            $comment->decrement('downvotes');
+            $change['downvotes'] = -1;
+          }else{
+            $comment->decrement('upvotes');
+            $change['upvotes'] = -1;
+          }
+        }else{ //mudar o like
+          $like->pivot->update(['like_or_dislike' => $val]);
+          if($val == 0){
+            $comment->increment('downvotes'); $comment->decrement('upvotes');
+            $change = ['comment_id' => $id ,'upvotes' => -1, 'downvotes' => 1];
+          }else{
+            $comment->increment('upvotes'); $comment->decrement('downvotes');
+            $change = ['comment_id' => $id ,'upvotes' => 1, 'downvotes' => -1];
+          }
+        }
+      }
+
+      return $change;
+    }
+
 }

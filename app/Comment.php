@@ -62,5 +62,8 @@ class Comment extends Model
     return $this->belongsTo('App\RegularUser' , 'user_id');
   }
 
+  public function userLikes(){
+    return $this->belongsToMany('App\RegularUser' , 'user_comment_reaction' , 'comment_id' , 'user_id')->withPivot('like_or_dislike');
+  }
 
 }

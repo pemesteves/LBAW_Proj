@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS public."reset_pass";
+DROP TABLE IF EXISTS public."user_comment_reaction";
 DROP TABLE IF EXISTS public."user_reaction";
 DROP TABLE IF EXISTS public."user_interested_in_event";
 DROP TABLE IF EXISTS public."friend";
@@ -320,6 +321,14 @@ CREATE TABLE public."user_reaction"
 	"post_id" integer NOT NULL REFERENCES public."post"("post_id") ON DELETE CASCADE,
 	"like_or_dislike" integer NOT NULL, -- 1 for like, 0 for dislike
 	CONSTRAINT "user_reaction_pkey" PRIMARY KEY ("user_id", "post_id")
+);
+
+CREATE TABLE public."user_comment_reaction"
+(
+	"user_id" integer NOT NULL REFERENCES public."user"("user_id") ON DELETE CASCADE,
+	"comment_id" integer NOT NULL REFERENCES public."comment"("comment_id") ON DELETE CASCADE,
+	"like_or_dislike" integer NOT NULL, -- 1 for like, 0 for dislike
+	CONSTRAINT "user_comment_reaction_pkey" PRIMARY KEY ("user_id", "comment_id")
 );
 
 CREATE TABLE public."reset_pass"

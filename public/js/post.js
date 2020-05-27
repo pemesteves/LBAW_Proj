@@ -10,6 +10,16 @@ function addEventListeners() {
       disliker.addEventListener('click', sendDislikePostRequest);
     });
 
+    let commentLikers = document.querySelectorAll('.comment_container .comment_votes button.comment_upvote');
+    [].forEach.call(commentLikers, function(liker) {
+      liker.addEventListener('click', sendLikeCommentRequest);
+    });
+
+    let commentDislikers = document.querySelectorAll('.comment_container .comment_votes button.comment_downvote');
+    [].forEach.call(commentDislikers, function(disliker) {
+      disliker.addEventListener('click', sendDislikeCommentRequest);
+    });
+
 
     let commentDelleters = document.querySelectorAll('.comment_container div.options_menu .comment_delete');
     [].forEach.call(commentDelleters, function(deleter){
@@ -50,10 +60,10 @@ function addEventListeners() {
       reporter.addEventListener('click', openReportPostModal);
     });
 
+
+
     let notification = document.querySelector('#notificationDrop');
-    if(notification !== null) {
-      notification.addEventListener('click',sendSeenNotificationsRequest);
-    }
+    notification.addEventListener('click',sendSeenNotificationsRequest);
 
 }
 
@@ -83,8 +93,19 @@ function sendDislikePostRequest(event) {
     event.preventDefault();
 }
 
+function sendLikeCommentRequest(event) {
+  let id = this.closest('.comment_container').getAttribute('data-id');
+  sendAjaxRequest('put', '/api/comments/' + id +"/like/1", null, commentLikeHandler);
+  event.preventDefault();
+}
+function sendDislikeCommentRequest(event) {
+  let id = this.closest('.comment_container').getAttribute('data-id');
+  sendAjaxRequest('put', '/api/comments/' + id +"/like/0", null, commentLikeHandler);
+  event.preventDefault();
+}
+
 function postLikeHandler() {
-    if (this.status != 200) window.location = '/';
+    if (this.status != 200) return;
     let like = JSON.parse(this.responseText);
     let element = document.querySelector('article.post[data-id="'+ like.post_id + '"] .votes');
     let likes = element.querySelector('.post_like');
@@ -94,6 +115,21 @@ function postLikeHandler() {
     element = document.querySelector('article.post[data-id="'+ like.post_id + '"] .post_votes');
     likes = element.querySelector('.post_like');
     dislikes = element.querySelector('.post_dislike');
+    likes.textContent= String.fromCharCode(160)+ (parseInt(likes.textContent)+like.upvotes) + String.fromCharCode(160);
+    dislikes.textContent= String.fromCharCode(160)+ (parseInt(dislikes.textContent)+like.downvotes) + String.fromCharCode(160);
+  }
+
+function commentLikeHandler() {
+    if (this.status != 200) return;
+    let like = JSON.parse(this.responseText);
+    let element = document.querySelector('div.comment_container[data-id="'+ like.comment_id + '"] .comment_votes');
+    let likes = element.querySelector('.comment_like');
+    let dislikes = element.querySelector('.comment_dislike');
+    likes.textContent=parseInt(likes.textContent)+like.upvotes;
+    dislikes.textContent=parseInt(dislikes.textContent)+like.downvotes;
+    element = document.querySelector('div.comment_container[data-id="'+ like.comment_id + '"] .post_votes');
+    likes = element.querySelector('.comment_like');
+    dislikes = element.querySelector('.comment_dislike');
     likes.textContent= String.fromCharCode(160)+ (parseInt(likes.textContent)+like.upvotes) + String.fromCharCode(160);
     dislikes.textContent= String.fromCharCode(160)+ (parseInt(dislikes.textContent)+like.downvotes) + String.fromCharCode(160);
   }

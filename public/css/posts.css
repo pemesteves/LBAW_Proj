@@ -41,6 +41,14 @@
     color: rgb(145, 47, 11);
 }
 
+.comment_like{
+    color:rgba(4, 99, 4, 0.9)
+}
+
+.comment_dislike{
+    color: rgba(126, 35, 2, 0.9);
+}
+
 .comment_container{
     padding-top: .5em;
     padding-bottom: .5em; 

@@ -28,6 +28,7 @@ Route::put('api/comments/{id}/report' , 'CommentController@report');
 Route::put('/api/users/{id}/report', 'RegularUserController@report');
 
 Route::put('/api/posts/{id}/like/{val}' , 'PostController@like');
+Route::put('/api/comments/{id}/like/{val}' , 'CommentController@like');
 
 Route::put('/api/chats/{id}/message', 'MessageController@create');
 

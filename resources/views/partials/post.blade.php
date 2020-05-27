@@ -132,6 +132,15 @@
                                 <div class="col-9 comment_text">
                                     <p>${e.comment.body}</p>
                                 </div>
+                                <div class='comment_votes' style="float: right;">
+                                        <button class='comment_upvote' style="padding-left:5px; background-color: transparent; border: 0;" > 
+                                            <span class="fa fa-thumbs-up comment_like">&nbsp;0&nbsp;</span>
+                                        </button>    
+                                        <button class='comment_downvote' style="padding-left:0; background-color: transparent; border: 0;" > 
+                                            <span class="fa fa-thumbs-down comment_dislike">&nbsp;0&nbsp;</span>
+                                        </button>
+                                    </div>
+                                <div >
                                 <div>
                                     <div class="btn-group dropright" style="margin-right: 0; padding-right: 0; width: 100%">
                                         <button type="button" data-toggle="dropdown" style="font-size: 150%; margin-right: 0; padding-right: 0; width: 100%; background-color: white; border: 0;"> 
@@ -159,6 +168,8 @@
                                 commentDelleters.addEventListener('click', sendDeleteCommentRequest);
                                 let commentEditTransformers = new_comment.querySelector('.comment_container div.options_menu .comment_edit');
                                 commentEditTransformers.addEventListener('click', setCommentEditBox);
+                                new_comment.querySelector('.comment_upvote').addEventListener('click',sendLikeCommentRequest);
+                                new_comment.querySelector('.comment_downvote').addEventListener('click',sendDislikeCommentRequest);
                             });
                         </script>
                         </div>
