@@ -176,6 +176,49 @@
                         </div>
                     </div>
                 </div>
+                @if(get_class($user->regular_userable) == "App\Teacher")
+                <div class="card">
+                    <div class="card-header" id="headingFour">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseThree">
+                                Agenda  
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+                        <div class="card-body">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                    <th scope="col">Hour</th>
+                                    <th scope="col">Monday</th>
+                                    <th scope="col">Tuesday</th>
+                                    <th scope="col">Wednesday</th>
+                                    <th scope="col">Thursday</th>
+                                    <th scope="col">Friday</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                @for ($i = 0; $i < 12; $i++)
+                                    <tr>
+                                    <th scope="row">{{$i+7}}h - {{$i+8}}h</th>
+                                    @for ($a = 0; $a < 5; $a++)
+                                        <td>
+                                            @if($user->regular_userable->appointments()[$i*5+$a]->description)
+                                                {{$user->regular_userable->appointments()[$i*5+$a]->description}}
+                                            @else
+                                                ------
+                                            @endif
+                                        </td>
+                                    @endfor
+                                    </tr>
+                                @endfor 
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                @endif
             </div>
         </div>
     </div>

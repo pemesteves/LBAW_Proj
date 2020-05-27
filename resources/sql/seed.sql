@@ -1,3 +1,6 @@
+
+DROP TABLE IF EXISTS public."appointment";
+DROP TABLE IF EXISTS public."timeUnit";
 DROP TABLE IF EXISTS public."reset_pass";
 DROP TABLE IF EXISTS public."user_comment_reaction";
 DROP TABLE IF EXISTS public."user_reaction";
@@ -339,6 +342,22 @@ CREATE TABLE public."reset_pass"
 	CONSTRAINT "reset_pass_pkey" PRIMARY KEY ("reset_pass_id")
 );
 
+CREATE TABLE public."timeUnit"
+(
+	"timeUnit_id" serial,
+	"day" text NOT NULL,
+	"hour" integer NOT NULL,
+	CONSTRAINT "timeUnit_pkey" PRIMARY KEY ("timeUnit_id")
+);
+
+Create TABLE public."appointment"
+(
+	"teacher_id" integer NOT NULL REFERENCES public."teacher"("teacher_id") ON DELETE CASCADE,
+	"time_id" integer NOT NULL REFERENCES public."timeUnit"("timeUnit_id") ON DELETE CASCADE,
+	"description" text NOT NULL,
+	CONSTRAINT "appointment_pkey" PRIMARY KEY ("teacher_id","time_id")
+);
+
 
 -- USER NOTIFIED INDEX
 CREATE INDEX "user_notified" ON "notified_user" USING hash("user_notified");
@@ -588,6 +607,75 @@ CREATE TRIGGER post_date
 --     BEFORE UPDATE ON public."organization"
 --     EXECUTE PROCEDURE unique_org();
 
+insert into public."timeUnit" ("day","hour") VALUES('Monday',7);
+insert into public."timeUnit" ("day","hour") VALUES('Monday',8);
+insert into public."timeUnit" ("day","hour") VALUES('Monday',9);
+insert into public."timeUnit" ("day","hour") VALUES('Monday',10);
+insert into public."timeUnit" ("day","hour") VALUES('Monday',11);
+insert into public."timeUnit" ("day","hour") VALUES('Monday',12);
+insert into public."timeUnit" ("day","hour") VALUES('Monday',13);
+insert into public."timeUnit" ("day","hour") VALUES('Monday',14);
+insert into public."timeUnit" ("day","hour") VALUES('Monday',15);
+insert into public."timeUnit" ("day","hour") VALUES('Monday',16);
+insert into public."timeUnit" ("day","hour") VALUES('Monday',17);
+insert into public."timeUnit" ("day","hour") VALUES('Monday',18);
+insert into public."timeUnit" ("day","hour") VALUES('Monday',19);
+
+insert into public."timeUnit" ("day","hour") VALUES('Tuesday',7);
+insert into public."timeUnit" ("day","hour") VALUES('Tuesday',8);
+insert into public."timeUnit" ("day","hour") VALUES('Tuesday',9);
+insert into public."timeUnit" ("day","hour") VALUES('Tuesday',10);
+insert into public."timeUnit" ("day","hour") VALUES('Tuesday',11);
+insert into public."timeUnit" ("day","hour") VALUES('Tuesday',12);
+insert into public."timeUnit" ("day","hour") VALUES('Tuesday',13);
+insert into public."timeUnit" ("day","hour") VALUES('Tuesday',14);
+insert into public."timeUnit" ("day","hour") VALUES('Tuesday',15);
+insert into public."timeUnit" ("day","hour") VALUES('Tuesday',16);
+insert into public."timeUnit" ("day","hour") VALUES('Tuesday',17);
+insert into public."timeUnit" ("day","hour") VALUES('Tuesday',18);
+insert into public."timeUnit" ("day","hour") VALUES('Tuesday',19);
+
+insert into public."timeUnit" ("day","hour") VALUES('Wednesday',7);
+insert into public."timeUnit" ("day","hour") VALUES('Wednesday',8);
+insert into public."timeUnit" ("day","hour") VALUES('Wednesday',9);
+insert into public."timeUnit" ("day","hour") VALUES('Wednesday',10);
+insert into public."timeUnit" ("day","hour") VALUES('Wednesday',11);
+insert into public."timeUnit" ("day","hour") VALUES('Wednesday',12);
+insert into public."timeUnit" ("day","hour") VALUES('Wednesday',13);
+insert into public."timeUnit" ("day","hour") VALUES('Wednesday',14);
+insert into public."timeUnit" ("day","hour") VALUES('Wednesday',15);
+insert into public."timeUnit" ("day","hour") VALUES('Wednesday',16);
+insert into public."timeUnit" ("day","hour") VALUES('Wednesday',17);
+insert into public."timeUnit" ("day","hour") VALUES('Wednesday',18);
+insert into public."timeUnit" ("day","hour") VALUES('Wednesday',19);
+
+insert into public."timeUnit" ("day","hour") VALUES('Thursday',7);
+insert into public."timeUnit" ("day","hour") VALUES('Thursday',8);
+insert into public."timeUnit" ("day","hour") VALUES('Thursday',9);
+insert into public."timeUnit" ("day","hour") VALUES('Thursday',10);
+insert into public."timeUnit" ("day","hour") VALUES('Thursday',11);
+insert into public."timeUnit" ("day","hour") VALUES('Thursday',12);
+insert into public."timeUnit" ("day","hour") VALUES('Thursday',13);
+insert into public."timeUnit" ("day","hour") VALUES('Thursday',14);
+insert into public."timeUnit" ("day","hour") VALUES('Thursday',15);
+insert into public."timeUnit" ("day","hour") VALUES('Thursday',16);
+insert into public."timeUnit" ("day","hour") VALUES('Thursday',17);
+insert into public."timeUnit" ("day","hour") VALUES('Thursday',18);
+insert into public."timeUnit" ("day","hour") VALUES('Thursday',19);
+
+insert into public."timeUnit" ("day","hour") VALUES('Friday',7);
+insert into public."timeUnit" ("day","hour") VALUES('Friday',8);
+insert into public."timeUnit" ("day","hour") VALUES('Friday',9);
+insert into public."timeUnit" ("day","hour") VALUES('Friday',10);
+insert into public."timeUnit" ("day","hour") VALUES('Friday',11);
+insert into public."timeUnit" ("day","hour") VALUES('Friday',12);
+insert into public."timeUnit" ("day","hour") VALUES('Friday',13);
+insert into public."timeUnit" ("day","hour") VALUES('Friday',14);
+insert into public."timeUnit" ("day","hour") VALUES('Friday',15);
+insert into public."timeUnit" ("day","hour") VALUES('Friday',16);
+insert into public."timeUnit" ("day","hour") VALUES('Friday',17);
+insert into public."timeUnit" ("day","hour") VALUES('Friday',18);
+insert into public."timeUnit" ("day","hour") VALUES('Friday',19);
 
 insert into public."user" ("name", "email", "password","userable_id","userable_type") values('Admin1', 'admin1@gg.pt', '$2y$12$4c4ki2eoJHMW75uuaFffLe6yEiUsbtomUOQErBwgp7hmeV5DfVzPa',1,'App\Admin'); --admin
 insert into public."user" ("name", "email", "password","userable_id","userable_type") values('Joaquim Rodrigues', 'jokinho@feup.pt', '$2y$12$YD2mkOUiJDXykPGe2bHw6ugb14EBPlTK6.Nf7QTnDEz2Su19tW7EW',1,'App\RegularUser'); --aaaa
@@ -666,6 +754,16 @@ insert into public."teacher" ("regular_user_id") values (8);
 insert into public."teacher" ("regular_user_id") values (10);
 insert into public."teacher" ("regular_user_id") values (15);
 insert into public."teacher" ("regular_user_id") values (21);
+
+
+insert into public."appointment"("teacher_id","time_id","description") VALUES(4,1,'bela segunda');
+insert into public."appointment"("teacher_id","time_id","description") VALUES(4,2,'uma terça');
+insert into public."appointment"("teacher_id","time_id","description") VALUES(4,3,'is wednesday my dudes');
+insert into public."appointment"("teacher_id","time_id","description") VALUES(4,4,'ola');
+insert into public."appointment"("teacher_id","time_id","description") VALUES(4,5,'ola outra vez, E214');
+insert into public."appointment"("teacher_id","time_id","description") VALUES(4,6,'vou estar na sala B231');
+insert into public."appointment"("teacher_id","time_id","description") VALUES(4,10,'sempre siga');
+insert into public."appointment"("teacher_id","time_id","description") VALUES(2,3,'bom dia');
 
 
 insert into public."organization" ("regular_user_id") values (22);
