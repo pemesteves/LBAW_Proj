@@ -19,7 +19,13 @@
             </div>
             <div class="col-8" style="padding: 0.2rem 1rem 0 0.2rem;">
                 <div class="row">
-                    <h1 style="border: 0; font-size: 4.5rem;">{{ $user->user->name }}</h1>
+                    <h1 style="border: 0; font-size: 4.5rem;">{{ $user->user->name }}</h1> 
+                    @if( get_class($user->regular_userable) == "App\Organization") 
+                         @if ($org_status[0]->type == 'accepted') 
+                         <span class="fas fa-check-circle">&nbsp;</span>
+                         @endif
+                    @endif
+
                 </div>
                 <div class="row">
                     <h2 style="border: 0; padding: 0">{{$user->university}}</h2>
@@ -63,7 +69,7 @@
                             @endif
                         @elseif (Auth::user()->user_id == $user->user_id && get_class($user->regular_userable) == "App\Organization")  
                             @if (count($org_status) == 0)
-                                <button type="button" class="btn btn-light verify_org" data-id='{{$user->regular_user_id}}' style="margin-left: auto; margin-right:4%;background-color: rgba(0,0,150,.03); ">
+                                <button type="button" class="btn btn-light verify_org" onClick="this.disabled=true" data-id='{{$user->regular_user_id}}' style="margin-left: auto; margin-right:4%;background-color: rgba(0,0,150,.03); ">
                                     Verify Organization
                                 </button>
                             @elseif($org_status[0]->type == 'pending')
@@ -75,7 +81,7 @@
                                     Verified
                                 </button>
                             @else
-                                <button type="button" class="btn btn-light verify_org" data-id='{{$user->regular_user_id}}' style="margin-left: auto; margin-right:4%;background-color: rgba(0,0,150,.03); ">
+                                <button type="button" class="btn btn-light verify_org" onClick="this.disabled=true" data-id='{{$user->regular_user_id}}' style="margin-left: auto; margin-right:4%;background-color: rgba(0,0,150,.03); ">
                                     Verify Organization
                                 </button>
                             @endif
@@ -159,7 +165,7 @@
                             <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                             Friends 
                                 @if(Auth::user()->user_id != $user->user_id && !Auth::user()->isAdmin()) 
-                                    ( {{count(Auth::user()->userable->friendsInCommun($user))}} in commun )
+                                    ( {{count(Auth::user()->userable->friendsInCommun($user))}} in common )
                                 @endif
                             </button>
                         </h5>

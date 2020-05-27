@@ -88,8 +88,16 @@ class ProfileController extends Controller{
                           ['friend.friend_id1', '=',Auth::user()->userable_id],
                         ])->get();
     }
-
     $image = $user->image();
+
+    if($user->regular_userable_type == "App\Organization") {
+      $org_status = DB::table("organization_approval_request")
+      ->where([['organization_approval_request.organization_id', '=', $user->regular_userable->organization_id]]
+      )->get();
+      return view('pages.user' , ['is_admin' => false , 'user' => $user, 'friendship_status' => $friendship_status, 'posts' => $posts, 'groups' => $groups,  'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'image' => $image, 'org_status' => $org_status ]);
+
+    }
+
     return view('pages.user' , ['is_admin' => false , 'user' => $user, 'friendship_status' => $friendship_status, 'posts' => $posts, 'groups' => $groups,  'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'image' => $image ]);
   }
 
