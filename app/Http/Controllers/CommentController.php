@@ -6,11 +6,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
+use App\Http\Traits\NotificationTrait;
+use App\Notification;
+
 use App\Comment;
 use App\Report;
 use App\Events\NewComment;
 
 class CommentController extends Controller{
+
+    use NotificationTrait;
 
     /**
      * Creates a new comment.
@@ -36,6 +41,14 @@ class CommentController extends Controller{
       $new_comment = Comment::take(1)->where("comment_id", '=', $comment["comment_id"])->get();
       
       broadcast(new NewComment($comment))->toOthers();
+
+      $notification =  new Notification;
+      $notification->origin_user_id = Auth::user()->userable->regular_user_id;
+      $notification->notification_comment_id = $new_comment[0]->comment_id;
+      $notification->description = $notification->getDescription(" has a new comment");
+      $notification->link = $notification->link();
+      $notification->save();
+      $this->sendNotification($notification,$new_comment[0]->post->regularUser->regular_user_id);
 
       return $new_comment[0];
     }
