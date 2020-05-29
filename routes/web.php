@@ -12,7 +12,7 @@
 */
 
 
-Route::get('/', 'Auth\LoginController@home');
+Route::get('/', 'Auth\LoginController@home')->name('home');
 
 
 // API
@@ -123,5 +123,7 @@ Route::put('/api/users/notifications', 'RegularUserController@seeNotifactions');
 
 
 
-Route::get('/settings','RegularUserController@settings');
+Route::get('/settings','RegularUserController@settings')->name('settings');
 Route::get('/archived','RegularUserController@archived');
+
+Route::post('/users/delete','RegularUserController@delete');

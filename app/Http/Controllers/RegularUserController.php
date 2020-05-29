@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Traits\NotificationTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -138,4 +139,14 @@ class RegularUserController extends Controller{
         return view('pages.archived',['posts' => Auth::user()->userable->archived_posts]);
     }
 
+    public function delete(Request $request){
+        $password = $request->input('password');
+        $hasher = App('hash');
+        $user = Auth::user();
+        if ($hasher->check($password, $user->password)) {
+            $user->delete();
+            return redirect(url('/logout'));
+        }else
+            return back();
+    }
 }

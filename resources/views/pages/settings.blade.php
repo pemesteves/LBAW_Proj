@@ -20,7 +20,33 @@
                     </div>
 
                     <div>
-                        <button type="button" class="btn btn-danger">Delete Account</button>
+                        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="deleteModalLabel">Delete Account, are you sure? There is no turn around!</h5>
+                                        <input type="hidden" id="report_id">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form id='deleteUserForm' action='/users/delete' method='post'>
+                                        {{ csrf_field() }}
+                                        <div class="form-group">
+                                            <label class="col-form-label">Password:</label>
+                                            <input type="password" name='password' class="form-control" id="password">
+                                        </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="submit" form="deleteUserForm" id='deleteUser' class="btn btn-primary">Send report</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete Account</button>
                     </div>
                 </div>
 
