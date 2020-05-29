@@ -32,6 +32,37 @@ class PostController extends Controller{
       return $post;
     }
 
+    public function archive(Request $request, $id)
+    {
+      $post = Post::find($id);
+      if(!isset($post))
+        throw new HttpException(404, "post");
+
+      $this->authorize('archive', $post);
+
+      $post->update(['type' => 'archived']);
+      $post->save();
+
+      return $post;
+    }
+
+    public function unarchive(Request $request, $id)
+    {
+      $post = Post::find($id);
+      if(!isset($post))
+        throw new HttpException(404, "post");
+
+      $this->authorize('archive', $post);
+      $report = Report::where([['reported_post_id',$id],['approval',true]])->get();
+      if(count($report) > 0)
+        $post->update(['type' => 'blocked']);
+      else
+        $post->update(['type' => 'normal']);
+      $post->save();
+
+      return $post;
+    }
+
     /**
      * Generic create post function
      */
@@ -96,6 +127,8 @@ class PostController extends Controller{
         throw new HttpException(404, "post");
 
       if($post->type == 'blocked' && !Auth::user()->isAdmin())
+        throw new HttpException(404, "post");
+      else if($post->type == 'archived' && (!Auth::user()->isAdmin() || $post->author_id != Auth::user()->userable->regular_user_id))
         throw new HttpException(404, "post");
         
       return view('pages.post' , ['is_admin' => false , 'post' => $post, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);

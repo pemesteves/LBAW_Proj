@@ -31,7 +31,7 @@ DROP TYPE IF EXISTS "friendship_status";
 DROP TYPE IF EXISTS "org_approval";
 DROP TYPE IF EXISTS status;
 
-CREATE TYPE status AS ENUM ('normal', 'blocked', 'deleted');
+CREATE TYPE status AS ENUM ('normal', 'blocked', 'archived');
 CREATE TYPE "friendship_status" AS ENUM ('accepted', 'pending', 'refused');
 CREATE TYPE "org_approval" AS ENUM ('pending', 'accepted', 'refused');
 

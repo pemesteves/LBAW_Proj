@@ -41,8 +41,12 @@ class RegularUser extends Model
      * The posts this user owns.
      */
     public function posts() {
-        return $this->hasMany('App\Post', 'author_id', 'regular_user_id')->where("type",'<>','blocked')->orderBy('date', 'desc');
-      }
+        return $this->hasMany('App\Post', 'author_id', 'regular_user_id')->where("type",'normal')->orderBy('date', 'desc');
+    }
+
+    public function archived_posts() {
+    return $this->hasMany('App\Post', 'author_id', 'regular_user_id')->where("type",'archived')->orderBy('date', 'desc');
+    }
 
     public function user()
     {
@@ -55,11 +59,11 @@ class RegularUser extends Model
     }
 
     public function groups(){
-        return $this->belongsToMany('App\Group','user_in_group','user_id','group_id')->where("type",'<>','blocked');
+        return $this->belongsToMany('App\Group','user_in_group','user_id','group_id')->where("type",'normal');
     }
 
     public function events(){
-        return $this->belongsToMany('App\Event','user_interested_in_event','user_id','event_id')->where("type",'<>','blocked');;
+        return $this->belongsToMany('App\Event','user_interested_in_event','user_id','event_id')->where("type",'normal');
     }
 
     public function chats(){

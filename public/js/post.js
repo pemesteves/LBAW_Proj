@@ -60,6 +60,15 @@ function addEventListeners() {
       reporter.addEventListener('click', openReportPostModal);
     });
 
+    let postArchivers = document.querySelectorAll('article.post button.archive');
+    [].forEach.call(postArchivers, function(archiver) {
+      archiver.addEventListener('click', sendArchivePostRequest);
+    });
+    let postUnarchivers = document.querySelectorAll('article.post button.unarchive');
+    [].forEach.call(postUnarchivers, function(unarchiver) {
+      unarchiver.addEventListener('click', sendUnarchivePostRequest);
+    });
+
 
 
     let notification = document.querySelector('#notificationDrop');
@@ -254,6 +263,15 @@ function sendDeletePostRequest(event) {
   sendAjaxRequest('delete', '/api/posts/' + id, null, postDeletedHandler, postDeleteErrorHandler);
 }
 
+function sendArchivePostRequest(event) {
+  let id = this.closest('article').getAttribute('data-id');
+  sendAjaxRequest('put', '/api/posts/' + id +'/archive', null, postArchiveHandler);
+}
+function sendUnarchivePostRequest(event) {
+  let id = this.closest('article').getAttribute('data-id');
+  sendAjaxRequest('put', '/api/posts/' + id +'/unarchive', null, postUnarchiveHandler);
+}
+
 
 
 function openReportPostModal(event){
@@ -347,6 +365,34 @@ function postDeletedHandler() {
 
   addFeedback("Post deleted successfully");
 
+}
+
+function postArchiveHandler() {
+  if (this.status != 200) {
+    addErrorFeedback("Failed to archive post.");
+    return;
+  }
+  let post = JSON.parse(this.responseText);
+  let element = document.querySelector('article.post[data-id="'+ post.post_id + '"]');
+  //let parentElement = element.parentElement;
+  $('#popup-'+post.post_id).modal('hide');
+  element.remove();
+
+  addFeedback("Post archive successfully");
+}
+
+function postUnarchiveHandler() {
+  if (this.status != 200) {
+    addErrorFeedback("Failed to unarchive post.");
+    return;
+  }
+  let post = JSON.parse(this.responseText);
+  let element = document.querySelector('article.post[data-id="'+ post.post_id + '"]');
+  //let parentElement = element.parentElement;
+  $('#popup-'+post.post_id).modal('hide');
+  element.remove();
+
+  addFeedback("Post unarchive successfully");
 }
 
 

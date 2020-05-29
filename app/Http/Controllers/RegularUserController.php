@@ -129,4 +129,13 @@ class RegularUserController extends Controller{
         return;
     }
 
+    public function settings(){
+        return view('pages.settings',[]);
+    }
+
+    public function archived(){
+
+        return view('pages.archived',['posts' => Auth::user()->userable->archived_posts]);
+    }
+
 }

@@ -51,7 +51,7 @@ class Event extends Model
         if(Auth::user()->isAdmin())
             return $this->hasMany('App\Post', 'event_id', 'event_id')
                         ->orderBy('date', 'desc');
-        return $this->hasMany('App\Post', 'event_id', 'event_id')->where("type",'<>','blocked')->orderBy('date', 'desc');
+        return $this->hasMany('App\Post', 'event_id', 'event_id')->where("type",'normal')->orderBy('date', 'desc');
     }
 
     /**

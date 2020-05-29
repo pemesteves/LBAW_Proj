@@ -19,6 +19,8 @@ Route::get('/', 'Auth\LoginController@home');
 
 Route::put('/api/posts' , 'PostController@create');
 Route::delete('api/posts/{id}', 'PostController@delete');
+Route::put('api/posts/{id}/archive', 'PostController@archive');
+Route::put('api/posts/{id}/unarchive', 'PostController@unarchive');
 Route::put('api/posts/{id}/report', 'PostController@report');
 Route::put('/api/posts/{id}/comment', 'CommentController@create');
 Route::delete('api/comments/{id}', 'CommentController@delete');
@@ -118,3 +120,8 @@ Route::get('/api/posts/{last_id}', 'FeedController@getPosts');
 
 
 Route::put('/api/users/notifications', 'RegularUserController@seeNotifactions');
+
+
+
+Route::get('/settings','RegularUserController@settings');
+Route::get('/archived','RegularUserController@archived');
