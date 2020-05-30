@@ -31,7 +31,7 @@
                     </header>
                     <div class="col user_chats" style="height: 87%; justify-content:flex-start; padding: 0">
                         @foreach(Auth::user()->userable->chats as $chat)
-                            @include('partials.chat', ['chat' => $chat, 'members_info' => $in_chat])
+                            @include('partials.chat', ['chat' => $chat])
                         @endforeach 
                     </div>
                     <footer id="create_chat" class="row" style="margin: 0; padding: 0; width: 100%; height: 6.5%">

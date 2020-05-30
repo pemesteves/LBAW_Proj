@@ -4,45 +4,22 @@
             
                 <img class="card-img" src="https://image.flaticon.com/icons/svg/166/166258.svg" alt="" style="width:2.5em;height:2.5em; border-radius:50%"/>
             
-            
                <h2 class="card-title" style="margin-left:10px; margin-right:40px">{{$chat->chat_name}}</h2>
-               <?php $i=0 ?>
-               @if (sizeof($members_info) > 3)
-                @foreach ($members_info as $member_info)
-                  @if ($i < 3)
-                <?php $image = $member_info->image()?>
-                        <img 
-                        @if (isset($image) && $image !== null)
-                                src="{{$image->file_path}}"
-                        @else
-                        src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png"
+               <div> 
+                        @for ($i = 0; $i < 3 and $i < count($chat->in_chat); $i++)
+                                <img style="width:30px;height:30px;border-radius:50%;float: left;position:absolute;transform: translateX({{$i*15}}px);"
+                                @if (object_get($chat->in_chat[$i]->image(), "image_id"))
+                                        src="{{object_get($$chat->in_chat[$i]->image(), "file_path")}}"
+                                @else
+                                        src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" 
+                                @endif
+                                class="mx-auto d-block" alt="user"/>
+                        @endfor 
+                        @if(count($chat->in_chat)>=3)
+                                <img  style="width:30px;height:30px;border-radius:50%;float: right;position:absolute;transform: translateX(40px);" 
+                                src="https://comunicadores.info/wp-content/uploads/2014/12/very-basic-plus-icon.png" class="mx-auto d-block" alt="user"/>
                         @endif
-                        alt="" class="rounded-circle" style="max-width:8%; max-height: 2%;" align="left"/>
-
-                        <?php $i++; ?>
-                  @else
-                  <img    
-                        src="https://comunicadores.info/wp-content/uploads/2014/12/very-basic-plus-icon.png"
-                        alt="" class="rounded-circle" style="max-width:8%; max-height: 2%;" align="left"/>
-                        @break
-                  @endif
-                @endforeach
-               @else
-                @foreach ($members_info as $member_info)
-                <?php $image = $member_info->image()?>     
-                <img 
-                        @if (isset($image) && $image !== null)
-                                src="{{$image->file_path}}"
-                        @else
-                        src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png"
-                        @endif
-                        alt="" class="rounded-circle" style="max-width:2%; max-height: 2%;" align="left"/>
-                        </div>
-                 @endforeach
-                 <img    
-                        src="https://comunicadores.info/wp-content/uploads/2014/12/very-basic-plus-icon.png"
-                        alt="" class="rounded-circle" style="max-width:8%; max-height: 2%;" align="left"/>
-               @endif
+                </div>
             
         </div>
         </a>
