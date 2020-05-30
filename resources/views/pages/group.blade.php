@@ -95,9 +95,10 @@
                 </div>
             </div>
         </form>
+        <div id='group_form_container'>
+            @each('partials.post', $posts, 'post')
 
-            
-        @each('partials.post', $posts, 'post')
+        </div>
 
     </div>
 </div>  

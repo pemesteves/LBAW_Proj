@@ -207,4 +207,15 @@ class GroupController extends Controller{
 
       return $image;
     }
+
+    function getPosts($group_id,$last_id){
+
+      $myGroupsPosts = Post::join('user_in_group' , "post.group_id" , "user_in_group.group_id")
+                                    ->where([['user_in_group.user_id', Auth::user()->userable->regular_user_id],['post.type','normal']])
+                                    ->where([['post_id','<',$last_id],['post.group_id',$group_id]])
+                                    ->select("post.*")
+                                    ->orderBy('date','desc')->limit(3)->get();
+
+      return view('requests.posts',['posts' => $myGroupsPosts]);
+    }
 }

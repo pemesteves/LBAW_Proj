@@ -49,11 +49,10 @@ class Group extends Model
     public function posts() {
         if(Auth::user()->isAdmin())
             return $this->hasMany('App\Post', 'group_id', 'group_id')
-                        ->orderBy('date', 'desc');
+                        ->orderBy('date', 'desc')->limit(5);
         return $this->hasMany('App\Post', 'group_id', 'group_id')->where("type",'<>','blocked')
-                    ->orderBy('date', 'desc');
+                    ->orderBy('date', 'desc')->limit(5);
     }
-
     /**
      * Count the number of members of the group
      */

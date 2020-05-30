@@ -41,7 +41,7 @@ class RegularUser extends Model
      * The posts this user owns.
      */
     public function posts() {
-        return $this->hasMany('App\Post', 'author_id', 'regular_user_id')->where("type",'normal')->orderBy('date', 'desc');
+        return $this->hasMany('App\Post', 'author_id', 'regular_user_id')->where("type",'normal')->orderBy('date', 'desc')->limit(5);;
     }
 
     public function archived_posts() {

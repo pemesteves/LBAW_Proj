@@ -254,7 +254,7 @@
             </form>
         @endif
 
-        <div id="posts_container">
+        <div id="user_posts_container">
             @each('partials.post', $posts, 'post')
         </div>
         
