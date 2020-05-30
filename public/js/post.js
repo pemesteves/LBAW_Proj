@@ -443,8 +443,9 @@ function commentAddErrorHandler() {
 }
 
 function messageAddedHandler(){
+  console.log(this.responseText);
   if (this.status != 200 && this.status != 201){
-    window.location = '/';
+    // window.location = '/';
     return;
   }
   let message = JSON.parse(this.responseText);
@@ -665,6 +666,15 @@ function createComment(comment){
 
 
 
+function createMessage(message) {
+  let new_message = document.createElement('p');
+  new_message.className = "chat_my_message";
+  new_message.innerHTML = `
+    ${message.body}
+  `;
+  return new_message;
+
+}
 
 
 
