@@ -155,8 +155,8 @@
                                     </div>
                                 <div >
                                 <div>
-                                    <div class="btn-group dropright" style="margin-right: 0; padding-right: 0; width: 100%">
-                                        <button type="button" data-toggle="dropdown" style="font-size: 150%; margin-right: 0; padding-right: 0; width: 100%; background-color: white; border: 0;"> 
+                                    <div class="btn-group dropright d-print-none" style="margin-right: 0; padding-right: 0; width: 100%">
+                                        <button type="button" data-toggle="dropdown" style="padding:0;font-size: 100%;width:20px; margin-right: 0; padding-right: 0; width: 100%; background-color: white; border: 0;"> 
                                         <span class="fa fa-ellipsis-v" ></span></button>
                                         <div class="dropdown-menu options_menu" style="min-width:5rem">
                                             <ul class="list-group">

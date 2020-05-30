@@ -210,6 +210,10 @@ class GroupController extends Controller{
 
     function getPosts($group_id,$last_id){
 
+      $group = Group::find($group_id);
+
+      $this->authorize('show', $group);
+
       $myGroupsPosts = Post::join('user_in_group' , "post.group_id" , "user_in_group.group_id")
                                     ->where([['user_in_group.user_id', Auth::user()->userable->regular_user_id],['post.type','normal']])
                                     ->where([['post_id','<',$last_id],['post.group_id',$group_id]])

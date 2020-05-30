@@ -21,6 +21,24 @@ class CommentPolicy
     public function delete(User $user, Comment $comment)
     {
       // Only a comment owner can delete it
-      return $user->user_id == $comment->author_id;
+      return $user->userable->regular_user_id == $comment->user_id;
+    }
+
+    public function edit(User $user, Comment $comment)
+    {
+      // Only a comment owner can edit it
+      return $user->userable->regular_user_id == $comment->user_id;
+    }
+
+    public function like(User $user)
+    {
+      // Any user can like a comment
+      return Auth::check();
+    }
+
+    public function report(User $user)
+    {
+      // Any user can report a comment
+      return Auth::check();
     }
 }

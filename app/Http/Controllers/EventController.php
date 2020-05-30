@@ -162,7 +162,7 @@ class EventController extends Controller{
         'title' => 'required|string|regex:/^[a-z0-9áàãâéêíóõôú]+[a-z0-9áàãâéêíóõôú ]*[a-z0-9áàãâéêíóõôú]$/i|max:255',
         'description' => "required|string|regex:/^[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]+[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@ ]*[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]$/i|max:255",
       ]);
-
+        
       $title = $request->input('title');
       $description = $request->input('description');
       $reporter_id = Auth::user()->userable->regular_user_id;
@@ -222,6 +222,8 @@ class EventController extends Controller{
     }
 
     function getPosts($event_id,$last_id){
+
+      $event = Event::find($event_id);
 
       $myEventsPosts = Post::join('user_interested_in_event' , "post.event_id" , "user_interested_in_event.event_id")
             ->where([['user_interested_in_event.user_id', Auth::user()->userable->regular_user_id],['post.type','normal']])

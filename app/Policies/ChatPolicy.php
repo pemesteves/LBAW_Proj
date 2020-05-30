@@ -16,4 +16,8 @@ class ChatPolicy
     public function show(User $user, Chat $chat){
         return Auth::user()->userable->chats->find($chat) != null;
     }
+
+    public function add(User $user, Chat $chat){
+        return Auth::user()->userable->chats->find($chat) != null;
+    }
 }
