@@ -2,6 +2,10 @@
 
 @section('content')
 
+@foreach($in_chat as $user)
+    {{$user->user->name}}
+    <br>
+@endforeach
 
 <article class="chat" data-id="{{ $chat->chat_id }}">
     <div id="full_page" class="d-flex flex-column no-gutters vh-100" style="padding: 0">
@@ -34,6 +38,12 @@
                     <header class="row" id="chat_info">
                         <img class="card-img" src="https://image.flaticon.com/icons/svg/166/166258.svg" alt="" style="width:2.5em; height:2.5em ; border-radius:50%" onclick="window.location.href='./profile.php'"/>
                         <h2>{{$chat->chat_name}}</h2>
+                        <div style="position:absolute;right:20px;">
+                            <button id='add_members_chat' class='btn btn-light' style='border-radius:50%;width:40px;height:40px' data-toggle="modal" data-target="#addMemberModal">
+                                <span class="fa fa-plus"></span>
+                            </button>
+                            members
+                        </div>
                     </header>
 
                     <section id="messages_col" class="d-flex flex-column" style="flex-grow:1">
@@ -107,6 +117,30 @@
                 </section>
             </section>
         </section>
+    </div>
+    <div class="modal fade" id="addMemberModal" tabindex="-1" role="dialog" aria-labelledby="addMemberModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addMemberModalLabel">Add new members</h5>
+                    <input type="hidden" id="report_id">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action='/users/delete' method='post'>
+                    <div class="form-group">
+                        <label class="col-form-label">Member:</label>
+                        <input type="text" name='name' autocomplete="off" laber='name' class="form-control" id="new_member_name">
+                    </div>
+                    </form>
+                    <div id='members_search'>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </article>
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Traits\NotificationTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -138,4 +139,25 @@ class RegularUserController extends Controller{
         return view('pages.archived',['posts' => Auth::user()->userable->archived_posts]);
     }
 
+    public function delete(Request $request){
+        $password = $request->input('password');
+        $hasher = App('hash');
+        $user = Auth::user();
+        if ($hasher->check($password, $user->password)) {
+            $user->delete();
+            return redirect(url('/logout'));
+        }else
+            return back();
+    }
+
+    public function getFriends(Request $request){
+        $str = strtolower($request->input('string'));
+        $suggestions = RegularUser::join('user','regular_user.user_id','user.user_id')->join('friend','friend_id1','regular_user_id')
+                ->where([['friend_id2',Auth::user()->userable->regular_user_id],['friend.type','accepted']])
+                ->whereRaw('lower(name) LIKE \'%'.$str.'%\'')
+                ->leftjoin('image','image.regular_user_id', '=', 'regular_user.regular_user_id')
+                ->leftjoin('file', 'file.file_id', '=', 'image.file_id')
+                ->get();
+        return ['str' => $str , 'new_members' => $suggestions];
+    }
 }

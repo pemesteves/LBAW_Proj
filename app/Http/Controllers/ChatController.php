@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 use App\Message;
+use App\RegularUser;
 use App\Chat;
 use Exception;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -33,7 +34,7 @@ class ChatController extends Controller{
       
       $notifications = Auth::user()->userable->notifications;
 
-      return view('pages.chat' , ['is_admin' => false , 'chat' => $chat, 'messages' => $messages, 'members' => $members, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'notifications' => $notifications]);
+      return view('pages.chat' , ['in_chat' => $chat->in_chat, 'chat' => $chat, 'messages' => $messages, 'members' => $members, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'notifications' => $notifications]);
     }
 
     public function get_chat(){
@@ -51,6 +52,26 @@ class ChatController extends Controller{
       }catch(Exception $exception){
         return redirect()->route('feed');
       }
+    }
+
+    public function getFriends(Request $request,$chat_id){
+      $str = strtolower($request->input('string'));
+      $suggestions = RegularUser::join('user','regular_user.user_id','user.user_id')->join('friend','friend_id1','regular_user_id')
+              ->where([['friend_id2',Auth::user()->userable->regular_user_id],['friend.type','accepted']])
+              ->whereRaw('lower(name) LIKE \'%'.$str.'%\'')
+              ->leftjoin('image','image.regular_user_id', '=', 'regular_user.regular_user_id')
+              ->leftjoin('file', 'file.file_id', '=', 'image.file_id')
+              ->whereNOTIn('regular_user.regular_user_id',function($query) use ($chat_id){
+                $query->select('user_id')->from('user_in_chat')
+                ->where([['chat_id',$chat_id]]);
+              })
+              ->get();
+      return ['str' => $str , 'new_members' => $suggestions];
+  }
+
+    public function addToChat($chat_id,$user_id){
+      DB::table('user_in_chat')->insert(['user_id' => $user_id,'chat_id' => $chat_id]);
+      return $user_id;
     }
 
 }

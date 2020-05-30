@@ -46,6 +46,7 @@
             <script src="{{ asset('js/group.js') }}" defer> </script>
             <script src="{{ asset('js/uploadImages.js') }}" defer> </script>
             <script src="{{ asset('js/input_validation.js') }}" defer> </script>
+            <script src="{{ asset('js/chat.js') }}" defer> </script>
 
             @if(isset($js))
                 @foreach($js as $j)
@@ -100,34 +101,34 @@
                 @yield('content')
                 
                 <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="reportModalLabel">Report</h5>
-                        <input type="hidden" id="report_id">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                        <div class="form-group">
-                            <label class="col-form-label">Title:</label>
-                            <input type="text" class="form-control" id="report_title">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="reportModalLabel">Report</h5>
+                                <input type="hidden" id="report_id">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                <div class="form-group">
+                                    <label class="col-form-label">Title:</label>
+                                    <input type="text" class="form-control" id="report_title">
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-form-label">Description:</label>
+                                    <textarea class="form-control" id="report_description"></textarea>
+                                </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary sendReport">Send report</button>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-form-label">Description:</label>
-                            <textarea class="form-control" id="report_description"></textarea>
-                        </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary sendReport">Send report</button>
-                    </div>
                     </div>
                 </div>
-            </div>
 
             </div>
 

@@ -104,5 +104,8 @@ class RegularUser extends Model
         return $this->friends->intersect($user->friends);
     }
     
+    public function friendsInCommunWithMe(){
+        return $this->friendsInCommun(Auth::user()->userable);
+    }
 
 }

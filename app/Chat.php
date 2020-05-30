@@ -53,6 +53,11 @@ class Chat extends Model
                    ->count();
  
     return $result;
-  }
+}
+
+public function in_chat(){
+  return $this->belongsToMany('App\RegularUser','user_in_chat','chat_id','user_id');
+}
+
 
 }
