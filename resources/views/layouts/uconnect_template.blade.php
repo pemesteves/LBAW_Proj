@@ -47,6 +47,7 @@
             <script src="{{ asset('js/uploadImages.js') }}" defer> </script>
             <script src="{{ asset('js/input_validation.js') }}" defer> </script>
             <script src="{{ asset('js/chat.js') }}" defer> </script>
+            <script src="{{ asset('js/teacherAgendaEdit.js') }}" defer> </script>
 
             @if(isset($js))
                 @foreach($js as $j)

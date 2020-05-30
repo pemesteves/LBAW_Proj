@@ -59,6 +59,57 @@
                         </div>
                     </div>
                 </div>
+                @if(get_class(Auth::user()->userable->regular_userable) == "App\Teacher")
+                <div class="card" id="personal_info_card">
+                    <div class="card-header">
+                        <h5 class="mb-0 text-link" style="font-size: 1.25em; font-weight:normal; " >
+                            Agenda  
+                        </h5>
+                    </div>
+                    <div id="collapseTwo">
+                        <div class="card-body">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                    <th scope="col">Hour</th>
+                                    <th scope="col">Monday</th>
+                                    <th scope="col">Tuesday</th>
+                                    <th scope="col">Wednesday</th>
+                                    <th scope="col">Thursday</th>
+                                    <th scope="col">Friday</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                @for ($i = 0; $i < 12; $i++)
+                                    <tr>
+                                    <th scope="row">{{$i+7}}h - {{$i+8}}h</th>
+                                    @for ($a = 0; $a < 5; $a++)
+                                        <td>
+                                           @if(Auth::user()->userable->regular_userable->appointments()[$i*5+$a]->description)
+                                                <?php print_r(Auth::user()->userable->regular_userable->appointments()[$i*5+$a]);?>
+                                                <div class="container" style="padding: 0">
+                                                    <div class="row" style="padding-left: .25em; padding-right: .25em;">
+                                                        <div class="col-sm-10" style="padding: 0">
+                                                            {{Auth::user()->userable->regular_userable->appointments()[$i*5+$a]->description}}
+                                                        </div>
+                                                        <div class="col-sm-2" style="padding: 0">
+                                                            <span class="fa fa-trash"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @else
+                                                <button class="btn btn-primary">Add</button>
+                                            @endif
+                                        </td>
+                                    @endfor
+                                    </tr>
+                                @endfor 
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                @endif
             </div>
             <div class="row">
                 <button type="submit" class="btn btn-primary" action="/users/me" method="post">Edit Profile</button>
