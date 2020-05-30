@@ -30,7 +30,15 @@
                             <h2 class="card-subtitle">{{ $group->information }} </h2>
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <p class="card-text"><!--$members?>-->{{ $members }} members</p>
+                                    <div class="row">
+                                        <p class="card-text m-0"><!--$members?>-->{{ $member_count }} members</p>
+                                        <button class="btn dropdown-toggle dropdown-toggle-split py-0" type="button" id="memberDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="memberDropdown">            
+                                            <div class="navbar-nav">
+                                                @each('partials.group_member', $members, 'member')
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <p class="card-text" id="last_update"><span class="fa fa-history"></span>&nbsp;Updated <?= getUpdateDate($group->updated_at);?><!--2--> days ago</p>

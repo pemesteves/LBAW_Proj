@@ -55,9 +55,24 @@ class Group extends Model
     }
 
     /**
-     * Count the number of members of the group
+     * Get members of the group
      */
     public function members() {
+        $result = $this->join('user_in_group', 'group.group_id', '=', 'user_in_group.group_id')
+                       ->join('regular_user', 'user_in_group.user_id', '=', 'regular_user.user_id')
+                       ->select('user_id', 'regular_user_id', 'group_id')
+                       ->join('user', 'user.user_id', '=', 'regular_user.user_id') 
+                       ->where('group.group_id', '=', $this->group_id)
+                       ->select('*')
+                       ->get();
+
+        return $result;
+    }
+
+    /**
+     * Count the number of members of the group
+     */
+    public function member_count() {
         $result = $this->join('user_in_group', 'group.group_id', '=', 'user_in_group.group_id')
                        ->where('group.group_id', '=', $this->group_id)
                        ->select('*')

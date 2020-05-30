@@ -33,6 +33,7 @@ class GroupController extends Controller{
       $posts = $group->posts;
 
       $members = $group->members();
+      $member_count = $group->member_count();
 
       $owner = DB::table('user_in_group')
             ->where('group_id', '=', $id)
@@ -42,7 +43,7 @@ class GroupController extends Controller{
       
       $image = $group->image();
 
-      return view('pages.group' , ['is_admin' => false, 'group' => $group, 'posts' => $posts, 'members' => $members, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'is_owner' => $owner , 'image' => $image]);
+      return view('pages.group' , ['is_admin' => false, 'group' => $group, 'posts' => $posts, 'members' => $members, 'member_count' => $member_count, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'is_owner' => $owner , 'image' => $image]);
     }
 
     public function showCreateForm(){
