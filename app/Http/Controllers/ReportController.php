@@ -17,6 +17,7 @@ class ReportController extends Controller{
 
     function accept(Request $request, $id){
         $report = Report::find($id);
+        $this->authorize('approve',$report);
         $report->approval = true;
 
         switch($report->referenceTo()){
@@ -54,6 +55,7 @@ class ReportController extends Controller{
 
     function decline(Request $request, $id){
         $report = Report::find($id);
+        $this->authorize('approve',$report);
         $report->approval = false;
 
         switch($report->referenceTo()){

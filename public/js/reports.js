@@ -25,47 +25,34 @@ function addEventListeners() {
       selector.addEventListener('click', changeTab);
     });
 
-    let orgRequesters = document.querySelectorAll('button.verify_org');
-    [].forEach.call(orgRequesters, function(requester) {
-      requester.addEventListener('click', sendOrgRequest);
-    });
 
 }
 
 
 function sendAcceptRequest(event) {
   let id = this.closest('div.request').getAttribute('data-id');
-  sendAjaxRequest('put', '/api/orgApproval/' + id + '/accept', null, requestStatusHandler);
+  sendAjaxRequest('put', '/api/orgApproval/' + id + '/accept', null, requestAcceptedStatusHandler);
   event.preventDefault();
 }
 function sendDeclineRequest(event) {
   let id = this.closest('div.request').getAttribute('data-id');
-  sendAjaxRequest('put', '/api/orgApproval/' + id + '/decline', null, requestStatusHandler);
+  sendAjaxRequest('put', '/api/orgApproval/' + id + '/decline', null, requestDeclinedStatusHandler);
   event.preventDefault();
 }
 
 function sendAcceptReportRequest(event) {
     let id = this.closest('div.report').getAttribute('data-id');
-    sendAjaxRequest('put', '/api/reports/' + id + '/accept', null, reportStatusHandler);
+    sendAjaxRequest('put', '/api/reports/' + id + '/accept', null, reportAcceptedStatusHandler);
     event.preventDefault();
 }
 function sendDeclineReportRequest(event) {
     let id = this.closest('div.report').getAttribute('data-id');
-    sendAjaxRequest('put', '/api/reports/' + id + '/decline', null, reportStatusHandler);
+    sendAjaxRequest('put', '/api/reports/' + id + '/decline', null, reportDeclinedStatusHandler);
     event.preventDefault();
 }
 
-function sendOrgRequest(event) {
-  let id = this.closest('button').getAttribute('data-id');
 
-  sendAjaxRequest('put', '/api/users/' + id + '/orgVerify', null, orgRequestHandler, orgRequestErrorHandler);
-
-  event.preventDefault();
-  return false;
-}
-
-
-function reportStatusHandler(){
+function reportAcceptedStatusHandler(){
     if (this.status != 200) {
       //window.location = '/';
       addErrorFeedback("Report processing failed." + this.responseText);
@@ -87,11 +74,47 @@ function reportStatusHandler(){
     }
 }
 
+function reportDeclinedStatusHandler(){
+  if (this.status != 200) {
+    //window.location = '/';
+    addErrorFeedback("Report processing failed." + this.responseText);
+    return;
+    }
+  let response = JSON.parse(this.responseText);
+  let element = document.querySelector('div.report[data-id="'+ response.id + '"]');
+  let parent = element.parentElement;
+  parent.remove();
+  addFeedback("Report processed successfully.");
+
+}
+
 function reportFailedHandler(){
   addErrorFeedback("Report processing failed.");
 }
 
-function requestStatusHandler(){
+function requestAcceptedStatusHandler(){
+  if (this.status != 200) {
+    //window.location = '/';
+    addErrorFeedback("Request processing failed.");
+    return;
+    }
+  let response = JSON.parse(this.responseText);
+  let element = document.querySelector('div.request[data-id="'+ response.id + '"]');
+  let button = element.querySelector('button.accept')
+  let parent = element.parentElement;
+  parent.remove();
+  if(button){
+    button.remove();
+    let requested = document.querySelector('#requested');
+    requested.insertBefore(parent,requested.firstChild);
+    element.querySelector('button.decline').innerHTML="Cancel";
+    addFeedback("Report processed successfully.");
+  }else{
+    addFeedback("Report cancelled successfully.");
+  }
+}
+
+function requestDeclinedStatusHandler(){
   if (this.status != 200) {
     //window.location = '/';
     addErrorFeedback("Request processing failed.");
@@ -123,24 +146,6 @@ function changeTab(){
  
 }
 
-
-
-function orgRequestHandler() {
-  if (this.status != 200 && this.status != 201) {
-    console.log(this.responseText);
-    let x = JSON.parse(this.responseText);
-    addErrorFeedback("Request processing failed.");
-    return;
-  }
-  let x = JSON.parse(this.responseText);
-
-  addFeedback("Request sent successfully");
-
-}
-
-function orgRequestErrorHandler() {
-addErrorFeedback("Request processing failed.");
-}
 
 
 

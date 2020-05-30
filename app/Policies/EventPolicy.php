@@ -46,4 +46,10 @@ class EventPolicy
         
         return $organization->organization_id == $event->organization_id;
     }
+
+    public function report(User $user)
+    {
+      // Any user can report a comment
+      return Auth::check();
+    }
 }

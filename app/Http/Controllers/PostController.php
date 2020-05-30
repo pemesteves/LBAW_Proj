@@ -53,6 +53,7 @@ class PostController extends Controller{
         throw new HttpException(404, "post");
 
       $this->authorize('archive', $post);
+      
       $report = Report::where([['reported_post_id',$id],['approval',true]])->get();
       if(count($report) > 0)
         $post->update(['type' => 'blocked']);

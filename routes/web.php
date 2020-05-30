@@ -117,6 +117,10 @@ Route::get('/posts/{post_id}/edit', 'PostController@show_edit');
 Route::post('/posts/{post_id}', 'PostController@edit');
 
 Route::get('/api/posts/{last_id}', 'FeedController@getPosts');
+Route::get('/api/groups/{group_id}/posts/{last_id}', 'GroupController@getPosts');
+Route::get('/api/events/{event_id}/posts/{last_id}', 'EventController@getPosts');
+Route::get('/api/users/me/posts/{last_id}', 'ProfileController@getMyPosts');
+Route::get('/api/users/{user_id}/posts/{last_id}', 'ProfileController@getPosts');
 
 
 Route::put('/api/users/notifications', 'RegularUserController@seeNotifactions');
