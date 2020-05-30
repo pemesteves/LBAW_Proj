@@ -127,3 +127,10 @@ Route::get('/settings','RegularUserController@settings')->name('settings');
 Route::get('/archived','RegularUserController@archived');
 
 Route::post('/users/delete','RegularUserController@delete');
+
+Route::get('/api/chats/{chat_id}/friends','ChatController@getFriends');
+
+
+Route::put('api/chats/{chat_id}/{user_id}','ChatController@addToChat');
+
+

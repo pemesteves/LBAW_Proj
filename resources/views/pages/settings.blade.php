@@ -41,7 +41,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <button type="submit" form="deleteUserForm" id='deleteUser' class="btn btn-primary">Send report</button>
+                                        <button type="submit" form="deleteUserForm" id='deleteUser' class="btn btn-primary">Delete me</button>
                                     </div>
                                 </div>
                             </div>
