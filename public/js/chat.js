@@ -4,7 +4,12 @@ function addEventListeners() {
   let lookMemberName = document.querySelector('#new_member_name');
   if(lookMemberName) lookMemberName.addEventListener('input',sendLookNamesRequest);
 
-
+  let lookChatName = document.querySelector('#new_chat_name');
+  if(lookChatName) lookChatName.addEventListener('keypress', function(e) {
+    if(e.key == 'Enter') {
+      sendNewChatRequest(e);
+    }
+  });
 }
 
 
@@ -14,6 +19,13 @@ function sendLookNamesRequest(event) {
   let chatId = pathParts[2];
   sendAjaxRequest('get', '/api/chats/'+chatId+'/friends?string='+name, null, showNewMembersHandler);
   //event.preventDefault();
+}
+
+
+function sendNewChatRequest(event) {
+  let name = document.getElementById('new_chat_name').value;
+  sendAjaxRequest('put', '/api/chats/create', {name : name}, newChatHandler);
+  event.preventDefault();
 }
 
 function showNewMembersHandler(){
@@ -37,6 +49,22 @@ function showNewMembersHandler(){
 
 }
 
+function newChatHandler() {
+  console.log(this.responseText);
+  if (this.status != 200 && this.status != 201){
+    console.log("fui");
+    return;
+  }
+
+  console.log(this.responseText);
+  let chat = JSON.parse(this.responseText);
+
+  let new_chat = createChat(chat);
+
+  document.querySelector('div.user_chats').prepend(new_chat);
+
+}
+
 
 function sendAddMemberToChatRequest(event){
   let pathParts = window.location.pathname.split('/');
@@ -54,6 +82,35 @@ function addedUserChatHandler() {
   document.querySelector('#addToChat_'+res).remove();
 }
 
+
+function createChat(chat) {
+  let new_chat = document.createElement('article');
+  new_chat.classList.add('card-mb-3', 'chat_user_info_article'); 
+  new_chat.innerHTML = `
+    <a href = "/chats/${chat.chat_id}" style="color: inherit; text-decoration: none;">
+    <div class="row chat_user_info_article_div" style="margin-left:15px">
+      
+          <img class="card-img" src="https://image.flaticon.com/icons/svg/166/166258.svg" alt="" style="width:2.5em;height:2.5em; border-radius:50%"/>
+      
+      
+         <h2 class="card-title" style="margin-left:10px; margin-right:40px">${chat.chat_name}</h2>
+         <img 
+         @if (isset($image) && $image !== null)
+                 src="{{$image->file_path}}"
+         @else
+         src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png"
+         @endif
+         alt="" class="rounded-circle" style="max-width:8%; max-height: 2%;" align="left"/>
+
+           <img    
+                  src="https://comunicadores.info/wp-content/uploads/2014/12/very-basic-plus-icon.png"
+                  alt="" class="rounded-circle" style="max-width:8%; max-height: 2%;" align="left"/>      
+  </div>
+  </a>  
+  `
+
+  return new_chat;
+}
 
 
 
