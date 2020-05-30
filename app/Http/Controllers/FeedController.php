@@ -24,20 +24,20 @@ class FeedController extends Controller{
                     
         if(get_class($user->userable) == "App\RegularUser"){
             //$posts = Post::orderBy('date','desc')->get();
-            $myPosts = Post::where([['author_id', Auth::user()->userable->regular_user_id],['type','<>','blocked']])
+            $myPosts = Post::where([['author_id', Auth::user()->userable->regular_user_id],['type','normal']])
                                 ->whereNull('post.event_id')
                                 ->whereNull('post.group_id')
                                 ->select("post.*");
             $myGroupsPosts = Post::join('user_in_group' , "post.group_id" , "user_in_group.group_id")
-                                        ->where([['user_in_group.user_id', Auth::user()->userable->regular_user_id],['post.type','<>','blocked']])
+                                        ->where([['user_in_group.user_id', Auth::user()->userable->regular_user_id],['post.type','normal']])
                                         ->select("post.*");
             $myEventsPosts = Post::join('user_interested_in_event' , "post.event_id" , "user_interested_in_event.event_id")
-                                        ->where([['user_interested_in_event.user_id', Auth::user()->userable->regular_user_id],['post.type','<>','blocked']])
+                                        ->where([['user_interested_in_event.user_id', Auth::user()->userable->regular_user_id],['post.type','normal']])
                                         ->select("post.*");
 
             $posts = Post::join('friend' , "author_id" , "friend_id2")
                     ->where( [["friend_id1" , "=" , Auth::user()->userable->regular_user_id] ,
-                            ['friend.type','accepted'],['post.type','<>','blocked']])
+                            ['friend.type','accepted'],['post.type','normal']])
                             ->whereNull('post.event_id')
                             ->whereNull('post.group_id')
                     ->select("post.*")
@@ -153,23 +153,23 @@ class FeedController extends Controller{
 
     function getPosts($last_id){
       
-        $myPosts = Post::where([['author_id', Auth::user()->userable->regular_user_id],['type','<>','blocked']])
+        $myPosts = Post::where([['author_id', Auth::user()->userable->regular_user_id],['type','normal']])
                             ->whereNull('post.event_id')
                             ->whereNull('post.group_id')
                             ->where('post_id','<',$last_id)
                             ->select("post.*");
         $myGroupsPosts = Post::join('user_in_group' , "post.group_id" , "user_in_group.group_id")
-                                    ->where([['user_in_group.user_id', Auth::user()->userable->regular_user_id],['post.type','<>','blocked']])
+                                    ->where([['user_in_group.user_id', Auth::user()->userable->regular_user_id],['post.type','normal']])
                                     ->where('post_id','<',$last_id)
                                     ->select("post.*");
         $myEventsPosts = Post::join('user_interested_in_event' , "post.event_id" , "user_interested_in_event.event_id")
-                                    ->where([['user_interested_in_event.user_id', Auth::user()->userable->regular_user_id],['post.type','<>','blocked']])
+                                    ->where([['user_interested_in_event.user_id', Auth::user()->userable->regular_user_id],['post.type','normal']])
                                     ->where('post_id','<',$last_id)
                                     ->select("post.*");
 
         $posts = Post::join('friend' , "author_id" , "friend_id2")
                 ->where( [["friend_id1" , "=" , Auth::user()->userable->regular_user_id] ,
-                        ['friend.type','accepted'],['post.type','<>','blocked']])
+                        ['friend.type','accepted'],['post.type','normal']])
                         ->whereNull('post.event_id')
                         ->whereNull('post.group_id')
                 ->select("post.*")

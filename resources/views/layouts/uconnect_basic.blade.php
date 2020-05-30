@@ -135,7 +135,7 @@ window.Echo = new Echo({
                                         <a class="dropdown-item" href="/events/create"><span class="fa fa-calendar"></span>&nbsp;&nbsp;Create Event</a>
                                     @endif
                                     <a class="dropdown-item" href="/about"><span class="fa fa-info-circle"></span>&nbsp;&nbsp;About Us</a>
-                                    <a class="dropdown-item" href="#"><span class="fa fa-cog"></span>&nbsp;&nbsp;Settings</a>
+                                    <a class="dropdown-item" href="/settings"><span class="fa fa-cog"></span>&nbsp;&nbsp;Settings</a>
                                     <div class="dropdown-divider"></div>
                                 @endif
                                 <a class="dropdown-item" href="{{ url('/logout') }}"><span class="fa fa-sign-out"></span>&nbsp;Logout</a>

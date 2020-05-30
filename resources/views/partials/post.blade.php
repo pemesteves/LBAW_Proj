@@ -2,7 +2,6 @@
 
 
 
-
 <!-- Popup -->
 
 <article class="post" id='post_{{ $post->post_id }}' data-id="{{ $post->post_id }}">
@@ -35,7 +34,10 @@
                                     </div>
                                     <div class="col-sm-3" style="padding-top:0.2rem;padding-bottom:0.2rem; text-align: right; font-size: 1.25em;">
                                         <p class="card-text" style="margin-bottom:0rem">{{date('d-m-Y', strtotime($post->date))}}</p>
-                                        <p class="card-text">{{date('H:i', strtotime($post->date))}}</p>
+                                        <p class="card-text" style="margin-bottom:0.5rem">{{date('H:i', strtotime($post->date))}}</p>
+                                        @if(strcmp($post->type,'archived') == 0)
+                                            <small style='float:right' class="text-muted">archived</small>
+                                        @endif
                                     </div>
                                 </div>
                                 @if($post->hasContext())
@@ -68,6 +70,17 @@
                                                 <button onclick="location.href='/posts/{{$post->post_id}}/edit'" style=" margin-left:auto; margin-right:auto; background-color: white; border: 0;">
                                                     Edit
                                                 </button>
+                                            </li>
+                                            <li class="list-group-item options_entry" style="text-align: left;">
+                                                @if(strcmp($post->type,'archived') != 0)
+                                                <button class='archive' style=" background-color: white; border: 0;" > 
+                                                    Archive
+                                                </button>
+                                                @else
+                                                <button class='unarchive' style=" background-color: white; border: 0;" > 
+                                                    Unarchive
+                                                </button>
+                                                @endif
                                             </li>
                                             <li class="list-group-item options_entry" style="text-align: left;">
                                                 <button class='delete' style=" background-color: white; border: 0;" > 

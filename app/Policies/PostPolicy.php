@@ -18,6 +18,12 @@ class PostPolicy
       return Auth::check();
     }
 
+    public function archive(User $user, Post $post)
+    {
+      // Only a post owner can delete it
+      return $user->userable_id == $post->author_id;
+    }
+
     public function delete(User $user, Post $post)
     {
       // Only a post owner can delete it
