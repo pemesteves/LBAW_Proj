@@ -6,6 +6,17 @@
             
             
                <h2 class="card-title" style="margin-left:10px">{{$chat->chat_name}}</h2>
+               
+               @if ($members_count > 3) {
+                @for($i = 0; $i < 3; $i++)
+                  $members_info[$i]->
+                @endfor 
+               }
+               @else
+                @for($i = 0; $i < $members_count; $i++)
+                  $members_info[$i]->
+                @endfor 
+               @endif
             
         </div>
         </a>

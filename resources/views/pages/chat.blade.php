@@ -19,7 +19,9 @@
                         </form>
                     </header>
                     <div class="col" style="height: 87%; justify-content:flex-start; padding: 0">
-                        @each('partials.chat', Auth::user()->chats, 'chat')
+                        @foreach(Auth::user()->chats as $chat)
+                            @include('partials.chat', ['chat' => $chat, 'members_count' => $members, 'members_info' => $members_info])
+                        @endforeach                        
                     </div>
                     <footer id="create_chat" class="row" style="margin: 0; padding: 0; width: 100%; height: 6.5%">
                         <button class="btn" type="button" style="margin: 0; padding: 0; width: 100%; color: white; background-color: sandybrown; border-radius: 0;">
