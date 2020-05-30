@@ -59,7 +59,7 @@ class Group extends Model
      */
     public function members() {
         $result = $this->join('user_in_group', 'group.group_id', '=', 'user_in_group.group_id')
-                       ->join('regular_user', 'user_in_group.user_id', '=', 'regular_user.user_id')
+                       ->join('regular_user', 'user_in_group.user_id', '=', 'regular_user.regular_user_id')
                        ->select('user_id', 'regular_user_id', 'group_id')
                        ->join('user', 'user.user_id', '=', 'regular_user.user_id') 
                        ->where('group.group_id', '=', $this->group_id)

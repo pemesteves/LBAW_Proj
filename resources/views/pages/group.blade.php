@@ -35,7 +35,7 @@
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">          
                                                 @foreach($members as $member)
-                                                    <div class="card mb member_card" style="margin-bottom:0px;border-radius:0px;" data-id="{{ $member->user_id }}">
+                                                    <div class="card mb member_card" style="margin-bottom:0px;border-radius:0px;" data-id="{{ $member->regular_user_id }}">
                                                         <div class="row no-gutters">
                                                             <div class="col-md" style="flex-grow:1; max-width:100%; text-align: left;">
                                                                 <a href="../users/{{$member->regular_user_id}}" style="text-decoration: none; color:black">
