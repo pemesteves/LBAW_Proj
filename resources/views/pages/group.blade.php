@@ -10,7 +10,7 @@
 ?>
 
 @section('content')
-<div id="feed_container" class="container" >
+<div id="feed_container" class="container" data-id="{{ $group->group_id }}">
     <div id="group_card" class="container card mb-3 border rounded">
         <div class="row no-gutters">
             <div class="card text-center col-sm-3">
@@ -30,15 +30,51 @@
                             <h2 class="card-subtitle">{{ $group->information }} </h2>
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <div class="row">
-                                        <p class="card-text m-0"><!--$members?>-->{{ $member_count }} members</p>
-                                        <button class="btn dropdown-toggle dropdown-toggle-split py-0" type="button" id="memberDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="memberDropdown">            
-                                            <div class="navbar-nav">
-                                                @each('partials.group_member', $members, 'member')
+                                    <div class="modal fade p-5" id="memberPopup" tabindex="-1" role="dialog" 
+                                        aria-labelledby="memberButton" aria-hidden="true">  
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">          
+                                                @foreach($members as $member)
+                                                    <div class="card mb member_card" style="margin-bottom:0px;border-radius:0px;" data-id="{{ $member->user_id }}">
+                                                        <div class="row no-gutters">
+                                                            <div class="col-md" style="flex-grow:1; max-width:100%; text-align: left;">
+                                                                <a href="../users/{{$member->regular_user_id}}" style="text-decoration: none; color:black">
+                                                                    <div class="row no-gutters">
+                                                                        <div class="col-sm">
+                                                                            <div class="card text-center" style="border-right:none;border-bottom:none;border-top:none;border-radius:0;height:100%;">
+                                                                                <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" class="card-img-top mx-auto d-block" 
+                                                                                alt="..." style="border-radius:50%; max-width:3rem; padding:0.1rem;padding-top:0.2rem">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-8" style="flex-grow:1; max-width:100%; text-align: left;">
+                                                                            <div class="" style="margin-bottom: 0;padding-bottom: 0;">
+                                                                                <p class="card-text small_post_body" style="margin-bottom:0;margin-left:0.2rem;display:inline-block;">
+                                                                                    {{$member->name}}
+                                                                                </p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </a> 
+                                                            </div>
+                                                            @if($is_owner)
+                                                            <div class="col-sm" style="flex-grow:0; max-width:100%; text-align: left;">
+                                                                <span class="btn btn-light remove_button" data-id='{{$member->regular_user_id}}' 
+                                                                    style="background-color: rgba(0,0,150,.03);float:right; margin-right:0.5rem;margin-top:0.2rem;font-size:0.9rem ">
+                                                                    Remove
+                                                                </span>
+                                                            </div>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                @endforeach
                                             </div>
                                         </div>
                                     </div>
+                                    <button type="button" id="memberButton" class="btn p-0" data-toggle="modal" 
+                                data-target="#memberPopup" 
+                                style="color: inherit;background: none; width:100%;height:100%;">
+                                            <p class="card-text text-left m-0"><!--$members?>-->{{ $member_count }} members</p>
+                                    </button>
                                 </div>
                                 <div class="col-sm-6">
                                     <p class="card-text" id="last_update"><span class="fa fa-history"></span>&nbsp;Updated <?= getUpdateDate($group->updated_at);?><!--2--> days ago</p>

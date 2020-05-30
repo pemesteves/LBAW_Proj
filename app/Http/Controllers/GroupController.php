@@ -208,4 +208,13 @@ class GroupController extends Controller{
 
       return $image;
     }
+
+    public function removeMember(Request $request, $group_id, $user_id){
+
+      $member = DB::table('user_in_group')->where('group_id', $group_id)->where('user_id', $user_id)->first();
+
+      DB::table('user_in_group')->where('group_id', $group_id)->where('user_id', $user_id)->delete();
+
+      return json_encode($member);
+    }
 }
