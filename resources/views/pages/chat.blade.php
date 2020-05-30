@@ -2,10 +2,17 @@
 
 @section('content')
 
-@foreach($in_chat as $user)
+<!-- @foreach($in_chat as $user)
     {{$user->user->name}}
     <br>
 @endforeach
+
+@foreach(Auth::user()->userable->chats as $chat)
+    {{$chat->chat_id}}
+    <br>
+@endforeach
+ -->
+
 
 <article class="chat" data-id="{{ $chat->chat_id }}">
     <div id="full_page" class="d-flex flex-column no-gutters vh-100" style="padding: 0">
@@ -22,13 +29,13 @@
                             </div>
                         </form>
                     </header>
-                    <div class="col" style="height: 87%; justify-content:flex-start; padding: 0">
-                        @foreach(Auth::user()->chats as $chat)
-                            @include('partials.chat', ['chat' => $chat, 'members_count' => $members, 'members_info' => $members_info])
-                        @endforeach                        
+                    <div class="col user_chats" style="height: 87%; justify-content:flex-start; padding: 0">
+                        @foreach(Auth::user()->userable->chats as $chat)
+                            @include('partials.chat', ['chat' => $chat, 'members_info' => $in_chat])
+                        @endforeach 
                     </div>
                     <footer id="create_chat" class="row" style="margin: 0; padding: 0; width: 100%; height: 6.5%">
-                        <button class="btn" type="button" style="margin: 0; padding: 0; width: 100%; color: white; background-color: sandybrown; border-radius: 0;">
+                        <button class="btn" type="button" style="margin: 0; padding: 0; width: 100%; color: white; background-color: sandybrown; border-radius: 0;" data-toggle="modal" data-target="#addChatModal">
                             <p id="create_group_message"><i class="fa fa-plus"></i>&nbsp;Create Group Chat</p>
                         </button>
                     </footer>
@@ -132,7 +139,7 @@
                     <form action='/users/delete' method='post'>
                     <div class="form-group">
                         <label class="col-form-label">Member:</label>
-                        <input type="text" name='name' autocomplete="off" laber='name' class="form-control" id="new_member_name">
+                        <input type="text" name='name' autocomplete="off" label='name' class="form-control" id="new_member_name">
                     </div>
                     </form>
                     <div id='members_search'>
@@ -142,6 +149,29 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="addChatModal" tabindex="-1" role="dialog" aria-labelledby="addChatModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addChatModalLabel">Add chat name</h5>
+                    <input type="hidden" id="report_id">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="chat_create">
+                    <div class="form-group">
+                        <label class="col-form-label">Chat:</label>
+                        <input type="text" name='name' required="required" autocomplete="off" label='name' class="form-control" id="new_chat_name">
+                        <input type="submit" id="new_chat_name_submit" style="position: absolute; left: -9999px"/>
+                    </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 </article>
 
 

@@ -74,4 +74,18 @@ class ChatController extends Controller{
       return $user_id;
     }
 
+
+    public function create(Request $request) {
+
+      $chat = new Chat();
+      $chat->chat_name = $request->input('name');
+      $chat->save();
+
+      $this->addToChat($chat->chat_id, Auth::user()->userable->regular_user_id);
+
+      $new_chat = Chat::take(1)->where("chat_id", '=', $chat["chat_id"])->get(); 
+      return $new_chat[0];
+
+    }
+
 }
