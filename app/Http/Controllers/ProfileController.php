@@ -188,4 +188,24 @@ class ProfileController extends Controller{
 
   }
 
+  function getMyPosts($last_id){
+
+    $myPosts = Post::where([['author_id', Auth::user()->userable->regular_user_id],['type','normal']])
+    ->where('post_id','<',$last_id)
+    ->select("post.*")
+    ->orderBy('date','desc')->limit(3)->get();;
+
+    return view('requests.posts',['posts' => $myPosts]);
+  }
+
+  function getPosts($user_id,$last_id){
+
+    $myPosts = Post::where([['author_id', $user_id],['type','normal']])
+    ->where('post_id','<',$last_id)
+    ->select("post.*")
+    ->orderBy('date','desc')->limit(3)->get();;
+
+    return view('requests.posts',['posts' => $myPosts]);
+  }
+
 }

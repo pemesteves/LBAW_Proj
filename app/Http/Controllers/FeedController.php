@@ -98,7 +98,7 @@ class FeedController extends Controller{
             //return $recommendations->toSql();
 
             return view('pages.feed' , ['is_admin' => false , 
-            'js' => ['infinite_scroll_feed.js'],
+            'js' => [],
             'posts' => $posts , 
             'groups' => Auth::user()->userable->groups  ,
             'events' => Auth::user()->userable->events, 

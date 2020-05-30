@@ -31,7 +31,7 @@ class OrgApproval extends Model
      * @var array
      */
     protected $fillable = [
-      'approval',
+      'approval','type'
   ];
 
   /**

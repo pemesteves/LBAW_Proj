@@ -136,11 +136,6 @@ function commentLikeHandler() {
     let dislikes = element.querySelector('.comment_dislike');
     likes.textContent=parseInt(likes.textContent)+like.upvotes;
     dislikes.textContent=parseInt(dislikes.textContent)+like.downvotes;
-    element = document.querySelector('div.comment_container[data-id="'+ like.comment_id + '"] .post_votes');
-    likes = element.querySelector('.comment_like');
-    dislikes = element.querySelector('.comment_dislike');
-    likes.textContent= String.fromCharCode(160)+ (parseInt(likes.textContent)+like.upvotes) + String.fromCharCode(160);
-    dislikes.textContent= String.fromCharCode(160)+ (parseInt(dislikes.textContent)+like.downvotes) + String.fromCharCode(160);
   }
 
 
@@ -151,7 +146,10 @@ function sendDeleteCommentRequest(event) {
   sendAjaxRequest('delete', '/api/comments/' + id, null, commentDeletedHandler);
 }
 function commentDeletedHandler() {
-  if (this.status != 200) window.location = '/';
+  if (this.status != 200){
+    addErrorFeedback("Failed to delete comment.");
+    return;
+  }
   let comment = JSON.parse(this.responseText);
   let element = document.querySelector('div.comment_container[data-id="'+ comment.comment_id + '"]');
   let count = document.querySelector("#post_" + comment.post_id + " .comments_count");

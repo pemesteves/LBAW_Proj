@@ -70,6 +70,8 @@ class ChatController extends Controller{
   }
 
     public function addToChat($chat_id,$user_id){
+      $chat = Chat::find($chat_id);
+      $this->authorize('add', $chat);
       DB::table('user_in_chat')->insert(['user_id' => $user_id,'chat_id' => $chat_id]);
       return $user_id;
     }

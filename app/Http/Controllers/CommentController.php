@@ -57,7 +57,7 @@ class CommentController extends Controller{
     {
       $comment = Comment::find($id);
 
-      //$this->authorize('delete', $comment);
+      $this->authorize('delete', $comment);
       $comment->delete();
 
       return $comment;
@@ -72,8 +72,8 @@ class CommentController extends Controller{
 
       $comment = Comment::find($id);
 
+      $this->authorize('edit', $comment);
 
-      //TODO::CHECKPOLICE
       $comment->body = $request->input('body');
 
       $comment->save();
@@ -113,7 +113,7 @@ class CommentController extends Controller{
       $comment = Comment::find($id);
       if(!isset($comment))
         throw new HttpException(404, "comment");
-      //TODO: AUTHORIZE  
+      $this->authorize('like', $comment);
       $change = ['comment_id' => $id ,'upvotes' => 0, 'downvotes' => 0];
 
       $like = $comment->userLikes()->wherePivot('user_id' , Auth::user()->userable->regular_user_id)->first();
