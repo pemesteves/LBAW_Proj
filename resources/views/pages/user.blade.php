@@ -205,7 +205,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @for ($i = 0; $i < 12; $i++)
+                                @for ($i = 0; $i < 13; $i++)
                                     <tr>
                                     <th scope="row">{{$i+7}}h - {{$i+8}}h</th>
                                     @for ($a = 0; $a < 5; $a++)

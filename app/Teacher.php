@@ -35,7 +35,14 @@ class Teacher extends Model
     }
 
     public function appointments(){
-        return DB::table('appointment')->whereNull('teacher_id')->orWhere('teacher_id',$this->teacher_id)->rightJoin('timeUnit','time_id','=','timeUnit_id')->orderBy('timeUnit_id')->get();
+
+        $myAppoint = DB::table('appointment')->where('teacher_id',$this->teacher_id);
+
+        $all = DB::table('timeUnit')->leftjoinSub($myAppoint , 'app' , function ($join) {
+                $join->on('timeUnit_id', '=', 'app.time_id');
+            })->get();
+
+        return $all;
     }
 
 }
