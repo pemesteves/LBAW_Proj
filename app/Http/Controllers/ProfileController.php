@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Appointment;
 use App\File;
 use App\Image;
 use Illuminate\Http\Request;
@@ -160,6 +161,53 @@ class ProfileController extends Controller{
     Session::flash("success_message", "Profile updated successfully.");
     
     return ProfileController::show_me();
+  }
+
+  public function deleteAppointment(Request $request, $teacher_id, $time_id){
+    if(!Auth::check()) return redirect('/login');
+
+    $appointment = DB::table('appointment')
+                       ->where('teacher_id', '=', $teacher_id)
+                       ->where('time_id', '=', $time_id)->get();
+
+    if(!isset($appointment))
+      throw new HttpException(404, "appointment");
+
+    //$this->authorize('delete', $appointment); 
+    /**
+     * TODO Add delete authorize
+     */
+
+    DB::table('appointment')
+        ->where('teacher_id', '=', $teacher_id)
+        ->where('time_id', '=', $time_id)
+        ->delete();
+
+    return $appointment;
+  }
+
+  public function addAppointment(Request $request, $teacher_id, $time_id){
+    if(!Auth::check()) return redirect('/login');
+
+    $description = $request->input('description');
+  
+    DB::table("appointment")
+        ->insert(["teacher_id" => $teacher_id,
+                  "time_id" => $time_id,
+                  "description" => $description
+    ]);
+
+
+    $appointment = DB::table('appointment')
+        ->where('teacher_id', '=', $teacher_id)
+        ->where('time_id', '=', $time_id)
+        ->get();
+
+    //$this->authorize('create', $appointment); 
+    /**
+     * TODO Add create authorize
+    */
+    return $appointment;
   }
 
 

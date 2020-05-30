@@ -78,6 +78,8 @@ Route::get('/users/me/edit', 'ProfileController@show_me_edit');
 Route::post('/users/me', 'ProfileController@edit');
 Route::get('/users/{id}', 'ProfileController@show');
 Route::get('/users/me/email', 'ProfileController@email');
+Route::delete('/api/users/{teacher_id}/appointments/{time_id}', 'ProfileController@deleteAppointment');
+Route::put('/api/users/{teacher_id}/appointments/{time_id}', 'ProfileController@addAppointment');
 
 //About
 Route::get('/about', 'AboutController@show');

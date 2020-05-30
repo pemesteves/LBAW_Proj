@@ -86,19 +86,23 @@
                                     @for ($a = 0; $a < 5; $a++)
                                         <td>
                                            @if(Auth::user()->userable->regular_userable->appointments()[$i*5+$a]->description)
-                                                <?php print_r(Auth::user()->userable->regular_userable->appointments()[$i*5+$a]);?>
                                                 <div class="container" style="padding: 0">
                                                     <div class="row" style="padding-left: .25em; padding-right: .25em;">
                                                         <div class="col-sm-10" style="padding: 0">
                                                             {{Auth::user()->userable->regular_userable->appointments()[$i*5+$a]->description}}
                                                         </div>
                                                         <div class="col-sm-2" style="padding: 0">
-                                                            <span class="fa fa-trash"></span>
+                                                            <span class="fa fa-trash appointment"
+                                                            data-time="{{Auth::user()->userable->regular_userable->appointments()[$i*5+$a]->time_id}}"
+                                                            data-teacher="{{Auth::user()->userable->regular_userable->appointments()[$i*5+$a]->teacher_id}}"></span>
                                                         </div>
                                                     </div>
                                                 </div>
                                             @else
-                                                <button class="btn btn-primary">Add</button>
+                                                <button class="btn btn-primary appointment"
+                                                data-time="<?=$i*5+$a+1;?>"
+                                                data-teacher="<?=Auth::user()->userable->regular_userable->teacher_id;?>"
+                                                >Add</button>
                                             @endif
                                         </td>
                                     @endfor

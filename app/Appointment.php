@@ -17,9 +17,6 @@ class Appointment extends Model
      */
     protected $table = 'appointment';
 
-
-
-
 }
 
 
