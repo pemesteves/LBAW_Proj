@@ -47,7 +47,7 @@ class Message extends Model
    * The user this post belongs to
    */
   public function user() {
-    return $this->belongsTo('App\User' , 'sender_id');
+    return $this->belongsTo('App\RegularUser' , 'sender_id');
   }
 
   /**

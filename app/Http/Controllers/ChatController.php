@@ -30,7 +30,8 @@ class ChatController extends Controller{
                      ->get();
 
       $members = $chat->members();
-
+     
+      
       $notifications = Auth::user()->userable->notifications;
 
       return view('pages.chat' , ['in_chat' => $chat->in_chat, 'chat' => $chat, 'messages' => $messages, 'members' => $members, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'notifications' => $notifications]);
