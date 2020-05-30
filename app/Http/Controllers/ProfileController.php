@@ -166,17 +166,24 @@ class ProfileController extends Controller{
   public function deleteAppointment(Request $request, $teacher_id, $time_id){
     if(!Auth::check()) return redirect('/login');
 
+    if(Auth::user()->userable_type !== "App\RegularUser"){
+      throw new HttpException(404, "page");
+    }
+
+    if(Auth::user()->userable->regular_userable_type !== "App\Teacher"){
+      throw new HttpException(404, "page");
+    }
+
+    if(Auth::user()->userable->regular_userable->teacher_id != $teacher_id){
+      throw new HttpException(404, "appointment");
+    }
+
     $appointment = DB::table('appointment')
                        ->where('teacher_id', '=', $teacher_id)
                        ->where('time_id', '=', $time_id)->get();
 
     if(!isset($appointment))
       throw new HttpException(404, "appointment");
-
-    //$this->authorize('delete', $appointment); 
-    /**
-     * TODO Add delete authorize
-     */
 
     DB::table('appointment')
         ->where('teacher_id', '=', $teacher_id)
@@ -188,6 +195,18 @@ class ProfileController extends Controller{
 
   public function addAppointment(Request $request, $teacher_id, $time_id){
     if(!Auth::check()) return redirect('/login');
+
+    if(Auth::user()->userable_type !== "App\RegularUser"){
+      throw new HttpException(404, "page");
+    }
+
+    if(Auth::user()->userable->regular_userable_type !== "App\Teacher"){
+      throw new HttpException(404, "page");
+    }
+
+    if(Auth::user()->userable->regular_userable->teacher_id != $teacher_id){
+      throw new HttpException(404, "appointment");
+    }
 
     $description = $request->input('description');
   
@@ -203,10 +222,6 @@ class ProfileController extends Controller{
         ->where('time_id', '=', $time_id)
         ->get();
 
-    //$this->authorize('create', $appointment); 
-    /**
-     * TODO Add create authorize
-    */
     return $appointment;
   }
 
