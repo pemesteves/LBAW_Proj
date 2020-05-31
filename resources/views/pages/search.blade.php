@@ -24,5 +24,16 @@
             <br>
         @endforeach
         <a href='/groups/search?search={{$str}}'> More groups </a>
+        <br><br><br>
+    @endif
+    @if($posts)
+        @foreach ($posts as $obj)
+            @if($obj->rank > 0.0)
+                {{$obj->title}}
+            
+                <br>
+            @endif
+        @endforeach
+        <a href='/posts/search?search={{$str}}'> More posts </a>
     @endif
 @endsection

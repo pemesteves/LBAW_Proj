@@ -4,6 +4,11 @@ function addEventListeners() {
     [].forEach.call(groupReporters, function(reporter) {
       reporter.addEventListener('click', openReportGroupModal);
     });
+
+    let memberCards = document.querySelectorAll('#memberPopup span.remove_button');
+    [].forEach.call(memberCards, function(card) {
+      card.addEventListener('click', sendRemoveMemberRequest);
+    });
   
 }
 
@@ -49,6 +54,28 @@ function openReportGroupModal(event){
 
   function groupReportErrorHandler() {
     addErrorFeedback("Failed to report group.");
+  }
+
+  function sendRemoveMemberRequest(event) {
+    let group_id = this.closest('#feed_container').getAttribute('data-id');
+    let user_id = this.closest('div.member_card').getAttribute('data-id');
+  
+    sendAjaxRequest('delete', '/api/groups/' + group_id + '/members/' + user_id, null, memberRemovedHandler);
+  }
+  function memberRemovedHandler() {
+    if (this.status != 200 && this.status != 201) {
+      //window.location = '/';
+      addErrorFeedback("Member removal failed. Error " + this.status);
+      return;
+      }
+    let member = JSON.parse(this.responseText);
+    let element = document.querySelector('div.member_card[data-id="'+ member.user_id + '"]');
+    let count = document.querySelector("button#memberButton p");
+    count.innerHTML = (parseInt(count.textContent)-1) + " members";
+  
+    element.remove();
+
+    addFeedback("Member removed successfully.");
   }
 
 

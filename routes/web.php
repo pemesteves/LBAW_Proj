@@ -71,6 +71,7 @@ Route::get('/search' , 'FeedController@search');
 Route::get('/users/search' , 'FeedController@searchUsers');
 Route::get('/groups/search' , 'FeedController@searchGroups');
 Route::get('/events/search' , 'FeedController@searchEvents');
+Route::get('/posts/search' , 'FeedController@searchPosts');
 
 //Profile
 Route::get('/users/me', 'ProfileController@show_me');
@@ -94,6 +95,8 @@ Route::put('/api/groups/{id}/posts', 'PostController@createInGroup');
 Route::get('/groups/{group_id}/edit', 'GroupController@show_edit');
 Route::post('/groups/{group_id}', 'GroupController@edit');
 Route::put('api/groups/{id}/report', 'GroupController@report');
+
+Route::delete('api/groups/{group_id}/members/{user_id}', 'GroupController@removeMember');
 
 //Event
 Route::get('/events/create', 'EventController@showCreateForm');
