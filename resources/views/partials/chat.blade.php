@@ -9,7 +9,7 @@
                         @for ($i = 0; $i < 3 and $i < count($chat->in_chat); $i++)
                                 <img style="width:30px;height:30px;border-radius:50%;float: left;position:absolute;transform: translateX({{$i*15}}px);"
                                 @if (object_get($chat->in_chat[$i]->image(), "image_id"))
-                                        src="{{object_get($$chat->in_chat[$i]->image(), "file_path")}}"
+                                        src="{{object_get($chat->in_chat[$i]->image(), "file_path")}}"
                                 @else
                                         src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" 
                                 @endif

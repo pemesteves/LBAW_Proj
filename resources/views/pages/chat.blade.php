@@ -2,7 +2,13 @@
 
 @section('content')
 
-<article class="chat" data-id="{{ $chat->chat_id }}">
+@if (is_null($chat)) 
+    <?php $data_id = 0 ?>
+@else
+    <?php $data_id = $chat->chat_id ?>
+@endif
+
+<article class="chat" data-id="{{ $data_id }}">
     <div id="full_page" class="d-flex flex-column no-gutters vh-100" style="padding: 0">
         <section class="container-fluid no-gutters" style="flex: 1 1 auto">
             <section class="row" style="height: 100%">
@@ -18,8 +24,11 @@
                         </form>
                     </header>
                     <div class="col user_chats" style="height: 87%; justify-content:flex-start; padding: 0">
-                        @foreach(Auth::user()->userable->chats as $chat)
-                            @include('partials.chat', ['chat' => $chat])
+                        @if(sizeof(Auth::user()->userable->chats) == 0) 
+                            <p>You have no chats! If you want to connect with your friends, create one.</p>
+                        @endif
+                        @foreach(Auth::user()->userable->chats as $chatUsr)
+                            @include('partials.chat', ['chat' => $chatUsr])
                         @endforeach 
                     </div>
                     <footer id="create_chat" class="row" style="margin: 0; padding: 0; width: 100%; height: 6.5%">
@@ -28,7 +37,7 @@
                         </button>
                     </footer>
                 </section>
-
+            @if(!is_null($chat))
                 <section id="opened_message" class="col-md-9 d-flex flex-column" style="height: 100%">
                     <header class="row" id="chat_info">
                         <img class="card-img" src="https://image.flaticon.com/icons/svg/166/166258.svg" alt="" style="width:2.5em; height:2.5em ; border-radius:50%" onclick="window.location.href='./profile.php'"/>
@@ -168,6 +177,8 @@
                 };
             </script>
         @endif
+
+    @endif
 </article>
 
 
