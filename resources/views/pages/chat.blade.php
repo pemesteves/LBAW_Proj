@@ -2,9 +2,9 @@
 
 @section('content')
 
-<article class="chat" data-id="{{ $chat->chat_id }}">
-    <div id="full_page" class="d-flex flex-column no-gutters vh-100" style="padding: 0">
-        <section class="container-fluid no-gutters" style="flex: 1 1 auto">
+<article class="chat" data-id="{{ $chat->chat_id }}" style="height:100%;">
+    <div id="full_page" class="d-flex flex-column no-gutters " style="height: 100%;">
+        <section class="container-fluid no-gutters" style="height: 100%;">
             <section class="row" style="height: 100%">
                 <section id="chats" class="col-md-3" style="height: 100%; padding: 0; border-width: 0; border-right-width: 0.1em; border-style:solid; border-color: sandybrown">
                     <header id="search_chat" class="row" style="margin: 0; padding: 0; width: 100%; height: 6.5%; border-color: sandybrown; border-width: 0; border-bottom-width: 0.1em; border-style: solid">
@@ -41,7 +41,7 @@
                         </div>
                     </header>
 
-                    <section id="messages_col" class="d-flex flex-column" style="flex-grow:1">
+                    <section id="messages_col" class="d-flex flex-column" style="overflow: auto">
                         <?php 
                             $image = null;
                             $user_name = null;
@@ -102,7 +102,7 @@
                         <img class="chat_user_image" src="images/placeholder.png" alt=""  onclick="window.location.href='/users/me'"/>
                         <form id="newmessage" class="form-inline" style="max-width: 90%; width: 90%; justify-content:center;">
                             <div class="input-group chat_message_input" style="width:98%">
-                                <textarea type="text" required class="form-control" placeholder="Write a message..." aria-label="msg-write" aria-describedby="send-message-button" style="border-width: 0; border-top-left-radius: inherit; border-bottom-left-radius: inherit;"></textarea>
+                                <input type="text" required class="form-control" placeholder="Write a message..." aria-label="msg-write" aria-describedby="send-message-button" style="border-width: 0; border-top-left-radius: inherit; border-bottom-left-radius: inherit;"></textarea>
                                 <div class="input-group-append" style="border-radius: inherit">
                                     <button type="submit" class="btn btn-outline-light fa fa-caret-left fa-flip-horizontal" id="send-message-button" style="background-color: sandybrown; border-top-left-radius: inherit; border-bottom-left-radius: inherit;"></button>
                                 </div>
@@ -113,6 +113,16 @@
             </section>
         </section>
     </div>
+
+
+
+
+
+
+
+
+
+
     <div class="modal fade" id="addMemberModal" tabindex="-1" role="dialog" aria-labelledby="addMemberModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">

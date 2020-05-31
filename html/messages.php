@@ -4,7 +4,7 @@
 
     draw_header();
 ?>
-<div id="full_page" class="d-flex flex-column no-gutters vh-100" style="padding: 0">
+<div id="full_page" class="d-flex flex-column  vh-100" style="padding: 0">
 <?php
     draw_navbar();
 ?>
@@ -24,11 +24,7 @@
                     </form>
                 </header>
                 <div class="col" style="height: 87%; justify-content:flex-start; padding: 0">
-                <?php 
-                    draw_chat_info("images/placeholder.png", "", "Joaquin", 1);
-                    draw_chat_info("images/placeholder.png", "", "Joanna", 10);
-                    draw_chat_info("images/placeholder.png", "", "Mary", 0);
-                ?>
+                
                 </div>
                 <footer id="create_chat" class="row" style="margin: 0; padding: 0; width: 100%; height: 6.5%">
                     <button class="btn" type="button" style="margin: 0; padding: 0; width: 100%; color: white; background-color: sandybrown; border-radius: 0;">
@@ -44,11 +40,7 @@
                 </header>
 
                 <section id="messages_col" class="d-flex flex-column" style="flex-grow:1">
-                    <?php 
-                        draw_message(false, "Quisque cursus risus augue, nec.");
-                        draw_message(true, "Aenean volutpat euismod diam, et pharetra quam.");
-                        draw_message(true, "Nunc non varius augue.");
-                    ?>
+                    
                 </section>
 
                 <footer class="row" id="send_message" style="border-width: 0; border-top-width: 0.1em; border-style:solid; border-color: sandybrown; height: 6.5%;">

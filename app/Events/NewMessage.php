@@ -28,7 +28,7 @@ class NewMessage implements ShouldBroadcastNow
      *
      * @return void
      */
-    public function __construct(Message $message, String $image, String $user_name, String $id)
+    public function __construct(Message $message, $image, String $user_name, String $id)
     {
         $this->message = $message;
         $this->image = $image;
