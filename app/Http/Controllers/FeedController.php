@@ -99,7 +99,7 @@ class FeedController extends Controller{
             //return $recommendations->toSql();
 
             return view('pages.feed' , ['is_admin' => false , 
-            'css' => ['posts.css','post_form.css','navbar.css','feed.css','menu.css'],
+            'css' => ['posts.css','post_form.css','navbar.css','feed.css','menu.css','chat.css'],
             'js' => ['post.js','infinite_scroll.js','friendship.js','general.js',],
             'posts' => $posts , 
             'groups' => Auth::user()->userable->groups  ,
