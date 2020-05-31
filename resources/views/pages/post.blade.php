@@ -9,7 +9,7 @@
                 <div class="container" style="border-bottom:0;border-radius:0;max-width: 90%;">
                     <div class="row">
                         <div class="col-sm-2">
-                            <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" class="mx-auto d-block" alt="..." style="border-radius:50%; max-width:7rem; " onclick="window.location.href='/users/{{ $post->regularUser->regular_user_id }}'"/>
+                            <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" class="mx-auto d-block" alt="user_post" style="border-radius:50%; max-width:7rem; " onclick="window.location.href='/users/{{ $post->regularUser->regular_user_id }}'"/>
                         </div>
                         <div class="col-sm-10">
                             <div class="row">

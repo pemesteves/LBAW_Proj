@@ -10,7 +10,7 @@
             <div class="card-body container">
                 @csrf      
 
-                <img src="" class="card-img-top mx-auto d-block" alt=""> 
+                <img src="" class="card-img-top mx-auto d-block" alt="event_image"> 
                 <div>
                     <input required name="image" type="file"/>
                 </div>

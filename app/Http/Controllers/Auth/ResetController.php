@@ -41,9 +41,9 @@ class ResetController extends Controller
             'code'=> $code,
         );
 
-        Mail::send('emails.simple',$data, function($message){
+        Mail::send('emails.simple',$data, function($message) use($email){
         $message->from("uconnectlbaw@gmail.com","UConnect");
-        $message->to('uconnectlbaw@gmail.com')
+        $message->to($email)
                 ->subject("UConnet: Reset Password code");
         
         });

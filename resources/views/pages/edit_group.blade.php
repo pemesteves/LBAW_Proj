@@ -12,7 +12,7 @@
                 @else
                     src="http://www.pluspixel.com.br/wp-content/uploads/services-socialmediamarketing-optimized.png" 
                 @endif
-                class="mx-auto d-block" alt=""> 
+                class="mx-auto d-block" alt="group_image"> 
                 <div style="display: none;">
                     <input name="image" type="file" 
                         @if (isset($image) && $image !== null)

@@ -20,7 +20,7 @@
                     @else
                         src="http://www.pluspixel.com.br/wp-content/uploads/services-socialmediamarketing-optimized.png" 
                     @endif
-                class="card-img-top mx-auto d-block" alt="..." style="border-radius:50%; max-width:8rem">
+                class="card-img-top mx-auto d-block" alt="group_image" style="border-radius:50%; max-width:8rem">
             </div>
             <div class="card col-sm-9" >
                 <div class="row">
@@ -43,7 +43,7 @@
                                                                         <div class="col-sm">
                                                                             <div class="card text-center" style="border-right:none;border-bottom:none;border-top:none;border-radius:0;height:100%;">
                                                                                 <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" class="card-img-top mx-auto d-block" 
-                                                                                alt="..." style="border-radius:50%; max-width:3rem; padding:0.1rem;padding-top:0.2rem">
+                                                                                alt="user_image" style="border-radius:50%; max-width:3rem; padding:0.1rem;padding-top:0.2rem">
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-md-8" style="flex-grow:1; max-width:100%; text-align: left;">

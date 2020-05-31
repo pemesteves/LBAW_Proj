@@ -9,7 +9,7 @@
     @else
         src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png"
     @endif
-    alt="" class="rounded-circle" style="max-width:2%; max-height: 2%;" align="left"/>
+    alt="author_image" class="rounded-circle" style="max-width:2%; max-height: 2%;" align="left"/>
     <h6 style="border: 0; padding: 0; text-decoration:none; color:inherit"> <a href="/users/<?= $message->sender_id?>" style="text-decoration:none; color:inherit">
      {{$message->user->user->name}}
     </a> </h6>

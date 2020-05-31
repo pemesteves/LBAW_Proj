@@ -9,7 +9,7 @@
         <form id="group_image_upload" method="post" action="/groups/create" enctype="multipart/form-data">
             @csrf
             <div class="card-title">
-                <img src="http://www.pluspixel.com.br/wp-content/uploads/services-socialmediamarketing-optimized.png" class="mx-auto d-block" alt=""
+                <img src="http://www.pluspixel.com.br/wp-content/uploads/services-socialmediamarketing-optimized.png" class="mx-auto d-block" alt="group_image"
                     title="Click here to upload the group image"
                     style="border-radius: 50%; max-width: 8rem;"> 
                 <div style="display: none;">

@@ -36,7 +36,7 @@
                 @if($chat)
                 <section id="opened_message" class="col-md-9 d-flex flex-column" style="height: 100%;max-height:100%">
                     <header class="row" id="chat_info">
-                        <img class="card-img" src="https://image.flaticon.com/icons/svg/166/166258.svg" alt="" style="width:2.5em; height:2.5em ; border-radius:50%" onclick="window.location.href='./profile.php'"/>
+                        <img class="card-img" src="https://image.flaticon.com/icons/svg/166/166258.svg" alt="group image" style="width:2.5em; height:2.5em ; border-radius:50%" onclick="window.location.href='./profile.php'"/>
                         <h2>{{$chat->chat_name}}</h2>
                         <div style="position:absolute;right:20px;">
                             <button id='add_members_chat' class='btn btn-light' style='border-radius:50%;width:40px;height:40px' data-toggle="modal" data-target="#addMemberModal">
@@ -72,7 +72,7 @@
                                         <img 
                                             src="${e.image}"                                    console.log("habemus papa");
 
-                                            alt="" class="rounded-circle" style="max-width:2%; max-height: 2%;" align="left"/>
+                                            alt="member_image" class="rounded-circle" style="max-width:2%; max-height: 2%;" align="left"/>
                                             <h6 style="border: 0; padding: 0; text-decoration:none; color:inherit"> <a href="/users/${e.id}" style="text-decoration:none; color:inherit"> ${e.user_name}</a> </h6>
                                             </div>    
                                             <p class="chat_other_message">${e.message.body}</p>
@@ -83,7 +83,7 @@
                                         <div>
                                         <img 
                                             src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png"
-                                            alt="" class="rounded-circle" style="max-width:2%; max-height: 2%;" align="left"/>
+                                            alt="member_image" class="rounded-circle" style="max-width:2%; max-height: 2%;" align="left"/>
                                             <h6 style="border: 0; padding: 0; text-decoration:none; color:inherit"> <a href="/users/${e.id}" style="text-decoration:none; color:inherit"> ${e.user_name}</a> </h6>
                                             </div>   
                                             <p class="chat_other_message">${e.message.body}</p>
@@ -98,7 +98,7 @@
                     </section>
 
                     <footer class="row" id="send_message" style="border-width: 0; border-top-width: 0.1em; border-style:solid; border-color: sandybrown; height: 6.5%;">
-                        <img class="chat_user_image" src="images/placeholder.png" alt=""  onclick="window.location.href='/users/me'"/>
+                        <img class="chat_user_image" src="images/placeholder.png" alt="user_image"  onclick="window.location.href='/users/me'"/>
                         <form id="newmessage" class="form-inline" style="max-width: 90%; width: 90%; justify-content:center;">
                             <div class="input-group chat_message_input" style="width:98%">
                                 <input type="text" required class="form-control" placeholder="Write a message..." aria-label="msg-write" aria-describedby="send-message-button" style="border-width: 0; border-top-left-radius: inherit; border-bottom-left-radius: inherit;"></textarea>

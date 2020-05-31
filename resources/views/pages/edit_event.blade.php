@@ -13,7 +13,7 @@
 <div id="event_card" class="card mb-3 border rounded">
     <form method="post" id="event_image_upload" action="/events/{{$event->event_id}}" enctype="multipart/form-data">
         @csrf
-        <img src="{{$event->image()->file_path}}" class="card-img-top mx-auto d-block" alt="..."> 
+        <img src="{{$event->image()->file_path}}" class="card-img-top mx-auto d-block" alt="event_image"> 
         <div style="display: none">
             <input name="image" type="file" value="{{$event->image()->file_path}}"/>
         </div>
