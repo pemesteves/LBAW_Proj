@@ -114,9 +114,10 @@
                 </div>
             </div>
         </form>
-
+        <div id='event_form_container'>
             
         @each('partials.post', $posts, 'post')
+        </div>
 
     </div>
 </div>

@@ -6,6 +6,11 @@
     color: whitesmoke;
 }
 
+.navbar .form-control#filter {
+    border-radius: 2em;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
 
 .navbar > .form-inline > .input-group {
     border-width: 0.05em; 
@@ -17,8 +22,6 @@
 
 .navbar > .form-inline .input-group input {
     border-width: 0; 
-    border-top-left-radius: inherit; 
-    border-bottom-left-radius: inherit;
 }
 
 .navbar > .form-inline .input-group .input-group-append {

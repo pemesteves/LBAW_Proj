@@ -50,10 +50,7 @@ function addEventListeners() {
       creator.addEventListener('submit', sendCreateCommentRequest);
     });
 
-    let messageCreators = document.querySelectorAll('article.chat form#newmessage');
-    [].forEach.call(messageCreators, function(creator){
-    creator.addEventListener('submit', sendCreateMessageRequest);
-    });
+    
 
     let postReporters = document.querySelectorAll('article.post button.report');
     [].forEach.call(postReporters, function(reporter) {
@@ -70,25 +67,11 @@ function addEventListeners() {
     });
 
 
-
-    let notification = document.querySelector('#notificationDrop');
-    notification.addEventListener('click',sendSeenNotificationsRequest);
-
 }
 
-function sendSeenNotificationsRequest(event) {
-  sendAjaxRequest('put', '/api/users/notifications', null, seenNotificationsHandler);
-  event.preventDefault();
-}
 
-function seenNotificationsHandler(){
-  if (this.status != 200){
-    return;
-  }
-  let count = document.querySelector('#notifications_count');
-  count.style.display='none';
-  count.textContent = "0";
-}
+
+
 
 
 function sendLikePostRequest(event) {
@@ -136,11 +119,6 @@ function commentLikeHandler() {
     let dislikes = element.querySelector('.comment_dislike');
     likes.textContent=parseInt(likes.textContent)+like.upvotes;
     dislikes.textContent=parseInt(dislikes.textContent)+like.downvotes;
-    element = document.querySelector('div.comment_container[data-id="'+ like.comment_id + '"] .post_votes');
-    likes = element.querySelector('.comment_like');
-    dislikes = element.querySelector('.comment_dislike');
-    likes.textContent= String.fromCharCode(160)+ (parseInt(likes.textContent)+like.upvotes) + String.fromCharCode(160);
-    dislikes.textContent= String.fromCharCode(160)+ (parseInt(dislikes.textContent)+like.downvotes) + String.fromCharCode(160);
   }
 
 
@@ -151,7 +129,10 @@ function sendDeleteCommentRequest(event) {
   sendAjaxRequest('delete', '/api/comments/' + id, null, commentDeletedHandler);
 }
 function commentDeletedHandler() {
-  if (this.status != 200) window.location = '/';
+  if (this.status != 200){
+    addErrorFeedback("Failed to delete comment.");
+    return;
+  }
   let comment = JSON.parse(this.responseText);
   let element = document.querySelector('div.comment_container[data-id="'+ comment.comment_id + '"]');
   let count = document.querySelector("#post_" + comment.post_id + " .comments_count");
@@ -336,21 +317,6 @@ function sendCreateCommentRequest(event){
   return false;
 }
 
-function sendCreateMessageRequest(event){
-  
-  let body = this.querySelector('textarea').value;
-
-  let id = this.closest('article.chat').getAttribute('data-id');
-
-  if(body != '') {
-    sendAjaxRequest('put', '/api/chats/'+id+'/message', {body: body}, messageAddedHandler);
-  }
-  else {
-  }
-
-  event.preventDefault();
-  return false;
-}
 
 function postDeletedHandler() {
   if (this.status != 200) {
@@ -488,21 +454,6 @@ function commentAddErrorHandler() {
   addErrorFeedback("Failed to add comment.");
 }
 
-function messageAddedHandler(){
-  if (this.status != 200 && this.status != 201){
-    window.location = '/';
-    return;
-  }
-  let message = JSON.parse(this.responseText);
-
-  // Create the new message
-  let new_message = createMessage(message);
-
-  // Reset the new message input
-  let toSelect = document.querySelector('article.chat[data-id="'+ message.chat_id + '"]');
-  let form = toSelect.querySelector('div.chat_message_input');
-  form.querySelector('textarea').value="";
-}
 
 function createPost(post){
   const date = new Date(post.date);
@@ -711,6 +662,15 @@ function createComment(comment){
 
 
 
+function createMessage(message) {
+  let new_message = document.createElement('p');
+  new_message.className = "chat_my_message";
+  new_message.innerHTML = `
+    ${message.body}
+  `;
+  return new_message;
+
+}
 
 
 

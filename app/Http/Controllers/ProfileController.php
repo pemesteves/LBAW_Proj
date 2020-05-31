@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Appointment;
 use App\File;
 use App\Image;
 use Illuminate\Http\Request;
@@ -36,24 +37,30 @@ class ProfileController extends Controller{
 
       $image = Auth::user()->userable->image();
       
-
+      $org_status = null;
       if(get_class(Auth::user()->userable->regular_userable) == "App\Organization") {
         $org_status = DB::table("organization_approval_request")
         ->where([['organization_approval_request.organization_id', '=', Auth::user()->userable->regular_userable->organization_id]]
         )->get();
-        return view('pages.user' , ['is_admin' => false , 'user' => Auth::user()->userable, 'posts' => $posts , 'groups' => $groups, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'image' => $image, 'org_status' => $org_status]);
-  
       }
       
-      return view('pages.user' , ['is_admin' => false , 'user' => Auth::user()->userable, 'posts' => $posts , 'groups' => $groups, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'image' => $image]);
+      return view('pages.user' , ['css' => ['navbar.css','posts.css','post_form.css','feed.css','profile.css'],
+      'js' => ['general.js','post.js','infinite_scroll.js'] , 'user' => Auth::user()->userable, 'posts' => $posts , 'groups' => $groups, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'image' => $image, 'org_status' => $org_status]);
   }
 
   public function show_me_edit(){
     if (!Auth::check()) return redirect('/login');
 
     $image = Auth::user()->userable->image();
- 
-    return view('pages.user_me_edit' , ['is_admin' => false , 'notifications' => Auth::user()->userable->notifications, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'image' => $image]);
+    
+    $js = null;
+    if(get_class(Auth::user()->userable->regular_userable) == "App\Teacher")
+      $js = ['general.js','uploadImages.js','teacherAgendaEdit.js'];
+    else
+      $js = ['general.js','uploadImages.js'];
+
+    return view('pages.user_me_edit' , ['css' => ['navbar.css','posts.css','post_form.css','feed.css','profile.css','create.css'],
+    'js' => $js , 'notifications' => Auth::user()->userable->notifications, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'image' => $image]);
 
 
   }
@@ -90,15 +97,15 @@ class ProfileController extends Controller{
     }
     $image = $user->image();
 
+    $org_status = null;
     if($user->regular_userable_type == "App\Organization") {
       $org_status = DB::table("organization_approval_request")
       ->where([['organization_approval_request.organization_id', '=', $user->regular_userable->organization_id]]
       )->get();
-      return view('pages.user' , ['is_admin' => false , 'user' => $user, 'friendship_status' => $friendship_status, 'posts' => $posts, 'groups' => $groups,  'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'image' => $image, 'org_status' => $org_status ]);
-
     }
 
-    return view('pages.user' , ['is_admin' => false , 'user' => $user, 'friendship_status' => $friendship_status, 'posts' => $posts, 'groups' => $groups,  'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'image' => $image ]);
+    return view('pages.user' , ['css' => ['navbar.css','posts.css','post_form.css','feed.css','profile.css'],
+    'js' => ['general.js','post.js','infinite_scroll.js','friendship.js'] , 'user' => $user, 'friendship_status' => $friendship_status, 'posts' => $posts, 'groups' => $groups,  'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'image' => $image,'org_status' => $org_status ]);
   }
 
   /**
@@ -162,6 +169,68 @@ class ProfileController extends Controller{
     return ProfileController::show_me();
   }
 
+  public function deleteAppointment(Request $request, $teacher_id, $time_id){
+    if(!Auth::check()) return redirect('/login');
+
+    if(Auth::user()->userable_type !== "App\RegularUser"){
+      throw new HttpException(404, "page");
+    }
+
+    if(Auth::user()->userable->regular_userable_type !== "App\Teacher"){
+      throw new HttpException(404, "page");
+    }
+
+    if(Auth::user()->userable->regular_userable->teacher_id != $teacher_id){
+      throw new HttpException(404, "appointment");
+    }
+
+    $appointment = DB::table('appointment')
+                       ->where('teacher_id', '=', $teacher_id)
+                       ->where('time_id', '=', $time_id)->get();
+
+    if(!isset($appointment))
+      throw new HttpException(404, "appointment");
+
+    DB::table('appointment')
+        ->where('teacher_id', '=', $teacher_id)
+        ->where('time_id', '=', $time_id)
+        ->delete();
+
+    return $appointment;
+  }
+
+  public function addAppointment(Request $request, $teacher_id, $time_id){
+    if(!Auth::check()) return redirect('/login');
+
+    if(Auth::user()->userable_type !== "App\RegularUser"){
+      throw new HttpException(404, "page");
+    }
+
+    if(Auth::user()->userable->regular_userable_type !== "App\Teacher"){
+      throw new HttpException(404, "page");
+    }
+
+    if(Auth::user()->userable->regular_userable->teacher_id != $teacher_id){
+      throw new HttpException(404, "appointment");
+    }
+
+    $description = $request->input('description');
+  
+    DB::table("appointment")
+        ->insert(["teacher_id" => $teacher_id,
+                  "time_id" => $time_id,
+                  "description" => $description
+    ]);
+
+
+    $appointment = DB::table('appointment')
+        ->where('teacher_id', '=', $teacher_id)
+        ->where('time_id', '=', $time_id)
+        ->get();
+
+    return $appointment;
+  }
+
 
 
   public function email(){
@@ -186,6 +255,26 @@ class ProfileController extends Controller{
 
     return "Your email has been sended sucessfully";
 
+  }
+
+  function getMyPosts($last_id){
+
+    $myPosts = Post::where([['author_id', Auth::user()->userable->regular_user_id],['type','normal']])
+    ->where('post_id','<',$last_id)
+    ->select("post.*")
+    ->orderBy('date','desc')->limit(3)->get();;
+
+    return view('requests.posts',['posts' => $myPosts]);
+  }
+
+  function getPosts($user_id,$last_id){
+
+    $myPosts = Post::where([['author_id', $user_id],['type','normal']])
+    ->where('post_id','<',$last_id)
+    ->select("post.*")
+    ->orderBy('date','desc')->limit(3)->get();;
+
+    return view('requests.posts',['posts' => $myPosts]);
   }
 
 }

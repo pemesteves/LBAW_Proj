@@ -18,34 +18,22 @@
             <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Barlow|Cormorant+Garamond&display=swap">
 
             <!-- Costume Css -->
-
-            <link href="{{ asset('css/menu.css') }}" rel="stylesheet">
-            <link href="{{ asset('css/post_form.css') }}" rel="stylesheet">
-            <link href="{{ asset('css/posts.css') }}" rel="stylesheet">
-            <link href="{{ asset('css/chat.css') }}" rel="stylesheet">
             <link href="{{ asset('css/colors.css') }}" rel="stylesheet">
-            <link href="{{ asset('css/authentication.css') }}" rel="stylesheet">
-            <link href="{{ asset('css/event.css') }}" rel="stylesheet">
-            <link href="{{ asset('css/group.css') }}" rel="stylesheet">
-            <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
-            <link href="{{ asset('css/about.css') }}" rel="stylesheet">
-            <link href="{{ asset('css/navbar.css') }}" rel="stylesheet">
             <link href="{{ asset('css/error.css') }}" rel="stylesheet">
-            <link href="{{ asset('css/create.css') }}" rel="stylesheet">
-            <link href="{{ asset('css/feed.css') }}" rel="stylesheet">
-            <link href="{{ asset('css/help.css') }}" rel="stylesheet">
-            <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
+
+            
+            @if(isset($css))
+                @foreach($css as $c)
+                    <link href='{{ asset("css/$c") }}' rel="stylesheet">
+                @endforeach
+            @endif
 
             <script src="{{ asset('js/navbar_mobile.js') }}" defer></script>        
             <script src="{{ asset('js/app.js') }}" defer> </script>
-            <script src="{{ asset('js/post.js') }}" defer> </script>
-            <script src="{{ asset('js/resetPass.js') }}" defer> </script>
-            <script src="{{ asset('js/reports.js') }}" defer> </script>
-            <script src="{{ asset('js/friendship.js') }}" defer> </script>
-            <script src="{{ asset('js/event.js') }}" defer> </script>
-            <script src="{{ asset('js/group.js') }}" defer> </script>
-            <script src="{{ asset('js/uploadImages.js') }}" defer> </script>
             <script src="{{ asset('js/input_validation.js') }}" defer> </script>
+           
+            
+            
 
             @if(isset($js))
                 @foreach($js as $j)
@@ -100,34 +88,34 @@
                 @yield('content')
                 
                 <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="reportModalLabel">Report</h5>
-                        <input type="hidden" id="report_id">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                        <div class="form-group">
-                            <label class="col-form-label">Title:</label>
-                            <input type="text" class="form-control" id="report_title">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="reportModalLabel">Report</h5>
+                                <input type="hidden" id="report_id">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                <div class="form-group">
+                                    <label class="col-form-label">Title:</label>
+                                    <input type="text" class="form-control" id="report_title">
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-form-label">Description:</label>
+                                    <textarea class="form-control" id="report_description"></textarea>
+                                </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary sendReport">Send report</button>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-form-label">Description:</label>
-                            <textarea class="form-control" id="report_description"></textarea>
-                        </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary sendReport">Send report</button>
-                    </div>
                     </div>
                 </div>
-            </div>
 
             </div>
 

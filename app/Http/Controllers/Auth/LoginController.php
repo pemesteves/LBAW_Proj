@@ -42,7 +42,7 @@ class LoginController extends Controller
     }
 
     public function home() {
-        return view('pages.home');
+        return view('pages.home',['css' => ['authentication.css ']]);
 
     }
 

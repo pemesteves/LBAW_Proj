@@ -14,7 +14,7 @@
         <h6>{{ $comment->body }}</h6>
     </div>
     <div class='comment_votes' style="float: right;">
-            <button class='comment_upvote' style="padding-left:5px; background-color: transparent; border: 0;" > 
+            <button class='comment_upvote' style="padding-left:4px; background-color: transparent; border: 0;" > 
                 <span class="fa fa-thumbs-up comment_like">&nbsp;{{$comment->upvotes}}&nbsp;</span>
             </button>    
             <button class='comment_downvote' style="padding-left:0; background-color: transparent; border: 0;" > 
@@ -23,7 +23,7 @@
         </div>
     <div >
         <div class="btn-group dropright d-print-none" style="margin-right: 0; padding-right: 0; width: 100%">
-            <button type="button" data-toggle="dropdown" style="padding:0;font-size: 100%;width:20px; margin-right: 0; padding-right: 0; width: 100%; background-color: white; border: 0;"> 
+            <button type="button" data-toggle="dropdown" style="padding:0;font-size: 100%;width:20px; margin-right: 0; padding-left: 1px;padding-right: 1px; width: 100%; background-color: white; border: 0;"> 
             <span class="fa fa-ellipsis-v" ></span></button>
             <div class="dropdown-menu options_menu" style="min-width:5rem">
                 <ul class="list-group">

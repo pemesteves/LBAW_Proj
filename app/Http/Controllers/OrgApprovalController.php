@@ -11,17 +11,18 @@ use App\OrgApproval;
 class OrgApprovalController extends Controller{
 
     function accept(Request $request, $id){
-        $orgRequest = DB::table('organization_approval_request')
-            ->where(['organization_approval_request.request_id' => $id])
-            ->update(['type' => 'accepted']);
+        $orgRequest = OrgApproval::find($id);
+        $this->authorize('approve',$orgRequest);
+        $orgRequest->type = 'accepted';
+        $orgRequest->save();
         return ['id' => $id];
     }
 
     function decline(Request $request, $id){
-        $orgRequest = DB::table('organization_approval_request')
-        ->where(['organization_approval_request.request_id' => $id])
-        ->delete();
-    return ['id' => $id];
+        $orgRequest = OrgApproval::find($id);
+        $this->authorize('approve',$orgRequest);
+        $orgRequest->delete();
+        return ['id' => $id];
     }
 
 }

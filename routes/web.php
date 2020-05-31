@@ -12,7 +12,7 @@
 */
 
 
-Route::get('/', 'Auth\LoginController@home');
+Route::get('/', 'Auth\LoginController@home')->name('home');
 
 
 // API
@@ -71,6 +71,7 @@ Route::get('/search' , 'FeedController@search');
 Route::get('/users/search' , 'FeedController@searchUsers');
 Route::get('/groups/search' , 'FeedController@searchGroups');
 Route::get('/events/search' , 'FeedController@searchEvents');
+Route::get('/posts/search' , 'FeedController@searchPosts');
 
 //Profile
 Route::get('/users/me', 'ProfileController@show_me');
@@ -78,6 +79,8 @@ Route::get('/users/me/edit', 'ProfileController@show_me_edit');
 Route::post('/users/me', 'ProfileController@edit');
 Route::get('/users/{id}', 'ProfileController@show');
 Route::get('/users/me/email', 'ProfileController@email');
+Route::delete('/api/users/{teacher_id}/appointments/{time_id}', 'ProfileController@deleteAppointment');
+Route::put('/api/users/{teacher_id}/appointments/{time_id}', 'ProfileController@addAppointment');
 
 //About
 Route::get('/about', 'AboutController@show');
@@ -112,6 +115,7 @@ Route::put('api/events/{id}/desinterest', 'EventController@desinterest');
 //Chat
 Route::get('/chats/{chat_id}', 'ChatController@show')->name('chats.show');
 Route::get('/chats', 'ChatController@get_chat');
+Route::put('api/chats/create', 'ChatController@create');
 
 //Post
 Route::get('/posts/{post_id}', 'PostController@show');
@@ -119,11 +123,24 @@ Route::get('/posts/{post_id}/edit', 'PostController@show_edit');
 Route::post('/posts/{post_id}', 'PostController@edit');
 
 Route::get('/api/posts/{last_id}', 'FeedController@getPosts');
+Route::get('/api/groups/{group_id}/posts/{last_id}', 'GroupController@getPosts');
+Route::get('/api/events/{event_id}/posts/{last_id}', 'EventController@getPosts');
+Route::get('/api/users/me/posts/{last_id}', 'ProfileController@getMyPosts');
+Route::get('/api/users/{user_id}/posts/{last_id}', 'ProfileController@getPosts');
 
 
 Route::put('/api/users/notifications', 'RegularUserController@seeNotifactions');
 
 
 
-Route::get('/settings','RegularUserController@settings');
+Route::get('/settings','RegularUserController@settings')->name('settings');
 Route::get('/archived','RegularUserController@archived');
+
+Route::post('/users/delete','RegularUserController@delete');
+
+Route::get('/api/chats/{chat_id}/friends','ChatController@getFriends');
+
+
+Route::put('api/chats/{chat_id}/{user_id}','ChatController@addToChat');
+
+

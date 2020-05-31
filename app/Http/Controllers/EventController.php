@@ -44,7 +44,8 @@ class EventController extends Controller{
 
       $image = $event->image();
 
-      return view('pages.event' , ['interested'=>$interested,'is_admin' => false , 'event' => $event, 'posts' => $posts, 'going' => $going, 'can_create_events' => $can_create_events, 'is_owner' => $owner, 'image' => $image]);
+      return view('pages.event' , ['css' => ['navbar.css','event.css','posts.css','post_form.css','feed.css'],
+      'js' => ['event.js','post.js','infinite_scroll.js','general.js'] ,'interested'=>$interested , 'event' => $event, 'posts' => $posts, 'going' => $going, 'can_create_events' => $can_create_events, 'is_owner' => $owner, 'image' => $image]);
     }
 
     public function showCreateForm(){
@@ -52,7 +53,7 @@ class EventController extends Controller{
 
       $this->authorize('create', 'App\Event');
 
-      return view('pages.create_event', ['is_admin' => false, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
+      return view('pages.create_event', ['css' => ['navbar.css','event.css','posts.css','post_form.css','feed.css','create.css' ], 'js' => ['upload_images.js','general.js'] , 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
     }
 
     public function create(Request $request){
@@ -113,7 +114,7 @@ class EventController extends Controller{
 
       $this->authorize('edit', $event);
 
-      return view('pages.edit_event' , ['is_admin' => false , 'event' => $event, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization' ]);
+      return view('pages.edit_event' , ['css' => ['navbar.css','event.css','posts.css','post_form.css','feed.css'], 'js' => ['upload_images.js','general.js'], 'event' => $event, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization' ]);
     }
 
     /**
@@ -162,7 +163,7 @@ class EventController extends Controller{
         'title' => 'required|string|regex:/^[a-z0-9áàãâéêíóõôú]+[a-z0-9áàãâéêíóõôú ]*[a-z0-9áàãâéêíóõôú]$/i|max:255',
         'description' => "required|string|regex:/^[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]+[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@ ]*[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]$/i|max:255",
       ]);
-
+        
       $title = $request->input('title');
       $description = $request->input('description');
       $reporter_id = Auth::user()->userable->regular_user_id;
@@ -219,6 +220,19 @@ class EventController extends Controller{
     function interest($id){
       DB::table('user_interested_in_event')->insert(['user_id' => Auth::user()->userable->regular_user_id,'event_id' => $id]);
       return ;
+    }
+
+    function getPosts($event_id,$last_id){
+
+      $event = Event::find($event_id);
+
+      $myEventsPosts = Post::join('user_interested_in_event' , "post.event_id" , "user_interested_in_event.event_id")
+            ->where([['user_interested_in_event.user_id', Auth::user()->userable->regular_user_id],['post.type','normal']])
+            ->where([['post_id','<',$last_id],['post.event_id',$event_id]])
+            ->select("post.*")
+            ->orderBy('date','desc')->limit(3)->get();
+
+      return view('requests.posts',['posts' => $myEventsPosts]);
     }
 
 }

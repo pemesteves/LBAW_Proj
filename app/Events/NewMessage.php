@@ -20,14 +20,20 @@ class NewMessage implements ShouldBroadcastNow
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $message;
+    public $image;
+    public $user_name;
+    public $id;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Message $message)
+    public function __construct(Message $message, String $image, String $user_name, String $id)
     {
         $this->message = $message;
+        $this->image = $image;
+        $this->user_name = $user_name;
+        $this->id = $id;
     }
 
     /**

@@ -43,7 +43,10 @@ class GroupController extends Controller{
       
       $image = $group->image();
 
-      return view('pages.group' , ['is_admin' => false, 'group' => $group, 'posts' => $posts, 'members' => $members, 'member_count' => $member_count, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'is_owner' => $owner , 'image' => $image]);
+
+      return view('pages.group' , ['css' => ['navbar.css','group.css','posts.css','post_form.css','feed.css'], 
+      'js' => ['general.js','group.js','infinite_scroll'],
+      'group' => $group, 'posts' => $posts, 'members' => $members, 'member_count' => $member_count, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'is_owner' => $owner , 'image' => $image]);
     }
 
     public function showCreateForm(){
@@ -51,7 +54,9 @@ class GroupController extends Controller{
 
       $this->authorize('create', 'App\Group');
 
-      return view('pages.create_group', ['is_admin' => false, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
+      return view('pages.create_group', ['css' => ['navbar.css','group.css','posts.css','post_form.css','feed.css','help.css','create.css'],
+      'js' => ['general.js','uploadImages.js'],
+       'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
     }
 
     public function create(Request $request){
@@ -112,7 +117,9 @@ class GroupController extends Controller{
       
       $image = $group->image();
 
-      return view('pages.edit_group' , ['is_admin' => false, 'group' => $group, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'image' => $image ]);
+      return view('pages.edit_group' , ['css' => ['navbar.css','group.css','posts.css','post_form.css','feed.css','help.css'],
+      'js' => ['general.js','uploadImages.js'],
+       'group' => $group, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'image' => $image ]);
     }
 
     /**
@@ -216,5 +223,21 @@ class GroupController extends Controller{
       DB::table('user_in_group')->where('group_id', $group_id)->where('user_id', $user_id)->delete();
 
       return json_encode($member);
+      
+    }
+
+    function getPosts($group_id,$last_id){
+
+      $group = Group::find($group_id);
+
+      $this->authorize('show', $group);
+
+      $myGroupsPosts = Post::join('user_in_group' , "post.group_id" , "user_in_group.group_id")
+                                    ->where([['user_in_group.user_id', Auth::user()->userable->regular_user_id],['post.type','normal']])
+                                    ->where([['post_id','<',$last_id],['post.group_id',$group_id]])
+                                    ->select("post.*")
+                                    ->orderBy('date','desc')->limit(3)->get();
+
+      return view('requests.posts',['posts' => $myGroupsPosts]);
     }
 }

@@ -45,12 +45,18 @@ class Chat extends Model
   }
 
   public function members() {
-    $result = $this->join('user_in_chat', 'chat.chat_id', '=', 'user_in_chat.chat_id')
+
+        $result = $this->join('user_in_chat', 'chat.chat_id', '=', 'user_in_chat.chat_id')
+                   ->join('regular_user', 'user_in_chat.user_id', '=', 'regular_user.regular_user_id')
                    ->where('chat.chat_id', '=', $this->chat_id)
                    ->select('*')
                    ->count();
-
+ 
     return $result;
+}
+
+public function in_chat(){
+  return $this->belongsToMany('App\RegularUser','user_in_chat','chat_id','user_id');
 }
 
 
