@@ -52,19 +52,20 @@ function showNewMembersHandler(){
 function newChatHandler() {
   console.log(this.responseText);
   if (this.status != 200 && this.status != 201){
-    console.log("fui");
     return;
   }
 
-  console.log(this.responseText);
   let chat = JSON.parse(this.responseText);
 
   let new_chat = createChat(chat);
 
   document.querySelector('div.user_chats').prepend(new_chat);
 
-}
+  window.location = '/chats/' + chat.chat_id;
+  
+  $("#addMemberModal").modal();
 
+}
 
 function sendAddMemberToChatRequest(event){
   let pathParts = window.location.pathname.split('/');
@@ -101,10 +102,6 @@ function createChat(chat) {
          src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png"
          @endif
          alt="" class="rounded-circle" style="max-width:8%; max-height: 2%;" align="left"/>
-
-           <img    
-                  src="https://comunicadores.info/wp-content/uploads/2014/12/very-basic-plus-icon.png"
-                  alt="" class="rounded-circle" style="max-width:8%; max-height: 2%;" align="left"/>      
   </div>
   </a>  
   `

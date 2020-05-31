@@ -86,8 +86,8 @@ class ChatController extends Controller{
       DB::table('user_in_chat')->insert(['user_id' => Auth::user()->userable->regular_user_id,'chat_id' => $chat->chat_id]); 
 
       $new_chat = Chat::take(1)->where("chat_id", '=', $chat["chat_id"])->get(); 
+      
       return $new_chat[0];
-
     }
 
 }

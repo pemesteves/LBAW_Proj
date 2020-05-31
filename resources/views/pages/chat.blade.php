@@ -2,18 +2,6 @@
 
 @section('content')
 
-<!-- @foreach($in_chat as $user)
-    {{$user->user->name}}
-    <br>
-@endforeach
-
-@foreach(Auth::user()->userable->chats as $chat)
-    {{$chat->chat_id}}
-    <br>
-@endforeach
- -->
-
-
 <article class="chat" data-id="{{ $chat->chat_id }}">
     <div id="full_page" class="d-flex flex-column no-gutters vh-100" style="padding: 0">
         <section class="container-fluid no-gutters" style="flex: 1 1 auto">
