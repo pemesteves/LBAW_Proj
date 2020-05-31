@@ -249,9 +249,7 @@
                                     </spany>
                                 
                             </div>
-                            
-                        </button>
-                        
+                        </button>  
                         <div class="card-footer" style="border-left:none;border-right:none;border-bottom:none">
                             <span class="comments_count"> {{$post->comments->count()}} comments </span>
                             <div class='post_votes' style="float: right;">

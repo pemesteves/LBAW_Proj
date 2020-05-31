@@ -2,6 +2,9 @@
 
 @section('content')
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+
 <br>
 <div id="feed_container" class="container" >
     <div id="profile_card" class="container" style="padding-top: 1em; margin-bottom: 0; background-color: white; border: 1px solid lightgrey;">
@@ -239,15 +242,26 @@
                         <div id="post_upload">
                             <div>
                                 <p class="fa fa-plus">&ensp;image</p>
-                                <input type="file"/>
+                                <input type="file" name="image"/>
                             </div>
                             <div>
-                                    <p class="fa fa-plus">&ensp;file</p>
-                                    <input type="file"/>
+                                <p class="fa fa-plus">&ensp;file</p>
+                                <input type="file" name="file"/>
                             </div>  
                         </div>
                         <div>
                             <button id="post_form_post" type="submit">Post</button> 
+                        </div>
+                    </div>
+                    <div class="container" id="postInputImages" style="display:none;">
+                        <div class="row">
+                            <div class="col-sm-6">    
+                                <img id="image" src="" style="display:none;"/>
+                            </div>
+                            <div class="col-sm-6">
+                                <img class="file" style="display:none;"/>
+                                <canvas class="file" style="display:none;"></canvas>
+                            </div>
                         </div>
                     </div>
                 </div>

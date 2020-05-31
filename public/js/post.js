@@ -282,9 +282,18 @@ function sendReportPostRequest(event) {
 
 
 function sendCreatePostRequest(event){
-  //TODO Add files
   let title = this.querySelector('input[name=title]').value;
   let body = this.querySelector('textarea').value;
+  let image = this.querySelector('input[name="image"]').value;
+  let file = this.querySelector('input[name="file"]').value;
+
+  /**
+   * TODO Change sendAjaxRequest to send enctype = multipart/form-data
+   * 
+   * Fix fakepath
+   * 
+   * console.error("image - " + image + "; file - " + file);
+   */
 
   let resource = "";
 

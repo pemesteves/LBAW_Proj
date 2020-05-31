@@ -45,7 +45,7 @@ class EventController extends Controller{
       $image = $event->image();
 
       return view('pages.event' , ['css' => ['navbar.css','event.css','posts.css','post_form.css','feed.css'],
-      'js' => ['event.js','post.js','infinite_scroll.js','general.js'] ,'interested'=>$interested , 'event' => $event, 'posts' => $posts, 'going' => $going, 'can_create_events' => $can_create_events, 'is_owner' => $owner, 'image' => $image]);
+      'js' => ['event.js','post.js','infinite_scroll.js','general.js', 'uploadImages.js'] ,'interested'=>$interested , 'event' => $event, 'posts' => $posts, 'going' => $going, 'can_create_events' => $can_create_events, 'is_owner' => $owner, 'image' => $image]);
     }
 
     public function showCreateForm(){
