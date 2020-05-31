@@ -26,16 +26,18 @@
                 <div class="col-sm-11">
                     <div class="card-body">
                         <h1 class="card-title uconnect-title" style='display:inline-block'>{{ $event->name }}</h1>
-                        @if(count($interested) == 0)
-                            <button type="button" class="btn btn-light show_interest" data-id='{{$event->event_id}}' 
-                                style="float:right;margin-right:20px;background-color: rgba(0,0,150,.03); ">
-                                Show interest
-                            </button>
-                        @else
-                            <button type="button" class="btn btn-light remove_interest" data-id='{{$event->event_id}}' 
-                                style="float:right;margin-right:20px;background-color: rgba(0,0,150,.03); ">
-                                Remove interest
-                            </button>
+                        @if (!(Auth::user()->userable->regular_userable_type == 'App\Organization' && Auth::user()->userable->regular_userable->organization_id == $event->organization_id))
+                            @if(count($interested) == 0)
+                                <button type="button" class="btn btn-light show_interest" data-id='{{$event->event_id}}' 
+                                    style="float:right;margin-right:20px;background-color: rgba(0,0,150,.03); ">
+                                    Show interest
+                                </button>
+                            @else
+                                <button type="button" class="btn btn-light remove_interest" data-id='{{$event->event_id}}' 
+                                    style="float:right;margin-right:20px;background-color: rgba(0,0,150,.03); ">
+                                    Remove interest
+                                </button>
+                            @endif
                         @endif
                         <p class="card-text uconnect-paragraph" >{{ $event->information }}</p>
                     </div>

@@ -95,6 +95,11 @@ Route::get('/groups/{group_id}/edit', 'GroupController@show_edit');
 Route::post('/groups/{group_id}', 'GroupController@edit');
 Route::put('api/groups/{id}/report', 'GroupController@report');
 
+Route::delete('api/groups/{group_id}/members/{user_id}', 'GroupController@removeMember');
+
+Route::get('/api/groups/{group_id}/friends','GroupController@getFriends');
+Route::put('api/groups/{group_id}/{user_id}','GroupController@addToGroup');
+
 //Event
 Route::get('/events/create', 'EventController@showCreateForm');
 Route::post('/events/create', 'EventController@create');

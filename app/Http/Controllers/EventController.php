@@ -79,7 +79,7 @@ class EventController extends Controller{
       $event->save();
       
       DB::table('user_interested_in_event')->insert([
-        'user_id' => Auth::user()->user_id,
+        'user_id' => Auth::user()->userable->regular_user_id,
         'event_id' => $event->event_id
       ]);
       
