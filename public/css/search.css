@@ -1,0 +1,45 @@
+div.searchDiv {
+    margin-top: 2em;
+    margin-bottom: 2em; 
+    background-color: white;
+    border: 1px solid lightgray;
+    padding: 1em;
+}
+
+div.searchDiv > div {
+    border-bottom: 1px solid lightgray;
+    border-top: 1px solid lightgray;
+    max-width: 100%;
+    min-width: 100%;
+    width: 100%;
+}
+
+div.searchDiv div.row {
+    border: 0;
+    padding:.5em 1em;
+    margin: 0;
+}
+
+div.searchDiv div.row h3 {
+    margin-top: .5rem;
+}
+
+div.searchDiv div.row p{
+    margin: 0;
+}
+
+div.searchDiv .col-sm-2 {
+    padding: 0;
+}
+
+div.searchDiv img {
+    max-width: 100%;
+}
+
+div.searchDiv div.searchDivCard:not(:first-child) {
+    border-top: 1px solid lightgray;
+}
+
+div.searchDiv div.searchDivCard:hover {
+    cursor: pointer;
+}
