@@ -21,7 +21,7 @@ class ResetController extends Controller
 
 
     public function showReset(){
-        return view("auth.reset");
+        return view("auth.reset",['css' => ['authentication.css'],'js' => ['resetPass.js']]);
     }
 
     public function addEmail(Request $request){

@@ -50,10 +50,7 @@ function addEventListeners() {
       creator.addEventListener('submit', sendCreateCommentRequest);
     });
 
-    let messageCreators = document.querySelectorAll('article.chat form#newmessage');
-    [].forEach.call(messageCreators, function(creator){
-    creator.addEventListener('submit', sendCreateMessageRequest);
-    });
+    
 
     let postReporters = document.querySelectorAll('article.post button.report');
     [].forEach.call(postReporters, function(reporter) {
@@ -70,25 +67,11 @@ function addEventListeners() {
     });
 
 
-
-    let notification = document.querySelector('#notificationDrop');
-    notification.addEventListener('click',sendSeenNotificationsRequest);
-
 }
 
-function sendSeenNotificationsRequest(event) {
-  sendAjaxRequest('put', '/api/users/notifications', null, seenNotificationsHandler);
-  event.preventDefault();
-}
 
-function seenNotificationsHandler(){
-  if (this.status != 200){
-    return;
-  }
-  let count = document.querySelector('#notifications_count');
-  count.style.display='none';
-  count.textContent = "0";
-}
+
+
 
 
 function sendLikePostRequest(event) {
@@ -334,21 +317,6 @@ function sendCreateCommentRequest(event){
   return false;
 }
 
-function sendCreateMessageRequest(event){
-  
-  let body = this.querySelector('textarea').value;
-
-  let id = this.closest('article.chat').getAttribute('data-id');
-
-  if(body != '') {
-    sendAjaxRequest('put', '/api/chats/'+id+'/message', {body: body}, messageAddedHandler);
-  }
-  else {
-  }
-
-  event.preventDefault();
-  return false;
-}
 
 function postDeletedHandler() {
   if (this.status != 200) {
@@ -486,22 +454,6 @@ function commentAddErrorHandler() {
   addErrorFeedback("Failed to add comment.");
 }
 
-function messageAddedHandler(){
-  console.log(this.responseText);
-  if (this.status != 200 && this.status != 201){
-    // window.location = '/';
-    return;
-  }
-  let message = JSON.parse(this.responseText);
-
-  // Create the new message
-  let new_message = createMessage(message);
-
-  // Reset the new message input
-  let toSelect = document.querySelector('article.chat[data-id="'+ message.chat_id + '"]');
-  let form = toSelect.querySelector('div.chat_message_input');
-  form.querySelector('textarea').value="";
-}
 
 function createPost(post){
   const date = new Date(post.date);

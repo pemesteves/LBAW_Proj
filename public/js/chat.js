@@ -10,8 +10,47 @@ function addEventListeners() {
       sendNewChatRequest(e);
     }
   });
+
+  let messageCreators = document.querySelectorAll('article.chat form#newmessage');
+    [].forEach.call(messageCreators, function(creator){
+    creator.addEventListener('submit', sendCreateMessageRequest);
+  });
+
 }
 
+function sendCreateMessageRequest(event){
+  
+  let body = this.querySelector('textarea').value;
+
+  let id = this.closest('article.chat').getAttribute('data-id');
+
+  if(body != '') {
+    sendAjaxRequest('put', '/api/chats/'+id+'/message', {body: body}, messageAddedHandler);
+  }
+  else {
+  }
+
+  event.preventDefault();
+  return false;
+}
+
+
+function messageAddedHandler(){
+  console.log(this.responseText);
+  if (this.status != 200 && this.status != 201){
+    // window.location = '/';
+    return;
+  }
+  let message = JSON.parse(this.responseText);
+
+  // Create the new message
+  let new_message = createMessage(message);
+
+  // Reset the new message input
+  let toSelect = document.querySelector('article.chat[data-id="'+ message.chat_id + '"]');
+  let form = toSelect.querySelector('div.chat_message_input');
+  form.querySelector('textarea').value="";
+}
 
 function sendLookNamesRequest(event) {
   let name = this.value;
@@ -63,7 +102,6 @@ function newChatHandler() {
 
   window.location = '/chats/' + chat.chat_id;
   
-  $("#addMemberModal").modal();
 
 }
 

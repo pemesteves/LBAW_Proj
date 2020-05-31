@@ -37,24 +37,30 @@ class ProfileController extends Controller{
 
       $image = Auth::user()->userable->image();
       
-
+      $org_status = null;
       if(get_class(Auth::user()->userable->regular_userable) == "App\Organization") {
         $org_status = DB::table("organization_approval_request")
         ->where([['organization_approval_request.organization_id', '=', Auth::user()->userable->regular_userable->organization_id]]
         )->get();
-        return view('pages.user' , ['is_admin' => false , 'user' => Auth::user()->userable, 'posts' => $posts , 'groups' => $groups, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'image' => $image, 'org_status' => $org_status]);
-  
       }
       
-      return view('pages.user' , ['is_admin' => false , 'user' => Auth::user()->userable, 'posts' => $posts , 'groups' => $groups, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'image' => $image]);
+      return view('pages.user' , ['css' => ['navbar.css','posts.css','post_form.css','feed.css','profile.css'],
+      'js' => ['general.js','post.js','infinite_scroll.js'] , 'user' => Auth::user()->userable, 'posts' => $posts , 'groups' => $groups, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'image' => $image, 'org_status' => $org_status]);
   }
 
   public function show_me_edit(){
     if (!Auth::check()) return redirect('/login');
 
     $image = Auth::user()->userable->image();
- 
-    return view('pages.user_me_edit' , ['is_admin' => false , 'notifications' => Auth::user()->userable->notifications, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'image' => $image]);
+    
+    $js = null;
+    if(get_class(Auth::user()->userable->regular_userable) == "App\Teacher")
+      $js = ['general.js','uploadImages.js','teacherAgendaEdit.js'];
+    else
+      $js = ['general.js','uploadImages.js'];
+
+    return view('pages.user_me_edit' , ['css' => ['navbar.css','posts.css','post_form.css','feed.css','profile.css','create.css'],
+    'js' => $js , 'notifications' => Auth::user()->userable->notifications, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'image' => $image]);
 
 
   }
@@ -91,15 +97,15 @@ class ProfileController extends Controller{
     }
     $image = $user->image();
 
+    $org_status = null;
     if($user->regular_userable_type == "App\Organization") {
       $org_status = DB::table("organization_approval_request")
       ->where([['organization_approval_request.organization_id', '=', $user->regular_userable->organization_id]]
       )->get();
-      return view('pages.user' , ['is_admin' => false , 'user' => $user, 'friendship_status' => $friendship_status, 'posts' => $posts, 'groups' => $groups,  'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'image' => $image, 'org_status' => $org_status ]);
-
     }
 
-    return view('pages.user' , ['is_admin' => false , 'user' => $user, 'friendship_status' => $friendship_status, 'posts' => $posts, 'groups' => $groups,  'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'image' => $image ]);
+    return view('pages.user' , ['css' => ['navbar.css','posts.css','post_form.css','feed.css','profile.css'],
+    'js' => ['general.js','post.js','infinite_scroll.js','friendship.js'] , 'user' => $user, 'friendship_status' => $friendship_status, 'posts' => $posts, 'groups' => $groups,  'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'image' => $image,'org_status' => $org_status ]);
   }
 
   /**

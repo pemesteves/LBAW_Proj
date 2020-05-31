@@ -160,6 +160,14 @@
                 </div>
             </div>
         </div>
+
+        @if(sizeof($in_chat) == 1) 
+            <script>
+                window.onload = function() {
+                    $('#addMemberModal').modal();
+                };
+            </script>
+        @endif
 </article>
 
 

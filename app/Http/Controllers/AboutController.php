@@ -11,7 +11,7 @@ class AboutController extends Controller{
     public function show(){
         if (!Auth::check()) return redirect('/login');
 
-        return view('pages.about' , ['is_admin' => false, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'notifications' => Auth::user()->userable->notifications]);
+        return view('pages.about' , ['css' => ['navbar.css','about.css'],'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'notifications' => Auth::user()->userable->notifications]);
 
     }
 }

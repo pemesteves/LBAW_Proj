@@ -131,12 +131,12 @@ class RegularUserController extends Controller{
     }
 
     public function settings(){
-        return view('pages.settings',[]);
+        return view('pages.settings',['css' => ['navbar.css','feed.css'],'js' => ['general.js']]);
     }
 
     public function archived(){
 
-        return view('pages.archived',['posts' => Auth::user()->userable->archived_posts]);
+        return view('pages.archived',['css' => ['navbar.css','feed.css','posts.css',''],'js' => ['general.js','post.js'],'posts' => Auth::user()->userable->archived_posts]);
     }
 
     public function delete(Request $request){
