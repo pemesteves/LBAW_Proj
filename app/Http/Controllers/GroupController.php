@@ -45,7 +45,7 @@ class GroupController extends Controller{
 
 
       return view('pages.group' , ['css' => ['navbar.css','group.css','posts.css','post_form.css','feed.css'], 
-      'js' => ['general.js','group.js','infinite_scroll'],
+      'js' => ['general.js','group.js','infinite_scroll.js','post.js'],
       'group' => $group, 'posts' => $posts, 'members' => $members, 'member_count' => $member_count, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'is_owner' => $owner , 'image' => $image]);
     }
 

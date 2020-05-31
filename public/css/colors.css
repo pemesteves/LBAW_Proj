@@ -31,6 +31,11 @@
     font-size: 1em;
 }
 
+.btn-accord {
+    color: rgb(117, 93, 71);
+    font-size: 1em;
+}
+
 .btn-link:hover {
     color: rgb(204, 103, 14);
 }

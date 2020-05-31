@@ -231,23 +231,26 @@
                 <div class="col-md-8" style="flex-grow:1; max-width:100%; text-align: left;">
                     <div class="card" style="height: 100%; margin-bottom: 0;">
             
-                
-                            <div class="card-body" style="margin-bottom: 0;padding: 0;">
-                                <button type="button" id="postModal-{{ $post['post_id'] }}" class="btn post_open_modal" data-toggle="modal" 
+                        <button type="button" id="postModal-{{ $post['post_id'] }}" class="btn post_open_modal" data-toggle="modal" 
                                 data-target="#popup-{{ $post['post_id'] }}" 
                                 style="color: inherit;background: none; width:100%;height:100%;padding-top: 20px;padding-left: 20px;"> 
-                                    <span class="card-title small_post_title" style="display:inline-block;"> {{ $post['title'] }}</span>
-                                    <small class="text-muted" style="margin-bottom:0rem;float:right;margin-right:1rem;">{{$post->getContext()}}</small>
+                            <div class="card-body" style="margin-bottom:1rem;padding: 0;height:100%;position:relative">
+                                
+                                    <h4 class="card-title " > {{ $post['title'] }}</h4>
+                                    <small class="text-muted" style="margin-bottom:0rem;margin-right:1rem;position: absolute;top: 0;right:0">
+                                        {{$post->getContext()}}
+                                    </small>
                                     <span class="card-text small_post_body">
                                         {{ $post->body }}
                                     </span>
-                                    <span class="card-text" style="margin-bottom:0rem; float: right;margin-right:1rem;">
+                                    <span class="card-text" style="margin-bottom:0rem;margin-right:1rem;position: absolute;bottom: 0;right:0">
                                         <small class="text-muted" style="margin-bottom:0rem;">{{date('d-m-Y', strtotime($post->date))}}</small>, 
                                         <small class="text-muted" style="margin-bottom:0.2rem">{{date('H:i', strtotime($post->date))}}</small>
                                     </spany>
-                                </button>
+                                
                             </div>
-
+                            
+                        </button>
                         
                         <div class="card-footer" style="border-left:none;border-right:none;border-bottom:none">
                             <span class="comments_count"> {{$post->comments->count()}} comments </span>
