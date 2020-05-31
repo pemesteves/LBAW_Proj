@@ -28,6 +28,15 @@ window.Echo = new Echo({
                 @if(!Auth::user()->isAdmin())
                     <form class="form-inline" method="get" action="/search">
                         <div class="input-group">
+                            <div class="input-group-append">
+                                <select class="form-control" required id="filter" name="filter">
+                                    <option>All</option>
+                                    <option>Users</option>
+                                    <option>Events</option>
+                                    <option>Groups</option>
+                                    <option>Posts</option>
+                                </select>
+                            </div>
                             <input type="text" name='search' required class="form-control" placeholder="Search" aria-label="Search" aria-describedby="search-button">
                             <div class="input-group-append">
                                 <button class="btn btn-outline-light fa fa-search fa-flip-horizontal" type="submit" id="search-button"></button>

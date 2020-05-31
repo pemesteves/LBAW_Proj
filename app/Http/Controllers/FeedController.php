@@ -12,6 +12,7 @@ use App\RegularUser;
 use App\Event;
 use App\Group;
 use App\OrgApproval;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class FeedController extends Controller{
 
@@ -124,30 +125,71 @@ class FeedController extends Controller{
     public function searchUsers(Request $request ){
         $str = strtolower($request->input('search'));
         $users = RegularUser::join('user','user.user_id','regular_user.user_id')->whereRaw('lower(name) LIKE \'%'.$str.'%\'')->get();
-        return view('pages.search',[ 'str' => $str  ,'users' => $users,'events' => null, 'groups' => null]);
+        return view('pages.search',[ 'str' => $str  ,'users' => $users,'events' => null, 'groups' => null, 'posts' => null]);
     }
 
     public function searchEvents(Request $request ){
         $str = strtolower($request->input('search'));
         $events = Event::whereRaw('lower(name) LIKE \'%'.$str.'%\'')->get();
 
-        return view('pages.search',[ 'str' => $str  ,'users' => null,'events' => $events, 'groups' => null]);
+        return view('pages.search',[ 'str' => $str  ,'users' => null,'events' => $events, 'groups' => null, 'posts' => null]);
     }
 
     public function searchGroups(Request $request ){
         $str = strtolower($request->input('search'));
         $groups = Group::whereRaw('lower(name) LIKE \'%'.$str.'%\'')->get();
 
-        return view('pages.search',[ 'str' => $str  ,'users' => null,'events' => null, 'groups' => $groups]);
+        return view('pages.search',[ 'str' => $str  ,'users' => null,'events' => null, 'groups' => $groups, 'posts' => null]);
     }
 
+    public function searchPosts(Request $request){
+        $str = strtolower($request->input('search'));
+
+        $posts =  DB::table('post')
+                      ->select(["*", DB::raw("ts_rank(
+                                    setweight(to_tsvector('english', title), 'A') || 
+                                    setweight(to_tsvector('english', body), 'B'),
+                                    plainto_tsquery('english', '".$str."')
+                                ) as rank ")])
+                       ->orderBy("rank", "desc") 
+                       ->limit(5)->get();
+        return view('pages.search',[ 'str' => $str  ,'users' => null,'events' => null, 'groups' => null, 'posts' => $posts]);
+    }
+
+
     public function search(Request $request ){
+
+        $filter = $request->input('filter');
+
+        switch ($filter) {
+            case 'Users':
+                return $this->searchUsers($request);
+            case 'Events':
+                return $this->searchEvents($request);
+            case 'Groups':
+                return $this->searchGroups($request);
+            case 'Posts':
+                return $this->searchPosts($request);
+            case 'All':
+                break;
+            default: 
+                throw new HttpException(404, 'page');
+        }
+
         $str = strtolower($request->input('search'));
         $users = RegularUser::join('user','user.user_id','regular_user.user_id')->whereRaw('lower(name) LIKE \'%'.$str.'%\'')->limit(5)->get();
         $events = Event::whereRaw('lower(name) LIKE \'%'.$str.'%\'')->limit(5)->get();
         $groups = Group::whereRaw('lower(name) LIKE \'%'.$str.'%\'')->limit(5)->get();
+        $posts =  DB::table('post')
+                      ->select(["*", DB::raw("ts_rank(
+                                    setweight(to_tsvector('english', title), 'A') || 
+                                    setweight(to_tsvector('english', body), 'B'),
+                                    plainto_tsquery('english', '".$str."')
+                                ) as rank ")])
+                       ->orderBy("rank", "desc") 
+                       ->limit(5)->get();
 
-        return view('pages.search',[ 'str' => $str  ,'users' => $users,'events' => $events, 'groups' => $groups]);
+        return view('pages.search',[ 'str' => $str  ,'users' => $users,'events' => $events, 'groups' => $groups, 'posts' => $posts]);
     }
 
 

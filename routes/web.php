@@ -71,6 +71,7 @@ Route::get('/search' , 'FeedController@search');
 Route::get('/users/search' , 'FeedController@searchUsers');
 Route::get('/groups/search' , 'FeedController@searchGroups');
 Route::get('/events/search' , 'FeedController@searchEvents');
+Route::get('/posts/search' , 'FeedController@searchPosts');
 
 //Profile
 Route::get('/users/me', 'ProfileController@show_me');
