@@ -42,7 +42,9 @@ class GroupController extends Controller{
       
       $image = $group->image();
 
-      return view('pages.group' , ['css' => ['navbar.css','group.css','posts.css','post_form.css','feed.css'], 'group' => $group, 'posts' => $posts, 'members' => $members, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'is_owner' => $owner , 'image' => $image]);
+      return view('pages.group' , ['css' => ['navbar.css','group.css','posts.css','post_form.css','feed.css'], 
+      'js' => ['general.js','group.js','infinite_scroll'],
+      'group' => $group, 'posts' => $posts, 'members' => $members, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'is_owner' => $owner , 'image' => $image]);
     }
 
     public function showCreateForm(){
@@ -50,7 +52,9 @@ class GroupController extends Controller{
 
       $this->authorize('create', 'App\Group');
 
-      return view('pages.create_group', ['css' => ['navbar.css','group.css','posts.css','post_form.css','feed.css','help.css',], 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
+      return view('pages.create_group', ['css' => ['navbar.css','group.css','posts.css','post_form.css','feed.css','help.css','create.css'],
+      'js' => ['general.js','uploadImages.js'],
+       'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
     }
 
     public function create(Request $request){
@@ -111,7 +115,9 @@ class GroupController extends Controller{
       
       $image = $group->image();
 
-      return view('pages.edit_group' , ['css' => ['navbar.css','group.css','posts.css','post_form.css','feed.css','help.css'], 'group' => $group, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'image' => $image ]);
+      return view('pages.edit_group' , ['css' => ['navbar.css','group.css','posts.css','post_form.css','feed.css','help.css'],
+      'js' => ['general.js','uploadImages.js'],
+       'group' => $group, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'image' => $image ]);
     }
 
     /**

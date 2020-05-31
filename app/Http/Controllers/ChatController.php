@@ -34,7 +34,7 @@ class ChatController extends Controller{
       
       $notifications = Auth::user()->userable->notifications;
 
-      return view('pages.chat' , ['css' => ['navbar.css','chat.css'],'in_chat' => $chat->in_chat, 'chat' => $chat, 'messages' => $messages, 'members' => $members, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'notifications' => $notifications]);
+      return view('pages.chat' , ['css' => ['navbar.css','chat.css'],'js' => ['chat.js'],'in_chat' => $chat->in_chat, 'chat' => $chat, 'messages' => $messages, 'members' => $members, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'notifications' => $notifications]);
     }
 
     public function get_chat(){

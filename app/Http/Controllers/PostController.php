@@ -132,7 +132,8 @@ class PostController extends Controller{
       else if($post->type == 'archived' && (!Auth::user()->isAdmin() || $post->author_id != Auth::user()->userable->regular_user_id))
         throw new HttpException(404, "post");
         
-      return view('pages.post' , ['css' => ['navbar.css','posts.css'] , 'post' => $post, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
+      return view('pages.post' , ['css' => ['navbar.css','posts.css'],
+      'js' => ['general.js','post.js'], 'post' => $post, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
     }
 
     /**
@@ -150,7 +151,8 @@ class PostController extends Controller{
 
       $this->authorize('edit', $post);
 
-      return view('pages.post_edit' , ['is_admin' => false , 'post' => $post, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
+      return view('pages.post_edit' , ['css' => ['navbar.css','posts.css'],
+      'js' => ['general.js','post.js'] , 'post' => $post, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
     }
 
      /**

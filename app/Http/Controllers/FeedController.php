@@ -99,7 +99,7 @@ class FeedController extends Controller{
 
             return view('pages.feed' , ['is_admin' => false , 
             'css' => ['posts.css','post_form.css','navbar.css','feed.css','menu.css'],
-            'js' => [],
+            'js' => ['post.js','infinite_scroll.js','friendship.js','general.js',],
             'posts' => $posts , 
             'groups' => Auth::user()->userable->groups  ,
             'events' => Auth::user()->userable->events, 
@@ -120,6 +120,7 @@ class FeedController extends Controller{
 
         return view('pages.admin_feed' , ['reports' => $reports, 
         'css' => ['navbar.css','admin.css'],
+        'js' => ['reports.js'],
         'reported' => $reported, 'is_admin' => true, 'requests' => $requests, 'requested' => $requested]);
     
     }
@@ -129,6 +130,7 @@ class FeedController extends Controller{
         $users = RegularUser::join('user','user.user_id','regular_user.user_id')->whereRaw('lower(name) LIKE \'%'.$str.'%\'')->get();
         return view('pages.search',
         ['css' => ['navbar.css','feed.css','menu.css'],
+        'js' => ['general.js'],
          'str' => $str  ,'users' => $users,'events' => null, 'groups' => null]);
     }
 
@@ -138,6 +140,7 @@ class FeedController extends Controller{
 
         return view('pages.search',
         ['css' => ['navbar.css','feed.css','menu.css'],
+        'js' => ['general.js'],
          'str' => $str  ,'users' => null,'events' => $events, 'groups' => null]);
     }
 
@@ -147,6 +150,7 @@ class FeedController extends Controller{
 
         return view('pages.search',
         ['css' => ['navbar.css','feed.css','menu.css'],
+        'js' => ['general.js'],
          'str' => $str  ,'users' => null,'events' => null, 'groups' => $groups]);
     }
 
@@ -158,6 +162,7 @@ class FeedController extends Controller{
 
         return view('pages.search',
         ['css' => ['navbar.css','feed.css','menu.css'],
+        'js' => ['general.js'],
          'str' => $str  ,'users' => $users,'events' => $events, 'groups' => $groups]);
     }
 
