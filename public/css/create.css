@@ -42,11 +42,11 @@
     width: 100%;
 }
 
-#create_card legend.card-title {
+#create_card label.card-title {
     margin-top: 0;
 }
 
-#create_card legend {
+#create_card label {
     margin-top: .5em;
     margin-bottom: 0;
 }

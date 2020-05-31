@@ -21,10 +21,10 @@
                 </div>
             </div>
             <div class="card-body container">
-                <legend class="card-title uconnect-title" >Name: </legend>
+                <label class="card-title uconnect-title" >Name: </label>
                 <input id="name" type="text" name="name" placeholder="Group Name" required/>
 
-                <legend>Information:</legend>
+                <label>Information:</label>
                 <textarea id="information" name="information" type="text" required></textarea>
             </div>
             <div class="card-footer no-gutters">      

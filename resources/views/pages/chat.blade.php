@@ -107,7 +107,7 @@
                             alt="user_image"/>
                         <form id="newmessage" label='message' class="form-inline" style="max-width: 90%; width: 90%; justify-content:center;">
                             <div class="input-group chat_message_input" style="width:98%">
-                                <input type="text" required class="form-control" placeholder="Write a message..." aria-label="msg-write" aria-describedby="send-message-button" style="border-width: 0; border-top-left-radius: inherit; border-bottom-left-radius: inherit;"></textarea>
+                                <input type="text" label='message' required class="form-control" placeholder="Write a message..." aria-label="msg-write" aria-describedby="send-message-button" style="border-width: 0; border-top-left-radius: inherit; border-bottom-left-radius: inherit;"></textarea>
                                 <div class="input-group-append" style="border-radius: inherit">
                                     <button type="submit" class="btn btn-outline-light fa fa-caret-left fa-flip-horizontal" id="send-message-button" style="background-color: sandybrown; border-top-left-radius: inherit; border-bottom-left-radius: inherit;"></button>
                                 </div>
@@ -139,12 +139,10 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action='/users/delete' method='post'>
                     <div class="form-group">
                         <label class="col-form-label">Member:</label>
                         <input type="text" name='name' autocomplete="off" label='name' class="form-control" id="new_member_name">
                     </div>
-                    </form>
                     <div id='members_search'>
                         
                     </div>
@@ -152,6 +150,16 @@
             </div>
         </div>
     </div>
+
+        @if(count($in_chat) == 1) 
+            <script>
+                window.onload = function() {
+                    $('#addMemberModal').modal();
+                };
+            </script>
+        @endif
+
+    @endif
 
     <div class="modal fade" id="addChatModal" tabindex="-1" role="dialog" aria-labelledby="addChatModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -165,26 +173,17 @@
                 </div>
                 <div class="modal-body">
                     <form id="chat_create">
-                    <div class="form-group">
-                        <label class="col-form-label">Chat:</label>
-                        <input type="text" name='name' required="required" autocomplete="off" label='name' class="form-control" id="new_chat_name">
-                        <input type="submit" id="new_chat_name_submit" style="position: absolute; left: -9999px"/>
-                    </div>
+                        <div class="form-group">
+                            <label class="col-form-label">Chat:</label>
+                            <input type="text" name='name' required="required" autocomplete="off" label='name' class="form-control" id="new_chat_name">
+                            <input type="submit" id="new_chat_name_submit" style="position: absolute; left: -9999px"/>
+                        </div>
                     </form>
-                    </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        @if(count($in_chat) == 1) 
-            <script>
-                window.onload = function() {
-                    $('#addMemberModal').modal();
-                };
-            </script>
-        @endif
-
-    @endif
 </article>
 
 

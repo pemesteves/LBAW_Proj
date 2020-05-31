@@ -15,21 +15,24 @@
                     <input required name="image" type="file"/>
                 </div>
 
-                <legend class="card-title uconnect-title" >Name: </legend>
+                <label class="card-title uconnect-title" >Name: </label>
                 <input id="name" type="text" name="name" placeholder="Event Name" required/>
 
-                <legend>Information:</legend>
+                <label>Information:</label>
                 <textarea id="information" name="information" type="text" required></textarea>
                 
                 <div class="row">
+                <fieldset>
+                    <legend styel='padding-left:50px'>Specifics</legend>
                     <div class="col-sm-6">
-                        <legend><span class="fa fa-calendar"></span>&nbsp;Date:</legend>
+                        <label><span class="fa fa-calendar"></span>&nbsp;Date:</label>
                         <input type="date" name="date" required/> <!--Change calendar-->
                     </div>
                     <div class="col-sm-6">
-                        <legend><span class="fa fa-map-pin"></span>&nbsp;Location:</legend>
+                        <label><span class="fa fa-map-pin"></span>&nbsp;Location:</label>
                         <input type="text" name="location" required/> <!--Add Google Maps API-->
                     </div>
+                </fieldset>
                 </div>
             </div>
             <div class="card-footer no-gutters">      
