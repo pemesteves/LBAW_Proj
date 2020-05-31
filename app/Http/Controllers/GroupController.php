@@ -11,6 +11,7 @@ use App\Post;
 use App\Group;
 use App\Image;
 use App\Report;
+use App\RegularUser;
 use Exception;
 use Illuminate\Support\Facades\Input;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -239,5 +240,28 @@ class GroupController extends Controller{
                                     ->orderBy('date','desc')->limit(3)->get();
 
       return view('requests.posts',['posts' => $myGroupsPosts]);
+    }
+
+    public function getFriends(Request $request,$group_id){
+      $str = strtolower($request->input('string'));
+      $suggestions = RegularUser::join('user','regular_user.user_id','user.user_id')->join('friend','friend_id1','regular_user_id')
+              ->where([['friend_id2',Auth::user()->userable->regular_user_id],['friend.type','accepted']])
+              ->whereRaw('lower(name) LIKE \'%'.$str.'%\'')
+              ->leftjoin('image','image.regular_user_id', '=', 'regular_user.regular_user_id')
+              ->leftjoin('file', 'file.file_id', '=', 'image.file_id')
+              ->whereNOTIn('regular_user.regular_user_id',function($query) use ($group_id){
+                $query->select('user_id')->from('user_in_group')
+                ->where([['group_id',$group_id]]);
+              })
+              ->get();
+      return ['str' => $str , 'new_members' => $suggestions];
+  }
+
+    public function addToGroup($group_id,$user_id){
+      $group = Group::find($group_id);
+      //$this->authorize('add', $group);
+      DB::table('user_in_group')->insert(['user_id' => $user_id,'group_id' => $group_id]);
+      $member = DB::table('user')->join('regular_user', 'user.user_id', '=', 'regular_user.user_id')->where('regular_user_id', $user_id)-> first();
+      return json_encode($member);
     }
 }

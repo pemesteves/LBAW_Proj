@@ -29,7 +29,38 @@
                             <h1 class="card-title">{{ $group->name }}</h1>
                             <h2 class="card-subtitle">{{ $group->information }} </h2>
                             <div class="row">
-                                <div class="col-sm-6">
+                                @if($is_owner)
+                                <div class="col-sm flex-grow-0 p-0">
+                                    <div class="modal fade" id="addMemberModal" tabindex="-1" role="dialog" aria-labelledby="addMemberModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="addMemberModalLabel">Add new members</h5>
+                                                    <input type="hidden" id="report_id">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action='/users/delete' method='post'>
+                                                    <div class="form-group">
+                                                        <label class="col-form-label">Member:</label>
+                                                        <input type="text" name='name' autocomplete="off" label='name' class="form-control" id="new_member_name">
+                                                    </div>
+                                                    </form>
+                                                    <div id='members_search'>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button id='add_members_group' class='btn btn-light' style='border-radius:50%;width:40px;height:40px' data-toggle="modal" data-target="#addMemberModal">
+                                        <span class="fa fa-plus"></span>
+                                    </button>
+                                </div>
+                                "endif"
+                                <div class="col-sm p-0">
                                     <div class="modal fade p-5" id="memberPopup" tabindex="-1" role="dialog" 
                                         aria-labelledby="memberButton" aria-hidden="true">  
                                         <div class="modal-dialog" role="document">
@@ -76,7 +107,8 @@
                                             <p class="card-text text-left m-0"><!--$members?>-->{{ $member_count }} members</p>
                                     </button>
                                 </div>
-                                <div class="col-sm-6">
+                                
+                                <div class="col-sm ml-auto">
                                     <p class="card-text" id="last_update"><span class="fa fa-history"></span>&nbsp;Updated <?= getUpdateDate($group->updated_at);?><!--2--> days ago</p>
                                 </div>
                             </div>
