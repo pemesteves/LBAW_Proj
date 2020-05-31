@@ -9,7 +9,7 @@
         <form id="group_image_upload" method="post" action="/groups/create" enctype="multipart/form-data">
             @csrf
             <div class="card-title">
-                <img src="http://www.pluspixel.com.br/wp-content/uploads/services-socialmediamarketing-optimized.png" class="mx-auto d-block" alt=""
+                <img src="http://www.pluspixel.com.br/wp-content/uploads/services-socialmediamarketing-optimized.png" class="mx-auto d-block" alt="group_image"
                     title="Click here to upload the group image"
                     style="border-radius: 50%; max-width: 8rem;"> 
                 <div style="display: none;">
@@ -21,10 +21,10 @@
                 </div>
             </div>
             <div class="card-body container">
-                <legend class="card-title uconnect-title" >Name: </legend>
+                <label class="card-title uconnect-title" >Name: </label>
                 <input id="name" type="text" name="name" placeholder="Group Name" required/>
 
-                <legend>Information:</legend>
+                <label>Information:</label>
                 <textarea id="information" name="information" type="text" required></textarea>
             </div>
             <div class="card-footer no-gutters">      

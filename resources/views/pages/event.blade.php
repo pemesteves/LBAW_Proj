@@ -19,7 +19,7 @@
             @else
                 src=""
             @endif
-            class="card-img-top mx-auto d-block" alt="..."/>
+            class="card-img-top mx-auto d-block" alt="event_image"/>
         </div>
         <div class="card row">
             <div class="row">

@@ -20,7 +20,7 @@
                                 @else
                                     src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" 
                                 @endif
-                                class="mx-auto d-block" alt="..." onclick="window.location.href='/users/{{ $post->regularUser->regular_user_id }}'"/>
+                                class="mx-auto d-block" alt="user_image" onclick="window.location.href='/users/{{ $post->regularUser->regular_user_id }}'"/>
                             </div>
                             <div class="col-sm-10">
                                 <div class="row">
@@ -113,7 +113,7 @@
                             @csrf
                             <div class="row post_comment_form" >
                                 <div class="col-2">
-                                    <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" class="mx-auto d-block" alt="..." style="border-radius:50%; max-width:2rem; ">
+                                    <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" class="mx-auto d-block" alt="user_image" style="border-radius:50%; max-width:2rem; ">
                                 </div>
                                 <div class="col-9 post_comment_form_text">
                                     <textarea name="body" class="form-control" required placeholder="Comment..." rows="1"></textarea>
@@ -136,7 +136,7 @@
 
                                 new_comment.innerHTML = `<div class="col-2 comment_user_info" >
                                     <div class="row">   
-                                        <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" class="mx-auto d-block" alt="..." style="border-radius:50%; max-width:2rem; "  onclick="window.location.href='./users/${e.comment.user.user_id}'">
+                                        <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" class="mx-auto d-block" alt="user_image" style="border-radius:50%; max-width:2rem; "  onclick="window.location.href='./users/${e.comment.user.user_id}'">
                                     </div>
                                     <div class="row">
                                         <h4 style="font-size: 1em; margin: 0 auto;">${e.comment.user.user.name}</h4>
@@ -214,7 +214,7 @@
                             @else
                                 src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" 
                             @endif
-                            class="card-img-top mx-auto d-block" alt="..." style="border-radius:50%; max-width:5rem; padding-top:0.8rem">
+                            class="card-img-top mx-auto d-block" alt="user_image" style="border-radius:50%; max-width:5rem; padding-top:0.8rem">
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item" style="border:none;padding-top:0.2rem;padding-bottom:0.2rem"> {{ object_get($post->regularUser->user,"name") }}
                                 </li>

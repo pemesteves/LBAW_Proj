@@ -56,70 +56,71 @@
             <title>UConnect: We're getting there</title>
         </head>
         <body>
-            <div>
-                @yield('nav_bar')
-            </div>
-            
-            <div id='feedback'>
-            </div>           
-
-            <div id="content">
-                
-            @if(Session::has("success_message"))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <?=
-                Session::get("success_message") 
-                ?>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+            <div id="full_page" class="d-flex flex-column no-gutters vh-100" style="padding: 0;max-height:100vh">
+                <div>
+                    @yield('nav_bar')
                 </div>
-            @endif
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-
-                @yield('content')
                 
-                <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="reportModalLabel">Report</h5>
-                                <input type="hidden" id="report_id">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <form>
-                                <div class="form-group">
-                                    <label class="col-form-label">Title:</label>
-                                    <input type="text" class="form-control" id="report_title">
+                <div id='feedback'>
+                </div>           
+
+                <div id="content" style='flex-grow: 1;'>
+                    
+                @if(Session::has("success_message"))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <?=
+                    Session::get("success_message") 
+                    ?>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                    @yield('content')
+                    
+                    <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="reportModalLabel">Report</h5>
+                                    <input type="hidden" id="report_id">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-form-label">Description:</label>
-                                    <textarea class="form-control" id="report_description"></textarea>
+                                <div class="modal-body">
+                                    <form>
+                                    <div class="form-group">
+                                        <label class="col-form-label">Title:</label>
+                                        <input type="text" class="form-control" id="report_title">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-form-label">Description:</label>
+                                        <textarea class="form-control" id="report_description"></textarea>
+                                    </div>
+                                    </form>
                                 </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary sendReport">Send report</button>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary sendReport">Send report</button>
+                                </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
 
             </div>
-
-
             <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
             <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>

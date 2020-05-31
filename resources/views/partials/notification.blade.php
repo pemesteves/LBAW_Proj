@@ -3,7 +3,11 @@
         <div class="row no-gutters">
             <div class="col-sm">
                 <div class="card text-center" style="border-bottom:none;border-top:none;border-radius:0;height:100%;">
-                    <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" class="card-img-top mx-auto d-block" alt="..." style="border-radius:50%; max-width:3rem; padding:0.1rem">
+                    <img @if ($notification->triggerUser->image() !== null)
+                            src="{{$notification->triggerUser->image()->file_path}}"
+                        @else
+                            src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png"
+                        @endif class="card-img-top mx-auto d-block" alt="user_image" style="border-radius:50%; max-width:3rem; padding:0.1rem">
                 </div>
             </div>
             <div class="col-md-8" style="flex-grow:1; max-width:100%; text-align: left;">

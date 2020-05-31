@@ -15,7 +15,7 @@
                             @else 
                                 src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" 
                             @endif
-                        alt="" class="rounded-circle" style="max-width:100%; max-height: 50%;"/>
+                        alt="user_image" class="rounded-circle" style="max-width:100%; max-height: 50%;"/>
                         <div style="display: none;">
                             <input name="image" type="file" 
                                 @if (isset($image) && $image !== null)

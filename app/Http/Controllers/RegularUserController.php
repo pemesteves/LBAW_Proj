@@ -136,7 +136,7 @@ class RegularUserController extends Controller{
 
     public function archived(){
 
-        return view('pages.archived',['css' => ['navbar.css','feed.css','posts.css',''],'js' => ['general.js','post.js'],'posts' => Auth::user()->userable->archived_posts]);
+        return view('pages.archived',['css' => ['navbar.css','feed.css','posts.css'],'js' => ['general.js','post.js'],'posts' => Auth::user()->userable->archived_posts]);
     }
 
     public function delete(Request $request){

@@ -31,27 +31,13 @@ class ChatController extends Controller{
 
       $members = $chat->members();
      
-      
-      $notifications = Auth::user()->userable->notifications;
 
-      return view('pages.chat' , ['css' => ['navbar.css','chat.css'],'js' => ['chat.js'],'in_chat' => $chat->in_chat, 'chat' => $chat, 'messages' => $messages, 'members' => $members, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'notifications' => $notifications]);
+      return view('pages.chat' , ['css' => ['navbar.css','chat.css'],'js' => ['chat.js','general.js'],'in_chat' => $chat->in_chat, 'chat' => $chat, 'messages' => $messages, 'members' => $members, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
     }
 
     public function get_chat(){
       if (!Auth::check()) return redirect('/login');
-
-      try{
-        $chat_id = DB::table('user_in_chat')
-                      ->where('user_id', '=', Auth::user()->userable->regular_user_id)
-                      ->join('message', 'user_in_chat.chat_id', '=', 'message.chat_id')
-                      ->orderBy('date', 'asc')
-                      ->select('message.chat_id as chat_id')
-                      ->limit(1)
-                      ->get()[0]->chat_id;        
-        return redirect()->route('chats.show', $chat_id);
-      }catch(Exception $exception){
-        return redirect()->route('feed');
-      }
+      return view ('pages.chat', ['css' => ['navbar.css', 'chat.css'], 'js' =>['chat.js','general.js'], 'chat' => null, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
     }
 
     public function getFriends(Request $request,$chat_id){

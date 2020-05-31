@@ -20,7 +20,7 @@ function addEventListeners() {
 
 function sendCreateMessageRequest(event){
   
-  let body = this.querySelector('textarea').value;
+  let body = this.querySelector('input').value;
 
   let id = this.closest('article.chat').getAttribute('data-id');
 
@@ -49,7 +49,7 @@ function messageAddedHandler(){
   // Reset the new message input
   let toSelect = document.querySelector('article.chat[data-id="'+ message.chat_id + '"]');
   let form = toSelect.querySelector('div.chat_message_input');
-  form.querySelector('textarea').value="";
+  form.querySelector('input').value="";
 }
 
 function sendLookNamesRequest(event) {

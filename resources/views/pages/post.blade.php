@@ -9,7 +9,12 @@
                 <div class="container" style="border-bottom:0;border-radius:0;max-width: 90%;">
                     <div class="row">
                         <div class="col-sm-2">
-                            <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" class="mx-auto d-block" alt="..." style="border-radius:50%; max-width:7rem; " onclick="window.location.href='/users/{{ $post->regularUser->regular_user_id }}'"/>
+                            <img @if ($post->regularUser->image() !== null)
+                                src="{{$post->regularUser->image()->file_path}}"
+                            @else
+                                src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" 
+                            @endif 
+                            class="mx-auto d-block" alt="user_post" style="border-radius:50%; max-width:7rem; " onclick="window.location.href='/users/{{ $post->regularUser->regular_user_id }}'"/>
                         </div>
                         <div class="col-sm-10">
                             <div class="row">
@@ -86,7 +91,13 @@
                         @csrf
                         <div class="row post_comment_form" >
                             <div class="col-2">
-                                <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" class="mx-auto d-block" alt="..." style="border-radius:50%; max-width:2rem; ">
+                                <img 
+                            @if (Auth::user()->userable->image() !== null)
+                                src="{{Auth::user()->userable->image()->file_path}}"
+                            @else
+                                src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" 
+                            @endif
+                             class="mx-auto d-block" alt="..." style="border-radius:50%; max-width:2rem; ">
                             </div>
                             <div class="col-9 post_comment_form_text">
                                 <textarea name="body" class="form-control" required placeholder="Comment..." rows="1"></textarea>
