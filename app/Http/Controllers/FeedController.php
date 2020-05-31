@@ -98,6 +98,7 @@ class FeedController extends Controller{
             //return $recommendations->toSql();
 
             return view('pages.feed' , ['is_admin' => false , 
+            'css' => ['posts.css','post_form.css','navbar.css','feed.css','menu.css'],
             'js' => [],
             'posts' => $posts , 
             'groups' => Auth::user()->userable->groups  ,
@@ -117,28 +118,36 @@ class FeedController extends Controller{
         $requests = OrgApproval::where('type', 'pending')->orderBy('request_id','desc')->get();
         $requested = OrgApproval::where('type','accepted')->orderBy('request_id','desc')->get();
 
-        return view('pages.admin_feed' , ['reports' => $reports, 'reported' => $reported, 'is_admin' => true, 'requests' => $requests, 'requested' => $requested]);
+        return view('pages.admin_feed' , ['reports' => $reports, 
+        'css' => ['navbar.css','admin.css'],
+        'reported' => $reported, 'is_admin' => true, 'requests' => $requests, 'requested' => $requested]);
     
     }
 
     public function searchUsers(Request $request ){
         $str = strtolower($request->input('search'));
         $users = RegularUser::join('user','user.user_id','regular_user.user_id')->whereRaw('lower(name) LIKE \'%'.$str.'%\'')->get();
-        return view('pages.search',[ 'str' => $str  ,'users' => $users,'events' => null, 'groups' => null]);
+        return view('pages.search',
+        ['css' => ['navbar.css','feed.css','menu.css'],
+         'str' => $str  ,'users' => $users,'events' => null, 'groups' => null]);
     }
 
     public function searchEvents(Request $request ){
         $str = strtolower($request->input('search'));
         $events = Event::whereRaw('lower(name) LIKE \'%'.$str.'%\'')->get();
 
-        return view('pages.search',[ 'str' => $str  ,'users' => null,'events' => $events, 'groups' => null]);
+        return view('pages.search',
+        ['css' => ['navbar.css','feed.css','menu.css'],
+         'str' => $str  ,'users' => null,'events' => $events, 'groups' => null]);
     }
 
     public function searchGroups(Request $request ){
         $str = strtolower($request->input('search'));
         $groups = Group::whereRaw('lower(name) LIKE \'%'.$str.'%\'')->get();
 
-        return view('pages.search',[ 'str' => $str  ,'users' => null,'events' => null, 'groups' => $groups]);
+        return view('pages.search',
+        ['css' => ['navbar.css','feed.css','menu.css'],
+         'str' => $str  ,'users' => null,'events' => null, 'groups' => $groups]);
     }
 
     public function search(Request $request ){
@@ -147,7 +156,9 @@ class FeedController extends Controller{
         $events = Event::whereRaw('lower(name) LIKE \'%'.$str.'%\'')->limit(5)->get();
         $groups = Group::whereRaw('lower(name) LIKE \'%'.$str.'%\'')->limit(5)->get();
 
-        return view('pages.search',[ 'str' => $str  ,'users' => $users,'events' => $events, 'groups' => $groups]);
+        return view('pages.search',
+        ['css' => ['navbar.css','feed.css','menu.css'],
+         'str' => $str  ,'users' => $users,'events' => $events, 'groups' => $groups]);
     }
 
 

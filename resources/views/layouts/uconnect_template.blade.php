@@ -18,23 +18,15 @@
             <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Barlow|Cormorant+Garamond&display=swap">
 
             <!-- Costume Css -->
-
-            <link href="{{ asset('css/menu.css') }}" rel="stylesheet">
-            <link href="{{ asset('css/post_form.css') }}" rel="stylesheet">
-            <link href="{{ asset('css/posts.css') }}" rel="stylesheet">
-            <link href="{{ asset('css/chat.css') }}" rel="stylesheet">
             <link href="{{ asset('css/colors.css') }}" rel="stylesheet">
-            <link href="{{ asset('css/authentication.css') }}" rel="stylesheet">
-            <link href="{{ asset('css/event.css') }}" rel="stylesheet">
-            <link href="{{ asset('css/group.css') }}" rel="stylesheet">
-            <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
-            <link href="{{ asset('css/about.css') }}" rel="stylesheet">
-            <link href="{{ asset('css/navbar.css') }}" rel="stylesheet">
             <link href="{{ asset('css/error.css') }}" rel="stylesheet">
-            <link href="{{ asset('css/create.css') }}" rel="stylesheet">
-            <link href="{{ asset('css/feed.css') }}" rel="stylesheet">
-            <link href="{{ asset('css/help.css') }}" rel="stylesheet">
-            <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
+
+            
+            @if(isset($css))
+                @foreach($css as $c)
+                    <link href='{{ asset("css/$c") }}' rel="stylesheet">
+                @endforeach
+            @endif
 
             <script src="{{ asset('js/navbar_mobile.js') }}" defer></script>        
             <script src="{{ asset('js/app.js') }}" defer> </script>

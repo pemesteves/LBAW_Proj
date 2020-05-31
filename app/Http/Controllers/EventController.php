@@ -44,7 +44,7 @@ class EventController extends Controller{
 
       $image = $event->image();
 
-      return view('pages.event' , ['interested'=>$interested,'is_admin' => false , 'event' => $event, 'posts' => $posts, 'going' => $going, 'can_create_events' => $can_create_events, 'is_owner' => $owner, 'image' => $image]);
+      return view('pages.event' , ['css' => ['navbar.css','event.css','posts.css','post_form.css','feed.css'] ,'interested'=>$interested , 'event' => $event, 'posts' => $posts, 'going' => $going, 'can_create_events' => $can_create_events, 'is_owner' => $owner, 'image' => $image]);
     }
 
     public function showCreateForm(){
@@ -52,7 +52,7 @@ class EventController extends Controller{
 
       $this->authorize('create', 'App\Event');
 
-      return view('pages.create_event', ['is_admin' => false, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
+      return view('pages.create_event', ['css' => ['navbar.css','event.css','posts.css','post_form.css','feed.css'] , 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
     }
 
     public function create(Request $request){
@@ -113,7 +113,7 @@ class EventController extends Controller{
 
       $this->authorize('edit', $event);
 
-      return view('pages.edit_event' , ['is_admin' => false , 'event' => $event, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization' ]);
+      return view('pages.edit_event' , ['css' => ['navbar.css','event.css','posts.css','post_form.css','feed.css'] , 'event' => $event, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization' ]);
     }
 
     /**

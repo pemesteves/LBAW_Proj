@@ -72,7 +72,7 @@ function addEventListeners() {
 
 
     let notification = document.querySelector('#notificationDrop');
-    notification.addEventListener('click',sendSeenNotificationsRequest);
+    if(notification) notification.addEventListener('click',sendSeenNotificationsRequest);
 
 }
 
