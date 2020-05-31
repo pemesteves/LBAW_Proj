@@ -56,7 +56,7 @@
             <title>UConnect: We're getting there</title>
         </head>
         <body>
-            <div id="full_page" class="d-flex flex-column no-gutters vh-100" style="padding: 0">
+            <div id="full_page" class="d-flex flex-column no-gutters vh-100" style="padding: 0;max-height:100vh">
                 <div>
                     @yield('nav_bar')
                 </div>

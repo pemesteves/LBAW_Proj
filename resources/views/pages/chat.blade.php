@@ -1,8 +1,12 @@
 @extends('layouts.uconnect_basic')
 
 @section('content')
-
-<article class="chat" data-id="{{ $chat->chat_id }}" style="height:100%;">
+    
+@if (is_null($chat)) 
+    <article class="chat" style="height:100%;">
+@else
+    <article class="chat" data-id="{{ $chat->chat_id }}" style="height:100%;">
+@endif
     <div id="full_page" class="d-flex flex-column no-gutters " style="height: 100%;">
         <section class="container-fluid no-gutters" style="height: 100%;">
             <section class="row" style="height: 100%">
@@ -18,9 +22,10 @@
                         </form>
                     </header>
                     <div class="col user_chats" style="height: 87%; justify-content:flex-start; padding: 0">
-                        @foreach(Auth::user()->userable->chats as $chat)
-                            @include('partials.chat', ['chat' => $chat])
-                        @endforeach 
+                        @if(count(Auth::user()->userable->chats) == 0) 
+                            <p>You have no chats! If you want to connect with your friends, create one.</p>
+                        @endif
+                        @each('partials.chat', Auth::user()->userable->chats, 'chat')
                     </div>
                     <footer id="create_chat" class="row" style="margin: 0; padding: 0; width: 100%; height: 6.5%">
                         <button class="btn" type="button" style="margin: 0; padding: 0; width: 100%; color: white; background-color: sandybrown; border-radius: 0;" data-toggle="modal" data-target="#addChatModal">
@@ -28,8 +33,8 @@
                         </button>
                     </footer>
                 </section>
-
-                <section id="opened_message" class="col-md-9 d-flex flex-column" style="height: 100%">
+                @if($chat)
+                <section id="opened_message" class="col-md-9 d-flex flex-column" style="height: 100%;max-height:100%">
                     <header class="row" id="chat_info">
                         <img class="card-img" src="https://image.flaticon.com/icons/svg/166/166258.svg" alt="" style="width:2.5em; height:2.5em ; border-radius:50%" onclick="window.location.href='./profile.php'"/>
                         <h2>{{$chat->chat_name}}</h2>
@@ -41,16 +46,10 @@
                         </div>
                     </header>
 
-                    <section id="messages_col" class="d-flex flex-column" style="overflow: auto">
-                        <?php 
-                            $image = null;
-                            $user_name = null;
-                        ?>
-                        @foreach ($messages as $message)
-                            <?php $user_name = $message->user->user->name;
-                            $image = $message->user->image(); ?>
-                            @include('partials.message', ['message' => $message, 'image' => $image, 'user_name' => $user_name])
-                        @endforeach
+                    <section id="messages_col" class="d-flex flex-column" style="flex-grow:1;overflow: auto;">
+
+                        @each('partials.message', $messages, 'message')
+
                         <script>
                             window.Echo.channel('chat.{{$chat->chat_id}}')
                             .listen('NewMessage', (e) => {
@@ -171,13 +170,15 @@
             </div>
         </div>
 
-        @if(sizeof($in_chat) == 1) 
+        @if(count($in_chat) == 1) 
             <script>
                 window.onload = function() {
                     $('#addMemberModal').modal();
                 };
             </script>
         @endif
+
+    @endif
 </article>
 
 

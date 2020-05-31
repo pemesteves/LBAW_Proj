@@ -33,6 +33,7 @@ class GroupController extends Controller{
       $posts = $group->posts;
 
       $members = $group->members();
+      $member_count = $group->member_count();
 
       $owner = DB::table('user_in_group')
             ->where('group_id', '=', $id)
@@ -42,9 +43,10 @@ class GroupController extends Controller{
       
       $image = $group->image();
 
+
       return view('pages.group' , ['css' => ['navbar.css','group.css','posts.css','post_form.css','feed.css'], 
       'js' => ['general.js','group.js','infinite_scroll'],
-      'group' => $group, 'posts' => $posts, 'members' => $members, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'is_owner' => $owner , 'image' => $image]);
+      'group' => $group, 'posts' => $posts, 'members' => $members, 'member_count' => $member_count, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'is_owner' => $owner , 'image' => $image]);
     }
 
     public function showCreateForm(){
@@ -212,6 +214,16 @@ class GroupController extends Controller{
       $image->save();
 
       return $image;
+    }
+
+    public function removeMember(Request $request, $group_id, $user_id){
+
+      $member = DB::table('user_in_group')->where('group_id', $group_id)->where('user_id', $user_id)->first();
+
+      DB::table('user_in_group')->where('group_id', $group_id)->where('user_id', $user_id)->delete();
+
+      return json_encode($member);
+      
     }
 
     function getPosts($group_id,$last_id){
