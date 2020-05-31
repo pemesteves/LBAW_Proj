@@ -102,7 +102,6 @@ function newChatHandler() {
 
   window.location = '/chats/' + chat.chat_id;
   
-  $("#addMemberModal").modal();
 
 }
 
