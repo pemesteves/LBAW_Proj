@@ -18,12 +18,9 @@
 }
 
 .post_comment_form_text textarea{
-    -moz-border-bottom-colors: none;
-    -moz-border-left-colors: none;
-    -moz-border-right-colors: none;
-    -moz-border-top-colors: none;
+    
     background: none repeat scroll 0 0 rgba(0, 0, 0, 0.01);
-    border-color: -moz-use-text-color #FFFFFF #FFFFFF -moz-use-text-color;
+
     border-image: none;
     border-radius: 0.4em;
     border-style: none solid solid none;
@@ -126,9 +123,7 @@
 
 .small_post_body{
     overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
+    
     overflow-wrap: break-word;
     word-wrap: break-word;
     hyphens: auto;

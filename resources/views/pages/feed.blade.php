@@ -13,7 +13,7 @@
                             <h5 class="menu_title">Groups</h5>
                             <ul class="dl-submenu">
                                 @if (count($groups) === 0)
-                                    <small>No groups</small>
+                                    <li><small>No groups</small></li>
                                 @else
                                     @foreach ($groups as $group)
                                         <li><a href="groups/{{$group->group_id}}"><small>{{$group->name}}</small></a></li>
@@ -28,7 +28,7 @@
                             <h5 class="menu_title">Events</h5>
                             <ul class="dl-submenu">
                                 @if (count($events) === 0)
-                                    <small>No events</small>
+                                    <li><small>No events</small></li>
                                 @else
                                     @foreach ($events as $event)
                                         <li><a href="events/{{$event->event_id}}"><small>{{$event->name}}</small></a></li>
