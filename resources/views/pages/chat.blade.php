@@ -131,15 +131,17 @@
 
                                 </div>
 
-                                <script>
+                            <script>
                                     window.Echo.channel('notifiedUser.{{Auth::user()->userable->regular_user_id}}')
                                     .listen('NewNotification', (e) => {
-                                        let new_notification = document.createElement('div');
-                                        new_notification.classList.add('card', 'mb');
-                                        new_notification.setAttribute('style',"margin-bottom:0px;border-radius:0px;");
-
-                                        new_notification.innerHTML = ` 
-                                            <a href="${e.notification.link}" style="text-decoration: none; color:black">
+                                    if(e.notification.origin_user_id == {{Auth::user()->userable->regular_user_id}})
+                                        return;
+                                    let new_notification = document.createElement('div');
+                                    new_notification.classList.add('card', 'mb');
+                                    new_notification.setAttribute('style',"margin-bottom:0px;border-radius:0px;");
+                                    if(e.image == null){
+                                    new_notification.innerHTML = ` 
+                                        <a href="${e.notification.link}" style="text-decoration: none; color:black">
                                             <div class="row no-gutters">
                                                 <div class="col-sm">
                                                     <div class="card text-center" style="border-bottom:none;border-top:none;border-radius:0;height:100%;">
@@ -152,19 +154,173 @@
                                                         <p class="card-text small_post_body" style="margin-bottom:0;margin-left:0.2rem;">
                                                             ${e.notification.description}
                                                         </p>
+                                                        <p class="card-text" style="margin-bottom:0rem; float: right;margin-right:0.1rem;">
+                                                        <small class="text-muted" style="margin-bottom:0rem">
+                                                        now</p>
                                                     </div>
                                                 </div>
                                             </div>
                                         </a> `
-                                        let no_notif = document.getElementById("no_notif");
-                                        if(no_notif) no_notif.style.display = 'none';
-                                        document.getElementById("notificationDiv").insertBefore(new_notification, document.getElementById("notificationDiv").childNodes[0]);
-                                        let count = document.querySelector('#notifications_count');
-                                        count.style.display = 'inline-block';
-                                        count.textContent = parseInt(count.textContent) + 1;
-                                    });
+                                    }else{
+                                        new_notification.innerHTML = ` 
+                                        <a href="${e.notification.link}" style="text-decoration: none; color:black">
+                                            <div class="row no-gutters">
+                                                <div class="col-sm">
+                                                    <div class="card text-center" style="border-bottom:none;border-top:none;border-radius:0;height:100%;">
+                                                    <img src="${e.image.file_path}" class="card-img-top mx-auto d-block" alt="user_image" style="border-radius:50%; max-width:3rem; padding:0.1rem">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8" style="flex-grow:1; max-width:100%; text-align: left;">
+                                                    <div class="" style="margin-bottom: 0;padding-bottom: 0;">
+                                                        
+                                                        <p class="card-text small_post_body" style="margin-bottom:0;margin-left:0.2rem;">
+                                                            ${e.notification.description}
+                                                        </p>
+                                                        <p class="card-text" style="margin-bottom:0rem; float: right;margin-right:0.1rem;">
+                                                        <small class="text-muted" style="margin-bottom:0rem">
+                                                        now</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a> `
+                                    }
+                                    let no_notif = document.getElementById("no_notif");
+                                    if(no_notif) no_notif.style.display = 'none';
+                                    document.getElementById("notificationDiv").insertBefore(new_notification, document.getElementById("notificationDiv").childNodes[0]);
+                                    let count = document.querySelector('#notifications_count');
+                                    count.style.display = 'inline-block';
+                                    count.textContent = parseInt(count.textContent) + 1;
+                                });
 
-                                </script>
+                            </script>
+                            @foreach(Auth::user()->userable->events as $event)
+                            <script>
+                                window.Echo.channel('notifiedEvent.{{$event->event_id}}')
+                                .listen('NewNotification', (e) => {
+                                    if(e.notification.origin_user_id == {{Auth::user()->userable->regular_user_id}})
+                                        return;
+                                    let new_notification = document.createElement('div');
+                                    new_notification.classList.add('card', 'mb');
+                                    new_notification.setAttribute('style',"margin-bottom:0px;border-radius:0px;");
+                                    if(e.image == null){
+                                    new_notification.innerHTML = ` 
+                                        <a href="${e.notification.link}" style="text-decoration: none; color:black">
+                                            <div class="row no-gutters">
+                                                <div class="col-sm">
+                                                    <div class="card text-center" style="border-bottom:none;border-top:none;border-radius:0;height:100%;">
+                                                        <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" class="card-img-top mx-auto d-block" alt="user_image" style="border-radius:50%; max-width:3rem; padding:0.1rem">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8" style="flex-grow:1; max-width:100%; text-align: left;">
+                                                    <div class="" style="margin-bottom: 0;padding-bottom: 0;">
+                                                        
+                                                        <p class="card-text small_post_body" style="margin-bottom:0;margin-left:0.2rem;">
+                                                            ${e.notification.description}
+                                                        </p>
+                                                        <p class="card-text" style="margin-bottom:0rem; float: right;margin-right:0.1rem;">
+                                                        <small class="text-muted" style="margin-bottom:0rem">
+                                                        now</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a> `
+                                    }else{
+                                        new_notification.innerHTML = ` 
+                                        <a href="${e.notification.link}" style="text-decoration: none; color:black">
+                                            <div class="row no-gutters">
+                                                <div class="col-sm">
+                                                    <div class="card text-center" style="border-bottom:none;border-top:none;border-radius:0;height:100%;">
+                                                    <img src="${e.image.file_path}" class="card-img-top mx-auto d-block" alt="user_image" style="border-radius:50%; max-width:3rem; padding:0.1rem">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8" style="flex-grow:1; max-width:100%; text-align: left;">
+                                                    <div class="" style="margin-bottom: 0;padding-bottom: 0;">
+                                                        
+                                                        <p class="card-text small_post_body" style="margin-bottom:0;margin-left:0.2rem;">
+                                                            ${e.notification.description}
+                                                        </p>
+                                                        <p class="card-text" style="margin-bottom:0rem; float: right;margin-right:0.1rem;">
+                                                        <small class="text-muted" style="margin-bottom:0rem">
+                                                        now</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a> `
+                                    }
+                                    let no_notif = document.getElementById("no_notif");
+                                    if(no_notif) no_notif.style.display = 'none';
+                                    document.getElementById("notificationDiv").insertBefore(new_notification, document.getElementById("notificationDiv").childNodes[0]);
+                                    let count = document.querySelector('#notifications_count');
+                                    count.style.display = 'inline-block';
+                                    count.textContent = parseInt(count.textContent) + 1;
+                                });
+
+                            </script>
+                            @endforeach
+                            @foreach(Auth::user()->userable->groups as $group)
+                            <script>
+                                window.Echo.channel('notifiedGroup.{{$group->group_id}}')
+                                .listen('NewNotification', (e) => {
+                                    if(e.notification.origin_user_id == {{Auth::user()->userable->regular_user_id}})
+                                        return;
+                                    let new_notification = document.createElement('div');
+                                    new_notification.classList.add('card', 'mb');
+                                    new_notification.setAttribute('style',"margin-bottom:0px;border-radius:0px;");
+                                    if(e.image == null){
+                                    new_notification.innerHTML = ` 
+                                        <a href="${e.notification.link}" style="text-decoration: none; color:black">
+                                            <div class="row no-gutters">
+                                                <div class="col-sm">
+                                                    <div class="card text-center" style="border-bottom:none;border-top:none;border-radius:0;height:100%;">
+                                                        <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" class="card-img-top mx-auto d-block" alt="user_image" style="border-radius:50%; max-width:3rem; padding:0.1rem">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8" style="flex-grow:1; max-width:100%; text-align: left;">
+                                                    <div class="" style="margin-bottom: 0;padding-bottom: 0;">
+                                                        
+                                                        <p class="card-text small_post_body" style="margin-bottom:0;margin-left:0.2rem;">
+                                                            ${e.notification.description}
+                                                        </p>
+                                                        <p class="card-text" style="margin-bottom:0rem; float: right;margin-right:0.1rem;">
+                                                        <small class="text-muted" style="margin-bottom:0rem">
+                                                        now</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a> `
+                                    }else{
+                                        new_notification.innerHTML = ` 
+                                        <a href="${e.notification.link}" style="text-decoration: none; color:black">
+                                            <div class="row no-gutters">
+                                                <div class="col-sm">
+                                                    <div class="card text-center" style="border-bottom:none;border-top:none;border-radius:0;height:100%;">
+                                                    <img src="${e.image.file_path}" class="card-img-top mx-auto d-block" alt="user_image" style="border-radius:50%; max-width:3rem; padding:0.1rem">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8" style="flex-grow:1; max-width:100%; text-align: left;">
+                                                    <div class="" style="margin-bottom: 0;padding-bottom: 0;">
+                                                        
+                                                        <p class="card-text small_post_body" style="margin-bottom:0;margin-left:0.2rem;">
+                                                            ${e.notification.description}
+                                                        </p>
+                                                        <p class="card-text" style="margin-bottom:0rem; float: right;margin-right:0.1rem;">
+                                                        <small class="text-muted" style="margin-bottom:0rem">
+                                                        now</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a> `
+                                    }
+                                    let no_notif = document.getElementById("no_notif");
+                                    if(no_notif) no_notif.style.display = 'none';
+                                    document.getElementById("notificationDiv").insertBefore(new_notification, document.getElementById("notificationDiv").childNodes[0]);
+                                    let count = document.querySelector('#notifications_count');
+                                    count.style.display = 'inline-block';
+                                    count.textContent = parseInt(count.textContent) + 1;
+                                });
+
+                            </script>
+                            @endforeach
                                 
                             </div>
                         </div>

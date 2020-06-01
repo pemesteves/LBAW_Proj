@@ -56,12 +56,13 @@
             <title>UConnect: We're getting there</title>
         </head>
         <body>
-            <div id="full_page" style="padding: 0;display: flex; flex-flow: column;height: 100vh;">
+            <div id="full_page">
                 <div>
                     @yield('nav_bar')
                 </div>
                 
-                <div id='feedback'>
+                <div id='feedback' style='position: -webkit-sticky;position: sticky;top: 0;z-index:1;'>
+                    
                 </div>           
 
                 <div id="content" style='flex-grow: 1;'>

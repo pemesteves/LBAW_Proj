@@ -37,7 +37,7 @@ class RegularUserController extends Controller{
         $notification->link = $notification->link();
         $notification->save();
 
-        $this->sendNotification($notification,$id);
+        $this->sendNotification($notification,Auth::user()->userable->image(),$id);
 
         return ['result' => true , 'user_id' => $id];
     }
@@ -65,7 +65,7 @@ class RegularUserController extends Controller{
         $notification->link = $notification->link();
         $notification->save();
 
-        $this->sendNotification($notification,$id);
+        $this->sendNotification($notification,Auth::user()->userable->image(),$id);
 
         return ['result' => true , 'user_id' => $id];
     }

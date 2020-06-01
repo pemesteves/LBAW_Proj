@@ -93,7 +93,8 @@ class PostController extends Controller{
         $notification->description = $notification->getDescription(" has a new post");
         $notification->link = $notification->link();
         $notification->save();
-        $this->sendNotifications($notification,$interested);
+        //$this->sendNotifications($notification,$interested);Auth::user()->userable->image()
+        $this->sendNotifications($notification,Auth::user()->userable->image(),$interested);
       }
       else if($event_id){
         $post->event_id = $event_id;
@@ -107,7 +108,8 @@ class PostController extends Controller{
         $notification->description = $notification->getDescription(" has a new post");
         $notification->link = $notification->link();
         $notification->save();
-        $this->sendNotifications($notification,$interested);
+        //$this->sendNotifications($notification,$interested);
+        $this->sendNotifications($notification,Auth::user()->userable->image(),$interested);
       }
       $post->save();
       

@@ -48,7 +48,7 @@ class CommentController extends Controller{
       $notification->description = $notification->getDescription(" has a new comment");
       $notification->link = $notification->link();
       $notification->save();
-      $this->sendNotification($notification,$new_comment[0]->post->regularUser->regular_user_id);
+      $this->sendNotification($notification,Auth::user()->userable->image(),$new_comment[0]->post->regularUser->regular_user_id);
 
       return $new_comment[0];
     }
