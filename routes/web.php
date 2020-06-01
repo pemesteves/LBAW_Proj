@@ -33,6 +33,7 @@ Route::put('/api/posts/{id}/like/{val}' , 'PostController@like');
 Route::put('/api/comments/{id}/like/{val}' , 'CommentController@like');
 
 Route::put('/api/chats/{id}/message', 'MessageController@create');
+Route::put('/api/chats/{id}/clear', 'ChatController@clear');
 
 Route::put('/api/reports/{id}/accept' , 'ReportController@accept');
 Route::put('/api/reports/{id}/decline' , 'ReportController@decline');
@@ -118,6 +119,8 @@ Route::put('api/events/{id}/desinterest', 'EventController@desinterest');
 Route::get('/chats/{chat_id}', 'ChatController@show')->name('chats.show');
 Route::get('/chats', 'ChatController@get_chat');
 Route::put('api/chats/create', 'ChatController@create');
+Route::delete('/api/chats/{chat_id}/deleteUser', 'ChatController@deleteUser');
+
 
 //Post
 Route::get('/posts/{post_id}', 'PostController@show');

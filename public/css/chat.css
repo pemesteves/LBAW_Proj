@@ -42,11 +42,6 @@
     text-decoration:none
 }
 
-#messages_col{
-    margin: 0% 2%;
-    margin-top: 10px
-}
-
 
 .chat_user_info_article{
     border-color: sandybrown; 
@@ -59,8 +54,8 @@
 }
 
 
-#chat_info{
-    padding-top:0.5em;
+#chat_header{
+    padding-top:0.3em;
     padding-bottom: 0.15em; 
     border-width: 0; 
     border-bottom-width: 0.1em; 
@@ -68,10 +63,10 @@
     border-color: sandybrown
 }
 
-#chat_info > img {
+#chat_header > img {
     margin-left:  10px;
 }
-#chat_info > h2 {
+#chat_header > h2 {
     margin-left:  5px;
 }
 
@@ -79,3 +74,96 @@
     margin-bottom: 5px;
     font-size: 1.2em;
 }
+
+
+.mytooltip {
+
+}
+  
+/* Tooltip text */
+.mytooltip .mytooltiptext {
+    visibility: hidden;
+    position:relative;
+    background-color: rgb(212, 187, 168);
+    color:black;
+    border-radius: 6px;
+    transform: translate(-10px,-10px);
+    padding:0 5px;
+}
+.mytooltip:hover .mytooltiptext {
+
+    visibility: visible;
+}
+
+#chat_content{
+    flex: 1;
+    overflow: auto;
+    display:flex;
+    flex-flow:row;
+}
+
+#chat_sidebar{
+    height:100%;
+    display:inline-block;
+    width: 30%;
+    display: flex;
+    flex-flow:column;
+    border-right:sandybrown 1px solid;
+}
+
+#chat_general{
+    height:100%;
+    display:inline-block;
+    width: 100%;
+    display: flex;
+    flex-flow:column;
+}
+
+#messages_col{
+    margin-left:0;
+    margin-right:0;
+    margin-top:2px;
+    margin-bottom:2px;
+    flex: 1;
+    overflow: auto;
+    display:flex;
+    flex-flow:column;
+}
+
+.chat_user_images img{
+    display:inline-block;
+    white-space:nowrap;
+    text-align: center;
+}
+
+#add_members{
+    float:right;
+}
+
+@media only screen and (max-width: 1250px) {
+    #chat_sidebar{
+        width:50%;
+    }
+    
+  }
+
+
+@media only screen and (max-width: 950px) {
+    
+    #chat_sidebar{
+        width:30%;
+    }
+    .chat_user_images img{
+        display:none;
+    }
+
+    
+  }
+
+  @media only screen and (max-width: 600px) {
+    
+    #add_members{
+        float:none;
+    }
+    
+  }

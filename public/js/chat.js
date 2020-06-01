@@ -11,9 +11,14 @@ function addEventListeners() {
     }
   });
 
-  let messageCreators = document.querySelectorAll('article.chat form#newmessage');
+  let messageCreators = document.querySelectorAll('#chat_content form#newmessage');
     [].forEach.call(messageCreators, function(creator){
     creator.addEventListener('submit', sendCreateMessageRequest);
+  });
+
+  let chatLeaver = document.querySelectorAll('#leave_chat_button');
+  [].forEach.call(chatLeaver, function(leaver){
+    leaver.addEventListener('click', sendLeaveChatRequest);
   });
 
 }
@@ -22,7 +27,7 @@ function sendCreateMessageRequest(event){
   
   let body = this.querySelector('input').value;
 
-  let id = this.closest('article.chat').getAttribute('data-id');
+  let id = this.closest('#chat_content').getAttribute('data-id');
 
   if(body != '') {
     sendAjaxRequest('put', '/api/chats/'+id+'/message', {body: body}, messageAddedHandler);
@@ -33,6 +38,30 @@ function sendCreateMessageRequest(event){
   event.preventDefault();
   return false;
 }
+
+function sendLeaveChatRequest(event) {
+  let user_id = this.closest('div').getAttribute('data-id');
+  let chat_id = document.getElementsByClassName('chat')[0].getAttribute('data-id');
+  console.log(user_id);
+  console.log(chat_id);
+
+  sendAjaxRequest('delete', '/api/chats/'+chat_id+'/deleteUser', {user_id : user_id}, deletedUserHandler);
+
+
+  event.preventDefault();
+}
+
+function deletedUserHandler(){
+  if (this.status != 200 && this.status != 201){
+     window.location = '/chats';
+    return;
+  }
+
+  let message = JSON.parse(this.responseText);
+  window.location = '/chats'; 
+
+}
+
 
 
 function messageAddedHandler(){
@@ -47,9 +76,11 @@ function messageAddedHandler(){
   let new_message = createMessage(message);
 
   // Reset the new message input
-  let toSelect = document.querySelector('article.chat[data-id="'+ message.chat_id + '"]');
+  let toSelect = document.querySelector('#chat_content[data-id="'+ message.chat_id + '"]');
   let form = toSelect.querySelector('div.chat_message_input');
-  form.querySelector('input').value="";
+  let input = form.querySelector('input');
+  input.value="";
+  input.blur();
 }
 
 function sendLookNamesRequest(event) {
@@ -98,7 +129,7 @@ function newChatHandler() {
 
   let new_chat = createChat(chat);
 
-  document.querySelector('div.user_chats').prepend(new_chat);
+  document.querySelector('div#user_chats').prepend(new_chat);
 
   window.location = '/chats/' + chat.chat_id;
   

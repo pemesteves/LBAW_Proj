@@ -68,17 +68,17 @@ class Notification extends Model
 
   function link(){
     if($this->notification_user_id)
-        return "users/" . $this->origin_user_id;
+        return "/users/" . $this->origin_user_id;
     if($this->notification_event_id)
-        return "events/" . $this->notification_event_id;
+        return "/events/" . $this->notification_event_id;
     if($this->notification_post_id)
-        return "posts/" . $this->notification_post_id;
+        return "/posts/" . $this->notification_post_id;
     if($this->notification_comment_id){
       $comment = Comment::where('comment_id',$this->notification_comment_id)->first();
-      return "posts/" . $comment->post_id . "#comment_" . $this->notification_comment_id;
+      return "/posts/" . $comment->post_id . "#comment_" . $this->notification_comment_id;
     }
     if($this->notification_group_id)
-      return "groups/" . $this->notification_group_id;
+      return "/groups/" . $this->notification_group_id;
 
     return "#";
   }

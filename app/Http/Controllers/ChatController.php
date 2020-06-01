@@ -30,6 +30,7 @@ class ChatController extends Controller{
                      ->get();
 
       $members = $chat->members();
+      DB::table("user_in_chat")->where([['chat_id',$chat->chat_id],['user_id',Auth::user()->userable->regular_user_id]])->update(['not_seen' => 0]);
      
 
       return view('pages.chat' , ['css' => ['navbar.css','chat.css'],'js' => ['chat.js','general.js'],'in_chat' => $chat->in_chat, 'chat' => $chat, 'messages' => $messages, 'members' => $members, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
@@ -62,6 +63,13 @@ class ChatController extends Controller{
       return $user_id;
     }
 
+    public function clear(Request $request, $id) {
+
+      $chat = Chat::find($id);
+      DB::table("user_in_chat")->where([['chat_id',$chat->chat_id],['user_id',Auth::user()->userable->regular_user_id]])->update(['not_seen' => 0]);
+      
+      return $chat;
+    }
 
     public function create(Request $request) {
 
@@ -74,6 +82,16 @@ class ChatController extends Controller{
       $new_chat = Chat::take(1)->where("chat_id", '=', $chat["chat_id"])->get(); 
       
       return $new_chat[0];
+    }
+
+
+    public function deleteUser(Request $request, $chat_id) {
+
+      $userInChat = DB::table('user_in_chat')->where(['user_id'=>$request->input('user_id'), 'chat_id' => $chat_id ])->first();
+       DB::table('user_in_chat')->where(['user_id'=>$request->input('user_id'), 'chat_id' => $chat_id ])->delete();
+
+      return json_encode($userInChat);
+      
     }
 
 }
