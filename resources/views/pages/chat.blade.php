@@ -168,7 +168,18 @@
                                 
                             </div>
                         </div>
-                        <button type="button" class="btn btn-outline-light fa fa-envelope" onclick="window.location.href='/chats'"></button>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-outline-light fa fa-envelope" onclick="window.location.href='/chats'"></button>
+                            @if(Auth::user()->userable->total_not_seen() > 0)
+                            <h5 id='notifications_count' style='display:inline-block;position:absolute;left:22px;top:13px;background-color:lavender;
+                                border-radius:50%;width: 15px;height: 15px;text-align: center;line-height: 13px;'>
+                            @else
+                            <h5 id='notifications_count' style='display:none;position:absolute;left:22px;top:13px;background-color:lavender;
+                                border-radius:50%;width: 15px;height: 15px;text-align: center;line-height: 13px;'>
+                            @endif
+                                {{Auth::user()->userable->total_not_seen()}}
+                            </h5>
+                        </div>
                     @endif
                         @if(Auth::user()->isAdmin())
                             <button type="button" class="btn btn-outline-light" onclick="window.location.href='/admin'">
@@ -238,8 +249,6 @@
                         </ul>
                     </div>
                 @endif
-
-                
                 <div id='chat_sidebar'>
                     <header id="search_chat" style="margin: 0; padding: 0; width: 100%; height: 55px; border-color: sandybrown; border-width: 0; border-bottom-width: 0.1em; border-style: solid">
                         <form class="form-inline" method="post" style="width: 100%; justify-content:center;margin-top:7px">
@@ -284,42 +293,40 @@
                             .listen('NewMessage', (e) => {
                                 var idUser = {{Auth::user()->userable->regular_user_id}}
                                 let new_message = document.createElement("P");
+                                console.log(e);
                                 if (idUser == e.message.sender_id) {
                                     new_message.className = "chat_my_message";
-
                                     new_message.innerHTML = `${e.message.body}`;
-
                                     document.getElementById("messages_col").appendChild(new_message);
-
                                     
                                 }                        
                                 else {
                                     let new_message_other = document.createElement("div");
-                                    if (e.image !== "") {
-                                        new_message_other.innerHTML = `
-                                        <div>
-                                        <img 
-                                            src="${e.image}"                                    console.log("habemus papa");
-
-                                            alt="member_image" class="rounded-circle" style="max-width:2%; max-height: 2%;" align="left"/>
-                                            <h6 style="border: 0; padding: 0; text-decoration:none; color:inherit"> <a href="/users/${e.id}" style="text-decoration:none; color:inherit"> ${e.user_name}</a> </h6>
-                                            </div>    
-                                            <p class="chat_other_message">${e.message.body}</p>
-                                        `
-                                    }
-                                    else {
-                                        new_message_other.innerHTML = `
-                                        <div>
-                                        <img 
-                                            src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png"
-                                            alt="member_image" class="rounded-circle" style="max-width:2%; max-height: 2%;" align="left"/>
-                                            <h6 style="border: 0; padding: 0; text-decoration:none; color:inherit"> <a href="/users/${e.id}" style="text-decoration:none; color:inherit"> ${e.user_name}</a> </h6>
-                                            </div>   
-                                            <p class="chat_other_message">${e.message.body}</p>
-                                        `
+                                    new_message_other.setAttribute('style','margin-left:10px');
+                                    if(e.image.localeCompare("") == 0){
+                                        new_message_other.innerHTML += 
+                                        `<div class="mytooltip">
+                                                                    <a href='/users/${e.id}'>
+                                                                    <img src=\"https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png\"  alt="author_image" class="rounded-circle" style="width:40px;height:40px;display:inline-block;margin-right:10px" align="left"/>
+                                            </a>
+                                                <span class="mytooltiptext">${e.user_name}</span>
+                                            </div>
+                                            <p class="chat_other_message" style='display:inline-block '>${e.message.body}</p>
+                                        </div>  `;
+                                    }else{
+                                        new_message_other.innerHTML += 
+                                        `<div class="mytooltip">
+                                                                    <a href='/users/${e.id}'>
+                                                                    <img src=\"${e.image}\" alt="author_image" class="rounded-circle" style="width:40px;height:40px;display:inline-block;margin-right:10px" align="left"/>
+                                            </a>
+                                                <span class="mytooltiptext">${e.user_name}</span>
+                                            </div>
+                                            <p class="chat_other_message" style='display:inline-block '>${e.message.body}</p>
+                                        </div>  `;
                                     }
                                     document.getElementById("messages_col").appendChild(new_message_other);
                                 }
+                                sendAjaxRequest('put', '/api/chats/{{$chat->chat_id}}/clear', null, null);
                                 location.href = "#";
                                 location.href = "#bottom_chat";
                                 

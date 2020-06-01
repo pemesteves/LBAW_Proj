@@ -67,7 +67,7 @@ class RegularUser extends Model
     }
 
     public function chats(){
-        return $this->belongsToMany('App\Chat', 'user_in_chat', 'user_id', 'chat_id');
+        return $this->belongsToMany('App\Chat', 'user_in_chat', 'user_id', 'chat_id')->orderBy('last_modified',"DESC");
     }
 
     public function notifications() {
@@ -77,6 +77,15 @@ class RegularUser extends Model
     public function numberOfNotifications() {
         return $this->belongsToMany('App\Notification', 'notified_user', 'user_notified', 'notification_id' )
                 ->withPivot('seen')->where('seen',false)->count();
+    }
+
+    public function not_seen(Chat $chat){
+        $user_in_chat = DB::table("user_in_chat")->select('not_seen')->where([['chat_id',$chat->chat_id],['user_id',$this->regular_user_id]])->get();
+        return $user_in_chat[0]->not_seen;
+    }
+
+    public function total_not_seen(){
+        return count(DB::table("user_in_chat")->select('not_seen')->where([['user_id',$this->regular_user_id],['not_seen','>',0]])->get());
     }
 
     /**

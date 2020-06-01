@@ -112,7 +112,19 @@ window.Echo = new Echo({
                             
                         </div>
                     </div>
-                    <button type="button" class="btn btn-outline-light fa fa-envelope" onclick="window.location.href='/chats'"></button>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-outline-light fa fa-envelope" onclick="window.location.href='/chats'"></button>
+                        @if(Auth::user()->userable->total_not_seen() > 0)
+                        <h5 id='notifications_count' style='display:inline-block;position:absolute;left:22px;top:13px;background-color:lavender;
+                            border-radius:50%;width: 15px;height: 15px;text-align: center;line-height: 13px;'>
+                        @else
+                        <h5 id='notifications_count' style='display:none;position:absolute;left:22px;top:13px;background-color:lavender;
+                            border-radius:50%;width: 15px;height: 15px;text-align: center;line-height: 13px;'>
+                        @endif
+                            {{Auth::user()->userable->total_not_seen()}}
+                        </h5>
+                    </div>
+                    
                 @endif
                     @if(Auth::user()->isAdmin())
                         <button type="button" class="btn btn-outline-light" onclick="window.location.href='/admin'">

@@ -3,9 +3,13 @@
         <div class="row chat_user_info_article_div" style="margin-left:15px;flex-wrap:nowrap">
             
                 <img class="card-img" src="https://image.flaticon.com/icons/svg/166/166258.svg" alt="chat_image" style="width:2.5em;height:2.5em; border-radius:50%"/>
-            
-               <h2 class="card-title" style="margin-left:10px; margin-right:10px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;">{{$chat->chat_name}}</h2>
-               <div class='chat_user_images'> 
+                @if(Auth::user()->userable->not_seen($chat)!=0)
+                <h5 style='border-radius:50%;background-color:lavender;width:15px;height:15px;position:relative;text-align: center;line-height: 7px;'>
+                        {{Auth::user()->userable->not_seen($chat)}}
+                </h5>
+                @endif
+                <h2 class="card-title" style="margin-left:10px; margin-right:10px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;">{{$chat->chat_name}}</h2>
+                <div class='chat_user_images'> 
                         @for ($i = 0; $i < 3 and $i < count($chat->in_chat); $i++)
                                 <img style="width:30px;height:30px;border-radius:50%;float:left;position:relative;left:{{-15*$i}}px;"
                                 @if (object_get($chat->in_chat[$i]->image(), "image_id"))
