@@ -14,7 +14,8 @@ function addEventListeners() {
                 if (this.files && this.files[0]) {
                     let img = document.querySelector('form#event_image_upload img');  // $('img')[0]
                     img.src = URL.createObjectURL(this.files[0]); // set src to blob url
-                    
+                    img.style.display = "block";
+
                     if(document.querySelector('div#create_card') != null){
                         document.querySelector('form#event_image_upload input[type="file"]').style.opacity = 0;
                     }

@@ -10,7 +10,7 @@
             <div class="card-body container">
                 @csrf      
 
-                <img src="" class="card-img-top mx-auto d-block" alt="event_image"> 
+                <img src="" class="card-img-top mx-auto" alt="event_image" style="display: none;"> 
                 <div>
                     <input required name="image" type="file"/>
                 </div>
@@ -22,17 +22,17 @@
                 <textarea id="information" name="information" type="text" required></textarea>
                 
                 <div class="row">
-                <fieldset>
-                    <legend styel='padding-left:50px'>Specifics</legend>
-                    <div class="col-sm-6">
-                        <label><span class="fa fa-calendar"></span>&nbsp;Date:</label>
-                        <input type="date" name="date" required/> <!--Change calendar-->
-                    </div>
-                    <div class="col-sm-6">
-                        <label><span class="fa fa-map-pin"></span>&nbsp;Location:</label>
-                        <input type="text" name="location" required/> <!--Add Google Maps API-->
-                    </div>
-                </fieldset>
+                    <fieldset style="max-width:100%; width:100%;">
+                        <legend styel='padding-left:50px'>Specifics</legend>
+                        <div class="col-sm-6">
+                            <label><span class="fa fa-calendar"></span>&nbsp;Date:</label>
+                            <input type="date" name="date" required/> <!--Change calendar-->
+                        </div>
+                        <div class="col-sm-6">
+                            <label><span class="fa fa-map-pin"></span>&nbsp;Location:</label>
+                            <input type="text" name="location" required/> <!--Add Google Maps API-->
+                        </div>
+                    </fieldset>
                 </div>
             </div>
             <div class="card-footer no-gutters">      

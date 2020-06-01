@@ -53,7 +53,7 @@ class EventController extends Controller{
 
       $this->authorize('create', 'App\Event');
 
-      return view('pages.create_event', ['css' => ['navbar.css','event.css','posts.css','post_form.css','feed.css','create.css' ], 'js' => ['upload_images.js','general.js'] , 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
+      return view('pages.create_event', ['css' => ['navbar.css','event.css','posts.css','post_form.css','feed.css','create.css' ], 'js' => ['uploadImages.js','general.js'] , 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
     }
 
     public function create(Request $request){
