@@ -124,7 +124,7 @@
                             </div>
                             <div class="col-sm-3" style="padding-left: 0; text-align: right">
                                 <img src="{{object_get($post->image(), 'file_path')}}" alt="<?php $image_path = explode("/", object_get($post->image(), 'file_path')); echo end($image_path);?>"
-                                    style="max-height: 100%; height: 100%;"
+                                    style="max-height: 100%; max-width: 100%;"
                                 />
                             </div>
                         </div>
