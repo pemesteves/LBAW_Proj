@@ -217,7 +217,7 @@
             <div id="chat_content" @if ($chat) 
                 data-id="{{ $chat->chat_id }}"
                 @endif
-                style='flex: 1;overflow: auto;display:flex;flex-flow:row;'>
+            >
                     
                 @if(Session::has("success_message"))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -239,8 +239,9 @@
                     </div>
                 @endif
 
-                <div style='height:100%;display:inline-block;width: 30%;border-right:sandybrown 1px solid'>
-                    <header id="search_chat" style="margin: 0; padding: 0; width: 100%; height: 50px; border-color: sandybrown; border-width: 0; border-bottom-width: 0.1em; border-style: solid">
+                
+                <div id='chat_sidebar'>
+                    <header id="search_chat" style="margin: 0; padding: 0; width: 100%; height: 55px; border-color: sandybrown; border-width: 0; border-bottom-width: 0.1em; border-style: solid">
                         <form class="form-inline" method="post" style="width: 100%; justify-content:center;margin-top:7px">
                             <div class="input-group" style="margin-left:5px;margin-right:5px;border-width: 0.05em; border-color: lightgrey; border-radius: 2em; border-style:solid; background-color: white">
                                 <input type="text" required class="form-control" placeholder="Search" aria-label="Search messages" aria-describedby="search-messages-button" style="border-width: 0; border-top-left-radius: inherit; border-bottom-left-radius: inherit;">
@@ -250,31 +251,31 @@
                             </div>
                         </form>
                     </header>
-                    <div id='user_chats' >
+                    <div id='user_chats' style='flex: 1;overflow: auto;overflow-x: hidden !important;;display:flex;flex-flow:column;margin-top:2px;margin-bottom:2px'>
                         @if(count(Auth::user()->userable->chats) == 0) 
                             <p>You have no chats! If you want to connect with your friends, create one.</p>
                         @endif
                         @each('partials.chat', Auth::user()->userable->chats, 'chat')
                     </div>
-                    <footer id="create_chat" style="margin:0;padding:0;width:100%;height:40px;">
-                        <button class="btn" type="button" style="margin: 0; padding: 0; width: 100%; color: white; background-color: sandybrown; border-radius: 0;" data-toggle="modal" data-target="#addChatModal">
+                    <footer id="send_message" style="border-width: 0; border-top-width: 0.1em; border-style:solid; border-color: sandybrown;">
+                        <button class="btn" type="button" style="height:60px;margin: 0; padding: 0; width: 100%; color: white; background-color: sandybrown; border-radius: 0;" data-toggle="modal" data-target="#addChatModal">
                             <p id="create_group_message"><i class="fa fa-plus"></i>&nbsp;Create Group Chat</p>
                         </button>
                     </footer>
                 </div>
-                <div style='height:100%;display:inline-block;width: 100%;display: flex;flex-flow:column;'>
+                <div id='chat_general'>
                     @if($chat)
-                        <header id="chat_info">
+                        <header id="chat_header">
                             <img class="card-img" src="https://image.flaticon.com/icons/svg/166/166258.svg" alt="" style="width:2.5em; height:2.5em;border-radius:50%;display:inline-block" onclick="window.location.href='./profile.php'"/>
-                            <h2 style='display:inline-block'>{{$chat->chat_name}}</h2>
-                            <div style='float:right;margin-right:20px'>
+                            <h2 style='display:inline-block;text-overflow: ellipsis;white-space: nowrap;'>{{$chat->chat_name}}</h2>
+                            <div id='add_members' style='margin-right:20px'>
                                 <button id='add_members_chat' class='btn btn-light' style='border-radius:50%;width:40px;height:40px' data-toggle="modal" data-target="#addMemberModal">
                                     <span class="fa fa-plus"></span>
                                 </button>
                                 members
                             </div>
                         </header>
-                        <div id='messages_col' style='margin-left:0;margin-right:0;flex: 1;overflow: auto;display:flex;flex-flow:column;margin-top:2px;margin-bottom:2px'>
+                        <div id='messages_col'>
                             @each('partials.message', $messages, 'message')
                             <script>
                                 window.Echo.channel('chat.{{$chat->chat_id}}')
@@ -311,8 +312,11 @@
                                         }
                                         document.getElementById("messages_col").appendChild(new_message_other);
                                     }
+                                    location.href = "#";
+                                    location.href = "#bottom_chat";
                                 });
                             </script>
+                            <span id='bottom_chat'></span>
                         </div>
                         <footer id="send_message" style="border-width: 0; border-top-width: 0.1em; border-style:solid; border-color: sandybrown;">
                             <img class="chat_user_image" @if (Auth::user()->userable->image() !== null)
