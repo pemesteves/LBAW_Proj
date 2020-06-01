@@ -262,11 +262,13 @@
                             <p id="create_group_message"><i class="fa fa-plus"></i>&nbsp;Create Group Chat</p>
                         </button>
                     </footer>
+                </section>
                 </div>
                 <div id='chat_general'>
                     @if($chat)
                         <header id="chat_header">
-                            <img class="card-img" src="https://image.flaticon.com/icons/svg/166/166258.svg" alt="" style="width:2.5em; height:2.5em;border-radius:50%;display:inline-block" onclick="window.location.href='./profile.php'"/>
+                            <input type="image" src="https://image.flaticon.com/icons/svg/166/166258.svg" data-toggle="modal" data-target="#viewMembersModal" id="chat_img" 
+                                style="float:left;width:2.5em;height:2.5em;border-radius:50%;margin-left:4px;margin-top:4px"/>
                             <h2 style='display:inline-block;text-overflow: ellipsis;white-space: nowrap;'>{{$chat->chat_name}}</h2>
                             <div id='add_members' style='margin-right:20px'>
                                 <button id='add_members_chat' class='btn btn-light' style='border-radius:50%;width:40px;height:40px' data-toggle="modal" data-target="#addMemberModal">
@@ -278,44 +280,52 @@
                         <div id='messages_col'>
                             @each('partials.message', $messages, 'message')
                             <script>
-                                window.Echo.channel('chat.{{$chat->chat_id}}')
-                                .listen('NewMessage', (e) => {
-                                    var idUser = {{Auth::user()->userable->regular_user_id}}
-                                    let new_message = document.createElement("P");
-                                    if (idUser == e.message.sender_id) {
-                                        new_message.className = "chat_my_message";
-                                        new_message.innerHTML = `${e.message.body}`;
-                                        document.getElementById("messages_col").appendChild(new_message);
-                                    }                        
-                                    else {
-                                        let new_message_other = document.createElement("div");
-                                        if (e.image !== "") {
-                                            new_message_other.innerHTML = `
-                                            <div>
-                                            <img 
-                                                src="${e.image}"                                    console.log("habemus papa");
+                            window.Echo.channel('chat.{{$chat->chat_id}}')
+                            .listen('NewMessage', (e) => {
+                                var idUser = {{Auth::user()->userable->regular_user_id}}
+                                let new_message = document.createElement("P");
+                                if (idUser == e.message.sender_id) {
+                                    new_message.className = "chat_my_message";
 
-                                                alt="member_image" class="rounded-circle" style="max-width:2%; max-height: 2%;" align="left"/>
-                                                <h6 style="border: 0; padding: 0; text-decoration:none; color:inherit"> <a href="/users/${e.id}" style="text-decoration:none; color:inherit"> ${e.user_name}</a> </h6>
-                                                </div>    
-                                                <p class="chat_other_message">${e.message.body}</p>`
-                                        }
-                                        else {
-                                            new_message_other.innerHTML = `
-                                            <div>
-                                            <img 
-                                                src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png"
-                                                alt="member_image" class="rounded-circle" style="max-width:2%; max-height: 2%;" align="left"/>
-                                                <h6 style="border: 0; padding: 0; text-decoration:none; color:inherit"> <a href="/users/${e.id}" style="text-decoration:none; color:inherit"> ${e.user_name}</a> </h6>
-                                                </div>   
-                                                <p class="chat_other_message">${e.message.body}</p>`
-                                        }
-                                        document.getElementById("messages_col").appendChild(new_message_other);
+                                    new_message.innerHTML = `${e.message.body}`;
+
+                                    document.getElementById("messages_col").appendChild(new_message);
+
+                                    
+                                }                        
+                                else {
+                                    let new_message_other = document.createElement("div");
+                                    if (e.image !== "") {
+                                        new_message_other.innerHTML = `
+                                        <div>
+                                        <img 
+                                            src="${e.image}"                                    console.log("habemus papa");
+
+                                            alt="member_image" class="rounded-circle" style="max-width:2%; max-height: 2%;" align="left"/>
+                                            <h6 style="border: 0; padding: 0; text-decoration:none; color:inherit"> <a href="/users/${e.id}" style="text-decoration:none; color:inherit"> ${e.user_name}</a> </h6>
+                                            </div>    
+                                            <p class="chat_other_message">${e.message.body}</p>
+                                        `
                                     }
-                                    location.href = "#";
-                                    location.href = "#bottom_chat";
-                                });
-                            </script>
+                                    else {
+                                        new_message_other.innerHTML = `
+                                        <div>
+                                        <img 
+                                            src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png"
+                                            alt="member_image" class="rounded-circle" style="max-width:2%; max-height: 2%;" align="left"/>
+                                            <h6 style="border: 0; padding: 0; text-decoration:none; color:inherit"> <a href="/users/${e.id}" style="text-decoration:none; color:inherit"> ${e.user_name}</a> </h6>
+                                            </div>   
+                                            <p class="chat_other_message">${e.message.body}</p>
+                                        `
+                                    }
+                                    document.getElementById("messages_col").appendChild(new_message_other);
+                                }
+                                location.href = "#";
+                                location.href = "#bottom_chat";
+                                
+                            });
+                            </script> 
+
                             <span id='bottom_chat'></span>
                         </div>
                         <footer id="send_message" style="border-width: 0; border-top-width: 0.1em; border-style:solid; border-color: sandybrown;">
@@ -356,6 +366,62 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="modal fade" id="viewMembersModal" tabindex="-1" role="dialog" aria-labelledby="viewMembersModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="addChatModalLabel">Chat members</h5>
+                                        <input type="hidden" id="report_id">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                    @foreach($in_chat as $member_in_chat)
+                                        <div class="card mb member_card" style="margin-bottom:0px;border-radius:0px;" data-id="{{ $member_in_chat->regular_user_id }}">
+                                            <div class="row no-gutters">
+                                                <div class="col-md" style="flex-grow:1; max-width:100%; text-align: left;">
+                                                    <a href="../users/{{$member_in_chat->regular_user_id}}" style="text-decoration: none; color:black">
+                                                        <div class="row no-gutters">
+                                                            <div class="col-sm">
+                                                                <div class="card text-center" style="border-right:none;border-bottom:none;border-top:none;border-radius:0;height:100%;">
+                                                                    <img 
+                                                                    @if (object_get($member_in_chat->image(), "image_id"))
+                                                                    src="{{object_get($member_in_chat->image(), "file_path")}}"
+                                                                    @else
+                                                                    src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" 
+                                                                    @endif 
+                                                                    class="card-img-top mx-auto d-block" 
+                                                                    alt="..." style="border-radius:50%; width:3rem;height:3rem; padding:0.1rem;padding-top:0.2rem">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-8" style="flex-grow:1; max-width:100%; text-align: left;">
+                                                                <div class="" style="margin-bottom: 0;padding-bottom: 0;">
+                                                                    <p class="card-text small_post_body" style="margin-bottom:0;margin-left:0.2rem;display:inline-block;">
+                                                                        {{$member_in_chat->user->name}}
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </a> 
+                                                </div>
+                                                @if($member_in_chat->regular_user_id == Auth::user()->userable->regular_user_id)
+                                                    <div class="col-sm" style="flex-grow:0; max-width:100%; text-align: left;" data-id='{{$member_in_chat->regular_user_id}}'>
+                                                        <span class="btn btn-light leave_chat_button" id="leave_chat_button" data-id='{{$member_in_chat->regular_user_id}}' 
+                                                            style="background-color: rgba(0,0,150,.03);float:right; margin-right:0.5rem;margin-top:0.2rem;font-size:0.9rem ">
+                                                            Leave
+                                                        </span>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
 
                         @if(count($in_chat) == 1) 
                             <script>

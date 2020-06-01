@@ -16,6 +16,11 @@ function addEventListeners() {
     creator.addEventListener('submit', sendCreateMessageRequest);
   });
 
+  let chatLeaver = document.querySelectorAll('#leave_chat_button');
+  [].forEach.call(chatLeaver, function(leaver){
+    leaver.addEventListener('click', sendLeaveChatRequest);
+  });
+
 }
 
 function sendCreateMessageRequest(event){
@@ -33,6 +38,30 @@ function sendCreateMessageRequest(event){
   event.preventDefault();
   return false;
 }
+
+function sendLeaveChatRequest(event) {
+  let user_id = this.closest('div').getAttribute('data-id');
+  let chat_id = document.getElementsByClassName('chat')[0].getAttribute('data-id');
+  console.log(user_id);
+  console.log(chat_id);
+
+  sendAjaxRequest('delete', '/api/chats/'+chat_id+'/deleteUser', {user_id : user_id}, deletedUserHandler);
+
+
+  event.preventDefault();
+}
+
+function deletedUserHandler(){
+  if (this.status != 200 && this.status != 201){
+     window.location = '/chats';
+    return;
+  }
+
+  let message = JSON.parse(this.responseText);
+  window.location = '/chats'; 
+
+}
+
 
 
 function messageAddedHandler(){

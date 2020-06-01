@@ -15,7 +15,7 @@
                                 @endif
                                 class="mx-auto" alt="user"/>
                         @endfor 
-                        @if(count($chat->in_chat)>=3)
+                        @if(count($chat->in_chat)>3)
                                 <img  style="width:30px;height:30px;border-radius:50%;float:left;position:relative;left:-45px" 
                                 src="https://comunicadores.info/wp-content/uploads/2014/12/very-basic-plus-icon.png" class="mx-auto" alt="user"/>
                         @endif
