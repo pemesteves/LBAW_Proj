@@ -17,7 +17,7 @@ Route::get('/', 'Auth\LoginController@home')->name('home');
 
 // API
 
-Route::put('/api/posts' , 'PostController@create');
+Route::post('/api/posts' , 'PostController@create');
 Route::delete('api/posts/{id}', 'PostController@delete');
 Route::put('api/posts/{id}/archive', 'PostController@archive');
 Route::put('api/posts/{id}/unarchive', 'PostController@unarchive');
@@ -89,7 +89,7 @@ Route::get('/groups/create', 'GroupController@showCreateForm');
 Route::post('/groups/create', 'GroupController@create');
 
 Route::get('/groups/{id}', 'GroupController@show')->name('groups.show');
-Route::put('/api/groups/{id}/posts', 'PostController@createInGroup');
+Route::post('/api/groups/{id}/posts', 'PostController@createInGroup');
 
 Route::get('/groups/{group_id}/edit', 'GroupController@show_edit');
 Route::post('/groups/{group_id}', 'GroupController@edit');
@@ -105,7 +105,7 @@ Route::get('/events/create', 'EventController@showCreateForm');
 Route::post('/events/create', 'EventController@create');
 
 Route::get('/events/{event_id}' , 'EventController@show')->name('events.show');
-Route::put('/api/events/{id}/posts', 'PostController@createInEvent');
+Route::post('/api/events/{id}/posts', 'PostController@createInEvent');
 
 Route::get('/events/{event_id}/edit', 'EventController@show_edit');
 Route::post('/api/events/{event_id}/upload_image', 'EventController@upload_image');

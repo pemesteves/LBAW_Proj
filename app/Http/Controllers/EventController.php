@@ -209,7 +209,7 @@ class EventController extends Controller{
       $image->file_id = $file->file_id;
       $image->event_id = $event_id;
       $image->save();
-      error_log($image);
+      
       return $image;
     }
 

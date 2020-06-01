@@ -95,4 +95,25 @@ class Post extends Model
     return "";
   }
 
+  public function file(){
+    $file = File::take(1)
+                 ->where('file.post_id', '=', $this->post_id)
+                 ->get();
+    if(count($file) === 0)
+      return null;
+
+    return $file[0];
+  }
+
+  public function image(){
+    $image = Image::take(1)
+                  ->where('image.post_id', '=', $this->post_id)
+                  ->join('file', 'file.file_id', '=', 'image.file_id')
+                  ->get();
+
+    if(count($image) === 0)
+      return null;
+    
+    return $image[0];  
+  } 
 }

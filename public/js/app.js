@@ -14,26 +14,35 @@ function encodeForAjax(data) {
 }
 */
 function sendAjaxRequest(method, url, data, successHandler, errorHandler) {
-  let request = new XMLHttpRequest();
+  $.ajax({
+    type: method,
+    url: url,
+    data: data,
+    contentType: false,
+    processData: false,
+    error: errorHandler,
+    success: successHandler,
+  });
+  /*let request = new XMLHttpRequest();
 
   request.open(method, url, true);
   request.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="csrf-token"]').content);
   request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   request.addEventListener('load', successHandler);
   request.addEventListener('error', errorHandler);
-  request.send(encodeForAjax(data));
+  request.send(encodeForAjax(data));*/
 }
 
-/*function sendEnctypeAjaxRequest(method, url, data, successHandler, errorHandler) {
+function sendEnctypeAjaxRequest(method, url, data, successHandler, errorHandler) {
   let request = new XMLHttpRequest();
 
   request.open(method, url, true);
   request.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="csrf-token"]').content);
-  request.setRequestHeader('Content-Type', 'multipart/form-data');
+  //request.setRequestHeader('Content-Type', 'multipart/form-data');
   request.addEventListener('load', successHandler);
   request.addEventListener('error', errorHandler);
-  request.send(encodeFormDataForAjax(data));
-}*/
+  request.send(data);
+}
 
 
 function addFeedback(message){

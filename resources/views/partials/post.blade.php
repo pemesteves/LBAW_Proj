@@ -103,12 +103,48 @@
                 </div>
                 <div class="modal-body post_container" style="overflow-y: auto;">
                     <div class="container" style="border-bottom:0;border-top:0;border-radius:0;height:100%;">
+                    @if (object_get($post->image(), 'image_id'))
+                        <div class="row post_content" style="padding-bottom: 1rem;">
+                            <div class="col-sm-9" style="padding-right: 0;">
+                                <div class="row post_title">
+                                    <h2>{{ $post['title'] }}</h2>  
+                                </div>
+                                @if (object_get($post->file(), 'file_id'))
+                                <div class="row">
+                                    <p> {{ $post['body'] }}</p>
+                                </div>
+                                <div class="row">
+                                    <a href="{{object_get($post->file(), 'file_path')}}" download><span class="fa fa-download">&nbsp;</span><?php $file_path = explode("/", object_get($post->file(), 'file_path')); echo end($file_path);?></a>
+                                </div>
+                                @else
+                                <div class="row">
+                                    <p>{{ $post['body'] }}</p>
+                                </div>
+                                @endif
+                            </div>
+                            <div class="col-sm-3" style="padding-left: 0; text-align: right">
+                                <img src="{{object_get($post->image(), 'file_path')}}" alt="<?php $image_path = explode("/", object_get($post->image(), 'file_path')); echo end($image_path);?>"
+                                    style="max-height: 100%; height: 100%;"
+                                />
+                            </div>
+                        </div>
+                    @else 
                         <div class="row post_title">
                             <h2>{{ $post['title'] }}</h2>  
                         </div>
-                        <div class="row post_content">
+                        @if (object_get($post->file(), 'file_id'))
+                        <div class="row">
                             <p> {{ $post['body'] }}</p>
                         </div>
+                        <div class="row post_content">
+                            <a href="{{object_get($post->file(), 'file_path')}}" download><span class="fa fa-download">&nbsp;</span><?php $file_path = explode("/", object_get($post->file(), 'file_path')); echo end($file_path);?></a>
+                        </div>
+                        @else
+                        <div class="row post_content">
+                            <p>{{ $post['body'] }}</p>
+                        </div>
+                        @endif
+                    @endif
                         <form>
                             @csrf
                             <div class="row post_comment_form" >
@@ -240,6 +276,20 @@
                                     <small class="text-muted" style="margin-bottom:0rem;margin-right:1rem;position: absolute;top: 0;right:0">
                                         {{$post->getContext()}}
                                     </small>
+                                    @if (object_get($post->file(), 'file_id'))
+                                        <small class="text-muted" style="margin-bottom:0rem;margin-right:1rem;position: absolute;top: 1.5em;right:0">
+                                            1 <span class="fa fa-file">&nbsp;</span>
+                                        </small>
+                                        @if (object_get($post->image(), 'image_id'))
+                                            <small class="text-muted" style="margin-bottom:0rem;margin-right:1rem;position: absolute;top: 3em; right:0">
+                                                1 <span class="fa fa-image"></span>
+                                            </small>
+                                        @endif
+                                    @elseif (object_get($post->image(), 'image_id'))
+                                    <small class="text-muted" style="margin-bottom:0rem;margin-right:1rem;position: absolute;top: 1em;right:0">
+                                        1 <span class="fa fa-image"></span>
+                                    </small>
+                                    @endif
                                     <span class="card-text small_post_body">
                                         {{ $post->body }}
                                     </span>

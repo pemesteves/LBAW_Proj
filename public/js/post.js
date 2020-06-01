@@ -311,12 +311,10 @@ function sendCreatePostRequest(event){
     formData.delete("image");
   if(file === '')
     formData.delete("file");
-  
-  formData.append('_method', 'put');
-  
+
   if(title != '' && body != ''){
-    //sendEnctypeAjaxRequest('post', resource, formData, postAddedHandler, postAddErrorHandler);
-    sendAjaxRequest('put', resource, {title: title, body: body}, postAddedHandler, postAddErrorHandler);
+    sendEnctypeAjaxRequest('post', resource, formData, postAddedHandler, postAddErrorHandler);
+    //sendAjaxRequest('put', resource, {title: title, body: body}, postAddedHandler, postAddErrorHandler);
   }
 
   event.preventDefault();
@@ -417,6 +415,14 @@ function postAddedHandler() {
   let form = document.querySelector('form#post_form');
   form.querySelector('[type=text]').value="";
   form.querySelector('textarea').value="";
+
+  form.querySelector('input[name="image"]').value="";
+  form.querySelector('input[name="file"]').value="";
+
+  form.querySelector('img#image').style.display = "none";
+  form.querySelector('canvas.file').style.display = "none";
+  form.querySelector('img.file').style.display = "none";
+  form.querySelector('div#postInputImages').style.display = "none";
 
   // Insert the new post
   //form.parentElement.insertBefore(new_post, form.nextSibling);
