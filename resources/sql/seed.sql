@@ -219,7 +219,8 @@ CREATE TABLE public."comment"
 CREATE TABLE public."chat"
 (
 	"chat_id" serial NOT NULL,
-	"chat_name" text,
+	"chat_name" text NOT NULL,
+	"last_modified" timestamp with time zone DEFAULT now(),
 	CONSTRAINT "chat_id_pkey" PRIMARY KEY ("chat_id")
 );
 
@@ -239,6 +240,7 @@ CREATE TABLE public."user_in_chat"
 (
 	"user_id" integer NOT NULL REFERENCES public."regular_user"("regular_user_id") ON DELETE CASCADE,
 	"chat_id" integer NOT NULL REFERENCES public."chat"("chat_id") ON DELETE CASCADE,
+	"not_seen" integer NOT NULL DEFAULT 0,
 	CONSTRAINT "user_in_chat_pkey" PRIMARY KEY ("user_id", "chat_id")
 );
 
@@ -401,7 +403,7 @@ CREATE INDEX "search_user_names" ON "user" USING GIST(to_tsvector('english', "na
 CREATE INDEX "search_group_names" ON "group" USING GIST(to_tsvector('english', "name"));
 CREATE INDEX "search_event_names" ON "event" USING GIST(to_tsvector('english', "name"));
 
-
+DROP TRIGGER IF EXISTS update_chat_date ON "message" CASCADE;
 DROP TRIGGER IF EXISTS update_group_posts ON "group" CASCADE;
 DROP TRIGGER IF EXISTS update_event_posts ON "event" CASCADE;
 DROP TRIGGER IF EXISTS update_user_posts ON "user" CASCADE;
@@ -413,6 +415,8 @@ DROP TRIGGER IF EXISTS post_date ON "post" CASCADE;
 DROP TRIGGER IF EXISTS event_update_at ON "event" CASCADE;
 DROP TRIGGER IF EXISTS group_update_at ON "group" CASCADE;
 
+
+DROP FUNCTION IF EXISTS update_chat_date() CASCADE;
 DROP FUNCTION IF EXISTS update_group_posts() CASCADE;
 DROP FUNCTION IF EXISTS update_event_posts() CASCADE;
 DROP FUNCTION IF EXISTS update_user_posts() CASCADE;
@@ -423,6 +427,20 @@ DROP FUNCTION IF EXISTS post_date() CASCADE;
 -- DROP FUNCTION IF EXISTS unique_org() CASCADE;
 DROP FUNCTION IF EXISTS update_at() CASCADE;
 
+CREATE FUNCTION update_chat_date() RETURNS TRIGGER AS
+$BODY$
+BEGIN
+    UPDATE "chat" SET "last_modified" = now() WHERE "chat_id" = NEW."chat_id";
+	UPDATE "user_in_chat" SET "not_seen" = "not_seen" + 1 WHERE "chat_id" = NEW."chat_id";
+    RETURN NEW;
+END
+$BODY$
+LANGUAGE plpgsql;
+
+CREATE TRIGGER update_chat_date
+    AFTER INSERT ON public."message"
+	FOR EACH ROW
+    EXECUTE PROCEDURE update_chat_date();
 
 
 CREATE FUNCTION update_group_posts() RETURNS TRIGGER AS

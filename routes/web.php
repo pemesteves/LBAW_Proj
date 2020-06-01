@@ -33,6 +33,7 @@ Route::put('/api/posts/{id}/like/{val}' , 'PostController@like');
 Route::put('/api/comments/{id}/like/{val}' , 'CommentController@like');
 
 Route::put('/api/chats/{id}/message', 'MessageController@create');
+Route::put('/api/chats/{id}/clear', 'ChatController@clear');
 
 Route::put('/api/reports/{id}/accept' , 'ReportController@accept');
 Route::put('/api/reports/{id}/decline' , 'ReportController@decline');
