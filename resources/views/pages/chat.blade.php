@@ -264,7 +264,10 @@
                         @if(count(Auth::user()->userable->chats) == 0) 
                             <p>You have no chats! If you want to connect with your friends, create one.</p>
                         @endif
-                        @each('partials.chat', Auth::user()->userable->chats, 'chat')
+                        @foreach(Auth::user()->userable->chats as $chatt)
+                                    @include('partials.chat',['chat' => $chatt,'current_chat' => $chat])
+                        @endforeach 
+                        
                     </div>
                     <footer id="send_message" style="border-width: 0; border-top-width: 0.1em; border-style:solid; border-color: sandybrown;">
                         <button class="btn" type="button" style="height:60px;margin: 0; padding: 0; width: 100%; color: white; background-color: sandybrown; border-radius: 0;" data-toggle="modal" data-target="#addChatModal">
@@ -293,7 +296,7 @@
                             .listen('NewMessage', (e) => {
                                 var idUser = {{Auth::user()->userable->regular_user_id}}
                                 let new_message = document.createElement("P");
-                                console.log(e);
+                                //console.log(e);
                                 if (idUser == e.message.sender_id) {
                                     new_message.className = "chat_my_message";
                                     new_message.innerHTML = `${e.message.body}`;
