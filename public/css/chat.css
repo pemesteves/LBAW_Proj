@@ -79,3 +79,23 @@
     margin-bottom: 5px;
     font-size: 1.2em;
 }
+
+
+.mytooltip {
+
+}
+  
+/* Tooltip text */
+.mytooltip .mytooltiptext {
+    visibility: hidden;
+    position:absolute;
+    background-color: rgb(212, 187, 168);
+    color:black;
+    border-radius: 6px;
+    transform: translate(-10px,-10px);
+    padding:0 5px;
+}
+.mytooltip:hover .mytooltiptext {
+
+    visibility: visible;
+}

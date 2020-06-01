@@ -7,7 +7,7 @@
                             src="{{$notification->triggerUser->image()->file_path}}"
                         @else
                             src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png"
-                        @endif class="card-img-top mx-auto d-block" alt="user_image" style="border-radius:50%; max-width:3rem; padding:0.1rem">
+                        @endif class="card-img-top mx-auto d-block" alt="user_image" style="border-radius:50%; height:3rem;width:3rem; padding:0.1rem">
                 </div>
             </div>
             <div class="col-md-8" style="flex-grow:1; max-width:100%; text-align: left;">
