@@ -1,7 +1,8 @@
 // Loaded via <script> tag, create shortcut to access PDF.js exports.
 let pdfjsLib = window['pdfjs-dist/build/pdf'];
 // The workerSrc property shall be specified.
-pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://mozilla.github.io/pdf.js/build/pdf.worker.js';
+if(pdfjsLib !== null && pdfjsLib !== undefined)
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://mozilla.github.io/pdf.js/build/pdf.worker.js';
 
 
 function addEventListeners() {

@@ -30,11 +30,11 @@ window.Echo = new Echo({
                         <div class="input-group">
                             <div class="input-group-append">
                                 <select class="form-control" required id="filter" name="filter">
-                                    <option>All</option>
-                                    <option>Users</option>
-                                    <option>Events</option>
-                                    <option>Groups</option>
-                                    <option>Posts</option>
+                                    <option <?php if(isset($_GET['filter']) && $_GET['filter'] === 'All') echo 'selected';?>>All</option>
+                                    <option <?php if(isset($_GET['filter']) && $_GET['filter'] === 'Users') echo 'selected';?>>Users</option>
+                                    <option <?php if(isset($_GET['filter']) && $_GET['filter'] === 'Events') echo 'selected';?>>Events</option>
+                                    <option <?php if(isset($_GET['filter']) && $_GET['filter'] === 'Groups') echo 'selected';?>>Groups</option>
+                                    <option <?php if(isset($_GET['filter']) && $_GET['filter'] === 'Posts') echo 'selected';?>>Posts</option>
                                 </select>
                             </div>
                             <input type="text" name='search' required class="form-control" placeholder="Search" aria-label="Search" aria-describedby="search-button">

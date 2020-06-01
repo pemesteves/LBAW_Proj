@@ -14,7 +14,7 @@
             @else
                 @foreach ($users as $obj)
                     <div class="row searchDivCard" 
-                         onclick="window.location.href='/users/{{$obj->regular_user_id}}'">
+                         onclick="window.location.href='/users/{{$obj->regularUserId}}'">
                         <div class="col-sm-2">
                             <img class="rounded-circle" 
                             @if (isset($obj->file_path) && $obj->file_path !== null)
@@ -120,7 +120,7 @@
                             </div>
                             <div class="row" style="padding: 0">
                                 <div class="col-sm-6" style="padding-left: 0">
-                                    <p>{{$obj->name}}</p>
+                                    <p>{{$obj->body}}</p>
                                 </div>
                                 <div class="col-sm-6" style="padding-right: 0; text-align:right">
                                     <p>{{date('d-m-Y, H:i', strtotime($obj->date))}}</p>

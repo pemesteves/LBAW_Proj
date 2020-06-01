@@ -128,7 +128,13 @@ class FeedController extends Controller{
 
     public function searchUsers(Request $request ){
         $str = strtolower($request->input('search'));
-        $users = RegularUser::join('user','user.user_id','regular_user.user_id')->whereRaw('lower(name) LIKE \'%'.$str.'%\'')->get();
+        $users = RegularUser::select(["*", "regular_user.regular_user_id as regularUserId"])
+                              ->join('user','user.user_id','regular_user.user_id')
+                              ->whereRaw('lower(name) LIKE \'%'.$str.'%\'')
+                              ->leftjoin('image', 'regular_user.regular_user_id', '=','image.regular_user_id')
+                              ->leftjoin('file', 'file.file_id', '=', 'image.file_id')
+                              ->get();
+
         return view('pages.search',
         ['css' => ['navbar.css','feed.css','menu.css', 'search.css'],
         'js' => ['general.js'],
@@ -137,7 +143,14 @@ class FeedController extends Controller{
 
     public function searchEvents(Request $request ){
         $str = strtolower($request->input('search'));
-        $events = Event::whereRaw('lower(name) LIKE \'%'.$str.'%\'')->get();
+        $events = Event::select(["*", "event.name as eventName", "event.event_id as eventId"])
+                         ->whereRaw('lower(event.name) LIKE \'%'.$str.'%\'')
+                         ->rightjoin('organization', 'organization.organization_id', 'event.organization_id')
+                         ->rightjoin('regular_user', 'regular_user.regular_user_id', 'organization.regular_user_id')
+                         ->rightjoin('user', 'regular_user.user_id', 'user.user_id')
+                         ->leftjoin('image', 'event.event_id', '=','image.event_id')
+                         ->leftjoin('file', 'file.file_id', '=', 'image.file_id')
+                         ->get();
 
         return view('pages.search',
         ['css' => ['navbar.css','feed.css','menu.css', 'search.css'],
@@ -147,7 +160,15 @@ class FeedController extends Controller{
 
     public function searchGroups(Request $request ){
         $str = strtolower($request->input('search'));
-        $groups = Group::whereRaw('lower(name) LIKE \'%'.$str.'%\'')->get();
+        $groups = Group::select(["*", "group.group_id as groupId"])
+                         ->whereRaw('lower(name) LIKE \'%'.$str.'%\'')
+                         ->leftjoin('image', 'group.group_id', '=','image.group_id')
+                         ->leftjoin('file', 'file.file_id', '=', 'image.file_id')
+                         ->join('user_in_group', function($join){
+                            $join->on('user_in_group.group_id', '=', 'group.group_id')
+                                 ->where('user_in_group.user_id', '=', Auth::user()->userable->regular_user_id);
+                         })
+                         ->get();
 
         return view('pages.search',
         ['css' => ['navbar.css','feed.css','menu.css', 'search.css'],
@@ -159,14 +180,16 @@ class FeedController extends Controller{
         $str = strtolower($request->input('search'));
 
         $all_posts =  DB::table('post')
-                      ->select(["*", DB::raw("ts_rank(
+                          ->select(["*", DB::raw("ts_rank(
                                     setweight(to_tsvector('english', title), 'A') || 
                                     setweight(to_tsvector('english', body), 'B'),
                                     plainto_tsquery('english', '".$str."')
                                 ) as rank ")])
-                       ->orderBy("rank", "desc") 
-                       ->limit(5)->get();
-        
+                          ->join('regular_user', 'regular_user.regular_user_id', 'post.author_id')
+                          ->join('user', 'regular_user.user_id', 'user.user_id')
+                          ->orderBy("rank", "desc") 
+                          ->get();
+            
         $posts = array();
         foreach($all_posts as $post){
             if($post->rank > 0){
@@ -201,7 +224,8 @@ class FeedController extends Controller{
         }
 
         $str = strtolower($request->input('search'));
-        $users = RegularUser::join('user','user.user_id','regular_user.user_id')
+        $users = RegularUser::select(["*", "regular_user.regular_user_id as regularUserId"])
+                              ->join('user','user.user_id','regular_user.user_id')
                               ->whereRaw('lower(name) LIKE \'%'.$str.'%\'')
                               ->leftjoin('image', 'regular_user.regular_user_id', '=','image.regular_user_id')
                               ->leftjoin('file', 'file.file_id', '=', 'image.file_id')
