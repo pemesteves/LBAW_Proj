@@ -431,6 +431,7 @@ function postAddErrorHandler() {
 function commentAddedHandler(){
   if (this.status != 200 && this.status != 201){
     addErrorFeedback("Failed to add comment.");
+    document.querySelector('body').innerHTML = this.responseText;
     return;
   }
 
@@ -452,6 +453,7 @@ function commentAddedHandler(){
 
 function commentAddErrorHandler() {
   addErrorFeedback("Failed to add comment.");
+  document.innerHTML = this.responseText;
 }
 
 

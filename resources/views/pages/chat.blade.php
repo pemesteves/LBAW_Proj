@@ -333,7 +333,7 @@
                                     src="{{Auth::user()->userable->image()->file_path}}"
                                 @else
                                     src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" 
-                                @endif   alt=""  onclick="window.location.href='./profile.php'" 
+                                @endif   alt=""  onclick="window.location.href='/users/{{Auth::user()->userable->regular_user_id}}'" 
                             style='display:inline-block;width:50px;height:50px' >
                             <form id="newmessage" label='message' class="form-inline" style="max-width: 90%; width: 90%; justify-content:center;display:inline-block">
                                 <div class="input-group chat_message_input" style="width:98%">
@@ -348,7 +348,7 @@
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="addMemberModalLabel">Add new members</h5>
+                                        <h5 class="modal-title" id="addMemberModalLabel">Add new members to "{{$chat->chat_name}}"</h5>
                                         <input type="hidden" id="report_id">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
@@ -367,7 +367,7 @@
                             </div>
                         </div>
                         <div class="modal fade" id="viewMembersModal" tabindex="-1" role="dialog" aria-labelledby="viewMembersModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="addChatModalLabel">Chat members</h5>
@@ -434,7 +434,7 @@
                     @endif
 
                     <div class="modal fade" id="addChatModal" tabindex="-1" role="dialog" aria-labelledby="addChatModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="addChatModalLabel">Add chat name</h5>
