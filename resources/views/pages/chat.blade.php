@@ -33,10 +33,10 @@
                         </button>
                     </footer>
                 </section>
-                @if($chat)
+                @if(!is_null($chat))
                 <section id="opened_message" class="col-md-9 d-flex flex-column" style="height: 100%;max-height:100%">
                     <header class="row" id="chat_info">
-                        <img class="card-img" src="https://image.flaticon.com/icons/svg/166/166258.svg" alt="group image" style="width:2.5em; height:2.5em ; border-radius:50%" onclick="window.location.href='./profile.php'"/>
+                    <input type="image" src="https://image.flaticon.com/icons/svg/166/166258.svg" data-toggle="modal" data-target="#viewMembersModal" id="chat_img" style="width:2.5em; height:2.5em ; border-radius:50%" />
                         <h2>{{$chat->chat_name}}</h2>
                         <div style="position:absolute;right:20px;">
                             <button id='add_members_chat' class='btn btn-light' style='border-radius:50%;width:40px;height:40px' data-toggle="modal" data-target="#addMemberModal">
@@ -151,6 +151,61 @@
         </div>
     </div>
 
+    <div class="modal fade" id="viewMembersModal" tabindex="-1" role="dialog" aria-labelledby="viewMembersModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addChatModalLabel">Chat members</h5>
+                    <input type="hidden" id="report_id">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                @foreach($in_chat as $member_in_chat)
+                    <div class="card mb member_card" style="margin-bottom:0px;border-radius:0px;" data-id="{{ $member_in_chat->regular_user_id }}">
+                        <div class="row no-gutters">
+                            <div class="col-md" style="flex-grow:1; max-width:100%; text-align: left;">
+                                <a href="../users/{{$member_in_chat->regular_user_id}}" style="text-decoration: none; color:black">
+                                    <div class="row no-gutters">
+                                        <div class="col-sm">
+                                            <div class="card text-center" style="border-right:none;border-bottom:none;border-top:none;border-radius:0;height:100%;">
+                                                <img 
+                                                @if (object_get($member_in_chat->image(), "image_id"))
+                                                src="{{object_get($chat->in_chat[$i]->image(), "file_path")}}"
+                                                @else
+                                                src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" 
+                                                @endif 
+                                                class="card-img-top mx-auto d-block" 
+                                                alt="..." style="border-radius:50%; max-width:3rem; padding:0.1rem;padding-top:0.2rem">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8" style="flex-grow:1; max-width:100%; text-align: left;">
+                                            <div class="" style="margin-bottom: 0;padding-bottom: 0;">
+                                                <p class="card-text small_post_body" style="margin-bottom:0;margin-left:0.2rem;display:inline-block;">
+                                                    {{$member_in_chat->user->name}}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a> 
+                            </div>
+                            @if($member_in_chat->regular_user_id == Auth::user()->userable->regular_user_id)
+                            <div class="col-sm" style="flex-grow:0; max-width:100%; text-align: left;" data-id='{{$member_in_chat->regular_user_id}}'>
+                                <span class="btn btn-light leave_chat_button" id="leave_chat_button" data-id='{{$member_in_chat->regular_user_id}}' 
+                                    style="background-color: rgba(0,0,150,.03);float:right; margin-right:0.5rem;margin-top:0.2rem;font-size:0.9rem ">
+                                    Leave
+                                </span>
+                            </div>
+                            @endif
+                        </div>
+                    </div>
+                @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+
         @if(count($in_chat) == 1) 
             <script>
                 window.onload = function() {
@@ -183,6 +238,8 @@
             </div>
         </div>
     </div>
+
+    
 
 </article>
 

@@ -118,6 +118,8 @@ Route::put('api/events/{id}/desinterest', 'EventController@desinterest');
 Route::get('/chats/{chat_id}', 'ChatController@show')->name('chats.show');
 Route::get('/chats', 'ChatController@get_chat');
 Route::put('api/chats/create', 'ChatController@create');
+Route::delete('/api/chats/{chat_id}/deleteUser', 'ChatController@deleteUser');
+
 
 //Post
 Route::get('/posts/{post_id}', 'PostController@show');

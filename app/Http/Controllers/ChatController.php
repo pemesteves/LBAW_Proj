@@ -76,4 +76,14 @@ class ChatController extends Controller{
       return $new_chat[0];
     }
 
+
+    public function deleteUser(Request $request, $chat_id) {
+
+      $userInChat = DB::table('user_in_chat')->where(['user_id'=>$request->input('user_id'), 'chat_id' => $chat_id ])->first();
+       DB::table('user_in_chat')->where(['user_id'=>$request->input('user_id'), 'chat_id' => $chat_id ])->delete();
+
+      return json_encode($userInChat);
+      
+    }
+
 }
