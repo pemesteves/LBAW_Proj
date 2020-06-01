@@ -41,7 +41,6 @@ function createDeleteDialog(event){
 function createInputAppointment(event){
     let time = this.getAttribute('data-time');
     let teacher = this.getAttribute('data-teacher');
-    
     let popUp = document.createElement("dialog");
     popUp.classList.add('d-print-none');
     popUp.setAttribute('id', 'addAppointmentPopUp');
@@ -51,11 +50,16 @@ function createInputAppointment(event){
     popUp.setAttribute('data-teacher', teacher);
     popUp.innerHTML = `
         <form>
-            <div style="font-size: 2em;">
+            <div style="font-size: 1.5em;">
+                <div style="max-width: 100%; width: 100%; display: flex; flex-direction: row-reverse;">
+                    <button class="btn" onclick="closeDialog()">
+                        <span class="fa fa-times"></span>
+                    </button>
+                </div>
                 <p style="text-align: center; ">Insert the appointment description:</p>
                 <input type="text" name="description" placeholder="New Appointment" style="max-width:100%; width:100%; margin-bottom: 1em;"/>
                 <div style="text-align: center; ">
-                    <button type="submit" class="btn btn-success" style="font-size: 1.25em;">Add Appointment</button>
+                    <button type="submit" class="btn btn-success">Add Appointment</button>
                 </div>
             </div>
         </form>
@@ -141,6 +145,11 @@ function appointmentAddedHandler(){
     element.remove();
   
     addFeedback("Appointment added successfully.")
+}
+
+function closeDialog(){
+    let element = document.getElementById('addAppointmentPopUp');
+    element.remove();
 }
 
 function appointmentAddErrorHandler(){

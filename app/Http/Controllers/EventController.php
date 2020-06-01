@@ -45,7 +45,7 @@ class EventController extends Controller{
       $image = $event->image();
 
       return view('pages.event' , ['css' => ['navbar.css','event.css','posts.css','post_form.css','feed.css'],
-      'js' => ['event.js','post.js','infinite_scroll.js','general.js'] ,'interested'=>$interested , 'event' => $event, 'posts' => $posts, 'going' => $going, 'can_create_events' => $can_create_events, 'is_owner' => $owner, 'image' => $image]);
+      'js' => ['event.js','post.js','infinite_scroll.js','general.js', 'uploadImages.js'] ,'interested'=>$interested , 'event' => $event, 'posts' => $posts, 'going' => $going, 'can_create_events' => $can_create_events, 'is_owner' => $owner, 'image' => $image]);
     }
 
     public function showCreateForm(){
@@ -53,7 +53,7 @@ class EventController extends Controller{
 
       $this->authorize('create', 'App\Event');
 
-      return view('pages.create_event', ['css' => ['navbar.css','event.css','posts.css','post_form.css','feed.css','create.css' ], 'js' => ['upload_images.js','general.js'] , 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
+      return view('pages.create_event', ['css' => ['navbar.css','event.css','posts.css','post_form.css','feed.css','create.css' ], 'js' => ['uploadImages.js','general.js'] , 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
     }
 
     public function create(Request $request){
@@ -209,7 +209,7 @@ class EventController extends Controller{
       $image->file_id = $file->file_id;
       $image->event_id = $event_id;
       $image->save();
-      error_log($image);
+      
       return $image;
     }
 

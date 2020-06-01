@@ -4,6 +4,8 @@
 /public/images/events
 /public/images/groups
 /public/images/users
+/public/images/posts
+/public/files
 /storage/*.key
 /vendor
 /.idea

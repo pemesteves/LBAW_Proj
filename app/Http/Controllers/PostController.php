@@ -3,18 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Event;
+use App\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Traits\NotificationTrait;
-
+use App\Image;
 use App\Post;
 use App\Report;
 use App\Notification;
+use Exception;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Support\Facades\Session;
-
+use Symfony\Component\HttpFoundation\ParameterBag;
 
 class PostController extends Controller{
 
@@ -112,11 +114,85 @@ class PostController extends Controller{
         $this->sendNotifications($notification,Auth::user()->userable->image(),$interested);
       }
       $post->save();
+
+      $image = $this->upload_image($request, $post->post_id);
+
+      $file = $this->upload_file($request, $post->post_id);
       
-      //Gets useful information about the post
-      $new_post = Post::take(1)->where("post_id", '=', $post["post_id"])->get(); 
+      $new_post = Post::take(1)
+                        ->where("post_id", '=', $post["post_id"])
+                        ->get(); 
+
         
-      return view('partials.post',['post' => $new_post[0]]); 
+      return view('partials.post',['post' => $new_post[0], 'image' => $image, 'file' => $file]); 
+    }
+
+    public function upload_file(Request $request, $post_id){
+      $array = $request->validate([
+        'file' => 'max:2048',
+      ]);
+    
+      if(count($array) === 0)
+        return null;
+
+      $fileName = time().'.'.request()->file->getClientOriginalExtension();
+  
+      request()->file->move(public_path('files/posts'), $fileName);
+
+      try{
+        $file = File::where('post_id', '=', $post_id)->get()[0];
+      }catch(Exception $e){
+        $file = null;
+      }
+
+      if(isset($file) && $file !== null){ // Delete file 
+        $file->delete();
+      }
+      
+      $file = new File();
+      $file->post_id = $post_id;
+      $file->file_path = '/files/posts/' . $fileName;
+      $file->save();
+
+      return $file;
+    }
+
+    public function upload_image(Request $request, $post_id){
+      $array = $request->validate([
+        'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+      ]);
+    
+      if(count($array) === 0)
+        return null;
+
+      $imageName = time().'.'.request()->image->getClientOriginalExtension();
+  
+      request()->image->move(public_path('images/posts'), $imageName);
+
+      try{
+        $image = Image::where('post_id', '=', $post_id)->get()[0];
+      }catch(Exception $e){
+        $image = null;
+      }
+
+      if(isset($image) && $image !== null){ // Delete image and file
+        $file_id = $image->file_id;
+        $image->delete();
+        
+        $file = File::find($file_id);
+        $file->delete();
+      }
+      
+      $file = new File();
+      $file->file_path = '/images/posts/' . $imageName;
+      $file->save();
+
+      $image = new Image();
+      $image->file_id = $file->file_id;
+      $image->post_id = $post_id;
+      $image->save();
+
+      return $image;
     }
 
     /**

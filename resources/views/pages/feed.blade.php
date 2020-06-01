@@ -2,6 +2,7 @@
 
 @section('content')
 
+<script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
 
 <div id="feed_container" class="container" >
         <div class="row">
@@ -60,7 +61,7 @@
             </div>
             <div id='postFeed_container' class="col-sm-8">
 
-                <form id="post_form" class="new_post d-print-none">
+                <form id="post_form" class="new_post d-print-none" enctype="multipart/form-data">
                     <div id="post_container">
                         @csrf
                         <input id="post_title" name="title" type="text" required="required" placeholder="Title"/>
@@ -69,15 +70,26 @@
                             <div id="post_upload" class="col-sm-11" style="padding: 0;">
                                 <div>
                                     <p class="fa fa-plus">&ensp;image</p>
-                                    <input type="file"/>
+                                    <input type="file" name="image"/>
                                 </div>
                                 <div>
-                                        <p class="fa fa-plus">&ensp;file</p>
-                                        <input type="file"/>
+                                    <p class="fa fa-plus">&ensp;file</p>
+                                    <input type="file" name="file"/>
                                 </div>  
                             </div>
                             <div class="col-sm-1" style="padding: 0;">
                                 <button id="post_form_post" type="submit">Post</button> 
+                            </div>
+                        </div>
+                        <div class="container" id="postInputImages" style="display:none;">
+                            <div class="row">
+                                <div class="col-sm-6">    
+                                    <img id="image" src="" style="display:none;"/>
+                                </div>
+                                <div class="col-sm-6">
+                                    <img class="file" style="display:none;"/>
+                                    <canvas class="file" style="display:none;"></canvas>
+                                </div>
                             </div>
                         </div>
                     </div>

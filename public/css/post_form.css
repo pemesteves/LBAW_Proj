@@ -81,6 +81,29 @@
 
 }
 
+
+#post_form div.row div.col-sm-6:first-child {
+    padding-left: 0;
+} 
+
+#post_form div.row div.col-sm-6:last-child {
+    padding-right: 0;
+}
+
+#post_form img, #post_form canvas {
+    max-width: 100%;
+    width: 100%;
+}
+
+#post_form img#image {
+    border-bottom-left-radius: .5em;
+}
+
+#post_form .file {
+    border-bottom-right-radius: .5em;
+    float: right;
+}
+
 @media screen and (max-width: 575px) {
     #post_form_lower{
         flex-direction: column;

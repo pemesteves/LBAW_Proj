@@ -45,7 +45,7 @@ class ProfileController extends Controller{
       }
       
       return view('pages.user' , ['css' => ['navbar.css','posts.css','post_form.css','feed.css','profile.css'],
-      'js' => ['general.js','post.js','infinite_scroll.js'] , 'user' => Auth::user()->userable, 'posts' => $posts , 'groups' => $groups, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'image' => $image, 'org_status' => $org_status]);
+      'js' => ['general.js','post.js','infinite_scroll.js', 'uploadImages.js'] , 'user' => Auth::user()->userable, 'posts' => $posts , 'groups' => $groups, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'image' => $image, 'org_status' => $org_status]);
   }
 
   public function show_me_edit(){

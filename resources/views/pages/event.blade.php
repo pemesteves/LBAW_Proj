@@ -9,6 +9,10 @@
     }
 ?>
 
+
+<script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+
+
 @section('content')
 <div id="feed_container" class="container" >
     <div id="event_card" class="container card mb-3 border rounded">
@@ -94,7 +98,7 @@
     
     <div class="col-sm-8" style="flex-grow:1;max-width:100%">
 
-        <form id="post_form" class="new_post d-print-none">
+        <form id="post_form" class="new_post d-print-none" enctype="multipart/form-data">
             <div class="container" id="post_container">
                 @csrf
                 <input id="post_title" name="title" type="text" required="required" placeholder="Title"/>
@@ -103,15 +107,26 @@
                     <div id="post_upload">
                         <div>
                             <p class="fa fa-plus">&ensp;image</p>
-                            <input type="file"/>
+                            <input type="file" name="image"/>
                         </div>
                         <div>
-                                <p class="fa fa-plus">&ensp;file</p>
-                                <input type="file"/>
+                            <p class="fa fa-plus">&ensp;file</p>
+                            <input type="file" name="file"/>
                         </div>  
                     </div>
                     <div>
                         <button id="post_form_post" type="submit">Post</button> 
+                    </div>
+                </div>
+                <div class="container" id="postInputImages" style="display:none;">
+                    <div class="row">
+                        <div class="col-sm-6">    
+                            <img id="image" src="" style="display:none;"/>
+                        </div>
+                        <div class="col-sm-6">
+                            <img class="file" style="display:none;"/>
+                            <canvas class="file" style="display:none;"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>

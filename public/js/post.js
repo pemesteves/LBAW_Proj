@@ -282,9 +282,17 @@ function sendReportPostRequest(event) {
 
 
 function sendCreatePostRequest(event){
-  //TODO Add files
   let title = this.querySelector('input[name=title]').value;
   let body = this.querySelector('textarea').value;
+  let image = this.querySelector('input[name="image"]').value;
+  let file = this.querySelector('input[name="file"]').value;
+  /**
+   * TODO Change sendAjaxRequest to send enctype = multipart/form-data
+   * 
+   * Fix fakepath
+   * 
+   * console.error("image - " + image + "; file - " + file);
+   */
 
   let resource = "";
 
@@ -298,9 +306,17 @@ function sendCreatePostRequest(event){
   }else
     resource = '/api/posts/';
 
-  if(title != '' && body != '')
-    sendAjaxRequest('put', resource, {title: title, body: body}, postAddedHandler, postAddErrorHandler);
-  
+  let formData = new FormData(this);
+  if(image === '')
+    formData.delete("image");
+  if(file === '')
+    formData.delete("file");
+
+  if(title != '' && body != ''){
+    sendEnctypeAjaxRequest('post', resource, formData, postAddedHandler, postAddErrorHandler);
+    //sendAjaxRequest('put', resource, {title: title, body: body}, postAddedHandler, postAddErrorHandler);
+  }
+
   event.preventDefault();
   return false;
 }
@@ -399,6 +415,14 @@ function postAddedHandler() {
   let form = document.querySelector('form#post_form');
   form.querySelector('[type=text]').value="";
   form.querySelector('textarea').value="";
+
+  form.querySelector('input[name="image"]').value="";
+  form.querySelector('input[name="file"]').value="";
+
+  form.querySelector('img#image').style.display = "none";
+  form.querySelector('canvas.file').style.display = "none";
+  form.querySelector('img.file').style.display = "none";
+  form.querySelector('div#postInputImages').style.display = "none";
 
   // Insert the new post
   //form.parentElement.insertBefore(new_post, form.nextSibling);
