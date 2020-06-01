@@ -286,7 +286,6 @@ function sendCreatePostRequest(event){
   let body = this.querySelector('textarea').value;
   let image = this.querySelector('input[name="image"]').value;
   let file = this.querySelector('input[name="file"]').value;
-
   /**
    * TODO Change sendAjaxRequest to send enctype = multipart/form-data
    * 
@@ -307,9 +306,19 @@ function sendCreatePostRequest(event){
   }else
     resource = '/api/posts/';
 
-  if(title != '' && body != '')
-    sendAjaxRequest('put', resource, {title: title, body: body}, postAddedHandler, postAddErrorHandler);
+  let formData = new FormData(this);
+  if(image === '')
+    formData.delete("image");
+  if(file === '')
+    formData.delete("file");
   
+  formData.append('_method', 'put');
+  
+  if(title != '' && body != ''){
+    //sendEnctypeAjaxRequest('post', resource, formData, postAddedHandler, postAddErrorHandler);
+    sendAjaxRequest('put', resource, {title: title, body: body}, postAddedHandler, postAddErrorHandler);
+  }
+
   event.preventDefault();
   return false;
 }

@@ -14,7 +14,7 @@ use App\Report;
 use App\Notification;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Support\Facades\Session;
-
+use Symfony\Component\HttpFoundation\ParameterBag;
 
 class PostController extends Controller{
 

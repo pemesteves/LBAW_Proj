@@ -2,7 +2,6 @@
 
 @section('content')
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
 
 <div id="feed_container" class="container" >

@@ -5,6 +5,14 @@ function encodeForAjax(data) {
   }).join('&');
 }
 
+/*function encodeFormDataForAjax(data){
+  let object = {};
+  data.forEach(function(value, key){
+      object[key] = value;
+  });
+  return JSON.stringify(object);
+}
+*/
 function sendAjaxRequest(method, url, data, successHandler, errorHandler) {
   let request = new XMLHttpRequest();
 
@@ -16,6 +24,16 @@ function sendAjaxRequest(method, url, data, successHandler, errorHandler) {
   request.send(encodeForAjax(data));
 }
 
+/*function sendEnctypeAjaxRequest(method, url, data, successHandler, errorHandler) {
+  let request = new XMLHttpRequest();
+
+  request.open(method, url, true);
+  request.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="csrf-token"]').content);
+  request.setRequestHeader('Content-Type', 'multipart/form-data');
+  request.addEventListener('load', successHandler);
+  request.addEventListener('error', errorHandler);
+  request.send(encodeFormDataForAjax(data));
+}*/
 
 
 function addFeedback(message){
