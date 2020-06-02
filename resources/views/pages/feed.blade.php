@@ -17,7 +17,7 @@
                                     <li><small>No groups</small></li>
                                 @else
                                     @foreach ($groups as $group)
-                                        <li><a href="groups/{{$group->group_id}}"><small>{{$group->name}}</small></a></li>
+                                        <li><a href="groups/{{$group->group_id}}"><small class='sub-menu'>{{$group->name}}</small></a></li>
                                     @endforeach
                                 @endif
                                 <li><button class="btn btn-primary" onclick="window.location.href='/groups/create'"><span class="fa fa-plus"></span>&nbsp;Create Group</button>
@@ -32,7 +32,7 @@
                                     <li><small>No events</small></li>
                                 @else
                                     @foreach ($events as $event)
-                                        <li><a href="events/{{$event->event_id}}"><small>{{$event->name}}</small></a></li>
+                                        <li><a href="events/{{$event->event_id}}"><small class='sub-menu'>{{$event->name}}</small></a></li>
                                     @endforeach
                                 @endif
 

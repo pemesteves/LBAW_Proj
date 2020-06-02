@@ -1,7 +1,7 @@
 @extends('layouts.uconnect_basic')
 
 @section('content')
-    <div class="container">
+    <div id="search_container" class='container'>
     @if($users)
         <div class="searchDiv">
             <h2>Users</h2>
@@ -16,7 +16,7 @@
                     <div class="row searchDivCard" 
                          onclick="window.location.href='/users/{{$obj->regularUserId}}'">
                         <div class="col-sm-2">
-                            <img class="rounded-circle" 
+                            <img class="rounded-circle" style='width:10rem;height:10rem;'
                             @if (isset($obj->file_path) && $obj->file_path !== null)
                                 src="{{$obj->file_path}}"
                             @else
@@ -31,7 +31,7 @@
                     </div>
                 @endforeach
             </div>
-            <a href='/users/search?search={{$str}}'> More users </a>
+            <a href='/users/search?search={{$str}}'><span class="fa fa-plus" style='background-color:transparent;'></span> More users </a>
             @endif
         </div>
     @endif
@@ -49,7 +49,7 @@
                     <div class="row searchDivCard" 
                          onclick="window.location.href='/events/{{$obj->eventId}}'">
                         <div class="col-sm-2">
-                            <img class="rounded-circle" 
+                            <img class="rounded-circle"  style='width:10rem;height:10rem;'
                             @if (isset($obj->file_path) && $obj->file_path !== null)
                                 src="{{$obj->file_path}}"
                             @else
@@ -64,7 +64,7 @@
                     </div>
                 @endforeach
             </div>
-            <a href='/events/search?search={{$str}}'> More events </a>
+            <a href='/events/search?search={{$str}}'> <span class="fa fa-plus" style='background-color:transparent;'></span> More events </a>
             @endif
         </div>
     @endif
@@ -82,7 +82,7 @@
                 <div class="row searchDivCard" 
                          onclick="window.location.href='/groups/{{$obj->groupId}}'">
                         <div class="col-sm-2">
-                            <img class="rounded-circle" 
+                            <img class="rounded-circle"  style='width:10rem;height:10rem;'
                             @if (isset($obj->file_path) && $obj->file_path !== null)
                                 src="{{$obj->file_path}}"
                             @else
@@ -97,7 +97,7 @@
                     </div>
                 @endforeach
             </div>
-            <a href='/groups/search?search={{$str}}'> More groups </a>
+            <a href='/groups/search?search={{$str}}'> <span class="fa fa-plus" style='background-color:transparent;'></span> More groups </a>
             @endif
         </div>
     @endif
@@ -130,7 +130,7 @@
                     @endif
                 @endforeach
             </div>
-            <a href='/posts/search?search={{$str}}'> More posts </a>
+            <a href='/posts/search?search={{$str}}'> <span class="fa fa-plus" style='background-color:transparent;'></span> More posts </a>
             @endif
         </div>
     @endif

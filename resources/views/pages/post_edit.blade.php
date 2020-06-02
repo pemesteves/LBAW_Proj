@@ -34,10 +34,10 @@
                             <div class="row justify-content-end votes" style="font-size: 1.2em;">
                                 <div class="col-sm-9" style="padding: 0;"></div>
                                 <div class="col-sm-3" style="padding: 0; float:right">
-                                    <button class='upvote' style=" background-color: white; border: 0;" > 
+                                    <button class='upvote' style=" border: 0;" > 
                                         <span class="fa fa-thumbs-up post_like">&nbsp;{{ $post->upvotes }}&nbsp;</span>
                                     </button>    
-                                    <button class='downvote' style=" background-color: white; border: 0;" > 
+                                    <button class='downvote' style=" border: 0;" > 
                                         <span class="fa fa-thumbs-down post_dislike">&nbsp;{{ $post->downvotes }}&nbsp;</span>
                                     </button>
                                 </div>

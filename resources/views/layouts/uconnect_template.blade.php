@@ -18,8 +18,18 @@
             <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Barlow|Cormorant+Garamond&display=swap">
 
             <!-- Costume Css -->
-            <link href="{{ asset('css/colors.css') }}" rel="stylesheet">
             <link href="{{ asset('css/error.css') }}" rel="stylesheet">
+
+            @if(!Auth::check())
+                <link href="{{ asset('css/auth_theme.css') }}" rel="stylesheet">
+            @else
+                @if(Auth::user()->dark_mode)
+                    <link href="{{ asset('css/dark_theme.css') }}" rel="stylesheet">
+                @else
+                    <link href="{{ asset('css/light_theme.css') }}" rel="stylesheet">
+                @endif
+            @endif
+            
 
             
             @if(isset($css))
@@ -43,7 +53,6 @@
 
             <style>
                 body {
-                    background-color: rgba(244, 166, 98, 0.05);
                     font-family: 'Barlow', Arial, Helvetica, sans-serif
                 } 
 
@@ -56,12 +65,13 @@
             <title>UConnect: We're getting there</title>
         </head>
         <body>
-            <div id="full_page" style="padding: 0;display: flex; flex-flow: column;height: 100vh;">
+            <div id="full_page">
                 <div>
                     @yield('nav_bar')
                 </div>
                 
-                <div id='feedback'>
+                <div id='feedback' style='position: -webkit-sticky;position: sticky;top: 0;z-index:1;'>
+                    
                 </div>           
 
                 <div id="content" style='flex-grow: 1;'>

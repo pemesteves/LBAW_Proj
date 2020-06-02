@@ -32,7 +32,7 @@
                 </p>
             </div>       
             <div class="card-footer container no-gutters">  
-                <button type="submit" class="btn-primary">Edit Group</button>      
+                <button type="submit" id='edit_btn' class="btn-primary">Edit Group</button>      
             </div>
         </div>
     </form>

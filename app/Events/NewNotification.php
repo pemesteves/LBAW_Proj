@@ -20,15 +20,17 @@ class NewNotification implements ShouldBroadcastNow
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $notification;
+    public $image;
     public $dest;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Notification $notification, $dest)
+    public function __construct(Notification $notification, $image, $dest)
     {
         $this->notification = $notification;
+        $this->image = $image;
         $this->dest = $dest;
     }
 
@@ -38,8 +40,13 @@ class NewNotification implements ShouldBroadcastNow
      * @return \Illuminate\Broadcasting\Channel|array
      */
     public function broadcastOn()
-    {
-        return new Channel('notifiedUser.'.$this->dest);
+    {   
+        if($this->notification->notification_event_id)
+            return new Channel('notifiedEvent.'.$this->notification->notification_event_id);
+        else if($this->notification->notification_group_id)
+            return new Channel('notifiedGroup.'.$this->notification->notification_group_id);
+        else
+            return new Channel('notifiedUser.'.$this->dest);
     }
 
 }

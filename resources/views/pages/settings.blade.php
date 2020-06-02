@@ -14,7 +14,7 @@
                 <div style='margin-top:10%'>
 
                     <div style='margin-bottom:5rem; padding-bottom:1rem; border-bottom:solid 2px sandybrown'>
-                        <a href='/archived' style='text-decoration:none; color:black'>
+                        <a href='/archived' style='text-decoration:none;'>
                             <h3>See archived posts</h3>
                         </a>
                     </div>
@@ -40,7 +40,7 @@
                                         </form>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-secondary " data-dismiss="modal">Close</button>
                                         <button type="submit" form="deleteUserForm" id='deleteUser' class="btn btn-primary">Delete me</button>
                                     </div>
                                 </div>

@@ -1,0 +1,491 @@
+body{
+    background-color: #121212;
+}
+
+.btn-primary {
+    background-color: sandybrown;
+    border-color: rgb(255, 135, 30);
+}
+
+.btn-primary:hover{
+    background-color: rgb(255, 135, 30);
+    border-color: rgb(255, 135, 30);
+}
+
+.btn-light:hover{
+    background-color: rgb(50,50,50,1);
+    color:white;
+}
+
+
+.btn-primary:active{
+    background-color: rgb(204, 103, 14)!important;
+    border-color: rgb(204, 103, 14)!important;
+}
+
+.btn-primary:focus{
+    background-color: rgb(204, 103, 14)!important;
+    border-color: rgb(204, 103, 14)!important;
+}
+
+.btn-success, .text-success {
+    background-color: darkgreen;
+}
+
+.btn-danger, .text-danger {
+    background-color: darkred;
+}
+
+.btn-link {
+    color: sandybrown;
+    font-size: 1em;
+}
+
+.btn-accord {
+    color: rgb(117, 93, 71);
+    font-size: 1em;
+}
+
+.btn-link:hover {
+    color: rgb(204, 103, 14);
+}
+
+.text-primary {
+    color: sandybrown !important;
+}
+
+.text-link {
+    color: sandybrown;
+    font-size: 1em;
+}
+
+.menu_title{
+    color: #FFFFFF;
+}
+
+small.sub-menu{
+    color: #FFFFFF;
+}
+
+.dl-submenu{
+    color: #FFFFFF;
+}
+
+.post-left{
+    background-color: rgb(50,50,50,1);
+    color:  #FFFFFF;
+}
+.post-left ul li{
+    background-color: rgb(50,50,50,1);
+    color:  #FFFFFF;
+}
+
+
+.post_right{
+    background-color: rgb(50,50,50,1);
+    color:  #FFFFFF;
+}
+
+.post-footer{
+    background-color: rgb(90,90,90,1)
+}
+
+.small_post{
+    border-color:  #121212;
+}
+
+.small_post >   div {
+    background-color:  #212121;
+}
+
+.post .post_like {
+    color:#5faa01;
+}
+.post .post_dislike {
+    color:#da3434;;
+}
+
+.modal-content{
+    background-color: rgb(50,50,50,1);
+    color:  #FFFFFF;
+}
+
+.modal-content button{
+    background-color: rgb(50,50,50,1);
+    color: white;
+}
+.modal-content li{
+    background-color: rgb(50,50,50,1);
+    color: white;
+}
+
+.post_comment_form_text textarea{
+    background: none repeat scroll 0 0 rgb(120,120,120,1);
+}
+
+.post_comment_form_text textarea:focus{
+    background: none repeat scroll 0 0 rgb(202, 199, 197);
+    color:black;
+}
+
+.post_comment_form_text textarea::placeholder{
+    color:black !important;
+}
+
+.post .comment_like {
+    color:#5faa01;
+}
+.post .comment_dislike {
+    color:#da3434;;
+}
+
+.post small{
+    color: rgb(168, 163, 163);
+}
+
+.comment_text{
+    background-color:  rgb(120,120,120,1);
+}
+
+.comment_text:after {
+	border-right-color: rgb(120,120,120,1) !important;
+}
+
+.comment_container:target .comment_text {
+    background:rgb(163, 181, 187);
+    color:rgb(185, 117, 57);
+}
+.comment_container:target .comment_text:after {
+    border-right-color: rgb(163, 181, 187) !important;
+}
+
+#post_form #post_container{ 
+    border: none;
+}
+
+#post_form input[type=text] {
+    background: none repeat scroll 0 0 rgb(40,40,40,1);
+    border-color:  #FFFFFF #FFFFFF ;
+    color: #dfdfdf;
+}
+#post_form input[type=text]:focus {
+    background: none repeat scroll 0 0 rgb(60,60,60,1);
+    outline-width: 0;
+}
+
+#post_form textarea {
+    background: none repeat scroll 0 0 rgb(40,40,40,1);
+    box-shadow: 0 1px 2px rgba(211, 209, 209, 0.2) inset;
+    border-color:  #FFFFFF #FFFFFF ;
+    color: #dfdfdf;
+}
+#post_form textarea:focus {
+    background: none repeat scroll 0 0 rgb(60,60,60,1);
+    outline-width: 0;
+}
+
+
+#post_form_lower{
+    background: none repeat scroll 0 0 rgb(90,90,90,1);
+    border-color:  #FFFFFF #FFFFFF;
+    color: #dfdfdf;
+}
+
+#profile_card{
+    background-color: rgb(40,40,40,1);
+    border-color: none;
+    color:white;
+}
+
+#accordion .card-header h5 button{
+    color: sandybrown;
+}
+
+#accordion .card{
+    background-color: rgb(60,60,60,1) !important;
+}
+
+#accordion .card .collapse{
+    background-color: rgb(80,80,80,1) !important;
+}
+
+#profile_card #accordion .card-body ul li a {
+    color: white;
+}
+
+#user_opt button{
+    background-color: rgb(40,40,40,1);
+    color: white;
+}
+
+#user_opt *{
+    background-color: rgb(40,40,40,1);
+    color: white;
+}
+
+.interaction_opt{
+    background-color: rgb(90,90,90,1);
+    color: sandybrown;
+    border: none;
+}
+
+.recommendedFriend{
+    background-color: rgb(40,40,40,1);
+}
+
+.recommendedFriend .img_container{
+    background-color: rgb(40,40,40,1);
+}
+
+.recommendedFriend .small_user_name{
+    color: white;
+}
+.recommendedFriend .small_in_common{
+    color: rgb(168, 163, 163);
+}
+
+.recommendedFriend .interaction_opt{
+    background-color: rgb(90,90,90,1);
+    color: sandybrown;
+    border: none;
+}
+
+#notif{
+    background-color: rgb(40,40,40,1);
+    border-color:rgb(40,40,40,1);
+    color: white;
+}
+
+.notification{
+    background-color: rgb(40,40,40,1);
+}
+
+.notification *{
+    background-color: rgb(40,40,40,1);
+    color:white;
+}
+
+#group_card {
+    background-color: rgb(40,40,40,1);;
+    border:none !important; 
+}
+
+#group_card *{
+    background-color: rgb(40,40,40,1);
+    color:white;
+}
+
+#add_members_group{
+    border:none;
+}
+
+#add_members_group:hover{
+    background-color: rgb(133, 131, 131);
+}
+#add_members_group:hover *{
+    background-color: rgb(133, 131, 131);
+}
+
+#event_card {
+    background-color: rgb(40,40,40,1);;
+    border:none !important; 
+}
+
+#event_card *{
+    background-color: rgb(40,40,40,1);
+    color:white;
+    border:none !important;
+}
+
+#event_card .fa-map-pin{
+    color:sandybrown;
+}
+#event_card .fa-calendar{
+    color:sandybrown;
+}
+#event_card .card-footer {
+    background-color: rgb(80,80,80,1);
+}
+#event_card .card-footer *{
+    background-color: rgb(80,80,80,1);
+}
+
+.interaction_opt{
+    background-color: rgb(90,90,90,1) !important;
+    color: sandybrown !important;
+    border: none !important;
+}
+
+.interaction_opt:hover{
+    background-color: rgb(133, 131, 131) !important;
+    color: white !important;
+}
+
+#chat_content{
+    background-color:rgb(40,40,40,1);
+    color:white;
+}
+
+#chat_content .not_seen_count{
+    color:black;
+}
+
+#newmessage .chat_message_input{
+    border:  none;
+}
+
+#newmessage input[type=text] {
+    background: none repeat scroll 0 0 rgb(100,100,100,1);
+    border-color:  #FFFFFF #FFFFFF ;
+    color: black;
+}
+#newmessage input[type=text]:focus {
+    background: none repeat scroll 0 0 rgb(243, 238, 235);
+    outline-width: 0;
+}
+
+#newmessage input[type=text]::placeholder{
+    color:white !important;
+}
+
+#create_card {
+    background-color: rgb(40,40,40,1);;
+    border:none !important; 
+}
+
+#create_card *{
+    background-color: rgb(40,40,40,1);;
+    color:white;
+    border:none !important; 
+}
+
+#create_card .card .card-footer button{
+    background-color: sandybrown ;
+}
+
+#create_card input[type=text] {
+    background: none repeat scroll 0 0 rgb(100,100,100,1);
+    border-color:  #FFFFFF #FFFFFF ;
+    color: white;
+}
+#create_card input[type=text]:focus {
+    background: none repeat scroll 0 0 rgb(243, 238, 235);
+    color: black;
+    outline-width: 0;
+}
+#create_card textarea {
+    background: none repeat scroll 0 0 rgb(100,100,100,1);
+    border-color:  #FFFFFF #FFFFFF ;
+    color: white;
+}
+#create_card textarea:focus {
+    background: none repeat scroll 0 0 rgb(243, 238, 235);
+    color: black;
+    outline-width: 0;
+}
+
+#postFeed_container h4{
+    color: rgb(248, 225, 204);
+}
+
+#edit_btn{
+    background-color: sandybrown !important;
+}
+
+dialog{
+    background-color: rgb(100,100,100,1) !important;
+}
+dialog p{
+    background-color: rgb(100,100,100,1) !important;
+}
+dialog div{
+    background-color: rgb(100,100,100,1) !important;
+}
+
+#about_container{
+    color: white;
+}
+
+#about_container .card{
+    background-color: rgb(40,40,40,1);
+}
+
+#settings_container a{
+    color: white;
+}
+
+#deleteModalLabel{
+    color: rgb(206, 33, 33);
+}
+
+#settings_container h4{
+    color: rgb(248, 225, 204);
+}
+
+div.searchDiv {
+    background-color: rgb(60,60,60,1);
+    border:none;
+    color:white;
+}
+
+div.searchDiv > div {
+    border-bottom: 1px solid sandybrown;
+    border-top: 1px solid sandybrown;
+}
+
+div.searchDiv div.searchDivCard:not(:first-child) {
+    border-top: 1px solid sandybrown;
+}
+#search_container a{
+    color: sandybrown;
+}
+
+#profile_card {
+    background-color: rgb(40,40,40,1);
+}
+
+#profile_card *{
+    background-color: rgb(40,40,40,1);
+}
+
+#profile_card input[type=text] {
+    background: none repeat scroll 0 0 rgb(100,100,100,1);
+    border-color:  transparent ;
+    border-radius:5px;
+    color: white;
+}
+#profile_card input[type=text]:focus {
+    background: none repeat scroll 0 0 rgb(243, 238, 235);
+    color: black;
+    outline-width: 0;
+}
+#profile_card textarea {
+    background: none repeat scroll 0 0 rgb(100,100,100,1);
+    border-color:  transparent ;    
+    border-radius:5px;
+    color: white;
+}
+#profile_card textarea:focus {
+    background: none repeat scroll 0 0 rgb(243, 238, 235);
+    color: black;
+    outline-width: 0;
+}
+
+#edit_profile_button button{
+    background-color: sandybrown;
+}
+
+button.tab_selector:not(.tab_selected){
+    background: none repeat scroll 0 0 rgb(60,60,60,1);
+    color:sandybrown;
+}
+
+.report {
+    background-color: rgb(80,80,80,1);
+    color:white;
+}
+
+.request {
+    background-color: rgb(69, 116, 138);
+    color:white;
+}

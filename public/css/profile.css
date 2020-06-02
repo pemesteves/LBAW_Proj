@@ -26,9 +26,6 @@
 	padding-bottom: 10px;
 }
 
-#profile_card #accordion .card-body ul li a {
-    color: black;
-}
 
 #profile_card #accordion .card-body ul li:before {
     content: '';
