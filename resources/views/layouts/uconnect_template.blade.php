@@ -22,6 +22,7 @@
 
             @if(!Auth::check())
                 <link href="{{ asset('css/auth_theme.css') }}" rel="stylesheet">
+                <link href="{{ asset('css/authentication.css') }}" rel="stylesheet">
             @else
                 @if(Auth::user()->dark_mode)
                     <link href="{{ asset('css/dark_theme.css') }}" rel="stylesheet">

@@ -122,9 +122,9 @@
                                 </div>
                                 @endif
                             </div>
-                            <div class="col-sm-3" style="padding-left: 0; text-align: right">
+                            <div style="padding-left: 0; text-align: right;width:100%">
                                 <img src="{{object_get($post->image(), 'file_path')}}" alt="<?php $image_path = explode("/", object_get($post->image(), 'file_path')); echo end($image_path);?>"
-                                    style="max-height: 100%; max-width: 100%;"
+                                    style="max-height:50vh; max-width:100% ;display:block; margin-left: auto;margin-right: auto;"
                                 />
                             </div>
                         </div>

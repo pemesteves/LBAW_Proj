@@ -168,3 +168,7 @@ div.searchDiv div.searchDivCard:not(:first-child) {
 .request{
     background-color:powderblue;
 }
+
+#profile_card {
+    background-color: white;
+}

@@ -40,7 +40,7 @@ class GroupController extends Controller{
             ->where('group_id', '=', $id)
             ->where('user_id', '=', Auth::user()->userable->regular_user_id)
             ->select('admin')
-            ->limit(1);
+            ->limit(1)->get();
       
       $image = $group->image();
 

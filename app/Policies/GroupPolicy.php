@@ -30,7 +30,7 @@ class GroupPolicy
             return false;
 
         $user_in_group = DB::table('user_in_group')
-            ->where('user_id', '=', $user->userable_id)
+            ->where('user_id', '=', $user->userable->regular_user_id)
             ->where('group_id', '=', $group->group_id)
             ->get();
 

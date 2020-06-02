@@ -40,3 +40,15 @@ div#feed_container .post div.modal-dialog div.modal-content div.modal-header > d
     border-radius: 50%;     
     max-width: 7rem; 
 }
+
+#settings_container div div a h3:before {
+    content: '';
+    position: absolute;
+    border-right:2px solid black;
+    border-bottom:2px solid black;
+    width:10px;
+    height:10px;
+    top: calc(50% - 10px);
+    left: -5px;
+    transform: translateY(-50%) rotate(-45deg);
+}
