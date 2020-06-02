@@ -26,7 +26,7 @@
                         <legend styel='padding-left:50px'>Specifics</legend>
                         <div class="col-sm-6">
                             <label><span class="fa fa-calendar"></span>&nbsp;Date:</label>
-                            <input type="date" name="date" required/> <!--Change calendar-->
+                            <input type="date" name="date" min="<?=date("Y-m-d", strtotime("tomorrow"))?>" required/> <!--Change calendar-->
                         </div>
                         <div class="col-sm-6">
                             <label><span class="fa fa-map-pin"></span>&nbsp;Location:</label>
