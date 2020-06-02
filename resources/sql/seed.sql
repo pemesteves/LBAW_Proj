@@ -309,6 +309,7 @@ CREATE TABLE public."user_interested_in_event"
 (
 	"user_id" integer NOT NULL REFERENCES public."regular_user"("regular_user_id") ON DELETE CASCADE,
 	"event_id" integer NOT NULL REFERENCES public."event"("event_id") ON DELETE CASCADE,
+	"date" timestamp with time zone NOT NULL DEFAULT now(),
 	CONSTRAINT "user_interested_in_event_pkey" PRIMARY KEY ("user_id", "event_id")
 );
 

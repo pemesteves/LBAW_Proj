@@ -1,0 +1,12 @@
+div.graph {
+    border: 1px solid lightgray;
+    margin-bottom: 1em;
+}
+
+div.stats {
+    padding: 1em;
+}
+
+div.stats:first-child {
+    border-bottom: 1px solid lightgray;
+}

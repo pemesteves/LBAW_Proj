@@ -10,6 +10,7 @@ use App\Report;
 use App\Event;
 use App\File;
 use App\Image;
+use ErrorException;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
@@ -46,6 +47,128 @@ class EventController extends Controller{
 
       return view('pages.event' , ['css' => ['navbar.css','event.css','posts.css','post_form.css','feed.css'],
       'js' => ['event.js','post.js','infinite_scroll.js','general.js', 'uploadImages.js'] ,'interested'=>$interested , 'event' => $event, 'posts' => $posts, 'going' => $going, 'can_create_events' => $can_create_events, 'is_owner' => $owner, 'image' => $image]);
+    }
+
+    public function show_statistics($id){
+      if (!Auth::check()) return redirect('/login');
+
+      $event = Event::find($id);
+      if(!isset($event))
+        throw new HttpException(404, "event");
+
+      if($event->type == "blocked" && !Auth::user()->isAdmin())
+        throw new HttpException(404, "event");
+
+      // Only a admin can see the statistics, like in the edit option
+      $this->authorize('edit', $event);
+
+      $going = $event->going();
+      
+      $can_create_events  = Auth::user()->userable->regular_userable_type === 'App\Organization';
+
+      $image = $event->image();
+
+      $users_posts = array();
+      $postsPerDay = array();
+
+      $posts = $event->posts;
+      
+      foreach($posts as $post){
+        if(isset($users_posts[$post->regularUser->regular_user_id])){
+          $users_posts[$post->regularUser->regular_user_id]++;
+        }else{
+          $users_posts[$post->regularUser->regular_user_id] = 1;
+        }
+
+        $postDate = date('d-m-Y', strtotime($post->date));
+        if(isset($postsPerDay[$postDate])){
+          $postsPerDay[$postDate]++;
+        }else{
+          $postsPerDay[$postDate] = 1;
+        }
+      }
+
+      $numberPosts = [
+        0 => 0,
+        1 => 0,
+        2 => 0,
+        3 => 0,
+        4 => 0
+      ];
+
+      foreach($users_posts as $numPosts){
+          if($numPosts === 0){
+            $numberPosts[0]++;
+          }else if ($numPosts <= 5){
+            $numberPosts[1]++;
+          }else if ($numPosts <= 10){
+            $numberPosts[2]++;
+          }else if ($numPosts <= 15){
+            $numberPosts[3]++;
+          }else {
+            $numberPosts[4]++;
+          }
+      }
+      
+      $postsPerUser = array(
+        array("label"=> "0 posts", "y"=> $numberPosts[0]),
+        array("label"=> "1-5 posts", "y"=> $numberPosts[1]),
+        array("label"=> "6-10 posts", "y"=> $numberPosts[2]),
+        array("label"=> "11-15 posts", "y"=> $numberPosts[3]),
+        array("label"=> "+15 posts", "y"=> $numberPosts[4])
+      );
+
+      $postsPerDayOfYear = array();
+      foreach(array_keys($postsPerDay) as $post_date){
+        array_push($postsPerDayOfYear, array("x" => strtotime($post_date)* 1000, "y" => $postsPerDay[$post_date]));
+      }
+
+      try{
+        $firstDay = reset($postsPerDayOfYear)["x"];
+      }catch(ErrorException $e){
+        $firstDay = null;
+      }
+
+      try{
+        $lastDay = end($postsPerDayOfYear)["x"];
+      }catch(ErrorException $e){
+        $lastDay = null;
+      }
+
+      $interested = DB::table('user_interested_in_event')
+        ->where('event_id', '=', $event->event_id)
+        ->orderBy('date', 'asc')
+        ->get();
+        
+      $usersPerDay = array();
+      foreach($interested as $interestedUser){
+        $interestDate = date('d-m-Y', strtotime($interestedUser->date));
+        if(isset($usersPerDay[$interestDate])){
+          $usersPerDay[$interestDate]++;
+        }else{
+          $usersPerDay[$interestDate] = 1;
+        }
+      }
+
+      $lastNumUsers = null;
+      $newUsersPerDay = array();
+      foreach(array_keys($usersPerDay) as $date){
+        if($lastNumUsers !== null){
+          $usersPerDay[$date] += $lastNumUsers;
+          array_push($newUsersPerDay, array("x" => strtotime($date)* 1000, "y" => $usersPerDay[$date]));
+        }else{
+          array_push($newUsersPerDay, array("x" => strtotime($date)* 1000, "y" => $usersPerDay[$date]));
+        }
+        $lastNumUsers = $usersPerDay[$date];
+      }
+
+      reset($usersPerDay);
+      return view('pages.event_statistics' , ['css' => ['navbar.css','event.css','posts.css','post_form.css','feed.css','statistics.css'],
+      'js' => ['event.js','post.js','infinite_scroll.js','general.js', 'uploadImages.js'] ,
+      'event' => $event, 'going' => $going, 'can_create_events' => $can_create_events, 'image' => $image,
+      'posts_per_user'=>$postsPerUser, 'postsPerDay' => $postsPerDay, 'postsPerDayOfYear' => $postsPerDayOfYear,
+      'firstDay' => $firstDay, 'lastDay' => $lastDay, 'usersPerDay' => $newUsersPerDay,
+      'firstUserDay' => key($usersPerDay), 'lastUserDay' => array_key_last($usersPerDay)]);
     }
 
     public function showCreateForm(){
