@@ -131,7 +131,7 @@ function openReportGroupModal(event){
     let count = document.querySelector("button#memberButton p");
     count.innerHTML = (parseInt(count.textContent)+1) + " members";
 
-    let memberCard = new_member.querySelector('span.remove_button');
+    let memberCard = document.querySelector('span.remove_button');
     memberCard.addEventListener('click', sendRemoveMemberRequest);
 
     addFeedback("Member added successfully.");
