@@ -118,7 +118,7 @@ class GroupController extends Controller{
       
       $image = $group->image();
 
-      return view('pages.edit_group' , ['css' => ['navbar.css','group.css','posts.css','post_form.css','feed.css','help.css'],
+      return view('pages.edit_group' , ['css' => ['navbar.css','group.css','posts.css','post_form.css','feed.css','help.css','create.css'],
       'js' => ['general.js','uploadImages.js'],
        'group' => $group, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'image' => $image ]);
     }
