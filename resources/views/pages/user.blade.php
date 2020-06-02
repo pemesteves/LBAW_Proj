@@ -6,7 +6,7 @@
 
 <br>
 <div id="feed_container" class="container" >
-    <div id="profile_card" class="container" style="padding-top: 1em; margin-bottom: 0; background-color: white; border: 1px solid lightgrey;">
+    <div id="profile_card" class="container" style="padding-top: 1em; margin-bottom: 0;">
         <div class="row">
             <div class="col-3">
                 <div class="text-center" style="max-width: 75%; max-height: 80%;">
@@ -48,42 +48,42 @@
                     </h2>
                         @if(Auth::user()->user_id != $user->user_id && !Auth::user()->isAdmin())
                             @if(count($friendship_status) == 0)
-                            <span class="btn btn-light add_friend" data-id='{{$user->regular_user_id}}' style="margin-left: auto; margin-right:4%;background-color: rgba(0,0,150,.03); ">
+                            <span class="btn btn-light add_friend interaction_opt" data-id='{{$user->regular_user_id}}' style="margin-left: auto; margin-right:4% ">
                                 Add Friend
                             </span>
                             @elseif($friendship_status[0]->type == 'accepted')
-                                <span  class="btn btn-light remove_friend" data-id='{{$user->regular_user_id}}' style="margin-left: auto; margin-right:4%;background-color: rgba(0,0,150,.03); ">
+                                <span  class="btn btn-light remove_friend interaction_opt" data-id='{{$user->regular_user_id}}' style="margin-left: auto; margin-right:4%; ">
                                     Remove Friend
                                 </span>
                             @elseif($friendship_status[0]->type == 'pending')
                                 @if($friendship_status[0]->friend_id1 == Auth::user()->userable_id)
-                                    <span  class="btn btn-light cancel_friend" data-id='{{$user->regular_user_id}}' style="margin-left: auto; margin-right:4%;background-color: rgba(0,0,150,.03); ">
+                                    <span  class="btn btn-light cancel_friend interaction_opt" data-id='{{$user->regular_user_id}}' style="margin-left: auto; margin-right:4%; ">
                                         Cancel Request
                                     </span>
                                 @else
-                                        <span  class="btn btn-light accept_friend" data-id='{{$user->regular_user_id}}' style="margin-left: auto; margin-right:4%;background-color: rgba(0,0,150,.03); ">
+                                        <span  class="btn btn-light accept_friend interaction_opt" data-id='{{$user->regular_user_id}}' style="margin-left: auto; margin-right:4%; ">
                                             Accept
                                         </span>
-                                        <span class="btn btn-light decline_friend" data-id='{{$user->regular_user_id}}' style="margin-right:4%;background-color: rgba(0,0,150,.03); ">
+                                        <span class="btn btn-light decline_friend interaction_opt" data-id='{{$user->regular_user_id}}' style="margin-right:4%; ">
                                             Decline
                                         </span>
                                 @endif
                             @endif
                         @elseif (Auth::user()->user_id == $user->user_id && get_class($user->regular_userable) == "App\Organization")  
                             @if (count($org_status) == 0)
-                                <button type="button" class="btn btn-light verify_org" onClick="this.disabled=true" data-id='{{$user->regular_user_id}}' style="margin-left: auto; margin-right:4%;background-color: rgba(0,0,150,.03); ">
+                                <button type="button" class="btn btn-light verify_org interaction_opt" onClick="this.disabled=true" data-id='{{$user->regular_user_id}}' style="margin-left: auto; margin-right:4%; ">
                                     Verify Organization
                                 </button>
                             @elseif($org_status[0]->type == 'pending')
-                                <button type="button" class="btn btn-light verify_pending" data-id='{{$user->regular_user_id}}' style="margin-left: auto; margin-right:4%;background-color: rgba(0,0,150,.03); " disabled>
+                                <button type="button" class="btn btn-light verify_pending interaction_opt" data-id='{{$user->regular_user_id}}' style="margin-left: auto; margin-right:4%; " disabled>
                                     Request Pending
                                 </button>
                             @elseif($org_status[0]->type == 'accepted')
-                                <button type="button" class="btn btn-light org" data-id='{{$user->regular_user_id}}' style="margin-left: auto; margin-right:4%;background-color: rgba(0,0,150,.03); " disabled>
+                                <button type="button" class="btn btn-light org interaction_opt" data-id='{{$user->regular_user_id}}' style="margin-left: auto; margin-right:4%; " disabled>
                                     Verified
                                 </button>
                             @else
-                                <button type="button" class="btn btn-light verify_org" onClick="this.disabled=true" data-id='{{$user->regular_user_id}}' style="margin-left: auto; margin-right:4%;background-color: rgba(0,0,150,.03); ">
+                                <button type="button" class="btn btn-light verify_org interaction_opt" onClick="this.disabled=true" data-id='{{$user->regular_user_id}}' style="margin-left: auto; margin-right:4%;">
                                     Verify Organization
                                 </button>
                             @endif
@@ -94,25 +94,25 @@
                 </div>
             </div>
             <div class="col-sm-1 d-print-none">
-                <div class="btn-group dropleft" style="margin-right: 0; padding-right: 0; width: 100%">
-                    <button type="button" data-toggle="dropdown" style="font-size: 150%; margin-right: 0; padding-right: 0; width: 100%; background-color: white; border: 0;"> 
+                <div id='user_opt' class="btn-group dropleft" style="margin-right: 0; padding-right: 0; width: 100%">
+                    <button type="button" data-toggle="dropdown" style="font-size: 150%; margin-right: 0; padding-right: 0; width: 100%; border: 0;"> 
                     <span class="fa fa-ellipsis-v" ></span></button>
                     <div class="dropdown-menu options_menu" style="min-width:5rem">
                         <ul class="list-group">
                             @if (Auth::user()->user_id == $user->user_id)
                                 <li class="list-group-item options_entry" style="text-align: left;">
-                                    <button onclick="location.href='/users/me/edit'" style=" margin-left:auto; margin-right:auto; background-color: white; border: 0;">
+                                    <button onclick="location.href='/users/me/edit'" style=" margin-left:auto; margin-right:auto; border: 0;">
                                         Edit
                                     </button>
                                 </li>
                                 <li class="list-group-item options_entry" style="text-align: left;">
-                                    <button class='delete' style=" background-color: white; border: 0;" > 
+                                    <button class='delete' style="border: 0;" > 
                                         Delete
                                     </button>
                                 </li>
                             @else
                                 <li class="list-group-item options_entry" style="text-align: left;">
-                                    <button class='report' data-id='{{$user->regular_userable->regular_user_id}}' style="background-color: white; border: 0;">Report</button>
+                                    <button class='report' data-id='{{$user->regular_userable->regular_user_id}}'>Report</button>
                                 </li>
                             @endif
                         </ul>

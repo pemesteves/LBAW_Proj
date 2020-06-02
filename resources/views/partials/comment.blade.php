@@ -29,24 +29,24 @@
         </div>
     <div >
         <div class="btn-group dropright d-print-none" style="margin-right: 0; padding-right: 0; width: 100%">
-            <button type="button" data-toggle="dropdown" style="padding:0;font-size: 100%;width:20px; margin-right: 0; padding-left: 1px;padding-right: 1px; width: 100%; background-color: white; border: 0;"> 
+            <button type="button" data-toggle="dropdown" style="padding:0;font-size: 100%;width:20px; margin-right: 0; padding-left: 1px;padding-right: 1px; width: 100%; border: 0;"> 
             <span class="fa fa-ellipsis-v" ></span></button>
             <div class="dropdown-menu options_menu" style="min-width:5rem">
                 <ul class="list-group">
                     @if($comment->user_id == Auth::user()->userable->regular_user_id)
                         <li class="list-group-item options_entry" style="text-align: left;">
-                            <button class='comment_edit' style=" margin-left:auto; margin-right:auto; background-color: white; border: 0;">
+                            <button class='comment_edit' style=" margin-left:auto; margin-right:auto; border: 0;">
                                 Edit
                             </button>
                         </li>
                         <li class="list-group-item options_entry" style="text-align: left;">
-                            <button class='comment_delete' style=" background-color: white; border: 0;" > 
+                            <button class='comment_delete' style=" border: 0;" > 
                                 Delete
                             </button>
                         </li>
                     @else
                         <li class="list-group-item options_entry" style="text-align: left;">
-                            <button class='comment_report' style=" background-color: white; border: 0;" > 
+                            <button class='comment_report' style=" border: 0;" > 
                                 Report
                             </button>
                         </li>

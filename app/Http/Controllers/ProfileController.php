@@ -277,4 +277,22 @@ class ProfileController extends Controller{
     return view('requests.posts',['posts' => $myPosts]);
   }
 
+  function dark(){
+    if (!Auth::check()) return redirect('/login');
+
+    Auth::user()->update(['dark_mode' => true]);
+
+    return back();
+
+  }
+
+  function light(){
+    if (!Auth::check()) return redirect('/login');
+
+    Auth::user()->update(['dark_mode' => false]);
+
+    return back();
+
+  }
+
 }

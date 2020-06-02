@@ -303,7 +303,11 @@ window.Echo = new Echo({
                         <button class="btn btn-outline-light dropdown-toggle dropdown-toggle-split" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">            
                             <div class="navbar-nav">
-                                    <a class="dropdown-item" href="#"><span class="fa fa-adjust"></span>&nbsp;&nbsp;Dark Mode</a>
+                                @if(!Auth::user()->dark_mode)
+                                    <a class="dropdown-item" href="/dark_mode"><span class="fa fa-adjust"></span>&nbsp;&nbsp;Dark Mode</a>
+                                @else
+                                    <a class="dropdown-item" href="/light_mode"><span class="fa fa-adjust"></span>&nbsp;&nbsp;Light Mode</a>
+                                @endif
                                 @if(!Auth::user()->isAdmin())   
                                     <a class="dropdown-item" href="/groups/create"><span class="fa fa-users"></span>&nbsp;Create Group</a>
                                     @if (isset($can_create_events) && $can_create_events)

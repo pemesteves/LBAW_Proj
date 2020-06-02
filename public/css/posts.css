@@ -18,15 +18,12 @@
 }
 
 .post_comment_form_text textarea{
-    
-    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.01);
 
     border-image: none;
     border-radius: 0.4em;
     border-style: none solid solid none;
     border-width: medium 0px 0px medium;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12) inset;
-    color: #444444;
     transition: background-color 0.2s ease 0s;
 }
 
@@ -56,10 +53,8 @@
 .post_container .comment_padding{
     padding-left: 5em   ;
 }
-
 .comment_text{
     position: relative;
-    background:rgb(243, 238, 235);
 	border-radius: 0 .4em .4em .4em;
 }
 
@@ -75,7 +70,6 @@
 	width: 0;
 	height: 0;
 	border: 15px solid transparent;
-	border-right-color: rgb(243, 238, 235);
 	border-left: 0;
 	border-top: 0;
 	margin-top: 0px;
