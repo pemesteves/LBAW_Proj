@@ -465,7 +465,6 @@
                             .listen('NewMessage', (e) => {
                                 var idUser = {{Auth::user()->userable->regular_user_id}}
                                 let new_message = document.createElement("P");
-                                //console.log(e);
                                 if (idUser == e.message.sender_id) {
                                     new_message.className = "chat_my_message";
                                     new_message.innerHTML = `${e.message.body}`;

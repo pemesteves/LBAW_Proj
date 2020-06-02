@@ -84,6 +84,7 @@ Route::put('/api/users/{teacher_id}/appointments/{time_id}', 'ProfileController@
 Route::put('/api/users/{id}/apply', 'RegularUserController@applyToOrg');
 Route::put('/api/users/{id}/reject', 'RegularUserController@rejectApplication');
 Route::put('/api/users/{id}/accept', 'RegularUserController@acceptApplication');
+Route::delete('/api/users/{id}/remove', 'RegularUserController@removeUser');
 
 
 

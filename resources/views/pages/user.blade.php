@@ -136,7 +136,7 @@
                                         Delete
                                     </button>
                                 </li>
-                                @if (get_class(Auth::user()->userable->regular_userable) == "App\Organization")
+                                @if (get_class(Auth::user()->userable->regular_userable) == "App\Organization" && $user->regular_user_id == Auth::user()->userable->regular_user_id)
                                 <li class="list-group-item options_entry" style="text-align: left;">
                                     <button class='manage manage_applications' id="manage_applications" data-id='{{$user->regular_userable->regular_user_id}}' style="background-color: white; border: 0;" data-toggle="modal" data-target="#viewUserApplications">
                                         Manage members
@@ -351,12 +351,19 @@
                                 </a> 
                             </div>
                             @if($member_in_org->regular_user_id == Auth::user()->userable->regular_user_id)
-                                <div class="col-sm" style="flex-grow:0; max-width:100%; text-align: left;" data-id='{{$member_in_org->regular_user_id}}'>
+                                <div class="col-sm user_leave_org" style="flex-grow:0; max-width:100%; text-align: left;" data-id='{{$member_in_org->regular_user_id}}'>
                                     <span class="btn btn-light leave_org_button" id="leave_org_button" data-id='{{$member_in_org->regular_user_id}}' 
                                         style="background-color: rgba(0,0,150,.03);float:right; margin-right:0.5rem;margin-top:0.2rem;font-size:0.9rem ">
                                         Leave
                                     </span>
                                 </div>
+                            @elseif(Auth::user()->userable->regular_user_id == $user->regular_user_id && get_class($user->regular_userable) == "App\Organization")
+                                <div class="col-sm user_leave_org" style="flex-grow:0; max-width:100%; text-align: left;" data-id='{{$member_in_org->regular_user_id}}'>
+                                        <span class="btn btn-light leave_org_button" id="leave_org_button" data-id='{{$member_in_org->regular_user_id}}' 
+                                            style="background-color: rgba(0,0,150,.03);float:right; margin-right:0.5rem;margin-top:0.2rem;font-size:0.9rem ">
+                                            Remove
+                                        </span>
+                                    </div>
                             @endif
                         </div>
                     </div>

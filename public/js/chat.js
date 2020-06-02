@@ -45,8 +45,6 @@ function sendCreateMessageRequest(event){
 function sendLeaveChatRequest(event) {
   let user_id = this.closest('div').getAttribute('data-id');
   let chat_id = document.getElementsByClassName('chat')[0].getAttribute('data-id');
-  console.log(user_id);
-  console.log(chat_id);
 
   sendAjaxRequest('delete', '/api/chats/'+chat_id+'/deleteUser', {user_id : user_id}, deletedUserHandler);
 
@@ -68,7 +66,6 @@ function deletedUserHandler(){
 
 
 function messageAddedHandler(){
-  console.log(this.responseText);
   if (this.status != 200 && this.status != 201){
     // window.location = '/';
     return;
@@ -123,7 +120,6 @@ function showNewMembersHandler(){
 }
 
 function newChatHandler() {
-  console.log(this.responseText);
   if (this.status != 200 && this.status != 201){
     return;
   }

@@ -35,8 +35,6 @@
         <script>
                 window.Echo.channel('chat.{{$chat->chat_id}}')
                 .listen('NewMessage', (e) => {
-                        console.log('aqui');
-                        console.log(e);
                         @if(!$current_chat or $chat->chat_id != $current_chat->chat_id)
                                 let count = document.querySelector('#chats_view_{{$chat->chat_id}} h5.not_seen_count');
                                 count.textContent = parseInt(count.textContent)+1;

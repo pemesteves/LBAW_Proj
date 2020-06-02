@@ -21,6 +21,11 @@ function addEventListeners() {
       rejector.addEventListener('click', sendRejectRequest);
     });
 
+    let orgUserLeave = document.querySelectorAll('.user_leave_org');
+    [].forEach.call(orgUserLeave, function(leaver) {
+      leaver.addEventListener('click', sendLeaveRequest);
+    });
+
 }
 
   function sendOrgRequest(event) {
@@ -45,6 +50,7 @@ function addEventListeners() {
     event.preventDefault();
   }
 
+
   function sendRejectRequest(event) {
     let id = this.getAttribute('data-id');
     let org_reg_id = document.getElementById('manage_applications').getAttribute('data-id');
@@ -52,6 +58,12 @@ function addEventListeners() {
     event.preventDefault();
   }
 
+  function sendLeaveRequest(event) {
+    let id = this.getAttribute('data-id');
+    let org_reg_id = document.getElementById('org_members_button').getAttribute('data-id');;
+    sendAjaxRequest('delete', '/api/users/' +  org_reg_id + '/remove', {id:id, org_id:org_reg_id}, orgLeaverHandler, orgLeaverErrorHandler);
+    event.preventDefault();
+  }
   
 
   function orgRequestHandler() {
@@ -104,6 +116,23 @@ function addEventListeners() {
     addFeedback("Request sent successfully");
     let element = document.querySelectorAll('.member_applied[data-id="'+ x + '"]');
     element[0].remove();
+    return;
+
+  }
+
+  function orgLeaverHandler() {
+    if (this.status != 200 && this.status != 201) {
+      let x = this.responseText;
+      addErrorFeedback("Request processing failed.");
+      return;
+    }
+    let x = JSON.parse(this.responseText);
+    addFeedback("Request processing failed.");
+    let element = document.querySelectorAll('.member_card[data-id="'+ x + '"]');
+    element[0].remove();
+
+    let count = document.querySelector("button#org_members_button p");
+    count.innerHTML = (parseInt(count.textContent)-1) + " members";
 
   }
   
@@ -120,6 +149,10 @@ function addEventListeners() {
   }
 
   function orgRejectorErrorHandler() {
+    addErrorFeedback("Request processing failed.");
+  }
+
+  function orgLeaverErrorHandler() {
     addErrorFeedback("Request processing failed.");
   }
 
@@ -152,13 +185,21 @@ function addEventListeners() {
                                     </div>
                                 </a> 
                             </div>
+                            <div class="col-sm user_leave_org" style="flex-grow:0; max-width:100%; text-align: left;" data-id='${reg_user.regular_user_id}'>
+                                <span class="btn btn-light leave_org_button" id="leave_org_button" data-id='${reg_user.regular_user_id}' 
+                                    style="background-color: rgba(0,0,150,.03);float:right; margin-right:0.5rem;margin-top:0.2rem;font-size:0.9rem ">
+                                    Remove
+                                </span>
+                            </div>
                         </div>
     `
 
     document.querySelector('#all_org_members').appendChild(new_member);
     let count = document.querySelector("button#org_members_button p");
     count.innerHTML = (parseInt(count.textContent)+1) + " members";
-
+    
+    let org_leaver = new_member.querySelector('.user_leave_org');
+    org_leaver.addEventListener('click', sendLeaveRequest);
   }
 
 
