@@ -151,6 +151,14 @@ small.sub-menu{
 	border-right-color: rgb(120,120,120,1) !important;
 }
 
+.comment_container:target .comment_text {
+    background:rgb(163, 181, 187);
+    color:rgb(185, 117, 57);
+}
+.comment_container:target .comment_text:after {
+    border-right-color: rgb(163, 181, 187) !important;
+}
+
 #post_form #post_container{ 
     border: none;
 }
@@ -465,4 +473,19 @@ div.searchDiv div.searchDivCard:not(:first-child) {
 
 #edit_profile_button button{
     background-color: sandybrown;
+}
+
+button.tab_selector:not(.tab_selected){
+    background: none repeat scroll 0 0 rgb(60,60,60,1);
+    color:sandybrown;
+}
+
+.report {
+    background-color: rgb(80,80,80,1);
+    color:white;
+}
+
+.request {
+    background-color: rgb(69, 116, 138);
+    color:white;
 }

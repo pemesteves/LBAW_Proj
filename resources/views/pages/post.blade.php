@@ -87,6 +87,7 @@
                     <div class="row post_content">
                         <p> {{ $post['body'] }}</p>
                     </div>
+                    @if(!Auth::user()->isAdmin())
                     <form class="d-print-none">
                         @csrf
                         <div class="row post_comment_form" >
@@ -107,6 +108,7 @@
                             </div>
                         </div>
                     </form>
+                    @endif
                     <div id ="comments">
                         @each("partials.comment" , $post->comments, "comment")
 

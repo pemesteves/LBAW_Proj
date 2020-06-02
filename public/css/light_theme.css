@@ -74,6 +74,13 @@ body{
 	border-right-color: rgb(243, 238, 235) !important;
 }
 
+.comment_container:target .comment_text {
+    background:rgb(198, 223, 231);
+}
+.comment_container:target .comment_text:after {
+    border-right-color: rgb(198, 223, 231) !important;
+}
+
 .modal-content{
     background-color: white
 }
@@ -156,4 +163,8 @@ div.searchDiv div.searchDivCard:not(:first-child) {
 }
 #profile_card {
     border: 1px solid lightgrey;
+}
+
+.request{
+    background-color:powderblue;
 }

@@ -58,10 +58,6 @@
 	border-radius: 0 .4em .4em .4em;
 }
 
-.comment_container:target .comment_text {
-    background:rgb(198, 223, 231);
-}
-
 .comment_text:after {
 	content: '';
 	position: absolute;
@@ -76,9 +72,6 @@
 	margin-left: -15px;
 }
 
-.comment_container:target .comment_text:after {
-    border-right-color: rgb(198, 223, 231);
-}
 
 .comment_text p{
     max-width: 100%;
