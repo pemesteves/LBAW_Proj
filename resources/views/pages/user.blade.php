@@ -136,10 +136,12 @@
                                         Delete
                                     </button>
                                 </li>
+                                @if (get_class(Auth::user()->userable->regular_userable) == "App\Organization")
                                 <li class="list-group-item options_entry" style="text-align: left;">
                                     <button class='manage manage_applications' id="manage_applications" data-id='{{$user->regular_userable->regular_user_id}}' style="background-color: white; border: 0;" data-toggle="modal" data-target="#viewUserApplications">
                                         Manage members
                                     </button>
+                                @endif
                             @else
                                 <li class="list-group-item options_entry" style="text-align: left;">
                                     <button class='report' data-id='{{$user->regular_userable->regular_user_id}}'>Report</button>
