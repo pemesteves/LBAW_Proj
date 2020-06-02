@@ -176,7 +176,7 @@ CREATE TABLE public."post"
 CREATE TABLE public."file"
 (
 	"file_id" serial NOT NULL,
-	"post_id" integer REFERENCES public."post"("post_id"),
+	"post_id" integer REFERENCES public."post"("post_id") ON DELETE CASCADE,
 	"file_path" text NOT NULL,
 	
 	CONSTRAINT "file_id_pkey" PRIMARY KEY ("file_id")
