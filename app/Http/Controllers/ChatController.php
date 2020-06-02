@@ -26,8 +26,11 @@ class ChatController extends Controller{
 
       $messages = Message::join('chat','chat.chat_id','=', 'message.chat_id')
                      ->where('chat.chat_id', '=',  $id)
-                     ->orderBy('date','asc')
-                     ->get();
+                     ->orderBy('date','desc')
+                     ->limit(20)
+                     ->get()->reverse();
+
+        
 
       $members = $chat->members();
       DB::table("user_in_chat")->where([['chat_id',$chat->chat_id],['user_id',Auth::user()->userable->regular_user_id]])->update(['not_seen' => 0]);
@@ -92,6 +95,25 @@ class ChatController extends Controller{
 
       return json_encode($userInChat);
       
+    }
+
+    public function getMessages($chat_id,$id){
+
+      $chat = Chat::find($chat_id);
+
+      if(!isset($chat))
+        throw new HttpException(404, "chat");
+
+      $this->authorize('show', $chat);
+
+      $messages = Message::join('chat','chat.chat_id','=', 'message.chat_id')
+                     ->where([['chat.chat_id', '=',  $chat_id],['message.message_id','<',$id]])
+                     ->orderBy('date','desc')
+                     ->limit(10)
+                     ->get()->reverse();
+
+      return view('requests.messages',['messages' => $messages]);
+
     }
 
 }

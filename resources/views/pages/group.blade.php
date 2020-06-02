@@ -46,12 +46,10 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form action='/users/delete' method='post'>
                                                     <div class="form-group">
                                                         <label class="col-form-label">Member:</label>
                                                         <input type="text" name='name' autocomplete="off" label='name' class="form-control" id="new_member_name">
                                                     </div>
-                                                    </form>
                                                     <div id='members_search'>
                                                         
                                                     </div>
@@ -124,7 +122,8 @@
                             <span class="fa fa-ellipsis-v" ></span></button>
                             <div class="dropdown-menu options_menu" id="group_menu_options" style="min-width:5rem">
                                 <ul class="list-group">
-                                    @if ($is_owner)
+
+                                    @if ($is_owner && $is_owner[0]->admin)
                                         <li class="list-group-item options_entry" style="text-align: left;">
                                             <button onclick="location.href='/groups/{{$group->group_id}}/edit'" style="margin-left:auto; margin-right:auto;  border: 0;">
                                                 Edit
@@ -135,13 +134,12 @@
                                                 Delete
                                             </button>
                                         </li>
-                                    
+                                    @endif
                                         <li class="list-group-item options_entry" style="text-align: left;">
                                             <button class='report' style="border: 0;" data-id='{{$group->group_id}}' > 
                                                 Report
                                             </button>
                                         </li>
-                                    @endif
                                 </ul>
                             </div>
                         </div>

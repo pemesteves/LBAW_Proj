@@ -93,4 +93,5 @@ class Group extends Model
             
         return $image[0];
     }
+
 }

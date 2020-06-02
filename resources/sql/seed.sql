@@ -176,7 +176,7 @@ CREATE TABLE public."post"
 CREATE TABLE public."file"
 (
 	"file_id" serial NOT NULL,
-	"post_id" integer REFERENCES public."post"("post_id"),
+	"post_id" integer REFERENCES public."post"("post_id") ON DELETE CASCADE,
 	"file_path" text NOT NULL,
 	
 	CONSTRAINT "file_id_pkey" PRIMARY KEY ("file_id")
@@ -712,7 +712,7 @@ insert into public."user" ("name", "email", "password","userable_id","userable_t
 insert into public."user" ("name", "email", "password","userable_id","userable_type") values('Paulo Tavares', 'paulot@flup.pt', '$2y$12$v4q.gyOIG6xdFbhoq8dcsuhoIvyWvHYD8DJtLMi0vX5B1r..3M7N2',2,'App\RegularUser'); --1234pass
 insert into public."user" ("name", "email", "password","userable_id","userable_type") values('AEISEP', 'aeisep@isep.pt', '$2y$12$zXXPUS2k6hPJ4u/Ue9lLuesoKfJMKIBspDTejMvQGyoKvZ1kNbV8u',3,'App\RegularUser'); --yoyo10
 insert into public."user" ("name", "email", "password","userable_id","userable_type") values('Gustavo Torres', 'tgusta@feup.pt', '$2y$12$ydeNcQ4mOr1HLYnooq2Xuu5ZLYMla7ZIEBaQiN08UekSJ0WvAqdve',4,'App\RegularUser'); --tgustamucho
-insert into public."user" ("name", "email", "password","userable_id","userable_type") values('Pedro Esteves', '', '$2y$12$braCBZULabp3zeMXJHAmDeClfXk9myM/4LovIm/UES5Kgk8HR8Isy',5,'App\RegularUser'); --estevesboss
+insert into public."user" ("name", "email", "password","userable_id","userable_type") values('Pedro Esteves', 'pmesteves@feup.pt', '$2y$12$braCBZULabp3zeMXJHAmDeClfXk9myM/4LovIm/UES5Kgk8HR8Isy',5,'App\RegularUser'); --estevesboss
 insert into public."user" ("name", "email", "password","userable_id","userable_type") values ('Vitor Ventuzelos', 'berserking@feup.pt', '$2y$12$mAQnlXAoBWvwe..Oym7pmuRBsbw2Xtqcbt75hjxuYPH9ll3n/XhlC',6,'App\RegularUser'); --berserking_idiot
 insert into public."user" ("name", "email", "password","userable_id","userable_type") values ('José Martins', 'martins@flup.pt', '$2y$12$csw8WDrgXzAay3jiFdxYIOmpECmceiXvyOK1AECLSFyXuZnQsusuO',7,'App\RegularUser'); --martins
 insert into public."user" ("name", "email", "password","userable_id","userable_type") values ('Marta Camões', 'mcamoes@fcup.pt', '$2y$12$0l0WKBud6d/WPJUH/7ceye1JaEGaOWMsAaihzl/EnRQ2rSsOhmrMa',8,'App\RegularUser'); --123p

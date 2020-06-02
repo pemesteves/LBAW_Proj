@@ -134,7 +134,7 @@ class ProfileController extends Controller{
     if(!Auth::check()) return redirect('/login');
 
     $request->validate([
-      'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+      'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
       'name' => 'required|string|regex:/^[a-z0-9áàãâéêíóõôú]+(?:[a-z0-9áàãâéêíóõôú ]*[a-z0-9áàãâéêíóõôú])?$/i|max:255',
       'university' => 'required|string|regex:/^[a-z0-9áàãâéêíóõôú]+(?:[a-z0-9áàãâéêíóõôú ]*[a-z0-9áàãâéêíóõôú])?$/i|max:255',
       'personal_info' => "required|string|regex:/^[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]+(?:[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@ ]*[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@])?$/i|max:255",
@@ -152,7 +152,7 @@ class ProfileController extends Controller{
 
       if(request()->image !== null){
         $request->validate([
-          'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:20048',
+          'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:20048',
         ]);
         $imageName = time().'.'.request()->image->getClientOriginalExtension();
 

@@ -21,6 +21,9 @@ function addEventListeners() {
     leaver.addEventListener('click', sendLeaveChatRequest);
   });
 
+  let col = document.querySelector('#messages_col');
+  if(col) col.addEventListener('scroll',infinite_chat);
+
 }
 
 function sendCreateMessageRequest(event){
@@ -231,6 +234,53 @@ function createMessage(message) {
 }
 
 
+let sent_chat = false;
+
+function infinite_chat(){
+  if(this.scrollTop < 100){
+    
+    if(!sent_chat){
+      sent_chat = true;
+      let last_id = null;
+      
+      let resource = "";
+
+      let pathParts = window.location.pathname.split('/');
+      if(pathParts[1] == "chats"){
+          resource = '/api/chats/' + pathParts[2] + '/messages/';
+          last_id = document.querySelector('#messages_col :first-child').getAttribute('data-id')
+      }else
+          return;
+
+      sendAjaxRequest('get', resource+last_id, null , addMessages);
+    }
+
+  }
+}
+
+
+function addMessages(){
+  if (this.status != 200 && this.status != 201){
+      //window.location = '/';
+      sent_chat = false;
+      return;
+  }
+
+  if(this.responseText.length < 5) // no important content available
+      return;
+
+  let pathParts = window.location.pathname.split('/');
+  if(pathParts[1] == "chats"){
+      let col = document.querySelector('#messages_col');
+      let previous = col.scrollHeight;
+      document.querySelector('#messages_col').insertAdjacentHTML('afterbegin',this.responseText);
+      let now = col.scrollHeight;
+      let dif = now - previous;
+      //col.scrollTop +=dif;
+  }
+
+  sent_chat = false;
+}
 
 
 

@@ -158,3 +158,5 @@ Route::put('api/chats/{chat_id}/{user_id}','ChatController@addToChat');
 
 Route::get('/dark_mode','ProfileController@dark');
 Route::get('/light_mode','ProfileController@light');
+
+Route::get('/api/chats/{chat_id}/messages/{id}','ChatController@getMessages');
