@@ -26,7 +26,7 @@
                 <div class="col-sm-11">
                     <div class="card-body">
                         <h1 class="card-title uconnect-title" style='display:inline-block'>{{ $event->name }}</h1>
-                            <button type="button" class="btn btn-link show_interest" data-id='{{$event->event_id}}' 
+                            <button type="button" class="btn btn-link" 
                                 style="float:right;margin-right:20px;background-color: rgba(0,0,150,.03); "
                                 onclick="window.location.href='/events/{{$event->event_id}}'">
                                 Back To Event Page
@@ -58,8 +58,8 @@
     <?php
  
 ?>
-    <div class="col-sm-8" style="flex-grow:1;max-width:100%; background-color: whitesmoke; padding: 1em;">
-        <div>
+    <div class="col-sm-8" style="flex-grow:1;max-width:80%; background-color: whitesmoke; padding: 1em; margin: 0 auto;">
+        <div class="stats">
             <h2>Day with more posts:</h2>
             <?php 
             try{
@@ -76,7 +76,7 @@
                 echo '<p>There are no posts yet!</p>';
             }?>
         </div>
-        <div>
+        <div class="stats">
             <h2>Day with fewer posts:</h2>
             <?php 
             try{
@@ -94,16 +94,16 @@
             }?>
         </div>
         @if($firstDay)
-        <div id="postsPerUserChart" style="height: 370px; width: 100%;"></div>
-        <div id="postsPerUserDayChart" style="height: 370px; width: 100%;"></div>
+        <div id="postsPerUserChart" class="graph" style="height: 370px; width: 100%;"></div>
+        <div id="postsPerUserDayChart" class="graph" style="height: 370px; width: 100%;"></div>
         @endif
+        <div id="usersPerDayChart" class="graph" style="height: 370px; width: 100%;"></div>
     </div>
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </div>
-@if($firstDay)
 <script>
     window.onload = function () {
-        
+    <?php if($firstDay){?>
         let postsPerUserChart = new CanvasJS.Chart("postsPerUserChart", {
             animationEnabled: true,
             exportEnabled: true,
@@ -133,19 +133,13 @@
         if(lastDay.getFullYear() === firstDay.getFullYear()){
             if(lastDay.getMonth() === firstDay.getMonth()){
                 titleName = "Day";
-                if(lastDay.getDate() === firstDay.getDate()){
-                    interval = 2;
-                    intervalType = "hour";
-                    formatDate = "HH'h'";
-                    titleName = "Hour";
-                }else if(lastDay.getDate() - firstDay.getDate() <= 2){
+                    formatDate = "DD/MM";
+                if(lastDay.getDate() - firstDay.getDate() <= 2){
                     interval = 6;
                     intervalType = "hour";
-                    formatDate = "day DD, HH'h'";
                 }else{
                     interval = 3;
                     intervalType = "day";
-                    formatDate = "DD/MM";
                 }
             }else{
                 titleName = "Month";
@@ -178,7 +172,53 @@
         });
 
         postsPerUserDayChart.render();
+    <?php } ?>
+
+        const lastUserDay = new Date(<?php echo $lastUserDay;?>);
+        const firstUserDay = new Date(<?php echo $firstUserDay;?>);
+        interval = 1;
+        intervalType = "year";
+        formatDate = "YYYY";
+        if(lastUserDay.getFullYear() === firstUserDay.getFullYear()){
+            if(lastUserDay.getMonth() === firstUserDay.getMonth()){
+                formatDate = "DD/MM";
+                if(lastUserDay.getDate() - firstUserDay.getDate() <= 2){
+                    interval = 6;
+                    intervalType = "hour";
+                }else{
+                    interval = 3;
+                    intervalType = "day";
+                }
+            }else{
+                intervalType = "month";
+                formatDate = "MM/YYYY";
+            }
+        }
+
+        let usersPerDayChart = new CanvasJS.Chart("usersPerDayChart", {
+            animationEnabled: true,
+            title:{
+                text: "Number of Users Interested In This Event"
+            },
+            axisY: {
+                title: "Number of Users"
+            },
+            axisX: {
+                labelFormatter: function(e){
+                    return CanvasJS.formatDate(e.value, formatDate);
+                },
+                interval: interval,
+                intervalType: intervalType,
+            },
+            data: [{
+                type: "spline",
+                markerSize: 5,
+                xValueType: "dateTime",
+                dataPoints: <?php echo json_encode($usersPerDay, JSON_NUMERIC_CHECK); ?>
+	        }]
+        });
+
+        usersPerDayChart.render();
     }
 </script>
-@endif
 @endsection

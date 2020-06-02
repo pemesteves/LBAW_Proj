@@ -78,7 +78,6 @@ class PostController extends Controller{
         'title' => "required|string|regex:/^[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]+[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@ ]*[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]$/i|max:255",
         'body' => "required|string|regex:/^[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]+[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@ ]*[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]$/i|max:255",
       ]);
-
       $post->title = $request->input('title');
       $post->body = $request->input('body');
       $post->author_id = Auth::user()->userable->regular_user_id; //TODO Change this to the id of the regular_user
@@ -112,7 +111,6 @@ class PostController extends Controller{
         $this->sendNotifications($notification,$interested);
       }
       $post->save();
-
       $image = $this->upload_image($request, $post->post_id);
 
       $file = $this->upload_file($request, $post->post_id);

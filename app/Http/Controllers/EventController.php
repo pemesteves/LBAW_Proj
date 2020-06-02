@@ -124,22 +124,51 @@ class EventController extends Controller{
       }
 
       try{
-        $firstDay = $postsPerDayOfYear[0]["x"];
+        $firstDay = reset($postsPerDayOfYear)["x"];
       }catch(ErrorException $e){
         $firstDay = null;
       }
 
       try{
-        $lastDay = $postsPerDayOfYear[count($postsPerDayOfYear)-1]["x"];
+        $lastDay = end($postsPerDayOfYear)["x"];
       }catch(ErrorException $e){
         $lastDay = null;
       }
 
-      return view('pages.event_statistics' , ['css' => ['navbar.css','event.css','posts.css','post_form.css','feed.css'],
+      $interested = DB::table('user_interested_in_event')
+        ->where('event_id', '=', $event->event_id)
+        ->orderBy('date', 'asc')
+        ->get();
+        
+      $usersPerDay = array();
+      foreach($interested as $interestedUser){
+        $interestDate = date('d-m-Y', strtotime($interestedUser->date));
+        if(isset($usersPerDay[$interestDate])){
+          $usersPerDay[$interestDate]++;
+        }else{
+          $usersPerDay[$interestDate] = 1;
+        }
+      }
+
+      $lastNumUsers = null;
+      $newUsersPerDay = array();
+      foreach(array_keys($usersPerDay) as $date){
+        if($lastNumUsers !== null){
+          $usersPerDay[$date] += $lastNumUsers;
+          array_push($newUsersPerDay, array("x" => strtotime($date)* 1000, "y" => $usersPerDay[$date]));
+        }else{
+          array_push($newUsersPerDay, array("x" => strtotime($date)* 1000, "y" => $usersPerDay[$date]));
+        }
+        $lastNumUsers = $usersPerDay[$date];
+      }
+
+      reset($usersPerDay);
+      return view('pages.event_statistics' , ['css' => ['navbar.css','event.css','posts.css','post_form.css','feed.css','statistics.css'],
       'js' => ['event.js','post.js','infinite_scroll.js','general.js', 'uploadImages.js'] ,
       'event' => $event, 'going' => $going, 'can_create_events' => $can_create_events, 'image' => $image,
       'posts_per_user'=>$postsPerUser, 'postsPerDay' => $postsPerDay, 'postsPerDayOfYear' => $postsPerDayOfYear,
-      'firstDay' => $firstDay, 'lastDay' => $lastDay, ]);
+      'firstDay' => $firstDay, 'lastDay' => $lastDay, 'usersPerDay' => $newUsersPerDay,
+      'firstUserDay' => key($usersPerDay), 'lastUserDay' => array_key_last($usersPerDay)]);
     }
 
     public function showCreateForm(){
