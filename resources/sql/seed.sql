@@ -11,6 +11,7 @@ DROP TABLE IF EXISTS public."notified_user";
 DROP TABLE IF EXISTS public."notification";
 DROP TABLE IF EXISTS public."user_in_chat";
 DROP TABLE IF EXISTS public."user_in_group";
+DROP TABLE IF EXISTS public."user_in_org";
 DROP TABLE IF EXISTS public."message";
 DROP TABLE IF EXISTS public."chat";
 DROP TABLE IF EXISTS public."comment";
@@ -242,6 +243,14 @@ CREATE TABLE public."user_in_chat"
 	"chat_id" integer NOT NULL REFERENCES public."chat"("chat_id") ON DELETE CASCADE,
 	"not_seen" integer NOT NULL DEFAULT 0,
 	CONSTRAINT "user_in_chat_pkey" PRIMARY KEY ("user_id", "chat_id")
+);
+
+CREATE TABLE public."user_in_org"
+(
+	"user_id" integer NOT NULL REFERENCES public."regular_user"("regular_user_id") ON DELETE CASCADE,
+	"organization_id" integer NOT NULL REFERENCES public."organization"("organization_id") ON DELETE CASCADE,
+	TYPE "org_approval" NOT NULL DEFAULT 'pending',
+	CONSTRAINT "user_in_org_pkey" PRIMARY KEY ("user_id", "organization_id")
 );
 
 CREATE TABLE public."notification"
@@ -948,3 +957,6 @@ insert into public."user_interested_in_event" ("user_id","event_id") values(4,1)
 insert into public."user_interested_in_event" ("user_id","event_id") values(7,1);
 insert into public."user_interested_in_event" ("user_id","event_id") values(10,1);
 insert into public."user_interested_in_event" ("user_id","event_id") values(21,1);
+
+insert into public."user_in_org" ("user_id","organization_id","type") values(10,1,'accepted');
+insert into public."user_in_org" ("user_id","organization_id") values(12,1);

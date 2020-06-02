@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Post;
 use App\RegularUser;
 use App\User;
+use App\Organization;
 use Exception;
 use Illuminate\Support\Facades\Input;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -38,14 +39,22 @@ class ProfileController extends Controller{
       $image = Auth::user()->userable->image();
       
       $org_status = null;
+      $org_users = null;
+      $org_applyRequests = null;
       if(get_class(Auth::user()->userable->regular_userable) == "App\Organization") {
+        $org = Organization::find(Auth::user()->userable->regular_userable->organization_id);
         $org_status = DB::table("organization_approval_request")
         ->where([['organization_approval_request.organization_id', '=', Auth::user()->userable->regular_userable->organization_id]]
         )->get();
+        $org_users = $org->members;
+        $org_applyRequests = $org->applied_users;
+        // $org_applyRequests = DB::table("user_in_org")
+        // ->where([user_in_org.organization_id', '=', Auth::user()->userable->regular_userable->organization_id],
+        // ['user_in_org.type', '=', "pending"]]
+        // )->get();
       }
-      
       return view('pages.user' , ['css' => ['navbar.css','posts.css','post_form.css','feed.css','profile.css'],
-      'js' => ['general.js','post.js','infinite_scroll.js', 'uploadImages.js'] , 'user' => Auth::user()->userable, 'posts' => $posts , 'groups' => $groups, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'image' => $image, 'org_status' => $org_status]);
+      'js' => ['general.js','post.js','infinite_scroll.js', 'uploadImages.js', 'user.js'] , 'user' => Auth::user()->userable, 'posts' => $posts , 'groups' => $groups, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'image' => $image, 'org_status' => $org_status, 'org_members' => $org_users, 'org_applyreq' => $org_applyRequests]);
   }
 
   public function show_me_edit(){
@@ -98,14 +107,24 @@ class ProfileController extends Controller{
     $image = $user->image();
 
     $org_status = null;
+    $org_users = null;
+    $belongToOrg = null;
+    $org_applyRequests = null;
     if($user->regular_userable_type == "App\Organization") {
+      $org = Organization::find($user->regular_userable->organization_id);
       $org_status = DB::table("organization_approval_request")
       ->where([['organization_approval_request.organization_id', '=', $user->regular_userable->organization_id]]
+      )->get();
+      $org_users = $org->members;
+      
+      $belongToOrg = DB::table("user_in_org")
+      ->where([['user_in_org.user_id', '=', Auth::user()->userable->regular_user_id],
+      ['user_in_org.organization_id', '=', $user->regular_userable->organization_id]]
       )->get();
     }
 
     return view('pages.user' , ['css' => ['navbar.css','posts.css','post_form.css','feed.css','profile.css'],
-    'js' => ['general.js','post.js','infinite_scroll.js','friendship.js'] , 'user' => $user, 'friendship_status' => $friendship_status, 'posts' => $posts, 'groups' => $groups,  'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'image' => $image,'org_status' => $org_status ]);
+    'js' => ['general.js','post.js','infinite_scroll.js','friendship.js', 'user.js'] , 'user' => $user, 'friendship_status' => $friendship_status, 'posts' => $posts, 'groups' => $groups,  'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'image' => $image,'org_status' => $org_status, 'org_members' => $org_users ,'belongToOrg' => $belongToOrg, 'org_applyreq' => null]);
   }
 
   /**

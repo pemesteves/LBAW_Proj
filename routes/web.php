@@ -81,6 +81,11 @@ Route::get('/users/{id}', 'ProfileController@show');
 Route::get('/users/me/email', 'ProfileController@email');
 Route::delete('/api/users/{teacher_id}/appointments/{time_id}', 'ProfileController@deleteAppointment');
 Route::put('/api/users/{teacher_id}/appointments/{time_id}', 'ProfileController@addAppointment');
+Route::put('/api/users/{id}/apply', 'RegularUserController@applyToOrg');
+Route::put('/api/users/{id}/reject', 'RegularUserController@rejectApplication');
+Route::put('/api/users/{id}/accept', 'RegularUserController@acceptApplication');
+
+
 
 //About
 Route::get('/about', 'AboutController@show');

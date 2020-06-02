@@ -27,10 +27,18 @@
                          <span class="fas fa-check-circle">&nbsp;</span>
                          @endif
                     @endif
-
                 </div>
                 <div class="row">
                     <h2 style="border: 0; padding: 0">{{$user->university}}</h2>
+                    @if( get_class($user->regular_userable) == "App\Organization") 
+                        <button type="button" id="org_members_button" class="btn p-0" data-id='{{$user->regular_user_id}}' style="margin-left: auto; margin-right:4%; " data-toggle="modal" 
+                                data-target="#viewMembersModal" 
+                                style="color: inherit;background: none; width:100%;height:100%;">
+                                            <p class="card-text text-left m-0 members_num">{{ 
+                                            count($org_members) 
+                                            }} members</p>
+                                    </button>
+                    @endif
                 </div>
                 <div class="row" style="padding-bottom:10px;">
                     <h2 style="border: 0; padding: 0;">
@@ -48,25 +56,41 @@
                     </h2>
                         @if(Auth::user()->user_id != $user->user_id && !Auth::user()->isAdmin())
                             @if(count($friendship_status) == 0)
-                            <span class="btn btn-light add_friend" data-id='{{$user->regular_user_id}}' style="margin-left: auto; margin-right:4%;background-color: rgba(0,0,150,.03); ">
+                            <span class="btn btn-light add_friend" data-id='{{$user->regular_user_id}}' style="margin-left: auto; margin-right:0;background-color: rgba(0,0,150,.03); ">
                                 Add Friend
                             </span>
                             @elseif($friendship_status[0]->type == 'accepted')
-                                <span  class="btn btn-light remove_friend" data-id='{{$user->regular_user_id}}' style="margin-left: auto; margin-right:4%;background-color: rgba(0,0,150,.03); ">
+                                <span  class="btn btn-light remove_friend" data-id='{{$user->regular_user_id}}' style="margin-left: auto; margin-right:0;background-color: rgba(0,0,150,.03); ">
                                     Remove Friend
                                 </span>
                             @elseif($friendship_status[0]->type == 'pending')
                                 @if($friendship_status[0]->friend_id1 == Auth::user()->userable_id)
-                                    <span  class="btn btn-light cancel_friend" data-id='{{$user->regular_user_id}}' style="margin-left: auto; margin-right:4%;background-color: rgba(0,0,150,.03); ">
+                                    <span  class="btn btn-light cancel_friend" data-id='{{$user->regular_user_id}}' style="margin-left: auto; margin-right:0;background-color: rgba(0,0,150,.03); ">
                                         Cancel Request
                                     </span>
                                 @else
-                                        <span  class="btn btn-light accept_friend" data-id='{{$user->regular_user_id}}' style="margin-left: auto; margin-right:4%;background-color: rgba(0,0,150,.03); ">
+                                        <span  class="btn btn-light accept_friend" data-id='{{$user->regular_user_id}}' style="margin-left: auto; margin-right:0;background-color: rgba(0,0,150,.03); ">
                                             Accept
                                         </span>
                                         <span class="btn btn-light decline_friend" data-id='{{$user->regular_user_id}}' style="margin-right:4%;background-color: rgba(0,0,150,.03); ">
                                             Decline
                                         </span>
+                                @endif
+                            @endif
+
+                            @if(get_class($user->regular_userable) == "App\Organization")
+                                @if(count($belongToOrg) == 0)
+                                <button type="button" class="btn btn-light apply_org" onClick="this.disabled=true" data-id='{{$user->regular_user_id}}' style="margin-left: 0; margin-right:4%;background-color: rgba(0,0,150,.03); ">
+                                    Apply to Organization
+                                </button>
+                                @elseif($belongToOrg[0]->type == 'pending')
+                                <button type="button" class="btn btn-light" data-id='{{$user->regular_user_id}}' style="margin-left: 0; margin-right:4%;background-color: rgba(0,0,150,.03); " disabled>
+                                    Already applied
+                                </button>
+                                @elseif($belongToOrg[0]->type == 'accepted')
+                                <button type="button" class="btn btn-light" data-id='{{$user->regular_user_id}}' style="margin-left: 0; margin-right:4%;background-color: rgba(0,0,150,.03); " disabled>
+                                    Organization member
+                                </button>
                                 @endif
                             @endif
                         @elseif (Auth::user()->user_id == $user->user_id && get_class($user->regular_userable) == "App\Organization")  
@@ -76,7 +100,7 @@
                                 </button>
                             @elseif($org_status[0]->type == 'pending')
                                 <button type="button" class="btn btn-light verify_pending" data-id='{{$user->regular_user_id}}' style="margin-left: auto; margin-right:4%;background-color: rgba(0,0,150,.03); " disabled>
-                                    Request Pending
+                                    Request pending
                                 </button>
                             @elseif($org_status[0]->type == 'accepted')
                                 <button type="button" class="btn btn-light org" data-id='{{$user->regular_user_id}}' style="margin-left: auto; margin-right:4%;background-color: rgba(0,0,150,.03); " disabled>
@@ -87,6 +111,8 @@
                                     Verify Organization
                                 </button>
                             @endif
+                                
+
                         @endif
                 </div>
                 <div class="row">
@@ -110,11 +136,17 @@
                                         Delete
                                     </button>
                                 </li>
+                                <li class="list-group-item options_entry" style="text-align: left;">
+                                    <button class='manage manage_applications' id="manage_applications" data-id='{{$user->regular_userable->regular_user_id}}' style="background-color: white; border: 0;" data-toggle="modal" data-target="#viewUserApplications">
+                                        Manage members
+                                    </button>
                             @else
                                 <li class="list-group-item options_entry" style="text-align: left;">
                                     <button class='report' data-id='{{$user->regular_userable->regular_user_id}}' style="background-color: white; border: 0;">Report</button>
                                 </li>
                             @endif
+                            
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -273,5 +305,136 @@
         
 
     </div>
+    <div class="modal fade" id="viewMembersModal" tabindex="-1" role="dialog" aria-labelledby="viewMembersModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="orgMembersLabel">Organization members</h5>
+                    <input type="hidden" id="report_id">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="all_org_members">
+                @if(!is_null($org_members))
+                @if(count($org_members) == 0)
+                    <p>This org has no users yet!</p>
+                @endif
+                @foreach($org_members as $member_in_org)
+                    <div class="card mb member_card" style="margin-bottom:0px;border-radius:0px;" data-id="{{ $member_in_org->regular_user_id }}">
+                        <div class="row no-gutters">
+                            <div class="col-md" style="flex-grow:1; max-width:100%; text-align: left;">
+                                <a href="../users/{{$member_in_org->regular_user_id}}" style="text-decoration: none; color:black">
+                                    <div class="row no-gutters">
+                                        <div class="col-sm">
+                                            <div class="card text-center" style="border-right:none;border-bottom:none;border-top:none;border-radius:0;height:100%;">
+                                                <img 
+                                                @if (object_get($member_in_org->image(), "image_id"))
+                                                src="{{object_get($member_in_org->image(), "file_path")}}"
+                                                @else
+                                                src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" 
+                                                @endif 
+                                                class="card-img-top mx-auto d-block" 
+                                                alt="..." style="border-radius:50%; width:3rem;height:3rem; padding:0.1rem;padding-top:0.2rem">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8" style="flex-grow:1; max-width:100%; text-align: left;">
+                                            <div class="" style="margin-bottom: 0;padding-bottom: 0;">
+                                                <p class="card-text small_post_body" style="margin-bottom:0;margin-left:0.2rem;display:inline-block;">
+                                                    {{$member_in_org->user->name}}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a> 
+                            </div>
+                            @if($member_in_org->regular_user_id == Auth::user()->userable->regular_user_id)
+                                <div class="col-sm" style="flex-grow:0; max-width:100%; text-align: left;" data-id='{{$member_in_org->regular_user_id}}'>
+                                    <span class="btn btn-light leave_org_button" id="leave_org_button" data-id='{{$member_in_org->regular_user_id}}' 
+                                        style="background-color: rgba(0,0,150,.03);float:right; margin-right:0.5rem;margin-top:0.2rem;font-size:0.9rem ">
+                                        Leave
+                                    </span>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                @endforeach
+                @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="viewUserApplications" tabindex="-1" role="dialog" aria-labelledby="viewUserApplicationsLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="viewUserApplicationsLabel">Organization members</h5>
+                    <input type="hidden" id="report_id">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+            
+                @if(!is_null($org_applyreq))
+                @if(count($org_applyreq) == 0)
+                    <p id="empty_members">This org has no applications yet!</p>
+                @endif
+                @foreach($org_applyreq as $member_applied)
+                    <div class="card mb member_card member_applied" style="margin-bottom:0px;border-radius:0px;" data-id="{{ $member_applied->regular_user_id }}">
+                        <div class="row no-gutters">
+                            <div class="col-md" style="flex-grow:1; max-width:100%; text-align: left;">
+                                <a href="../users/{{$member_applied->regular_user_id}}" style="text-decoration: none; color:black">
+                                    <div class="row no-gutters">
+                                        <div class="col-sm">
+                                            <div class="card text-center" style="border-right:none;border-bottom:none;border-top:none;border-radius:0;height:100%;">
+                                                <img 
+                                                @if (object_get($member_applied->image(), "image_id"))
+                                                src="{{object_get($member_applied->image(), "file_path")}}"
+                                                @else
+                                                src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" 
+                                                @endif 
+                                                class="card-img-top mx-auto d-block" 
+                                                alt="..." style="border-radius:50%; width:3rem;height:3rem; padding:0.1rem;padding-top:0.2rem">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8" style="flex-grow:1; max-width:100%; text-align: left;">
+                                            <div class="" style="margin-bottom: 0;padding-bottom: 0;">
+                                                <p class="card-text small_post_body" style="margin-bottom:0;margin-left:0.2rem;display:inline-block;">
+                                                    {{$member_applied->user->name}}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a> 
+                            </div>
+                                <div class="col-sm accept_div" style="flex-grow:0; max-width:100%; text-align: left;" data-id='{{$member_applied->regular_user_id}}'>
+                                    <button type="button" class="btn btn-light accept_user_org" id="accept_user_org" data-id='{{$member_applied->regular_user_id}}' 
+                                        style="background-color: rgba(0,0,150,.03);float:right; margin-right:0.5rem;margin-top:0.2rem;font-size:0.9rem ">
+                                        Accept
+                                    </button>
+                                </div>
+                                <div class="col-sm reject_div" style="flex-grow:0; max-width:100%; text-align: left;" data-id='{{$member_applied->regular_user_id}}'>
+                                    <button type="button" class="btn btn-light reject_user_org" id="reject_user_org" data-id='{{$member_applied->regular_user_id}}' 
+                                        style="background-color: rgba(0,0,150,.03);float:right; margin-right:0.5rem;margin-top:0.2rem;font-size:0.9rem ">
+                                        Reject
+                                    </button>
+                                </div>
+
+                        </div>
+                    </div>
+                @endforeach
+                @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+                      
 </div>
 @endsection

@@ -160,4 +160,40 @@ class RegularUserController extends Controller{
                 ->get();
         return ['str' => $str , 'new_members' => $suggestions];
     }
+
+    function applyToOrg(Request $request) {
+        $id = $request->input('id');
+        $org = RegularUser::find($id);
+
+        DB::table('user_in_org')->insert(['user_id' => Auth::user()->userable->regular_user_id, 'organization_id' => $org->regular_userable->organization_id]);
+
+        return json_encode($id);
+    }
+
+    function acceptApplication(Request $request){
+        $id = $request->input('id');
+        $org_id = Auth::user()->userable->regular_userable->organization_id;
+        DB::table('user_in_org')->where(['user_id' => $id],
+        ['organization_id' => $org_id]
+        )->update(['type'=> 'accepted']);
+
+        $regUsr = RegularUser::find($id);
+        if (object_get($regUsr->image(), "image_id")) {
+            $image = object_get($regUsr->image(), "file_path");
+        }
+        else {
+            $image = "https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png";
+        }
+        return json_encode(array('user' => $regUsr, 'image'=> $image));
+    }
+
+    function rejectApplication(Request $request) {
+        $id = $request->input('id');
+        $org_id = Auth::user()->userable->regular_userable->organization_id;
+        DB::table('user_in_org')->where(['user_id' => $id],
+        ['organization_id' => $org_id]
+        )->delete();
+
+        return json_encode($id);
+    }
 }

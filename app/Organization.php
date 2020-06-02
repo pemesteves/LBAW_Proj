@@ -42,4 +42,14 @@ class Organization extends Model
         return $this->morphOne('App\User', 'regular_userable');
     }
 
+    public function applied_users(){
+        return $this->belongsToMany('App\RegularUser','user_in_org','organization_id','user_id')->where('user_in_org.type', '=', 'pending');
+      }
+
+    public function members() {
+        return $this->belongsToMany('App\RegularUser','user_in_org','organization_id','user_id')->where('user_in_org.type', '=', 'accepted');
+    }
+
+
+
 }

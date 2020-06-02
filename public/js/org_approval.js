@@ -10,7 +10,6 @@ function addEventListeners() {
       decliner.addEventListener('click', sendDeclineRequest);
     });
 
-
 }
 
 function sendAcceptRequest(event) {
