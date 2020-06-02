@@ -1,8 +1,8 @@
 
     @if(Auth::user()->userable->regular_user_id == $message->sender_id)
-        <p class="chat_my_message">{{$message->body}}</p>
+        <p data-id='{{$message->message_id}}' class="chat_my_message">{{$message->body}}</p>
     @else 
-    <div style="margin-left:10px">
+    <div data-id='{{$message->message_id}}' style="margin-left:10px">
         <div class="mytooltip">
             <a href='/users/{{$message->user->regular_user_id}}'>
                 <img 
