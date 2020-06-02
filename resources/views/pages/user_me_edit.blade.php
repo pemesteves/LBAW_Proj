@@ -3,7 +3,7 @@
 @section('content')
 
 <br>
-    <div id="profile_card" class="container" style="padding-top: 1em; margin-bottom: 0; background-color: white; border: 1px solid lightgrey;">
+    <div id="profile_card" class="container" style="padding-top: 1em; margin-bottom: 0;">
         <form id="user_image_upload" action="/users/me" method="post" enctype="multipart/form-data">
             @csrf
             <div class="row">
@@ -115,7 +115,7 @@
                 </div>
                 @endif
             </div>
-            <div class="row">
+            <div id='edit_profile_button' class="row">
                 <button type="submit" class="btn btn-primary" action="/users/me" method="post">Edit Profile</button>
             </div>
         </form>

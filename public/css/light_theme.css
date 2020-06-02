@@ -78,7 +78,7 @@ body{
     background-color: white
 }
 
-.modal-content button{
+.post button{
     background-color: white
 }
 
@@ -123,4 +123,37 @@ body{
 
 #user_opt button{
     background-color: transparent;
+}
+
+#group_card button{
+    background-color: transparent;
+}
+
+#settings_container a{
+    color: black;
+}
+
+#deleteModalLabel{
+    color: red;
+}
+
+div.searchDiv {
+    background-color: white;
+    border: 1px solid lightgray;
+}
+
+div.searchDiv > div {
+    border-bottom: 1px solid lightgray;
+    border-top: 1px solid lightgray;
+}
+
+div.searchDiv div.searchDivCard:not(:first-child) {
+    border-top: 1px solid lightgray;
+}
+
+#search_container a{
+    color: black;
+}
+#profile_card {
+    border: 1px solid lightgrey;
 }

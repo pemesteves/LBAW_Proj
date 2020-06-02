@@ -1,8 +1,8 @@
-<div class="card mb" style="margin-bottom:0px;border-radius:0px;">
+<div class="card mb notification" style="margin-bottom:0px;border-radius:0px;">
     <a href="{{$notification->link}}" style="text-decoration: none; color:black">
         <div class="row no-gutters">
             <div class="col-sm">
-                <div class="card text-center" style="border-bottom:none;border-top:none;border-radius:0;height:100%;">
+                <div class="card text-center img_container" style="border-bottom:none;border-top:none;border-radius:0;height:100%;">
                     <img @if ($notification->triggerUser->image() !== null)
                             src="{{$notification->triggerUser->image()->file_path}}"
                         @else
@@ -16,7 +16,7 @@
                     <p class="card-text small_post_body" style="margin-bottom:0;margin-left:0.2rem;">
                         {{$notification->description}}
                     </p>
-                    <p class="card-text" style="margin-bottom:0rem; float: right;margin-right:0.1rem;"><small class="text-muted" style="margin-bottom:0rem">{{date('d-m-Y', strtotime($notification->date))}}</small>, <small class="text-muted" style="margin-bottom:0.2rem">{{date('H:i', strtotime($notification->date))}}</small></p>
+                    <p class="card-text" style="margin-bottom:0rem; float: right;margin-right:0.1rem;"><small style="margin-bottom:0rem">{{date('d-m-Y', strtotime($notification->date))}}</small>, <small style="margin-bottom:0.2rem">{{date('H:i', strtotime($notification->date))}}</small></p>
                 </div>
             </div>
         </div>

@@ -114,7 +114,7 @@ class EventController extends Controller{
 
       $this->authorize('edit', $event);
 
-      return view('pages.edit_event' , ['css' => ['navbar.css','event.css','posts.css','post_form.css','feed.css'], 'js' => ['upload_images.js','general.js'], 'event' => $event, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization' ]);
+      return view('pages.edit_event' , ['css' => ['navbar.css','event.css','posts.css','post_form.css','feed.css'], 'js' => ['uploadImages.js','general.js'], 'event' => $event, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization' ]);
     }
 
     /**
