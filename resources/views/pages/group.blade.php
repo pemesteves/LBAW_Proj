@@ -46,12 +46,10 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form action='/users/delete' method='post'>
                                                     <div class="form-group">
                                                         <label class="col-form-label">Member:</label>
                                                         <input type="text" name='name' autocomplete="off" label='name' class="form-control" id="new_member_name">
                                                     </div>
-                                                    </form>
                                                     <div id='members_search'>
                                                         
                                                     </div>

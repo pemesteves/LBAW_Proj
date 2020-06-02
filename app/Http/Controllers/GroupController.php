@@ -66,7 +66,7 @@ class GroupController extends Controller{
       $this->authorize('create', 'App\Group');
 
       $request->validate([
-        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         'name' => 'required|string|regex:/^[a-z0-9áàãâéêíóõôú]+(?:[a-z0-9áàãâéêíóõôú ]*[a-z0-9áàãâéêíóõôú])?$/i|max:255',
         'information' => "required|string|regex:/^[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]+(?:[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@ ]*[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@])?$/i|max:255",
       ]);
@@ -85,7 +85,7 @@ class GroupController extends Controller{
 
         if(request()->image !== null){
           $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:20048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:20048',
           ]);
           $imageName = time().'.'.request()->image->getClientOriginalExtension();
 
@@ -118,7 +118,7 @@ class GroupController extends Controller{
       
       $image = $group->image();
 
-      return view('pages.edit_group' , ['css' => ['navbar.css','group.css','posts.css','post_form.css','feed.css','help.css','create.css'],
+      return view('pages.edit_group' , ['css' => ['navbar.css','group.css','posts.css','post_form.css','feed.css','help.css', 'create.css'],
       'js' => ['general.js','uploadImages.js'],
        'group' => $group, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'image' => $image ]);
     }
@@ -138,7 +138,7 @@ class GroupController extends Controller{
       $this->authorize('edit', $group);
 
       $request->validate([
-        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         'name' => 'required|string|regex:/^[a-z0-9áàãâéêíóõôú]+(?:[a-z0-9áàãâéêíóõôú ]*[a-z0-9áàãâéêíóõôú])?$/i|max:255',
         'information' => "required|string|regex:/^[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]+(?:[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@ ]*[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@])?$/i|max:255",
       ]);
@@ -185,7 +185,7 @@ class GroupController extends Controller{
 
     public function upload_image(Request $request, $group_id){
       $request->validate([
-        'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
       ]);
       $imageName = time().'.'.request()->image->getClientOriginalExtension();
 

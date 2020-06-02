@@ -185,12 +185,14 @@ function checkGroupImageUpload(event){
        message = "You can also add an image to your group!"
     }
     
+    const url = window.location.href.split("/");
+    let action = url[url.length-1];
     let popUp = document.createElement("dialog");
     popUp.classList.add('d-print-none');
     popUp.setAttribute('open', 'open');
     popUp.setAttribute('style', 'margin-top: 3.5em;');
     popUp.innerHTML = `
-        <p style="text-align: center;">Are you sure you want to create the group? ${message}</p>
+        <p style="text-align: center;">Are you sure you want to ${action} the group? ${message}</p>
         <div style="text-align: center;">
             <button class="btn btn-success" onclick="submitForm()">Yes</button>
             <button class="btn btn-danger" onclick="deletePopUp()">No</button>
