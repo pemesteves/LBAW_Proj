@@ -1,0 +1,126 @@
+body{
+    background-color: rgba(244, 166, 98, 0.05);
+}
+
+.btn-primary {
+    background-color: sandybrown;
+    border-color: rgb(255, 135, 30);
+}
+
+.btn-primary:hover{
+    background-color: rgb(255, 135, 30);
+    border-color: rgb(255, 135, 30);
+}
+
+.btn-primary:active{
+    background-color: rgb(204, 103, 14)!important;
+    border-color: rgb(204, 103, 14)!important;
+}
+
+.btn-primary:focus{
+    background-color: rgb(204, 103, 14)!important;
+    border-color: rgb(204, 103, 14)!important;
+}
+
+.btn-success, .text-success {
+    background-color: darkgreen;
+}
+
+.btn-danger, .text-danger {
+    background-color: darkred;
+}
+
+.btn-link {
+    color: sandybrown;
+    font-size: 1em;
+}
+
+.btn-accord {
+    color: rgb(117, 93, 71);
+    font-size: 1em;
+}
+
+.btn-link:hover {
+    color: rgb(204, 103, 14);
+}
+
+.text-primary {
+    color: sandybrown !important;
+}
+
+.text-link {
+    color: sandybrown;
+    font-size: 1em;
+}
+
+.menu_title{
+    color: black;
+}
+
+.post_comment_form_text textarea{
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.01);
+    color: #444444;
+}
+
+.post small{
+    color: #6c757d !important;
+}
+
+.comment_text{
+    background:rgb(243, 238, 235);
+}
+
+.comment_text:after {
+	border-right-color: rgb(243, 238, 235) !important;
+}
+
+.modal-content{
+    background-color: white
+}
+
+.modal-content button{
+    background-color: white
+}
+
+#post_form #post_container{ 
+    border: 1px solid lightgrey;
+}
+
+#post_form input[type=text] {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.01);
+    border-color:  #FFFFFF #FFFFFF ;
+    color: #555555;
+}
+#post_form input[type=text]:focus {
+    background: none repeat scroll 0 0 #FFFFFF;
+    outline-width: 0;
+}
+
+#post_form textarea {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.01);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12) inset;
+    border-color:  #FFFFFF #FFFFFF ;
+    color: #444444;
+}
+#post_form textarea:focus {
+    background: none repeat scroll 0 0 #FFFFFF;
+    outline-width: 0;
+}
+
+#post_form_lower{
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.03);
+    border-color:  #FFFFFF #FFFFFF;
+    color: #555555;
+}
+
+#profile_card{
+    border: 1px solid lightgrey;
+}
+
+#profile_card #accordion .card-body ul li a {
+    color: black;
+}
+
+#user_opt button{
+    background-color: transparent;
+}

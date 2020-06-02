@@ -36,13 +36,13 @@
                                         <p class="card-text" style="margin-bottom:0rem">{{date('d-m-Y', strtotime($post->date))}}</p>
                                         <p class="card-text" style="margin-bottom:0.5rem">{{date('H:i', strtotime($post->date))}}</p>
                                         @if(strcmp($post->type,'archived') == 0)
-                                            <small style='float:right' class="text-muted">archived</small>
+                                            <small style='float:right' >archived</small>
                                         @endif
                                     </div>
                                 </div>
                                 @if($post->hasContext())
                                     <a href="../{{$post->getLink()}}" style="text-decoration:none;">
-                                        <small class="text-muted" style="margin-left:0.4rem">{{$post->getContext()}}</small>
+                                        <small  style="margin-left:0.4rem">{{$post->getContext()}}</small>
                                     </a>
                                 @endif
                                 <div class="row justify-content-end votes" style="font-size: 1.2em;float:right">
@@ -273,20 +273,20 @@
                             <div class="card-body" style="margin-bottom:1rem;padding: 0;height:100%;position:relative">
                                 
                                     <h4 class="card-title " > {{ $post['title'] }}</h4>
-                                    <small class="text-muted" style="margin-bottom:0rem;margin-right:1rem;position: absolute;top: 0;right:0">
+                                    <small  style="margin-bottom:0rem;margin-right:1rem;position: absolute;top: 0;right:0">
                                         {{$post->getContext()}}
                                     </small>
                                     @if (object_get($post->file(), 'file_id'))
-                                        <small class="text-muted" style="margin-bottom:0rem;margin-right:1rem;position: absolute;top: 1.5em;right:0">
+                                        <small  style="margin-bottom:0rem;margin-right:1rem;position: absolute;top: 1.5em;right:0">
                                             1 <span class="fa fa-file">&nbsp;</span>
                                         </small>
                                         @if (object_get($post->image(), 'image_id'))
-                                            <small class="text-muted" style="margin-bottom:0rem;margin-right:1rem;position: absolute;top: 3em; right:0">
+                                            <small  style="margin-bottom:0rem;margin-right:1rem;position: absolute;top: 3em; right:0">
                                                 1 <span class="fa fa-image"></span>
                                             </small>
                                         @endif
                                     @elseif (object_get($post->image(), 'image_id'))
-                                    <small class="text-muted" style="margin-bottom:0rem;margin-right:1rem;position: absolute;top: 1em;right:0">
+                                    <small  style="margin-bottom:0rem;margin-right:1rem;position: absolute;top: 1em;right:0">
                                         1 <span class="fa fa-image"></span>
                                     </small>
                                     @endif
@@ -294,8 +294,8 @@
                                         {{ $post->body }}
                                     </span>
                                     <span class="card-text" style="margin-bottom:0rem;margin-right:1rem;position: absolute;bottom: 0;right:0">
-                                        <small class="text-muted" style="margin-bottom:0rem;">{{date('d-m-Y', strtotime($post->date))}}</small>, 
-                                        <small class="text-muted" style="margin-bottom:0.2rem">{{date('H:i', strtotime($post->date))}}</small>
+                                        <small  style="margin-bottom:0rem;">{{date('d-m-Y', strtotime($post->date))}}</small>, 
+                                        <small  style="margin-bottom:0.2rem">{{date('H:i', strtotime($post->date))}}</small>
                                     </spany>
                                 
                             </div>
