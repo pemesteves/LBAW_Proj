@@ -157,7 +157,7 @@ class PostController extends Controller{
 
     public function upload_image(Request $request, $post_id){
       $array = $request->validate([
-        'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'image' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
       ]);
     
       if(count($array) === 0)
