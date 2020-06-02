@@ -50,9 +50,14 @@
                     <div class="btn-group dropleft" style="margin-right: 0; padding-right: 0; width: 100%">
                         <button type="button" data-toggle="dropdown" style="font-size: 150%; margin-right: 0; padding-right: 0; width: 100%; background-color: white; border: 0;"> 
                         <span class="fa fa-ellipsis-v" ></span></button>
-                        <div class="dropdown-menu options_menu" id="event_menu_options" style="min-width:5rem">
+                        <div class="dropdown-menu options_menu" id="event_menu_options" style="min-width:5.5rem">
                             <ul class="list-group">
                                 @if ($is_owner)
+                                    <li class="list-group-item options_entry" style="text-align: left;">
+                                        <button onclick="location.href='/events/{{$event->event_id}}/statistics'" style=" margin-left:auto; margin-right:auto; background-color: white; border: 0;">
+                                            Statistics
+                                        </button>
+                                    </li>
                                     <li class="list-group-item options_entry" style="text-align: left;">
                                         <button onclick="location.href='/events/{{$event->event_id}}/edit'" style=" margin-left:auto; margin-right:auto; background-color: white; border: 0;">
                                             Edit

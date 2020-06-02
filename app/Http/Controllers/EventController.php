@@ -48,6 +48,82 @@ class EventController extends Controller{
       'js' => ['event.js','post.js','infinite_scroll.js','general.js', 'uploadImages.js'] ,'interested'=>$interested , 'event' => $event, 'posts' => $posts, 'going' => $going, 'can_create_events' => $can_create_events, 'is_owner' => $owner, 'image' => $image]);
     }
 
+    public function show_statistics($id){
+      if (!Auth::check()) return redirect('/login');
+
+      $event = Event::find($id);
+      if(!isset($event))
+        throw new HttpException(404, "event");
+
+      if($event->type == "blocked" && !Auth::user()->isAdmin())
+        throw new HttpException(404, "event");
+
+      // Only a admin can see the statistics, like in the edit option
+      $this->authorize('edit', $event);
+
+      $going = $event->going();
+      $interested = DB::table("user_interested_in_event")
+                    ->where([['user_id',Auth::user()->userable->regular_user_id],['event_id',$id]])->get();
+      $can_create_events  = Auth::user()->userable->regular_userable_type === 'App\Organization';
+
+      $image = $event->image();
+
+      $users_posts = array();
+      $postsPerDay = array();
+
+      $posts = $event->posts;
+      
+      foreach($posts as $post){
+        if(isset($users_posts[$post->regularUser->regular_user_id])){
+          $users_posts[$post->regularUser->regular_user_id]++;
+        }else{
+          $users_posts[$post->regularUser->regular_user_id] = 1;
+        }
+
+        $postDate = date('d-m-Y', strtotime($post->date));
+        if(isset($postsPerDay[$postDate])){
+          $postsPerDay++;
+        }else{
+          $postsPerDay[$postDate] = 1;
+        }
+      }
+
+      $numberPosts = [
+        0 => 0,
+        1 => 0,
+        2 => 0,
+        3 => 0,
+        4 => 0
+      ];
+
+      foreach($users_posts as $numPosts){
+          if($numPosts === 0){
+            $numberPosts[0]++;
+          }else if ($numPosts <= 5){
+            $numberPosts[1]++;
+          }else if ($numPosts <= 10){
+            $numberPosts[2]++;
+          }else if ($numPosts <= 15){
+            $numberPosts[3]++;
+          }else {
+            $numberPosts[4]++;
+          }
+      }
+      
+      $postsPerUser = array(
+        array("label"=> "0 posts", "y"=> $numberPosts[0]),
+        array("label"=> "1-5 posts", "y"=> $numberPosts[1]),
+        array("label"=> "6-10 posts", "y"=> $numberPosts[2]),
+        array("label"=> "11-15 posts", "y"=> $numberPosts[3]),
+        array("label"=> "+15 posts", "y"=> $numberPosts[4])
+      );
+
+      return view('pages.event_statistics' , ['css' => ['navbar.css','event.css','posts.css','post_form.css','feed.css'],
+      'js' => ['event.js','post.js','infinite_scroll.js','general.js', 'uploadImages.js'] ,
+      'interested'=>$interested , 'event' => $event, 'going' => $going, 'can_create_events' => $can_create_events, 'image' => $image,
+      'posts_per_user'=>$postsPerUser, 'postsPerDay' => $postsPerDay]);
+    }
+
     public function showCreateForm(){
       if (!Auth::check()) return redirect('/login');
 
