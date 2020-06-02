@@ -196,4 +196,13 @@ class RegularUserController extends Controller{
 
         return json_encode($id);
     }
+
+    function removeUser(Request $request) {
+        $id = $request->input('id');
+        $org_id = $request->input('org_id');
+        DB::table('user_in_org')->where(['user_id' => $id],
+        ['organization_id' => $org_id]
+        )->delete();
+        return json_encode($id);
+    }
 }
