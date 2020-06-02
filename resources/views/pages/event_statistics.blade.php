@@ -61,31 +61,46 @@
     <div class="col-sm-8" style="flex-grow:1;max-width:100%; background-color: whitesmoke; padding: 1em;">
         <div>
             <h2>Day with more posts:</h2>
-            <?php $maxDay = array_keys($postsPerDay, max($postsPerDay))[0];?> 
-            <p>{{$maxDay}} - {{$postsPerDay[$maxDay]}}
-                @if ($postsPerDay[$maxDay] === 1)
-                    post
-                @else
-                    posts
-                @endif
-            </p>
+            <?php 
+            try{
+                $maxDay = array_keys($postsPerDay, max($postsPerDay))[0];?> 
+                <p>{{$maxDay}} - {{$postsPerDay[$maxDay]}}
+                    @if ($postsPerDay[$maxDay] === 1)
+                        post
+                    @else
+                        posts
+                    @endif
+                </p>
+            <?php
+            }catch(ErrorException $e){
+                echo '<p>There are no posts yet!</p>';
+            }?>
         </div>
         <div>
             <h2>Day with fewer posts:</h2>
-            <?php $minDay = array_keys($postsPerDay, min($postsPerDay))[0];?>
-            <p>{{$minDay}} - {{$postsPerDay[$minDay]}}
-                @if ($postsPerDay[$minDay] === 1)
-                    post
-                @else
-                    posts
-                @endif
-            </p>
+            <?php 
+            try{
+                $minDay = array_keys($postsPerDay, min($postsPerDay))[0];?>
+                <p>{{$minDay}} - {{$postsPerDay[$minDay]}}
+                    @if ($postsPerDay[$minDay] === 1)
+                        post
+                    @else
+                        posts
+                    @endif
+                </p>
+            <?php
+            }catch(ErrorException $e){
+                echo '<p>There are no posts yet!</p>';
+            }?>
         </div>
+        @if($firstDay)
         <div id="postsPerUserChart" style="height: 370px; width: 100%;"></div>
         <div id="postsPerUserDayChart" style="height: 370px; width: 100%;"></div>
+        @endif
     </div>
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </div>
+@if($firstDay)
 <script>
     window.onload = function () {
         
@@ -165,4 +180,5 @@
         postsPerUserDayChart.render();
     }
 </script>
+@endif
 @endsection

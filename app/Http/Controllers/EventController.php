@@ -10,6 +10,7 @@ use App\Report;
 use App\Event;
 use App\File;
 use App\Image;
+use ErrorException;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
@@ -62,8 +63,7 @@ class EventController extends Controller{
       $this->authorize('edit', $event);
 
       $going = $event->going();
-      $interested = DB::table("user_interested_in_event")
-                    ->where([['user_id',Auth::user()->userable->regular_user_id],['event_id',$id]])->get();
+      
       $can_create_events  = Auth::user()->userable->regular_userable_type === 'App\Organization';
 
       $image = $event->image();
@@ -123,11 +123,23 @@ class EventController extends Controller{
         array_push($postsPerDayOfYear, array("x" => strtotime($post_date)* 1000, "y" => $postsPerDay[$post_date]));
       }
 
+      try{
+        $firstDay = $postsPerDayOfYear[0]["x"];
+      }catch(ErrorException $e){
+        $firstDay = null;
+      }
+
+      try{
+        $lastDay = $postsPerDayOfYear[count($postsPerDayOfYear)-1]["x"];
+      }catch(ErrorException $e){
+        $lastDay = null;
+      }
+
       return view('pages.event_statistics' , ['css' => ['navbar.css','event.css','posts.css','post_form.css','feed.css'],
       'js' => ['event.js','post.js','infinite_scroll.js','general.js', 'uploadImages.js'] ,
-      'interested'=>$interested , 'event' => $event, 'going' => $going, 'can_create_events' => $can_create_events, 'image' => $image,
+      'event' => $event, 'going' => $going, 'can_create_events' => $can_create_events, 'image' => $image,
       'posts_per_user'=>$postsPerUser, 'postsPerDay' => $postsPerDay, 'postsPerDayOfYear' => $postsPerDayOfYear,
-      'firstDay' => $postsPerDayOfYear[0]["x"], 'lastDay' => $postsPerDayOfYear[count($postsPerDayOfYear)-1]["x"], ]);
+      'firstDay' => $firstDay, 'lastDay' => $lastDay, ]);
     }
 
     public function showCreateForm(){
