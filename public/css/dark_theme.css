@@ -540,3 +540,7 @@ button#dl-trigger::after {
     background: #495057;
     box-shadow: 0 10px 0 #495057, 0 20px 0 #495057;
 }
+
+#create_card input[type="date"] {
+    background-color: rgb(100,100,100,1) !important;
+}

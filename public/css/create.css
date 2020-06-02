@@ -38,6 +38,18 @@
     margin: 0;
 }
 
+#create_card fieldset .row .row {
+    margin: 0;
+}
+
+#create_card .row .col-sm-2, #create_card .row .col-sm-10 {
+    padding: 0;
+}
+
+#create_card fieldset .row .row label {
+    margin-top: 0;
+}
+
 #create_card input[type="text"] {
     width: 100%;
 }
