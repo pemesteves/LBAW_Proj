@@ -64,7 +64,7 @@
                 <form id="post_form" class="new_post d-print-none" enctype="multipart/form-data">
                     <div id="post_container">
                         @csrf
-                        <input id="post_title" name="title" type="text" required="required" placeholder="Title"/>
+                        <input id="post_title" name="title" type="text" required="required" placeholder="Title" autocomplete="off"/>
                         <textarea id="post_text" name="body" class="form-control" required placeholder="Write here..." rows="3"></textarea>
                         <div id="post_form_lower" class="container">
                             <div id="post_upload" class="col-sm-11" style="padding: 0;">
