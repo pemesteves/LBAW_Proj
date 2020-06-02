@@ -15,7 +15,7 @@
                 <div style="display: none;">
                     <input name="image" type="file"/>
                 </div>      
-                <div id="upload_help" style="text-align: center; margin-top: -0.5em; margin-right: -7.5em;">
+                <div id="upload_help" style="text-align: center; margin-top: -0.5em; margin-right: -7.5em; background-color: transparent;">
                     <span class="fa fa-question-circle text-info"
                     title="A group can have an image. If you want to change it you can click on this image and upload a new one. If you don't upload an image now, your group will have this image until you edit it."></span>
                 </div>
