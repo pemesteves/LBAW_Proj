@@ -82,7 +82,7 @@ class EventController extends Controller{
 
         $postDate = date('d-m-Y', strtotime($post->date));
         if(isset($postsPerDay[$postDate])){
-          $postsPerDay++;
+          $postsPerDay[$postDate]++;
         }else{
           $postsPerDay[$postDate] = 1;
         }
@@ -118,10 +118,16 @@ class EventController extends Controller{
         array("label"=> "+15 posts", "y"=> $numberPosts[4])
       );
 
+      $postsPerDayOfYear = array();
+      foreach(array_keys($postsPerDay) as $post_date){
+        array_push($postsPerDayOfYear, array("x" => strtotime($post_date)* 1000, "y" => $postsPerDay[$post_date]));
+      }
+
       return view('pages.event_statistics' , ['css' => ['navbar.css','event.css','posts.css','post_form.css','feed.css'],
       'js' => ['event.js','post.js','infinite_scroll.js','general.js', 'uploadImages.js'] ,
       'interested'=>$interested , 'event' => $event, 'going' => $going, 'can_create_events' => $can_create_events, 'image' => $image,
-      'posts_per_user'=>$postsPerUser, 'postsPerDay' => $postsPerDay]);
+      'posts_per_user'=>$postsPerUser, 'postsPerDay' => $postsPerDay, 'postsPerDayOfYear' => $postsPerDayOfYear,
+      'firstDay' => $postsPerDayOfYear[0]["x"], 'lastDay' => $postsPerDayOfYear[count($postsPerDayOfYear)-1]["x"], ]);
     }
 
     public function showCreateForm(){

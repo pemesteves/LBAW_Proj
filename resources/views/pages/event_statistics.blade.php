@@ -27,7 +27,8 @@
                     <div class="card-body">
                         <h1 class="card-title uconnect-title" style='display:inline-block'>{{ $event->name }}</h1>
                             <button type="button" class="btn btn-link show_interest" data-id='{{$event->event_id}}' 
-                                style="float:right;margin-right:20px;background-color: rgba(0,0,150,.03); ">
+                                style="float:right;margin-right:20px;background-color: rgba(0,0,150,.03); "
+                                onclick="window.location.href='/events/{{$event->event_id}}'">
                                 Back To Event Page
                             </button>
                         <p class="card-text uconnect-paragraph" >{{ $event->information }}</p>
@@ -81,13 +82,14 @@
             </p>
         </div>
         <div id="postsPerUserChart" style="height: 370px; width: 100%;"></div>
+        <div id="postsPerUserDayChart" style="height: 370px; width: 100%;"></div>
     </div>
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </div>
 <script>
     window.onload = function () {
         
-        let chart = new CanvasJS.Chart("postsPerUserChart", {
+        let postsPerUserChart = new CanvasJS.Chart("postsPerUserChart", {
             animationEnabled: true,
             exportEnabled: true,
             title:{
@@ -104,7 +106,63 @@
                 dataPoints: <?php echo json_encode($posts_per_user, JSON_NUMERIC_CHECK); ?>
             }]
         });
-        chart.render();
+        postsPerUserChart.render();
+
+        const lastDay = new Date(<?php echo $lastDay;?>);
+        const firstDay = new Date(<?php echo $firstDay;?>);
+        let interval = 1;
+        let intervalType = "year";
+        let formatDate = "YYYY";
+        let titleName = "Year";
+
+        if(lastDay.getFullYear() === firstDay.getFullYear()){
+            if(lastDay.getMonth() === firstDay.getMonth()){
+                titleName = "Day";
+                if(lastDay.getDate() === firstDay.getDate()){
+                    interval = 2;
+                    intervalType = "hour";
+                    formatDate = "HH'h'";
+                    titleName = "Hour";
+                }else if(lastDay.getDate() - firstDay.getDate() <= 2){
+                    interval = 6;
+                    intervalType = "hour";
+                    formatDate = "day DD, HH'h'";
+                }else{
+                    interval = 3;
+                    intervalType = "day";
+                    formatDate = "DD/MM";
+                }
+            }else{
+                titleName = "Month";
+                intervalType = "month";
+                formatDate = "MM/YYYY";
+            }
+        }
+
+        let postsPerUserDayChart = new CanvasJS.Chart("postsPerUserDayChart", {
+            animationEnabled: true,
+            title:{
+                text: "Number of Posts by " + titleName
+            },
+            axisY: {
+                title: "Number of Posts"
+            },
+            axisX: {
+                labelFormatter: function(e){
+                    return CanvasJS.formatDate(e.value, formatDate);
+                },
+                interval: interval,
+                intervalType: intervalType,
+            },
+            data: [{
+                type: "spline",
+                markerSize: 5,
+                xValueType: "dateTime",
+                dataPoints: <?php echo json_encode($postsPerDayOfYear, JSON_NUMERIC_CHECK); ?>
+	        }]
+        });
+
+        postsPerUserDayChart.render();
     }
 </script>
 @endsection
