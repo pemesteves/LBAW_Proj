@@ -113,6 +113,7 @@ Route::post('/events/create', 'EventController@create');
 Route::get('/events/{event_id}' , 'EventController@show')->name('events.show');
 Route::post('/api/events/{id}/posts', 'PostController@createInEvent');
 
+Route::get('/events/{event_id}/statistics', 'EventController@show_statistics');
 Route::get('/events/{event_id}/edit', 'EventController@show_edit');
 Route::post('/api/events/{event_id}/upload_image', 'EventController@upload_image');
 Route::post('/events/{event_id}', 'EventController@edit');
@@ -154,3 +155,5 @@ Route::get('/api/chats/{chat_id}/friends','ChatController@getFriends');
 Route::put('api/chats/{chat_id}/{user_id}','ChatController@addToChat');
 
 
+Route::get('/dark_mode','ProfileController@dark');
+Route::get('/light_mode','ProfileController@light');

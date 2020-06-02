@@ -81,14 +81,14 @@ window.Echo = new Echo({
                                     if(e.notification.origin_user_id == {{Auth::user()->userable->regular_user_id}})
                                         return;
                                     let new_notification = document.createElement('div');
-                                    new_notification.classList.add('card', 'mb');
+                                    new_notification.classList.add('card', 'mb','notification');
                                     new_notification.setAttribute('style',"margin-bottom:0px;border-radius:0px;");
                                     if(e.image == null){
                                     new_notification.innerHTML = ` 
                                         <a href="${e.notification.link}" style="text-decoration: none; color:black">
                                             <div class="row no-gutters">
                                                 <div class="col-sm">
-                                                    <div class="card text-center" style="border-bottom:none;border-top:none;border-radius:0;height:100%;">
+                                                    <div class="card text-center img_container" style="border-bottom:none;border-top:none;border-radius:0;height:100%;">
                                                         <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" class="card-img-top mx-auto d-block" alt="user_image" style="border-radius:50%; max-width:3rem; padding:0.1rem">
                                                     </div>
                                                 </div>
@@ -99,7 +99,7 @@ window.Echo = new Echo({
                                                             ${e.notification.description}
                                                         </p>
                                                         <p class="card-text" style="margin-bottom:0rem; float: right;margin-right:0.1rem;">
-                                                        <small class="text-muted" style="margin-bottom:0rem">
+                                                        <small style="margin-bottom:0rem">
                                                         now</p>
                                                     </div>
                                                 </div>
@@ -110,7 +110,7 @@ window.Echo = new Echo({
                                         <a href="${e.notification.link}" style="text-decoration: none; color:black">
                                             <div class="row no-gutters">
                                                 <div class="col-sm">
-                                                    <div class="card text-center" style="border-bottom:none;border-top:none;border-radius:0;height:100%;">
+                                                    <div class="card text-center img_container" style="border-bottom:none;border-top:none;border-radius:0;height:100%;">
                                                     <img src="${e.image.file_path}" class="card-img-top mx-auto d-block" alt="user_image" style="border-radius:50%; max-width:3rem; padding:0.1rem">
                                                     </div>
                                                 </div>
@@ -121,7 +121,7 @@ window.Echo = new Echo({
                                                             ${e.notification.description}
                                                         </p>
                                                         <p class="card-text" style="margin-bottom:0rem; float: right;margin-right:0.1rem;">
-                                                        <small class="text-muted" style="margin-bottom:0rem">
+                                                        <small style="margin-bottom:0rem">
                                                         now</p>
                                                     </div>
                                                 </div>
@@ -144,14 +144,14 @@ window.Echo = new Echo({
                                     if(e.notification.origin_user_id == {{Auth::user()->userable->regular_user_id}})
                                         return;
                                     let new_notification = document.createElement('div');
-                                    new_notification.classList.add('card', 'mb');
+                                    new_notification.classList.add('card', 'mb','notification');
                                     new_notification.setAttribute('style',"margin-bottom:0px;border-radius:0px;");
                                     if(e.image == null){
                                     new_notification.innerHTML = ` 
                                         <a href="${e.notification.link}" style="text-decoration: none; color:black">
                                             <div class="row no-gutters">
                                                 <div class="col-sm">
-                                                    <div class="card text-center" style="border-bottom:none;border-top:none;border-radius:0;height:100%;">
+                                                    <div class="card text-center img_container" style="border-bottom:none;border-top:none;border-radius:0;height:100%;">
                                                         <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" class="card-img-top mx-auto d-block" alt="user_image" style="border-radius:50%; max-width:3rem; padding:0.1rem">
                                                     </div>
                                                 </div>
@@ -162,7 +162,7 @@ window.Echo = new Echo({
                                                             ${e.notification.description}
                                                         </p>
                                                         <p class="card-text" style="margin-bottom:0rem; float: right;margin-right:0.1rem;">
-                                                        <small class="text-muted" style="margin-bottom:0rem">
+                                                        <small style="margin-bottom:0rem">
                                                         now</p>
                                                     </div>
                                                 </div>
@@ -173,7 +173,7 @@ window.Echo = new Echo({
                                         <a href="${e.notification.link}" style="text-decoration: none; color:black">
                                             <div class="row no-gutters">
                                                 <div class="col-sm">
-                                                    <div class="card text-center" style="border-bottom:none;border-top:none;border-radius:0;height:100%;">
+                                                    <div class="card text-center img_container" style="border-bottom:none;border-top:none;border-radius:0;height:100%;">
                                                     <img src="${e.image.file_path}" class="card-img-top mx-auto d-block" alt="user_image" style="border-radius:50%; max-width:3rem; padding:0.1rem">
                                                     </div>
                                                 </div>
@@ -184,7 +184,7 @@ window.Echo = new Echo({
                                                             ${e.notification.description}
                                                         </p>
                                                         <p class="card-text" style="margin-bottom:0rem; float: right;margin-right:0.1rem;">
-                                                        <small class="text-muted" style="margin-bottom:0rem">
+                                                        <small style="margin-bottom:0rem">
                                                         now</p>
                                                     </div>
                                                 </div>
@@ -208,14 +208,14 @@ window.Echo = new Echo({
                                     if(e.notification.origin_user_id == {{Auth::user()->userable->regular_user_id}})
                                         return;
                                     let new_notification = document.createElement('div');
-                                    new_notification.classList.add('card', 'mb');
+                                    new_notification.classList.add('card', 'mb','notification');
                                     new_notification.setAttribute('style',"margin-bottom:0px;border-radius:0px;");
                                     if(e.image == null){
                                     new_notification.innerHTML = ` 
                                         <a href="${e.notification.link}" style="text-decoration: none; color:black">
                                             <div class="row no-gutters">
                                                 <div class="col-sm">
-                                                    <div class="card text-center" style="border-bottom:none;border-top:none;border-radius:0;height:100%;">
+                                                    <div class="card text-center img_container" style="border-bottom:none;border-top:none;border-radius:0;height:100%;">
                                                         <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" class="card-img-top mx-auto d-block" alt="user_image" style="border-radius:50%; max-width:3rem; padding:0.1rem">
                                                     </div>
                                                 </div>
@@ -226,7 +226,7 @@ window.Echo = new Echo({
                                                             ${e.notification.description}
                                                         </p>
                                                         <p class="card-text" style="margin-bottom:0rem; float: right;margin-right:0.1rem;">
-                                                        <small class="text-muted" style="margin-bottom:0rem">
+                                                        <small style="margin-bottom:0rem">
                                                         now</p>
                                                     </div>
                                                 </div>
@@ -237,7 +237,7 @@ window.Echo = new Echo({
                                         <a href="${e.notification.link}" style="text-decoration: none; color:black">
                                             <div class="row no-gutters">
                                                 <div class="col-sm">
-                                                    <div class="card text-center" style="border-bottom:none;border-top:none;border-radius:0;height:100%;">
+                                                    <div class="card text-center img_container" style="border-bottom:none;border-top:none;border-radius:0;height:100%;">
                                                     <img src="${e.image.file_path}" class="card-img-top mx-auto d-block" alt="user_image" style="border-radius:50%; max-width:3rem; padding:0.1rem">
                                                     </div>
                                                 </div>
@@ -248,7 +248,7 @@ window.Echo = new Echo({
                                                             ${e.notification.description}
                                                         </p>
                                                         <p class="card-text" style="margin-bottom:0rem; float: right;margin-right:0.1rem;">
-                                                        <small class="text-muted" style="margin-bottom:0rem">
+                                                        <small style="margin-bottom:0rem">
                                                         now</p>
                                                     </div>
                                                 </div>
@@ -303,7 +303,11 @@ window.Echo = new Echo({
                         <button class="btn btn-outline-light dropdown-toggle dropdown-toggle-split" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">            
                             <div class="navbar-nav">
-                                    <a class="dropdown-item" href="#"><span class="fa fa-adjust"></span>&nbsp;&nbsp;Dark Mode</a>
+                                @if(!Auth::user()->dark_mode)
+                                    <a class="dropdown-item" href="/dark_mode"><span class="fa fa-adjust"></span>&nbsp;&nbsp;Dark Mode</a>
+                                @else
+                                    <a class="dropdown-item" href="/light_mode"><span class="fa fa-adjust"></span>&nbsp;&nbsp;Light Mode</a>
+                                @endif
                                 @if(!Auth::user()->isAdmin())   
                                     <a class="dropdown-item" href="/groups/create"><span class="fa fa-users"></span>&nbsp;Create Group</a>
                                     @if (isset($can_create_events) && $can_create_events)

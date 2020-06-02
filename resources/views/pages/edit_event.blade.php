@@ -39,7 +39,7 @@
                 </div>   
             </div>       
             <div class="card-footer container no-gutters">  
-                <button type="submit" class="btn-primary">Edit Event</button>      
+                <button id='edit_btn' type="submit" class="btn-primary" style='width:100%'>Edit Event</button>      
             </div>
         </div>
     </form>

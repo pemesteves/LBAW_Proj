@@ -1,7 +1,6 @@
 #post_form #post_container{ 
     max-width: 70%;
     margin:5% 15%;
-    border: 1px solid lightgrey;
     border-radius: .5em;
     padding: 0;
     background-color: white;
@@ -26,53 +25,35 @@
 
 #post_form textarea {
     width: 100%;
-    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.01);
-    border-color:  #FFFFFF #FFFFFF ;
     border-image: none;
     border-radius: 0px;
     border-style: none solid solid none;
     border-width: medium 0px 0px medium;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12) inset;
-    color: #444444;
     font-size: 1em;
     line-height: 1.4em;
     transition: background-color 0.2s ease 0s;
 }
    
-#post_form textarea:focus {
-    background: none repeat scroll 0 0 #FFFFFF;
-    outline-width: 0;
-}
 
 #post_form input[type=text] {
     width: 100%;
-    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.01);
-    border-color:  #FFFFFF #FFFFFF ;
     border-image: none;
     border-radius: 0.3em 0.3em 0 0;
     border-style: none solid solid none;
     border-width: medium 0px 0px medium;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12) inset;
-    color: #555555;
     font-size: 1.5em;
     line-height: 1.4em;
     transition: background-color 0.2s ease 0s;
 }
-   
-#post_form input[type=text]:focus {
-    background: none repeat scroll 0 0 #FFFFFF;
-    outline-width: 0;
-}
 
 #post_form_lower{
-    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.03);
-    border-color:  #FFFFFF #FFFFFF;
+
     border-image: none;
     border-radius: 0em 0em 0.3em 0.3em;
     border-style: none solid solid none;
     border-width: medium 0px 0px medium;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12) inset;
-    color: #555555;
 
     padding: 5px 0;
     display: flex;

@@ -36,20 +36,20 @@
                                         <p class="card-text" style="margin-bottom:0rem">{{date('d-m-Y', strtotime($post->date))}}</p>
                                         <p class="card-text" style="margin-bottom:0.5rem">{{date('H:i', strtotime($post->date))}}</p>
                                         @if(strcmp($post->type,'archived') == 0)
-                                            <small style='float:right' class="text-muted">archived</small>
+                                            <small style='float:right' >archived</small>
                                         @endif
                                     </div>
                                 </div>
                                 @if($post->hasContext())
                                     <a href="../{{$post->getLink()}}" style="text-decoration:none;">
-                                        <small class="text-muted" style="margin-left:0.4rem">{{$post->getContext()}}</small>
+                                        <small  style="margin-left:0.4rem">{{$post->getContext()}}</small>
                                     </a>
                                 @endif
                                 <div class="row justify-content-end votes" style="font-size: 1.2em;float:right">
-                                    <button class='upvote' style=" background-color: white; border: 0;" > 
+                                    <button class='upvote' style=" border: 0;" > 
                                         <span class="fa fa-thumbs-up post_like">&nbsp;{{ $post->upvotes }}&nbsp;</span>
                                     </button>    
-                                    <button class='downvote' style=" background-color: white; border: 0;" > 
+                                    <button class='downvote' style="border: 0;" > 
                                         <span class="fa fa-thumbs-down post_dislike">&nbsp;{{ $post->downvotes }}&nbsp;</span>
                                     </button>
                                 </div>
@@ -58,38 +58,38 @@
                         
                     </div>
                     @if(!Auth::user()->isAdmin())
-                        <div>
-                            <button type="button" data-dismiss="modal" style="font-size: 150%; margin-right: 0; padding-right: 0; width: 100%; background-color: white; border: 0;"><span class="fa fa-times"></span></button>
+                        <div class='post_opt'>
+                            <button type="button" data-dismiss="modal" style="font-size: 150%; margin-right: 0; padding-right: 0; width: 100%; border: 0;"><span class="fa fa-times"></span></button>
                             <div class="btn-group dropleft" style="margin-right: 0; padding-right: 0; width: 100%">
-                                <button type="button" data-toggle="dropdown" style="font-size: 150%; margin-right: 0; padding-right: 0; width: 100%; background-color: white; border: 0;"> 
+                                <button type="button" data-toggle="dropdown" style="font-size: 150%; margin-right: 0; padding-right: 0; width: 100%;border: 0;"> 
                                 <span class="fa fa-ellipsis-v" ></span></button>
                                 <div class="dropdown-menu options_menu" style="min-width:5rem">
                                     <ul class="list-group">
                                         @if ( object_get($post->regularUser->user, "user_id") == Auth::user()->user_id)
                                             <li class="list-group-item options_entry" style="text-align: left;">
-                                                <button onclick="location.href='/posts/{{$post->post_id}}/edit'" style=" margin-left:auto; margin-right:auto; background-color: white; border: 0;">
+                                                <button onclick="location.href='/posts/{{$post->post_id}}/edit'" style=" margin-left:auto; margin-right:auto; border: 0;">
                                                     Edit
                                                 </button>
                                             </li>
                                             <li class="list-group-item options_entry" style="text-align: left;">
                                                 @if(strcmp($post->type,'archived') != 0)
-                                                <button class='archive' style=" background-color: white; border: 0;" > 
+                                                <button class='archive' style=" border: 0;" > 
                                                     Archive
                                                 </button>
                                                 @else
-                                                <button class='unarchive' style=" background-color: white; border: 0;" > 
+                                                <button class='unarchive' style=" border: 0;" > 
                                                     Unarchive
                                                 </button>
                                                 @endif
                                             </li>
                                             <li class="list-group-item options_entry" style="text-align: left;">
-                                                <button class='delete' style=" background-color: white; border: 0;" > 
+                                                <button class='delete' style="border: 0;" > 
                                                     Delete
                                                 </button>
                                             </li>
                                         @else
                                             <li class="list-group-item options_entry" style="text-align: left;">
-                                                <button class='report' style=" background-color: white; border: 0;" > 
+                                                <button class='report' style="border: 0;" > 
                                                     Report
                                                 </button>
                                             </li>
@@ -155,7 +155,7 @@
                                     <textarea name="body" class="form-control" required placeholder="Comment..." rows="1"></textarea>
                                 </div>
                                 <div class="col-1" style="padding: 0">
-                                    <button type="submit" style="padding: 0; max-height: 100%; height: 100%; max-width: 100%; width: 100%; background-color: white; border: 0;"><span class="fa fa-caret-right" style="float: left; font-size: 1.5em;margin-left: 0.75em;"></span></button>
+                                    <button type="submit" style="padding: 0; max-height: 100%; height: 100%; max-width: 100%; width: 100%; border: 0;"><span class="fa fa-caret-right" style="float: left; font-size: 1.5em;margin-left: 0.75em;"></span></button>
                                 </div>
                             </div>
                         </form>
@@ -239,11 +239,11 @@
 
 
 
-    <div class="card mb-3" style="max-width:70%;margin:5% 15%">
+    <div class="card mb-3 small_post" style="max-width:70%;margin:5% 15%">
         <div class="row no-gutters">
-                <div class="col-sm">
+                <div class="col-sm ">
                     <a href='/users/{{$post->regularUser->regular_user_id}}' style='text-decoration:none;color:black'>
-                        <div class="card text-center" style="border-bottom:none;border-top:none;border-radius:0;height:100%;">
+                        <div class="card text-center post-left" style="border-bottom:none;border-top:none;border-radius:0;height:100%;">
                             <img 
                             @if (object_get($post->regularUser->image(), "image_id"))
                                 src="{{object_get($post->regularUser->image(), "file_path")}}"
@@ -251,7 +251,7 @@
                                 src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" 
                             @endif
                             class="card-img-top mx-auto d-block" alt="user_image" style="border-radius:50%; max-width:5rem; padding-top:0.8rem">
-                            <ul class="list-group list-group-flush">
+                            <ul class="list-group list-group-flush" style='display:inline-block'>
                                 <li class="list-group-item" style="border:none;padding-top:0.2rem;padding-bottom:0.2rem"> {{ object_get($post->regularUser->user,"name") }}
                                 </li>
                                 <li class="list-group-item" style="border:none;padding-top:0.2rem;padding-bottom:0.2rem">{{ object_get($post->regularUser, "university") }}</li>
@@ -265,7 +265,7 @@
                     </a>
                 </div>
                 <div class="col-md-8" style="flex-grow:1; max-width:100%; text-align: left;">
-                    <div class="card" style="height: 100%; margin-bottom: 0;">
+                    <div class="card post_right" style="height: 100%; margin-bottom: 0;">
             
                         <button type="button" id="postModal-{{ $post['post_id'] }}" class="btn post_open_modal" data-toggle="modal" 
                                 data-target="#popup-{{ $post['post_id'] }}" 
@@ -273,20 +273,20 @@
                             <div class="card-body" style="margin-bottom:1rem;padding: 0;height:100%;position:relative">
                                 
                                     <h4 class="card-title " > {{ $post['title'] }}</h4>
-                                    <small class="text-muted" style="margin-bottom:0rem;margin-right:1rem;position: absolute;top: 0;right:0">
+                                    <small  style="margin-bottom:0rem;margin-right:1rem;position: absolute;top: 0;right:0">
                                         {{$post->getContext()}}
                                     </small>
                                     @if (object_get($post->file(), 'file_id'))
-                                        <small class="text-muted" style="margin-bottom:0rem;margin-right:1rem;position: absolute;top: 1.5em;right:0">
+                                        <small  style="margin-bottom:0rem;margin-right:1rem;position: absolute;top: 1.5em;right:0">
                                             1 <span class="fa fa-file">&nbsp;</span>
                                         </small>
                                         @if (object_get($post->image(), 'image_id'))
-                                            <small class="text-muted" style="margin-bottom:0rem;margin-right:1rem;position: absolute;top: 3em; right:0">
+                                            <small  style="margin-bottom:0rem;margin-right:1rem;position: absolute;top: 3em; right:0">
                                                 1 <span class="fa fa-image"></span>
                                             </small>
                                         @endif
                                     @elseif (object_get($post->image(), 'image_id'))
-                                    <small class="text-muted" style="margin-bottom:0rem;margin-right:1rem;position: absolute;top: 1em;right:0">
+                                    <small  style="margin-bottom:0rem;margin-right:1rem;position: absolute;top: 1em;right:0">
                                         1 <span class="fa fa-image"></span>
                                     </small>
                                     @endif
@@ -294,13 +294,13 @@
                                         {{ $post->body }}
                                     </span>
                                     <span class="card-text" style="margin-bottom:0rem;margin-right:1rem;position: absolute;bottom: 0;right:0">
-                                        <small class="text-muted" style="margin-bottom:0rem;">{{date('d-m-Y', strtotime($post->date))}}</small>, 
-                                        <small class="text-muted" style="margin-bottom:0.2rem">{{date('H:i', strtotime($post->date))}}</small>
+                                        <small  style="margin-bottom:0rem;">{{date('d-m-Y', strtotime($post->date))}}</small>, 
+                                        <small  style="margin-bottom:0.2rem">{{date('H:i', strtotime($post->date))}}</small>
                                     </spany>
                                 
                             </div>
                         </button>  
-                        <div class="card-footer" style="border-left:none;border-right:none;border-bottom:none">
+                        <div class="card-footer post-footer" style="border-left:none;border-right:none;border-bottom:none">
                             <span class="comments_count"> {{$post->comments->count()}} comments </span>
                             <div class='post_votes' style="float: right;">
                                 <button class='upvote' style=" background-color: transparent; border: 0;" > 

@@ -32,13 +32,13 @@
                         <h1 class="card-title uconnect-title" style='display:inline-block'>{{ $event->name }}</h1>
                         @if (!(Auth::user()->userable->regular_userable_type == 'App\Organization' && Auth::user()->userable->regular_userable->organization_id == $event->organization_id))
                             @if(count($interested) == 0)
-                                <button type="button" class="btn btn-light show_interest" data-id='{{$event->event_id}}' 
-                                    style="float:right;margin-right:20px;background-color: rgba(0,0,150,.03); ">
+                                <button type="button" class="btn btn-light show_interest interaction_opt" data-id='{{$event->event_id}}' 
+                                    style="float:right;margin-right:20px;">
                                     Show interest
                                 </button>
                             @else
-                                <button type="button" class="btn btn-light remove_interest" data-id='{{$event->event_id}}' 
-                                    style="float:right;margin-right:20px;background-color: rgba(0,0,150,.03); ">
+                                <button type="button" class="btn btn-light remove_interest interaction_opt" data-id='{{$event->event_id}}' 
+                                    style="float:right;margin-right:20px;">
                                     Remove interest
                                 </button>
                             @endif
@@ -48,24 +48,29 @@
                 </div>
                 <div class="col-sm-1 d-print-none">
                     <div class="btn-group dropleft" style="margin-right: 0; padding-right: 0; width: 100%">
-                        <button type="button" data-toggle="dropdown" style="font-size: 150%; margin-right: 0; padding-right: 0; width: 100%; background-color: white; border: 0;"> 
+                        <button type="button" data-toggle="dropdown" style="margin-top:5px;font-size: 150%; margin-right: 0; padding-right: 0; width: 100%; border: 0;"> 
                         <span class="fa fa-ellipsis-v" ></span></button>
-                        <div class="dropdown-menu options_menu" id="event_menu_options" style="min-width:5rem">
+                        <div class="dropdown-menu options_menu" id="event_menu_options" style="min-width:5.5rem">
                             <ul class="list-group">
                                 @if ($is_owner)
                                     <li class="list-group-item options_entry" style="text-align: left;">
-                                        <button onclick="location.href='/events/{{$event->event_id}}/edit'" style=" margin-left:auto; margin-right:auto; background-color: white; border: 0;">
+                                        <button onclick="location.href='/events/{{$event->event_id}}/statistics'" style=" margin-left:auto; margin-right:auto; border: 0;">
+                                            Statistics
+                                        </button>
+                                    </li>
+                                    <li class="list-group-item options_entry" style="text-align: left;">
+                                        <button onclick="location.href='/events/{{$event->event_id}}/edit'" style=" margin-left:auto; margin-right:auto; border: 0;">
                                             Edit
                                         </button>
                                     </li>
                                     <li class="list-group-item options_entry" style="text-align: left;">
-                                        <button class='delete' style=" background-color: white; border: 0;" > 
+                                        <button class='delete' style="border: 0;" > 
                                             Delete
                                         </button>
                                     </li>
                                 @else
                                     <li class="list-group-item options_entry" style="text-align: left;">
-                                        <button class='report' style=" background-color: white; border: 0;" data-id='{{$event->event_id}}' > 
+                                        <button class='report' style="border: 0;" data-id='{{$event->event_id}}' > 
                                             Report
                                         </button>
                                     </li>

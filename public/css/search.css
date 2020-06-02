@@ -1,14 +1,10 @@
 div.searchDiv {
     margin-top: 2em;
     margin-bottom: 2em; 
-    background-color: white;
-    border: 1px solid lightgray;
     padding: 1em;
 }
 
 div.searchDiv > div {
-    border-bottom: 1px solid lightgray;
-    border-top: 1px solid lightgray;
     max-width: 100%;
     min-width: 100%;
     width: 100%;
@@ -36,10 +32,14 @@ div.searchDiv img {
     max-width: 100%;
 }
 
-div.searchDiv div.searchDivCard:not(:first-child) {
-    border-top: 1px solid lightgray;
-}
-
 div.searchDiv div.searchDivCard:hover {
     cursor: pointer;
+}
+
+#search_container a{
+    text-decoration: none;
+}
+
+.fa-plus{
+    color:sandybrown;
 }
