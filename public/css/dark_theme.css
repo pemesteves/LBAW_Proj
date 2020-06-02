@@ -489,3 +489,54 @@ button.tab_selector:not(.tab_selected){
     background-color: rgb(69, 116, 138);
     color:white;
 }
+
+nav.navbar h2{
+    color: #495057;
+}
+
+nav.navbar div#navbar_pers_info button, nav.navbar button#navbar_pers_info_mobile span{
+    color: #495057;
+}
+
+nav.navbar form.form-inline div.input-group{
+    background-color: #dfdfdf;
+    border-color: #dfdfdf;
+}
+
+nav.navbar form.form-inline div.input-group div.input-group-append {
+    background-color: inherit;
+    color: inherit;
+    border-color: inherit;
+}
+
+nav.navbar form.form-inline div.input-group div.input-group-append select {
+    background-color: inherit;
+    color: inherit;
+}
+
+nav.navbar form.form-inline div.input-group div.input-group-append button{
+    color: inherit;
+    border-color: inherit;
+}
+
+nav.navbar form.form-inline div.input-group input {
+    background-color: inherit;
+    color: inherit;
+}
+
+nav.navbar .dropdown-menu.dropdown-menu-right {
+    background-color: #495057;
+} 
+
+nav.navbar .dropdown-menu.dropdown-menu-right a {
+    color: whitesmoke;
+}
+
+nav.navbar .dropdown-menu.dropdown-menu-right a:hover {
+    color: #495057;
+}
+
+button#dl-trigger::after {
+    background: #495057;
+    box-shadow: 0 10px 0 #495057, 0 20px 0 #495057;
+}
