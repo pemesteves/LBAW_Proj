@@ -29,7 +29,7 @@ class CommentController extends Controller{
       $this->authorize('create', $comment);
 
       $request->validate([
-        'body' => "required|string|regex:/^[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]+(?:[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@ ]*[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@])?$/i|max:255",
+        'body' => "required|string|regex:/^[a-z0-9çáàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]+(?:[a-z0-9çáàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@ ]*[a-z0-9çáàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@])?$/i|max:255",
       ]);
 
       $comment->body = $request->input('body');
@@ -71,7 +71,7 @@ class CommentController extends Controller{
     {
 
       $request->validate([
-        'body' => "required|string|regex:/^[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]+(?:[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@ ]*[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@])?$/i|max:255",
+        'body' => "required|string|regex:/^[a-z0-9çáàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]+(?:[a-z0-9çáàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@ ]*[a-z0-9çáàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@])?$/i|max:255",
       ]);
 
       $comment = Comment::find($id);
@@ -94,8 +94,8 @@ class CommentController extends Controller{
     { 
 
       $request->validate([
-        'title' => 'required|string|regex:/^[a-z0-9áàãâéêíóõôú]+(?:[a-z0-9áàãâéêíóõôú ]*[a-z0-9áàãâéêíóõôú])?$/i|max:255',
-        'description' => "required|string|regex:/^[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]+(?:[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@ ]*[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@])?$/i|max:255",
+        'title' => 'required|string|regex:/^[a-z0-9çáàãâéêíóõôú]+(?:[a-z0-9çáàãâéêíóõôú ]*[a-z0-9çáàãâéêíóõôú])?$/i|max:255',
+        'description' => "required|string|regex:/^[a-z0-9çáàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]+(?:[a-z0-9çáàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@ ]*[a-z0-9çáàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@])?$/i|max:255",
       ]);
 
       $title = $request->input('title');

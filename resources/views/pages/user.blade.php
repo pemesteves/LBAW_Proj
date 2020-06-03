@@ -266,7 +266,7 @@
     </div>
     <div id="posts_container" class="col-sm-8" style="flex-grow:1;max-width:100%">
         @if(Auth::user()->user_id == $user->user_id)
-            <form id="post_form" class="new_post d-print-none">
+            <form method="post" action="/api/posts/" id="post_form" class="new_post d-print-none">
                 <div class="container" id="post_container">
                     @csrf
                     <input id="post_title" name="title" type="text" required="required" placeholder="Title"/>

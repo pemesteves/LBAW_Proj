@@ -49,7 +49,7 @@ function createInputAppointment(event){
     popUp.setAttribute('data-time', time);
     popUp.setAttribute('data-teacher', teacher);
     popUp.innerHTML = `
-        <form>
+        <form method="put" action="/api/users/${teacher}/appointments/">
             <div style="font-size: 1.5em;">
                 <div style="max-width: 100%; width: 100%; display: flex; flex-direction: row-reverse;">
                     <button class="btn" onclick="closeDialog()">
