@@ -182,7 +182,7 @@ function setCommentEditBox(event){
   element.innerHTML = `
     <div class="modal-body comment_edit_container" style="overflow-y: auto;" data-id = ${id}>
       <div class="container" style="border-bottom:0;border-top:0;border-radius:0;height:100%;">
-        <form class = "comment_edit">                    
+        <form class="comment_edit">                    
           <div class="row post_comment_form" >
               <div class="col-2">
                   <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" class="mx-auto d-block" alt="..." style="border-radius:50%; max-width:2rem; ">
