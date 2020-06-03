@@ -63,7 +63,8 @@ class ChatController extends Controller{
       $chat = Chat::find($chat_id);
       $this->authorize('add', $chat);
       DB::table('user_in_chat')->insert(['user_id' => $user_id,'chat_id' => $chat_id]);
-      return $user_id;
+      $user = RegularUser::find($user_id);
+      return ['chat_id' => $chat_id,'user' => $user,'image' => $user->image()];
     }
 
     public function clear(Request $request, $id) {

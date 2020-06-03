@@ -148,7 +148,59 @@ function sendAddMemberToChatRequest(event){
 function addedUserChatHandler() {
   if (this.status != 200) return;
   let res = JSON.parse(this.responseText);
-  document.querySelector('#addToChat_'+res).remove();
+  document.querySelector('#addToChat_'+res.user.regular_user_id).remove();
+  let images = document.querySelector('#chats_view_'+res.chat_id +" .chat_user_info_article_div .chat_user_images");
+  let count = images.childElementCount;
+  let img = null;
+  if(count < 3){  
+    img = `<img style="width:30px;height:30px;border-radius:50%;float:left;position:relative;left:${-15*(count)}px;" `
+    if(res.image){
+      img += `src="${res.image}" `
+    }else{
+      img +=`src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" `
+    }
+    img+= `class="mx-auto" alt="user"/>`
+  }else if(count == 3){
+    img = `<img  style="width:30px;height:30px;border-radius:50%;float:left;position:relative;left:-45px" 
+    src="https://comunicadores.info/wp-content/uploads/2014/12/very-basic-plus-icon.png" class="mx-auto" alt="user"/>`
+  }
+  if(img) images.insertAdjacentHTML('beforeend',img);
+
+  let card = `<div class="card mb member_card" style="margin-bottom:0px;border-radius:0px;" data-id="${res.user.regular_user_id}">
+      <div class="row no-gutters">
+          <div class="col-md" style="flex-grow:1; max-width:100%; text-align: left;">
+              <a href="../users/${res.user.regular_user_id}" style="text-decoration: none; color:black">
+                  <div class="row no-gutters">
+                      <div class="col-sm">
+                          <div class="card text-center" style="border-right:none;border-bottom:none;border-top:none;border-radius:0;height:100%;">
+                              <img`
+                              if(res.image){
+                              card += ` src="${res.image}"`
+                              }else{
+                              card +=` src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" `
+                              }
+                              card +=`class="card-img-top mx-auto d-block" 
+                              alt="..." style="border-radius:50%; width:3rem;height:3rem; padding:0.1rem;padding-top:0.2rem">
+                          </div>
+                      </div>
+                      <div class="col-md-8" style="flex-grow:1; max-width:100%; text-align: left;">
+                          <div class="" style="margin-bottom: 0;padding-bottom: 0;">
+                              <p class="card-text small_post_body" style="margin-bottom:0;margin-left:0.2rem;display:inline-block;">
+                                ${res.user.user.name}
+                              </p>
+                          </div>
+                      </div>
+                  </div>
+              </a> 
+          </div>
+      </div>
+  </div>`;
+
+  document.querySelector('#viewMembersModal .modal-body').insertAdjacentHTML('beforeend',card);
+
+
+
+
 }
 
 

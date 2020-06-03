@@ -26,7 +26,7 @@
                 <div class="col-sm-11">
                     <div class="card-body">
                         <h1 class="card-title uconnect-title" style='display:inline-block'>{{ $event->name }}</h1>
-                            <button type="button" class="btn btn-link" 
+                            <button type="button" class="btn btn-light btn-link interaction_opt" 
                                 style="float:right;margin-right:20px;background-color: rgba(0,0,150,.03); "
                                 onclick="window.location.href='/events/{{$event->event_id}}'">
                                 Back To Event Page
