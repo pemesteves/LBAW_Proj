@@ -13,7 +13,9 @@ use Exception;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class ChatController extends Controller{
-
+    /**
+     * Only show 20 messages, the rest is get through ajax with an infinite scroll
+     */
     public function show($id){
       if (!Auth::check()) return redirect('/login');
 
@@ -30,20 +32,23 @@ class ChatController extends Controller{
                      ->limit(20)
                      ->get()->reverse();
 
-        
-
       $members = $chat->members();
       DB::table("user_in_chat")->where([['chat_id',$chat->chat_id],['user_id',Auth::user()->userable->regular_user_id]])->update(['not_seen' => 0]);
      
 
       return view('pages.chat' , ['css' => ['navbar.css','chat.css'],'js' => ['chat.js','general.js'],'in_chat' => $chat->in_chat, 'chat' => $chat, 'messages' => $messages, 'members' => $members, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
     }
-
+    /**
+     * General chats page, returns users chats
+     */
     public function get_chat(){
       if (!Auth::check()) return redirect('/login');
       return view ('pages.chat', ['css' => ['navbar.css', 'chat.css'], 'js' =>['chat.js','general.js'], 'chat' => null, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
     }
 
+    /**
+     * Get friends to add to a given chat
+     */
     public function getFriends(Request $request,$chat_id){
       $str = strtolower($request->input('string'));
       $suggestions = RegularUser::join('user','regular_user.user_id','user.user_id')->join('friend','friend_id1','regular_user_id')

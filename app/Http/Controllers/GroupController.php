@@ -19,6 +19,10 @@ use Illuminate\Support\Facades\Session;
 
 class GroupController extends Controller{
 
+    /**
+     * Show group, dont show posts, if not part of group
+     */
+
     public function show($id){
       if (!Auth::check()) return redirect('/login');
 
@@ -29,9 +33,11 @@ class GroupController extends Controller{
       if($group->type == 'blocked' && !Auth::user()->isAdmin())
         throw new HttpException(404, "group");
 
-      $this->authorize('show', $group);
+      //$this->authorize('show', $group);
 
-      $posts = $group->posts;
+      $posts = null;
+      if(Auth::user()->isAdmin() || Auth::user()->userable->groups->find($group) != null)
+        $posts = $group->posts;
 
       $members = $group->members();
       $member_count = $group->member_count();
@@ -241,7 +247,9 @@ class GroupController extends Controller{
 
       return view('requests.posts',['posts' => $myGroupsPosts]);
     }
-
+    /**
+     * Get friends to add to group, that dont belogn to group yet
+     */
     public function getFriends(Request $request,$group_id){
       $str = strtolower($request->input('string'));
       $suggestions = RegularUser::join('user','regular_user.user_id','user.user_id')->join('friend','friend_id1','regular_user_id')

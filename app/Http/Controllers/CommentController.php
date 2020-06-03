@@ -18,7 +18,7 @@ class CommentController extends Controller{
     use NotificationTrait;
 
     /**
-     * Creates a new comment.
+     * Creates a new comment and send notification if commenting on other user's post.
      *
      * @return Comment The comment created.
      */
@@ -54,7 +54,9 @@ class CommentController extends Controller{
 
       return $new_comment[0];
     }
-
+    /**
+     * Delete a comment
+     */
     public function delete(Request $request, $id)
     {
       $comment = Comment::find($id);
@@ -109,7 +111,13 @@ class CommentController extends Controller{
       $report->save();
       return $report;
     }
-
+    /**
+     * Like a comment.
+     * Insert a like if there in none of the user corresponding to that comment
+     * Delete if there a like with that value
+     * Update if the like has a different value
+     * Value - 0  for dislike, 1 for like
+     */
     public function like(Request $request, $id , $val)
     {
       $comment = Comment::find($id);

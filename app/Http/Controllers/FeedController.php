@@ -15,7 +15,11 @@ use App\OrgApproval;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class FeedController extends Controller{
-
+    /**
+     * Show posts of the events user is interested in, shoe posts of groups user is in, shoe posts of users the user is friends with,
+     * show user's posts and 
+     * compute 3 random users of the 10 users with most friends in commum of the 5 friends the user has most friends in commun with
+     */
     public function show(){
         if (!Auth::check()) return redirect('/login');
 
@@ -112,7 +116,9 @@ class FeedController extends Controller{
         }
 
     }
-
+    /**
+     * Show reports and request of verification for organizations for Admin
+     */
     public function show_admin_feed(){
         $reports = Report::whereNull('approval')->orderBy('report_id','desc')->get();
         $reported = Report::where('approval','True')->orderBy('report_id','desc')->get();
@@ -203,6 +209,9 @@ class FeedController extends Controller{
         'str' => $str  ,'users' => null,'events' => null, 'groups' => null, 'posts' => $posts]);
     }
 
+    /**
+     * Search users, events, groups and posts, or one of thoose.
+     */
 
     public function search(Request $request ){
 
@@ -276,6 +285,9 @@ class FeedController extends Controller{
         'js' => ['general.js'], 'str' => $str  ,'users' => $users,'events' => $events, 'groups' => $groups, 'posts' => $posts]);
     }
 
+    /**
+     * Get posts, used in infinite scroll
+     */
 
     function getPosts($last_id){
       

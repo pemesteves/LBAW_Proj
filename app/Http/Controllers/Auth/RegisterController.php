@@ -63,6 +63,11 @@ class RegisterController extends Controller
 
     /**
      * Create a new user instance after a valid registration.
+     * 
+     * As we are using inherance we need to do a little tricks with laravel, so that the User knows to which Regular User it corresponds to
+     * as the Regular User to which Student, Teacher or Organization it corresponds to
+     * For registration we first need to insert a User, then has we are inserting a Regular user we have to store the regular user id in the User
+     * and the same for the Student, Teacher or Organization in respect to the Regular User
      *
      * @param  array  $data
      * @return \App\User

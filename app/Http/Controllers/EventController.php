@@ -48,7 +48,9 @@ class EventController extends Controller{
       return view('pages.event' , ['css' => ['navbar.css','event.css','posts.css','post_form.css','feed.css'], 'in_event' => true,
       'js' => ['event.js','post.js','infinite_scroll.js','general.js', 'uploadImages.js'] ,'interested'=>$interested , 'event' => $event, 'posts' => $posts, 'going' => $going, 'can_create_events' => $can_create_events, 'is_owner' => $owner, 'image' => $image]);
     }
-
+    /**
+     * Compute statistics about the event, from day with least posts, grpah with the number of posts, and so on
+     */
     public function show_statistics($id){
       if (!Auth::check()) return redirect('/login');
 
@@ -178,7 +180,9 @@ class EventController extends Controller{
 
       return view('pages.create_event', ['css' => ['navbar.css','event.css','posts.css','post_form.css','feed.css','create.css' ], 'js' => ['uploadImages.js','general.js'] , 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization']);
     }
-
+    /**
+     * Create an event and submit an image corresponding to that event
+     */
     public function create(Request $request){
       if (!Auth::check()) return redirect('/login');
 
@@ -344,7 +348,9 @@ class EventController extends Controller{
       DB::table('user_interested_in_event')->insert(['user_id' => Auth::user()->userable->regular_user_id,'event_id' => $id]);
       return ;
     }
-
+    /**
+     * Get posts of that event, for infinite scroll
+     */
     function getPosts($event_id,$last_id){
 
       $event = Event::find($event_id);
