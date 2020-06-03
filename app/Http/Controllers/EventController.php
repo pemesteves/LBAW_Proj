@@ -186,9 +186,9 @@ class EventController extends Controller{
 
       $request->validate([
         'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
-        'name' => 'required|string|regex:/^[a-z0-9áàãâéêíóõôú]+(?:[a-z0-9áàãâéêíóõôú ]*[a-z0-9áàãâéêíóõôú])?$/i|max:255',
-        'information' => "required|string|regex:/^[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]+(?:[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@ ]*[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@])?$/i|max:255",
-        'location' => 'required|string|regex:/^[a-z0-9áàãâéêíóõôú]+(?:[a-z0-9áàãâéêíóõôú ]*[a-z0-9áàãâéêíóõôú])?$/i|max:255',
+        'name' => 'required|string|regex:/^[a-z0-9çáàãâéêíóõôú]+(?:[a-z0-9çáàãâéêíóõôú ]*[a-z0-9çáàãâéêíóõôú])?$/i|max:255',
+        'information' => "required|string|regex:/^[a-z0-9çáàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]+(?:[a-z0-9çáàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@ ]*[a-z0-9çáàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@])?$/i|max:255",
+        'location' => 'required|string|regex:/^[a-z0-9çáàãâéêíóõôú]+(?:[a-z0-9çáàãâéêíóõôú ]*[a-z0-9çáàãâéêíóõôú])?$/i|max:255',
         'date' => 'required|date|after:today',
       ]);
 
@@ -253,9 +253,9 @@ class EventController extends Controller{
 
       $request->validate([
         'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
-        'name' => 'required|string|regex:/^[a-z0-9áàãâéêíóõôú]+(?:[a-z0-9áàãâéêíóõôú ]*[a-z0-9áàãâéêíóõôú])?$/i|max:255',
-        'information' => "required|string|regex:/^[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]+(?:[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@ ]*[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@])?$/i|max:255",
-        'location' => 'required|string|regex:/^[a-z0-9áàãâéêíóõôú]+(?:[a-z0-9áàãâéêíóõôú ]*[a-z0-9áàãâéêíóõôú])?$/i|max:255',
+        'name' => 'required|string|regex:/^[a-z0-9çáàãâéêíóõôú]+(?:[a-z0-9çáàãâéêíóõôú ]*[a-z0-9çáàãâéêíóõôú])?$/i|max:255',
+        'information' => "required|string|regex:/^[a-z0-9çáàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]+(?:[a-z0-9çáàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@ ]*[a-z0-9çáàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@])?$/i|max:255",
+        'location' => 'required|string|regex:/^[a-z0-9çáàãâéêíóõôú]+(?:[a-z0-9çáàãâéêíóõôú ]*[a-z0-9çáàãâéêíóõôú])?$/i|max:255',
         'date' => 'required|date|after:today',
       ]);
 
@@ -283,8 +283,8 @@ class EventController extends Controller{
     { 
 
       $request->validate([
-        'title' => 'required|string|regex:/^[a-z0-9áàãâéêíóõôú]+(?:[a-z0-9áàãâéêíóõôú ]*[a-z0-9áàãâéêíóõôú])?$/i|max:255',
-        'description' => "required|string|regex:/^[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]+(?:[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@ ]*[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@])?$/i|max:255",
+        'title' => 'required|string|regex:/^[a-z0-9çáàãâéêíóõôú]+(?:[a-z0-9çáàãâéêíóõôú ]*[a-z0-9çáàãâéêíóõôú])?$/i|max:255',
+        'description' => "required|string|regex:/^[a-z0-9çáàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]+(?:[a-z0-9çáàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@ ]*[a-z0-9çáàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@])?$/i|max:255",
       ]);
         
       $title = $request->input('title');
