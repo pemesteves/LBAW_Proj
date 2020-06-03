@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use ErrorException;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Support\Facades\Auth;
@@ -49,11 +50,13 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {   
-        //error_log($exception, 3, "./log/tmp/my-errors.log");
+        $css = ['navbar.css','menu.css'];
+        $js = ['general.js'];
+
         if ($this->isHttpException($exception)) {
-            //return response()->view('errors.' . 'error', ['is_admin' => false, 'erro_code' => $exception->getStatusCode(), 'property_not_found' => $exception->getMessage(), 'can_create_events' => false], $exception->getStatusCode());
+            return response()->view('errors.' . 'error', ['css' => $css, 'js' => $js, 'erro_code' => $exception->getStatusCode(), 'property_not_found' => $exception->getMessage(), 'can_create_events' => false], $exception->getStatusCode());
         }else{
-            //return response()->view('errors.' . 'error', ['is_admin' => false, 'erro_code' => 404, 'property_not_found' => null, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization'], 404);
+            return response()->view('errors.' . 'error', ['css' => $css, 'js' => $js, 'erro_code' => 404, 'property_not_found' => null, 'can_create_events' => false], 404);
         }
         
         return parent::render($request, $exception);
