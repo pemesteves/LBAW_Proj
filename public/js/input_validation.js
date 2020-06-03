@@ -82,7 +82,7 @@ function postTextCheck(){
 }
 
 function commentCheck(){
-    let field = document.querySelector('article.post div[style="display: block;"] div.post_comment_form textarea');
+    let field = document.querySelector('article.post div[aria-modal="true"] div.post_comment_form textarea');
     let regex = /^[a-z0-9çáàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]+(?:[a-z0-9çáàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@ ]*[a-z0-9çáàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@])?$/i;
     if(regex.test(field.value)){
         field.setCustomValidity("");
