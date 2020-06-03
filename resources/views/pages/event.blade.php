@@ -48,29 +48,29 @@
                 </div>
                 <div class="col-sm-1 d-print-none">
                     <div class="btn-group dropleft" style="margin-right: 0; padding-right: 0; width: 100%">
-                        <button type="button" data-toggle="dropdown" style="margin-top:5px;font-size: 150%; margin-right: 0; padding-right: 0; width: 100%; border: 0;"> 
+                        <button type="button" data-toggle="dropdown" style="margin-top:5px;font-size: 150%; margin-right: 0; padding-right: 0; width: 100%; border: 0; background-color: transparent"> 
                         <span class="fa fa-ellipsis-v" ></span></button>
-                        <div class="dropdown-menu options_menu" id="event_menu_options" style="min-width:5.5rem">
+                        <div class="dropdown-menu options_menu" id="event_menu_options" style="min-width:5.5rem;">
                             <ul class="list-group">
                                 @if ($is_owner)
                                     <li class="list-group-item options_entry" style="text-align: left;">
-                                        <button onclick="location.href='/events/{{$event->event_id}}/statistics'" style=" margin-left:auto; margin-right:auto; border: 0;">
+                                        <button onclick="location.href='/events/{{$event->event_id}}/statistics'" style=" margin-left:auto; margin-right:auto; border: 0; background-color: transparent">
                                             Statistics
                                         </button>
                                     </li>
                                     <li class="list-group-item options_entry" style="text-align: left;">
-                                        <button onclick="location.href='/events/{{$event->event_id}}/edit'" style=" margin-left:auto; margin-right:auto; border: 0;">
+                                        <button onclick="location.href='/events/{{$event->event_id}}/edit'" style=" margin-left:auto; margin-right:auto; border: 0; background-color: transparent">
                                             Edit
                                         </button>
                                     </li>
-                                    <li class="list-group-item options_entry" style="text-align: left;">
-                                        <button class='delete' style="border: 0;" > 
+                                    <li class="list-group-item options_entry" style="text-align: left; ">
+                                        <button class='delete' style="border: 0; background-color: transparent" > 
                                             Delete
                                         </button>
                                     </li>
                                 @else
                                     <li class="list-group-item options_entry" style="text-align: left;">
-                                        <button class='report' style="border: 0;" data-id='{{$event->event_id}}' > 
+                                        <button class='report' style="border: 0; background-color: transparent" data-id='{{$event->event_id}}' > 
                                             Report
                                         </button>
                                     </li>
