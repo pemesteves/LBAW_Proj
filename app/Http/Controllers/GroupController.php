@@ -46,7 +46,7 @@ class GroupController extends Controller{
 
 
       return view('pages.group' , ['css' => ['navbar.css','group.css','posts.css','post_form.css','feed.css'], 
-      'js' => ['general.js','group.js','infinite_scroll.js','post.js', 'uploadImages.js'],
+      'js' => ['general.js','group.js','infinite_scroll.js','post.js', 'uploadImages.js'], 'in_group' => true,
       'group' => $group, 'posts' => $posts, 'members' => $members, 'member_count' => $member_count, 'can_create_events' => Auth::user()->userable->regular_userable_type == 'App\Organization', 'is_owner' => $owner , 'image' => $image]);
     }
 
@@ -67,8 +67,8 @@ class GroupController extends Controller{
 
       $request->validate([
         'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
-        'name' => 'required|string|regex:/^[a-z0-9áàãâéêíóõôú]+(?:[a-z0-9áàãâéêíóõôú ]*[a-z0-9áàãâéêíóõôú])?$/i|max:255',
-        'information' => "required|string|regex:/^[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]+(?:[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@ ]*[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@])?$/i|max:255",
+        'name' => 'required|string|regex:/^[a-z0-9çáàãâéêíóõôú]+(?:[a-z0-9çáàãâéêíóõôú ]*[a-z0-9çáàãâéêíóõôú])?$/i|max:255',
+        'information' => "required|string|regex:/^[a-z0-9çáàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]+(?:[a-z0-9çáàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@ ]*[a-z0-9çáàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@])?$/i|max:255",
       ]);
       
       $group = DB::transaction(function() use($request){
@@ -139,8 +139,8 @@ class GroupController extends Controller{
 
       $request->validate([
         'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
-        'name' => 'required|string|regex:/^[a-z0-9áàãâéêíóõôú]+(?:[a-z0-9áàãâéêíóõôú ]*[a-z0-9áàãâéêíóõôú])?$/i|max:255',
-        'information' => "required|string|regex:/^[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]+(?:[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@ ]*[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@])?$/i|max:255",
+        'name' => 'required|string|regex:/^[a-z0-9çáàãâéêíóõôú]+(?:[a-z0-9çáàãâéêíóõôú ]*[a-z0-9çáàãâéêíóõôú])?$/i|max:255',
+        'information' => "required|string|regex:/^[a-z0-9çáàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]+(?:[a-z0-9çáàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@ ]*[a-z0-9çáàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@])?$/i|max:255",
       ]);
 
       $name = $request->input('name');
@@ -165,8 +165,8 @@ class GroupController extends Controller{
     { 
 
       $request->validate([
-        'title' => 'required|string|regex:/^[a-z0-9áàãâéêíóõôú]+(?:[a-z0-9áàãâéêíóõôú ]*[a-z0-9áàãâéêíóõôú])?$/i|max:255',
-        'description' => "required|string|regex:/^[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]+(?:[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@ ]*[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@])?$/i|max:255",
+        'title' => 'required|string|regex:/^[a-z0-9çáàãâéêíóõôú]+(?:[a-z0-9çáàãâéêíóõôú ]*[a-z0-9çáàãâéêíóõôú])?$/i|max:255',
+        'description' => "required|string|regex:/^[a-z0-9çáàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]+(?:[a-z0-9çáàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@ ]*[a-z0-9çáàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@])?$/i|max:255",
       ]);
 
       $title = $request->input('title');

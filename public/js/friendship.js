@@ -165,7 +165,7 @@ function acceptFriendHandler(){
     let decliner = document.querySelector('span.decline_friend[data-id="'+ status.user_id + '"]');
     decliner.remove();
     adder.outerHTML=
-    `<span type="span" class="btn btn-light remove_friend" data-id='${status.user_id}' style="margin-left: auto; margin-right:4%;background-color: rgba(0,0,150,.03); ">
+    `<span type="span" class="btn btn-light remove_friend interaction_opt" data-id='${status.user_id}' style="margin-left: auto; margin-right:4%;background-color: rgba(0,0,150,.03); ">
         Remove Friend
     </span>`
     document.querySelector('span.remove_friend[data-id="'+ status.user_id + '"]').addEventListener('click',removeFriendRequest);
@@ -186,7 +186,7 @@ function declineFriendHandler(){
     let accepter = document.querySelector('span.accept_friend[data-id="'+ status.user_id + '"]');
     accepter.remove();
     adder.outerHTML=
-    `<span type="span" class="btn btn-light add_friend" data-id='${status.user_id}' style="margin-left: auto; margin-right:4%;background-color: rgba(0,0,150,.03); ">
+    `<span type="span" class="btn btn-light add_friend interaction_opt" data-id='${status.user_id}' style="margin-left: auto; margin-right:4%;background-color: rgba(0,0,150,.03); ">
         Add Friend
     </span>`
     document.querySelector('span.add_friend[data-id="'+ status.user_id + '"]').addEventListener('click',requestFriendRequest);
@@ -205,7 +205,7 @@ function removeFriendHandler(){
 
     let adder = document.querySelector('span.remove_friend[data-id="'+ status.user_id + '"]');
     adder.outerHTML=
-    `<span type="span" class="btn btn-light add_friend" data-id='${status.user_id}' style="margin-left: auto; margin-right:4%;background-color: rgba(0,0,150,.03); ">
+    `<span type="span" class="btn btn-light add_friend interaction_opt" data-id='${status.user_id}' style="margin-left: auto; margin-right:4%;background-color: rgba(0,0,150,.03); ">
         Add Friend
     </span>`
     document.querySelector('span.add_friend[data-id="'+ status.user_id + '"]')    .addEventListener('click',requestFriendRequest);

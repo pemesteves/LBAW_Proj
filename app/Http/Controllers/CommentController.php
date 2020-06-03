@@ -29,7 +29,7 @@ class CommentController extends Controller{
       $this->authorize('create', $comment);
 
       $request->validate([
-        'body' => "required|string|regex:/^[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]+(?:[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@ ]*[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@])?$/i|max:255",
+        'body' => "required|string|regex:/^[a-z0-9çáàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]+(?:[a-z0-9çáàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@ ]*[a-z0-9çáàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@])?$/i|max:255",
       ]);
 
       $comment->body = $request->input('body');
@@ -41,14 +41,16 @@ class CommentController extends Controller{
       $new_comment = Comment::take(1)->where("comment_id", '=', $comment["comment_id"])->get();
       
       broadcast(new NewComment($comment))->toOthers();
-
-      $notification =  new Notification;
-      $notification->origin_user_id = Auth::user()->userable->regular_user_id;
-      $notification->notification_comment_id = $new_comment[0]->comment_id;
-      $notification->description = $notification->getDescription(" has a new comment");
-      $notification->link = $notification->link();
-      $notification->save();
-      $this->sendNotification($notification,Auth::user()->userable->image(),$new_comment[0]->post->regularUser->regular_user_id);
+      
+      if($comment->post->author_id != Auth::user()->userable->regular_user_id){
+        $notification =  new Notification;
+        $notification->origin_user_id = Auth::user()->userable->regular_user_id;
+        $notification->notification_comment_id = $new_comment[0]->comment_id;
+        $notification->description = $notification->getDescription(" has a new comment");
+        $notification->link = $notification->link();
+        $notification->save();
+        $this->sendNotification($notification,Auth::user()->userable->image(),$new_comment[0]->post->regularUser->regular_user_id);
+      }
 
       return $new_comment[0];
     }
@@ -67,7 +69,7 @@ class CommentController extends Controller{
     {
 
       $request->validate([
-        'body' => "required|string|regex:/^[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]+(?:[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@ ]*[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@])?$/i|max:255",
+        'body' => "required|string|regex:/^[a-z0-9çáàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]+(?:[a-z0-9çáàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@ ]*[a-z0-9çáàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@])?$/i|max:255",
       ]);
 
       $comment = Comment::find($id);
@@ -90,8 +92,8 @@ class CommentController extends Controller{
     { 
 
       $request->validate([
-        'title' => 'required|string|regex:/^[a-z0-9áàãâéêíóõôú]+(?:[a-z0-9áàãâéêíóõôú ]*[a-z0-9áàãâéêíóõôú])?$/i|max:255',
-        'description' => "required|string|regex:/^[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]+(?:[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@ ]*[a-z0-9áàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@])?$/i|max:255",
+        'title' => 'required|string|regex:/^[a-z0-9çáàãâéêíóõôú]+(?:[a-z0-9çáàãâéêíóõôú ]*[a-z0-9çáàãâéêíóõôú])?$/i|max:255',
+        'description' => "required|string|regex:/^[a-z0-9çáàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@]+(?:[a-z0-9çáàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@ ]*[a-z0-9çáàãâéêíóõôú\[\]\(\)<>\-_!?\.',;:@])?$/i|max:255",
       ]);
 
       $title = $request->input('title');
