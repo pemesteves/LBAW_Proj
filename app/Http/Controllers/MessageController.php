@@ -43,7 +43,6 @@ class MessageController extends Controller{
       $new_message = Message::take(1)->where("message_id", '=', $message["message_id"])->get(); 
 
       broadcast(new NewMessage($message, $image, $user_name, $id))->toOthers();
-      //event(new NewMessage($message, $image, $user_name, $id));
 
       return $new_message[0];
     }

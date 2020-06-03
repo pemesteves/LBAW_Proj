@@ -38,13 +38,9 @@ return [
             'options' => [
                 'cluster' => env('PUSHER_APP_CLUSTER'),
                 'useTLS' => true,
-                'encrypted' => false,
-                'host' => 'lbaw2034.lbaw-prod.fe.up.pt',
+                'encrypted' => true,
+                'host' => '127.0.0.1',
                 'port' => 6001,
-                'curl_options' => [
-                    CURLOPT_SSL_VERIFYHOST => 0,
-                    CURLOPT_SSL_VERIFYPEER => 0,
-                ],
              ],
       ],
 

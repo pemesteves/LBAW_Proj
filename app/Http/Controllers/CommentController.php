@@ -41,7 +41,6 @@ class CommentController extends Controller{
       $new_comment = Comment::take(1)->where("comment_id", '=', $comment["comment_id"])->get();
       
       broadcast(new NewComment($comment))->toOthers();
-      //event(new NewComment($comment));
 
       $notification =  new Notification;
       $notification->origin_user_id = Auth::user()->userable->regular_user_id;

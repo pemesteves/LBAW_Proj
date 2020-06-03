@@ -16,9 +16,5 @@ COPY .env_production /var/www/.env
 COPY docker_run.sh /docker_run.sh
 RUN mkdir /var/run/php
 
-EXPOSE 6001 
-
-CMD ["php", "artisan", "websockets:serve"]
-
 # Start command
 CMD sh /docker_run.sh

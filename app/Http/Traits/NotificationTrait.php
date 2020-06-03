@@ -21,7 +21,6 @@ trait NotificationTrait {
         );
 
         broadcast(new NewNotification($notification,$image,$regular_user_id))->toOthers();
-        //event(new NewNotification($notification,$image,$regular_user_id));
 
         return;
     }
@@ -39,7 +38,7 @@ trait NotificationTrait {
             $arr
         );
         broadcast(new NewNotification($notification,$image,$arr))->toOthers();
-        //event(new NewNotification($notification,$image,$arr));
+
         return;
     }
 
