@@ -25,7 +25,7 @@ function addEventListeners() {
         remover.addEventListener('click', removeFriendRequest);
     });
 
-    let userReporter = document.querySelector('#profile_card span.report');
+    let userReporter = document.querySelector('#profile_card button.report');
     if(userReporter) userReporter.addEventListener('click', openReportUserModal);
 
 }

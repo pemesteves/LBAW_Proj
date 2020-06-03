@@ -144,7 +144,9 @@
                                 @endif
                             @else
                                 <li class="list-group-item options_entry" style="text-align: left;">
-                                    <button class='report' data-id='{{$user->regular_userable->regular_user_id}}'>Report</button>
+                                    <button class='report' data-id='{{$user->regular_userable->regular_user_id}}' style=" margin-left:auto; margin-right:auto; border: 0;">
+                                        Report
+                                    </button>
                                 </li>
                             @endif
                             
