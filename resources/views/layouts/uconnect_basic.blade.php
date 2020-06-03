@@ -10,6 +10,8 @@ window.Echo = new Echo({
     broadcaster: 'pusher',
     key: '05ddfe6c26eaafb78b1b',
     cluster: 'mt1',
+    encrypted: false,
+    wsPort: 6001,
     forceTLS: true
 });
 </script>
