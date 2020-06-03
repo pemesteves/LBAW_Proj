@@ -100,7 +100,7 @@ class FeedController extends Controller{
 
             return view('pages.feed' , ['is_admin' => false , 
             'css' => ['posts.css','post_form.css','navbar.css','feed.css','menu.css','chat.css'],
-            'js' => ['post.js','infinite_scroll.js','friendship.js','general.js', 'uploadImages.js'],
+            'js' => ['post.js','infinite_scroll.js','friendship.js','general.js', 'uploadImages.js', 'event.js', 'group.js'],
             'posts' => $posts , 
             'groups' => Auth::user()->userable->groups  ,
             'events' => Auth::user()->userable->events, 

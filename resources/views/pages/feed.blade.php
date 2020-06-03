@@ -61,7 +61,7 @@
             </div>
             <div id='postFeed_container' class="col-sm-8">
 
-                <form id="post_form" class="new_post d-print-none" enctype="multipart/form-data">
+                <form method="post" action="/api/posts/" id="post_form" class="new_post d-print-none" enctype="multipart/form-data">
                     <div id="post_container">
                         @csrf
                         <input id="post_title" name="title" type="text" required="required" placeholder="Title" autocomplete="off"/>

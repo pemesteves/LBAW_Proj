@@ -88,7 +88,7 @@
                         <p> {{ $post['body'] }}</p>
                     </div>
                     @if(!Auth::user()->isAdmin())
-                    <form class="d-print-none">
+                    <form method="put" action="/api/posts/{{$post->post_id}}/comment" class="d-print-none">
                         @csrf
                         <div class="row post_comment_form" >
                             <div class="col-2">

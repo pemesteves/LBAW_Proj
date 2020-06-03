@@ -422,14 +422,7 @@
                 @endif
                 <div id='chat_sidebar'>
                     <header id="search_chat" style="margin: 0; padding: 0; width: 100%; height: 55px; border-color: sandybrown; border-width: 0; border-bottom-width: 0.1em; border-style: solid">
-                        <form class="form-inline" method="post" style="width: 100%; justify-content:center;margin-top:7px">
-                            <div class="input-group" style="margin-left:5px;margin-right:5px;border-width: 0.05em; border-color: lightgrey; border-radius: 2em; border-style:solid; background-color: white">
-                                <input type="text" required class="form-control" placeholder="Search" aria-label="Search messages" aria-describedby="search-messages-button" style="border-width: 0; border-top-left-radius: inherit; border-bottom-left-radius: inherit;">
-                                <div class="input-group-append" style="border-radius: inherit">
-                                    <button class="btn btn-outline-light fa fa-search fa-flip-horizontal" type="submit" id="search-messages-button" style="background-color: sandybrown; border-top-left-radius: inherit; border-bottom-left-radius: inherit;"></button>
-                                </div>
-                            </div>
-                        </form>
+                        
                     </header>
                     <div id='user_chats' style='flex: 1;overflow: auto;overflow-x: hidden !important;;display:flex;flex-flow:column;margin-top:2px;margin-bottom:2px'>
                         @if(count(Auth::user()->userable->chats) == 0) 
@@ -515,7 +508,7 @@
                                     src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" 
                                 @endif   alt=""  onclick="window.location.href='/users/{{Auth::user()->userable->regular_user_id}}'" 
                             style='display:inline-block;width:50px;height:50px' >
-                            <form id="newmessage" label='message' class="form-inline" style="max-width: 90%; width: 90%; justify-content:center;display:inline-block">
+                            <form method="put" action="/api/chats/{{$chat->chat_id}}/message" id="newmessage" label='message' class="form-inline" style="max-width: 90%; width: 90%; justify-content:center;display:inline-block">
                                 <div class="input-group chat_message_input" style="width:98%">
                                     <input type="text" label='message' required class="form-control" placeholder="Write a message..." aria-label="msg-write" aria-describedby="send-message-button" style="border-width: 0; border-top-left-radius: inherit; border-bottom-left-radius: inherit;"></textarea>
                                     <div class="input-group-append" style="border-radius: inherit">

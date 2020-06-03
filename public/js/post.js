@@ -182,7 +182,7 @@ function setCommentEditBox(event){
   element.innerHTML = `
     <div class="modal-body comment_edit_container" style="overflow-y: auto;" data-id = ${id}>
       <div class="container" style="border-bottom:0;border-top:0;border-radius:0;height:100%;">
-        <form class="comment_edit">                    
+        <form class="comment_edit" method="put" action="/api/comments/${id}/edit">                    
           <div class="row post_comment_form" >
               <div class="col-2">
                   <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" class="mx-auto d-block" alt="..." style="border-radius:50%; max-width:2rem; ">
@@ -575,7 +575,7 @@ function createPost(post){
                     <div class="row post_content">
                         <p>${post.body}</p>
                     </div>
-                    <form method="post">
+                    <form method="put" action="/api/posts/${post.post_id}/comment">
                         <div class="row post_comment_form" >
                             <div class="col-2">
                                 <img src="https://www.pluspixel.com.br/wp-content/uploads/avatar-7.png" class="mx-auto d-block" alt="..." style="border-radius:50%; max-width:2rem; ">

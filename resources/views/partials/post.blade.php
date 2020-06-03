@@ -145,7 +145,7 @@
                         </div>
                         @endif
                     @endif
-                        <form>
+                        <form method="put" action="/api/posts/{{$post->post_id}}/comment">
                             @csrf
                             <div class="row post_comment_form" >
                                 <div class="col-2">
