@@ -24,7 +24,9 @@ trait NotificationTrait {
 
         return;
     }
-
+    /**
+     * Send notifications to several users, but broadcast only one
+     */
     public function sendNotifications($notification,$image, $regular_user_ids){
 
         $arr = [];

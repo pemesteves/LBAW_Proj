@@ -285,7 +285,9 @@ class ProfileController extends Controller{
 
     return view('requests.posts',['posts' => $myPosts]);
   }
-
+  /**
+   * For infinte scroll
+   */
   function getPosts($user_id,$last_id){
 
     $myPosts = Post::where([['author_id', $user_id],['type','normal']])

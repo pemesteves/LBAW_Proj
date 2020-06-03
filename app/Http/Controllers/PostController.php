@@ -67,7 +67,8 @@ class PostController extends Controller{
     }
 
     /**
-     * Generic create post function
+     * Generic create post function, and send notification to members of group or interested in event, when posting on group or event respectivly
+     * 
      */
     public function createPost(Request $request,$group_id,$event_id)    {
       $post = new Post();
@@ -315,7 +316,13 @@ class PostController extends Controller{
       return $report;
     }
 
-
+    /**
+     * Like a post.
+     * Insert a like if there in none of the user corresponding to that post
+     * Delete if there a like with that value
+     * Update if the like has a different value
+     * Value - 0  for dislike, 1 for like
+     */
     public function like(Request $request, $id , $val)
     {
       $post = Post::find($id);

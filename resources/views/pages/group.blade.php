@@ -33,7 +33,7 @@
                             <h1 class="card-title">{{ $group->name }}</h1>
                             <h2 class="card-subtitle">{{ $group->information }} </h2>
                             <div class="row">
-                                @if($is_owner)
+                                @if($is_owner && count($is_owner))
                                 <div class="col-sm flex-grow-0 p-0">
                                     <div class="modal fade" id="addMemberModal" tabindex="-1" role="dialog" aria-labelledby="addMemberModalLabel" aria-hidden="true" style='background-color:transparent;'>
                                         <div class="modal-dialog" role="document">
@@ -89,7 +89,7 @@
                                                                     </div>
                                                                 </a> 
                                                             </div>
-                                                            @if($is_owner)
+                                                            @if($is_owner && count($is_owner))
                                                             <div class="col-sm" style="flex-grow:0; max-width:100%; text-align: left;">
                                                                 <span class="btn btn-light remove_button" data-id='{{$member->regular_user_id}}' 
                                                                     style="float:right; margin-right:0.5rem;margin-top:0.2rem;font-size:0.9rem ">
@@ -123,7 +123,7 @@
                             <div class="dropdown-menu options_menu" id="group_menu_options" style="min-width:5rem">
                                 <ul class="list-group">
 
-                                    @if ($is_owner && $is_owner[0]->admin)
+                                    @if ($is_owner && count($is_owner) != 0 && $is_owner[0]->admin)
                                         <li class="list-group-item options_entry" style="text-align: left;">
                                             <button onclick="location.href='/groups/{{$group->group_id}}/edit'" style="margin-left:auto; margin-right:auto;  border: 0;">
                                                 Edit
@@ -150,7 +150,7 @@
     </div>
     
     <div class="col-sm-8" style="flex-grow:1;max-width:100%">
-
+    @if($posts)
         <form method="post" action="/api/groups/{{$group->group_id}}/posts/" id="post_form" class="new_post d-print-none" enctype="multipart/form-data">
             <div class="container" id="post_container">
                 @csrf
@@ -185,10 +185,11 @@
             </div>
         </form>
         <div id='group_form_container'>
-            @each('partials.post', $posts, 'post')
+            
+                @each('partials.post', $posts, 'post')
 
         </div>
-
+        @endif
     </div>
 </div>  
 @endsection

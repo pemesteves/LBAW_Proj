@@ -12,7 +12,7 @@ use App\Events\NewMessage;
 class MessageController extends Controller{
 
     /**
-     * Creates a new message.
+     * Creates a new message, and send via websockets to others listening to that chat
      *
      * @return Message The message created.
      */

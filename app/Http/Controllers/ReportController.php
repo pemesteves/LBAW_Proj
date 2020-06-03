@@ -14,7 +14,9 @@ use App\Event;
 use App\RegularUser;
 
 class ReportController extends Controller{
-
+    /**
+     * Accept report
+     */
     function accept(Request $request, $id){
         $report = Report::find($id);
         $this->authorize('approve',$report);
@@ -52,7 +54,9 @@ class ReportController extends Controller{
 
         return ['id' => $id];
     }
-
+    /**
+     * Ignore report
+     */
     function decline(Request $request, $id){
         $report = Report::find($id);
         $this->authorize('approve',$report);

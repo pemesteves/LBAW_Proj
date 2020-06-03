@@ -26,7 +26,9 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 class RegularUserController extends Controller{
 
     use NotificationTrait;
-
+    /**
+     * Send friendship request and notification
+     */
     function sendRequest($id){
         DB::table('friend')->insert(['friend_id1' => Auth::user()->userable->regular_user_id, 'friend_id2' => $id]);
 
@@ -41,13 +43,17 @@ class RegularUserController extends Controller{
 
         return ['result' => true , 'user_id' => $id];
     }
-
+        /**
+     * Cancel friendship request
+     */
     function cancelRequest($id){
         DB::table('friend')->where(['friend_id1' => Auth::user()->userable->regular_user_id, 'friend_id2' => $id])->delete();
         Notification::where(['origin_user_id' => Auth::user()->userable->regular_user_id, 'notification_user_id' => $id])->delete();
         return ['result' => true , 'user_id' => $id];
     }
-
+    /**
+     * Accept friendship request and notification
+     */
     function acceptRequest($id){
         $friend = DB::table('friend')
             ->where(['friend_id1' => Auth::user()->userable->regular_user_id, 'friend_id2' => $id])
@@ -69,7 +75,9 @@ class RegularUserController extends Controller{
 
         return ['result' => true , 'user_id' => $id];
     }
-
+    /**
+     * Decline friendship request
+     */
     function declineRequest($id){
         $friend = DB::table('friend')
             ->where(['friend_id1' => Auth::user()->userable->regular_user_id, 'friend_id2' => $id])
