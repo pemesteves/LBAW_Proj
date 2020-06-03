@@ -191,7 +191,7 @@ function setCommentEditBox(event){
                   <textarea name="body" class="form-control" required placeholder="Comment..." rows="1">${previous}</textarea>
               </div>
               <div class="col-1" style="padding: 0">
-                  <button class="comment_edit" type="submit" style="padding: 0; max-height: 100%; height: 100%; max-width: 100%; width: 100%; background-color: white; border: 0;"><span class="fa fa-caret-right" style="float: left; font-size: 1.5em;margin-left: 0.75em;"></span></button>
+                  <button class="comment_edit" type="submit" style="padding: 0; max-height: 100%; height: 100%; max-width: 100%; width: 100%; border: 0;"><span class="fa fa-caret-right" style="float: left; font-size: 1.5em;margin-left: 0.75em;"></span></button>
               </div>
           </div>
         </form>
